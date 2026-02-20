@@ -31,40 +31,16 @@
     "header-two": {
       "type": "header-two",
       "blocks": {
-        "social_icon_NayCAq": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-x",
-            "link": ""
-          }
-        },
-        "social_icon_nEyrXz": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-youtube",
-            "link": ""
-          }
-        },
-        "social_icon_Fw7Q6d": {
+        "social_icon_RmXyw9": {
           "type": "social_icon",
           "settings": {
             "icon_choice": "icon-instagram",
             "link": ""
           }
-        },
-        "social_icon_NHy78J": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-facebook",
-            "link": ""
-          }
         }
       },
       "block_order": [
-        "social_icon_NayCAq",
-        "social_icon_nEyrXz",
-        "social_icon_Fw7Q6d",
-        "social_icon_NHy78J"
+        "social_icon_RmXyw9"
       ],
       "settings": {
         "menu": "main-menu",
