@@ -31,13 +31,6 @@
     "header-two": {
       "type": "header-two",
       "blocks": {
-        "social_icon_bPCiTz": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-instagram",
-            "link": ""
-          }
-        },
         "social_icon_RmXyw9": {
           "type": "social_icon",
           "settings": {
@@ -75,7 +68,6 @@
         }
       },
       "block_order": [
-        "social_icon_bPCiTz",
         "social_icon_RmXyw9",
         "social_icon_ctzzDe",
         "social_icon_QUH6kx",
