@@ -8,33 +8,33 @@
  * ------------------------------------------------------------
  */
 {
-  "type": "header",
-  "name": "Header Group",
-  "sections": {
-    "header": {
-      "type": "header",
-      "settings": {
-        "menu": "main-menu",
-        "logo": "shopify://shop_images/logo.svg"
-      }
-    },
-    "header-two": {
-      "type": "header-two",
-      "disabled": true,
-      "settings": {
-        "menu": "main-menu",
-        "logo": "shopify://shop_images/logo.svg"
-      }
-    },
-    "header-three": {
-      "type": "header-three",
-      "disabled": true,
-      "settings": {}
-    }
-  },
-  "order": [
-    "header",
-    "header-two",
-    "header-three"
-  ]
+	"type": "header",
+	"name": "Header Group",
+	"sections": {
+		"header": {
+			"type": "header",
+			"settings": {
+				"menu": "main-menu",
+				"logo": "shopify://shop_images/logo.svg"
+			}
+		},
+		"announcement-bar": {
+			"type": "announcement-bar",
+			"settings": {}
+		},
+		"header-two": {
+			"type": "header-two",
+			"disabled": true,
+			"settings": {
+				"menu": "main-menu",
+				"logo": "shopify://shop_images/logo.svg"
+			}
+		},
+		"header-three": {
+			"type": "header-three",
+			"disabled": true,
+			"settings": {}
+		}
+	},
+	"order": ["header", "announcement-bar", "header-two", "header-three"]
 }
