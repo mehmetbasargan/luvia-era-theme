@@ -8,21 +8,36 @@
  * ------------------------------------------------------------
  */
 {
-	"type": "footer",
-	"name": "Footer Group",
-	"sections": {
-		"footer": {
-			"type": "footer",
-			"settings": {}
-		},
-		"footer-two": {
-			"type": "footer-two",
-			"settings": {}
-		},
-		"footer-three": {
-			"type": "footer-three",
-			"settings": {}
-		}
-	},
-	"order": ["footer", "footer-two", "footer-three"]
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "menu": "",
+        "show_payment_icons": true
+      }
+    },
+    "footer-two": {
+      "type": "footer-two",
+      "disabled": true,
+      "settings": {
+        "menu": "",
+        "show_payment_icons": true
+      }
+    },
+    "footer-three": {
+      "type": "footer-three",
+      "disabled": true,
+      "settings": {
+        "menu": "",
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "footer-two",
+    "footer-three"
+  ]
 }
