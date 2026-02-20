@@ -1,6 +1,6 @@
 <header class="bg-gray-50 w-full">
   <div class="container mx-auto flex flex-row items-center justify-between h-[100px]">
-    <a href="{{ routes.root_url }}" class=" w-[100px] lg:w-[150px] shrink-0">
+    <a href="{{ routes.root_url }}" class=" w-[140px] lg:w-[150px] shrink-0">
       {% if section.settings.logo %}
         {{ section.settings.logo | image_url: width: 150 | image_tag: alt: shop.name }}
       {% else %}
@@ -8,7 +8,7 @@
       {% endif %}
     </a>
 
-    <div class="flex flex-row items-center gap-5 lg:gap-10">
+    <div class="flex flex-row items-center gap-2 lg:gap-10">
       {% comment %} menu {% endcomment %}
       <div class="hidden lg:flex flex-row items-center gap-10">
         {% for link in section.settings.menu.links %}
@@ -37,15 +37,15 @@
       </div>
 
       <div class="flex flex-row items-center justify-center gap-2 bg-black/10 py-2 px-4 rounded-full">
-        <a href="{{ routes.search_url }}" class="w-[30px] text-black hover:text-brand">
+        <a href="{{ routes.search_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-brand">
           {% render 'icon-search' %}
         </a>
-        <a href="{{ routes.account_url }}" class="w-[30px] text-black hover:text-brand">
+        <a href="{{ routes.account_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-brand">
           {% if shop.customer_accounts_enabled %}
             {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
           {% endif %}
         </a>
-        <a href="{{ routes.cart_url }}" class="w-[30px] text-black hover:text-brand">
+        <a href="{{ routes.cart_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-brand">
           {% if cart.item_count > 0 %}
             <sup>{{ cart.item_count }}</sup>
           {% endif %}
