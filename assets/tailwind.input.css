@@ -13,6 +13,7 @@ font-family: "Inter", sans-serif; */
 
 	/* Özel renk veya başka değişkenler */
 	--color-brand: #3b82f6;
+	--color-custom-bg: #ededee;
 
 	/* özel renkler */
 	--color-brand-light: #60a5fa;
@@ -23,6 +24,8 @@ font-family: "Inter", sans-serif; */
 	--color-surface: #f9fafb;
 	--color-on-surface: #111827;
 }
+
+/* #ededee */
 
 @utility container {
 	@apply mx-auto max-w-[1280px] px-4;
