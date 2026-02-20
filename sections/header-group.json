@@ -11,16 +11,19 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "announcement_text": "Büyük İndirimi Kaçırmayın!",
+        "bg_color": "#dd1d1d"
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
         "menu": "main-menu",
         "logo": "shopify://shop_images/logo.svg"
       }
-    },
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {}
     },
     "header-two": {
       "type": "header-two",
