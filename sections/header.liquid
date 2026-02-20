@@ -8,24 +8,44 @@
       {% endif %}
     </a>
 
-    <div class="flex flex-row items-center gap-10">
+    <div class="flex flex-row items-center gap-5 lg:gap-10">
       {% comment %} menu {% endcomment %}
-      <div class="flex flex-row items-center gap-10">
+      <div class="hidden lg:flex flex-row items-center gap-10">
         {% for link in section.settings.menu.links %}
           {{ link.title | link_to: link.url }}
         {% endfor %}
       </div>
 
+      <div class="flex lg:hidden">
+        <button id="menu-toggle" class="group relative">
+          <div id="icon-open" class="block">
+            {% render 'icon-menu' %}
+          </div>
+
+          <div id="icon-close" class="hidden">
+            {% render 'icon-menu-close' %}
+          </div>
+        </button>
+
+        <nav id="main-menu" class="hidden absolute top-[100px] left-0 w-full bg-gray-50 z-40 ">
+          <div class="flex flex-col p-4">
+            {% for link in section.settings.menu.links %}
+              {{ link.title | link_to: link.url, class: 'py-4 border-b border-[#000000]/10 last:border-b-0' }}
+            {% endfor %}
+          </div>
+        </nav>
+      </div>
+
       <div class="flex flex-row items-center justify-center gap-2 bg-black/10 py-2 px-4 rounded-full">
-        <a href="{{ routes.search_url }}" class="w-[30px]">
+        <a href="{{ routes.search_url }}" class="w-[30px] text-black hover:text-brand">
           {% render 'icon-search' %}
         </a>
-        <a href="{{ routes.account_url }}" class="w-[30px] text-black">
+        <a href="{{ routes.account_url }}" class="w-[30px] text-black hover:text-brand">
           {% if shop.customer_accounts_enabled %}
             {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
           {% endif %}
         </a>
-        <a href="{{ routes.cart_url }}" class="w-[30px]">
+        <a href="{{ routes.cart_url }}" class="w-[30px] text-black hover:text-brand">
           {% if cart.item_count > 0 %}
             <sup>{{ cart.item_count }}</sup>
           {% endif %}
@@ -38,6 +58,15 @@
 
 {% stylesheet %}
 {% endstylesheet %}
+
+<script>
+  const menuToggle = document.querySelector('#menu-toggle');
+
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('is-open');
+    // Burada ayrıca asıl menü listeni de açıp kapatacak kodları ekleyebilirsin
+  });
+</script>
 
 {% schema %}
 {

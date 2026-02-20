@@ -69,4 +69,9 @@ font-family: "Inter", sans-serif; */
 		font-family: var(--font-josefin);
 		@apply font-medium text-brand-dark leading-tight;
 	}
+	p {
+		font-family: var(--font-inter);
+		font-size: clamp(1rem, 1.5vw, 1.1rem);
+		@apply text-[#000000] leading-relaxed;
+	}
 }
