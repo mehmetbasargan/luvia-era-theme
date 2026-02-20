@@ -294,6 +294,9 @@
   .w-\[30px\] {
     width: 30px;
   }
+  .w-\[100px\] {
+    width: 100px;
+  }
   .w-\[150px\] {
     width: 150px;
   }
@@ -512,6 +515,11 @@
   .lg\:hidden {
     @media (width >= 64rem) {
       display: none;
+    }
+  }
+  .lg\:w-\[150px\] {
+    @media (width >= 64rem) {
+      width: 150px;
     }
   }
   .lg\:gap-10 {

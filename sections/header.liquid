@@ -1,6 +1,6 @@
 <header class="bg-gray-50 w-full">
   <div class="container mx-auto flex flex-row items-center justify-between h-[100px]">
-    <a href="{{ routes.root_url }}" class=" w-[150px] shrink-0">
+    <a href="{{ routes.root_url }}" class=" w-[100px] lg:w-[150px] shrink-0">
       {% if section.settings.logo %}
         {{ section.settings.logo | image_url: width: 150 | image_tag: alt: shop.name }}
       {% else %}
