@@ -8,21 +8,31 @@
  * ------------------------------------------------------------
  */
 {
-	"type": "header",
-	"name": "Header Group",
-	"sections": {
-		"header": {
-			"type": "header",
-			"settings": {}
-		},
-		"header-two": {
-			"type": "header-two",
-			"settings": {}
-		},
-		"header-three": {
-			"type": "header-three",
-			"settings": {}
-		}
-	},
-	"order": ["header", "header-two", "header-three"]
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "header": {
+      "type": "header",
+      "disabled": true,
+      "settings": {
+        "menu": ""
+      }
+    },
+    "header-two": {
+      "type": "header-two",
+      "settings": {
+        "menu": "main-menu"
+      }
+    },
+    "header-three": {
+      "type": "header-three",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "header",
+    "header-two",
+    "header-three"
+  ]
 }
