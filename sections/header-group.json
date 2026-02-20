@@ -13,6 +13,7 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "disabled": true,
       "settings": {
         "announcement_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vero blanditiis ab!",
         "text_color": "#ffffff",
