@@ -46,8 +46,8 @@
         <ul class="flex items-center gap-2">
           {%- for block in section.blocks -%}
             {%- if block.type == 'social_icon' -%}
-              {%- # İkon ismini bir değişkene atıyoruz -%}
-              {%- assign current_icon = block.settings.icon_choice -%}
+              {%- # Seçilen ikon adını tırnaksız bir değişkene atıyoruz -%}
+              {%- assign icon_to_render = block.settings.icon_choice -%}
 
               <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white" {{ block.shopify_attributes }}>
                 <a
@@ -55,8 +55,8 @@
                   target="_blank"
                   class="block w-5 h-5 flex items-center justify-center"
                 >
-                  {%- # Değişkeni render ediyoruz -%}
-                  {% render current_icon %}
+                  {%- # Değişkeni burada render ediyoruz -%}
+                  {% render icon_to_render %}
                 </a>
               </li>
             {%- endif -%}
