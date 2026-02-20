@@ -31,27 +31,6 @@
     "header-two": {
       "type": "header-two",
       "blocks": {
-        "social_icon_KGr4MJ": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-tiktok",
-            "link": ""
-          }
-        },
-        "social_icon_qC4bjG": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-x",
-            "link": ""
-          }
-        },
-        "social_icon_QUH6kx": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-youtube",
-            "link": ""
-          }
-        },
         "social_icon_RmXyw9": {
           "type": "social_icon",
           "settings": {
@@ -65,14 +44,35 @@
             "icon_choice": "icon-instagram",
             "link": ""
           }
+        },
+        "social_icon_QUH6kx": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-youtube",
+            "link": ""
+          }
+        },
+        "social_icon_qC4bjG": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-x",
+            "link": ""
+          }
+        },
+        "social_icon_KGr4MJ": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-tiktok",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "social_icon_KGr4MJ",
-        "social_icon_qC4bjG",
-        "social_icon_QUH6kx",
         "social_icon_RmXyw9",
-        "social_icon_ctzzDe"
+        "social_icon_ctzzDe",
+        "social_icon_QUH6kx",
+        "social_icon_qC4bjG",
+        "social_icon_KGr4MJ"
       ],
       "settings": {
         "menu": "main-menu",
