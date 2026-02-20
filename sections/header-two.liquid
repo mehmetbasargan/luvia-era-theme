@@ -3,12 +3,14 @@
   <div class="container">
     <div class="w-full h-[80px] py-5 items-center justify-center md:justify-between flex">
       <div class="hidden md:flex">
-        <ul class="flex items-center gap-2">
-          <li>{% render 'icon-phone' %}</li>
-          <li class="font-medium">
-            <a href="#">0532 463 24 47</a>
-          </li>
-        </ul>
+        {% if section.settings.show_phone and section.settings.header_phone != blank %}
+          <ul class="flex items-center gap-2">
+            <li>{% render 'icon-phone' %}</li>
+            <li class="font-medium">
+              <a href="{{ section.settings.header_phone | replace: ' ', '' }}"> {{ section.settings.header_phone }}</a>
+            </li>
+          </ul>
+        {% endif %}
       </div>
       <div class="">
         <a href="{{ routes.root_url }}" class=" w-[140px] lg:w-[180px] shrink-0">
@@ -124,6 +126,18 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "header_phone",
+      "label": "Telefon Numarası",
+      "placeholder": "+90 5XX XXX XX XX"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "Telefonu Göster",
+      "default": true
     }
   ],
   "blocks": [

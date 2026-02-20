@@ -24,6 +24,7 @@
     --font-josefin: 'Josefin Sans', sans-serif;
     --color-brand: #3b82f6;
     --color-custom-bg: #ededee;
+    --color-brand-light: #60a5fa;
     --color-brand-dark: #1d4ed8;
     --color-surface: #f9fafb;
     --color-on-surface: #111827;
@@ -460,6 +461,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-brand);
+      }
+    }
+  }
+  .hover\:bg-brand-light {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-brand-light);
       }
     }
   }
