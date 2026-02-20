@@ -19,29 +19,7 @@
           {% endif %}
         </a>
       </div>
-
-      {% comment %}
-        <div class="hidden md:flex">
-          <ul class="flex items-center gap-2">
-            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-              <a href="#">{% render 'icon-facebook' %}</a>
-            </li>
-            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-              <a href="#">{% render 'icon-instagram' %}</a>
-            </li>
-            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-              <a href="#">{% render 'icon-youtube' %}</a>
-            </li>
-            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-              <a href="#">{% render 'icon-x' %}</a>
-            </li>
-            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-              <a href="#">{% render 'icon-tiktok' %}</a>
-            </li>
-          </ul>
-        </div>
-      {% endcomment %}
-
+      {% comment %} Social Media Icons {% endcomment %}
       <div class="hidden md:flex">
         <ul class="flex items-center gap-2">
           {%- for block in section.blocks -%}
@@ -55,7 +33,6 @@
                   target="_blank"
                   class="block w-5 h-5 flex items-center justify-center"
                 >
-                  {%- comment -%} Değişkeni tırnaklı stringe çevirmek için case kullanıyoruz {%- endcomment -%}
                   {%- case block.settings.icon_choice -%}
                     {%- when 'icon-facebook' -%}
                       {% render 'icon-facebook' %}
