@@ -9,7 +9,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-black: #000;
-    --color-white: #fff;
     --spacing: 0.25rem;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
@@ -311,9 +310,6 @@
   .gap-6 {
     gap: calc(var(--spacing) * 6);
   }
-  .gap-10 {
-    gap: calc(var(--spacing) * 10);
-  }
   .overflow-hidden {
     overflow: hidden;
   }
@@ -343,9 +339,6 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-black) 10%, transparent);
     }
-  }
-  .bg-brand-light {
-    background-color: var(--color-brand-light);
   }
   .bg-custom-bg {
     background-color: var(--color-custom-bg);
@@ -382,9 +375,6 @@
   }
   .text-black {
     color: var(--color-black);
-  }
-  .text-surface {
-    color: var(--color-surface);
   }
   .italic {
     font-style: italic;
