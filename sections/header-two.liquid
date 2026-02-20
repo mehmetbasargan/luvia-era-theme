@@ -1,5 +1,4 @@
 <header>
-  {{ settings.logo | json }}
   <a href="{{ routes.root_url }}" class="header__logo-link">
     {% if settings.logo %}
       {{ settings.logo | image_url: width: 300 | image_tag: alt: shop.name }}
