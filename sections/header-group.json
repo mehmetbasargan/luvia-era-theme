@@ -14,8 +14,9 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "announcement_text": "Büyük İndirimi Kaçırmayın!",
-        "bg_color": "#dd1d1d"
+        "announcement_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vero blanditiis ab!",
+        "text_color": "#ffffff",
+        "bg_color": "#005BD3"
       }
     },
     "header": {
