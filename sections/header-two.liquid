@@ -19,23 +19,29 @@
           {% endif %}
         </a>
       </div>
+
       <div class="hidden md:flex">
         <ul class="flex items-center gap-2">
-          <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-            <a href="#">{% render 'icon-facebook' %}</a>
-          </li>
-          <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-            <a href="#">{% render 'icon-instagram' %}</a>
-          </li>
-          <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-            <a href="#">{% render 'icon-youtube' %}</a>
-          </li>
-          <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-            <a href="#">{% render 'icon-x' %}</a>
-          </li>
-          <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
-            <a href="#">{% render 'icon-tiktok' %}</a>
-          </li>
+          {% for block in section.blocks %}
+            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
+              <a href="{{ block.settings.link }}">{{ block.settings.icon_choice }}</a>
+            </li>
+          {% endfor %}
+
+          {% comment %}
+            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
+              <a href="#">{% render 'icon-instagram' %}</a>
+            </li>
+            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
+              <a href="#">{% render 'icon-youtube' %}</a>
+            </li>
+            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
+              <a href="#">{% render 'icon-x' %}</a>
+            </li>
+            <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white">
+              <a href="#">{% render 'icon-tiktok' %}</a>
+            </li>
+          {% endcomment %}
         </ul>
       </div>
     </div>
@@ -112,36 +118,62 @@
       "id": "logo",
       "label": "Logo"
     }
+  ],
+  "blocks": [
+    {
+      "type": "social_icon",
+      "name": "Sosyal Medya İkonu",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_choice",
+          "label": "İkon Seçin",
+          "options": [
+            {
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "value": "youtube",
+              "label": "YouTube"
+            },
+            {
+              "value": "x",
+              "label": "X"
+            },
+            {
+              "value": "tiktok",
+              "label": "TikTok"
+            }
+          ],
+          "default": "instagram"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "İkon Linki"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Two",
+      "category": "Header",
+      "settings": {
+        "menu": "",
+        "logo": ""
+      },
+      "blocks": [
+        {
+          "type": "social_icon"
+        }
+      ]
+    }
   ]
 }
 {% endschema %}
-
-{% comment %}
-  <a href="{{ routes.root_url }}" class="header__logo-link w-[150px]">
-      {% if section.settings.logo %}
-        {{ section.settings.logo | image_url: width: 150 | image_tag: alt: shop.name }}
-      {% else %}
-        <span class="h2">{{ shop.name }}</span>
-      {% endif %}
-    </a>
-
-    <div class="header__menu">
-      {% for link in section.settings.menu.links %}
-        {{ link.title | link_to: link.url }}
-      {% endfor %}
-    </div>
-
-    <div class="header__icons">
-      {% if shop.customer_accounts_enabled %}
-        {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-      {% endif %}
-
-      <a href="{{ routes.cart_url }}">
-        {% if cart.item_count > 0 %}
-          <sup>{{ cart.item_count }}</sup>
-        {% endif %}
-
-        {{ 'icon-cart.svg' | inline_asset_content }}
-      </a>
-    </div>
-{% endcomment %}
