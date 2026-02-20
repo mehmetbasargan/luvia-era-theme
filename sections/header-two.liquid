@@ -46,17 +46,28 @@
         <ul class="flex items-center gap-2">
           {%- for block in section.blocks -%}
             {%- if block.type == 'social_icon' -%}
-              {%- # Seçilen ikon adını tırnaksız bir değişkene atıyoruz -%}
-              {%- assign icon_to_render = block.settings.icon_choice -%}
-
-              <li class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white" {{ block.shopify_attributes }}>
+              <li
+                class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-white transition-colors"
+                {{ block.shopify_attributes }}
+              >
                 <a
                   href="{{ block.settings.link | default: '#' }}"
                   target="_blank"
                   class="block w-5 h-5 flex items-center justify-center"
                 >
-                  {%- # Değişkeni burada render ediyoruz -%}
-                  {% render icon_to_render %}
+                  {%- comment -%} Değişkeni tırnaklı stringe çevirmek için case kullanıyoruz {%- endcomment -%}
+                  {%- case block.settings.icon_choice -%}
+                    {%- when 'icon-facebook' -%}
+                      {% render 'icon-facebook' %}
+                    {%- when 'icon-instagram' -%}
+                      {% render 'icon-instagram' %}
+                    {%- when 'icon-youtube' -%}
+                      {% render 'icon-youtube' %}
+                    {%- when 'icon-x' -%}
+                      {% render 'icon-x' %}
+                    {%- when 'icon-tiktok' -%}
+                      {% render 'icon-tiktok' %}
+                  {%- endcase -%}
                 </a>
               </li>
             {%- endif -%}
