@@ -482,7 +482,7 @@
   }
   p {
     font-family: var(--font-inter);
-    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    font-size: 15px;
     --tw-leading: var(--leading-relaxed);
     line-height: var(--leading-relaxed);
     color: #000000;

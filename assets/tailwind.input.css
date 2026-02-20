@@ -86,7 +86,7 @@ font-family: "Inter", sans-serif; */
 	}
 	p {
 		font-family: var(--font-inter);
-		font-size: clamp(1rem, 1.5vw, 1.1rem);
+		font-size: 15px;
 		@apply text-[#000000] leading-relaxed;
 	}
 }
