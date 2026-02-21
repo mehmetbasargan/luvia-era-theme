@@ -9,12 +9,21 @@
  */
 {
   "sections": {
+    "main_collection_banner_PaCmKL": {
+      "type": "main-collection-banner",
+      "name": "Koleksiyon Banner",
+      "settings": {
+        "hero_height": 55,
+        "overlay_opacity": 10
+      }
+    },
     "main": {
       "type": "product",
       "settings": {}
     }
   },
   "order": [
+    "main_collection_banner_PaCmKL",
     "main"
   ]
 }
