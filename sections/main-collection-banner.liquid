@@ -7,13 +7,13 @@
       {{
         collection.image
         | image_url: width: 2000
-        | image_tag: class: 'w-full h-full object-cover object-center', loading: 'eager'
+        | image_tag: class: 'w-full h-full object-cover object-center object-top', loading: 'eager'
       }}
     {% elsif section.settings.fallback_image != blank %}
       {{
         section.settings.fallback_image
         | image_url: width: 2000
-        | image_tag: class: 'w-full h-full object-cover object-center', loading: 'eager'
+        | image_tag: class: 'w-full h-full object-cover object-center object-top', loading: 'eager'
       }}
     {% else %}
       <div class="w-full h-full bg-[#3B443C]"></div>
