@@ -23,7 +23,7 @@
             {% if block.settings.button_link != blank %}
               <a
                 href="{{ block.settings.button_link }}"
-                class="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-brand hover:text-white transition-all"
+                class="bg-white text-black px-8 py-3 rounded-[30px] font-bold hover:bg-brand hover:text-white transition-all"
               >
                 {{ block.settings.button_label }}
               </a>
@@ -34,29 +34,38 @@
     {% endfor %}
   </div>
 
-  <div class="swiper-button-next !text-white"></div>
-  <div class="swiper-button-prev !text-white"></div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
   <div class="swiper-pagination"></div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const swiper = new Swiper('.myHeroSwiper', {
+  const initSwiper = () => {
+    new Swiper('.myHeroSwiper', {
       loop: true,
-      effect: 'fade', // Yumuşak geçiş için
+      effect: 'fade', // Yumuşak geçiş
+      fadeEffect: {
+        crossFade: true,
+      },
+      speed: 1000, // Geçiş hızı (1 saniye)
       autoplay: {
         delay: 5000,
+        disableOnInteraction: false,
       },
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
+        dynamicBullets: true, // Şık, küçükten büyüğe noktalar
       },
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
     });
-  });
+  };
+
+  document.addEventListener('DOMContentLoaded', initSwiper);
+  document.addEventListener('shopify:section:load', initSwiper);
 </script>
 
 {% schema %}
