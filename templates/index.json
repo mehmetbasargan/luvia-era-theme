@@ -16,9 +16,20 @@
     "hero_slider_RRiVYD": {
       "type": "hero-slider",
       "blocks": {
+        "slide_9mg6nd": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/img1.jpg",
+            "title": "Yeni Sezon",
+            "sub_title": "En yeni koleksiyonu hemen keşfedin.",
+            "button_label": "Alışverişe Başla",
+            "button_link": ""
+          }
+        },
         "slide_khVKm6": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/img3.jpg",
             "title": "Yeni Sezon",
             "sub_title": "En yeni koleksiyonu hemen keşfedin.",
             "button_label": "Alışverişe Başla",
@@ -28,6 +39,7 @@
         "slide_MwbAmj": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/img4.jpg",
             "title": "Yeni Sezon",
             "sub_title": "En yeni koleksiyonu hemen keşfedin.",
             "button_label": "Alışverişe Başla",
@@ -36,6 +48,7 @@
         }
       },
       "block_order": [
+        "slide_9mg6nd",
         "slide_khVKm6",
         "slide_MwbAmj"
       ],
