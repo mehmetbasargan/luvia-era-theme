@@ -11,7 +11,7 @@
 
   <div class="collection-products">
     {% paginate collection.products by 16 %}
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
+      <div class="grid grid-cols-4 gap-6 lg:gap-10">
         {% for product in collection.products %}
           <div class="collection-card-item">
             {% render 'product-card', product: product %}
