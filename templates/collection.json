@@ -9,17 +9,17 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "collection",
-      "settings": {}
-    },
     "main_collection_banner_NMaFVJ": {
       "type": "main-collection-banner",
       "name": "Koleksiyon Banner",
       "settings": {
-        "hero_height": 40,
+        "hero_height": 70,
         "overlay_opacity": 30
       }
+    },
+    "main": {
+      "type": "collection",
+      "settings": {}
     }
   },
   "order": [
