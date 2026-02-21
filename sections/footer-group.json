@@ -41,11 +41,44 @@
     },
     "footer-three": {
       "type": "footer-three",
+      "blocks": {
+        "gallery_image_HKdLtk": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/img2.jpg"
+          }
+        },
+        "gallery_image_bkacNU": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/img4.jpg"
+          }
+        },
+        "gallery_image_zA7xgB": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/img1.jpg"
+          }
+        },
+        "gallery_image_z3YhPw": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/img3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "gallery_image_HKdLtk",
+        "gallery_image_bkacNU",
+        "gallery_image_zA7xgB",
+        "gallery_image_z3YhPw"
+      ],
       "settings": {
         "menu_1_title": "Collections",
         "footer_menu_1": "footer",
         "menu_2_title": "Customer Care",
-        "footer_menu_2": "customer-care"
+        "footer_menu_2": "customer-care",
+        "gallery_title": "Follow Us @LuviaEra"
       }
     }
   },
