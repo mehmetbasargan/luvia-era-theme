@@ -14,8 +14,10 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "footer_logo": "shopify://shop_images/log..svg",
+        "footer_description": "Defining your essence through timeless designs.",
+        "footer_address": "Nişantaşı, İstanbul / TR",
+        "footer_email": "hello@luviaera.com"
       }
     },
     "footer-two": {
