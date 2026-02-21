@@ -94,7 +94,9 @@
       "settings": {
         "collection": "accessories",
         "section_title": "Editor's Picks",
-        "section_subtitle": "Luvia Era Capsule Collection"
+        "section_subtitle": "Luvia Era Capsule Collection",
+        "button_text": "All Products",
+        "button_url": "shopify://collections/all"
       }
     }
   },
