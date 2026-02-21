@@ -23,7 +23,7 @@
     {{ content_for_header }}
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
 
-    {{ 'css/swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
@@ -33,12 +33,6 @@
 
     {% sections 'footer-group' %}
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
-    <script>
-      {
-        {
-          'js/swiper-bundle.min.js' | asset_url | script_tag;
-        }
-      }
-    </script>
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>
