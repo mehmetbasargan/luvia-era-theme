@@ -59,7 +59,7 @@
   {% comment %} menu {% endcomment %}
   <div class=" bg-custom-bg h-[70px] flex items-center relative">
     <div class="container flex lg:justify-between justify-end items-center w-full">
-      <div class="">
+      <nav class="">
         <ul class="hidden lg:flex flex-row items-center justify-between gap-6 ">
           {% for link in section.settings.menu.links %}
             <li>
@@ -69,7 +69,8 @@
             </li>
           {% endfor %}
         </ul>
-      </div>
+      </nav>
+
       <div class="flex items-center lg:gap-2 gap-8 justify-start w-full lg:w-auto">
         <div class="flex lg:hidden">
           <button id="menu-toggle" class="group relative order-last">
@@ -116,6 +117,55 @@
       </div>
     </div>
   </div>
+
+  {% comment %} deneme menu {% endcomment %}
+  <nav class="hidden md:flex items-center gap-6">
+    {%- for link in section.settings.menu.links -%}
+      {%- if link.links != blank -%}
+        {%- # ALT MENÜSÜ OLAN BAŞLIK (Örn: Hakkımızda) -%}
+        <div class="relative group h-full flex items-center">
+          <button class="flex items-center gap-1 font-medium hover:text-brand transition-colors py-4">
+            {{ link.title }}
+            <svg
+              class="w-4 h-4 transition-transform group-hover:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          {%- # DROPDOWN KUTUSU -%}
+          <ul
+            class="
+              absolute top-full left-0 w-52 bg-black shadow-xl border border-gray-100 rounded-lg py-3
+              opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
+              transition-all duration-300
+            "
+          >
+            {%- for childlink in link.links -%}
+              <li>
+                <a
+                  href="{{ childlink.url }}"
+                  class="block px-5 py-2 text-sm text-white hover:bg-gray-50 hover:text-brand transition-colors"
+                >
+                  {{ childlink.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+
+      {%- else -%}
+        {%- # DÜZ LİNK (Alt menüsü olmayanlar) -%}
+        <a href="{{ link.url }}" class="font-medium hover:text-brand transition-colors py-4">
+          {{ link.title }}
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </nav>
+  {% comment %} deneme menu {% endcomment %}
 </header>
 
 <style>
