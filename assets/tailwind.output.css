@@ -279,6 +279,9 @@
   .order-last {
     order: 9999;
   }
+  .col-span-full {
+    grid-column: 1 / -1;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -319,6 +322,9 @@
   }
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
+  }
+  .mt-16 {
+    margin-top: calc(var(--spacing) * 16);
   }
   .mt-20 {
     margin-top: calc(var(--spacing) * 20);
@@ -598,6 +604,9 @@
   .border-\[\#d1d1d1\] {
     border-color: #d1d1d1;
   }
+  .border-gray-100 {
+    border-color: var(--color-gray-100);
+  }
   .border-gray-600 {
     border-color: var(--color-gray-600);
   }
@@ -839,6 +848,9 @@
   }
   .text-gray-400 {
     color: var(--color-gray-400);
+  }
+  .text-gray-500 {
+    color: var(--color-gray-500);
   }
   .text-primary {
     color: var(--color-primary);

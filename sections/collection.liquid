@@ -12,22 +12,25 @@
   <div class="collection-products">
     {% paginate collection.products by 20 %}
       {% for product in collection.products %}
-        <div class="collection-product">
-          {% if product.featured_image %}
-            {% render 'image',
-              class: 'collection-product__image',
-              image: product.featured_image,
-              url: product.url,
-              width: 400,
-              height: 400,
-              crop: 'center'
-            %}
-          {% endif %}
-          <div class="collection-product__content">
-            <p>{{ product.title | escape | link_to: product.url }}</p>
-            <p>{{ product.price | money }}</p>
+        {% paginate collection.products by 16 %}
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
+            {% for product in collection.products %}
+              <div class="collection-card-item">
+                {% render 'product-card', product: product %}
+              </div>
+            {% else %}
+              <div class="col-span-full text-center py-20">
+                <p class="text-gray-500 tracking-widest uppercase text-xs">Bu koleksiyonda henüz ürün bulunmuyor.</p>
+              </div>
+            {% endfor %}
           </div>
-        </div>
+
+          {% if paginate.pages > 1 %}
+            <div class="mt-16 flex justify-center border-t border-gray-100 pt-10">
+              {{ paginate | default_pagination }}
+            </div>
+          {% endif %}
+        {% endpaginate %}
       {% endfor %}
 
       {{ paginate | default_pagination }}
