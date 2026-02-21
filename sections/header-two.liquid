@@ -1,8 +1,8 @@
 <header class="overflow-visible">
   {% comment %} logo {% endcomment %}
   <div class="container">
-    <div class="w-full h-[80px] py-5 items-center justify-center md:justify-between flex">
-      <div class="hidden md:flex">
+    <div class="w-full h-[80px] py-5 items-center justify-center lg:justify-between flex">
+      <div class="hidden lg:flex">
         {% if section.settings.show_phone and section.settings.header_phone != blank %}
           <ul class="flex items-center gap-2">
             <li>{% render 'icon-phone' %}</li>
@@ -22,7 +22,7 @@
         </a>
       </div>
       {% comment %} Social Media Icons {% endcomment %}
-      <div class="hidden md:flex">
+      <div class="hidden lg:flex">
         <ul class="flex items-center gap-2">
           {%- for block in section.blocks -%}
             {%- if block.type == 'social_icon' -%}
@@ -97,6 +97,57 @@
                   {{ link.title }}
                 </a>
               {% endfor %}
+            </div>
+
+            <div class="">
+              <div class="container py-5 ">
+                <h5 class="text-center mb-5 border-b border-[#000000]/10 pb-3">Social Media</h5>
+                <div class="flex items-center justify-between md:justify-around gap-2">
+                  <div class="">
+                    {% if section.settings.show_phone and section.settings.header_phone != blank %}
+                      <ul class="flex items-center gap-2">
+                        <li>{% render 'icon-phone' %}</li>
+                        <li class="font-medium">
+                          <a href="{{ section.settings.header_phone | replace: ' ', '' }}">
+                            {{ section.settings.header_phone -}}
+                          </a>
+                        </li>
+                      </ul>
+                    {% endif %}
+                  </div>
+                  <div class="">
+                    <ul class="flex items-center gap-2">
+                      {%- for block in section.blocks -%}
+                        {%- if block.type == 'social_icon' -%}
+                          <li
+                            class="bg-custom-bg p-2 rounded-full hover:bg-brand hover:text-primary transition-colors"
+                            {{ block.shopify_attributes }}
+                          >
+                            <a
+                              href="{{ block.settings.link | default: '#' }}"
+                              target="_blank"
+                              class="block w-5 h-5 flex items-center justify-center"
+                            >
+                              {%- case block.settings.icon_choice -%}
+                                {%- when 'icon-facebook' -%}
+                                  {% render 'icon-facebook' %}
+                                {%- when 'icon-instagram' -%}
+                                  {% render 'icon-instagram' %}
+                                {%- when 'icon-youtube' -%}
+                                  {% render 'icon-youtube' %}
+                                {%- when 'icon-x' -%}
+                                  {% render 'icon-x' %}
+                                {%- when 'icon-tiktok' -%}
+                                  {% render 'icon-tiktok' %}
+                              {%- endcase -%}
+                            </a>
+                          </li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </nav>
         </div>
