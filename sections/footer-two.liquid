@@ -35,48 +35,51 @@
         </div>
       {% endcomment %}
     </div>
+    <div class="container w-full flex flex-wrap md:items-start items-center gap-8 justify-between mt-20">
+      <div class="md:w-[400px] w-full">
+        <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
+          {{ section.settings.menu_1_title }}
+        </h4>
+        <ul class="space-y-4 text-sm font-light text-primary flex flex-row gap-3">
+          {% for link in linklists[section.settings.footer_menu_1].links %}
+            <li>
+              <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
 
-    <div>
-      <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
-        {{ section.settings.menu_1_title }}
-      </h4>
-      <ul class="space-y-4 text-sm font-light text-primary flex flex-row gap-3">
-        {% for link in linklists[section.settings.footer_menu_1].links %}
-          <li>
-            <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
-              {{ link.title }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+      <div class="md:w-[400px] w-full">
+        <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
+          {{ section.settings.menu_2_title }}
+        </h4>
+        <ul class="space-y-4 text-sm font-light text-primary flex flex-row gap-3">
+          {% for link in linklists[section.settings.footer_menu_2].links %}
+            <li>
+              <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
 
-    <div>
-      <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
-        {{ section.settings.menu_2_title }}
-      </h4>
-      <ul class="space-y-4 text-sm font-light text-primary">
-        {% for link in linklists[section.settings.footer_menu_2].links %}
-          <li>
-            <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
-              {{ link.title }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    <div>
-      <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">Newsletter</h4>
-      <p class="text-xs text-gray-400 mb-4 font-light italic">Be the first to know about new eras.</p>
-      <form class="flex border-b border-gray-600 pb-2">
-        <input
-          type="email"
-          placeholder="Email address"
-          class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-gray-600 text-white"
-        >
-        <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">Join</button>
-      </form>
+      <div class="md:w-[300px] w-full">
+        <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">Newsletter</h4>
+        <p class="text-xs text-primary mb-4 font-medium ">Be the first to know about new eras.</p>
+        <form class="flex border-b border-secondary pb-2">
+          <input
+            type="email"
+            placeholder="Email address"
+            class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"
+          >
+          <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">
+            Join
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </footer>
