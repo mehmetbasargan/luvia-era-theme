@@ -92,7 +92,9 @@
       "type": "featured-products",
       "name": "Luvia Featured Collection",
       "settings": {
-        "collection": "accessories"
+        "collection": "accessories",
+        "section_title": "Editor's Picks",
+        "section_subtitle": "Luvia Era Capsule Collection"
       }
     }
   },
