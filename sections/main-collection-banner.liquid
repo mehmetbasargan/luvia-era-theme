@@ -1,0 +1,111 @@
+{%- style -%}
+  .collection-hero-{{ section.id }} {
+    height: {{ section.settings.hero_height }}vh;
+    min-height: 300px;
+  }
+  .hero-overlay-{{ section.id }} {
+    background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+  }
+{%- endstyle -%}
+
+<section class="collection-hero-{{ section.id }} relative w-full flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    {% if collection.image and section.settings.show_collection_image %}
+      {{ collection.image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover' }}
+    {% else %}
+      <div class="w-full h-full bg-[#3B443C]"></div>
+    {% endif %}
+    <div class="hero-overlay-{{ section.id }} absolute inset-0"></div>
+  </div>
+
+  <div class="relative z-10 text-center px-4">
+    <nav class="mb-4 text-[10px] uppercase tracking-[0.2em] text-white/80">
+      <a href="/" class="hover:text-[#B2AC88]">Home</a>
+      <span class="mx-2">/</span>
+      <span>{{ collection.title }}</span>
+    </nav>
+
+    <h1 class="text-white text-4xl md:text-6xl font-light tracking-[0.3em] uppercase italic">
+      {{ collection.title }}
+    </h1>
+  </div>
+</section>
+
+<section class="bg-[#F9F9F9] py-12 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-{{ section.settings.products_per_row }} gap-x-6 gap-y-16">
+      {% paginate collection.products by section.settings.products_per_page %}
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+
+        {% if paginate.pages > 1 %}
+          <div class="col-span-full pt-12 text-center text-xs tracking-widest uppercase">
+            {{ paginate | default_pagination }}
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Koleksiyon Sayfası",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Ayarları"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Koleksiyon Görselini Göster",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "hero_height",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "vh",
+      "label": "Hero Yüksekliği",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "label": "Karartma Oranı",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Ürün Gridi Ayarları"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Sayfa Başına Ürün",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "products_per_row",
+      "label": "Satır Başına Ürün (Masaüstü)",
+      "options": [
+        { "value": "3", "label": "3 Ürün" },
+        { "value": "4", "label": "4 Ürün" }
+      ],
+      "default": "4"
+    }
+  ]
+}
+{% endschema %}

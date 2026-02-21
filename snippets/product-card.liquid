@@ -1,0 +1,63 @@
+{% comment %}
+  Luvia Era Ürün Kartı Snippet'ı
+  Kullanımı: {% render 'product-card', product: product %}
+{% endcomment %}
+
+<div class="group flex flex-col h-full bg-white overflow-hidden relative">
+  <div class="relative aspect-[3/4] overflow-hidden bg-[#F9F9F9]">
+    {% if product.compare_at_price > product.price %}
+      <span class="absolute top-3 left-3 z-10 bg-[#B2AC88] text-white text-[9px] px-2 py-1 tracking-widest uppercase">
+        İndirim
+      </span>
+    {% endif %}
+
+    <a href="{{ product.url }}" class="block h-full w-full">
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.title }}"
+        loading="lazy"
+        width="600"
+        height="800"
+        class="w-full h-full object-cover transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+      >
+
+      {% if product.images[1] %}
+        <img
+          src="{{ product.images[1] | image_url: width: 600 }}"
+          alt="{{ product.title }}"
+          loading="lazy"
+          width="600"
+          height="800"
+          class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+        >
+      {% endif %}
+    </a>
+
+    <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
+      <a
+        href="{{ product.url }}"
+        class="w-full bg-[#3B443C] text-white py-3 text-[10px] uppercase tracking-[0.2em] block text-center hover:bg-[#B2AC88] transition-colors"
+      >
+        Detayları Gör
+      </a>
+    </div>
+  </div>
+
+  <div class="pt-4 pb-2 flex flex-col items-center">
+    <a
+      href="{{ product.url }}"
+      class="text-[#3B443C] text-xs font-light tracking-wide hover:text-[#B2AC88] transition-colors uppercase"
+    >
+      {{ product.title }}
+    </a>
+
+    <div class="mt-2 flex items-center gap-2">
+      {% if product.compare_at_price > product.price %}
+        <span class="text-gray-400 line-through text-[11px]">{{ product.compare_at_price | money }}</span>
+        <span class="text-[#B2AC88] text-sm font-medium">{{ product.price | money }}</span>
+      {% else %}
+        <span class="text-[#3B443C] text-sm font-light italic">{{ product.price | money }}</span>
+      {% endif %}
+    </div>
+  </div>
+</div>
