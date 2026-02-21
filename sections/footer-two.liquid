@@ -1,39 +1,162 @@
-<footer>
-  <div class="footer__copyright text-[12px]">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }} - All rights reserved
-  </div>
+<footer class="bg-custom-bg text-primary pt-16 pb-8 px-6 border-t border-[#d1d1d1]">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <div class="flex flex-col space-y-6">
+      <div>
+        <a href="{{ routes.root_url }}" class="block">
+          {% if section.settings.footer_logo != blank %}
+            {%- assign logo_alt = section.settings.footer_logo.alt | default: shop.name -%}
+            {{
+              section.settings.footer_logo
+              | image_url: width: 200
+              | image_tag: class: 'h-8 w-auto object-contain', alt: logo_alt
+            }}
+          {% else %}
+            <span class="text-2xl font-light tracking-[0.2em] uppercase text-primary">
+              Luvia <span class="font-semibold text-[#B2AC88]">Era</span>
+            </span>
+          {% endif %}
+        </a>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+        <p class="mt-4 text-sm text-primary leading-relaxed font-light">
+          {{ section.settings.footer_description }}
+        </p>
+      </div>
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+      <div class="space-y-2 text-sm text-primary">
+        <p class="flex items-center gap-2 text-[14px]">
+          <span class="text-primary">
+            {% render 'icon-map' %}
+          </span>
+          <span class="text-[14px]"> {{ section.settings.footer_address }}</span>
+        </p>
+        <p class="flex items-center gap-2 text-[14px]">
+          <span class="text-primary">
+            {% render 'icon-envelop' %}
+          </span>
+          <a href="mailto:{{ section.settings.footer_email }}">{{ section.settings.footer_email }}</a>
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
+        {{ section.settings.menu_1_title }}
+      </h4>
+      <ul class="space-y-4 text-sm font-light text-primary">
+        {% for link in linklists[section.settings.footer_menu_1].links %}
+          <li>
+            <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
+        {{ section.settings.menu_2_title }}
+      </h4>
+      <ul class="space-y-4 text-sm font-light text-primary">
+        {% for link in linklists[section.settings.footer_menu_2].links %}
+          <li>
+            <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">Newsletter</h4>
+      <p class="text-xs text-gray-400 mb-4 font-light italic">Be the first to know about new eras.</p>
+      <form class="flex border-b border-gray-600 pb-2">
+        <input
+          type="email"
+          placeholder="Email address"
+          class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-gray-600 text-white"
+        >
+        <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">Join</button>
+      </form>
+    </div>
   </div>
 </footer>
+
+<div class="bg-custom-bg py-4 text-center border-t border-[#d1d1d1]">
+  <div class="container">
+    <div class="footer__copyright text-[12px]">
+      &copy;
+      {{ 'now' | date: '%Y' }}
+      {{ shop.name | link_to: routes.root_url }} - All rights reserved
+    </div>
+    <div class="footer__payment">
+      {% if section.settings.show_payment_icons %}
+        {% for type in shop.enabled_payment_types %}
+          {{ type | payment_type_svg_tag }}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<button
+  id="back-to-top"
+  class="fixed bottom-8 right-8 z-100 bg-primary hover:bg-secondary text-white p-3 rounded-full shadow-2xl transition-all duration-500 transform translate-y-20 opacity-0 hover:scale-110 active:scale-95 cursor-pointer"
+  aria-label="Yukarı Çık"
+>
+  {% render 'icon-arrow' %}
+</button>
 
 {% schema %}
 {
   "name": "Footer Two",
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Menu"
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Logo Görseli"
     },
     {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "Show payment icons",
-      "default": true
+      "type": "text",
+      "id": "footer_description",
+      "label": "Kısa Açıklama",
+      "default": "Defining your essence through timeless designs."
+    },
+    {
+      "type": "text",
+      "id": "footer_address",
+      "label": "Adres",
+      "default": "Nişantaşı, İstanbul / TR"
+    },
+    {
+      "type": "text",
+      "id": "footer_email",
+      "label": "E-posta",
+      "default": "info@luviaera.com"
+    },
+    {
+      "type": "text",
+      "id": "menu_1_title",
+      "label": "1. Menü Başlığı",
+      "default": "Collections"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_1",
+      "label": "1. Menü Seçimi",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_title",
+      "label": "2. Menü Başlığı",
+      "default": "Customer Care"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_2",
+      "label": "2. Menü Seçimi"
     }
   ]
 }
