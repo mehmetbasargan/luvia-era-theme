@@ -2,15 +2,23 @@
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
     <div class="flex flex-col space-y-6">
       <div>
-        <a href="{{ routes.root_url }}" class=" w-[140px] lg:w-[180px] shrink-0">
-          {% if section.settings.logo %}
-            {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
+        <a href="/" class="block">
+          {% if section.settings.footer_logo != blank %}
+            {%- assign logo_alt = section.settings.footer_logo.alt | default: shop.name -%}
+            {{
+              section.settings.footer_logo
+              | image_url: width: 200
+              | image_tag: class: 'h-8 w-auto object-contain', alt: logo_alt
+            }}
           {% else %}
-            <span class="h2">{{ shop.name }}</span>
+            <span class="text-2xl font-light tracking-[0.2em] uppercase text-white">
+              Luvia <span class="font-semibold text-[#B2AC88]">Era</span>
+            </span>
           {% endif %}
         </a>
-        <p class="mt-4 text-sm text-primary leading-relaxed font-light">
-          Defining your essence through timeless designs and sustainable elegance. Join the era of conscious fashion.
+
+        <p class="mt-4 text-sm text-gray-300 leading-relaxed font-light">
+          {{ section.settings.footer_description }}
         </p>
       </div>
 
