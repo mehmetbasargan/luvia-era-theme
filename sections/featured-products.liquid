@@ -1,0 +1,79 @@
+<section class="bg-white py-20 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex justify-between items-end mb-12">
+      <div>
+        <h2 class="text-[#3B443C] text-2xl font-light tracking-widest uppercase italic">Editörün Seçtikleri</h2>
+        <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Luvia Era Kapsül Koleksiyon</p>
+      </div>
+      <a
+        href="/collections/all"
+        class="text-[#3B443C] text-xs border-b border-[#3B443C] pb-1 hover:text-[#B2AC88] hover:border-[#B2AC88] transition-all"
+        >TÜMÜNÜ GÖR</a
+      >
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
+      {% for product in collections[section.settings.collection].products limit: 4 %}
+        <div class="group cursor-pointer">
+          <div class="relative aspect-[3/4] overflow-hidden bg-[#F9F9F9]">
+            {% if product.compare_at_price > product.price %}
+              <span class="absolute top-4 left-4 z-10 bg-[#B2AC88] text-white text-[10px] px-3 py-1 tracking-widest uppercase"
+                >İndirim</span
+              >
+            {% endif %}
+
+            <img
+              src="{{ product.featured_image | image_url: width: 700 }}"
+              width="700"
+              height="933"
+              class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+            >
+
+            {% if product.images[1] %}
+              <img
+                src="{{ product.images[1] | image_url: width: 700 }}"
+                width="700"
+                height="933"
+                class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+              >
+            {% endif %}
+
+            <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <button class="w-full bg-[#3B443C]/90 text-white py-4 text-xs uppercase tracking-[0.2em] hover:bg-[#3B443C]">
+                Sepete Ekle
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-6 text-center">
+            <h3 class="text-[#3B443C] text-sm font-light tracking-wide">{{ product.title }}</h3>
+            <div class="mt-2 flex justify-center items-center gap-3">
+              {% if product.compare_at_price > product.price %}
+                <span class="text-gray-400 line-through text-xs">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+              <span class="text-[#3B443C] text-sm font-medium">{{ product.price | money }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Öne Çıkan Ürünler",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Sergilenecek Koleksiyonu Seç"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luvia Featured Collection"
+    }
+  ]
+}
+{% endschema %}
