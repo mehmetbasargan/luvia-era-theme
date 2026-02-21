@@ -54,19 +54,10 @@
       ],
       "name": "Hero Slider",
       "settings": {}
-    },
-    "collections_xAj8Vj": {
-      "type": "collections",
-      "name": "t:general.collections_grid",
-      "settings": {
-        "grid_item_width": "collections--full",
-        "grid_gap": 10
-      }
     }
   },
   "order": [
     "main",
-    "hero_slider_RRiVYD",
-    "collections_xAj8Vj"
+    "hero_slider_RRiVYD"
   ]
 }
