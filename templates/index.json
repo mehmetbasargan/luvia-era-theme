@@ -8,11 +8,43 @@
  * ------------------------------------------------------------
  */
 {
-	"sections": {
-		"main": {
-			"type": "index",
-			"settings": {}
-		}
-	},
-	"order": ["main"]
+  "sections": {
+    "main": {
+      "type": "index",
+      "settings": {}
+    },
+    "hero_slider_RRiVYD": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide_khVKm6": {
+          "type": "slide",
+          "settings": {
+            "title": "Yeni Sezon",
+            "sub_title": "En yeni koleksiyonu hemen keşfedin.",
+            "button_label": "Alışverişe Başla",
+            "button_link": ""
+          }
+        },
+        "slide_MwbAmj": {
+          "type": "slide",
+          "settings": {
+            "title": "Yeni Sezon",
+            "sub_title": "En yeni koleksiyonu hemen keşfedin.",
+            "button_label": "Alışverişe Başla",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_khVKm6",
+        "slide_MwbAmj"
+      ],
+      "name": "Hero Slider",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "hero_slider_RRiVYD"
+  ]
 }
