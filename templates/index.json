@@ -50,9 +50,47 @@
       ],
       "name": "Hero Slider",
       "settings": {}
+    },
+    "collection_list_thQPNq": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_BEhQzQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories"
+          }
+        },
+        "collection_Kij9aY": {
+          "type": "collection",
+          "settings": {
+            "collection": "dresses"
+          }
+        },
+        "collection_eXpiMK": {
+          "type": "collection",
+          "settings": {
+            "collection": "new-in"
+          }
+        },
+        "collection_QgDg7i": {
+          "type": "collection",
+          "settings": {
+            "collection": "tops-blouses"
+          }
+        }
+      },
+      "block_order": [
+        "collection_BEhQzQ",
+        "collection_Kij9aY",
+        "collection_eXpiMK",
+        "collection_QgDg7i"
+      ],
+      "name": "Kategori Kartları",
+      "settings": {}
     }
   },
   "order": [
-    "hero_slider_RRiVYD"
+    "hero_slider_RRiVYD",
+    "collection_list_thQPNq"
   ]
 }
