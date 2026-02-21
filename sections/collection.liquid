@@ -6,12 +6,9 @@
 {% endcomment %}
 
 <div class="container">
-  coollllll
-  <h1>{{ collection.title }}</h1>
-
-  <div class="collection-products">
-    {% paginate collection.products by 16 %}
-      <div class="grid grid-cols-4 gap-6 lg:gap-10">
+  <div class="py-[80px]">
+    {% paginate collection.products by 10 %}
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-10">
         {% for product in collection.products %}
           <div class="collection-card-item">
             {% render 'product-card', product: product %}
@@ -31,13 +28,6 @@
     {% endpaginate %}
   </div>
 </div>
-
-{% stylesheet %}
-  .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  }
-{% endstylesheet %}
 
 {% schema %}
 {

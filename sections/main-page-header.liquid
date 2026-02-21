@@ -1,0 +1,82 @@
+<section
+  class="relative w-full overflow-hidden flex items-center justify-center"
+  style="height: {{ section.settings.hero_height }}vh; min-height: 300px;"
+>
+  <div class="absolute inset-0 z-0">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover' }}
+    {% else %}
+      <div class="w-full h-full bg-[#3B443C]"></div>
+    {% endif %}
+    <div
+      class="absolute inset-0"
+      style="background-color: rgba(0,0,0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"
+    ></div>
+  </div>
+
+  <div class="relative z-10 text-center px-4">
+    <nav class="mb-4 text-[10px] uppercase tracking-[0.2em] text-white/80">
+      <a href="/" class="hover:text-[#B2AC88]">Home</a>
+      <span class="mx-2">/</span>
+      <span class="text-white">
+        {%- if section.settings.custom_title != blank -%}
+          {{- section.settings.custom_title -}}
+        {%- else -%}
+          {{- page.title -}}
+        {%- endif -%}
+      </span>
+    </nav>
+
+    <h1 class="text-white text-4xl md:text-5xl font-light tracking-[0.3em] uppercase italic">
+      {% if section.settings.custom_title != blank %}
+        {{ section.settings.custom_title }}
+      {% else %}
+        {{ page.title }}
+      {% endif %}
+    </h1>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sayfa Başlığı (Hero)",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Arka Plan Görseli"
+    },
+    {
+      "type": "text",
+      "id": "custom_title",
+      "label": "Özel Başlık (Boş bırakılırsa sayfa adını alır)",
+      "placeholder": "Örn: Hikayemiz"
+    },
+    {
+      "type": "range",
+      "id": "hero_height",
+      "min": 20,
+      "max": 70,
+      "step": 5,
+      "unit": "vh",
+      "label": "Banner Yüksekliği",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "label": "Görsel Karartma",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sayfa Başlığı (Hero)"
+    }
+  ]
+}
+{% endschema %}
