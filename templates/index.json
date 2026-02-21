@@ -98,11 +98,55 @@
         "button_text": "All Products",
         "button_url": "shopify://collections/all"
       }
+    },
+    "full_width_gallery_7tAPz6": {
+      "type": "full-width-gallery",
+      "blocks": {
+        "image_MpMjGq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/img3.jpg",
+            "link": ""
+          }
+        },
+        "image_cWgADr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/img1.jpg",
+            "link": ""
+          }
+        },
+        "image_9YfwDJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/img4.jpg",
+            "link": ""
+          }
+        },
+        "image_QKP94A": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/img2.jpg",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_MpMjGq",
+        "image_cWgADr",
+        "image_9YfwDJ",
+        "image_QKP94A"
+      ],
+      "name": "Luvia Full Gallery",
+      "settings": {
+        "title": "Follow the Era"
+      }
     }
   },
   "order": [
     "hero_slider_RRiVYD",
     "collection_list_thQPNq",
-    "featured_products_GFTLFG"
+    "featured_products_GFTLFG",
+    "full_width_gallery_7tAPz6"
   ]
 }
