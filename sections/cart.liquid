@@ -179,26 +179,26 @@
             <button
               type="submit"
               name="checkout"
-              class="w-full bg-primary text-white py-5 text-[11px] uppercase tracking-[0.4em] hover:bg-secondary transition-all duration-500 shadow-sm"
+              class="w-full cursor-pointer bg-primary text-white py-5 text-[11px] uppercase tracking-[0.4em] hover:bg-secondary transition-all duration-500 shadow-sm"
             >
               Proceed to Checkout
             </button>
           </div>
 
           <div class="flex justify-center gap-4 opacity-30 grayscale pt-4">
-            <small class="text-[8px] uppercase tracking-widest">Secure Payment Guaranteed</small>
+            <small class="text-[11px] uppercase tracking-widest">Secure Payment Guaranteed</small>
           </div>
         </div>
       </div>
     </form>
   {% else %}
     <div class="text-center py-32 animate-fadeIn">
-      <p class="text-[13px] italic text-gray-400 mb-10 tracking-widest font-light">
+      <p class="text-[13px] italic text-secondary mb-10 tracking-widest font-light">
         Your shopping bag is currently empty.
       </p>
       <a
         href="{{ routes.all_products_collection_url }}"
-        class="inline-block bg-black text-white px-12 py-5 uppercase tracking-[0.3em] text-[10px] hover:bg-gray-800 transition-all duration-500"
+        class="inline-block bg-primary text-white px-12 py-5 uppercase tracking-[0.3em] text-[12px] hover:bg-secondary transition-all duration-500"
       >
         Discover Our Collection
       </a>
