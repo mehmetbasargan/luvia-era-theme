@@ -468,6 +468,9 @@
   .h-\[1px\] {
     height: 1px;
   }
+  .h-\[23px\] {
+    height: 23px;
+  }
   .h-\[70px\] {
     height: 70px;
   }
@@ -512,6 +515,9 @@
   }
   .w-\[20px\] {
     width: 20px;
+  }
+  .w-\[23px\] {
+    width: 23px;
   }
   .w-\[140px\] {
     width: 140px;

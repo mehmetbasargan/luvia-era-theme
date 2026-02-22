@@ -161,11 +161,20 @@
               {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
             {% endif %}
           </a>
-          <a href="{{ routes.cart_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-secondary flex flex-col">
-            {% if cart.item_count > 0 %}
-              <span class="cart-count-bubble">{{ cart.item_count }}</span>
-            {% endif %}
-            {% render 'icon-cart' %}
+          <a
+            href="{{ routes.cart_url }}"
+            class="lg:w-[30px] w-[20px] text-black hover:text-secondary flex flex-col items-end justify-end"
+          >
+            <div class="">
+              {% if cart.item_count > 0 %}
+                <span class="cart-count-bubble bg-secondary w-[23px] h-[23px] flex items-center justify-center text-white text-xs rounded-full">
+                  {{- cart.item_count -}}
+                </span>
+              {% endif %}
+            </div>
+            <div class="">
+              {% render 'icon-cart' %}
+            </div>
           </a>
         </div>
       </div>
@@ -174,23 +183,12 @@
 </header>
 
 <style>
-    #shopify-section-{{ section.id }} {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background-color: white;
-    }
-
-    .cart-count-bubble {
-      background: red;
-      border-radius: 50%;
-      height: 25px;
-      width: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
+  #shopify-section-{{ section.id }} {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
   }
 </style>
 
