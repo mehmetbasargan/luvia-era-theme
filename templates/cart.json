@@ -9,12 +9,23 @@
  */
 {
   "sections": {
+    "main_page_header_PKCTaz": {
+      "type": "main-page-header",
+      "name": "Sayfa Başlığı (Hero)",
+      "settings": {
+        "image": "shopify://shop_images/img1.jpg",
+        "custom_title": "",
+        "hero_height": 60,
+        "overlay_opacity": 30
+      }
+    },
     "main": {
       "type": "cart",
       "settings": {}
     }
   },
   "order": [
+    "main_page_header_PKCTaz",
     "main"
   ]
 }
