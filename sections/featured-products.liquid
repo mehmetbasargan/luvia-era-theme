@@ -20,28 +20,42 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {% for product in collections[section.settings.collection].products limit: 4 %}
-          <div class="group">
-            {% comment %} cursor-pointer'ı buraya da koyabilirsin ama form içindeki butona odaklanalım {% endcomment %}
+          <div class="group relative">
             <div class="relative aspect-[3/4] overflow-hidden bg-[#F9F9F9]">
-              {% comment %} --- MEVCUT RESİM VE İNDİRİM KODLARIN BURADA KALIYOR --- {% endcomment %}
               {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-10 bg-[#B2AC88] text-white text-[10px] px-3 py-1 tracking-widest uppercase"
+                <span class="absolute top-4 left-4 z-20 bg-[#B2AC88] text-white text-[10px] px-3 py-1 tracking-widest uppercase"
                   >İndirim</span
                 >
               {% endif %}
 
-              {% comment %} ... (Resim kodlarını buraya ekle) ... {% endcomment %}
+              <a href="{{ product.url }}" class="block w-full h-full">
+                <img
+                  src="{{ product.featured_image | image_url: width: 700 }}"
+                  height=""
+                  width=""
+                  class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 z-0 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+                  alt="{{ product.title }}"
+                >
 
-              {% comment %} --- DEĞİŞİKLİK BURADA BAŞLIYOR: SEPETE EKLE FORMU --- {% endcomment %}
-              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                {% if product.images[1] %}
+                  <img
+                    src="{{ product.images[1] | image_url: width: 700 }}"
+                    height=""
+                    width=""
+                    class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0"
+                    alt="{{ product.title }}"
+                  >
+                {% endif %}
+              </a>
+
+              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
                 {%- assign product_form_id = 'section-product-form-'
                   | append: section.id
                   | append: '-'
                   | append: product.id
                 -%}
 
-                {% form 'product', product, id: product_form_id, class: 'm-0' %}
-                  {% comment %} Shopify'a hangi varyantın ekleneceğini söylüyoruz {% endcomment %}
+                {% form 'product', product, id: product_form_id %}
                   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                   <input type="hidden" name="quantity" value="1">
 
@@ -63,16 +77,17 @@
               </div>
             </div>
 
-            {% comment %} Alt Kısımdaki Başlık ve Fiyat Bilgileri {% endcomment %}
-            <a href="{{ product.url }}" class="mt-6 block text-center">
-              <h3 class="text-[#3B443C] text-sm font-light tracking-wide">{{ product.title }}</h3>
-              <div class="mt-2 flex justify-center items-center gap-3">
-                {% if product.compare_at_price > product.price %}
-                  <span class="text-gray-400 line-through text-xs">{{ product.compare_at_price | money }}</span>
-                {% endif %}
-                <span class="text-[#3B443C] text-sm font-medium">{{ product.price | money }}</span>
-              </div>
-            </a>
+            <div class="mt-6 text-center">
+              <a href="{{ product.url }}">
+                <h3 class="text-[#3B443C] text-sm font-light tracking-wide">{{ product.title }}</h3>
+                <div class="mt-2 flex justify-center items-center gap-3">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="text-gray-400 line-through text-xs">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="text-[#3B443C] text-sm font-medium">{{ product.price | money }}</span>
+                </div>
+              </a>
+            </div>
           </div>
         {% endfor %}
       </div>
