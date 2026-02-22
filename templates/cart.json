@@ -14,9 +14,9 @@
       "name": "Sayfa Başlığı (Hero)",
       "settings": {
         "image": "shopify://shop_images/img1.jpg",
-        "custom_title": "",
+        "custom_title": "CART",
         "hero_height": 60,
-        "overlay_opacity": 30
+        "overlay_opacity": 50
       }
     },
     "main": {
