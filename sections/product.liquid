@@ -236,6 +236,14 @@
     cartCountElements.forEach((el) => {
       el.innerText = cart.item_count;
     });
+
+    function removeCartItem(key) {
+      fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: key.toString(), quantity: 0 }),
+      }).then(() => updateCartDrawer());
+    }
   }
 
   // --- SEPETE EKLEME (ANA FONKSİYON) ---
