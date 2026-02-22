@@ -750,6 +750,9 @@
   .border-gray-600 {
     border-color: var(--color-gray-600);
   }
+  .border-primary {
+    border-color: var(--color-primary);
+  }
   .border-red-800 {
     border-color: var(--color-red-800);
   }
