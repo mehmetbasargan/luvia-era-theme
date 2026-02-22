@@ -45,3 +45,36 @@ backToTop.addEventListener('click', () => {
 		behavior: 'smooth', // Yumuşak kaydırma
 	});
 });
+
+/* filter settings */
+// assets/collection-filters.js (veya main-collection.liquid içine <script> olarak)
+
+document.addEventListener('DOMContentLoaded', function () {
+	const filterForm = document.querySelector('#CollectionFiltersForm');
+
+	if (filterForm) {
+		filterForm.addEventListener('change', (event) => {
+			const formData = new FormData(filterForm);
+			const searchParams = new URLSearchParams(formData).toString();
+			const fetchUrl = `${window.location.pathname}?${searchParams}`;
+
+			// Sayfa yenilenmeden URL'i güncelle
+			history.pushState({ path: fetchUrl }, '', fetchUrl);
+
+			// Ürün grid'ini güncelle (Loading efekti ekleyebiliriz)
+			const productGrid = document.querySelector('#ProductGridContainer');
+			productGrid.style.opacity = '0.5'; // Hafif karartma (Loading hissi)
+
+			fetch(fetchUrl)
+				.then((response) => response.text())
+				.then((responseText) => {
+					const html = new DOMParser().parseFromString(responseText, 'text/html');
+					const newProducts = html.querySelector('#ProductGridContainer').innerHTML;
+
+					document.querySelector('#ProductGridContainer').innerHTML = newProducts;
+					productGrid.style.opacity = '1'; // Geri getir
+				})
+				.catch((e) => console.error('Filter Error:', e));
+		});
+	}
+});

@@ -79,5 +79,22 @@
 				"default": 4
 			}
 		]
+	},
+	{
+		"name": "Luvia Era Colors",
+		"settings": [
+			{
+				"type": "color",
+				"id": "color_primary",
+				"label": "Primary Accent Color",
+				"default": "#000000"
+			},
+			{
+				"type": "color",
+				"id": "color_background",
+				"label": "Main Background",
+				"default": "#ffffff"
+			}
+		]
 	}
 ]
