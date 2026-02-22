@@ -6,25 +6,30 @@
 {% endcomment %}
 
 <div class="max-w-[1440px] mx-auto px-4 md:px-10 py-20">
-  <h1 class="text-2xl font-light tracking-[0.3em] uppercase mb-12 text-center">ALIŞVERİŞ SEPETİ</h1>
+  <h1 class="text-2xl font-light tracking-[0.3em] uppercase mb-12 text-center text-primary">Your Shopping Bag</h1>
 
   {% if cart.item_count > 0 %}
     <form action="/cart" method="post" class="flex flex-col lg:flex-row gap-16">
       <div class="w-full lg:w-2/3 space-y-8">
         {% for item in cart.items %}
-          <div class="flex gap-6 pb-8 border-b border-gray-100 items-center">
-            <a href="{{ item.url }}" class="w-24 h-32 shrink-0 bg-[#F9F9F9]">
-              <img src="{{ item.image | image_url: width: 300 }}" height="" width="" class="w-full h-full object-cover">
+          <div class="flex gap-6 pb-8 border-b border-gray-100 items-center animate-fadeIn">
+            <a href="{{ item.url }}" class="w-24 h-32 shrink-0 bg-[#F9F9F9] overflow-hidden">
+              <img
+                src="{{ item.image | image_url: width: 300 }}"
+                width=""
+                height=""
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              >
             </a>
             <div class="grow space-y-1">
-              <h3 class="text-sm uppercase tracking-widest">{{ item.product.title }}</h3>
-              <p class="text-[11px] text-gray-500 uppercase">{{ item.variant.title }}</p>
-              <div class="pt-4 flex items-center gap-4">
+              <h3 class="text-sm uppercase tracking-widest text-primary">{{ item.product.title }}</h3>
+              <p class="text-[10px] text-secondary uppercase tracking-wider font-light">{{ item.variant.title }}</p>
+              <div class="pt-4 flex items-center gap-6">
                 <p class="text-sm italic font-light">{{ item.final_line_price | money }}</p>
                 <a
                   href="{{ item.url_to_remove }}"
-                  class="text-[9px] uppercase tracking-tighter text-red-800 border-b border-red-800 pb-0.5"
-                  >Kaldır</a
+                  class="text-[9px] uppercase tracking-widest text-red-900 border-b border-red-900 pb-0.5 hover:text-black hover:border-black transition-colors"
+                  >Remove</a
                 >
               </div>
             </div>
@@ -32,30 +37,37 @@
         {% endfor %}
       </div>
 
-      <div class="w-full lg:w-1/3 bg-[#F9F9F9] p-8 h-fit space-y-8">
-        <h2 class="text-[12px] uppercase tracking-[0.3em] font-medium border-b border-gray-200 pb-4">Sipariş Özeti</h2>
-        <div class="flex justify-between items-center text-sm">
-          <span class="font-light tracking-widest uppercase text-[11px]">Ara Toplam</span>
-          <span class="italic">{{ cart.total_price | money }}</span>
+      <div class="w-full lg:w-1/3 bg-[#F9F9F9] p-10 h-fit space-y-8">
+        <h2 class="text-[12px] uppercase tracking-[0.3em] font-medium border-b border-gray-200 pb-4 text-primary">
+          Order Summary
+        </h2>
+
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="font-light tracking-widest uppercase text-[10px] text-secondary">Subtotal</span>
+            <span class="text-sm tracking-tighter">{{ cart.total_price | money }}</span>
+          </div>
+          <p class="text-[9px] text-gray-400 italic leading-relaxed">Shipping and taxes are calculated at checkout.</p>
         </div>
-        <p class="text-[10px] text-gray-400 italic">Kargo ve vergiler ödeme adımında hesaplanır.</p>
+
         <button
           type="submit"
           name="checkout"
-          class="w-full bg-[#3B443C] text-white py-4 uppercase tracking-[0.3em] hover:bg-black transition-all"
+          class="w-full bg-[#3B443C] text-white py-5 text-[11px] uppercase tracking-[0.3em] hover:bg-black transition-all duration-300 shadow-sm"
         >
-          GÜVENLİ ÖDEME
+          Proceed to Checkout
         </button>
       </div>
     </form>
   {% else %}
-    <div class="text-center py-20">
-      <p class="italic text-gray-500 mb-8">Sepetiniz şu anda boş.</p>
+    <div class="text-center py-32 space-y-8">
+      <p class="italic text-secondary font-light tracking-widest">Your bag is currently empty.</p>
       <a
         href="/collections/all"
-        class="inline-block border border-black px-10 py-4 uppercase tracking-[0.2em] text-[11px] hover:bg-black hover:text-white transition-all"
-        >Alışverişe Başla</a
+        class="inline-block border border-black px-12 py-4 uppercase tracking-[0.3em] text-[10px] hover:bg-black hover:text-white transition-all duration-500"
       >
+        Continue Shopping
+      </a>
     </div>
   {% endif %}
 </div>
