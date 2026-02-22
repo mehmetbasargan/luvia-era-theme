@@ -196,7 +196,62 @@
       .then((item) => {
         btn.innerText = 'EKLENDİ ✔';
         console.log('Başarı!', item);
-        alert('Ürün sepete eklendi!'); // Şimdilik alert kalsın, çalıştığını görelim
+        function openCartDrawer() {
+          const drawer = document.getElementById('cart-drawer');
+          const overlay = document.getElementById('cart-drawer-overlay');
+          const content = document.getElementById('cart-drawer-content');
+
+          drawer.classList.remove('invisible');
+          setTimeout(() => {
+            overlay.classList.replace('opacity-0', 'opacity-100');
+            content.classList.replace('translate-x-full', 'translate-x-0');
+          }, 10);
+
+          updateCartDrawer(); // Sepet içeriğini güncelle
+        }
+
+        function closeCartDrawer() {
+          const overlay = document.getElementById('cart-drawer-overlay');
+          const content = document.getElementById('cart-drawer-content');
+
+          overlay.classList.replace('opacity-100', 'opacity-0');
+          content.classList.replace('translate-x-0', 'translate-x-full');
+
+          setTimeout(() => {
+            document.getElementById('cart-drawer').classList.add('invisible');
+          }, 500);
+        }
+
+        function updateCartDrawer() {
+          fetch('/cart.js')
+            .then((res) => res.json())
+            .then((cart) => {
+              const container = document.getElementById('cart-drawer-items');
+              const totalPrice = document.getElementById('cart-total-price');
+
+              totalPrice.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
+
+              if (cart.items.length === 0) {
+                container.innerHTML = '<p class="text-[11px] italic text-gray-400">Sepetiniz boş.</p>';
+                return;
+              }
+
+              container.innerHTML = cart.items
+                .map(
+                  (item) => `
+        <div class="flex gap-4 border-b border-gray-50 pb-4">
+          <img src="${item.image}" class="w-16 h-20 object-cover bg-gray-50">
+          <div class="flex flex-col justify-center">
+            <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
+            <p class="text-[10px] text-gray-500 mt-1">${item.variant_title || ''}</p>
+            <p class="text-[11px] mt-2">${item.quantity} x ${(item.price / 100).toFixed(2)} TL</p>
+          </div>
+        </div>
+      `
+                )
+                .join('');
+            });
+        }
 
         setTimeout(() => {
           btn.disabled = false;
