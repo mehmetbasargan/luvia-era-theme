@@ -59,6 +59,54 @@
 
                   {%- when 'price_range' -%}
                     {% comment %} ... fiyat kodun aynı kalabilir ... {% endcomment %}
+                    <div class="filter-price-range space-y-4">
+                      <div class="flex items-center gap-4">
+                        <div class="relative flex-1">
+                          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">
+                            {{- cart.currency.symbol -}}
+                          </span>
+                          <input
+                            name="{{ filter.min_value.param_name }}"
+                            id="Filter-{{ filter.label | handle }}-Min"
+                            {% if filter.min_value.value %}
+                              value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '' }}"
+                            {% endif %}
+                            type="number"
+                            placeholder="0"
+                            min="0"
+                            max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '' }}"
+                            class="w-full pl-7 pr-3 py-2 border border-gray-100 text-[11px] focus:border-black outline-none transition-colors"
+                          >
+                        </div>
+
+                        <span class="text-gray-300 text-[10px]">—</span>
+
+                        <div class="relative flex-1">
+                          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">
+                            {{- cart.currency.symbol -}}
+                          </span>
+                          <input
+                            name="{{ filter.max_value.param_name }}"
+                            id="Filter-{{ filter.label | handle }}-Max"
+                            {% if filter.max_value.value %}
+                              value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '' }}"
+                            {% endif %}
+                            type="number"
+                            placeholder="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '' }}"
+                            min="0"
+                            max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '' }}"
+                            class="w-full pl-7 pr-3 py-2 border border-gray-100 text-[11px] focus:border-black outline-none transition-colors"
+                          >
+                        </div>
+                      </div>
+
+                      {% comment %} Alt kısma lüks bir bar görüntüsü ekleyelim {% endcomment %}
+                      <div class="relative w-full h-[1px] bg-gray-100 mt-6">
+                        <div class="absolute inset-0 bg-black" style="left: 0%; right: 0%;"></div>
+                        <div class="absolute -left-1 -top-[2px] w-[5px] h-[5px] rounded-full bg-black"></div>
+                        <div class="absolute -right-1 -top-[2px] w-[5px] h-[5px] rounded-full bg-black"></div>
+                      </div>
+                    </div>
                 {%- endcase -%}
               </div>
             </div>
