@@ -262,7 +262,6 @@
           )
           .join('');
       });
-    /* showToast('Item added to bag'); */
   }
 
   // Ürünü Satır Numarasına Göre Silme Fonksiyonu
@@ -280,7 +279,6 @@
         updateCartDrawer(); // Hem çekmeceyi hem de sayacı tazeler
       })
       .catch((err) => console.error('Silme hatası:', err));
-    showToast('Item removed from bag');
   }
 
   /* --- VARYANT SEÇİMİ --- */
@@ -362,7 +360,6 @@
       });
 
     return false;
-    /* showToast('Item added to bag'); */
   }
 
   function showToast(message, type = 'success') {
