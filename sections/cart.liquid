@@ -80,7 +80,7 @@
   </header>
 
   {% if cart.item_count > 0 %}
-    <form action="/cart" method="post" novalidate class="flex lg:flex-row gap-16">
+    <form action="/cart" method="post" novalidate class="flex flex-col lg:flex-row gap-16">
       <div class="w-full lg:w-2/3">
         <div class="border-t border-gray-100">
           {% for item in cart.items %}
