@@ -185,6 +185,7 @@
 
     updateCartDrawer(); // İçeriği tazele
   }
+  showToast('Item added to bag');
 
   function closeCartDrawer() {
     const overlay = document.getElementById('cart-drawer-overlay');
@@ -258,6 +259,7 @@
           .join('');
       });
   }
+  showToast('Item removed from bag');
 
   // Ürünü Satır Numarasına Göre Silme Fonksiyonu
   function removeCartItem(line) {
@@ -355,5 +357,32 @@
       });
 
     return false;
+  }
+
+  function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+
+    // Stil ayarları (Luvia Era Minimalizmi)
+    toast.className = `
+    px-8 py-4 bg-black text-white text-[10px] uppercase tracking-[0.3em] shadow-2xl
+    translate-y-10 opacity-0 transition-all duration-500 ease-out flex items-center justify-center min-w-[250px]
+  `;
+
+    toast.innerText = message;
+    container.appendChild(toast);
+
+    // Animasyonla göster
+    setTimeout(() => {
+      toast.classList.replace('translate-y-10', 'translate-y-0');
+      toast.classList.replace('opacity-0', 'opacity-100');
+    }, 10);
+
+    // 3 saniye sonra kaldır
+    setTimeout(() => {
+      toast.classList.replace('translate-y-0', 'translate-y-10');
+      toast.classList.replace('opacity-100', 'opacity-0');
+      setTimeout(() => toast.remove(), 500);
+    }, 3000);
   }
 </script>

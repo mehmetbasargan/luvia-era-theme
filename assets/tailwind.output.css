@@ -227,6 +227,9 @@
   }
 }
 @layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
   .invisible {
     visibility: hidden;
   }
@@ -287,8 +290,14 @@
   .bottom-8 {
     bottom: calc(var(--spacing) * 8);
   }
+  .bottom-10 {
+    bottom: calc(var(--spacing) * 10);
+  }
   .left-0 {
     left: calc(var(--spacing) * 0);
+  }
+  .left-1\/2 {
+    left: calc(1 / 2 * 100%);
   }
   .left-3 {
     left: calc(var(--spacing) * 3);
@@ -305,6 +314,9 @@
   .z-10 {
     z-index: 10;
   }
+  .z-20 {
+    z-index: 20;
+  }
   .z-40 {
     z-index: 40;
   }
@@ -313,6 +325,9 @@
   }
   .z-\[100\] {
     z-index: 100;
+  }
+  .z-\[200\] {
+    z-index: 200;
   }
   .order-first {
     order: -9999;
@@ -545,6 +560,9 @@
   .max-w-\[1440px\] {
     max-width: 1440px;
   }
+  .min-w-\[250px\] {
+    min-width: 250px;
+  }
   .flex-shrink {
     flex-shrink: 1;
   }
@@ -560,6 +578,10 @@
   .border-collapse {
     border-collapse: collapse;
   }
+  .-translate-x-1\/2 {
+    --tw-translate-x: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .translate-x-0 {
     --tw-translate-x: calc(var(--spacing) * 0);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -570,6 +592,10 @@
   }
   .translate-y-0 {
     --tw-translate-y: calc(var(--spacing) * 0);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-y-10 {
+    --tw-translate-y: calc(var(--spacing) * 10);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .translate-y-20 {
