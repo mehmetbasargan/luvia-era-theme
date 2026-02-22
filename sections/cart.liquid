@@ -12,7 +12,7 @@
     <form action="/cart" method="post" class="flex flex-col lg:flex-row gap-16">
       <div class="w-full lg:w-2/3 space-y-8">
         {% for item in cart.items %}
-          <div class="flex gap-6 pb-8 border-b border-gray-100 items-center animate-fadeIn border-b border-gray-200">
+          <div class="flex gap-6 pb-8 border-b border-gray-300 items-center animate-fadeIn">
             <a href="{{ item.url }}" class="w-24 h-32 shrink-0 bg-[#F9F9F9] overflow-hidden">
               <img
                 src="{{ item.image | image_url: width: 300 }}"
