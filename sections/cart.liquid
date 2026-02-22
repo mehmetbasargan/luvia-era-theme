@@ -235,6 +235,33 @@
       localStorage.removeItem('showRemoveToast'); // Bir kez göster ve sil
     }
   });
+
+  // Sepet sayfasındaki silme butonlarını yakalayalım
+  document.addEventListener('click', function (e) {
+    // Eğer tıklanan element bir "Remove" linki ise
+    if (e.target.closest('a[href*="/cart/change"]')) {
+      localStorage.setItem('cart_item_removed', 'true');
+    }
+  });
+
+  // Sayfa yüklendiğinde kontrol et
+  window.addEventListener('load', function () {
+    if (localStorage.getItem('cart_item_removed') === 'true') {
+      // Fonksiyonun var olduğundan emin olalım, yoksa burada tekrar tanımlayalım
+      if (typeof showToast === 'function') {
+        showToast('Item removed from bag');
+      } else {
+        // Eğer global showToast'a erişemezse diye yedek:
+        const toast = document.createElement('div');
+        toast.innerText = 'Item removed from bag';
+        toast.style.cssText =
+          'position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:black; color:white; padding:15px 30px; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; z-index:9999;';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+      localStorage.removeItem('cart_item_removed');
+    }
+  });
 </script>
 
 {% schema %}
