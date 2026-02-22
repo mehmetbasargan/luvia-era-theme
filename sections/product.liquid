@@ -184,8 +184,8 @@
     }, 10);
 
     updateCartDrawer(); // İçeriği tazele
+    showToast('Item added to bag');
   }
-  showToast('Item added to bag');
 
   function closeCartDrawer() {
     const overlay = document.getElementById('cart-drawer-overlay');
@@ -258,8 +258,8 @@
           )
           .join('');
       });
+    showToast('Item removed from bag');
   }
-  showToast('Item removed from bag');
 
   // Ürünü Satır Numarasına Göre Silme Fonksiyonu
   function removeCartItem(line) {
