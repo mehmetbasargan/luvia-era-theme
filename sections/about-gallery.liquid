@@ -1,20 +1,29 @@
 <div class="about-gallery-section py-20 bg-white">
   <div class="max-w-[1440px] mx-auto px-4">
-    <h2 class="text-[10px] uppercase tracking-[0.5em] text-center mb-12 text-gray-400">Curated Moments</h2>
+    {% if section.settings.title != blank %}
+      <h2 class="text-[10px] uppercase tracking-[0.5em] text-center mb-12 text-gray-400">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-      <div class="aspect-[3/4] bg-gray-100 flex items-center justify-center italic text-[10px] text-gray-400 uppercase tracking-widest">
-        Aesthetic 01
-      </div>
-      <div class="aspect-[3/4] bg-gray-100 flex items-center justify-center italic text-[10px] text-gray-400 uppercase tracking-widest">
-        Aesthetic 02
-      </div>
-      <div class="aspect-[3/4] bg-gray-100 flex items-center justify-center italic text-[10px] text-gray-400 uppercase tracking-widest">
-        Aesthetic 03
-      </div>
-      <div class="aspect-[3/4] bg-gray-100 flex items-center justify-center italic text-[10px] text-gray-400 uppercase tracking-widest">
-        Aesthetic 04
-      </div>
+      {% for block in section.blocks %}
+        <div class="aspect-[3/4] bg-gray-100 overflow-hidden group">
+          {% if block.settings.image %}
+            <img
+              src="{{ block.settings.image | image_url: width: 800 }}"
+              height=""
+              width=""
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="w-full h-full flex items-center justify-center italic text-[10px] text-gray-400 uppercase tracking-widest">
+              Image {{ forloop.index }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>
@@ -22,10 +31,37 @@
 {% schema %}
 {
   "name": "About Gallery",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Gallery Title",
+      "default": "Curated Moments"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_block",
+      "name": "Gallery Image",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select Image"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "About Gallery"
+      "name": "About Gallery",
+      "blocks": [
+        { "type": "image_block" },
+        { "type": "image_block" },
+        { "type": "image_block" },
+        { "type": "image_block" }
+      ]
     }
   ]
 }
