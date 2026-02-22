@@ -7,68 +7,62 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
+
 {
-  "sections": {
-    "main_collection_banner_3igPik": {
-      "type": "main-collection-banner",
-      "name": "Koleksiyon Banner",
-      "settings": {
-        "fallback_image": "shopify://shop_images/img4.jpg",
-        "hero_height": 60,
-        "overlay_opacity": 50
-      }
-    },
-    "main": {
-      "type": "collection",
-      "settings": {}
-    },
-    "full_width_gallery_7dxMQK": {
-      "type": "full-width-gallery",
-      "blocks": {
-        "image_h4tRdW": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/1.jpg",
-            "link": "shopify://collections/accessories"
-          }
-        },
-        "image_fRcTBf": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/img3.jpg",
-            "link": "shopify://products/luvia-silk-slip-dress"
-          }
-        },
-        "image_BxJUwe": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/cat3.jpg",
-            "link": "shopify://products/sage-muse-oversized-blazer"
-          }
-        },
-        "image_qR8XRW": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/img2.jpg",
-            "link": "shopify://collections/knitwear"
-          }
-        }
-      },
-      "block_order": [
-        "image_h4tRdW",
-        "image_fRcTBf",
-        "image_BxJUwe",
-        "image_qR8XRW"
-      ],
-      "name": "Luvia Full Gallery",
-      "settings": {
-        "title": "Follow the Era"
-      }
-    }
-  },
-  "order": [
-    "main_collection_banner_3igPik",
-    "main",
-    "full_width_gallery_7dxMQK"
-  ]
+	"sections": {
+		"main_collection_banner_3igPik": {
+			"type": "main-collection-banner",
+			"name": "Koleksiyon Banner",
+			"settings": {
+				"fallback_image": "shopify://shop_images/img4.jpg",
+				"hero_height": 60,
+				"overlay_opacity": 50
+			}
+		},
+		"main": {
+			"type": "main-collection",
+			"settings": {
+				"products_per_page": 12
+			}
+		},
+		"full_width_gallery_7dxMQK": {
+			"type": "full-width-gallery",
+			"blocks": {
+				"image_h4tRdW": {
+					"type": "image",
+					"settings": {
+						"image": "shopify://shop_images/1.jpg",
+						"link": "shopify://collections/accessories"
+					}
+				},
+				"image_fRcTBf": {
+					"type": "image",
+					"settings": {
+						"image": "shopify://shop_images/img3.jpg",
+						"link": "shopify://products/luvia-silk-slip-dress"
+					}
+				},
+				"image_BxJUwe": {
+					"type": "image",
+					"settings": {
+						"image": "shopify://shop_images/cat3.jpg",
+						"link": "shopify://products/sage-muse-oversized-blazer"
+					}
+				},
+				"image_qR8XRW": {
+					"type": "image",
+					"settings": {
+						"image": "shopify://shop_images/img2.jpg",
+						"link": "shopify://collections/knitwear"
+					}
+				}
+			},
+			"block_order": ["image_h4tRdW", "image_fRcTBf", "image_BxJUwe", "image_qR8XRW"],
+			"name": "Luvia Full Gallery",
+			"settings": {
+				"title": "Follow the Era"
+			}
+		}
+	},
+	"order": ["main_collection_banner_3igPik", "main", "full_width_gallery_7dxMQK"]
 }
