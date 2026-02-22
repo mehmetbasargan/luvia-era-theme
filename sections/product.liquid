@@ -220,12 +220,14 @@
                 <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(2)} TL</p>
               </div>
               </div>
-              <button
-                onclick="removeCartItem(${item.key})"
-                class="text-[9px] uppercase tracking-tighter text-red-800 mt-2"
-              >
-                Kaldır
-              </button>
+             <button 
+              type="button" 
+              onclick="removeCartItem('${item.key}')" 
+              class="text-[10px] uppercase tracking-widest text-red-900 mt-2 py-1 px-2 border border-transparent hover:border-red-100 transition-all cursor-pointer"
+              style="position: relative; z-index: 110;"
+            >
+              Kaldır
+            </button>
           </div>
         `
           )
@@ -239,11 +241,32 @@
 
     // TAM BURAYA EKLE:
     function removeCartItem(key) {
+      console.log('Siliniyor:', key); // Konsolda bunu görüyor musun bak!
+
+      const data = {
+        id: key,
+        quantity: 0,
+      };
+
       fetch('/cart/change.js', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: key.toString(), quantity: 0 }),
-      }).then(() => updateCartDrawer());
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error('Silme işlemi başarısız');
+          return res.json();
+        })
+        .then((cart) => {
+          console.log('Yeni sepet durumu:', cart);
+          updateCartDrawer(); // Listeyi yenile
+        })
+        .catch((err) => {
+          console.error('Silme hatası:', err);
+        });
     }
   }
 
