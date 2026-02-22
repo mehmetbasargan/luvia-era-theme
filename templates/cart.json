@@ -21,7 +21,6 @@
     },
     "main": {
       "type": "cart",
-      "disabled": true,
       "settings": {}
     }
   },
