@@ -2,18 +2,13 @@
 	"name": "About Us",
 	"sections": {
 		"main": {
-			"type": "main-page",
+			"type": "page",
 			"settings": {}
 		},
 		"story": {
 			"type": "about-brand-story",
 			"settings": {}
-		},
-		"gallery": {
-			"type": "about-gallery",
-			"settings": {}
 		}
 	},
-	"order": ["main", "story", "gallery"]
+	"order": ["main", "story"]
 }
-/*  */
