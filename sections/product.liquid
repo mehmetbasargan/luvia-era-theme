@@ -46,37 +46,31 @@
 
         <div class="h-1 w-full bg-gray-100"></div>
 
-        {% form 'product', product, class: 'space-y-6' %}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% form 'product', product, id: 'product-form', class: 'space-y-6', onsubmit: 'handleAddToCart(event)' %}
+          {% comment %}
+            ID kısmını dinamik yapalım.
+            Eğer ürünün tek varyantı varsa onu alır, çok varyantı varsa seçili olanı alır.
+          {% endcomment %}
+          <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
 
+          {% comment %} Varyant Seçenekleri (Renk vb.) {% endcomment %}
           {% unless product.has_only_default_variant %}
-            <div class="space-y-4">
+            <div class="product-options space-y-4">
               {% for option in product.options_with_values %}
-                <div class="product-option">
-                  <label class="text-[14px] uppercase tracking-widest text-secondary mb-2 block">
-                    {{ option.name }}
+                <div class="option-wrapper">
+                  <label class="text-[12px] uppercase tracking-widest text-secondary mb-3 block">
+                    {{- option.name -}}
                   </label>
-                  <div class="flex flex-wrap gap-3">
+                  <div class="flex flex-wrap gap-2">
                     {% for value in option.values %}
-                      <label class="cursor-pointer">
-                        <input
-                          type="radio"
-                          name="{{ option.name }}"
-                          value="{{ value }}"
-                          class="peer hidden"
-                          {% if option.selected_value == value %}
-                            checked
-                          {% endif %}
-                        >
-                        <span
-                          class="
-                            px-6 py-2 border border-gray-200 text-xs tracking-widest uppercase transition-all
-                            peer-checked:border-[#3B443C] peer-checked:bg-[#3B443C] peer-checked:text-white hover:border-secondary
-                          "
-                        >
-                          {{ value }}
-                        </span>
-                      </label>
+                      <button
+                        type="button"
+                        class="variant-selector border border-gray-200 px-4 py-2 text-[11px] uppercase tracking-widest transition-all hover:border-[#3B443C] {% if option.selected_value == value %} border-[#3B443C] bg-[#3B443C] text-white {% endif %}"
+                        data-value="{{ value }}"
+                        data-option-index="{{ forloop.parentloop.index0 }}"
+                      >
+                        {{ value }}
+                      </button>
                     {% endfor %}
                   </div>
                 </div>
@@ -84,15 +78,14 @@
             </div>
           {% endunless %}
 
-          <div class="space-y-4 pt-4">
+          <div class="pt-4">
             <button
               type="submit"
               name="add"
-              class="cursor-pointer w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.3em] hover:bg-secondary transition-colors duration-500"
+              class="w-full bg-[#3B443C] text-white py-4 uppercase tracking-[0.3em] hover:bg-[#2A312B] transition-colors"
             >
               Sepete Ekle
             </button>
-            {{ form | payment_button }}
           </div>
         {% endform %}
 
@@ -140,6 +133,14 @@
   }
 </style>
 
+{% schema %}
+{
+  "name": "Ürün Detayı",
+  "settings": [],
+  "presets": [{ "name": "Varsayılan Ürün" }]
+}
+{% endschema %}
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     // 1. Küçük resimler slider'ı
@@ -165,12 +166,49 @@
       },
     });
   });
-</script>
 
-{% schema %}
-{
-  "name": "Ürün Detayı",
-  "settings": [],
-  "presets": [{ "name": "Varsayılan Ürün" }]
-}
-{% endschema %}
+  /* form */
+  function handleAddToCart(event) {
+    // 1. KURAL: Sayfanın yönlenmesini (linkin değişmesini) anında durdur
+    event.preventDefault();
+    event.stopPropagation();
+
+    console.log('JS yakaladı! Sayfa artık değişmeyecek.');
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    // Butonu bekleme moduna al
+    const btn = form.querySelector('[name="add"]');
+    btn.disabled = true;
+    btn.innerText = 'İŞLENİYOR...';
+
+    // 2. KURAL: Shopify'ın kendi API'sine gönder
+    fetch('/cart/add.js', {
+      method: 'POST',
+      body: formData,
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error('Varyant ID hatası veya stok yok');
+        return response.json();
+      })
+      .then((item) => {
+        btn.innerText = 'EKLENDİ ✔';
+        console.log('Başarı!', item);
+        alert('Ürün sepete eklendi!'); // Şimdilik alert kalsın, çalıştığını görelim
+
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerText = 'SEPETE EKLE';
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error('Hata detayı:', error);
+        btn.innerText = 'HATA: ID GEÇERSİZ';
+        btn.disabled = false;
+      });
+
+    return false; // Ekstra güvenlik
+  }
+</script>
