@@ -18,7 +18,11 @@
       </button>
     </div>
 
-    <div id="cart-drawer-items" class="flex-grow overflow-y-auto py-6 space-y-6"></div>
+    <div id="cart-drawer-items" class="flex-grow overflow-y-auto py-6 space-y-6">
+      <button onclick="removeCartItem(${item.key})" class="text-[9px] uppercase tracking-tighter text-red-800 mt-2">
+        Kaldır
+      </button>
+    </div>
 
     <div class="border-t border-gray-100 pt-6 mt-auto">
       <div class="flex justify-between items-center mb-6">
