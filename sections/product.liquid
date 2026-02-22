@@ -219,6 +219,12 @@
                 <p class="text-[11px]">${item.quantity} Adet</p>
                 <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(2)} TL</p>
               </div>
+              <button
+                onclick="removeCartItem(${item.key})"
+                class="text-[9px] uppercase tracking-tighter text-red-800 mt-2"
+              >
+                Kaldır
+              </button>
             </div>
           </div>
         `
