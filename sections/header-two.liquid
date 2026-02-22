@@ -161,7 +161,7 @@
               {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
             {% endif %}
           </a>
-          <a href="{{ routes.cart_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-secondary flex">
+          <a href="{{ routes.cart_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-secondary flex flex-col">
             {% if cart.item_count > 0 %}
               <span class="cart-count-bubble">{{ cart.item_count }}</span>
             {% endif %}
