@@ -206,6 +206,37 @@
   {% endif %}
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Eğer URL'de 'cart' varsa ve bir ürün yeni silindiyse/güncellendiyse kontrol et
+    // Shopify'da sepet sayfasında bir işlem yapıldığında bunu tespit edebiliriz
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Eğer sepet sayfasındaysak ve sayfa az önce bir 'change' veya 'remove' sonrası yenilendiyse
+    // (Bunu anlamanın en kolay yolu tarayıcı geçmişine bakmaktır)
+    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD) {
+      // İstersen burada her yenilemede göstermezsin, ama kullanıcı bir şeyi silip sayfa döndüğünde
+      // bildirim çıkmasını istiyorsak şu mantığı kurabiliriz:
+    }
+
+    // Alternatif ve Kesin Yol:
+    // Sepet sayfasındaki "Remove" butonlarına tıklandığında bildirim bilgisini 'localStorage'a yazalım
+    const removeLinks = document.querySelectorAll('a[href*="/cart/change"]');
+    removeLinks.forEach((link) => {
+      link.addEventListener('click', function () {
+        localStorage.setItem('showRemoveToast', 'true');
+      });
+    });
+
+    // Sayfa açıldığında localStorage'da bu bilgi var mı bak?
+    if (localStorage.getItem('showRemoveToast') === 'true') {
+      showToast('Item removed from bag');
+      localStorage.removeItem('showRemoveToast'); // Bir kez göster ve sil
+    }
+  });
+</script>
+
 {% schema %}
 {
   "name": "t:general.cart",
