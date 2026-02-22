@@ -193,81 +193,70 @@
     }, 500);
   }
 
+  // Sepet Çekmecesini Güncelleyen Ana Fonksiyon
   function updateCartDrawer() {
-    fetch('/cart.js')
+    fetch(window.Shopify.routes.root + 'cart.js')
       .then((res) => res.json())
       .then((cart) => {
         const container = document.getElementById('cart-drawer-items');
         const totalPrice = document.getElementById('cart-total-price');
+        const cartCountElements = document.querySelectorAll('.cart-count'); // Header'daki sayı sınıfları
+
+        // 1. Header Sayacını Güncelle
+        cartCountElements.forEach((el) => {
+          el.innerText = cart.item_count;
+        });
 
         if (totalPrice) totalPrice.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
 
         if (cart.items.length === 0) {
-          container.innerHTML = '<p class="text-[11px] italic text-gray-400 text-center">Sepetiniz boş.</p>';
+          container.innerHTML = '<p class="text-[11px] italic text-gray-400 text-center py-10">Sepetiniz boş.</p>';
           return;
         }
 
+        // 2. Ürünleri Listele (index + 1 kullanarak line numarasını belirliyoruz)
         container.innerHTML = cart.items
           .map(
-            (item) => `
-          <div class="flex gap-4 border-b border-gray-50 pb-4 animate-fadeIn">
-            <img src="${item.image}" class="w-20 h-24 object-cover bg-[#F9F9F9]">
-            <div class="flex flex-col justify-center grow">
-              <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
-              <p class="text-[10px] text-gray-400 mt-1 italic">${item.variant_title || ''}</p>
-              <div class="flex justify-between items-center mt-3">
-                <p class="text-[11px]">${item.quantity} Adet</p>
-                <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(2)} TL</p>
-              </div>
-              </div>
-             <button 
-              type="button" 
-              onclick="removeCartItem('${item.key}')" 
-              class="text-[10px] uppercase tracking-widest text-red-900 mt-2 py-1 px-2 border border-transparent hover:border-red-100 transition-all cursor-pointer"
-              style="position: relative; z-index: 110;"
-            >
-              Kaldır
+            (item, index) => `
+        <div class="flex gap-4 border-b border-gray-50 pb-4 relative">
+          <img src="${item.image}" class="w-20 h-24 object-cover bg-[#F9F9F9]">
+          <div class="flex flex-col justify-center grow">
+            <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
+            <p class="text-[10px] text-gray-400 mt-1 italic">${item.variant_title || ''}</p>
+            
+            <div class="flex justify-between items-end mt-4">
+              <p class="text-[11px]">${item.quantity} Adet</p>
+              <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(2)} TL</p>
+            </div>
+
+            <button type="button" 
+              onclick="removeCartItem(${index + 1})" 
+              class="text-[9px] uppercase tracking-[0.2em] text-red-900 mt-2 text-left hover:text-black transition-all">
+              [ Kaldır ]
             </button>
           </div>
-        `
+        </div>
+      `
           )
           .join('');
       });
+  }
 
-    const cartCountElements = document.querySelectorAll('.cart-count'); // Header'daki sayı class'ı
-    cartCountElements.forEach((el) => {
-      el.innerText = cart.item_count;
-    });
+  // Ürünü Satır Numarasına Göre Silme Fonksiyonu
+  function removeCartItem(line) {
+    const btn = event.target;
+    btn.innerText = 'SİLİNİYOR...';
 
-    // TAM BURAYA EKLE:
-    function removeCartItem(key) {
-      console.log('Siliniyor:', key); // Konsolda bunu görüyor musun bak!
-
-      const data = {
-        id: key,
-        quantity: 0,
-      };
-
-      fetch('/cart/change.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-        body: JSON.stringify(data),
+    fetch(window.Shopify.routes.root + 'cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ line: line, quantity: 0 }),
+    })
+      .then((res) => res.json())
+      .then((cart) => {
+        updateCartDrawer(); // Hem çekmeceyi hem de sayacı tazeler
       })
-        .then((res) => {
-          if (!res.ok) throw new Error('Silme işlemi başarısız');
-          return res.json();
-        })
-        .then((cart) => {
-          console.log('Yeni sepet durumu:', cart);
-          updateCartDrawer(); // Listeyi yenile
-        })
-        .catch((err) => {
-          console.error('Silme hatası:', err);
-        });
-    }
+      .catch((err) => console.error('Silme hatası:', err));
   }
 
   // --- SEPETE EKLEME (ANA FONKSİYON) ---
