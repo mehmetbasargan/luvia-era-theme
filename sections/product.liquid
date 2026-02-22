@@ -198,16 +198,17 @@
     fetch(window.Shopify.routes.root + 'cart.js')
       .then((res) => res.json())
       .then((cart) => {
-        // 1. ÖNCE HEADER'DAKİ SAYACI GÜNCELLE
-        // Temandaki tüm sepet sayaçlarını bulur (mobil ve masaüstü ayrı olabilir)
+        // --- HEADER SAYACINI GÜNCELLEME (KESİN ÇÖZÜM) ---
         const cartBubbles = document.querySelectorAll('.cart-count-bubble');
-        cartBubbles.forEach((bubble) => {
-          bubble.innerText = cart.item_count;
 
-          // Eğer sepet boşsa sayacı gizlemek istersen (opsiyonel):
+        cartBubbles.forEach((bubble) => {
+          bubble.innerText = cart.item_count; // Sayıyı yaz
+
           if (cart.item_count > 0) {
-            bubble.style.display = 'inline-block';
+            bubble.classList.remove('hidden'); // Görünür yap
+            bubble.style.display = 'flex'; // Tailwind kullanmıyorsan garantiye al
           } else {
+            bubble.classList.add('hidden'); // Gizle
             bubble.style.display = 'none';
           }
         });
