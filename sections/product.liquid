@@ -152,10 +152,10 @@
 {% endschema %}
 
 <script>
-  // Sayfa yüklendiğinde Swiper'ları başlat
+  // 1. Sayfa yüklendiğinde Başlatılacaklar
   document.addEventListener('DOMContentLoaded', function () {
+    // Swiper Başlatma
     if (document.querySelector('.product-thumbs')) {
-      // Hata vermemesi için kontrol ekledik
       const thumbsSwiper = new Swiper('.product-thumbs', {
         direction: 'vertical',
         slidesPerView: 'auto',
@@ -172,7 +172,53 @@
         thumbs: { swiper: thumbsSwiper },
       });
     }
+
+    // VARYANT SEÇİMİNİ BAŞLAT (EKSİK OLAN KISIM BUYDU)
+    initVariantSelection();
   });
+
+  // --- VARYANT SEÇİMİ MANTIĞI ---
+  function initVariantSelection() {
+    const variantButtons = document.querySelectorAll('.variant-btn');
+    const variantIdInput = document.getElementById('variant-id');
+    const jsonElement = document.getElementById('product-variants-json');
+
+    if (!variantIdInput || !jsonElement) return;
+
+    const variants = JSON.parse(jsonElement.innerHTML);
+
+    variantButtons.forEach((btn) => {
+      btn.addEventListener('click', function () {
+        // Aktif buton stilini güncelle
+        const parent = this.closest('.flex') || this.parentElement;
+        parent.querySelectorAll('.variant-btn').forEach((b) => {
+          b.classList.remove('bg-black', 'text-white', 'border-black');
+        });
+        this.classList.add('bg-black', 'text-white', 'border-black');
+
+        // Tüm seçili değerleri topla
+        let selectedOptions = [];
+        document.querySelectorAll('.variant-btn.bg-black').forEach((activeBtn) => {
+          selectedOptions.push(activeBtn.getAttribute('data-value'));
+        });
+
+        // Eşleşen varyantı bul
+        const matchedVariant = variants.find((v) => {
+          return v.options.every((opt) => selectedOptions.includes(opt));
+        });
+
+        if (matchedVariant) {
+          variantIdInput.value = matchedVariant.id;
+
+          // Fiyatı Güncelle
+          const priceElement = document.querySelector('.product-price');
+          if (priceElement) {
+            priceElement.innerText = (matchedVariant.price / 100).toFixed(2) + ' TL';
+          }
+        }
+      });
+    });
+  }
 
   // --- SEPET ÇEKMECESİ FONKSİYONLARI ---
   function openCartDrawer() {
@@ -184,8 +230,8 @@
 
     drawer.classList.remove('invisible');
     setTimeout(() => {
-      overlay.classList.replace('opacity-0', 'opacity-100');
-      content.classList.replace('translate-x-full', 'translate-x-0');
+      overlay?.classList.replace('opacity-0', 'opacity-100');
+      content?.classList.replace('translate-x-full', 'translate-x-0');
     }, 10);
 
     updateCartDrawer();
@@ -258,12 +304,10 @@
           )
           .join('');
       });
-    // BURADAKİ showToast SİLİNDİ!
   }
 
   function removeCartItem(line) {
     const btn = event.target;
-    const originalText = btn.innerText;
     btn.innerText = 'REMOVING...';
 
     fetch(window.Shopify.routes.root + 'cart/change.js', {
@@ -273,16 +317,12 @@
     })
       .then((res) => res.json())
       .then((cart) => {
-        showToast('Item removed from bag'); // DOĞRU YER: Silme başarılı olunca!
+        showToast('Item removed from bag');
         updateCartDrawer();
       })
-      .catch((err) => {
-        console.error('Silme hatası:', err);
-        btn.innerText = originalText;
-      });
+      .catch((err) => console.error('Silme hatası:', err));
   }
 
-  // --- SEPETE EKLEME ---
   function handleAddToCart(event) {
     event.preventDefault();
     const form = event.target;
@@ -303,7 +343,7 @@
       })
       .then((item) => {
         btn.innerText = 'ADDED ✔';
-        showToast('Item added to bag'); // DOĞRU YER: Ekleme başarılı olunca!
+        showToast('Item added to bag');
         openCartDrawer();
 
         setTimeout(() => {
@@ -312,7 +352,6 @@
         }, 2000);
       })
       .catch((error) => {
-        console.error('Error:', error);
         btn.innerText = 'ERROR';
         btn.disabled = false;
       });
@@ -321,17 +360,14 @@
   function showToast(message) {
     const container = document.getElementById('toast-container');
     if (!container) return;
-
     const toast = document.createElement('div');
     toast.className = `px-8 py-4 bg-black text-white text-[10px] uppercase tracking-[0.3em] shadow-2xl translate-y-10 opacity-0 transition-all duration-500 ease-out flex items-center justify-center min-w-[250px] mb-2`;
     toast.innerText = message;
     container.appendChild(toast);
-
     setTimeout(() => {
       toast.classList.replace('translate-y-10', 'translate-y-0');
       toast.classList.replace('opacity-0', 'opacity-100');
     }, 10);
-
     setTimeout(() => {
       toast.classList.replace('translate-y-0', 'translate-y-10');
       toast.classList.replace('opacity-100', 'opacity-0');
