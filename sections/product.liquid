@@ -225,6 +225,11 @@
           )
           .join('');
       });
+
+    const cartCountElements = document.querySelectorAll('.cart-count'); // Header'daki sayı class'ı
+    cartCountElements.forEach((el) => {
+      el.innerText = cart.item_count;
+    });
   }
 
   // --- SEPETE EKLEME (ANA FONKSİYON) ---
