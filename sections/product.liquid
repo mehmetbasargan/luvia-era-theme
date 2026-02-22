@@ -142,8 +142,8 @@
 {% endschema %}
 
 <script>
+  // Sayfa yüklendiğinde Swiper'ları başlat
   document.addEventListener('DOMContentLoaded', function () {
-    // 1. Küçük resimler slider'ı
     const thumbsSwiper = new Swiper('.product-thumbs', {
       direction: 'vertical',
       slidesPerView: 'auto',
@@ -153,105 +153,106 @@
       loop: true,
     });
 
-    // 2. Ana slider
     const mainSwiper = new Swiper('.product-main', {
       spaceBetween: 0,
       loop: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      thumbs: {
-        swiper: thumbsSwiper,
-      },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      thumbs: { swiper: thumbsSwiper },
     });
   });
 
-  /* form */
+  // --- SEPET ÇEKMECESİ FONKSİYONLARI ---
+  function openCartDrawer() {
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('cart-drawer-overlay');
+    const content = document.getElementById('cart-drawer-content');
+
+    if (!drawer) {
+      console.error("Sepet çekmecesi HTML'de bulunamadı!");
+      return;
+    }
+
+    drawer.classList.remove('invisible');
+    setTimeout(() => {
+      overlay.classList.replace('opacity-0', 'opacity-100');
+      content.classList.replace('translate-x-full', 'translate-x-0');
+    }, 10);
+
+    updateCartDrawer(); // İçeriği tazele
+  }
+
+  function closeCartDrawer() {
+    const overlay = document.getElementById('cart-drawer-overlay');
+    const content = document.getElementById('cart-drawer-content');
+
+    overlay.classList.replace('opacity-100', 'opacity-0');
+    content.classList.replace('translate-x-0', 'translate-x-full');
+
+    setTimeout(() => {
+      document.getElementById('cart-drawer').classList.add('invisible');
+    }, 500);
+  }
+
+  function updateCartDrawer() {
+    fetch('/cart.js')
+      .then((res) => res.json())
+      .then((cart) => {
+        const container = document.getElementById('cart-drawer-items');
+        const totalPrice = document.getElementById('cart-total-price');
+
+        if (totalPrice) totalPrice.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
+
+        if (cart.items.length === 0) {
+          container.innerHTML = '<p class="text-[11px] italic text-gray-400 text-center">Sepetiniz boş.</p>';
+          return;
+        }
+
+        container.innerHTML = cart.items
+          .map(
+            (item) => `
+          <div class="flex gap-4 border-b border-gray-50 pb-4 animate-fadeIn">
+            <img src="${item.image}" class="w-20 h-24 object-cover bg-[#F9F9F9]">
+            <div class="flex flex-col justify-center grow">
+              <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
+              <p class="text-[10px] text-gray-400 mt-1 italic">${item.variant_title || ''}</p>
+              <div class="flex justify-between items-center mt-3">
+                <p class="text-[11px]">${item.quantity} Adet</p>
+                <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(2)} TL</p>
+              </div>
+            </div>
+          </div>
+        `
+          )
+          .join('');
+      });
+  }
+
+  // --- SEPETE EKLEME (ANA FONKSİYON) ---
   function handleAddToCart(event) {
-    // 1. KURAL: Sayfanın yönlenmesini (linkin değişmesini) anında durdur
     event.preventDefault();
     event.stopPropagation();
 
-    console.log('JS yakaladı! Sayfa artık değişmeyecek.');
-
     const form = event.target;
     const formData = new FormData(form);
-
-    // Butonu bekleme moduna al
     const btn = form.querySelector('[name="add"]');
+
     btn.disabled = true;
     btn.innerText = 'İŞLENİYOR...';
 
-    // 2. KURAL: Shopify'ın kendi API'sine gönder
     fetch('/cart/add.js', {
       method: 'POST',
       body: formData,
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
     })
       .then((response) => {
-        if (!response.ok) throw new Error('Varyant ID hatası veya stok yok');
+        if (!response.ok) throw new Error('Ekleme başarısız');
         return response.json();
       })
       .then((item) => {
         btn.innerText = 'EKLENDİ ✔';
-        console.log('Başarı!', item);
-        function openCartDrawer() {
-          const drawer = document.getElementById('cart-drawer');
-          const overlay = document.getElementById('cart-drawer-overlay');
-          const content = document.getElementById('cart-drawer-content');
 
-          drawer.classList.remove('invisible');
-          setTimeout(() => {
-            overlay.classList.replace('opacity-0', 'opacity-100');
-            content.classList.replace('translate-x-full', 'translate-x-0');
-          }, 10);
-
-          updateCartDrawer(); // Sepet içeriğini güncelle
-        }
-
-        function closeCartDrawer() {
-          const overlay = document.getElementById('cart-drawer-overlay');
-          const content = document.getElementById('cart-drawer-content');
-
-          overlay.classList.replace('opacity-100', 'opacity-0');
-          content.classList.replace('translate-x-0', 'translate-x-full');
-
-          setTimeout(() => {
-            document.getElementById('cart-drawer').classList.add('invisible');
-          }, 500);
-        }
-
-        function updateCartDrawer() {
-          fetch('/cart.js')
-            .then((res) => res.json())
-            .then((cart) => {
-              const container = document.getElementById('cart-drawer-items');
-              const totalPrice = document.getElementById('cart-total-price');
-
-              totalPrice.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
-
-              if (cart.items.length === 0) {
-                container.innerHTML = '<p class="text-[11px] italic text-gray-400">Sepetiniz boş.</p>';
-                return;
-              }
-
-              container.innerHTML = cart.items
-                .map(
-                  (item) => `
-        <div class="flex gap-4 border-b border-gray-50 pb-4">
-          <img src="${item.image}" class="w-16 h-20 object-cover bg-gray-50">
-          <div class="flex flex-col justify-center">
-            <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
-            <p class="text-[10px] text-gray-500 mt-1">${item.variant_title || ''}</p>
-            <p class="text-[11px] mt-2">${item.quantity} x ${(item.price / 100).toFixed(2)} TL</p>
-          </div>
-        </div>
-      `
-                )
-                .join('');
-            });
-        }
+        // İŞTE KRİTİK NOKTA: Fonksiyonu burada çağırıyoruz!
+        openCartDrawer();
 
         setTimeout(() => {
           btn.disabled = false;
@@ -259,11 +260,11 @@
         }, 2000);
       })
       .catch((error) => {
-        console.error('Hata detayı:', error);
-        btn.innerText = 'HATA: ID GEÇERSİZ';
+        console.error('Hata:', error);
+        btn.innerText = 'HATA OLUŞTU';
         btn.disabled = false;
       });
 
-    return false; // Ekstra güvenlik
+    return false;
   }
 </script>
