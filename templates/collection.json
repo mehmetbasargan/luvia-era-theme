@@ -13,6 +13,7 @@
       "type": "main-collection-banner",
       "name": "Collection Banner",
       "settings": {
+        "fallback_image": "shopify://shop_images/alpcem-portrait-4644666_1280.jpg",
         "hero_height": 60,
         "overlay_opacity": 50
       }
