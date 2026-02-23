@@ -116,7 +116,7 @@
         <div class="pt-8 border-t border-gray-100 space-y-4">
           <details class="group">
             <summary class="flex justify-between items-center cursor-pointer list-none text-[10px] uppercase tracking-widest text-[#3B443C]">
-              {{ 'products.product.details' | t }}
+              Ürün Detayları
               <span class="group-open:rotate-180 transition-transform">↓</span>
             </summary>
             <div class="pt-4 text-xs text-gray-500 leading-6">
@@ -141,28 +141,14 @@
 
 <style>
   .product-thumbs .swiper-slide {
-    height: 120px !important; /* Küçük resimlerin yüksekliği */
+    height: 120px !important;
     width: 100% !important;
-    margin-bottom: 10px; /* Aradaki boşluk */
+    margin-bottom: 10px;
     display: flex;
   }
   .product-thumbs {
-    padding-right: 0px; /* Ana görselle çok bitişmesin */
+    padding-right: 0px;
   }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    align-items: center;
-    color: #3b443c;
-    cursor: pointer;
-    display: flex;
-    height: var(--swiper-navigation-size);
-    justify-content: center;
-    position: absolute;
-    width: var(--swiper-navigation-size);
-    z-index: 10;
-  }
-
   .swiper-button-next,
   .swiper-button-prev {
     height: 50px !important;
@@ -170,17 +156,14 @@
     background: #ffffff60;
     border-radius: 50%;
     padding: 15px;
-  }
-
-  #toast-container div {
-    backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.85);
+    color: #3b443c;
+    z-index: 10;
   }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Swiper Başlatma
+    // 1. Swiper Kurulumu
     if (document.querySelector('.product-thumbs')) {
       const thumbsSwiper = new Swiper('.product-thumbs', {
         direction: 'vertical',
@@ -188,35 +171,23 @@
         spaceBetween: 10,
         freeMode: true,
         watchSlidesProgress: true,
-        loop: true,
       });
-
       const mainSwiper = new Swiper('.product-main', {
         spaceBetween: 0,
-        loop: true,
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         thumbs: { swiper: thumbsSwiper },
       });
     }
-  });
 
-  /*  */
-  document.addEventListener('DOMContentLoaded', function () {
+    // 2. Sepete Ekleme (AJAX)
     const productForm = document.querySelector('form[action="/cart/add"]');
-
     if (productForm) {
       productForm.addEventListener('submit', function (e) {
         e.preventDefault();
-
         let formData = new FormData(productForm);
-
-        fetch('/cart/add.js', {
-          method: 'POST',
-          body: formData,
-        })
+        fetch('/cart/add.js', { method: 'POST', body: formData })
           .then((response) => response.json())
-          .then((item) => {
-            // Ürün eklendi, şimdi çekmeceyi güncelle ve aç
+          .then(() => {
             openAndRefreshCart();
           })
           .catch((error) => console.error('Sepet Hatası:', error));
@@ -224,88 +195,47 @@
     }
   });
 
+  // 3. Sepet Çekmecesini Güncelleme ve Açma
   function openAndRefreshCart() {
     fetch('/cart.js')
       .then((res) => res.json())
       .then((cart) => {
-        // 1. Ürünleri Listele
         const itemsContainer = document.getElementById('cart-drawer-items');
         const totalPriceContainer = document.getElementById('cart-total-price');
 
         if (cart.items.length > 0) {
+          // MAP fonksiyonu içinde "Kaldır" butonunu ekledik (onclick="removeCartItem")
           itemsContainer.innerHTML = cart.items
             .map(
-              (item) => `
+              (item, index) => `
                 <div class="flex gap-4 border-b border-gray-50 pb-4">
                     <img src="${item.image}" class="w-20 h-24 object-cover">
                     <div class="flex-1">
-                    <h4 class="text-[10px] uppercase tracking-widest text-[#3B443C]">${item.product_title}</h4>
-                    <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
-                    <p class="text-xs mt-2">${(item.price / 100).toFixed(2)} TL</p>
+                      <div class="flex justify-between">
+                        <h4 class="text-[10px] uppercase tracking-widest text-[#3B443C]">${item.product_title}</h4>
+                        <button onclick="removeCartItem(${
+                          index + 1
+                        })" class="text-[9px] text-gray-400 hover:text-black uppercase underline">Kaldır</button>
+                      </div>
+                      <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
+                      <p class="text-xs mt-2 font-medium">${(item.price / 100).toFixed(2)} TL</p>
                     </div>
                 </div>
-                `
+            `
             )
             .join('');
         } else {
           itemsContainer.innerHTML =
-            '<p class="text-[10px] uppercase tracking-widest text-center mt-10">Sepetiniz Boş</p>';
+            '<p class="text-[10px] uppercase tracking-widest text-center mt-10 text-gray-400">Sepetiniz Boş</p>';
         }
-
-        itemsHtml = cart.items
-          .map(
-            (item, index) => `
-            <div class="flex gap-4 border-b border-gray-50 pb-4 relative group">
-                <img src="${item.image}" class="w-20 h-24 object-cover">
-                <div class="flex-1">
-                <div class="flex justify-between items-start">
-                    <h4 class="text-[10px] uppercase tracking-widest text-[#3B443C]">${item.product_title}</h4>
-                    <button 
-                    onclick="removeCartItem(${index + 1})" 
-                    class="text-[9px] uppercase tracking-tighter text-gray-400 hover:text-red-800 transition-colors"
-                    >
-                    Kaldır
-                    </button>
-                </div>
-                <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
-                <div class="flex justify-between items-center mt-4">
-                    <p class="text-xs font-light">${item.quantity} x ${(item.price / 100).toFixed(2)} TL</p>
-                </div>
-                </div>
-            </div>
-            `
-          )
-          .join('');
 
         totalPriceContainer.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
 
-        function removeCartItem(line) {
-          // Shopify'a "şu sıradaki ürünün miktarını 0 yap" diyoruz
-          fetch('/cart/change.js', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              line: line,
-              quantity: 0,
-            }),
-          })
-            .then((res) => res.json())
-            .then((cart) => {
-              // Sepet güncellendi, çekmece içeriğini tazele
-              openAndRefreshCart();
-            })
-            .catch((err) => console.error('Silme hatası:', err));
-        }
-
-        // 2. Çekmeceyi Görünür Yap (Senin ID'lerine Göre)
+        // Çekmeceyi Açma Animasyonu
         const drawer = document.getElementById('cart-drawer');
         const overlay = document.getElementById('cart-drawer-overlay');
         const content = document.getElementById('cart-drawer-content');
-
         drawer.classList.remove('invisible');
-        // Biraz gecikme veriyoruz ki transition (animasyon) çalışsın
         setTimeout(() => {
           overlay.classList.replace('opacity-0', 'opacity-100');
           content.classList.replace('translate-x-full', 'translate-x-0');
@@ -313,23 +243,32 @@
       });
   }
 
+  // 4. SEPETTEN ÜRÜN SİLME FONKSİYONU
+  function removeCartItem(line) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ line: line, quantity: 0 }),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        openAndRefreshCart(); // Listeyi tazele
+      })
+      .catch((err) => console.error('Silme hatası:', err));
+  }
+
   function closeCartDrawer() {
     const drawer = document.getElementById('cart-drawer');
     const overlay = document.getElementById('cart-drawer-overlay');
     const content = document.getElementById('cart-drawer-content');
-
     overlay.classList.replace('opacity-100', 'opacity-0');
     content.classList.replace('translate-x-0', 'translate-x-full');
-
     setTimeout(() => {
       drawer.classList.add('invisible');
-    }, 500); // Animasyon süresi kadar bekle
+    }, 500);
   }
 </script>
 
 {% schema %}
-{
-  "name": "Ürün Sayfası",
-  "settings": []
-}
+{ "name": "Ürün Sayfası", "settings": [] }
 {% endschema %}
