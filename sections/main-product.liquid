@@ -1,0 +1,80 @@
+{%- unless product.has_only_default_variant -%}
+  <div class="product-variants space-y-6 py-8 border-y border-gray-100 my-8">
+    {%- for option in product.options_with_values -%}
+      <div class="variant-wrapper">
+        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-4 block">
+          {{ option.name }}: <span class="text-black font-medium">{{ option.selected_value }}</span>
+        </label>
+
+        <div class="flex flex-wrap gap-3">
+          {%- for value in option.values -%}
+            <label class="cursor-pointer">
+              <input
+                type="radio"
+                name="{{ option.name }}"
+                value="{{ value | escape }}"
+                {% if option.selected_value == value %}
+                  checked
+                {% endif %}
+                class="sr-only peer"
+              >
+
+              {%- if option.name == 'Renk' or option.name == 'Color' -%}
+                {% comment %} Renk Swatch Görünümü {% endcomment %}
+                <span
+                  class="block w-8 h-8 rounded-full border border-gray-200 ring-offset-2 ring-black peer-checked:ring-1 transition-all"
+                  style="background-color: {{ value | handle }};"
+                >
+                </span>
+              {%- else -%}
+                {% comment %} Beden/Diğer Seçenekler Görünümü {% endcomment %}
+                <span class="min-w-[45px] h-[45px] flex items-center justify-center border border-gray-200 text-[11px] uppercase tracking-widest peer-checked:border-black peer-checked:bg-black peer-checked:text-white transition-all px-3">
+                  {{ value }}
+                </span>
+              {%- endif -%}
+            </label>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endunless -%}
+
+{% comment %} Sepete Ekle Formu {% endcomment %}
+<div class="product-form-container mt-8">
+  {%- form 'product', product -%}
+    {% comment %} Bu gizli input, seçilen varyantın ID'sini tutar {% endcomment %}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+    <div class="flex flex-col gap-4">
+      <button
+        type="submit"
+        name="add"
+        class="w-full bg-black text-white py-5 text-[11px] uppercase tracking-[0.3em] hover:bg-gray-900 transition-all {% unless product.available %}opacity-50 cursor-not-allowed{% endunless %}"
+        {% unless product.available %}
+          disabled
+        {% endunless %}
+      >
+        {% if product.available %}
+          Add to Cart
+        {% else %}
+          Sold Out
+        {% endif %}
+      </button>
+    </div>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Ürün Sayfası Detayı",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Markayı Göster",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
