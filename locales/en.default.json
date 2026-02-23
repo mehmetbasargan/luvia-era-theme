@@ -5,7 +5,9 @@
 		"home": "Home",
 		"clear_all": "Clear All",
 		"no_products_found": "No products found.",
-		"luvia_era_edition": "Luvia Era Edition"
+		"luvia_era_edition": "Luvia Era Edition",
+		"close": "Close",
+		"total": "Total"
 	},
 	"404": {
 		"title": "404",
@@ -35,7 +37,8 @@
 		"shopping_bg_is_empty": "Your shopping bag is currently empty.",
 		"discover_our_collection": "Discover Our Collection",
 		"add_to_cart": "Add to Cart",
-		"sold_out": "Sold Out"
+		"sold_out": "Sold Out",
+		"my_cart": "My Cart"
 	},
 	"customers": {
 		"login": {
