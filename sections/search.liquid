@@ -10,45 +10,34 @@
     <input
       id="search-input"
       type="search"
-      size="50"
       name="q"
       value="{{ search.terms | escape }}"
       placeholder="{{ 'search.placeholder' | t }}"
       class="border border-gray-300 rounded px-4 py-2 h-16 w-full focus:outline-none focus:ring-1 focus:ring-secondary"
+      autocomplete="off"
     >
     <button
       type="submit"
-      class="h-[64px] w-[64px] border border-gray-300 rounded flex items-center justify-center hover:bg-secondary text-primary hover:text-white cursor-pointer"
+      class="h-[64px] w-[64px] border border-gray-300 rounded flex items-center justify-center hover:bg-secondary text-primary hover:text-white"
     >
       {% render 'icon-search' %}
     </button>
   </form>
 
-  {% if search.performed %}
-    {% if search.results_count == 0 %}
-      <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
+  {% # SONUÇLARIN GELECEĞİ ALAN HER ZAMAN VAR OLMALI %}
+  <div id="search-results-container" class="py-10">
+    {% if search.performed %}
+      <div id="search-results" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+        {% for result in search.results %}
+          {% render 'product-card', product: result %}
+        {% endfor %}
+      </div>
     {% else %}
-      <div class="pt-10 w-full text-center">
-        <p class="text-xl">{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</p>
-      </div>
-
-      <div class="search-results py-10">
-        {% paginate search.results by 20 %}
-          {% # Search result items may be an article, a page, or a product. %}
-          <div id="search-results" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
-            {% for result in search.results %}
-              {% render 'product-card', product: result %}
-            {% endfor %}
-          </div>
-          {{ paginate | default_pagination }}
-        {% endpaginate %}
-      </div>
+      {% # Sayfa ilk açıldığında görünecek boş alan %}
+      <div id="search-results" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full"></div>
     {% endif %}
-  {% endif %}
+  </div>
 </div>
-
-{% stylesheet %}
-{% endstylesheet %}
 
 <script>
   const searchInput = document.querySelector('#search-input');
@@ -57,26 +46,27 @@
   searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.trim();
 
-    // 1. Kutu boşsa sonuçları anında temizle
     if (searchTerm.length === 0) {
       resultsContainer.innerHTML = '';
       return;
     }
 
-    // 2. En az 3 karakter olunca aramaya başla (Performans için)
     if (searchTerm.length > 2) {
-      // Shopify Predictive Search API'sini kullanıyoruz
-      fetch(`/search/suggest.json?q=${searchTerm}&resources[type]=product&resources[limit]=4`)
+      // ÖNEMLİ: URL'ye resources[type] ekledik
+      fetch(
+        `${window.Shopify.routes.root}search/suggest.json?q=${searchTerm}&resources[type]=product&resources[limit]=4`
+      )
         .then((response) => response.json())
         .then((suggestions) => {
-          const products = suggestions.data.products;
+          const products = suggestions.resources.results.products; // Veri yolu burada değişti
 
           if (products.length > 0) {
             renderResults(products);
           } else {
             resultsContainer.innerHTML = `<p>{{ 'search.no_results_html' | t }}</p>`;
           }
-        });
+        })
+        .catch((err) => console.error('Search Error:', err));
     }
   });
 
@@ -84,13 +74,14 @@
     resultsContainer.innerHTML = products
       .map(
         (product) => `
-    <div class="search-item">
-      <a href="${product.url}">
-        <img src="${product.image}" alt="${product.title}" class="w-12 h-12 object-cover">
-        <span>${product.title}</span>
-      </a>
-    </div>
-  `
+        <div class="product-card-temp border p-4 text-center">
+          <a href="${product.url}">
+            <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-cover mb-2">
+            <h3 class="text-sm uppercase">${product.title}</h3>
+            <p class="font-bold">${product.price_format || product.price}</p>
+          </a>
+        </div>
+      `
       )
       .join('');
   }
