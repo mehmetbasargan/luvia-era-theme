@@ -55,7 +55,10 @@
             {%- for option in product.options_with_values -%}
               <div class="variant-wrapper">
                 <label class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-4 block">
-                  {{ option.name }}: <span class="text-black font-medium">{{ option.selected_value }}</span>
+                  {{ option.name }}:
+                  <span id="option-value-{{ forloop.index }}" class="text-black font-medium">
+                    {{- option.selected_value -}}
+                  </span>
                 </label>
 
                 <div class="flex flex-wrap gap-3">
@@ -194,6 +197,39 @@
       });
     }
   });
+
+  /* ddddd */
+  // Varyant değiştiğinde ismi güncelleme
+document.querySelectorAll('.variant-wrapper').forEach((wrapper, index) => {
+  const labelSpan = document.getElementById(`option-value-${index + 1}`);
+  const inputs = wrapper.querySelectorAll('input[type="radio"]');
+
+  inputs.forEach(input => {
+    input.addEventListener('change', (e) => {
+      // Tıklanan inputun değerini yukarıdaki span'a yaz
+      labelSpan.textContent = e.target.value;
+      
+      // OPSİYONEL: Burada istersen fiyatı veya görseli de güncelleyebilirsin
+      updateVariantID(); 
+    });
+  });
+});
+
+// Formun içindeki gizli Input ID'sini güncelleme (Sepete doğru varyantın gitmesi için)
+function updateVariantID() {
+  const selectedOptions = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(input => input.value);
+  const variantData = {{ product.variants | json }};
+  
+  const matchedVariant = variantData.find(variant => {
+    return variant.options.every((option, index) => option === selectedOptions[index]);
+  });
+
+  if (matchedVariant) {
+    document.querySelector('input[name="id"]').value = matchedVariant.id;
+    // Fiyatı da güncellemek istersen:
+    // document.querySelector('.text-xl.font-medium').textContent = Shopify.formatMoney(matchedVariant.price);
+  }
+}
 
   // 3. Sepet Çekmecesini Güncelleme ve Açma
   function openAndRefreshCart() {
