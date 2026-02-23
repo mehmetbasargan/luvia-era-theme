@@ -79,12 +79,12 @@
 
             <div class="mt-6 text-center">
               <a href="{{ product.url }}">
-                <h3 class="text-[#3B443C] text-sm font-light tracking-wide">{{ product.title }}</h3>
+                <h3 class="text-[#3B443C] text-[13px] font-light tracking-wide">{{ product.title }}</h3>
                 <div class="mt-2 flex justify-center items-center gap-3">
                   {% if product.compare_at_price > product.price %}
-                    <span class="text-gray-400 line-through text-xs">{{ product.compare_at_price | money }}</span>
+                    <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
                   {% endif %}
-                  <span class="text-[#3B443C] text-sm font-medium">{{ product.price | money }}</span>
+                  <span class="text-[#3B443C] text-[13px] font-medium">{{ product.price | money }}</span>
                 </div>
               </a>
             </div>
