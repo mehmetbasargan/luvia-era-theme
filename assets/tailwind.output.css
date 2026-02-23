@@ -1034,6 +1034,9 @@
   .py-20 {
     padding-block: calc(var(--spacing) * 20);
   }
+  .py-30 {
+    padding-block: calc(var(--spacing) * 30);
+  }
   .py-32 {
     padding-block: calc(var(--spacing) * 32);
   }
