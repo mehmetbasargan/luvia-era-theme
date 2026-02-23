@@ -31,28 +31,28 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/alpcem-portrait-4778337_1280.jpg",
-            "link": "shopify://collections/accessories"
+            "link": "shopify://collections/golden-hour-muse"
           }
         },
         "image_fRcTBf": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/img3.jpg",
-            "link": "shopify://products/luvia-silk-slip-dress"
+            "link": "shopify://collections/golden-hour-muse"
           }
         },
         "image_BxJUwe": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat3.jpg",
-            "link": "shopify://products/sage-muse-oversized-blazer"
+            "link": "shopify://collections/silk-grace"
           }
         },
         "image_qR8XRW": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/img2.jpg",
-            "link": "shopify://collections/knitwear"
+            "link": "shopify://collections/the-minimalist-era"
           }
         }
       },
