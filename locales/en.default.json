@@ -34,7 +34,8 @@
 		"secure_payment_guaranteed": "Secure Payment Guaranteed",
 		"shopping_bg_is_empty": "Your shopping bag is currently empty.",
 		"discover_our_collection": "Discover Our Collection",
-		"add_to_cart": "Add to Cart"
+		"add_to_cart": "Add to Cart",
+		"sold_out": "Sold Out"
 	},
 	"customers": {
 		"login": {
@@ -74,8 +75,7 @@
 	"products": {
 		"product": {
 			"details_title": "Product Details",
-			"shipping_title": "Shipping & Returns",
-			"sold_out": "Sold Out"
+			"shipping_title": "Shipping & Returns"
 		}
 	},
 	"featured_products": {
