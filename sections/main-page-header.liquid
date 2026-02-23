@@ -39,18 +39,18 @@
 
 {% schema %}
 {
-  "name": "Sayfa Başlığı (Hero)",
+  "name": "Page Header",
   "settings": [
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Arka Plan Görseli"
+      "label": "Background Image"
     },
     {
       "type": "text",
       "id": "custom_title",
-      "label": "Özel Başlık (Boş bırakılırsa sayfa adını alır)",
-      "placeholder": "Örn: Hikayemiz"
+      "label": "Custom Title (if blank, page title will be used)",
+      "placeholder": "Example: Our Story"
     },
     {
       "type": "range",
@@ -59,7 +59,7 @@
       "max": 70,
       "step": 5,
       "unit": "vh",
-      "label": "Banner Yüksekliği",
+      "label": "Banner Height",
       "default": 40
     },
     {
@@ -69,13 +69,13 @@
       "max": 90,
       "step": 10,
       "unit": "%",
-      "label": "Görsel Karartma",
+      "label": "Image Overlay",
       "default": 30
     }
   ],
   "presets": [
     {
-      "name": "Sayfa Başlığı (Hero)"
+      "name": "Page Header"
     }
   ]
 }

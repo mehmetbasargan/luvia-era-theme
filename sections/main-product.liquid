@@ -109,7 +109,7 @@
                 {% if product.available %}
                   {{ 'cart.add_to_cart' | t }}
                 {% else %}
-                  {{ 'products.product.sold_out' | t }}
+                  {{ 'cart.sold_out' | t }}
                 {% endif %}
               </button>
             </div>
@@ -261,7 +261,7 @@ function updateVariantID() {
             .join('');
         } else {
           itemsContainer.innerHTML =
-            '<p class="text-[10px] uppercase tracking-widest text-center mt-10 text-gray-400">Sepetiniz Boş</p>';
+            '<p class="text-[10px] uppercase tracking-widest text-center mt-10 text-gray-400">${ "{{ 'products.product.empty_cart' | t }}" }</p>';
         }
 
         totalPriceContainer.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
@@ -305,5 +305,5 @@ function updateVariantID() {
 </script>
 
 {% schema %}
-{ "name": "Ürün Sayfası", "settings": [] }
+{ "name": "Product Page", "settings": [] }
 {% endschema %}

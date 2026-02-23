@@ -39,13 +39,13 @@
 
 {% schema %}
 {
-  "name": "Koleksiyon Banner",
+  "name": "Collection Banner",
   "settings": [
     {
       "type": "image_picker",
       "id": "fallback_image",
-      "label": "Yedek Görsel",
-      "info": "Koleksiyona özel görsel yoksa (örneğin Tüm Ürünler sayfası) bu görsel görünür."
+      "label": "Fallback Image",
+      "info": "If there is no collection-specific image (for example, the All Products page), this image will be displayed."
     },
     {
       "type": "range",
@@ -54,7 +54,7 @@
       "max": 100,
       "step": 5,
       "unit": "vh",
-      "label": "Banner Yüksekliği",
+      "label": "Banner Height",
       "default": 50
     },
     {
@@ -63,13 +63,13 @@
       "min": 0,
       "max": 90,
       "step": 10,
-      "label": "Görsel Karartma",
+      "label": "Image Overlay",
       "default": 30
     }
   ],
   "presets": [
     {
-      "name": "Koleksiyon Banner"
+      "name": "Collection Banner"
     }
   ]
 }

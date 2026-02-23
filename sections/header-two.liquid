@@ -180,14 +180,6 @@
   </div>
 </header>
 
-{% comment %}
-  element.style {
-      position: absolute;
-      top: -10px;
-      left: 9px;
-  }
-{% endcomment %}
-
 <style>
   #shopify-section-{{ section.id }} {
     position: -webkit-sticky;
@@ -215,25 +207,25 @@
     {
       "type": "text",
       "id": "header_phone",
-      "label": "Telefon Numarası",
+      "label": "Phone Number",
       "placeholder": "+90 5XX XXX XX XX"
     },
     {
       "type": "checkbox",
       "id": "show_phone",
-      "label": "Telefonu Göster",
+      "label": "Show Phone",
       "default": true
     }
   ],
   "blocks": [
     {
       "type": "social_icon",
-      "name": "Sosyal Medya İkonu",
+      "name": "Social Media Icon",
       "settings": [
         {
           "type": "select",
           "id": "icon_choice",
-          "label": "İkon Seçin",
+          "label": "Select Icon",
           "options": [
             { "value": "icon-facebook", "label": "Facebook" },
             { "value": "icon-instagram", "label": "Instagram" },
@@ -246,7 +238,7 @@
         {
           "type": "url",
           "id": "link",
-          "label": "İkon Linki"
+          "label": "Social Media Icon Link"
         }
       ]
     }

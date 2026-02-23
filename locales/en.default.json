@@ -78,7 +78,10 @@
 	"products": {
 		"product": {
 			"details_title": "Product Details",
-			"shipping_title": "Shipping & Returns"
+			"shipping_title": "Shipping & Returns",
+			"empty_cart": "Your cart is empty.",
+			"empty_bag": "Your bag is empty.",
+			"remove": "Remove"
 		}
 	},
 	"featured_products": {
@@ -89,6 +92,8 @@
 		"join": "Join",
 		"be_first_to_know": "Be the first to know about new eras.",
 		"all_rights_reserved": "All rights reserved",
-		"luvia_era": "Luvia Era"
+		"luvia_era": "Luvia Era",
+		"email_address": "Email address",
+		"subscribe": "Subscribe"
 	}
 }

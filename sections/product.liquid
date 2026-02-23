@@ -145,9 +145,9 @@
 
 {% schema %}
 {
-  "name": "Ürün Detayı",
+  "name": "Product Detail",
   "settings": [],
-  "presets": [{ "name": "Varsayılan Ürün" }]
+  "presets": [{ "name": "Default Product" }]
 }
 {% endschema %}
 
@@ -277,7 +277,7 @@
         if (!container) return;
 
         if (cart.items.length === 0) {
-          container.innerHTML = '<p class="text-[11px] italic text-gray-400 text-center py-10">Your bag is empty.</p>';
+          container.innerHTML = '<p class="text-[11px] italic text-gray-400 text-center py-10">${ "{{ 'products.product.empty_cart' | t }}" }</p>';
           return;
         }
 
@@ -296,7 +296,7 @@
               <button type="button" 
                 onclick="removeCartItem(${index + 1})" 
                 class="text-[9px] uppercase tracking-[0.2em] text-red-900 mt-2 text-left hover:text-black transition-all cursor-pointer">
-                [ Remove ]
+                [ ${ "{{ 'products.product.remove' | t }}" }]
               </button>
             </div>
           </div>
