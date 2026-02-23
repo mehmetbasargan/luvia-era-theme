@@ -1,37 +1,35 @@
 <section class="max-w-[1440px] mx-auto px-4 md:px-10 py-12">
   <div class="flex flex-col lg:flex-row gap-16">
     <div class="lg:w-3/5">
-      <div class="w-full md:w-full lg:w-2/3 flex flex-row gap-6 h-[600px] lg:h-[800px]">
-        {% comment %} thumbnails {% endcomment %}
-        <div class="hidden md:block w-20 shrink-0">
-          <div class="swiper product-thumbs h-full">
-            <div class="swiper-wrapper ">
-              {% for media in product.media %}
-                <div class="swiper-slide cursor-pointer opacity-50 transition-opacity duration-300 [&.swiper-slide-thumb-active]:opacity-100">
-                  {{ media | image_url: width: 200 | image_tag: class: ' object-cover' }}
-                </div>
-              {% endfor %}
-            </div>
+      {% comment %} thumbnails {% endcomment %}
+      <div class="hidden md:block w-20 shrink-0">
+        <div class="swiper product-thumbs h-full">
+          <div class="swiper-wrapper ">
+            {% for media in product.media %}
+              <div class="swiper-slide cursor-pointer opacity-50 transition-opacity duration-300 [&.swiper-slide-thumb-active]:opacity-100">
+                {{ media | image_url: width: 200 | image_tag: class: ' object-cover' }}
+              </div>
+            {% endfor %}
           </div>
         </div>
+      </div>
 
-        {% comment %} main images {% endcomment %}
-        <div class="grow h-full overflow-hidden bg-[#F9F9F9]">
-          <div class="swiper product-main h-full">
-            <div class="swiper-wrapper h-full">
-              {% for media in product.media %}
-                <div class="swiper-slide h-full">
-                  {{
-                    media
-                    | image_url: width: 1500
-                    | image_tag: class: 'w-full h-full object-cover object-top', loading: 'eager'
-                  }}
-                </div>
-              {% endfor %}
-            </div>
-            <div class="swiper-button-next text-[#3B443C] !after:text-lg"></div>
-            <div class="swiper-button-prev text-[#3B443C] !after:text-lg"></div>
+      {% comment %} main images {% endcomment %}
+      <div class="grow h-full overflow-hidden bg-[#F9F9F9]">
+        <div class="swiper product-main h-full">
+          <div class="swiper-wrapper h-full">
+            {% for media in product.media %}
+              <div class="swiper-slide h-full">
+                {{
+                  media
+                  | image_url: width: 1500
+                  | image_tag: class: 'w-full h-full object-cover object-top', loading: 'eager'
+                }}
+              </div>
+            {% endfor %}
           </div>
+          <div class="swiper-button-next text-[#3B443C] !after:text-lg"></div>
+          <div class="swiper-button-prev text-[#3B443C] !after:text-lg"></div>
         </div>
       </div>
     </div>
