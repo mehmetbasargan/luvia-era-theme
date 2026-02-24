@@ -20,6 +20,58 @@
         "bg_color": "#b2ac88"
       }
     },
+    "top_bar_w8ANTn": {
+      "type": "top-bar",
+      "blocks": {
+        "social_icon_zGzL9R": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-tiktok",
+            "link": ""
+          }
+        },
+        "social_icon_d44a9Y": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-x",
+            "link": ""
+          }
+        },
+        "social_icon_AMd3gx": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-facebook",
+            "link": ""
+          }
+        },
+        "social_icon_DgTc9H": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-youtube",
+            "link": ""
+          }
+        },
+        "social_icon_KzwKJh": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-instagram",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "social_icon_zGzL9R",
+        "social_icon_d44a9Y",
+        "social_icon_AMd3gx",
+        "social_icon_DgTc9H",
+        "social_icon_KzwKJh"
+      ],
+      "name": "Top Bar",
+      "settings": {
+        "header_phone": "",
+        "show_phone": true
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -77,26 +129,6 @@
       "type": "header-three",
       "disabled": true,
       "settings": {}
-    },
-    "top_bar_w8ANTn": {
-      "type": "top-bar",
-      "blocks": {
-        "social_icon_KzwKJh": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-instagram",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "social_icon_KzwKJh"
-      ],
-      "name": "Top Bar",
-      "settings": {
-        "header_phone": "",
-        "show_phone": true
-      }
     }
   },
   "order": [
