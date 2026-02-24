@@ -1,6 +1,6 @@
 <header class="bg-custom-bg w-full relative">
   <div class="container mx-auto flex flex-row items-center justify-between h-[100px]">
-    <a href="{{ routes.root_url }}" class=" w-[140px] lg:w-[180px] shrink-0">
+    <a href="{{ routes.root_url }}" class=" w-[160px] lg:w-[180px] shrink-0">
       {% if section.settings.logo %}
         {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
       {% else %}
@@ -8,14 +8,22 @@
       {% endif %}
     </a>
 
-    <div class="flex flex-row items-center gap-2 lg:gap-10">
+    <div class="flex flex-row items-center lg:gap-5">
       {% comment %} menu {% endcomment %}
-
-      <div class="hidden lg:flex flex-row items-center gap-4">
-        {% for link in section.settings.menu.links %}
-          {{ link.title | link_to: link.url }}
-        {% endfor %}
-      </div>
+      <nav class="hidden lg:flex flex-row items-center">
+        <ul class="hidden lg:flex flex-row items-center justify-between gap-3 ">
+          {% for link in section.settings.menu.links %}
+            <li>
+              <a
+                href="{{ link.url }}"
+                class="nav-link hover:text-secondary {% if link.current %} is-active {% endif %}"
+              >
+                {{- link.title -}}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
 
       <div class="flex lg:hidden">
         <button id="menu-toggle" class="group relative">
@@ -32,27 +40,38 @@
         <nav id="main-menu" class="hidden absolute top-[100px] left-0 w-full bg-custom-bg z-40 ">
           <div class="flex flex-col p-4 w-full">
             {% for link in section.settings.menu.links %}
-              {{ link.title | link_to: link.url, class: 'py-5 border-b border-[#000000]/10 last:border-b-0' }}
+              <a
+                href="{{ link.url }}"
+                class="nav-link py-5 border-b border-[#000000]/10 last:border-b-0 hover:text-secondary  {% if link.current %} is-active {% endif %}"
+              >
+                {{ link.title }}
+              </a>
             {% endfor %}
           </div>
         </nav>
       </div>
 
-      <div class="flex flex-row items-center justify-center gap-2 bg-black/10 py-2 px-4 rounded-full">
-        <a href="{{ routes.search_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-brand">
-          {% render 'icon-search' %}
-        </a>
-        <a href="{{ routes.account_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-brand">
-          {% if shop.customer_accounts_enabled %}
-            {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
-          {% endif %}
-        </a>
-        <a href="{{ routes.cart_url }}" class="lg:w-[30px] w-[20px] text-black hover:text-brand">
-          {% if cart.item_count > 0 %}
-            <sup>{{ cart.item_count }}</sup>
-          {% endif %}
-          {% render 'icon-cart' %}
-        </a>
+      <div class="flex flex-row items-center justify-center gap-2 py-2 px-4 ">
+        <div class="bg-black/10 p-2 rounded-full hover:bg-secondary">
+          <a href="{{ routes.account_url }}" class="lg:w-[30px] w-[20px] text-black">
+            {% render 'icon-search' %}
+          </a>
+        </div>
+        <div class="bg-black/10 p-2 rounded-full hover:bg-secondary">
+          <a href="{{ routes.account_url }}" class="lg:w-[30px] w-[20px] text-black ">
+            {% if shop.customer_accounts_enabled %}
+              {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
+            {% endif %}
+          </a>
+        </div>
+        <div class="bg-black/10 p-2 rounded-full hover:bg-secondary">
+          <a href="{{ routes.cart_url }}" class="lg:w-[30px] w-[20px] text-black">
+            {% if cart.item_count > 0 %}
+              <sup>{{ cart.item_count }}</sup>
+            {% endif %}
+            {% render 'icon-cart' %}
+          </a>
+        </div>
       </div>
     </div>
   </div>

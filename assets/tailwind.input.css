@@ -92,31 +92,3 @@
 .swiper-pagination-bullet {
 	@apply !bg-secondary !opacity-100 !h-[13px] !w-[13px];
 }
-
-/* 
-
-
-@theme {
-	Özel font tanımı
-	--font-inter: 'Inter', ui-sans-serif, system-ui;
-	--font-josefin: 'Josefin Sans', sans-serif;
-
-	Özel renk veya başka değişkenler
-	--color-primary: #3b443c;
-	--color-secondary: #b2ac88;
-	--color-custom-bg: #f9f9f9;
-
-	Marquee animation
-	--animate-marquee: marquee 15s linear infinite;
-
-	@keyframes marquee {
-		from {
-			transform: translateX(100%);
-		}
-		to {
-			transform: translateX(-100%);
-		}
-	}
-}
-
-*/
