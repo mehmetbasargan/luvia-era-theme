@@ -23,6 +23,20 @@
     "header": {
       "type": "header",
       "blocks": {
+        "social_icon_WRepGY": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-youtube",
+            "link": ""
+          }
+        },
+        "social_icon_x8FMNf": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-facebook",
+            "link": ""
+          }
+        },
         "social_icon_Nym7A7": {
           "type": "social_icon",
           "settings": {
@@ -32,6 +46,8 @@
         }
       },
       "block_order": [
+        "social_icon_WRepGY",
+        "social_icon_x8FMNf",
         "social_icon_Nym7A7"
       ],
       "settings": {
