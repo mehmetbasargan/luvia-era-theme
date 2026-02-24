@@ -108,19 +108,19 @@
 				"type": "color",
 				"id": "color_primary",
 				"label": "Primary Color (Text/Icons)",
-				"default": "#3b443c"
+				"default": ""
 			},
 			{
 				"type": "color",
 				"id": "color_secondary",
 				"label": "Secondary Color (Accent)",
-				"default": "#b2ac88"
+				"default": ""
 			},
 			{
 				"type": "color",
 				"id": "color_bg",
 				"label": "Background Color",
-				"default": "#f9f9f9"
+				"default": ""
 			},
 			{
 				"type": "header",
