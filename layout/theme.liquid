@@ -5,16 +5,11 @@
     {% render 'css-variables' %}
 
     {% comment %}
-      Font preloading:
-      1. Preconnect to font CDN for faster connection
-      2. Preload only the critical font variant (base weight)
-      3. Additional variants load on-demand via @font-face
+      Font preloading for Luvia Era Fonts:
     {% endcomment %}
-    {% unless settings.type_primary_font.system? %}
+    {% unless settings.heading_font.system? %}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-
-      {% comment %} Preload the base font variant for initial page render {% endcomment %}
-      {{ settings.type_primary_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+      {{ settings.heading_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
     {% endunless %}
 
     {% # Social, title, etc. %}
@@ -22,20 +17,33 @@
 
     {{ content_for_header }}
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
-
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
     <style>
+      /* Fontları Yüklüyoruz */
       {{ settings.heading_font | font_face: font_display: 'swap' }}
       {{ settings.body_font | font_face: font_display: 'swap' }}
 
       :root {
-        --color-primary: {{ settings.color_primary }};
-        --color-secondary: {{ settings.color_secondary }};
-        --color-bg: {{ settings.color_bg }};
+        /* Renk Değişkenleri */
+        --color-primary: {{ settings.color_primary | default: '#3B443C' }};
+        --color-secondary: {{ settings.color_secondary | default: '#B2AC88' }};
+        --color-bg: {{ settings.color_bg | default: '#FFFFFF' }};
 
-        --font-heading: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
-        --font-body: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+        /* Font Değişkenleri */
+        --font-heading: {{ settings.heading_font.family | default: 'serif' }}, {{ settings.heading_font.fallback_families }};
+        --font-body: {{ settings.body_font.family | default: 'sans-serif' }}, {{ settings.body_font.fallback_families }};
+      }
+
+      /* Global Uygulama */
+      body {
+        font-family: var(--font-body);
+        background-color: var(--color-bg);
+        color: var(--color-primary);
+      }
+
+      h1, h2, h3, h4, h5, h6, .font-heading {
+        font-family: var(--font-heading);
       }
     </style>
   </head>
@@ -52,6 +60,7 @@
     {{ content_for_layout }}
 
     {% sections 'footer-group' %}
+
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
   </body>
