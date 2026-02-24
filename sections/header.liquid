@@ -1,4 +1,4 @@
-<div class="bg-secondary py-2">
+<div class="bg-custom-bg border-b border-[#000000]/10 py-2">
   <div class="container">
     <div class="flex flex-row items-center justify-between">
       <div class="">tel</div>
@@ -9,13 +9,13 @@
             {%- for block in section.blocks -%}
               {%- if block.type == 'social_icon' -%}
                 <li
-                  class="bg-custom-bg p-2 rounded-full hover:bg-secondary text-primary hover:text-white transition-colors"
+                  class="p-2 bg-secondary hover:bg-primary text-white hover:text-white rounded-full "
                   {{ block.shopify_attributes }}
                 >
                   <a
                     href="{{ block.settings.link | default: '#' }}"
                     target="_blank"
-                    class="w-5 h-5 flex items-center justify-center"
+                    class=""
                   >
                     {%- case block.settings.icon_choice -%}
                       {%- when 'icon-facebook' -%}
@@ -50,7 +50,7 @@
       {% endif %}
     </a>
 
-    <div class="flex flex-row items-center lg:gap-5">
+    <div class="flex flex-row items-center lg:gap-5 gap-6">
       {% comment %} menu {% endcomment %}
       <nav class="hidden lg:flex flex-row items-center">
         <ul class="hidden lg:flex flex-row items-center justify-between gap-3 ">
@@ -93,7 +93,7 @@
         </nav>
       </div>
 
-      <div class="flex flex-row items-center justify-center gap-2 py-2 px-4 ">
+      <div class="flex flex-row items-center justify-center gap-2">
         <div class="bg-black/10 p-2 rounded-full hover:bg-secondary">
           <a href="{{ routes.account_url }}" class="lg:w-[30px] w-[20px] text-black">
             {% render 'icon-search' %}
