@@ -8,71 +8,95 @@
  * ------------------------------------------------------------
  */
 {
-	"type": "header",
-	"name": "Header Group",
-	"sections": {
-		"announcement-bar": {
-			"type": "announcement-bar",
-			"disabled": true,
-			"settings": {
-				"announcement_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vero blanditiis ab!",
-				"text_color": "#f9f9f9",
-				"bg_color": "#b2ac88"
-			}
-		},
-		"header": {
-			"type": "header",
-			"settings": {
-				"menu": "main-menu",
-				"logo": "shopify://shop_images/logo2.svg"
-			}
-		},
-		"header-two": {
-			"type": "header-two",
-			"blocks": {
-				"social_icon_RmXyw9": {
-					"type": "social_icon",
-					"settings": {
-						"icon_choice": "icon-facebook",
-						"link": "#"
-					}
-				},
-				"social_icon_ctzzDe": {
-					"type": "social_icon",
-					"settings": {
-						"icon_choice": "icon-instagram",
-						"link": "#"
-					}
-				},
-				"social_icon_QUH6kx": {
-					"type": "social_icon",
-					"settings": {
-						"icon_choice": "icon-youtube",
-						"link": "#"
-					}
-				},
-				"social_icon_qC4bjG": {
-					"type": "social_icon",
-					"settings": {
-						"icon_choice": "icon-x",
-						"link": "#"
-					}
-				}
-			},
-			"block_order": ["social_icon_RmXyw9", "social_icon_ctzzDe", "social_icon_QUH6kx", "social_icon_qC4bjG"],
-			"disabled": true,
-			"settings": {
-				"menu": "main-menu",
-				"logo": "shopify://shop_images/logo2.svg",
-				"header_phone": "+ 90532 463 24 47",
-				"show_phone": true
-			}
-		},
-		"header-three": {
-			"type": "header-three",
-			"disabled": true,
-			"settings": {}
-		}
-	},
-	"order": ["announcement-bar", "header", "header-two", "header-three"]
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "disabled": true,
+      "settings": {
+        "announcement_text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vero blanditiis ab!",
+        "text_color": "#f9f9f9",
+        "bg_color": "#b2ac88"
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "social_icon_MXHCyn": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-instagram",
+            "link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "social_icon_MXHCyn"
+      ],
+      "settings": {
+        "menu": "main-menu",
+        "logo": "shopify://shop_images/logo2.svg",
+        "header_phone": "532 463 24 47",
+        "show_phone": true
+      }
+    },
+    "header-two": {
+      "type": "header-two",
+      "blocks": {
+        "social_icon_RmXyw9": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-facebook",
+            "link": "#"
+          }
+        },
+        "social_icon_ctzzDe": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-instagram",
+            "link": "#"
+          }
+        },
+        "social_icon_QUH6kx": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-youtube",
+            "link": "#"
+          }
+        },
+        "social_icon_qC4bjG": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-x",
+            "link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "social_icon_RmXyw9",
+        "social_icon_ctzzDe",
+        "social_icon_QUH6kx",
+        "social_icon_qC4bjG"
+      ],
+      "disabled": true,
+      "settings": {
+        "menu": "main-menu",
+        "logo": "shopify://shop_images/logo2.svg",
+        "header_phone": "+ 90532 463 24 47",
+        "show_phone": true
+      }
+    },
+    "header-three": {
+      "type": "header-three",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "header-two",
+    "header-three"
+  ]
 }
