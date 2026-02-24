@@ -30,7 +30,13 @@
 				"type": "color",
 				"id": "color_bg",
 				"label": "Background Color",
-				"default": "#FFFFFF"
+				"default": "#f9f9f9"
+			},
+			{
+				"type": "color",
+				"id": "color_w",
+				"label": "White Color",
+				"default": "#ffffff"
 			},
 			{
 				"type": "header",

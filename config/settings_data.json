@@ -8,21 +8,23 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {
-    "color_primary": "#3b443c",
-    "color_secondary": "#b2ac88",
-    "color_bg": "#ffffff",
-    "heading_font": "josefin_sans_n4",
-    "body_font": "inter_n4",
-    "content_for_index": []
-  },
-  "presets": {
-    "Luvia Standard": {
-      "color_primary": "#3B443C",
-      "color_secondary": "#B2AC88",
-      "color_bg": "#FFFFFF",
-      "heading_font": "josefin_sans_n4",
-      "body_font": "inter_n4"
-    }
-  }
+	"current": {
+		"color_primary": "#3b443c",
+		"color_secondary": "#b2ac88",
+		"color_bg": "#f9f9f9",
+		"color_white": "#ffffff",
+		"heading_font": "josefin_sans_n4",
+		"body_font": "inter_n4",
+		"content_for_index": []
+	},
+	"presets": {
+		"Luvia Standard": {
+			"color_primary": "#3B443C",
+			"color_secondary": "#B2AC88",
+			"color_bg": "#F9F9F9",
+			"color_white": "#FFFFFF",
+			"heading_font": "josefin_sans_n4",
+			"body_font": "inter_n4"
+		}
+	}
 }
