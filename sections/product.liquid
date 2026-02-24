@@ -47,13 +47,8 @@
         <div class="h-1 w-full bg-gray-100"></div>
 
         {% form 'product', product, id: 'product-form', class: 'space-y-6', onsubmit: 'handleAddToCart(event)' %}
-          {% comment %}
-            ID kısmını dinamik yapalım.
-            Eğer ürünün tek varyantı varsa onu alır, çok varyantı varsa seçili olanı alır.
-          {% endcomment %}
           <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
 
-          {% comment %} Varyant Seçenekleri (Renk vb.) {% endcomment %}
           {% unless product.has_only_default_variant %}
             <div class="product-options space-y-6 py-6 border-y border-gray-100">
               {% for option in product.options_with_values %}
@@ -78,7 +73,6 @@
             </div>
           {% endunless %}
 
-          {% comment %} Tüm varyantların ID'lerini ve eşleşmelerini tutan gizli bir JSON (JS kullanacak) {% endcomment %}
           <script id="product-variants-json" type="application/json">
             {{ product.variants | json }}
           </script>
@@ -106,13 +100,13 @@
 
 <style>
   .product-thumbs .swiper-slide {
-    height: 120px !important; /* Küçük resimlerin yüksekliği */
+    height: 120px !important;
     width: 100% !important;
-    margin-bottom: 10px; /* Aradaki boşluk */
+    margin-bottom: 10px;
     display: flex;
   }
   .product-thumbs {
-    padding-right: 0px; /* Ana görselle çok bitişmesin */
+    padding-right: 0px;
   }
 
   .swiper-button-next,
@@ -152,9 +146,7 @@
 {% endschema %}
 
 <script>
-  // 1. Sayfa yüklendiğinde Başlatılacaklar
   document.addEventListener('DOMContentLoaded', function () {
-    // Swiper Başlatma
     if (document.querySelector('.product-thumbs')) {
       const thumbsSwiper = new Swiper('.product-thumbs', {
         direction: 'vertical',
@@ -173,11 +165,9 @@
       });
     }
 
-    // VARYANT SEÇİMİNİ BAŞLAT (EKSİK OLAN KISIM BUYDU)
     initVariantSelection();
   });
 
-  // --- VARYANT SEÇİMİ MANTIĞI ---
   function initVariantSelection() {
     const variantButtons = document.querySelectorAll('.variant-btn');
     const variantIdInput = document.getElementById('variant-id');
@@ -189,20 +179,17 @@
 
     variantButtons.forEach((btn) => {
       btn.addEventListener('click', function () {
-        // Aktif buton stilini güncelle
         const parent = this.closest('.flex') || this.parentElement;
         parent.querySelectorAll('.variant-btn').forEach((b) => {
           b.classList.remove('bg-black', 'text-white', 'border-black');
         });
         this.classList.add('bg-black', 'text-white', 'border-black');
 
-        // Tüm seçili değerleri topla
         let selectedOptions = [];
         document.querySelectorAll('.variant-btn.bg-black').forEach((activeBtn) => {
           selectedOptions.push(activeBtn.getAttribute('data-value'));
         });
 
-        // Eşleşen varyantı bul
         const matchedVariant = variants.find((v) => {
           return v.options.every((opt) => selectedOptions.includes(opt));
         });
@@ -210,7 +197,6 @@
         if (matchedVariant) {
           variantIdInput.value = matchedVariant.id;
 
-          // Fiyatı Güncelle
           const priceElement = document.querySelector('.product-price');
           if (priceElement) {
             priceElement.innerText = (matchedVariant.price / 100).toFixed(2) + ' TL';
@@ -220,7 +206,6 @@
     });
   }
 
-  // --- SEPET ÇEKMECESİ FONKSİYONLARI ---
   function openCartDrawer() {
     const drawer = document.getElementById('cart-drawer');
     const overlay = document.getElementById('cart-drawer-overlay');

@@ -20,7 +20,7 @@
 			}
 		},
 		"main": {
-			"type": "main-product", // BURAYI DEĞİŞTİRDİK
+			"type": "main-product",
 			"settings": {}
 		}
 	},

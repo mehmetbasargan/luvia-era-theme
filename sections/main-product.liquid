@@ -165,7 +165,6 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // 1. Swiper Kurulumu
     if (document.querySelector('.product-thumbs')) {
       const thumbsSwiper = new Swiper('.product-thumbs', {
         direction: 'vertical',
@@ -181,7 +180,6 @@
       });
     }
 
-    // 2. Sepete Ekleme (AJAX)
     const productForm = document.querySelector('form[action="/cart/add"]');
     if (productForm) {
       productForm.addEventListener('submit', function (e) {
@@ -197,24 +195,20 @@
     }
   });
 
-  /* ddddd */
-  // Varyant değiştiğinde ismi güncelleme
+
 document.querySelectorAll('.variant-wrapper').forEach((wrapper, index) => {
   const labelSpan = document.getElementById(`option-value-${index + 1}`);
   const inputs = wrapper.querySelectorAll('input[type="radio"]');
 
   inputs.forEach(input => {
     input.addEventListener('change', (e) => {
-      // Tıklanan inputun değerini yukarıdaki span'a yaz
       labelSpan.textContent = e.target.value;
       
-      // OPSİYONEL: Burada istersen fiyatı veya görseli de güncelleyebilirsin
       updateVariantID(); 
     });
   });
 });
 
-// Formun içindeki gizli Input ID'sini güncelleme (Sepete doğru varyantın gitmesi için)
 function updateVariantID() {
   const selectedOptions = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(input => input.value);
   const variantData = {{ product.variants | json }};
@@ -225,12 +219,9 @@ function updateVariantID() {
 
   if (matchedVariant) {
     document.querySelector('input[name="id"]').value = matchedVariant.id;
-    // Fiyatı da güncellemek istersen:
-    // document.querySelector('.text-xl.font-medium').textContent = Shopify.formatMoney(matchedVariant.price);
   }
 }
 
-  // 3. Sepet Çekmecesini Güncelleme ve Açma
   function openAndRefreshCart() {
     fetch('/cart.js')
       .then((res) => res.json())
@@ -239,7 +230,6 @@ function updateVariantID() {
         const totalPriceContainer = document.getElementById('cart-total-price');
 
         if (cart.items.length > 0) {
-          // MAP fonksiyonu içinde "Kaldır" butonunu ekledik (onclick="removeCartItem")
           itemsContainer.innerHTML = cart.items
             .map(
               (item, index) => `
@@ -266,7 +256,6 @@ function updateVariantID() {
 
         totalPriceContainer.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
 
-        // Çekmeceyi Açma Animasyonu
         const drawer = document.getElementById('cart-drawer');
         const overlay = document.getElementById('cart-drawer-overlay');
         const content = document.getElementById('cart-drawer-content');
@@ -278,7 +267,6 @@ function updateVariantID() {
       });
   }
 
-  // 4. SEPETTEN ÜRÜN SİLME FONKSİYONU
   function removeCartItem(line) {
     fetch('/cart/change.js', {
       method: 'POST',
@@ -287,7 +275,7 @@ function updateVariantID() {
     })
       .then((res) => res.json())
       .then(() => {
-        openAndRefreshCart(); // Listeyi tazele
+        openAndRefreshCart(); 
       })
       .catch((err) => console.error('Silme hatası:', err));
   }

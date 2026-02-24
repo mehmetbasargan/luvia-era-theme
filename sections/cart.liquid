@@ -5,75 +5,6 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
 {% endcomment %}
 
-{% comment %}
-  <div class="max-w-[1440px] mx-auto px-4 md:px-10 py-20">
-    <h1 class="text-2xl font-light tracking-[0.3em] uppercase mb-12 text-center text-primary">Your Shopping Bag</h1>
-
-    {% if cart.item_count > 0 %}
-      <form action="/cart" method="post" class="flex flex-col lg:flex-row gap-16">
-        <div class="w-full lg:w-2/3 space-y-8">
-          {% for item in cart.items %}
-            <div class="flex gap-6 pb-8 border-b border-gray-300 items-center animate-fadeIn">
-              <a href="{{ item.url }}" class="w-24 h-32 shrink-0 bg-[#F9F9F9] overflow-hidden">
-                <img
-                  src="{{ item.image | image_url: width: 300 }}"
-                  width=""
-                  height=""
-                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                >
-              </a>
-              <div class="grow space-y-1">
-                <h3 class="text-sm uppercase tracking-widest text-primary">{{ item.product.title }}</h3>
-                <p class="text-[10px] text-secondary uppercase tracking-wider font-light">{{ item.variant.title }}</p>
-                <div class="pt-4 flex items-center justify-between gap-6">
-                  <p class="text-sm italic font-light">{{ item.final_line_price | money }}</p>
-                  <a
-                    href="{{ item.url_to_remove }}"
-                    class="text-[9px] uppercase tracking-widest text-red-900 border-b border-red-900 pb-0.5 hover:text-black hover:border-black transition-colors"
-                    >Remove</a
-                  >
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-
-        <div class="w-full lg:w-1/3 bg-[#F9F9F9] p-10 h-fit space-y-8">
-          <h2 class="text-[13px] uppercase tracking-[0.3em] font-medium border-b border-gray-200 pb-4 text-primary">
-            Order Summary
-          </h2>
-
-          <div class="space-y-4">
-            <div class="flex justify-between items-center">
-              <span class="font-light tracking-widest uppercase text-[14px] text-secondary">Subtotal</span>
-              <span class="text-sm tracking-tighter">{{ cart.total_price | money }}</span>
-            </div>
-            <p class="text-[12px] text-gray-400 italic leading-relaxed">Shipping and taxes are calculated at checkout.</p>
-          </div>
-
-          <button
-            type="submit"
-            name="checkout"
-            class="w-full cursor-pointer bg-primary text-white py-5 text-[11px] uppercase tracking-[0.3em] hover:bg-secondary transition-all duration-300 shadow-sm"
-          >
-            Proceed to Checkout
-          </button>
-        </div>
-      </form>
-    {% else %}
-      <div class="text-center py-32 space-y-8">
-        <p class="italic text-secondary font-light tracking-widest">Your bag is currently empty.</p>
-        <a
-          href="{{ routes.all_products_collection_url }}"
-          class="inline-block border border-secondary text-secondary bg-white px-12 py-4 uppercase tracking-[0.3em] text-[10px] hover:bg-secondary hover:text-white transition-all duration-500"
-        >
-          Continue Shopping
-        </a>
-      </div>
-    {% endif %}
-  </div>
-{% endcomment %}
-
 <div class="max-w-[1440px] mx-auto px-4 md:px-10 py-16 lg:py-24">
   <header class="text-center mb-16">
     <h1 class="text-[22px] md:text-[28px] font-light tracking-[0.4em] uppercase text-primary">
@@ -214,20 +145,11 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Eğer URL'de 'cart' varsa ve bir ürün yeni silindiyse/güncellendiyse kontrol et
-    // Shopify'da sepet sayfasında bir işlem yapıldığında bunu tespit edebiliriz
-
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Eğer sepet sayfasındaysak ve sayfa az önce bir 'change' veya 'remove' sonrası yenilendiyse
-    // (Bunu anlamanın en kolay yolu tarayıcı geçmişine bakmaktır)
     if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD) {
-      // İstersen burada her yenilemede göstermezsin, ama kullanıcı bir şeyi silip sayfa döndüğünde
-      // bildirim çıkmasını istiyorsak şu mantığı kurabiliriz:
     }
 
-    // Alternatif ve Kesin Yol:
-    // Sepet sayfasındaki "Remove" butonlarına tıklandığında bildirim bilgisini 'localStorage'a yazalım
     const removeLinks = document.querySelectorAll('a[href*="/cart/change"]');
     removeLinks.forEach((link) => {
       link.addEventListener('click', function () {
@@ -235,29 +157,23 @@
       });
     });
 
-    // Sayfa açıldığında localStorage'da bu bilgi var mı bak?
     if (localStorage.getItem('showRemoveToast') === 'true') {
       showToast('Item removed from bag');
-      localStorage.removeItem('showRemoveToast'); // Bir kez göster ve sil
+      localStorage.removeItem('showRemoveToast');
     }
   });
 
-  // Sepet sayfasındaki silme butonlarını yakalayalım
   document.addEventListener('click', function (e) {
-    // Eğer tıklanan element bir "Remove" linki ise
     if (e.target.closest('a[href*="/cart/change"]')) {
       localStorage.setItem('cart_item_removed', 'true');
     }
   });
 
-  // Sayfa yüklendiğinde kontrol et
   window.addEventListener('load', function () {
     if (localStorage.getItem('cart_item_removed') === 'true') {
-      // Fonksiyonun var olduğundan emin olalım, yoksa burada tekrar tanımlayalım
       if (typeof showToast === 'function') {
         showToast('Item removed from bag');
       } else {
-        // Eğer global showToast'a erişemezse diye yedek:
         const toast = document.createElement('div');
         toast.innerText = 'Item removed from bag';
         toast.style.cssText =
