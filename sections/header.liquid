@@ -1,3 +1,45 @@
+<div class="bg-secondary py-2">
+  <div class="container">
+    <div class="flex flex-row items-center justify-between">
+      <div class="">tel</div>
+      <div class="">
+        {% comment %} Social Media Icons {% endcomment %}
+        <div class="hidden lg:flex">
+          <ul class="flex items-center gap-2">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'social_icon' -%}
+                <li
+                  class="bg-custom-bg p-2 rounded-full hover:bg-secondary text-primary hover:text-white transition-colors"
+                  {{ block.shopify_attributes }}
+                >
+                  <a
+                    href="{{ block.settings.link | default: '#' }}"
+                    target="_blank"
+                    class="w-5 h-5 flex items-center justify-center"
+                  >
+                    {%- case block.settings.icon_choice -%}
+                      {%- when 'icon-facebook' -%}
+                        {% render 'icon-facebook' %}
+                      {%- when 'icon-instagram' -%}
+                        {% render 'icon-instagram' %}
+                      {%- when 'icon-youtube' -%}
+                        {% render 'icon-youtube' %}
+                      {%- when 'icon-x' -%}
+                        {% render 'icon-x' %}
+                      {%- when 'icon-tiktok' -%}
+                        {% render 'icon-tiktok' %}
+                    {%- endcase -%}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <header class="bg-custom-bg w-full relative">
   <div class="container mx-auto flex flex-row items-center justify-between h-[100px]">
     <a href="{{ routes.root_url }}" class=" w-[160px] lg:w-[180px] shrink-0">
@@ -102,6 +144,32 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social_icon",
+      "name": "Social Media Icon",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_choice",
+          "label": "Select Icon",
+          "options": [
+            { "value": "icon-facebook", "label": "Facebook" },
+            { "value": "icon-instagram", "label": "Instagram" },
+            { "value": "icon-youtube", "label": "YouTube" },
+            { "value": "icon-x", "label": "X" },
+            { "value": "icon-tiktok", "label": "TikTok" }
+          ],
+          "default": "icon-instagram"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Social Media Icon Link"
+        }
+      ]
     }
   ]
 }
