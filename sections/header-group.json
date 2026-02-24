@@ -23,6 +23,20 @@
     "header": {
       "type": "header",
       "blocks": {
+        "social_icon_64aqfQ": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-tiktok",
+            "link": ""
+          }
+        },
+        "social_icon_LMjT8e": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-x",
+            "link": ""
+          }
+        },
         "social_icon_WRepGY": {
           "type": "social_icon",
           "settings": {
@@ -46,6 +60,8 @@
         }
       },
       "block_order": [
+        "social_icon_64aqfQ",
+        "social_icon_LMjT8e",
         "social_icon_WRepGY",
         "social_icon_x8FMNf",
         "social_icon_Nym7A7"
