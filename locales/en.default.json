@@ -54,7 +54,11 @@
 			"details_title": "Product Details",
 			"shipping_title": "Shipping & Returns",
 			"empty_bag": "Your bag is empty.",
-			"empty_cart": "Your shopping bag is empty."
+			"empty_cart": "Your shopping bag is empty.",
+			"size": "Size",
+			"size_guide": "Size Guide",
+			"dimensions": "Dimensions",
+			"fit_type": "Fit"
 		}
 	},
 	"blog": {

@@ -24,6 +24,20 @@
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
 
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+
+    <style>
+      {{ settings.heading_font | font_face: font_display: 'swap' }}
+      {{ settings.body_font | font_face: font_display: 'swap' }}
+
+      :root {
+        --color-primary: {{ settings.color_primary }};
+        --color-secondary: {{ settings.color_secondary }};
+        --color-bg: {{ settings.color_bg }};
+
+        --font-heading: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
+        --font-body: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+      }
+    </style>
   </head>
 
   <body>

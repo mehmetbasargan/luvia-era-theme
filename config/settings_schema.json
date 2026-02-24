@@ -80,7 +80,7 @@
 			}
 		]
 	},
-	{
+	/* {
 		"name": "Luvia Era Colors",
 		"settings": [
 			{
@@ -94,6 +94,49 @@
 				"id": "color_background",
 				"label": "Main Background",
 				"default": "#ffffff"
+			}
+		]
+	}, */
+	{
+		"name": "Luvia Era Design",
+		"settings": [
+			{
+				"type": "header",
+				"content": "Brand Colors"
+			},
+			{
+				"type": "color",
+				"id": "color_primary",
+				"label": "Primary Color (Text/Icons)",
+				"default": "#3B443C"
+			},
+			{
+				"type": "color",
+				"id": "color_secondary",
+				"label": "Secondary Color (Accent)",
+				"default": "#B2AC88"
+			},
+			{
+				"type": "color",
+				"id": "color_bg",
+				"label": "Background Color",
+				"default": "#FFFFFF"
+			},
+			{
+				"type": "header",
+				"content": "Typography"
+			},
+			{
+				"type": "font_picker",
+				"id": "heading_font",
+				"label": "Heading Font (Josefin)",
+				"default": "josefin_sans_n4"
+			},
+			{
+				"type": "font_picker",
+				"id": "body_font",
+				"label": "Body Font (Inter)",
+				"default": "inter_n4"
 			}
 		]
 	}
