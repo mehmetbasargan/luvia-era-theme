@@ -10,9 +10,9 @@
 {
   "current": {
     "color_primary": "#3b443c",
-    "color_secondary": "#b200fd",
+    "color_secondary": "#b2ac88",
     "color_bg": "#ffffff",
-    "heading_font": "abril_fatface_n4",
+    "heading_font": "josefin_sans_n4",
     "body_font": "inter_n4",
     "content_for_index": []
   },
