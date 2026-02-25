@@ -7,7 +7,7 @@
 
 @layer base {
 	body {
-		@apply font-inter bg-brand-bg text-primary antialiased m-0;
+		@apply font-inter bg-custom-bg text-primary antialiased m-0;
 	}
 
 	h1,

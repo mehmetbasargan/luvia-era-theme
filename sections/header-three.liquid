@@ -1,10 +1,73 @@
 <header
   id="main-header"
-  class="fixed top-0 left-0 z-50 w-full py-8 transition-all duration-500 ease-in-out bg-white/80"
+  class="fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-in-out bg-custom-bg/80"
 >
-  <div class="container flex items-center justify-between">
+  <div class="py-2 border-b bg-custom-bg/50">
+    <div class="container flex lg:justify-between justify-center items-center">
+      <div class="hidden lg:flex">
+        <ul class="flex items-center gap-6">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'social_icon' -%}
+              <li
+                class=""
+                {{ block.shopify_attributes }}
+              >
+                <a
+                  href="{{ block.settings.link | default: '#' }}"
+                  target="_blank"
+                  class="block w-5 h-5 flex items-center justify-center"
+                >
+                  {%- case block.settings.icon_choice -%}
+                    {%- when 'icon-facebook' -%}
+                      {% render 'icon-facebook' %}
+                    {%- when 'icon-instagram' -%}
+                      {% render 'icon-instagram' %}
+                    {%- when 'icon-youtube' -%}
+                      {% render 'icon-youtube' %}
+                    {%- when 'icon-x' -%}
+                      {% render 'icon-x' %}
+                    {%- when 'icon-tiktok' -%}
+                      {% render 'icon-tiktok' %}
+                  {%- endcase -%}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="">
+        <div class="flex flex-row justify-start gap-4 md:!gap-6">
+          <a href="{{ routes.search_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
+            {% render 'icon-search' %}
+          </a>
+          <a href="{{ routes.account_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
+            {% if shop.customer_accounts_enabled %}
+              {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
+            {% endif %}
+          </a>
+          <a
+            href="{{ routes.cart_url }}"
+            class="lg:w-[30px] w-[20px] text-primary hover:text-secondary relative"
+          >
+            <div
+              class="absolute top-[-7px] right-[-15px] md:right-[-5px]"
+            >
+              <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
+                {{- cart.item_count -}}
+              </span>
+            </div>
+            <div class="">
+              {% render 'icon-cart' %}
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container flex items-center justify-between py-8">
     {% comment %} logo {% endcomment %}
-    <div id="header-logo" class="container w-[20%] justify-start flex shrink-0">
+    <div class="container w-[20%] justify-start flex shrink-0" style="padding-left: 0;">
       <a href="{{ routes.root_url }}" class="w-[170px] lg:w-[180px] shrink-0">
         {% if section.settings.logo %}
           {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
@@ -45,7 +108,10 @@
       </button>
 
       {% comment %} mobile menu {% endcomment %}
-      <nav id="main-menu" class="hidden absolute top-[70px] left-0 w-full bg-white">
+      <nav
+        id="main-menu"
+        class="hidden absolute left-0 w-full bg-custom-bg/80 transition-all duration-500 ease-in-out top-[138px]"
+      >
         <div class="flex flex-col p-4 w-full">
           {% for link in section.settings.menu.links %}
             <a
@@ -114,16 +180,21 @@
 
 <script>
   const header = document.getElementById('main-header');
+  const menu = document.getElementById('main-menu');
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 30) {
       // Kaydırınca: Tam beyaz ve daha dar header
-      header.classList.remove('bg-white/80', 'py-8');
-      header.classList.add('bg-white', 'py-4', 'shadow-md');
+      header.classList.remove('bg-custom-bg/80');
+      header.classList.add('bg-custom-bg', 'shadow-md');
+      menu.classList.remove('bg-custom-bg/80');
+      menu.classList.add('bg-custom-bg');
     } else {
       // En tepedeyken: Yarı şeffaf ve geniş header
-      header.classList.remove('bg-white', 'py-4', 'shadow-md');
-      header.classList.add('bg-white/80', 'py-8');
+      header.classList.remove('custom-bg', 'shadow-md');
+      header.classList.add('bg-custom-bg/80');
+      menu.classList.remove('bg-custom-bg');
+      menu.classList.add('bg-custom-bg/80');
     }
   });
 </script>

@@ -2,9 +2,9 @@
 module.exports = {
 	content: [
 		'./layout/*.liquid',
-		'./sections/*.liquid',
-		'./snippets/*.liquid',
-		'./templates/*.liquid',
+		'./sections/**/*.liquid', // Bu: sections altındaki tüm klasörleri tara demek
+		'./snippets/**/*.liquid', // Bu da aynı şekilde tüm snippet alt klasörleri
+		'./templates/**/*.liquid',
 		'./config/*.json',
 	],
 	theme: {
