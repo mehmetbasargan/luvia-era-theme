@@ -1,4 +1,4 @@
-<div class="relative w-full h-[80px] md:h-[150px]">
+<div class="relative w-full h-[151px] md:h-[151px]">
   <header id="main-header" class="overflow-visible bg-custom-bg fixed top-0 z-50 w-full">
     {% comment %} logo {% endcomment %}
     <div class="border-gray-200 border-b">
@@ -248,6 +248,19 @@
     </div>
   </header>
 </div>
+
+<script>
+  function updateHeaderHeight() {
+    const header = document.querySelector('#main-header');
+    if (header) {
+      document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+    }
+  }
+
+  window.addEventListener('resize', updateHeaderHeight);
+  window.addEventListener('load', updateHeaderHeight);
+  window.addEventListener('scroll', updateHeaderHeight);
+</script>
 
 {% schema %}
 {
