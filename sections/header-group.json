@@ -74,6 +74,7 @@
         "social_icon_C7iEwT",
         "social_icon_W9gNB4"
       ],
+      "disabled": true,
       "settings": {
         "menu": "main-menu",
         "logo": "shopify://shop_images/logo2.svg",
@@ -119,7 +120,6 @@
         "social_icon_QUH6kx",
         "social_icon_qC4bjG"
       ],
-      "disabled": true,
       "settings": {
         "menu": "main-menu",
         "logo": "shopify://shop_images/logo2.svg",
