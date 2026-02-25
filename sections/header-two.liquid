@@ -1,4 +1,4 @@
-<header class="overflow-visible fixed z-50 w-full bg-custom-bg ">
+<header id="main-header" class="overflow-visible bg-custom-bg fixed top-0 z-50 w-full">
   {% comment %} logo {% endcomment %}
   <div class="border-gray-200 border-b">
     <div class="container  ">
@@ -246,6 +246,18 @@
     </div>
   </div>
 </header>
+
+<style>
+  #main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: all 0.3s ease;
+    height: 150px;
+  }
+</style>
 
 {% schema %}
 {
