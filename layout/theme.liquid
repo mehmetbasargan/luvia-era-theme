@@ -20,31 +20,31 @@
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
     <style>
-      /* Fontları Yüklüyoruz */
-      {{ settings.heading_font | font_face: font_display: 'swap' }}
-      {{ settings.body_font | font_face: font_display: 'swap' }}
+          /* Fontları Yüklüyoruz */
+          {{ settings.heading_font | font_face: font_display: 'swap' }}
+          {{ settings.body_font | font_face: font_display: 'swap' }}
 
-      :root {
-        /* Renk Değişkenleri */
-        --color-primary: {{ settings.color_primary | default: '#3B443C' }};
-        --color-secondary: {{ settings.color_secondary | default: '#B2AC88' }};
-        --color-bg: {{ settings.color_bg | default: '#f9f9f9' }};
+        :root {
+        /* Burayı şimdilik elle (manuel) yönetelim */
+        --color-primary: #3B443C;
+        --color-secondary: #B2AC88;
+        --color-bg: #FFFFFF;
 
-        /* Font Değişkenleri */
-        --font-heading: {{ settings.heading_font.family | default: 'serif' }}, {{ settings.heading_font.fallback_families }};
-        --font-body: {{ settings.body_font.family | default: 'sans-serif' }}, {{ settings.body_font.fallback_families }};
+        /* Font ailelerini Tailwind'in anlayacağı şekilde sabitleyelim */
+        --font-heading: "{{ settings.heading_font.family | default: 'Josefin Sans' }}", {{ settings.heading_font.fallback_families | default: 'serif' }};
+        --font-body: "{{ settings.body_font.family | default: 'Inter' }}", {{ settings.body_font.fallback_families | default: 'sans-serif' }};
       }
 
-      /* Global Uygulama */
-      body {
-        font-family: var(--font-body);
-        background-color: var(--color-bg);
-        color: var(--color-primary);
-      }
+          /* Global Uygulama */
+          body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-primary);
+          }
 
-      h1, h2, h3, h4, h5, h6, .font-heading {
-        font-family: var(--font-heading);
-      }
+          h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: var(--font-heading);
+          }
     </style>
   </head>
 

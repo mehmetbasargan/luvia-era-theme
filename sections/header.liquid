@@ -52,8 +52,8 @@
     </div>
   </div>
 </div>
-<header class="bg-custom-bg w-full relative">
-  <div class="container mx-auto flex flex-row items-center justify-between h-[100px]">
+<header class="bg-custom-bg w-full relative py-5 md:py-0">
+  <div class="container mx-auto flex md:flex-row flex-col items-center justify-between h-[100px]">
     <a href="{{ routes.root_url }}" class=" w-[160px] lg:w-[180px] shrink-0">
       {% if section.settings.logo %}
         {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
@@ -62,9 +62,9 @@
       {% endif %}
     </a>
 
-    <div class="flex flex-row items-center lg:gap-5 gap-6">
+    <div class="w-full flex justify-between gap-6 md:justify-end! md:w-auto">
       {% comment %} menu {% endcomment %}
-      <nav class="hidden lg:flex flex-row items-center">
+      <nav class="hidden lg:flex flex-row items-center ">
         <ul class="hidden lg:flex flex-row items-center justify-between gap-3 ">
           {% for link in section.settings.menu.links %}
             <li>
@@ -91,7 +91,7 @@
         </button>
 
         {% comment %} mobile menu {% endcomment %}
-        <nav id="main-menu" class="hidden absolute top-[100px] left-0 w-full bg-custom-bg z-40 ">
+        <nav id="main-menu" class="hidden absolute top-[500px] left-0 w-full bg-custom-bg z-40 ">
           <div class="flex flex-col p-4 w-full">
             {% for link in section.settings.menu.links %}
               <a
