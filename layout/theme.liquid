@@ -4,14 +4,6 @@
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
 
-    {% comment %}
-      Font preloading for Luvia Era Fonts:
-    {% endcomment %}
-    {% unless settings.heading_font.system? %}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-      {{ settings.heading_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
-    {% endunless %}
-
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 

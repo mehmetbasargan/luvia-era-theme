@@ -2,8 +2,9 @@
 
 @import 'tailwindcss';
 
-/* Doğru Yollar (Assets klasöründen bir üst klasöre çıkıp tarar) */
-@source "./**/*.liquid";
+/* Bir üst klasöre çık ve tüm liquid dosyalarını tara */
+@source "../../**/*.liquid";
+@source "../../**/*.json";
 
 .is-active {
 	@apply text-secondary;
