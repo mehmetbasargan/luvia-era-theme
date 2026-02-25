@@ -12,7 +12,7 @@
         {%- assign collection = collections[block.settings.collection] -%}
 
         <div class="group relative flex flex-col items-center">
-          <a href="{{ collection.url | default: '#' }}" class="w-full aspect-[4/3] overflow-hidden bg-white relative">
+          <a href="{{ collection.url | default: '#' }}" class="w-full aspect-[2/3] overflow-hidden bg-white relative">
             {% if collection.featured_image != blank %}
               <img
                 src="{{ collection.featured_image | image_url: width: 600 }}"
