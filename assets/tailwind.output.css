@@ -820,6 +820,26 @@ p{
   top: 138px;
 }
 
+.right-\[15px\]{
+  right: 15px;
+}
+
+.right-\[0px\]{
+  right: 0px;
+}
+
+.right-\[0px\!\]{
+  right: 0px!;
+}
+
+.right-\[-200px\!\]{
+  right: -200px!;
+}
+
+.right-\[-12px\]{
+  right: -12px;
+}
+
 .z-0{
   z-index: 0;
 }
@@ -2434,6 +2454,18 @@ p{
 @media (min-width: 768px){
   .md\:right-\[-5px\]{
     right: -5px;
+  }
+
+  .md\:right-\[-2px\]{
+    right: -2px;
+  }
+
+  .md\:right-\[-8px\]{
+    right: -8px;
+  }
+
+  .md\:right-\[-6px\]{
+    right: -6px;
   }
 
   .md\:block{
