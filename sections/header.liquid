@@ -1,59 +1,59 @@
-<div class="hidden lg:flex bg-custom-bg border-b border-[#000000]/10 py-2">
-  <div class="container">
-    <div class="flex flex-row items-center justify-between">
-      <div class="">
-        <div class="hidden lg:flex">
-          {% if section.settings.show_phone and section.settings.header_phone != blank %}
-            <ul class="flex items-center gap-2">
-              <li>{% render 'icon-phone' %}</li>
-              <li class="font-medium">
-                <a href="{{ section.settings.header_phone | replace: ' ', '' }}">
-                  {{ section.settings.header_phone -}}
-                </a>
-              </li>
-            </ul>
-          {% endif %}
-        </div>
-      </div>
-      <div class="">
-        {% comment %} Social Media Icons {% endcomment %}
-        <div class="hidden lg:flex">
-          <ul class="flex items-center gap-2">
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'social_icon' -%}
-                <li
-                  class="p-2 bg-secondary hover:bg-primary text-white hover:text-white transition-colors rounded-full"
-                  {{ block.shopify_attributes }}
-                >
-                  <a
-                    href="{{ block.settings.link | default: '#' }}"
-                    target="_blank"
-                    class=""
-                  >
-                    {%- case block.settings.icon_choice -%}
-                      {%- when 'icon-facebook' -%}
-                        {% render 'icon-facebook' %}
-                      {%- when 'icon-instagram' -%}
-                        {% render 'icon-instagram' %}
-                      {%- when 'icon-youtube' -%}
-                        {% render 'icon-youtube' %}
-                      {%- when 'icon-x' -%}
-                        {% render 'icon-x' %}
-                      {%- when 'icon-tiktok' -%}
-                        {% render 'icon-tiktok' %}
-                    {%- endcase -%}
+<header class="bg-custom-bg w-full py-5 md:py-0 fixed z-50">
+  <div class="hidden lg:flex bg-custom-bg border-b border-[#000000]/10 py-2 ">
+    <div class="container">
+      <div class="flex flex-row items-center justify-between">
+        <div class="">
+          <div class="hidden lg:flex">
+            {% if section.settings.show_phone and section.settings.header_phone != blank %}
+              <ul class="flex items-center gap-2">
+                <li>{% render 'icon-phone' %}</li>
+                <li class="font-medium">
+                  <a href="{{ section.settings.header_phone | replace: ' ', '' }}">
+                    {{ section.settings.header_phone -}}
                   </a>
                 </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+        <div class="">
+          {% comment %} Social Media Icons {% endcomment %}
+          <div class="hidden lg:flex">
+            <ul class="flex items-center gap-2">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'social_icon' -%}
+                  <li
+                    class="p-2 bg-secondary hover:bg-primary text-white hover:text-white transition-colors rounded-full"
+                    {{ block.shopify_attributes }}
+                  >
+                    <a
+                      href="{{ block.settings.link | default: '#' }}"
+                      target="_blank"
+                      class=""
+                    >
+                      {%- case block.settings.icon_choice -%}
+                        {%- when 'icon-facebook' -%}
+                          {% render 'icon-facebook' %}
+                        {%- when 'icon-instagram' -%}
+                          {% render 'icon-instagram' %}
+                        {%- when 'icon-youtube' -%}
+                          {% render 'icon-youtube' %}
+                        {%- when 'icon-x' -%}
+                          {% render 'icon-x' %}
+                        {%- when 'icon-tiktok' -%}
+                          {% render 'icon-tiktok' %}
+                      {%- endcase -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<header class="bg-custom-bg w-full relative py-5 md:py-0 ">
-  <div class="container mx-auto flex md:flex-row flex-col items-center justify-between h-[100px]">
+  <div class="container mx-auto flex md:flex-row flex-col items-center justify-between h-[100px] ">
     <a href="{{ routes.root_url }}" class=" w-[170px] lg:w-[180px] shrink-0">
       {% if section.settings.logo %}
         {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
@@ -254,16 +254,6 @@
     </div>
   </div>
 </header>
-
-<style>
-  #shopify-section-{{ section.id }} {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: white;
-  }
-</style>
 
 {% schema %}
 {
