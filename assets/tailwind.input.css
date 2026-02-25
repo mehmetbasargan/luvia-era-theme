@@ -2,9 +2,8 @@
 
 @import 'tailwindcss';
 
-/* Bir üst klasöre çık ve tüm liquid dosyalarını tara */
-@source "../**/*.liquid";
-@source "../**/*.json";
+/* Bu satır, klasör derinliği ne olursa olsun tüm alt klasörleri tarar */
+@source "../../**/*.{liquid,json}";
 
 .is-active {
 	@apply text-secondary;
