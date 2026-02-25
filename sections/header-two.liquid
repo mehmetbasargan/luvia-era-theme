@@ -87,20 +87,71 @@
           </button>
 
           {% comment %} mobile menu {% endcomment %}
-          <nav id="main-menu" class="hidden absolute top-[70px] left-0 bg-custom-bg z-40 w-full lg:w-0">
-            <div class="flex flex-col p-4 w-full">
-              {% for link in section.settings.menu.links %}
-                <a
-                  href="{{ link.url }}"
-                  class="nav-link py-5 border-b border-[#000000]/10 last:border-b-0 w-full hover:text-secondary {% if link.current %} is-active {% endif %}"
-                >
-                  {{ link.title }}
-                </a>
-              {% endfor %}
-            </div>
+          <div class="flex lg:hidden">
+            <button id="mobile-menu-open" class="group relative order-last">
+              <div id="icon-open" class="block">
+                {% render 'icon-menu' %}
+              </div>
 
-            <div class="">
-              <div class="container py-5 ">
+              <div id="icon-close" class="hidden">
+                {% render 'icon-menu-close' %}
+              </div>
+            </button>
+
+            {% comment %} mobile menu {% endcomment %}
+            <div
+              id="mobile-menu-overlay"
+              class="fixed inset-0 bg-black/80 z-[60] hidden transition-opacity duration-300"
+            ></div>
+
+            <div
+              id="mobile-menu-drawer"
+              class="fixed top-0 right-0 h-full w-[80%] max-w-[400px] bg-white z-[70] translate-x-full transition-transform duration-300 ease-in-out shadow-2xl p-6"
+            >
+              <div class="flex justify-end mb-8">
+                <button id="mobile-menu-close" class="p-2 text-primary">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <nav class="flex flex-col space-y-6">
+                {% for link in linklists['main-menu'].links %}
+                  <div class="mobile-nav-item">
+                    {% if link.links != blank %}
+                      <button class="flex justify-between items-center w-full text-sm uppercase tracking-widest font-josefin text-primary py-2 border-b border-gray-100 mobile-dropdown-btn">
+                        {{ link.title }}
+                        <svg
+                          class="w-4 h-4 transition-transform duration-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </button>
+
+                      <div class="hidden overflow-hidden pl-4 flex flex-col space-y-4 mt-4 mb-2 border-l border-secondary/30">
+                        {% for childlink in link.links %}
+                          <a href="{{ childlink.url }}" class="text-xs uppercase tracking-wider text-secondary">
+                            {{- childlink.title -}}
+                          </a>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      <a
+                        href="{{ link.url }}"
+                        class="block text-sm uppercase tracking-widest font-josefin text-primary py-2 border-b border-gray-100"
+                      >
+                        {{- link.title -}}
+                      </a>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </nav>
+
+              <div class="container py-5 mt-10">
                 <h5 class="text-center mb-5 border-b border-[#000000]/10 pb-3">{{ 'general.social_media' | t }}</h5>
                 <div class="flex flex-col lg:flex-row items-center justify-between md:justify-around gap-2">
                   <div class="">
@@ -115,7 +166,7 @@
                       </ul>
                     {% endif %}
                   </div>
-                  <div class="">
+                  <div class="mt-5">
                     <ul class="flex items-center gap-2">
                       {%- for block in section.blocks -%}
                         {%- if block.type == 'social_icon' -%}
@@ -149,7 +200,7 @@
                 </div>
               </div>
             </div>
-          </nav>
+          </div>
         </div>
 
         <div class="order-first flex flex-row justify-start gap-7 w-full lg:w-auto">
