@@ -1,4 +1,4 @@
-<header class="overflow-visible">
+<header class="overflow-visible fixed z-50 w-full bg-custom-bg">
   {% comment %} logo {% endcomment %}
   <div class="container">
     <div class="w-full h-[80px] py-5 items-center justify-center lg:justify-between flex">
@@ -243,19 +243,9 @@
   </div>
 </header>
 
-<style>
-  #shopify-section-{{ section.id }} {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: white;
-  }
-</style>
-
 {% schema %}
 {
-  "name": "Header Two",
+  "name": "Header - Centered",
   "settings": [
     {
       "type": "link_list",
@@ -304,6 +294,11 @@
           "label": "Social Media Icon Link"
         }
       ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header - Centered"
     }
   ]
 }
