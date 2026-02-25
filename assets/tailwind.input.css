@@ -2,6 +2,9 @@
 
 @import 'tailwindcss';
 
+/* Doğru Yollar (Assets klasöründen bir üst klasöre çıkıp tarar) */
+@source "./**/*.liquid";
+
 .is-active {
 	@apply text-secondary;
 }
