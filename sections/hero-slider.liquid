@@ -36,13 +36,24 @@
   </div>
 
   <div
-    class="swiper-button-next !text-secondary !flex !items-center !justify-center !rounded-full !bg-white/10 !p-[10px]"
+    class="swiper-button-next !text-primary hover:!bg-secondary !items-center !justify-center !rounded-full !bg-white/50 !p-[10px] !right-[30px] transition-all duration-150 !hidden md:!flex"
   ></div>
   <div
-    class="swiper-button-prev !text-secondary !flex !items-center !justify-center !rounded-full !bg-white/10 !p-[10px]"
+    class="swiper-button-prev !text-primary hover:!bg-secondary !items-center !justify-center !rounded-full !bg-white/50 !p-[10px] !left-[30px] transition-all duration-150 !hidden md:!flex"
   ></div>
   <div class="swiper-pagination mb-6"></div>
 </div>
+
+<style>
+  .swiper-pagination-bullet {
+    background: #b2ab88;
+    height: 15px !important;
+    width: 15px !important;
+  }
+  .swiper-pagination-bullet-active {
+    background: #b2ab88;
+  }
+</style>
 
 <script>
   const initSwiper = () => {
@@ -52,7 +63,7 @@
       fadeEffect: {
         crossFade: true,
       },
-      /*  speed: 1000, 
+      /* speed: 1000,
       autoplay: {
         delay: 5000,
         disableOnInteraction: false,
