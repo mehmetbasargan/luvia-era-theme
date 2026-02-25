@@ -2443,6 +2443,14 @@ p{
     display: block;
   }
 
+  .md\:h-\[100px\]{
+    height: 100px;
+  }
+
+  .md\:h-\[150px\]{
+    height: 150px;
+  }
+
   .md\:w-1\/4{
     width: 25%;
   }
