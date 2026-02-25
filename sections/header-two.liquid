@@ -60,32 +60,44 @@
   <div class=" bg-custom-bg h-[70px] flex items-center relative">
     <div class="container flex lg:justify-between justify-end items-center w-full">
       <nav class="">
-        <ul class="hidden lg:flex flex-row items-center justify-between gap-6 ">
-          {% for link in section.settings.menu.links %}
-            <li>
-              <a
-                href="{{ link.url }}"
-                class="nav-link hover:text-secondary text-[15px] {% if link.current %} is-active {% endif %}"
-              >
+        <ul class="hidden lg:flex justify-end gap-6">
+          {% for link in linklists['main-menu'].links %}
+            {% if link.links != blank %}
+              <div class="group relative py-4">
+                <button class="flex items-center hover:text-secondary transition-colors cursor-pointer">
+                  {{ link.title }}
+                  <svg
+                    class="w-3 h-3 ml-1 transition-transform duration-300 group-hover:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+
+                <div class="absolute left-0 top-full hidden group-hover:block min-w-[200px] bg-white shadow-xl border border-gray-100 py-4 z-[100] transition-all">
+                  {% for childlink in link.links %}
+                    <a
+                      href="{{ childlink.url }}"
+                      class="block px-6 py-2 text-primary hover:bg-custom-bg hover:text-secondary transition-all "
+                    >
+                      {{ childlink.title }}
+                    </a>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <a href="{{ link.url }}" class="hover:text-secondary transition-colors py-4">
                 {{ link.title }}
               </a>
-            </li>
+            {% endif %}
           {% endfor %}
         </ul>
       </nav>
 
       <div class="flex items-center lg:gap-2 gap-8 justify-start w-full lg:w-auto">
         <div class="flex lg:hidden">
-          <button id="menu-toggle" class="group relative order-last">
-            <div id="icon-open" class="block">
-              {% render 'icon-menu' %}
-            </div>
-
-            <div id="icon-close" class="hidden">
-              {% render 'icon-menu-close' %}
-            </div>
-          </button>
-
           {% comment %} mobile menu {% endcomment %}
           <div class="flex lg:hidden">
             <button id="mobile-menu-open" class="group relative order-last">
