@@ -15,10 +15,6 @@
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
-    {{ content_for_header }}
-    {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
-
     <style>
       :root {
         --color-primary: #3b443c;
@@ -33,8 +29,13 @@
         color: var(--color-primary);
         font-family: var(--font-body);
         margin: 0;
+        -webkit-font-smoothing: antialiased;
       }
     </style>
+
+    {{ content_for_header }}
+    {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
