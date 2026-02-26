@@ -1,5 +1,8 @@
 <section class="relative w-full h-[calc(100dvh-var(--header-height,0px))] lg:h-[calc(100vh-var(--header-height,0px))] overflow-hidden flex items-center justify-center group">
-  <div class="absolute inset-0 z-0">
+  <div
+    class="absolute inset-0 z-[1] pointer-events-none"
+    style="background-color: rgba(0,0,0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"
+  >
     {%- if section.settings.video_url != blank -%}
       {%- if section.settings.video_url.type == 'youtube' -%}
         <iframe
