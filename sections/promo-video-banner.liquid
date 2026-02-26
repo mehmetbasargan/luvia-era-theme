@@ -1,0 +1,139 @@
+<section class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden flex items-center justify-center group">
+  <div class="absolute inset-0 z-0">
+    {%- if section.settings.video_url != blank -%}
+      {%- if section.settings.video_url.type == 'youtube' -%}
+        <iframe
+          src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?autoplay=1&mute=1&loop=1&playlist={{ section.settings.video_url.id }}&controls=0&showinfo=0"
+          class="w-full h-full scale-[1.5] object-cover pointer-events-none"
+          frameborder="0"
+        ></iframe>
+      {%- else -%}
+        <iframe
+          src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?autoplay=1&loop=1&autopause=0&muted=1&background=1"
+          class="w-full h-full scale-[1.5] object-cover pointer-events-none"
+          frameborder="0"
+        ></iframe>
+      {%- endif -%}
+    {%- elsif section.settings.video_file != blank -%}
+      {{
+        section.settings.video_file
+        | video_tag:
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          class: 'w-full h-full object-cover scale-[1.02]'
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-300' }}
+    {%- endif -%}
+  </div>
+
+  <div class="absolute inset-0 bg-black/{{ section.settings.overlay_opacity }} z-[1]"></div>
+
+  <div class="relative z-[2] text-center px-4 max-w-4xl mx-auto">
+    <h2 class="promo-video-title text-white text-4xl md:text-6xl font-light uppercase mb-6 opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+      {{ section.settings.title }}
+    </h2>
+    <p class="promo-video-subtitle text-white/90 text-lg md:text-xl font-light mb-10 opacity-0 translate-y-8 transition-all duration-1000 delay-300 ease-out">
+      {{ section.settings.text }}
+    </p>
+    {% if section.settings.button_label != blank %}
+      <div class="promo-video-button opacity-0 translate-y-8 transition-all duration-1000 delay-500 ease-out">
+        <a
+          href="{{ section.settings.button_link }}"
+          class="inline-block border border-white text-white px-10 py-4 uppercase tracking-[0.2em] text-xs hover:bg-white hover:text-black transition-all duration-500"
+        >
+          {{ section.settings.button_label }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  /* Sayfa kaydırıldığında (Intersection Observer ile) veya görünür olduğunda tetiklenecek sınıflar */
+  .promo-video-active .promo-video-title,
+  .promo-video-active .promo-video-subtitle,
+  .promo-video-active .promo-video-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Videolu banner görünür olduğunda animasyonun başlaması için küçük bir Observer
+  const videoBannerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('promo-video-active');
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner =
+      document.querySelector('.promo-video-active')?.parentElement || document.querySelector('section.relative');
+    if (banner) videoBannerObserver.observe(banner);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Promo Video Banner",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Shopify Video File"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video Link (YouTube/Vimeo)",
+      "accept": ["youtube", "vimeo"]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Art of Living"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Subtitle",
+      "default": "Discover our new spring collection with cinematic pieces."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Discover Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Video Banner"
+    }
+  ]
+}
+{% endschema %}

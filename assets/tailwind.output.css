@@ -852,6 +852,14 @@ p{
   z-index: 70;
 }
 
+.z-\[1\]{
+  z-index: 1;
+}
+
+.z-\[2\]{
+  z-index: 2;
+}
+
 .order-first{
   order: -9999;
 }
@@ -1116,6 +1124,10 @@ p{
   height: 300px;
 }
 
+.h-\[60vh\]{
+  height: 60vh;
+}
+
 .w-1\/2{
   width: 50%;
 }
@@ -1286,6 +1298,23 @@ p{
 
 .translate-y-full{
   --tw-translate-y: 100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-y-8{
+  --tw-translate-y: 2rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-\[1\.02\]{
+  --tw-scale-x: 1.02;
+  --tw-scale-y: 1.02;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-\[1\.5\]{
+  --tw-scale-x: 1.5;
+  --tw-scale-y: 1.5;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1689,6 +1718,11 @@ p{
   background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
 }
 
+.bg-gray-300{
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
+}
+
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -1822,6 +1856,11 @@ p{
 .py-\[80px\]{
   padding-top: 80px;
   padding-bottom: 80px;
+}
+
+.px-10{
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .pb-0\.5{
@@ -2238,6 +2277,14 @@ p{
   transition-duration: 150ms;
 }
 
+.delay-300{
+  transition-delay: 300ms;
+}
+
+.delay-500{
+  transition-delay: 500ms;
+}
+
 .duration-1000{
   transition-duration: 1000ms;
 }
@@ -2379,6 +2426,11 @@ p{
 .hover\:bg-secondary:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(178 172 136 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-white:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:text-\[\#3B443C\]:hover{
@@ -2554,6 +2606,10 @@ p{
     height: 153px;
   }
 
+  .md\:h-\[80vh\]{
+    height: 80vh;
+  }
+
   .md\:w-1\/4{
     width: 25%;
   }
@@ -2661,6 +2717,16 @@ p{
   .md\:text-xs{
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  .md\:text-6xl{
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .md\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 
