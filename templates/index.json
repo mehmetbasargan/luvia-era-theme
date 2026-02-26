@@ -13,6 +13,8 @@
       "type": "promo-video-banner",
       "name": "Promo Video Banner",
       "settings": {
+        "video_file": "shopify://files/videos/video.mp4",
+        "video_url": "",
         "title": "The Art of Living",
         "text": "Discover our new spring collection with cinematic pieces.",
         "button_label": "Discover Now",
