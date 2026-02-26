@@ -88,7 +88,7 @@
         "megamenu_XKKJN6": {
           "type": "megamenu",
           "settings": {
-            "menu_item": "new arrivals",
+            "menu_item": "Collections",
             "promo_image": "shopify://shop_images/alpcem-portrait-4597858_1280_fed85f03-6953-4841-b2f9-34c38e315f64.jpg",
             "promo_heading": "New Season Now",
             "promo_link": "shopify://collections"
