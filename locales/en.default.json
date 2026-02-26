@@ -80,6 +80,13 @@
 			"other": "{{ count }} results found for \"{{ terms }}\""
 		}
 	},
+	"header": {
+		"mega_menu": {
+			"no_submenu": "No submenu (Navigation) found under this item.",
+			"add_submenu": "Add a submenu in Navigation settings.",
+			"promo_placeholder": "No image selected"
+		}
+	},
 	"footer": {
 		"newsletter": "Newsletter",
 		"join": "Join",
