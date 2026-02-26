@@ -85,6 +85,15 @@
     "header-two": {
       "type": "header-two",
       "blocks": {
+        "megamenu_AtztHm": {
+          "type": "megamenu",
+          "settings": {
+            "menu_item": "collection",
+            "promo_image": "shopify://shop_images/alpcem-portrait-4917796_1280.jpg",
+            "promo_heading": "New Season",
+            "promo_link": "shopify://collections/midnight-elegance"
+          }
+        },
         "megamenu_VAg7PF": {
           "type": "megamenu",
           "settings": {
@@ -124,6 +133,7 @@
         }
       },
       "block_order": [
+        "megamenu_AtztHm",
         "megamenu_VAg7PF",
         "social_icon_RmXyw9",
         "social_icon_ctzzDe",
