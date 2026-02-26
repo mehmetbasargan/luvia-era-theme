@@ -2033,6 +2033,10 @@ p{
   letter-spacing: 0.1em;
 }
 
+.tracking-\[0\.1em\]{
+  letter-spacing: 0.1em;
+}
+
 .\!text-primary{
   --tw-text-opacity: 1 !important;
   color: rgb(59 68 60 / var(--tw-text-opacity, 1)) !important;
@@ -2232,6 +2236,10 @@ p{
 
 .duration-\[1\.5s\]{
   transition-duration: 1.5s;
+}
+
+.duration-200{
+  transition-duration: 200ms;
 }
 
 .ease-in-out{
