@@ -124,7 +124,7 @@
           {% for product in collection.products %}
             {% render 'product-card', product: product %}
           {% else %}
-            <p class="text-center py-20 text-[12px] uppercase tracking-widest">{{ 'general.no_products_found' | t }}</p>
+            <p class="text-center py-20 text-[13px] uppercase tracking-widest">{{ 'general.no_products_found' | t }}</p>
           {% endfor %}
         </div>
 
@@ -133,7 +133,7 @@
             {% if paginate.previous %}
               <a
                 href="{{ paginate.previous.url }}"
-                class="text-[11px] uppercase tracking-[0.2em] text-gray-400 hover:text-black transition-colors"
+                class="text-[13px] uppercase tracking-[0.2em] text-gray-400 hover:text-black transition-colors"
                 >← {{ 'general.pagination.previous' | t -}}
               </a>
             {% endif %}
@@ -141,11 +141,11 @@
             <div class="flex items-center gap-4">
               {% for part in paginate.parts %}
                 {% if part.is_link %}
-                  <a href="{{ part.url }}" class="text-[11px] text-gray-400 hover:text-black transition-colors">
+                  <a href="{{ part.url }}" class="text-[13px] text-gray-400 hover:text-black transition-colors">
                     {{- part.title -}}
                   </a>
                 {% else %}
-                  <span class="text-[11px] {% if part.title == paginate.current_page %}text-black font-bold border-b border-black{% else %}text-gray-300{% endif %}">
+                  <span class="text-[13px] {% if part.title == paginate.current_page %}text-black font-bold border-b border-black{% else %}text-gray-300{% endif %}">
                     {{ part.title }}
                   </span>
                 {% endif %}
@@ -155,7 +155,7 @@
             {% if paginate.next %}
               <a
                 href="{{ paginate.next.url }}"
-                class="text-[11px] uppercase tracking-[0.2em] text-gray-400 hover:text-black transition-colors"
+                class="text-[13px] uppercase tracking-[0.2em] text-gray-400 hover:text-black transition-colors"
               >
                 {{- 'general.pagination.next' | t }} →</a
               >
