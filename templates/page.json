@@ -34,11 +34,51 @@
         "button_text": "Help",
         "button_url": "#"
       }
+    },
+    "about_gallery_w9C6dP": {
+      "type": "about-gallery",
+      "blocks": {
+        "image_block_E8WjCJ": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/alpcem-portrait-4597858_1280_fed85f03-6953-4841-b2f9-34c38e315f64.jpg"
+          }
+        },
+        "image_block_fhYAdQ": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/alpcem-portrait-4917796_1280_1b998f3d-aaaf-4a05-96eb-5db1ffe1c4f3.jpg"
+          }
+        },
+        "image_block_PqYken": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/alpcem-portrait-4778337_1280.jpg"
+          }
+        },
+        "image_block_Hxt3wH": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/img2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_E8WjCJ",
+        "image_block_fhYAdQ",
+        "image_block_PqYken",
+        "image_block_Hxt3wH"
+      ],
+      "name": "About Gallery",
+      "settings": {
+        "title": "Curated Moments"
+      }
     }
   },
   "order": [
     "header_hero",
     "main_content",
-    "featured_products_4gA8mN"
+    "featured_products_4gA8mN",
+    "about_gallery_w9C6dP"
   ]
 }
