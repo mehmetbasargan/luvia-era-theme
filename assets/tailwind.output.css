@@ -679,6 +679,10 @@ p{
   pointer-events: none;
 }
 
+.visible{
+  visibility: visible;
+}
+
 .invisible{
   visibility: hidden;
 }
@@ -1190,6 +1194,10 @@ p{
   height: fit-content;
 }
 
+.h-auto{
+  height: auto;
+}
+
 .w-0{
   width: 0px;
 }
@@ -1585,6 +1593,10 @@ p{
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
+.self-start{
+  align-self: flex-start;
 }
 
 .overflow-hidden{
@@ -2791,6 +2803,10 @@ p{
 
   .md\:top-\[180px\]{
     top: 180px;
+  }
+
+  .md\:top-0{
+    top: 0px;
   }
 
   .md\:block{
