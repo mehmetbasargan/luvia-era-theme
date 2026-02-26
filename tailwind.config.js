@@ -10,16 +10,17 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				primary: '#3B443C',
-				secondary: '#B2AC88',
-				custombg: '#F9F9F9',
-				line: '#e5e7eb',
-				white: '#FFFFFF',
-				black: '#000000',
+				primary: 'var(--color-primary)',
+				secondary: 'var(--color-secondary)',
+				custombg: 'var(--color-custombg)',
+				line: 'var(--color-line)',
+				white: 'var(--color-white)',
+				black: 'var(--color-black)',
 			},
+
 			fontFamily: {
-				inter: ['Inter', 'sans-serif'],
-				josefin: ['Josefin Sans', 'sans-serif'],
+				inter: 'var(--font-body)',
+				josefin: 'var(--font-heading)',
 			},
 			container: {
 				center: true,

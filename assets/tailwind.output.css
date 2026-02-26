@@ -556,13 +556,22 @@ video {
   display: none;
 }
 
+:root {
+  --color-primary: #3b443c;
+  --color-secondary: #b2ac88;
+  --color-custombg: #f9f9f9;
+  --color-line: #e5e7eb;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --font-heading: 'Josefin Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
 body{
   margin: 0px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));
-  font-family: Inter, sans-serif;
-  --tw-text-opacity: 1;
-  color: rgb(59 68 60 / var(--tw-text-opacity, 1));
+  background-color: var(--color-custombg);
+  font-family: var(--font-body);
+  color: var(--color-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -573,11 +582,10 @@ h1,
 	h4,
 	h5,
 	h6{
-  font-family: Josefin Sans, sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
-  --tw-text-opacity: 1;
-  color: rgb(59 68 60 / var(--tw-text-opacity, 1));
+  color: var(--color-primary);
 }
 
 h1 {
@@ -597,7 +605,7 @@ h4 {
 }
 
 p{
-  font-family: Inter, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
 }
@@ -655,8 +663,6 @@ p{
   background-color: rgb(178 172 136 / var(--tw-bg-opacity, 1)) !important;
   opacity: 1 !important;
 }
-
-/* Marquee V3 */
 
 .animate-marquee {
   animation: marquee 15s linear infinite;
@@ -1635,12 +1641,7 @@ p{
 }
 
 .border-black{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
-}
-
-.border-black\/10{
-  border-color: rgb(0 0 0 / 0.1);
+  border-color: var(--color-black);
 }
 
 .border-gray-100{
@@ -1669,8 +1670,7 @@ p{
 }
 
 .border-primary{
-  --tw-border-opacity: 1;
-  border-color: rgb(59 68 60 / var(--tw-border-opacity, 1));
+  border-color: var(--color-primary);
 }
 
 .border-red-900{
@@ -1679,21 +1679,11 @@ p{
 }
 
 .border-secondary{
-  --tw-border-opacity: 1;
-  border-color: rgb(178 172 136 / var(--tw-border-opacity, 1));
-}
-
-.border-secondary\/30{
-  border-color: rgb(178 172 136 / 0.3);
+  border-color: var(--color-secondary);
 }
 
 .border-white{
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
-}
-
-.border-white\/10{
-  border-color: rgb(255 255 255 / 0.1);
+  border-color: var(--color-white);
 }
 
 .border-l-transparent{
@@ -1705,12 +1695,7 @@ p{
 }
 
 .border-t-white{
-  --tw-border-opacity: 1;
-  border-top-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
-}
-
-.\!bg-white\/50{
-  background-color: rgb(255 255 255 / 0.5) !important;
+  border-top-color: var(--color-white);
 }
 
 .bg-\[\#3B443C\]{
@@ -1751,33 +1736,11 @@ p{
 }
 
 .bg-black{
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
-}
-
-.bg-black\/10{
-  background-color: rgb(0 0 0 / 0.1);
-}
-
-.bg-black\/20{
-  background-color: rgb(0 0 0 / 0.2);
-}
-
-.bg-black\/30{
-  background-color: rgb(0 0 0 / 0.3);
-}
-
-.bg-black\/80{
-  background-color: rgb(0 0 0 / 0.8);
+  background-color: var(--color-black);
 }
 
 .bg-custombg{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));
-}
-
-.bg-custombg\/80{
-  background-color: rgb(249 249 249 / 0.8);
+  background-color: var(--color-custombg);
 }
 
 .bg-gray-100{
@@ -1801,8 +1764,7 @@ p{
 }
 
 .bg-primary{
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 68 60 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-primary);
 }
 
 .bg-red-500{
@@ -1811,8 +1773,7 @@ p{
 }
 
 .bg-secondary{
-  --tw-bg-opacity: 1;
-  background-color: rgb(178 172 136 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-secondary);
 }
 
 .bg-transparent{
@@ -1820,8 +1781,7 @@ p{
 }
 
 .bg-white{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-white);
 }
 
 .object-contain{
@@ -2042,7 +2002,7 @@ p{
 }
 
 .font-josefin{
-  font-family: Josefin Sans, sans-serif;
+  font-family: var(--font-heading);
 }
 
 .text-2xl{
@@ -2201,8 +2161,7 @@ p{
 }
 
 .\!text-primary{
-  --tw-text-opacity: 1 !important;
-  color: rgb(59 68 60 / var(--tw-text-opacity, 1)) !important;
+  color: var(--color-primary) !important;
 }
 
 .text-\[\#3B443C\]{
@@ -2216,8 +2175,7 @@ p{
 }
 
 .text-black{
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+  color: var(--color-black);
 }
 
 .text-gray-300{
@@ -2236,8 +2194,7 @@ p{
 }
 
 .text-primary{
-  --tw-text-opacity: 1;
-  color: rgb(59 68 60 / var(--tw-text-opacity, 1));
+  color: var(--color-primary);
 }
 
 .text-red-900{
@@ -2246,21 +2203,11 @@ p{
 }
 
 .text-secondary{
-  --tw-text-opacity: 1;
-  color: rgb(178 172 136 / var(--tw-text-opacity, 1));
+  color: var(--color-secondary);
 }
 
 .text-white{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.text-white\/30{
-  color: rgb(255 255 255 / 0.3);
-}
-
-.text-white\/90{
-  color: rgb(255 255 255 / 0.9);
+  color: var(--color-white);
 }
 
 .underline{
@@ -2336,8 +2283,7 @@ p{
 }
 
 .ring-black{
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity, 1));
+  --tw-ring-color: var(--color-black);
 }
 
 .ring-offset-2{
@@ -2462,18 +2408,15 @@ p{
 }
 
 .placeholder\:text-primary::-moz-placeholder{
-  --tw-text-opacity: 1;
-  color: rgb(59 68 60 / var(--tw-text-opacity, 1));
+  color: var(--color-primary);
 }
 
 .placeholder\:text-primary::placeholder{
-  --tw-text-opacity: 1;
-  color: rgb(59 68 60 / var(--tw-text-opacity, 1));
+  color: var(--color-primary);
 }
 
 .checked\:bg-black:checked{
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-black);
 }
 
 .hover\:scale-105:hover{
@@ -2499,13 +2442,11 @@ p{
 }
 
 .hover\:border-black:hover{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
+  border-color: var(--color-black);
 }
 
 .hover\:\!bg-secondary:hover{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(178 172 136 / var(--tw-bg-opacity, 1)) !important;
+  background-color: var(--color-secondary) !important;
 }
 
 .hover\:bg-\[\#2A312B\]:hover{
@@ -2524,13 +2465,11 @@ p{
 }
 
 .hover\:bg-black:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-black);
 }
 
 .hover\:bg-custombg:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-custombg);
 }
 
 .hover\:bg-gray-50:hover{
@@ -2539,18 +2478,15 @@ p{
 }
 
 .hover\:bg-primary:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 68 60 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-primary);
 }
 
 .hover\:bg-secondary:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(178 172 136 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-secondary);
 }
 
 .hover\:bg-white:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-white);
 }
 
 .hover\:text-\[\#3B443C\]:hover{
@@ -2564,23 +2500,19 @@ p{
 }
 
 .hover\:text-black:hover{
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+  color: var(--color-black);
 }
 
 .hover\:text-primary:hover{
-  --tw-text-opacity: 1;
-  color: rgb(59 68 60 / var(--tw-text-opacity, 1));
+  color: var(--color-primary);
 }
 
 .hover\:text-secondary:hover{
-  --tw-text-opacity: 1;
-  color: rgb(178 172 136 / var(--tw-text-opacity, 1));
+  color: var(--color-secondary);
 }
 
 .hover\:text-white:hover{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+  color: var(--color-white);
 }
 
 .hover\:opacity-50:hover{
@@ -2593,8 +2525,7 @@ p{
 }
 
 .focus\:border-black:focus{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
+  border-color: var(--color-black);
 }
 
 .focus\:outline-none:focus{
@@ -2615,8 +2546,7 @@ p{
 }
 
 .focus\:ring-secondary:focus{
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(178 172 136 / var(--tw-ring-opacity, 1));
+  --tw-ring-color: var(--color-secondary);
 }
 
 .active\:scale-95:active{
@@ -2687,18 +2617,15 @@ p{
 }
 
 .peer:checked ~ .peer-checked\:border-black{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
+  border-color: var(--color-black);
 }
 
 .peer:checked ~ .peer-checked\:bg-black{
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+  background-color: var(--color-black);
 }
 
 .peer:checked ~ .peer-checked\:text-white{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+  color: var(--color-white);
 }
 
 .peer:checked ~ .peer-checked\:ring-1{

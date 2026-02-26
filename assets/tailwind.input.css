@@ -5,6 +5,18 @@
 @tailwind utilities;
 
 @layer base {
+	:root {
+		--color-primary: #3b443c;
+		--color-secondary: #b2ac88;
+		--color-custombg: #f9f9f9;
+		--color-line: #e5e7eb;
+		--color-white: #ffffff;
+		--color-black: #000000;
+
+		--font-heading: 'Josefin Sans', sans-serif;
+		--font-body: 'Inter', sans-serif;
+	}
+
 	body {
 		@apply font-inter bg-custombg text-primary antialiased m-0;
 	}
@@ -50,7 +62,6 @@
 		@apply !bg-[#b2ac88] !opacity-100 !h-[12px] !w-[12px];
 	}
 
-	/* Marquee V3 */
 	.animate-marquee {
 		animation: marquee 15s linear infinite;
 	}
