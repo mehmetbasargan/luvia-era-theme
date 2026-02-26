@@ -112,6 +112,32 @@
                 {% if is_mega %}
                   <div class="absolute left-0 top-full w-full bg-white shadow-2xl border-t border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] py-10 text-primary">
                     <div class="container mx-auto grid grid-cols-12 gap-8 px-4">
+                      <div class="col-span-4 relative overflow-hidden group/promo h-[300px]">
+                        {% if mega_block.settings.promo_image != blank %}
+                          <img
+                            src="{{ mega_block.settings.promo_image | image_url: width: 600 }}"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover/promo:scale-105"
+                            loading="lazy"
+                            width="600"
+                            height="300"
+                          >
+                          <div class="absolute inset-0 bg-black/20 flex flex-col justify-end p-6 text-left">
+                            <h4 class="text-white font-josefin text-xl mb-2">
+                              {{ mega_block.settings.promo_heading }}
+                            </h4>
+                            <a
+                              href="{{ mega_block.settings.promo_link }}"
+                              class="text-white text-xs underline tracking-widest uppercase font-medium"
+                              >Şimdi Keşfet</a
+                            >
+                          </div>
+                        {% else %}
+                          <div class="w-full h-full bg-gray-100 flex items-center justify-center italic text-gray-400">
+                            Görsel Seçilmedi
+                          </div>
+                        {% endif %}
+                      </div>
+
                       <div class="col-span-8 grid grid-cols-4 gap-8 text-left">
                         {%- if link.links != blank -%}
                           {%- for childlink in link.links -%}
@@ -148,32 +174,6 @@
                             Bu menünün altında henüz bir alt menü (Navigasyon) bulunamadı.
                           </div>
                         {%- endif -%}
-                      </div>
-
-                      <div class="col-span-4 relative overflow-hidden group/promo h-[300px]">
-                        {% if mega_block.settings.promo_image != blank %}
-                          <img
-                            src="{{ mega_block.settings.promo_image | image_url: width: 600 }}"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover/promo:scale-105"
-                            loading="lazy"
-                            width="600"
-                            height="300"
-                          >
-                          <div class="absolute inset-0 bg-black/20 flex flex-col justify-end p-6 text-left">
-                            <h4 class="text-white font-josefin text-xl mb-2">
-                              {{ mega_block.settings.promo_heading }}
-                            </h4>
-                            <a
-                              href="{{ mega_block.settings.promo_link }}"
-                              class="text-white text-xs underline tracking-widest uppercase font-medium"
-                              >Şimdi Keşfet</a
-                            >
-                          </div>
-                        {% else %}
-                          <div class="w-full h-full bg-gray-100 flex items-center justify-center italic text-gray-400">
-                            Görsel Seçilmedi
-                          </div>
-                        {% endif %}
                       </div>
                     </div>
                   </div>
