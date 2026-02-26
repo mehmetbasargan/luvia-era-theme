@@ -67,123 +67,112 @@
         <nav class="">
           <ul class="hidden lg:flex justify-end gap-6">
             {% for link in linklists['main-menu'].links %}
-              {%- assign is_mega = false -%}
-              {%- assign mega_block = null -%}
-
-              {% for link in linklists['main-menu'].links %}
-                {% for block in section.blocks %}
-                {% endfor %}
-
-                {% comment %} ... senin mevcut is_mega kontrol kodun ... {% endcomment %}
-              {% endfor %}
-
-              {%- comment -%} Check if this link is defined as a Mega Menu in Blocks {%- endcomment -%}
+              {%- comment -%} 1. ADIM: MEGA MENU KONTROLÜ (Döngünün en başında bir kez) {%- endcomment -%}
               {%- assign is_mega = false -%}
               {%- assign mega_block = null -%}
 
               {%- for block in section.blocks -%}
                 {%- if block.type == 'megamenu' -%}
-                  {%- comment -%} Harf büyüklüğünü ve boşlukları temizleyerek karşılaştır {%- endcomment -%}
                   {%- assign block_title = block.settings.menu_item | downcase | strip -%}
                   {%- assign link_title = link.title | downcase | strip -%}
-
                   {%- if block_title == link_title and block_title != blank -%}
                     {%- assign is_mega = true -%}
                     {%- assign mega_block = block -%}
                     {%- break -%}
-                    {%- comment -%} Eşleşme bulunduysa döngüden çık {%- endcomment -%}
                   {%- endif -%}
                 {%- endif -%}
               {%- endfor -%}
 
-              {% if link.links != blank %}
-                <li class="group {% if is_mega %}static{% else %}relative{% endif %} py-4">
-                  <button class="flex items-center hover:text-secondary transition-colors cursor-pointer uppercase text-sm tracking-widest font-medium">
-                    {{ link.title }}
-                    <svg
-                      class="w-3 h-3 ml-1 transition-transform duration-300 group-hover:rotate-180"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+              {%- comment -%} 2. ADIM: LİSTE ÖĞESİ BAŞLANGICI {%- endcomment -%}
+              <li class="group {% if is_mega %}static{% else %}relative{% endif %} flex items-center">
+                <div class="py-4">
+                  {% if is_mega or link.links != blank %}
+                    <button class="flex items-center hover:text-secondary transition-colors cursor-pointer uppercase text-sm tracking-widest font-medium">
+                      {{ link.title }}
+                      <svg
+                        class="w-3 h-3 ml-1 transition-transform duration-300 group-hover:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </button>
+                  {% else %}
+                    <a
+                      href="{{ link.url }}"
+                      class="hover:text-secondary transition-colors uppercase text-sm tracking-widest font-medium"
                     >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
+                      {{ link.title }}
+                    </a>
+                  {% endif %}
+                </div>
 
-                  {% if is_mega %}
-                    <div class="absolute left-0 top-full w-full bg-white shadow-2xl border-t border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] py-10">
-                      <div class="container mx-auto grid grid-cols-12 gap-8 px-4">
-                        <div class="col-span-8 grid grid-cols-4 gap-6 text-left">
-                          {% for childlink in link.links %}
-                            <div class="flex flex-col space-y-3">
-                              <a
-                                href="{{ childlink.url }}"
-                                class="font-bold text-primary border-b border-gray-100 pb-2 mb-2 uppercase text-xs tracking-widest"
-                              >
-                                {{ childlink.title }}
-                              </a>
-                              {% for grandchildlink in childlink.links %}
-                                <a
-                                  href="{{ grandchildlink.url }}"
-                                  class="text-gray-500 hover:text-secondary text-sm transition-colors"
-                                >
-                                  {{ grandchildlink.title }}
-                                </a>
-                              {% endfor %}
-                            </div>
-                          {% endfor %}
-                        </div>
-
-                        <div class="col-span-4 relative overflow-hidden group/promo h-[300px]">
-                          {% if mega_block.settings.promo_image != blank %}
-                            <img
-                              src="{{ mega_block.settings.promo_image | image_url: width: 600 }}"
-                              width=""
-                              height=""
-                              class="w-full h-full object-cover transition-transform duration-700 group-hover/promo:scale-105"
-                              loading="lazy"
+                {%- comment -%} 3. ADIM: İÇERİK (MEGA VEYA DROPDOWN) {%- endcomment -%}
+                {% if is_mega %}
+                  <div class="absolute left-0 top-full w-full bg-white shadow-2xl border-t border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] py-10 text-primary">
+                    <div class="container mx-auto grid grid-cols-12 gap-8 px-4">
+                      <div class="col-span-8 grid grid-cols-4 gap-6 text-left">
+                        {% for childlink in link.links %}
+                          <div class="flex flex-col space-y-3">
+                            <a
+                              href="{{ childlink.url }}"
+                              class="font-bold border-b border-gray-100 pb-2 mb-2 uppercase text-xs tracking-widest"
                             >
-                            <div class="absolute inset-0 bg-black/20 flex flex-col justify-end p-6 text-left">
-                              <h4 class="text-white font-josefin text-xl mb-2">
-                                {{ mega_block.settings.promo_heading }}
-                              </h4>
+                              {{ childlink.title }}
+                            </a>
+                            {% for grandchildlink in childlink.links %}
                               <a
-                                href="{{ mega_block.settings.promo_link }}"
-                                class="text-white text-xs underline tracking-widest uppercase font-medium"
-                                >Şimdi Keşfet</a
+                                href="{{ grandchildlink.url }}"
+                                class="text-gray-500 hover:text-secondary text-sm transition-colors"
                               >
-                            </div>
-                          {% else %}
-                            <div class="w-full h-full bg-gray-100 flex items-center justify-center italic text-gray-400">
-                              Görsel Seçilmedi
-                            </div>
-                          {% endif %}
-                        </div>
+                                {{ grandchildlink.title }}
+                              </a>
+                            {% endfor %}
+                          </div>
+                        {% endfor %}
+                      </div>
+
+                      <div class="col-span-4 relative overflow-hidden group/promo h-[300px]">
+                        {% if mega_block.settings.promo_image != blank %}
+                          <img
+                            src="{{ mega_block.settings.promo_image | image_url: width: 600 }}"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover/promo:scale-105"
+                            loading="lazy"
+                            width="600"
+                            height="300"
+                          >
+                          <div class="absolute inset-0 bg-black/20 flex flex-col justify-end p-6 text-left">
+                            <h4 class="text-white font-josefin text-xl mb-2">
+                              {{ mega_block.settings.promo_heading }}
+                            </h4>
+                            <a
+                              href="{{ mega_block.settings.promo_link }}"
+                              class="text-white text-xs underline tracking-widest uppercase font-medium"
+                              >Şimdi Keşfet</a
+                            >
+                          </div>
+                        {% else %}
+                          <div class="w-full h-full bg-gray-100 flex items-center justify-center italic text-gray-400">
+                            Görsel Seçilmedi
+                          </div>
+                        {% endif %}
                       </div>
                     </div>
-                  {% else %}
-                    <div class="absolute left-0 top-full hidden group-hover:block min-w-[200px] bg-white shadow-xl border border-gray-100 py-4 z-[100] transition-all">
-                      {% for childlink in link.links %}
-                        <a
-                          href="{{ childlink.url }}"
-                          class="block px-6 py-2 text-primary hover:bg-custom-bg hover:text-secondary transition-all"
-                        >
-                          {{ childlink.title }}
-                        </a>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
-                </li>
-              {% else %}
-                <li>
-                  <a
-                    href="{{ link.url }}"
-                    class="hover:text-secondary transition-colors py-4 uppercase text-sm tracking-widest font-medium"
-                  >
-                    {{ link.title }}
-                  </a>
-                </li>
-              {% endif %}
+                  </div>
+                {% elsif link.links != blank %}
+                  <div class="absolute left-0 top-full hidden group-hover:block min-w-[200px] bg-white shadow-xl border border-gray-100 py-4 z-[100]">
+                    {% for childlink in link.links %}
+                      <a
+                        href="{{ childlink.url }}"
+                        class="block px-6 py-2 text-primary hover:bg-custom-bg hover:text-secondary transition-all"
+                      >
+                        {{ childlink.title }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </li>
             {% endfor %}
           </ul>
         </nav>
