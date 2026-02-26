@@ -85,6 +85,15 @@
     "header-two": {
       "type": "header-two",
       "blocks": {
+        "megamenu_XKKJN6": {
+          "type": "megamenu",
+          "settings": {
+            "menu_item": "Collection",
+            "promo_image": "shopify://shop_images/alpcem-portrait-4597858_1280_fed85f03-6953-4841-b2f9-34c38e315f64.jpg",
+            "promo_heading": "New Season Now",
+            "promo_link": "shopify://collections/midnight-elegance"
+          }
+        },
         "social_icon_RmXyw9": {
           "type": "social_icon",
           "settings": {
@@ -115,6 +124,7 @@
         }
       },
       "block_order": [
+        "megamenu_XKKJN6",
         "social_icon_RmXyw9",
         "social_icon_ctzzDe",
         "social_icon_QUH6kx",
