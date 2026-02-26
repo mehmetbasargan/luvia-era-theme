@@ -145,14 +145,14 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/img3.jpg",
-            "link": "shopify://collections/dresses"
+            "link": "shopify://collections/midnight-elegance"
           }
         },
         "image_9YfwDJ": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/img2.jpg",
-            "link": "shopify://collections/new-in"
+            "link": "shopify://collections/silk-grace"
           }
         },
         "image_QKP94A": {
