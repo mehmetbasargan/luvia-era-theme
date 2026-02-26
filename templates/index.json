@@ -105,16 +105,25 @@
     "shoppable_image_mTy7Xm": {
       "type": "shoppable-image",
       "blocks": {
+        "product_point_rKQwbd": {
+          "type": "product_point",
+          "settings": {
+            "product": "luna-high-waist-trousers",
+            "top_position": 78,
+            "left_position": 50
+          }
+        },
         "product_point_JjixBg": {
           "type": "product_point",
           "settings": {
             "product": "aura-oversized-cashmere-coat",
-            "top_position": 50,
-            "left_position": 50
+            "top_position": 90,
+            "left_position": 29
           }
         }
       },
       "block_order": [
+        "product_point_rKQwbd",
         "product_point_JjixBg"
       ],
       "name": "Shoppable Image",
