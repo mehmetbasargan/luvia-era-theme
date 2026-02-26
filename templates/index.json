@@ -144,12 +144,31 @@
       "settings": {
         "title": "Follow the Era"
       }
+    },
+    "shoppable_image_mTy7Xm": {
+      "type": "shoppable-image",
+      "blocks": {
+        "product_point_JjixBg": {
+          "type": "product_point",
+          "settings": {
+            "product": "",
+            "top_position": 50,
+            "left_position": 50
+          }
+        }
+      },
+      "block_order": [
+        "product_point_JjixBg"
+      ],
+      "name": "Shoppable Image",
+      "settings": {}
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_yFYYic",
     "collection_list_thQPNq",
+    "shoppable_image_mTy7Xm",
     "featured_products_GFTLFG",
     "full_width_gallery_7tAPz6"
   ]
