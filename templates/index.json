@@ -91,6 +91,17 @@
       "name": "Kategori Kartları",
       "settings": {}
     },
+    "featured_products_GFTLFG": {
+      "type": "featured-products",
+      "name": "Luvia Featured Collection",
+      "settings": {
+        "collection": "midnight-elegance",
+        "section_title": "Editor's Picks",
+        "section_subtitle": "Luvia Era Capsule Collection",
+        "button_text": "All Products",
+        "button_url": "shopify://collections/all"
+      }
+    },
     "shoppable_image_mTy7Xm": {
       "type": "shoppable-image",
       "blocks": {
@@ -109,17 +120,6 @@
       "name": "Shoppable Image",
       "settings": {
         "image": "shopify://shop_images/alpcem-portrait-4778337_1280.jpg"
-      }
-    },
-    "featured_products_GFTLFG": {
-      "type": "featured-products",
-      "name": "Luvia Featured Collection",
-      "settings": {
-        "collection": "midnight-elegance",
-        "section_title": "Editor's Picks",
-        "section_subtitle": "Luvia Era Capsule Collection",
-        "button_text": "All Products",
-        "button_url": "shopify://collections/all"
       }
     },
     "full_width_gallery_7tAPz6": {
@@ -170,8 +170,8 @@
     "promo_video_banner_yyDpHy",
     "hero_slider_yFYYic",
     "collection_list_thQPNq",
-    "shoppable_image_mTy7Xm",
     "featured_products_GFTLFG",
+    "shoppable_image_mTy7Xm",
     "full_width_gallery_7tAPz6"
   ]
 }
