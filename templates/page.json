@@ -8,31 +8,27 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main": {
-      "type": "page",
-      "disabled": true,
-      "settings": {}
-    },
-    "main_page_header_8a4cyr": {
-      "type": "main-page-header",
-      "name": "Sayfa Başlığı (Hero)",
-      "settings": {
-        "image": "shopify://shop_images/img1.jpg",
-        "custom_title": "",
-        "hero_height": 60,
-        "overlay_opacity": 50
-      }
-    },
-    "product_QtaJV4": {
-      "type": "product",
-      "name": "Varsayılan Ürün",
-      "settings": {}
-    }
-  },
-  "order": [
-    "main",
-    "main_page_header_8a4cyr",
-    "product_QtaJV4"
-  ]
+	"sections": {
+		"header_hero": {
+			"type": "main-page-header",
+			"settings": {
+				"image": "shopify://shop_images/img1.jpg",
+				"custom_title": "",
+				"hero_height": 60,
+				"overlay_opacity": 50
+			}
+		},
+		"main_content": {
+			"type": "page",
+			"settings": {
+				"show_title": false
+			}
+		},
+		"featured_product": {
+			"type": "product",
+			"name": "Featured Product",
+			"settings": {}
+		}
+	},
+	"order": ["header_hero", "main_content", "featured_product"]
 }

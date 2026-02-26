@@ -5,15 +5,40 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/page
 {% endcomment %}
 
-<div class="container">
-  <h1>{{ page.title }}</h1>
+<div class="section-spacing py-12 md:py-24">
+  <div class="container mx-auto px-4">
+    {% comment %} Show title if Hero section is not used or explicitly enabled {% endcomment %}
+    {% if section.settings.show_title %}
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-5xl font-light uppercase tracking-[0.2em] text-black">
+          {{ page.title }}
+        </h1>
+        <div class="w-12 h-[1px] bg-black mx-auto mt-6"></div>
+      </div>
+    {% endif %}
 
-  {{ page.content }}
+    {% comment %} Page Content from Admin Rich Text Editor {% endcomment %}
+    <div class="max-w-3xl mx-auto">
+      <div class="prose prose-sm md:prose-base prose-black max-w-none font-light leading-relaxed text-gray-800">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
 </div>
 
 {% schema %}
 {
-  "name": "t:general.page",
-  "settings": []
+  "name": "Page Content",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show Page Title",
+      "default": false,
+      "info": "Disable this if you are using a 'Main Page Header' (Hero) section at the top."
+    }
+  ]
 }
 {% endschema %}
