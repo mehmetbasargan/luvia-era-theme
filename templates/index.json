@@ -57,7 +57,7 @@
     "collection_list_thQPNq": {
       "type": "collection-list",
       "blocks": {
-        "collection_BEhQzQ": {
+        "collection_RGtjwb": {
           "type": "collection",
           "settings": {
             "collection": "golden-hour-muse"
@@ -83,7 +83,7 @@
         }
       },
       "block_order": [
-        "collection_BEhQzQ",
+        "collection_RGtjwb",
         "collection_Kij9aY",
         "collection_eXpiMK",
         "collection_QgDg7i"
