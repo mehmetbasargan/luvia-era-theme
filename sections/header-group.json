@@ -147,6 +147,13 @@
             "link": ""
           }
         },
+        "social_icon_RaTRUW": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-facebook",
+            "link": ""
+          }
+        },
         "social_icon_bQiCPJ": {
           "type": "social_icon",
           "settings": {
@@ -160,21 +167,14 @@
             "icon_choice": "icon-instagram",
             "link": ""
           }
-        },
-        "social_icon_RaTRUW": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-facebook",
-            "link": ""
-          }
         }
       },
       "block_order": [
         "social_icon_FEVA6e",
         "social_icon_6ipxX7",
+        "social_icon_RaTRUW",
         "social_icon_bQiCPJ",
-        "social_icon_3x8aMj",
-        "social_icon_RaTRUW"
+        "social_icon_3x8aMj"
       ],
       "settings": {
         "menu": "main-menu",
