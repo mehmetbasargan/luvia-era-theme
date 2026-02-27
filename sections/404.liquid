@@ -7,18 +7,21 @@
 
 <div class="bg-custombg">
   <div class="container flex flex-col items-center justify-center text-center" style="height: 85vh;">
-    <h1 class="font-heading text-secondary opacity-50 select-none">404</h1>
-    <h2 class="font-heading mt-4 text-primary uppercase tracking-tight">Page Not Found</h2>
-    <p class="font-body text-lg mt-6 text-primary opacity-80 leading-relaxed" style="width: 80%">
-      It seems you have wandered off the path. The page you are looking for might have been moved or does not exist in
-      the world of Luvia Era.
+    <h1 class="font-heading text-secondary opacity-50 select-none">
+      {{ '404.title' | t }}
+    </h1>
+    <h2 class="font-heading mt-4 text-primary uppercase tracking-tight">
+      {{ '404.not_found' | t }}
+    </h2>
+    <p class="font-body mt-6 text-primary opacity-80 leading-relaxed" style="width: 80%">
+      {{ '404.not_found_text' | t }}
     </p>
     <div class="mt-10">
       <a
         href="{{ routes.root_url }}"
-        class="inline-block p-8 text-xs font-body tracking-[0.2em] uppercase transition-all duration-300 border border-primary text-primary hover:bg-primary hover:text-white antialiased"
+        class="inline-block p-5 text-xs font-body tracking-[0.2em] uppercase transition-all duration-300 border border-primary text-primary hover:bg-primary hover:text-white antialiased"
       >
-        Return to Home
+        {{ '404.back_to_shopping' | t }}
       </a>
     </div>
   </div>

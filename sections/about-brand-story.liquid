@@ -1,13 +1,13 @@
-<div class="max-w-[1440px] mx-auto px-4 md:px-20 py-20 lg:py-32">
+<div class="container px-4 md:px-20 py-20 lg:py-32">
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
     <div class="space-y-8 animate-fadeIn">
-      <h2 class="text-[13px] uppercase tracking-[0.5em] text-gray-400 font-light italic">
+      <h2 class="text-[15px] uppercase tracking-[0.3em] text-primary font-medium italic">
         {{ section.settings.since }}
       </h2>
-      <h3 class="font-light leading-tight tracking-tight text-primary uppercase">
+      <h3 class="font-light text-primary uppercase">
         {{ section.settings.heading | default: 'Crafting Timeless Elegance' }}
       </h3>
-      <div class="text-sm md:text-base text-secondary leading-relaxed font-light max-w-lg">
+      <div class="text-primary !leading-relaxed font-light max-w-lg ">
         {{
           section.settings.text
           | default: 'Luvia Era was born from a desire to blend modern minimalism with artisan craftsmanship.'
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="relative group overflow-hidden bg-[#F9F9F9]">
+    <div class="relative group overflow-hidden bg-custombg">
       {% if section.settings.image %}
         <img
           src="{{ section.settings.image | image_url: width: 1200 }}"
@@ -24,7 +24,7 @@
           class="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
         >
       {% else %}
-        <div class="w-full h-[600px] bg-gray-100 flex items-center justify-center italic text-gray-300 tracking-widest uppercase">
+        <div class="w-full h-[600px] bg-custombg flex items-center justify-center italic text-primary tracking-widest uppercase">
           <img
             src="{{ 'collection-1' | placeholder_svg_tag: 'w-full h-full bg-[#E5E5E5]' }}"
             height=""

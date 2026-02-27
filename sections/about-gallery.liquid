@@ -1,14 +1,14 @@
 <div class="about-gallery-section py-20 bg-white">
-  <div class="max-w-[1440px] mx-auto px-4">
+  <div class="container px-4">
     {% if section.settings.title != blank %}
-      <h2 class="text-[10px] uppercase tracking-[0.5em] text-center mb-12 text-gray-400">
+      <h2 class="text-[15px] uppercase tracking-[0.5em] text-center mb-12 text-primary font-medium">
         {{ section.settings.title }}
       </h2>
     {% endif %}
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
       {% for block in section.blocks %}
-        <div class="aspect-3/4 bg-gray-100 overflow-hidden group">
+        <div class="aspect-3/4 bg-custombg overflow-hidden group">
           {% if block.settings.image %}
             <img
               src="{{ block.settings.image | image_url: width: 800 }}"
@@ -18,7 +18,7 @@
               loading="lazy"
             >
           {% else %}
-            <div class="w-full h-full flex items-center justify-center italic text-[10px] text-gray-400 uppercase tracking-widest">
+            <div class="w-full h-full flex items-center justify-center italic text-[10px] text-custombg uppercase tracking-widest">
               Image {{ forloop.index }}
             </div>
           {% endif %}

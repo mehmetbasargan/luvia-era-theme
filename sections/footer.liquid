@@ -1,8 +1,8 @@
-<footer class="bg-custombg text-primary pt-16 pb-8 px-6 border-t border-[#d1d1d1]">
+<footer class="bg-custombg text-primary pt-16 pb-8 px-6 border-t border-line">
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
     <div class="flex flex-col space-y-6">
       <div>
-        <a href="{{ routes.root_url }}" class="block">
+        <a href="{{ routes.root_url }}" class="block mb-8">
           {% if section.settings.footer_logo != blank %}
             {%- assign logo_alt = section.settings.footer_logo.alt | default: shop.name -%}
             {{
@@ -33,7 +33,9 @@
           <span class="text-primary">
             {% render 'icon-envelop' %}
           </span>
-          <a href="mailto:{{ section.settings.footer_email }}">{{ section.settings.footer_email }}</a>
+          <a href="mailto:{{ section.settings.footer_email }}" class="hover:text-secondary transition-all duration-200">
+            {{- section.settings.footer_email -}}
+          </a>
         </p>
       </div>
     </div>
@@ -42,7 +44,7 @@
       <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
         {{ section.settings.menu_1_title }}
       </h4>
-      <ul class="space-y-4 text-sm font-light text-primary">
+      <ul class="space-y-4 text-md font-light text-primary">
         {% for link in linklists[section.settings.footer_menu_1].links %}
           <li>
             <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
@@ -57,7 +59,7 @@
       <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
         {{ section.settings.menu_2_title }}
       </h4>
-      <ul class="space-y-4 text-sm font-light text-primary">
+      <ul class="space-y-4 text-md font-light text-primary">
         {% for link in linklists[section.settings.footer_menu_2].links %}
           <li>
             <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
@@ -72,14 +74,14 @@
       <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
         {{ 'footer.newsletter' | t }}
       </h4>
-      <p class="text-xs text-gray-400 mb-4 font-light italic">
+      <p class="text-xs text-primary mb-4 font-light italic">
         {{ 'footer.be_first_to_know' | t }}
       </p>
-      <form class="flex border-b border-gray-600 pb-2">
+      <form class="flex border-b border-gray-400 pb-2">
         <input
           type="email"
           placeholder="{{ 'footer.email_address' | t }}"
-          class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-gray-600 text-white"
+          class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"
         >
         <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">
           {{ 'footer.join' | t }}
@@ -89,7 +91,7 @@
   </div>
 </footer>
 
-<div class="bg-custombg py-4 text-center border-t border-[#d1d1d1]">
+<div class="bg-custombg py-4 text-center border-t border-line">
   <div class="container">
     <div class="footer__copyright text-[12px]">
       &copy;
@@ -127,43 +129,43 @@
     {
       "type": "text",
       "id": "footer_description",
-      "label": "Kısa Açıklama",
+      "label": "Description",
       "default": "Defining your essence through timeless designs."
     },
     {
       "type": "text",
       "id": "footer_address",
-      "label": "Adres",
+      "label": "Address",
       "default": "Nişantaşı, İstanbul / TR"
     },
     {
       "type": "text",
       "id": "footer_email",
-      "label": "E-posta",
+      "label": "Email",
       "default": "info@luviaera.com"
     },
     {
       "type": "text",
       "id": "menu_1_title",
-      "label": "1. Menü Başlığı",
+      "label": "1. Menu Title",
       "default": "Collections"
     },
     {
       "type": "link_list",
       "id": "footer_menu_1",
-      "label": "1. Menü Seçimi",
+      "label": "1. Menu Selection",
       "default": "footer"
     },
     {
       "type": "text",
       "id": "menu_2_title",
-      "label": "2. Menü Başlığı",
+      "label": "2. Menu Title",
       "default": "Customer Care"
     },
     {
       "type": "link_list",
       "id": "footer_menu_2",
-      "label": "2. Menü Seçimi"
+      "label": "2. Menu Selection"
     }
   ]
 }

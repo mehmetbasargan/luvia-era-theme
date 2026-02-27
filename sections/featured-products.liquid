@@ -3,15 +3,15 @@
     <div class="max-w-7xl mx-auto">
       <div class="flex justify-between items-end mb-12">
         <div>
-          <h2 class="text-[#3B443C] text-2xl font-light tracking-widest uppercase">
+          <h4 class="text-primary font-light tracking-widest uppercase">
             {{ section.settings.section_title }}
-          </h2>
-          <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">{{ section.settings.section_subtitle }}</p>
+          </h4>
+          <p class="text-primary mt-2 uppercase tracking-widest">{{ section.settings.section_subtitle }}</p>
         </div>
         {% if section.settings.button_url %}
           <a
             href="{{ section.settings.button_url }}"
-            class="text-[#3B443C] text-xs border-b border-[#3B443C] pb-1 hover:text-[#B2AC88] hover:border-[#B2AC88] transition-all"
+            class="text-primary border-b border-line pb-1 hover:text-secondary hover:border-secondary transition-all"
           >
             {{ section.settings.button_text }}
           </a>
@@ -21,9 +21,9 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {% for product in collections[section.settings.collection].products limit: 4 %}
           <div class="group relative">
-            <div class="relative aspect-[3/4] overflow-hidden bg-[#F9F9F9]">
+            <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-20 bg-[#B2AC88] text-white text-[10px] px-3 py-1 tracking-widest uppercase">
+                <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[12px] px-3 py-1 tracking-widest uppercase">
                   {{ 'products.product.on_sale' | t }}
                 </span>
               {% endif %}
@@ -62,7 +62,7 @@
                   <button
                     type="submit"
                     name="add"
-                    class="w-full cursor-pointer bg-[#3B443C]/90 text-white py-4 text-xs uppercase tracking-[0.2em] hover:bg-[#3B443C] transition-colors"
+                    class="w-full cursor-pointer bg-primary text-white font-medium py-4 text-xs uppercase tracking-[0.2em] hover:bg-secondary transition-colors"
                     {% unless product.available %}
                       disabled
                     {% endunless %}
@@ -79,12 +79,12 @@
 
             <div class="mt-6 text-center">
               <a href="{{ product.url }}">
-                <h3 class="text-[#3B443C] text-[15px] font-light tracking-wide">{{ product.title }}</h3>
+                <h3 class="text-secondary text-[18px] font-medium tracking-wide">{{ product.title }}</h3>
                 <div class="mt-2 flex justify-center items-center gap-3">
                   {% if product.compare_at_price > product.price %}
-                    <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
+                    <span class="text-gray-400 line-through text-[14px]">{{ product.compare_at_price | money }}</span>
                   {% endif %}
-                  <span class="text-[#3B443C] text-[13px] font-medium">{{ product.price | money }}</span>
+                  <span class="text-primary text-[15px] font-medium">{{ product.price | money }}</span>
                 </div>
               </a>
             </div>

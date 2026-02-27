@@ -25,7 +25,8 @@
 	"404": {
 		"title": "404",
 		"not_found": "Page not found.",
-		"back_to_shopping": "Back to shopping"
+		"back_to_shopping": "Back to shopping",
+		"not_found_text": "It seems you have wandered off the path. The page you are looking for might have been moved or does not exist in the world of Luvia Era."
 	},
 	"cart": {
 		"title": "Cart",

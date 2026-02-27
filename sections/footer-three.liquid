@@ -1,11 +1,11 @@
-<footer class="bg-custombg text-primary py-20 border-t border-[#d1d1d1]">
+<footer class="bg-custombg text-primary py-20 border-t border-line">
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
       <div class="w-1/2">
         <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
           {{ section.settings.menu_1_title }}
         </h4>
-        <ul class=" text-sm font-light text-primary flex flex-col gap-3">
+        <ul class="text-sm font-light text-primary flex flex-col gap-3">
           {% for link in linklists[section.settings.footer_menu_1].links %}
             <li>
               <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
@@ -38,7 +38,7 @@
         <div class="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-2 gap-2">
           {% for block in section.blocks %}
             {% if block.type == 'gallery_image' %}
-              <div class="aspect-square overflow-hidden bg-gray-100 group">
+              <div class="aspect-square overflow-hidden bg-custombg group">
                 {% if block.settings.image != blank %}
                   {{
                     block.settings.image
@@ -47,7 +47,7 @@
                       class: 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
                   }}
                 {% else %}
-                  {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+                  {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-custombg' }}
                 {% endif %}
               </div>
             {% endif %}
@@ -77,7 +77,7 @@
   </div>
 </footer>
 
-<div class="bg-custombg py-4 text-center border-t border-[#d1d1d1]">
+<div class="bg-custombg py-4 text-center border-t border-line">
   <div class="container">
     <div class="footer__copyright text-[12px]">
       &copy;
@@ -109,43 +109,43 @@
     {
       "type": "text",
       "id": "menu_1_title",
-      "label": "1. Menü Başlığı",
+      "label": "1. Menu Title",
       "default": "Collections"
     },
     {
       "type": "link_list",
       "id": "footer_menu_1",
-      "label": "1. Menü Seçimi",
+      "label": "1. Menu Selection",
       "default": "footer"
     },
     {
       "type": "text",
       "id": "menu_2_title",
-      "label": "2. Menü Başlığı",
+      "label": "2. Menu Title",
       "default": "Customer Care"
     },
     {
       "type": "link_list",
       "id": "footer_menu_2",
-      "label": "2. Menü Seçimi"
+      "label": "2. Menu Selection"
     },
     {
       "type": "text",
       "id": "gallery_title",
-      "label": "Galeri Başlığı",
+      "label": "Gallery Title",
       "default": "Follow Us @LuviaEra"
     }
   ],
   "blocks": [
     {
       "type": "gallery_image",
-      "name": "Galeri Görseli",
+      "name": "Gallery Image",
       "limit": 4,
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Görsel Seç"
+          "label": "Image"
         }
       ]
     }

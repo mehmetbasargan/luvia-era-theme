@@ -1,9 +1,9 @@
-<section class="bg-[#F9F9F9] py-20 px-6">
-  <div class="max-w-7xl mx-auto">
+<section class="bg-custombg py-20 px-6">
+  <div class="container">
     <div class="text-center mb-16">
-      <h3 class="font-josefin uppercase text-secondary font-light tracking-[0.2em]">
+      <h4 class="font-josefin uppercase text-secondary font-light tracking-[0.2em]">
         {{ 'collections.explore_categories' | t }}
-      </h3>
+      </h4>
       <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
     </div>
 
@@ -26,21 +26,21 @@
             {% endif %}
 
             <div
-              class="absolute inset-0 bg-[#3B443C]/0 group-hover:bg-[#3B443C]/10 transition-colors duration-500"
+              class="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/10 transition-colors duration-500"
             ></div>
           </a>
 
           <div class="mt-6 text-center">
-            <h3 class="text-[#3B443C] text-sm md:text-base font-josefin tracking-widest uppercase mb-2">
+            <h6 class="text-primary tracking-widest uppercase mb-2">
               {% if collection.title != blank %}
                 {{ collection.title }}
               {% else %}
                 Select Collection
               {% endif %}
-            </h3>
+            </h6>
             <a
               href="{{ collection.url }}"
-              class="text-[10px] md:text-xs text-secondary border-b border-secondary pb-1 uppercase tracking-widest hover:text-[#3B443C] hover:border-[#3B443C] transition-all"
+              class="text-[10px] md:text-xs text-secondary border-b border-secondary pb-1 uppercase tracking-widest hover:text-primary hover:border-primary transition-all"
             >
               {{ 'collections.review' | t }}
             </a>
