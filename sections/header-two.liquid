@@ -27,7 +27,7 @@
           </div>
           {% comment %} Social Media Icons {% endcomment %}
           <div class="hidden lg:flex">
-            <ul class="flex items-center gap-2">
+            <ul class="flex items-center gap-1">
               {%- for block in section.blocks -%}
                 {%- if block.type == 'social_icon' -%}
                   <li
@@ -37,7 +37,7 @@
                     <a
                       href="{{ block.settings.link | default: '#' }}"
                       target="_blank"
-                      class="w-[28px] h-[28px] flex items-center justify-center"
+                      class="w-[25px] h-[25px] flex items-center justify-center"
                     >
                       {%- case block.settings.icon_choice -%}
                         {%- when 'icon-facebook' -%}
@@ -286,7 +286,7 @@
                       {% endif %}
                     </div>
                     <div class="mt-5">
-                      <ul class="flex items-center gap-2">
+                      <ul class="flex items-center gap-1">
                         {%- for block in section.blocks -%}
                           {%- if block.type == 'social_icon' -%}
                             <li
@@ -296,7 +296,7 @@
                               <a
                                 href="{{ block.settings.link | default: '#' }}"
                                 target="_blank"
-                                class="w-[28px] h-[28px] flex items-center justify-center"
+                                class="w-[25px] h-[25px] flex items-center justify-center"
                               >
                                 {%- case block.settings.icon_choice -%}
                                   {%- when 'icon-facebook' -%}
