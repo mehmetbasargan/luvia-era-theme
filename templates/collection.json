@@ -14,7 +14,7 @@
       "name": "Collection Banner",
       "settings": {
         "fallback_image": "shopify://shop_images/alpcem-portrait-4917796_1280_1b998f3d-aaaf-4a05-96eb-5db1ffe1c4f3.jpg",
-        "hero_height": 60,
+        "hero_height": 70,
         "overlay_opacity": 50
       }
     },
