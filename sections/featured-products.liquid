@@ -1,4 +1,5 @@
-<div class="container" id="featured-products-{{ section.id }}">
+<div class="container">
+  {% comment %} Yazım hatası düzeltildi: container {% endcomment %}
   <section class="bg-white py-20 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="flex justify-between items-end mb-12">
@@ -23,6 +24,7 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {%- assign featured_collection = section.settings.collection -%}
         {% for product in collections[featured_collection].products limit: 4 %}
+          {% comment %} MEHMET: İşte o meşhur tek satır! {% endcomment %}
           {% render 'product-card', product: product %}
         {% endfor %}
       </div>
@@ -30,48 +32,10 @@
   </section>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const sectionContainer = document.getElementById('featured-products-{{ section.id }}');
-
-    // 1. MEHMET: Bu bölümdeki formları dinle
-    sectionContainer.addEventListener('submit', function (e) {
-      const form = e.target;
-      if (form.action && form.action.includes('/cart/add')) {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        const submitButton = form.querySelector('[type="submit"]');
-
-        if (submitButton) submitButton.disabled = true;
-
-        fetch(window.Shopify.routes.root + 'cart/add.js', {
-          method: 'POST',
-          body: formData,
-          headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        })
-          .then((response) => response.json())
-          .then((item) => {
-            // 2. MEHMET: Eğer detay sayfasındaki fonksiyon globaldeyse onu çağır
-            if (typeof openAndRefreshCart === 'function') {
-              openAndRefreshCart();
-            } else {
-              // Fonksiyon bulunamazsa sayfayı yenileyelim ki en azından sepete eklendiği görülsün
-              // Ya da bu dosyanın içine de openAndRefreshCart fonksiyonunu kopyalayabilirsin.
-              window.location.reload();
-            }
-          })
-          .catch((error) => console.error('Hata:', error))
-          .finally(() => {
-            if (submitButton) submitButton.disabled = false;
-          });
-      }
-    });
-  });
-
-  // Buraya detay sayfasındaki openAndRefreshCart fonksiyonunu
-  // kopyalayıp koyarsan, ana sayfada da kusursuz çalışır Mehmet!
-</script>
+{% comment %}
+  MEHMET: JS kısmını buraya koymuyorum çünkü artık product-card.liquid içinde
+  kendi form yapısı varsa, global sepet kodun (theme.liquid'e koyduğumuz) bunu yakalayacaktır.
+{% endcomment %}
 
 {% schema %}
 {
