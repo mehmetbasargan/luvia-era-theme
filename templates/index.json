@@ -142,12 +142,20 @@
     "shoppable_image_mTy7Xm": {
       "type": "shoppable-image",
       "blocks": {
+        "product_point_dBnzhe": {
+          "type": "product_point",
+          "settings": {
+            "product": "solstice-linen-blouse",
+            "top_position": 57,
+            "left_position": 46
+          }
+        },
         "product_point_rKQwbd": {
           "type": "product_point",
           "settings": {
             "product": "velvet-night-blazer",
-            "top_position": 57,
-            "left_position": 58
+            "top_position": 41,
+            "left_position": 77
           }
         },
         "product_point_JjixBg": {
@@ -160,6 +168,7 @@
         }
       },
       "block_order": [
+        "product_point_dBnzhe",
         "product_point_rKQwbd",
         "product_point_JjixBg"
       ],
