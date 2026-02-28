@@ -173,11 +173,49 @@
       "settings": {
         "title": "Follow the Era"
       }
+    },
+    "marquee_text_cMiqhH": {
+      "type": "marquee-text",
+      "blocks": {
+        "text_block_w9gTCm": {
+          "type": "text_block",
+          "settings": {
+            "text": "FREE SHIPPING WORLDWIDE"
+          }
+        },
+        "text_block_tNNh8T": {
+          "type": "text_block",
+          "settings": {
+            "text": "NEW SEASON ARRIVALS"
+          }
+        },
+        "text_block_hwJGAT": {
+          "type": "text_block",
+          "settings": {
+            "text": "15% OFF FIRST ORDER"
+          }
+        }
+      },
+      "block_order": [
+        "text_block_w9gTCm",
+        "text_block_tNNh8T",
+        "text_block_hwJGAT"
+      ],
+      "name": "Marquee Text",
+      "settings": {
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "speed": 30,
+        "padding": 20,
+        "show_separator": true,
+        "pause_on_hover": true
+      }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_yFYYic",
+    "marquee_text_cMiqhH",
     "collection_list_thQPNq",
     "featured_products_GFTLFG",
     "shoppable_image_mTy7Xm",
