@@ -62,49 +62,5 @@
 
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
-    <script>
-      document.addEventListener('submit', function (e) {
-        // 1. Sayfadaki herhangi bir "Sepete Ekle" formunu yakala
-        const form = e.target;
-        const isCartForm = form.action && form.action.includes('/cart/add');
-
-        if (isCartForm) {
-          e.preventDefault(); // Sayfanın /cart'a gitmesini engelle
-
-          const submitButton = form.querySelector('[type="submit"]');
-          const formData = new FormData(form);
-
-          // Butonu geçici olarak devre dışı bırak (çift tıklamayı önler)
-          if (submitButton) submitButton.disabled = true;
-
-          // 2. AJAX ile Shopify'a gönder
-          fetch(window.Shopify.routes.root + 'cart/add.js', {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'X-Requested-With': 'XMLHttpRequest',
-            },
-          })
-            .then((response) => {
-              if (!response.ok) throw new Error('Ekleme başarısız');
-              return response.json();
-            })
-            .then((item) => {
-              // 3. MEHMET: Senin detay sayfasındaki o meşhur fonksiyonu burada çağırıyoruz!
-              if (typeof openAndRefreshCart === 'function') {
-                openAndRefreshCart();
-              } else {
-                console.error('Hata: openAndRefreshCart fonksiyonu bulunamadı!');
-              }
-            })
-            .catch((error) => {
-              console.error('Sepet Hatası:', error);
-            })
-            .finally(() => {
-              if (submitButton) submitButton.disabled = false;
-            });
-        }
-      });
-    </script>
   </body>
 </html>
