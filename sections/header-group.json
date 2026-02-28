@@ -23,6 +23,13 @@
     "header": {
       "type": "header",
       "blocks": {
+        "social_icon_WEGmyy": {
+          "type": "social_icon",
+          "settings": {
+            "icon_choice": "icon-facebook",
+            "link": ""
+          }
+        },
         "social_icon_W9gNB4": {
           "type": "social_icon",
           "settings": {
@@ -46,6 +53,7 @@
         }
       },
       "block_order": [
+        "social_icon_WEGmyy",
         "social_icon_W9gNB4",
         "social_icon_pgVcp7",
         "social_icon_pYUtiM"
