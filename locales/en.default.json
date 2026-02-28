@@ -25,6 +25,11 @@
 			"next": "Next"
 		}
 	},
+	"password": {
+		"title": "Password",
+		"password": "Password",
+		"enter": "Enter"
+	},
 	"404": {
 		"title": "404",
 		"not_found": "Page not found.",

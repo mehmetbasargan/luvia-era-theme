@@ -1,9 +1,8 @@
 <section
-  class="marquee-wrapper overflow-hidden select-none border-y border-white/10"
+  class="marquee-wrapper overflow-hidden select-none border-y border-white"
   style="background-color: {{ section.settings.bg_color }}; padding: {{ section.settings.padding }}px 0;"
 >
   <div class="flex whitespace-nowrap animate-marquee-loop">
-    {% comment %} Metni yan yana iki kez yazdırıyoruz ki boşluk kalmasın {% endcomment %}
     {% for i in (1..2) %}
       <div class="flex items-center">
         {% for block in section.blocks %}

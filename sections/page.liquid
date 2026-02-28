@@ -7,19 +7,17 @@
 
 <div class="section-spacing py-12 md:py-24 bg-white">
   <div class="container mx-auto px-4">
-    {% comment %} Show title if Hero section is not used or explicitly enabled {% endcomment %}
     {% if section.settings.show_title %}
       <div class="text-center mb-12">
-        <h1 class="text-3xl md:text-5xl font-light uppercase tracking-[0.2em] text-black">
+        <h2 class="text-3xl md:text-5xl font-light uppercase tracking-[0.2em] text-black">
           {{ page.title }}
-        </h1>
+        </h2>
         <div class="w-12 h-[1px] bg-black mx-auto mt-6"></div>
       </div>
     {% endif %}
 
-    {% comment %} Page Content from Admin Rich Text Editor {% endcomment %}
     <div class="">
-      <div class="flex flex-col gap-5 text-[16px] custom_page_content ">
+      <div class="flex flex-col gap-5 text-[16px] custom_page_content">
         {{ page.content }}
       </div>
     </div>
