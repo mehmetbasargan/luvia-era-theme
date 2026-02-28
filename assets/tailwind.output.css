@@ -2077,6 +2077,10 @@ p{
   font-size: 18px;
 }
 
+.text-\[20px\]{
+  font-size: 20px;
+}
+
 .text-\[22px\]{
   font-size: 22px;
 }
@@ -2099,22 +2103,9 @@ p{
   line-height: 1.25rem;
 }
 
-.text-xl{
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-\[113px\]{
-  font-size: 113px;
-}
-
-.text-\[20px\]{
-  font-size: 20px;
 }
 
 .font-bold{
@@ -2169,6 +2160,10 @@ p{
   letter-spacing: 0.3em;
 }
 
+.tracking-\[0\.3px\]{
+  letter-spacing: 0.3px;
+}
+
 .tracking-\[0\.4em\]{
   letter-spacing: 0.4em;
 }
@@ -2195,14 +2190,6 @@ p{
 
 .tracking-widest{
   letter-spacing: 0.1em;
-}
-
-.tracking-\[0\.3px\]{
-  letter-spacing: 0.3px;
-}
-
-.tracking-\[0\.px\]{
-  letter-spacing: 0.px;
 }
 
 .\!text-primary{
@@ -2261,16 +2248,6 @@ p{
 
 .text-white{
   color: var(--color-white);
-}
-
-.text-red-700{
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity, 1));
-}
-
-.text-green-600{
-  --tw-text-opacity: 1;
-  color: rgb(22 163 74 / var(--tw-text-opacity, 1));
 }
 
 .underline{
@@ -2567,11 +2544,6 @@ p{
 
 .hover\:text-white:hover{
   color: var(--color-white);
-}
-
-.hover\:text-red-600:hover{
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover{
