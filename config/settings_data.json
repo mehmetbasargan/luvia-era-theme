@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "primary_color": "#3b3e44",
     "secondary_color": "#b288af",
     "heading_font": "josefin_sans_n4",
     "body_font": "inter_n4",
