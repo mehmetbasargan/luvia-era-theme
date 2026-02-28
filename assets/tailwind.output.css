@@ -1182,6 +1182,10 @@ p{
   height: 100%;
 }
 
+.h-auto{
+  height: auto;
+}
+
 .\!w-\[50px\]{
   width: 50px !important;
 }
@@ -1631,6 +1635,10 @@ p{
 
 .rounded-sm{
   border-radius: 0.125rem;
+}
+
+.rounded-lg{
+  border-radius: 0.5rem;
 }
 
 .border{
@@ -2806,6 +2814,11 @@ p{
   .md\:text-xs{
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  .md\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 }
 
