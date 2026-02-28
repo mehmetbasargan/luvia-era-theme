@@ -33,13 +33,29 @@
       {% endif %}
     </a>
 
-    <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
-      <a
-        href="{{ product.url }}"
-        class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors"
-      >
-        {{ 'products.product.add_to_cart' | t }}
-      </a>
+    {% comment %} ESKİ <a> ETİKETİNİ SİLİP YERİNE BU FORMU KOY MEHMET {% endcomment %}
+    <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
+      {%- assign product_form_id = 'quick-add-' | append: section.id | append: '-' | append: product.id -%}
+
+      {% form 'product', product, id: product_form_id, class: 'm-0' %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+
+        <button
+          type="submit"
+          name="add"
+          class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer"
+          {% unless product.available %}
+            disabled
+          {% endunless %}
+        >
+          {% if product.available %}
+            {{ 'products.product.add_to_cart' | t }}
+          {% else %}
+            {{ 'products.product.sold_out' | t }}
+          {% endif %}
+        </button>
+      {% endform %}
     </div>
   </div>
 

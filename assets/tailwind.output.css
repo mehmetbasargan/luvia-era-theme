@@ -904,6 +904,10 @@ p{
   grid-column: 1 / -1;
 }
 
+.m-0{
+  margin: 0px;
+}
+
 .mx-2{
   margin-left: 0.5rem;
   margin-right: 0.5rem;
