@@ -7,27 +7,27 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
+
 {
-  "current": {
-    "primary_color": "#000000",
-    "secondary_color": "#b2ac88",
-    "custom_bg_color": "#f9f9f9",
-    "line_color": "#e5ebe7",
-    "heading_font": "josefin_sans_n4",
-    "body_font": "inter_n4",
-    "favicon": "shopify://shop_images/favicon.png",
-    "color_primary": "#3b443c",
-    "color_secondary": "#b2ac88",
-    "color_bg": "#f9f9f9",
-    "content_for_index": []
-  },
-  "presets": {
-    "Luvia Standard": {
-      "color_primary": "#3B443C",
-      "color_secondary": "#B2AC88",
-      "color_bg": "#F9F9F9",
-      "heading_font": "josefin_sans_n4",
-      "body_font": "inter_n4"
-    }
-  }
+	"current": {
+		"favicon": "shopify://shop_images/favicon.png",
+		"primary_color": "#3b443c",
+		"secondary_color": "#b2ac88",
+		"custom_bg_color": "#f9f9f9",
+		"line_color": "#e5e7eb",
+		"heading_font": "josefin_sans_n4",
+		"body_font": "inter_n4",
+		"sections": {},
+		"content_for_index": []
+	},
+	"presets": {
+		"Luvia Standard": {
+			"primary_color": "#3b443c",
+			"secondary_color": "#b2ac88",
+			"custom_bg_color": "#f9f9f9",
+			"line_color": "#e5e7eb",
+			"heading_font": "josefin_sans_n4",
+			"body_font": "inter_n4"
+		}
+	}
 }
