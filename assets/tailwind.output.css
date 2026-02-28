@@ -1715,11 +1715,6 @@ p{
   border-color: var(--color-white);
 }
 
-.border-red-500{
-  --tw-border-opacity: 1;
-  border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
-}
-
 .border-l-transparent{
   border-left-color: transparent;
 }
@@ -1743,11 +1738,6 @@ p{
 
 .bg-\[\#3B443C\]\/20{
   background-color: rgb(59 68 60 / 0.2);
-}
-
-.bg-\[\#B2AC88\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(178 172 136 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[\#E5E5E5\]{
@@ -1792,11 +1782,6 @@ p{
   background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
 }
 
-.bg-gray-50{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
-}
-
 .bg-primary{
   background-color: var(--color-primary);
 }
@@ -1816,11 +1801,6 @@ p{
 
 .bg-white{
   background-color: var(--color-white);
-}
-
-.bg-\[\#000000\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
 }
 
 .object-contain{
@@ -2040,12 +2020,12 @@ p{
   vertical-align: middle;
 }
 
-.font-josefin{
-  font-family: var(--font-heading);
-}
-
 .font-inter{
   font-family: var(--font-body);
+}
+
+.font-josefin{
+  font-family: var(--font-heading);
 }
 
 .text-2xl{
@@ -2056,11 +2036,6 @@ p{
 .text-3xl{
   font-size: 1.875rem;
   line-height: 2.25rem;
-}
-
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 
 .text-\[10px\]{
@@ -2124,10 +2099,6 @@ p{
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-\[0\]{
-  font-size: 0;
 }
 
 .font-bold{
@@ -2221,11 +2192,6 @@ p{
 .text-\[\#3B443C\]{
   --tw-text-opacity: 1;
   color: rgb(59 68 60 / var(--tw-text-opacity, 1));
-}
-
-.text-\[\#B2AC88\]{
-  --tw-text-opacity: 1;
-  color: rgb(178 172 136 / var(--tw-text-opacity, 1));
 }
 
 .text-black{
@@ -2513,11 +2479,6 @@ p{
   background-color: rgb(42 49 43 / var(--tw-bg-opacity, 1));
 }
 
-.hover\:bg-\[\#B2AC88\]:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(178 172 136 / var(--tw-bg-opacity, 1));
-}
-
 .hover\:bg-black:hover{
   background-color: var(--color-black);
 }
@@ -2545,11 +2506,6 @@ p{
 
 .hover\:\!text-white:hover{
   color: var(--color-white) !important;
-}
-
-.hover\:text-\[\#B2AC88\]:hover{
-  --tw-text-opacity: 1;
-  color: rgb(178 172 136 / var(--tw-text-opacity, 1));
 }
 
 .hover\:text-black:hover{
@@ -2687,12 +2643,6 @@ p{
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
-@media (min-width: 640px){
-  .sm\:grid-cols-2{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (min-width: 768px){
   .md\:right-\[-16px\]{
     right: -16px;
@@ -2827,11 +2777,6 @@ p{
     line-height: 1;
   }
 
-  .md\:text-6xl{
-    font-size: 3.75rem;
-    line-height: 1;
-  }
-
   .md\:text-\[13px\]{
     font-size: 13px;
   }
@@ -2843,11 +2788,6 @@ p{
   .md\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .md\:text-xl{
-    font-size: 1.25rem;
-    line-height: 1.75rem;
   }
 
   .md\:text-xs{
