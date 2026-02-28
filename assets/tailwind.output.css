@@ -1181,6 +1181,10 @@ p{
   height: 100%;
 }
 
+.h-7{
+  height: 1.75rem;
+}
+
 .\!w-\[50px\]{
   width: 50px !important;
 }
@@ -1280,6 +1284,10 @@ p{
 .w-max{
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-7{
+  width: 1.75rem;
 }
 
 .min-w-\[200px\]{
@@ -1624,6 +1632,10 @@ p{
   border-radius: 0.125rem;
 }
 
+.rounded-md{
+  border-radius: 0.375rem;
+}
+
 .border{
   border-width: 1px;
 }
@@ -1841,6 +1853,10 @@ p{
 
 .p-8{
   padding: 2rem;
+}
+
+.p-1{
+  padding: 0.25rem;
 }
 
 .px-10{

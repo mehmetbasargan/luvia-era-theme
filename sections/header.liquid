@@ -20,17 +20,17 @@
 
           {% comment %} Social Media Icons {% endcomment %}
           <div class="hidden lg:flex">
-            <ul class="flex items-center gap-1">
+            <ul class="flex items-center gap-3">
               {%- for block in section.blocks -%}
                 {%- if block.type == 'social_icon' -%}
                   <li
-                    class="rounded-full p-2 bg-custombg hover:bg-secondary text-primary hover:!text-white transition-colors"
+                    class="rounded-md bg-white hover:bg-secondary text-primary hover:!text-white transition-colors"
                     {{ block.shopify_attributes }}
                   >
                     <a
                       href="{{ block.settings.link | default: '#' }}"
                       target="_blank"
-                      class="w-[25px] h-[25px] flex items-center justify-center"
+                      class="flex items-center justify-center w-8 h-8 p-1"
                     >
                       {%- case block.settings.icon_choice -%}
                         {%- when 'icon-facebook' -%}
