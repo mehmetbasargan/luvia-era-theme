@@ -8,11 +8,11 @@
     id="cart-drawer-content"
     class="absolute right-0 top-0 h-full w-full max-w-[400px] bg-white translate-x-full transition-transform duration-500 ease-out p-8 shadow-2xl flex flex-col"
   >
-    <div class="flex justify-between items-center pb-6 border-b border-gray-100">
-      <h2 class="text-[12px] uppercase tracking-[0.3em] font-light text-primary">{{ 'cart.my_cart' | t }}</h2>
+    <div class="flex justify-between items-center pb-6 border-b border-line">
+      <h3 class="text-[12px] uppercase tracking-[0.3em] font-light text-primary">{{ 'cart.my_cart' | t }}</h3>
       <button
         onclick="closeCartDrawer()"
-        class="text-[10px] uppercase tracking-widest hover:opacity-50 transition-opacity"
+        class="text-[13px] uppercase tracking-widest hover:opacity-50 transition-opacity"
       >
         {{ 'general.close' | t }}
       </button>
@@ -20,14 +20,14 @@
 
     <div id="cart-drawer-items" class="flex-grow overflow-y-auto py-6 space-y-6"></div>
 
-    <div class="border-t border-gray-100 pt-6 mt-auto">
+    <div class="border-t border-line pt-6 mt-auto">
       <div class="flex justify-between items-center mb-6">
-        <span class="text-[10px] uppercase tracking-widest text-secondary">{{ 'general.total' | t }}</span>
+        <span class="text-[13px] uppercase tracking-widest text-secondary">{{ 'general.total' | t }}</span>
         <span id="cart-total-price" class="text-sm font-light tracking-wider">{{ cart.total_price | money }}</span>
       </div>
       <a
         href="{{ routes.cart_url }}"
-        class="block w-full bg-[#3B443C] text-white py-4 text-center text-[11px] uppercase tracking-[0.3em] hover:bg-[#2A312B] transition-all"
+        class="block w-full bg-primary text-white py-4 text-center text-[11px] uppercase tracking-[0.3em] hover:bg-secondary transition-all"
       >
         {{ 'cart.checkout' | t }}
       </a>

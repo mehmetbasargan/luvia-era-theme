@@ -78,7 +78,8 @@
 			"size": "Size",
 			"size_guide": "Size Guide",
 			"dimensions": "Dimensions",
-			"fit_type": "Fit"
+			"fit_type": "Fit",
+			"view_product": "View Product"
 		}
 	},
 	"blog": {

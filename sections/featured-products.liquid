@@ -97,6 +97,55 @@
   </section>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const featuredSection = document.querySelector('#section-{{ section.id }}') || document;
+
+    // Sadece bu bölümdeki veya sayfadaki tüm "Sepete Ekle" formlarını yakala
+    featuredSection.addEventListener('submit', function (e) {
+      if (e.target.action && e.target.action.includes('/cart/add')) {
+        e.preventDefault(); // Sayfa yenilenmesini durdur Mehmet!
+
+        const form = e.target;
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('[type="submit"]');
+
+        // Butonu bekleme moduna alalım (opsiyonel ama profesyonel durur)
+        if (submitButton) submitButton.disabled = true;
+
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((item) => {
+            // MEHMET: Ürün eklendi! Şimdi senin Cart Drawer'ı tetikleyen fonksiyonları çağırıyoruz.
+            // Senin temanın Drawer'ı açma/güncelleme fonksiyonları neyse onları buraya yaz:
+
+            if (typeof updateCartDrawer === 'function') updateCartDrawer();
+            if (typeof openCartDrawer === 'function') openCartDrawer();
+
+            // Eğer standart bir tema yapısı kullanıyorsan şu tetikleyiciler de işe yarar:
+            document.dispatchEvent(
+              new CustomEvent('cart:updated', {
+                detail: { cart: item },
+              })
+            );
+
+            // Çekmeceyi açan tetikleyici (Senin drawer'ın nasıl açılıyorsa o class'ı veya event'i ekle)
+            document.querySelector('cart-drawer')?.classList.add('active');
+          })
+          .catch((error) => {
+            console.error('Sepet ekleme hatası:', error);
+          })
+          .finally(() => {
+            if (submitButton) submitButton.disabled = false;
+          });
+      }
+    });
+  });
+</script>
+
 {% schema %}
 {
   "name": "Featured Products",
