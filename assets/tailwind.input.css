@@ -31,6 +31,11 @@
 		background: var(--color-bgtransparent) !important;
 	}
 
+	header#main-header.bg-bgtransparent {
+		background-color: var(--color-bgtransparent) !important;
+		background: var(--color-bgtransparent) !important;
+	}
+
 	h1,
 	h2,
 	h3,
