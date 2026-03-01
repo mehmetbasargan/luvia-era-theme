@@ -19,7 +19,11 @@
 	}
 
 	body {
-		@apply font-inter bg-custombg text-primary antialiased m-0;
+		@apply font-inter text-primary antialiased m-0;
+	}
+
+	.bg-transparent {
+		background-color: transparent !important;
 	}
 
 	h1,

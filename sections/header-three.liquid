@@ -1,6 +1,6 @@
 <header
   id="main-header"
-  class="fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-in-out bg-transparent backdrop-blur-sm"
+  class="fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-in-out bg-bgtransparent backdrop-blur-sm"
 >
   {% comment %} social media {% endcomment %}
   <div class="py-2 border-b border-line mb-2">
@@ -254,15 +254,15 @@
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 30) {
-      header.classList.remove('bg-transparent');
+      header.classList.remove('bg-bgtransparent');
       header.classList.add('bg-white', 'border-b', 'border-line', 'shadow-md');
       menu.classList.remove('bg-custombg/80');
       menu.classList.add('bg-custombg');
     } else {
       header.classList.remove('bg-white', 'border-b', 'border-line', 'shadow-md');
-      header.classList.add('bg-transparent');
+      header.classList.add('bg-bgtransparent');
       menu.classList.remove('bg-custombg');
-      menu.classList.add('bg-transparent');
+      menu.classList.add('bg-bgtransparent');
     }
   });
 </script>

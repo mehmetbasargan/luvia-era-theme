@@ -61,6 +61,7 @@
         --color-line: {{ settings.line_color }};
         --color-white: #ffffff;
         --color-black: #000000;
+        --color-bgtransparent: {{ settings.bgtransparent_color | default: 'rgba(249, 249, 249, 0.6)' }};
 
         /* Fonts from Shopify Settings */
         --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};

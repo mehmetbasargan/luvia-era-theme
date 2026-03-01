@@ -570,11 +570,14 @@ video {
 
 body{
   margin: 0px;
-  background-color: var(--color-custombg);
   font-family: var(--font-body);
   color: var(--color-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
 }
 
 h1,
