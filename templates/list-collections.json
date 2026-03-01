@@ -23,7 +23,7 @@
       "name": "Page Header",
       "settings": {
         "image": "shopify://shop_images/img1.jpg",
-        "custom_title": "",
+        "custom_title": "Collectios",
         "hero_height": 40,
         "overlay_opacity": 30
       }
