@@ -182,7 +182,7 @@
         "header_phone": "0532 463 24 47",
         "show_phone": true,
         "header_bg_color": "#ffffff",
-        "header_opacity": 20
+        "header_opacity": 50
       }
     }
   },
