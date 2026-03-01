@@ -19,7 +19,7 @@
     {{ article.content }}
   </div>
 
-  <div class="mt-16 pt-8 border-t flex justify-between items-center">
+  <div class="mt-16 pt-8 border-t border-line flex justify-between items-center">
     <a href="{{ blog.url }}" class="text-sm font-medium hover:text-secondary">← {{ 'blog.back_to_blog' | t }}</a>
     {%- render 'icon-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image -%}
   </div>
