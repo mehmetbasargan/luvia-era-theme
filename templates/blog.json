@@ -13,7 +13,9 @@
       "type": "main-blog",
       "disabled": true,
       "settings": {
-        "blog_title": "Latest Stories"
+        "blog_title": "Latest Stories",
+        "blog_subtitle": "Explore our latest stories and updates.",
+        "header_opacity": 100
       }
     },
     "main_page_header_8nCMnW": {
@@ -30,7 +32,9 @@
       "type": "main-blog",
       "name": "Main Blog Page",
       "settings": {
-        "blog_title": ""
+        "blog_title": "",
+        "blog_subtitle": "Explore our latest stories and updates.",
+        "header_opacity": 100
       }
     }
   },
