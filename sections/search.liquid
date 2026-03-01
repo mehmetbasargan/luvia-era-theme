@@ -57,12 +57,13 @@
 </div>
 
 <script>
-  // --- Translation Dictionary (Liquid to JS) ---
+// --- Translation Dictionary (Liquid to JS) ---
   const translations = {
-    journal: "{{ 'general.search.journal' | default: 'Journal' }}",
-    article: "{{ 'general.search.article' | default: 'Article' }}",
-    readMore: "{{ 'blog.read_more' | default: 'Read Article' }}",
-    viewProduct: "{{ 'general.view_product' | default: 'View Product' }}",
+    // Eğer dil dosyasında varsa onu al, yoksa direkt tırnak içindeki 'Journal' yazısını kullan
+    journal: {{ 'general.search.journal' | t | json }} || "Journal",
+    article: {{ 'general.search.article' | t | json }} || "Article",
+    readMore: {{ 'blog.read_more' | t | json }} || "Read Article",
+    viewProduct: {{ 'general.view_product' | t | json }} || "View Product"
   };
 
   const searchInput = document.querySelector('#search-input');

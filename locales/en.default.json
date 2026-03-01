@@ -31,7 +31,11 @@
 			"submit": "Search",
 			"results_with_count": "{{ count }} results found for \"{{ terms }}\"",
 			"no_results": "The product you are looking for was not found.",
-			"search_results": "Search Results"
+			"search_results": "Search Results",
+			"journal": "Journal",
+			"article": "Article",
+			"read_more": "Read More",
+			"view_product": "View Product"
 		}
 	},
 	"password": {
