@@ -1297,6 +1297,10 @@ p{
   width: max-content;
 }
 
+.w-\[50px\]{
+  width: 50px;
+}
+
 .min-w-\[200px\]{
   min-width: 200px;
 }
@@ -1561,6 +1565,10 @@ p{
 
 .gap-8{
   gap: 2rem;
+}
+
+.gap-11{
+  gap: 2.75rem;
 }
 
 .gap-x-4{
@@ -2661,6 +2669,12 @@ p{
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+@media (min-width: 640px){
+  .sm\:gap-6{
+    gap: 1.5rem;
+  }
+}
+
 @media (min-width: 768px){
   .md\:right-\[-16px\]{
     right: -16px;
@@ -2764,6 +2778,18 @@ p{
 
   .md\:gap-8{
     gap: 2rem;
+  }
+
+  .md\:gap-2{
+    gap: 0.5rem;
+  }
+
+  .md\:gap-3{
+    gap: 0.75rem;
+  }
+
+  .md\:gap-1{
+    gap: 0.25rem;
   }
 
   .md\:p-10{
@@ -2883,6 +2909,10 @@ p{
     width: auto;
   }
 
+  .lg\:w-\[50px\]{
+    width: 50px;
+  }
+
   .lg\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2913,6 +2943,26 @@ p{
 
   .lg\:gap-2{
     gap: 0.5rem;
+  }
+
+  .lg\:gap-6{
+    gap: 1.5rem;
+  }
+
+  .lg\:gap-7{
+    gap: 1.75rem;
+  }
+
+  .lg\:gap-8{
+    gap: 2rem;
+  }
+
+  .lg\:gap-4{
+    gap: 1rem;
+  }
+
+  .lg\:gap-3{
+    gap: 0.75rem;
   }
 
   .lg\:py-24{
