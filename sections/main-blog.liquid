@@ -59,3 +59,22 @@
     {% endif %}
   </div>
 {% endpaginate %}
+
+{% schema %}
+{
+  "name": "Main Blog Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "blog_title",
+      "label": "Blog Page Title",
+      "default": "Latest Stories"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Blog Page"
+    }
+  ]
+}
+{% endschema %}
