@@ -1,253 +1,36 @@
-{% schema %}
-{
-  "name": "Blog Posts",
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "show_rss",
-      "label": "Show RSS Feed",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_tags",
-      "label": "Show Article Tags",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_author",
-      "label": "Show Article Author",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_date",
-      "label": "Show Article Date",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_excerpt",
-      "label": "Show Article Excerpt",
-      "default": true
-    }
-  ]
-}
-{% endschema %}
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h1 class="text-4xl font-light text-center mb-12 uppercase tracking-widest">{{ blog.title }}</h1>
 
-{%- style -%}
-  .blog-hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    padding: 4rem 0;
-    margin-bottom: 3rem;
-  }
-  
-  .article-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  .article-image {
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .article-content {
-    padding: 1.5rem;
-  }
-  
-  .article-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
-    color: var(--color-secondary);
-  }
-  
-  .article-excerpt {
-    color: var(--color-primary);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-  
-  .blog-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .blog-tag {
-    background: var(--color-secondary);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-  }
-  
-  .blog-tag:hover {
-    background: var(--color-primary);
-  }
-  
-  .blog-pagination {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 3rem;
-  }
-  
-  .pagination-link {
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--color-primary);
-    border-radius: 8px;
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-  }
-  
-  .pagination-link:hover {
-    background: var(--color-primary);
-    color: white;
-  }
-  
-  .pagination-link.current {
-    background: var(--color-primary);
-    color: white;
-  }
-{%- endstyle -%}
-
-<div class="blog-hero">
-  <div class="container">
-    <div class="text-center text-white">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ blog.title }}</h1>
-      {% if blog.handle != 'news' %}
-        <p class="text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
-          {{ blog.description | default: 'Latest articles and insights from our team' }}
-        </p>
-      {% endif %}
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  {% if current_tags %}
-    <div class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">Tagged: {{ current_tags | join: ', ' }}</h2>
-      <a href="{{ blog.url }}" class="text-secondary hover:text-primary transition-colors">
-        ← Back to all articles
-      </a>
-    </div>
-  {% endif %}
-
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {% for article in blog.articles %}
-      <div class="article-card">
-        <a href="{{ article.url }}" class="block">
+      <article class="group">
+        <a href="{{ article.url }}" class="block overflow-hidden rounded-lg aspect-[16/10] mb-4">
           {% if article.image %}
-            <div class="relative overflow-hidden">
-              <img 
-                src="{{ article.image | image_url: width: 600, height: 400, crop: 'center' }}" 
-                alt="{{ article.image.alt | default: article.title }}"
-                class="article-image"
-                loading="lazy"
-              >
-              {% if section.settings.show_tags and article.tags.size > 0 %}
-                <div class="absolute top-4 left-4">
-                  <span class="blog-tag">{{ article.tags.first }}</span>
-                </div>
-              {% endif %}
-            </div>
+            <img
+              src="{{ article.image | image_url: width: 800 }}"
+              alt="{{ article.title }}"
+              height=""
+              width=""
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            >
           {% endif %}
-          
-          <div class="article-content">
-            {% if section.settings.show_date or section.settings.show_author %}
-              <div class="article-meta">
-                {% if section.settings.show_date %}
-                  <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
-                    {{ article.published_at | date: '%B %d, %Y' }}
-                  </time>
-                {% endif %}
-                
-                {% if section.settings.show_author and article.author %}
-                  {% if section.settings.show_date %}•{% endif %}
-                  <span>{{ article.author }}</span>
-                {% endif %}
-              </div>
-            {% endif %}
-            
-            <h3 class="text-xl font-bold mb-3 text-primary line-clamp-2">
-              {{ article.title }}
-            </h3>
-            
-            {% if section.settings.show_excerpt and article.excerpt %}
-              <p class="article-excerpt">
-                {{ article.excerpt | strip_html | truncatewords: 20 }}
-              </p>
-            {% endif %}
-            
-            <div class="flex justify-between items-center">
-              <a href="{{ article.url }}" class="text-secondary hover:text-primary font-medium transition-colors">
-                Read More →
-              </a>
-              
-              {% if section.settings.show_tags and article.tags.size > 0 %}
-                <div class="blog-tags">
-                  {% for tag in article.tags limit: 3 %}
-                    <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="blog-tag">
-                      {{ tag }}
-                    </a>
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-          </div>
         </a>
-      </div>
+        <div class="space-y-2">
+          <span class="text-xs text-gray-500 uppercase tracking-tighter">
+            {{- article.published_at | date: '%d %b %Y' -}}
+          </span>
+          <h2 class="text-xl font-medium group-hover:text-secondary transition-colors">
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </h2>
+          <p class="text-gray-600 line-clamp-2 text-sm">
+            {{ article.excerpt_or_content | strip_html | truncate: 120 }}
+          </p>
+          <a href="{{ article.url }}" class="inline-block pt-2 text-sm font-bold border-b-2 border-primary"
+            >READ MORE</a
+          >
+        </div>
+      </article>
     {% endfor %}
   </div>
-
-  {% if paginate.pages > 1 %}
-    <div class="blog-pagination">
-      {% if paginate.previous %}
-        <a href="{{ paginate.previous.url }}" class="pagination-link">
-          ← Previous
-        </a>
-      {% endif %}
-      
-      {% for part in paginate.parts %}
-        {% if part.is_link %}
-          <a href="{{ part.url }}" class="pagination-link">
-            {{ part.title }}
-          </a>
-        {% else %}
-          <span class="pagination-link current">
-            {{ part.title }}
-          </span>
-        {% endif %}
-      {% endfor %}
-      
-      {% if paginate.next %}
-        <a href="{{ paginate.next.url }}" class="pagination-link">
-          Next →
-        </a>
-      {% endif %}
-    </div>
-  {% endif %}
-</div>
-
-{% paginate blog.articles by 12 %}
+</section>
