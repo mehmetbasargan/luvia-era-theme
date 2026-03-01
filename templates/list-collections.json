@@ -30,9 +30,10 @@
     },
     "collections_DGeAmT": {
       "type": "collections",
+      "disabled": true,
       "name": "t:general.collections_grid",
       "settings": {
-        "grid_item_width": "collections--compact",
+        "grid_item_width": "collections--full",
         "grid_gap": 10
       }
     }
