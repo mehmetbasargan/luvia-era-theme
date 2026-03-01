@@ -82,11 +82,15 @@
         },
         "image_block_DLWdLA": {
           "type": "image_block",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/alpcem-portrait-4644666_1280_88a6dade-d64f-4172-9e05-23b31bbbef21.jpg"
+          }
         },
         "image_block_TAAMD8": {
           "type": "image_block",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/alpcem-portrait-4927177_1280.jpg"
+          }
         }
       },
       "block_order": [
