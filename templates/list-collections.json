@@ -27,10 +27,19 @@
         "hero_height": 40,
         "overlay_opacity": 30
       }
+    },
+    "collections_DGeAmT": {
+      "type": "collections",
+      "name": "t:general.collections_grid",
+      "settings": {
+        "grid_item_width": "collections--full",
+        "grid_gap": 10
+      }
     }
   },
   "order": [
     "collections_tpVVL9",
-    "main_page_header_3JHRnY"
+    "main_page_header_3JHRnY",
+    "collections_DGeAmT"
   ]
 }
