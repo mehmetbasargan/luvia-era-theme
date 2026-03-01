@@ -2,7 +2,7 @@
   <div class="main-blog-section py-12 px-4 max-w-7xl mx-auto">
     <header class="text-center mb-16">
       <h3 class="font-light uppercase tracking-widest">{{ blog.title }}</h3>
-      <p class="text-primary mt-2">{{ 'blog.explore_stories' | t }}</p>
+      <p class="text-primary mt-2">Explore our latest stories and updates</p>
     </header>
 
     <div class="flex justify-center gap-4 mb-10 overflow-x-auto pb-4">
@@ -10,7 +10,7 @@
         href="{{ blog.url }}"
         class="px-4 py-2 rounded-md border border-primary hover:bg-secondary hover:text-white transition {% if current_tags == blank %}bg-primary text-white{% endif %}"
       >
-        {{- 'blog.all_posts' | t -}}
+        All Posts
       </a>
       {% for tag in blog.all_tags %}
         <a
@@ -43,51 +43,45 @@
               <span class="text-sm font-bold text-secondary tracking-wider">
                 {{- article.published_at | date: '%B %d, %Y' -}}
               </span>
-              <h5 class="font-light uppercase leading-tight group-hover:text-primary transition-colors">
+              <h5 class="font-light uppercase leading-tight group-hover:text-primary transition-colors text-xl">
                 <a href="{{ article.url }}">{{ article.title }}</a>
               </h5>
-              <p class="text-primary line-clamp-3">
-                {{ article.excerpt_or_content | strip_html | truncate: 150 }}
-              </p>
+              <p class="text-primary line-clamp-3">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
               <a
                 href="{{ article.url }}"
                 class="inline-block pt-2 font-medium text-sm hover:underline text-secondary transition-all uppercase"
               >
-                {{ 'blog.read_more' | t }}
+                Read More
               </a>
             </div>
           </article>
         {% endfor %}
       </div>
 
-      {% comment %} Pagination {% endcomment %}
       {% if paginate.pages > 1 %}
-        <nav class="mt-16 flex justify-center items-center space-x-4 border-t border-line pt-10" role="navigation">
+        <nav class="mt-16 flex justify-center items-center space-x-6 border-t border-gray-100 pt-10" role="navigation">
           {% if paginate.previous %}
             <a
               href="{{ paginate.previous.url }}"
-              class="group flex items-center font-medium text-sm text-primary hover:text-secondary transition-colors uppercase"
+              class="flex items-center font-medium text-sm text-primary hover:text-secondary transition-colors uppercase"
             >
-              <span class="mr-2">←</span> {{ 'blog.pagination.previous' | t }}
+              <span class="mr-2">←</span> Previous
             </a>
           {% endif %}
 
-          <div class="flex items-center space-x-2">
+          <div class="flex items-center space-x-4">
             {% for part in paginate.parts %}
               {% if part.is_link %}
-                <a
-                  href="{{ part.url }}"
-                  class="w-5 h-5 flex items-center justify-center rounded-full text-sm font-medium text-primary"
-                >
+                <a href="{{ part.url }}" class="text-sm font-medium text-gray-400 hover:text-primary">
                   {{ part.title }}
                 </a>
               {% else %}
                 {% if part.title == paginate.current_page %}
-                  <span class="w-5 h-5 flex items-center justify-center text-primary text-md font-bold border-b-2 border-primary">
+                  <span class="text-md font-bold text-primary border-b-2 border-primary pb-1">
                     {{ part.title }}
                   </span>
                 {% else %}
-                  <span class="w-5 h-5 flex items-center justify-center text-primary">
+                  <span class="text-gray-300">
                     {{ part.title }}
                   </span>
                 {% endif %}
@@ -98,23 +92,20 @@
           {% if paginate.next %}
             <a
               href="{{ paginate.next.url }}"
-              class="group flex items-center font-medium text-sm text-primary hover:text-secondary transition-colors uppercase"
+              class="flex items-center font-medium text-sm text-primary hover:text-secondary transition-colors uppercase"
             >
-              {{ 'blog.pagination.next' | t }}
-              <span class="ml-2">→</span>
+              Next <span class="ml-2">→</span>
             </a>
           {% endif %}
         </nav>
       {% endif %}
 
     {% else %}
-      <div class="text-center py-20 bg-custombg rounded-lg">
-        <p class="text-xl text-primary">
-          {{ 'blog.no_posts_found' | t: blog_title: blog.title }}
-        </p>
-        <a href="/admin/articles/new" class="mt-4 inline-block bg-primary text-white px-6 py-2 rounded">
-          {{ 'blog.create_post' | t }}
-        </a>
+      <div class="text-center py-20 bg-gray-50 rounded-lg">
+        <p class="text-xl text-primary italic">No posts found in "{{ blog.title }}"</p>
+        <a href="/admin/articles/new" class="mt-4 inline-block bg-primary text-white px-6 py-2 rounded"
+          >Create a Post</a
+        >
       </div>
     {% endif %}
   </div>
