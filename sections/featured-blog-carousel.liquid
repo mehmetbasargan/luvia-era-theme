@@ -1,0 +1,130 @@
+<section class="featured-blog-slider py-16 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 mb-10 flex justify-between items-end">
+    <div>
+      <h2 class="text-3xl font-light uppercase tracking-widest">{{ section.settings.title }}</h2>
+      <p class="text-primary mt-2">{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="flex space-x-4">
+      <div class="swiper-button-prev-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition">
+        ←
+      </div>
+      <div class="swiper-button-next-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition">
+        →
+      </div>
+    </div>
+  </div>
+
+  <div class="swiper featuredSwiper px-4">
+    <div class="swiper-wrapper">
+      {% assign blog = blogs[section.settings.blog] %}
+      {% for article in blog.articles limit: section.settings.post_limit %}
+        <div class="swiper-slide">
+          <div class="group cursor-pointer">
+            {% if article.image %}
+              <div class="overflow-hidden aspect-[4/5] mb-4">
+                <img
+                  src="{{ article.image | image_url: width: 800 }}"
+                  height=""
+                  width=""
+                  class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  alt="{{ article.title }}"
+                >
+              </div>
+            {% endif %}
+            <span class="text-xs font-bold text-secondary uppercase tracking-widest">
+              {{- article.published_at | date: '%b %d, %Y' -}}
+            </span>
+            <h3 class="text-xl font-light mt-2 uppercase group-hover:text-secondary transition-colors">
+              {{ article.title }}
+            </h3>
+            <a
+              href="{{ article.url }}"
+              class="inline-block mt-4 text-sm border-b border-black pb-1 uppercase font-medium"
+              >Read Article</a
+            >
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .featuredSwiper {
+    padding-right: 50px;
+  } /* Sonraki kartın ucunu göstermek için */
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.featuredSwiper', {
+      slidesPerView: 1.2,
+      spaceBetween: 20,
+      navigation: {
+        nextEl: '.swiper-button-next-custom',
+        prevEl: '.swiper-button-prev-custom',
+      },
+      breakpoints: {
+        640: { slidesPerView: 2.2 },
+        1024: { slidesPerView: 3.2 },
+      },
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Blog Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The Journal"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub-heading",
+      "default": "Discover the world of Luvia Era"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Blog"
+    },
+    {
+      "type": "range",
+      "id": "post_limit",
+      "min": 3,
+      "max": 9,
+      "step": 1,
+      "label": "Posts to show",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Style Settings"
+    },
+    {
+      "type": "range",
+      "id": "header_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Header Opacity Rate",
+      "default": 100,
+      "info": "Adjust the transparency level of the header section if applicable."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Blog Carousel",
+      "settings": {
+        "blog": "news"
+      }
+    }
+  ]
+}
+{% endschema %}

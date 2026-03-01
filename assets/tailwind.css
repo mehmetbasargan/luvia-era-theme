@@ -1105,6 +1105,10 @@ p{
   aspect-ratio: 16 / 9;
 }
 
+.aspect-\[4\/5\]{
+  aspect-ratio: 4/5;
+}
+
 .size-8{
   width: 2rem;
   height: 2rem;
