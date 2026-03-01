@@ -1795,6 +1795,10 @@ p{
   border-color: var(--color-white);
 }
 
+.border-transparent{
+  border-color: transparent;
+}
+
 .border-l-transparent{
   border-left-color: transparent;
 }
