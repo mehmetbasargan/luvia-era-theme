@@ -57,23 +57,29 @@
 </div>
 
 <script>
+  // --- Translation Dictionary (Liquid to JS) ---
+  const translations = {
+    journal: "{{ 'general.search.journal' | default: 'Journal' }}",
+    article: "{{ 'general.search.article' | default: 'Article' }}",
+    readMore: "{{ 'blog.read_more' | default: 'Read Article' }}",
+    viewProduct: "{{ 'general.view_product' | default: 'View Product' }}",
+  };
+
   const searchInput = document.querySelector('#search-input');
   const resultsContainer = document.querySelector('#search-results');
   const searchHeaderWrapper = document.querySelector('#search-header-wrapper');
   const dynamicTitle = document.querySelector('#dynamic-search-title');
   const emptyMessage = document.querySelector('#search-empty-message');
 
-  // Currency formatter (automatically formats based on store settings - TL/Dollar etc.)
+  // Currency formatter
   const formatMoney = (cents) => {
+    if (!cents) return '';
     return (cents / 100).toLocaleString('{{ shop.locale }}', {
       style: 'currency',
       currency: '{{ cart.currency.iso_code }}',
     });
   };
 
-  /** * Check if translation file exists.
-   * If no translation, manually write "Search Results".
-   */
   const rawSearchLabel = "{{ 'general.search.search_results' | t }}";
   const searchLabel = rawSearchLabel.includes('search_results') ? 'Search Results' : rawSearchLabel;
 
@@ -88,15 +94,14 @@
       return;
     }
 
-    // Shopify Predictive Search API
+    // Shopify Predictive Search API - Product and Article included
     fetch(
       `${window.Shopify.routes.root}search/suggest.json?q=${encodeURIComponent(
         searchTerm
       )}&resources[type]=product,article&resources[limit]=12`
     )
-      .then((response) => response.json()) // Noktalı virgülü kaldırdık, zincir devam ediyor
+      .then((response) => response.json())
       .then((data) => {
-        // Ürünleri ve Makaleleri (Blogları) güvenli şekilde alıyoruz
         const products = data.resources?.results?.products || [];
         const articles = data.resources?.results?.articles || [];
         const allResults = [...products, ...articles];
@@ -118,94 +123,91 @@
       .catch((err) => console.error('Search Error:', err));
   });
 
-  // HTML structure matches product-card.liquid file exactly
   function renderResults(results) {
     resultsContainer.innerHTML = results
       .map((item) => {
-        // 1. Önce bu bir Blog yazısı mı kontrol edelim
-        // Shopify API blog yazıları için genelde 'article' tipini döndürür veya URL'de /blogs/ geçer
-        const isArticle = item.url.includes('/blogs/') || item.object_type === 'article';
+        // Check if it's a Blog Post
+        const isArticle = item.url.includes('/blogs/') || item.type === 'article';
 
-        // 2. Görsel Ayarları
+        // Image Handling
         const mainImage = item.featured_image ? item.featured_image.url : item.image || '';
         const hoverImage = !isArticle && item.images && item.images.length > 1 ? item.images[1].url : null;
 
-        // 3. Ürün Bilgileri (Sadece Ürünse hesapla, yoksa hata verir)
         let priceHtml = '';
         let actionButton = '';
 
         if (!isArticle) {
-          // ÜRÜN İÇİN HESAPLAMALAR
+          // PRODUCT LAYOUT
           const price = formatMoney(item.price);
           const isOnSale = item.compare_at_price > item.price;
           const comparePrice = isOnSale ? formatMoney(item.compare_at_price) : '';
 
           priceHtml = `
-          <div class="mt-2 flex items-center gap-2">
-            ${isOnSale ? `<span class="text-gray-400 line-through text-[13px]">${comparePrice}</span>` : ''}
-            <span class="text-primary text-[14px] font-medium">${price}</span>
-          </div>
-        `;
+            <div class="mt-2 flex items-center gap-2">
+              ${isOnSale ? `<span class="text-gray-400 line-through text-[13px]">${comparePrice}</span>` : ''}
+              <span class="text-primary text-[14px] font-medium">${price}</span>
+            </div>
+          `;
 
           actionButton = `
-          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
-            <a href="${item.url}" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
-              {{ 'general.view_product' | t }}
-            </a>
-          </div>
-        `;
+            <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
+              <a href="${item.url}" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
+                ${translations.viewProduct}
+              </a>
+            </div>
+          `;
         } else {
-          // BLOG İÇİN BUTON (View Product yerine Read More)
-          actionButton = `
-          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
-            <a href="${item.url}" class="w-full bg-black text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
-              Read Article
-            </a>
-          </div>
-        `;
-
+          // BLOG LAYOUT
           priceHtml = `
-          <div class="mt-2">
-            <span class="text-secondary text-[12px] font-medium uppercase tracking-wider">Journal / Article</span>
-          </div>
-        `;
+            <div class="mt-2">
+              <span class="text-secondary text-[12px] font-medium uppercase tracking-wider">${translations.article}</span>
+            </div>
+          `;
+
+          actionButton = `
+            <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
+              <a href="${item.url}" class="w-full bg-black text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
+                ${translations.readMore}
+              </a>
+            </div>
+          `;
         }
 
         return `
-      <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn border border-transparent hover:border-gray-50 transition-all">
-        <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
-          ${
-            isArticle
-              ? `<span class="absolute top-3 left-3 z-10 bg-black text-white font-bold text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">Journal</span>`
-              : ''
-          }
-          
-          <a href="${item.url}" class="block h-full w-full">
-            <img src="${mainImage}" alt="${
+          <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn border border-transparent hover:border-gray-50 transition-all">
+            <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
+              ${
+                isArticle
+                  ? `<span class="absolute top-3 left-3 z-10 bg-black text-white font-bold text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`
+                  : ''
+              }
+              
+              <a href="${item.url}" class="block h-full w-full">
+                <img src="${mainImage}" alt="${
           item.title
         }" class="w-full h-full object-cover transition-opacity duration-700 ${
           hoverImage ? 'group-hover:opacity-0' : ''
         }" loading="lazy">
-            ${
-              hoverImage
-                ? `<img src="${hoverImage}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">`
-                : ''
-            }
-          </a>
+                ${
+                  hoverImage
+                    ? `<img src="${hoverImage}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">`
+                    : ''
+                }
+              </a>
 
-          ${actionButton}
-        </div>
+              ${actionButton}
+            </div>
 
-        <div class="pt-4 pb-2 flex flex-col items-center px-3">
-          <a href="${
-            item.url
-          }" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px]">
-            ${item.title}
-          </a>
-          ${priceHtml}
-        </div>
-      </div>
-    `;
+            <div class="pt-4 pb-2 flex flex-col items-center px-3">
+              <a href="${
+                item.url
+              }" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px]">
+                ${item.title}
+              </a>
+              ${priceHtml}
+            </div>
+          </div>
+        `;
       })
       .join('');
   }
