@@ -5,7 +5,18 @@
 @tailwind utilities;
 
 @layer base {
-	/* CSS variables will be set by theme.liquid from Shopify settings */
+	:root {
+		--color-primary: #3b443c;
+		--color-secondary: #b2ac88;
+		--color-custombg: #f9f9f9;
+		--color-line: #e5e7eb;
+		--color-white: #ffffff;
+		--color-black: #000000;
+		--color-bgtransparent: rgba(249, 249, 249, 0.3);
+
+		--font-heading: 'Josefin Sans', sans-serif;
+		--font-body: 'Inter', sans-serif;
+	}
 
 	body {
 		@apply font-inter text-primary antialiased m-0;

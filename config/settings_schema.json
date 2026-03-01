@@ -37,12 +37,6 @@
 				"id": "line_color",
 				"label": "Border/Line Color",
 				"default": "#e5e7eb"
-			},
-			{
-				"type": "color",
-				"id": "bgtransparent_color",
-				"label": "Transparent Background",
-				"default": "rgba(249, 249, 249, 0.3)"
 			}
 		]
 	},

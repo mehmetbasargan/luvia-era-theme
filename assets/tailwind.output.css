@@ -556,7 +556,17 @@ video {
   display: none;
 }
 
-/* CSS variables will be set by theme.liquid from Shopify settings */
+:root {
+  --color-primary: #3b443c;
+  --color-secondary: #b2ac88;
+  --color-custombg: #f9f9f9;
+  --color-line: #e5e7eb;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-bgtransparent: rgba(249, 249, 249, 0.3);
+  --font-heading: 'Josefin Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
 
 body{
   margin: 0px;
@@ -1801,21 +1811,6 @@ p{
 
 .bg-white{
   background-color: var(--color-white);
-}
-
-.bg-red-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
-}
-
-.bg-emerald-500{
-  --tw-bg-opacity: 1;
-  background-color: rgb(16 185 129 / var(--tw-bg-opacity, 1));
-}
-
-.bg-emerald-400{
-  --tw-bg-opacity: 1;
-  background-color: rgb(52 211 153 / var(--tw-bg-opacity, 1));
 }
 
 .object-contain{
