@@ -17,6 +17,7 @@ module.exports = {
 				white: 'var(--color-white)',
 				black: 'var(--color-black)',
 				bgtransparent: 'var(--color-bgtransparent)',
+				'bg-white': 'var(--color-white)',
 			},
 
 			fontFamily: {
