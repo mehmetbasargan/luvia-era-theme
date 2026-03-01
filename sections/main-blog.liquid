@@ -5,6 +5,22 @@
       <p class="text-gray-500 mt-2">Explore our latest stories and updates</p>
     </header>
 
+    <div class="flex justify-center gap-4 mb-10 overflow-x-auto pb-4">
+      <a
+        href="{{ blog.url }}"
+        class="px-4 py-2 rounded-full border border-black hover:bg-black hover:text-white transition {% if current_tags == blank %}bg-black text-white{% endif %}"
+        >Hepsi</a
+      >
+      {% for tag in blog.all_tags %}
+        <a
+          href="{{ blog.url }}/tagged/{{ tag | handle }}"
+          class="px-4 py-2 rounded-full border border-black hover:bg-black hover:text-white transition {% if current_tags contains tag %}bg-black text-white{% endif %}"
+        >
+          {{ tag }}
+        </a>
+      {% endfor %}
+    </div>
+
     {% if blog.articles.size > 0 %}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {% for article in blog.articles %}
