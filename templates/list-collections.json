@@ -22,25 +22,53 @@
       "type": "main-page-header",
       "name": "Page Header",
       "settings": {
-        "image": "shopify://shop_images/img1.jpg",
+        "image": "shopify://shop_images/alpcem-portrait-4597858_1280_fed85f03-6953-4841-b2f9-34c38e315f64.jpg",
         "custom_title": "Collectios",
-        "hero_height": 40,
+        "hero_height": 70,
         "overlay_opacity": 30
       }
     },
-    "collections_DGeAmT": {
-      "type": "collections",
-      "disabled": true,
-      "name": "t:general.collections_grid",
-      "settings": {
-        "grid_item_width": "collections--full",
-        "grid_gap": 10
-      }
+    "collection_list_JiHC3i": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_eRLccp": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_XhyYAm": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_UF96ed": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_nFK6L3": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_eRLccp",
+        "collection_XhyYAm",
+        "collection_UF96ed",
+        "collection_nFK6L3"
+      ],
+      "name": "Collection Cards",
+      "settings": {}
     }
   },
   "order": [
     "collections_tpVVL9",
     "main_page_header_3JHRnY",
-    "collections_DGeAmT"
+    "collection_list_JiHC3i"
   ]
 }
