@@ -64,11 +64,47 @@
       ],
       "name": "Collection Cards",
       "settings": {}
+    },
+    "about_gallery_Xe6f4p": {
+      "type": "about-gallery",
+      "blocks": {
+        "image_block_HmeCbk": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/alpcem-portrait-4778337_1280_5970d338-dff6-4930-aea2-9d67087dfe85.jpg"
+          }
+        },
+        "image_block_PG9tTB": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/alpcem-portrait-4917796_1280_1b998f3d-aaaf-4a05-96eb-5db1ffe1c4f3.jpg"
+          }
+        },
+        "image_block_DLWdLA": {
+          "type": "image_block",
+          "settings": {}
+        },
+        "image_block_TAAMD8": {
+          "type": "image_block",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "image_block_HmeCbk",
+        "image_block_PG9tTB",
+        "image_block_DLWdLA",
+        "image_block_TAAMD8"
+      ],
+      "name": "About Gallery",
+      "settings": {
+        "title": "Curated Moments"
+      }
     }
   },
   "order": [
     "collections_tpVVL9",
     "main_page_header_3JHRnY",
-    "collection_list_JiHC3i"
+    "collection_list_JiHC3i",
+    "about_gallery_Xe6f4p"
   ]
 }
