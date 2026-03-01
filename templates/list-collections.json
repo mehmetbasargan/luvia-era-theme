@@ -24,7 +24,7 @@
       "settings": {
         "image": "shopify://shop_images/img1.jpg",
         "custom_title": "Collectios",
-        "hero_height": 50,
+        "hero_height": 60,
         "overlay_opacity": 30
       }
     },
