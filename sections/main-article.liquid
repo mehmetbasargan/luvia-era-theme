@@ -1,8 +1,8 @@
-<article class="max-w-3xl mx-auto px-4 py-16">
+<article class="container px-4 py-16">
   <header class="text-center mb-12">
-    <span class="text-sm uppercase tracking-widest text-gray-400">{{ blog.title }}</span>
+    <span class="text-sm uppercase tracking-widest text-primary">{{ blog.title }}</span>
     <h1 class="text-5xl font-light mt-4 mb-6 leading-tight">{{ article.title }}</h1>
-    <div class="flex justify-center items-center space-x-4 text-gray-500 text-sm">
+    <div class="flex justify-center items-center space-x-4 text-primary text-sm">
       <span>{{ article.author }}</span>
       <span>•</span>
       <span>{{ article.published_at | date: '%d %b %Y' }}</span>
@@ -15,7 +15,7 @@
     </div>
   {% endif %}
 
-  <div class="prose prose-lg max-w-none prose-headings:font-light prose-a:text-secondary">
+  <div class="prose prose-lg max-w-none prose-headings:font-light prose-a:text-secondary flex flex-col gap-6">
     {{ article.content }}
   </div>
 
