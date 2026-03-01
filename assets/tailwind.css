@@ -580,6 +580,10 @@ body{
   background-color: transparent !important;
 }
 
+.bg-bgtransparent {
+  background-color: var(--color-bgtransparent) !important;
+}
+
 h1,
 	h2,
 	h3,
@@ -1767,6 +1771,10 @@ p{
 .bg-\[\#FBFBFB\]{
   --tw-bg-opacity: 1;
   background-color: rgb(251 251 251 / var(--tw-bg-opacity, 1));
+}
+
+.bg-bgtransparent{
+  background-color: var(--color-bgtransparent);
 }
 
 .bg-black{
