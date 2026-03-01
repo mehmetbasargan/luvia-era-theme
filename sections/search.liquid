@@ -6,7 +6,7 @@
     role="search"
     class="flex items-center gap-2 max-w-3xl mx-auto mb-10"
   >
-    <input type="hidden" name="type" value="product">
+    <input type="hidden" name="type" value="product,article">
     <div class="relative w-full">
       <input
         id="search-input"
@@ -49,7 +49,6 @@
         {% endfor %}
       {% endif %}
     </div>
-
     <div id="search-empty-message" class="hidden text-center py-20 font-josefin text-lg text-gray-500">
       {{ 'general.search.no_results' | t }}
     </div>
@@ -57,7 +56,7 @@
 </div>
 
 <script>
-  // --- Translation Dictionary ---
+  // --- Çeviri Sözlüğü ---
   const translations = {
     journal: {{ 'general.search.journal' | t | json }} || "Journal",
     article: {{ 'general.search.article' | t | json }} || "Article",
@@ -93,18 +92,17 @@
       return;
     }
 
-    fetch(`${window.Shopify.routes.root}search/suggest.json?q=${encodeURIComponent(searchTerm)}&resources[type]=product,article&resources[limit]:12`)
-      .then((response) => response.json())
-      .then((data) => {
+    fetch(`${window.Shopify.routes.root}search/suggest.json?q=${encodeURIComponent(searchTerm)}&resources[type]=product,article&resources[limit]=12`)
+      .then(response => response.json())
+      .then(data => {
         const products = data.resources?.results?.products || [];
         const articles = data.resources?.results?.articles || [];
         const allResults = [...products, ...articles];
-        const resultCount = allResults.length;
-
+        
         searchHeaderWrapper.classList.remove('hidden');
-        dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${resultCount})`;
+        dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${allResults.length})`;
 
-        if (resultCount > 0) {
+        if (allResults.length > 0) {
           emptyMessage.classList.add('hidden');
           resultsContainer.classList.remove('hidden');
           renderResults(allResults);
@@ -113,98 +111,84 @@
           emptyMessage.classList.remove('hidden');
         }
       })
-      .catch((err) => console.error('Search Error:', err));
+      .catch(err => console.error('Arama Hatası:', err));
   });
 
   function renderResults(results) {
-    resultsContainer.innerHTML = results
-      .map((item) => {
-        const isArticle = item.url.includes('/blogs/') || item.type === 'article';
-        const mainImage = item.featured_image ? item.featured_image.url : item.image || '';
-        const hoverImage = !isArticle && item.images && item.images.length > 1 ? item.images[1].url : null;
+    resultsContainer.innerHTML = results.map(item => {
+      const isArticle = item.url.includes('/blogs/') || item.type === 'article';
+      const mainImage = item.featured_image ? item.featured_image.url : (item.image || '');
+      const hoverImage = !isArticle && item.images && item.images.length > 1 ? item.images[1].url : null;
 
-        let priceHtml = '';
-        let actionButton = '';
-        let badgeHtml = '';
-        let wishlistHtml = ''; // Wishlist placeholder
+      let badgeHtml = '';
+      let priceHtml = '';
+      let actionButton = '';
+      let wishlistHtml = '';
 
-        if (!isArticle) {
-          const currentPrice = Number(item.price);
-          const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
-          const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
+      if (!isArticle) {
+        // Ürün Ayarları
+        const currentPrice = Number(item.price);
+        const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
+        const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
 
-          if (isOnSale) {
-            badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md animate-fadeIn">${translations.sale}</span>`;
-          }
-
-          // WISHLIST BUTONU (ID'ye göre otomatik oluşur)
-          wishlistHtml = `<div class="absolute top-3 right-3 z-30 growave-wishlist-wrapper" data-product-id="${item.id}">
-                            <div class="ssw-faveit ssw-wishlist-btn ssw-fave-btn ssw-wishlist-btn-${item.id}" data-id="${item.id}"></div>
-                          </div>`;
-
-          priceHtml = `
-            <div class="mt-2 flex items-center gap-2">
-              ${isOnSale ? `<span class="text-gray-400 line-through text-[13px]">${formatMoney(comparePriceRaw)}</span>` : ''}
-              <span class="text-primary text-[14px] font-medium">${formatMoney(item.price)}</span>
-            </div>
-          `;
-
-          actionButton = `
-            <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
-              <a href="${item.url}" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
-                ${translations.viewProduct}
-              </a>
-            </div>
-          `;
-        } else {
-          badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white font-bold text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
-          priceHtml = `<div class="mt-2"><span class="text-secondary text-[12px] font-medium uppercase tracking-wider">${translations.article}</span></div>`;
-          actionButton = `<div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block"><a href="${item.url}" class="w-full bg-black text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">${translations.readMore}</a></div>`;
+        if (isOnSale) {
+          badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md">${translations.sale}</span>`;
         }
+        
+        // Wishlist Placeholder (Growave/SSW için)
+        wishlistHtml = `<div class="absolute top-3 right-3 z-30 ssw-wishlist-btn-group" data-product-id="${item.id}"></div>`;
 
-        return `
-          <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn border border-transparent hover:border-gray-50 transition-all">
-            <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
-              ${badgeHtml}
-              ${wishlistHtml}
-              <a href="${item.url}" class="block h-full w-full">
-                <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-opacity duration-700 ${hoverImage ? 'group-hover:opacity-0' : ''}" loading="lazy">
-                ${hoverImage ? `<img src="${hoverImage}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">` : ''}
-              </a>
-              ${actionButton}
-            </div>
-            <div class="pt-4 pb-2 flex flex-col items-center px-3">
-              <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px]">
-                ${item.title}
-              </a>
-              ${priceHtml}
-            </div>
+        priceHtml = `
+          <div class="mt-2 flex items-center gap-2">
+            ${isOnSale ? `<span class="text-gray-400 line-through text-[13px]">${formatMoney(comparePriceRaw)}</span>` : ''}
+            <span class="text-primary text-[14px] font-medium">${formatMoney(item.price)}</span>
+          </div>`;
+
+        actionButton = `
+          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
+            <a href="${item.url}" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
+              ${translations.viewProduct}
+            </a>
+          </div>`;
+      } else {
+        // Blog Ayarları
+        badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white font-bold text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
+        priceHtml = `<div class="mt-2 text-secondary text-[12px] font-medium uppercase tracking-wider">${translations.article}</div>`;
+        actionButton = `
+          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
+            <a href="${item.url}" class="w-full bg-black text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
+              ${translations.readMore}
+            </a>
+          </div>`;
+      }
+
+      return `
+        <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn transition-all">
+          <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
+            ${badgeHtml}
+            ${wishlistHtml}
+            <a href="${item.url}" class="block h-full w-full">
+              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-opacity duration-700 ${hoverImage ? 'group-hover:opacity-0' : ''}" loading="lazy">
+              ${hoverImage ? `<img src="${hoverImage}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">` : ''}
+            </a>
+            ${actionButton}
           </div>
-        `;
-      }).join('');
+          <div class="pt-4 pb-2 flex flex-col items-center px-3">
+            <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px]">
+              ${item.title}
+            </a>
+            ${priceHtml}
+          </div>
+        </div>`;
+    }).join('');
 
-    // --- TETİKLEYİCİLER ---
+    // Uygulamaları Tetikle
+    if (window.sswRun) { window.sswRun(); }
     if (window.gwApp && typeof window.gwApp.init === 'function') { window.gwApp.init(); }
-    if (window.sswRun) { window.sswRun(); } // Growave için ekstra tetikleyici
     document.dispatchEvent(new CustomEvent('shopify:section:load'));
   }
 </script>
 
-<style>
-  .animate-fadeIn {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
 <style>
   .animate-fadeIn {
     animation: fadeIn 0.4s ease-out forwards;
@@ -213,22 +197,6 @@
     from {
       opacity: 0;
       transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
-
-<style>
-  .animate-fadeIn {
-    animation: fadeIn 0.5s ease forwards;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
     }
     to {
       opacity: 1;
