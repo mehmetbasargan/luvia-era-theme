@@ -67,7 +67,7 @@
         "title": "Follow the Era"
       }
     },
-    "product_recommendations_kQipQW": {
+    "product_recommendations_jKgtbU": {
       "type": "product-recommendations",
       "name": "Product Recommendations",
       "settings": {
@@ -79,7 +79,7 @@
   "order": [
     "main_collection_banner_3igPik",
     "main",
-    "full_width_gallery_7dxMQK",
-    "product_recommendations_kQipQW"
+    "product_recommendations_jKgtbU",
+    "full_width_gallery_7dxMQK"
   ]
 }
