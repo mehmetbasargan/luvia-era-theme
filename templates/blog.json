@@ -30,7 +30,7 @@
       "type": "main-blog",
       "name": "Main Blog Page",
       "settings": {
-        "blog_title": "Deneme"
+        "blog_title": ""
       }
     }
   },
