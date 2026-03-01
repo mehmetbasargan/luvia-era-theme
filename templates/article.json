@@ -9,12 +9,23 @@
  */
 {
   "sections": {
+    "main_page_header_LAHALC": {
+      "type": "main-page-header",
+      "name": "Page Header",
+      "settings": {
+        "image": "shopify://shop_images/img2.jpg",
+        "custom_title": "Detail",
+        "hero_height": 55,
+        "overlay_opacity": 30
+      }
+    },
     "main": {
       "type": "main-article",
       "settings": {}
     }
   },
   "order": [
+    "main_page_header_LAHALC",
     "main"
   ]
 }
