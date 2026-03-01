@@ -135,8 +135,13 @@
           badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md">${translations.sale}</span>`;
         }
         
-        // Wishlist Placeholder (Growave/SSW için)
-        wishlistHtml = `<div class="absolute top-3 right-3 z-30 ssw-wishlist-btn-group" data-product-id="${item.id}"></div>`;
+        // --- GROWAVE/SSW WISHLIST BUTONU ---
+        wishlistHtml = `
+          <div class="absolute top-3 right-3 z-30">
+            <div class="ssw-faveit ssw-wishlist-btn ssw-fave-btn ssw-wishlist-btn-${item.id}" data-id="${item.id}">
+              <i class="ssw-icon-heart-o"></i>
+            </div>
+          </div>`;
 
         priceHtml = `
           <div class="mt-2 flex items-center gap-2">
@@ -182,10 +187,15 @@
         </div>`;
     }).join('');
 
-    // Uygulamaları Tetikle
-    if (window.sswRun) { window.sswRun(); }
-    if (window.gwApp && typeof window.gwApp.init === 'function') { window.gwApp.init(); }
-    document.dispatchEvent(new CustomEvent('shopify:section:load'));
+    // --- Uygulamaları Tetikle (Gecikmeli) ---
+    setTimeout(() => {
+      if (typeof sswRun === 'function') { sswRun(); }
+      if (window.ssw && typeof window.ssw === 'function') {
+         window.ssw('.ssw-faveit').faveit();
+      }
+      if (window.gwApp && typeof window.gwApp.init === 'function') { window.gwApp.init(); }
+      document.dispatchEvent(new CustomEvent('shopify:section:load'));
+    }, 150);
   }
 </script>
 
