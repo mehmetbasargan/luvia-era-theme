@@ -93,27 +93,29 @@
       `${window.Shopify.routes.root}search/suggest.json?q=${encodeURIComponent(
         searchTerm
       )}&resources[type]=product,article&resources[limit]=12`
-    ).then((response) => response.json());
-    then((data) => {
-      // Ürünleri ve Makaleleri (Blogları) alıp birleştiriyoruz
-      const products = data.resources?.results?.products || [];
-      const articles = data.resources?.results?.articles || [];
-      const allResults = [...products, ...articles]; // İkisi tek bir listede
+    )
+      .then((response) => response.json()) // Noktalı virgülü kaldırdık, zincir devam ediyor
+      .then((data) => {
+        // Ürünleri ve Makaleleri (Blogları) güvenli şekilde alıyoruz
+        const products = data.resources?.results?.products || [];
+        const articles = data.resources?.results?.articles || [];
+        const allResults = [...products, ...articles];
 
-      const resultCount = allResults.length;
+        const resultCount = allResults.length;
 
-      searchHeaderWrapper.classList.remove('hidden');
-      dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${resultCount})`;
+        searchHeaderWrapper.classList.remove('hidden');
+        dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${resultCount})`;
 
-      if (resultCount > 0) {
-        emptyMessage.classList.add('hidden');
-        resultsContainer.classList.remove('hidden');
-        renderResults(allResults); // Artık tüm sonuçları (ürün + blog) gönderiyoruz
-      } else {
-        resultsContainer.innerHTML = '';
-        emptyMessage.classList.remove('hidden');
-      }
-    }).catch((err) => console.error('Search Error:', err));
+        if (resultCount > 0) {
+          emptyMessage.classList.add('hidden');
+          resultsContainer.classList.remove('hidden');
+          renderResults(allResults);
+        } else {
+          resultsContainer.innerHTML = '';
+          emptyMessage.classList.remove('hidden');
+        }
+      })
+      .catch((err) => console.error('Search Error:', err));
   });
 
   // HTML structure matches product-card.liquid file exactly
