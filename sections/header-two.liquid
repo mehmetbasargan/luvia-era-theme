@@ -327,10 +327,15 @@
             </div>
           </div>
 
-          <div class="order-first flex flex-row justify-start gap-7 w-full lg:w-auto">
+          {% comment %} account {% endcomment %}
+          <div class="order-first flex flex-row justify-start gap-4 w-full lg:w-auto">
             <a href="{{ routes.search_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
               {% render 'icon-search' %}
             </a>
+            <a href="/pages/wishlist" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
+              {% render 'icon-wishlist' %}
+            </a>
+
             <a href="{{ routes.account_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
               {% if shop.customer_accounts_enabled %}
                 {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
