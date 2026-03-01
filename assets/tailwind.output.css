@@ -1034,6 +1034,13 @@ p{
   -webkit-line-clamp: 3;
 }
 
+.line-clamp-2{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .block{
   display: block;
 }
@@ -1215,6 +1222,14 @@ p{
   height: 100%;
 }
 
+.h-\[200px\]{
+  height: 200px;
+}
+
+.min-h-\[3rem\]{
+  min-height: 3rem;
+}
+
 .\!w-\[50px\]{
   width: 50px !important;
 }
@@ -1366,6 +1381,10 @@ p{
 
 .max-w-none{
   max-width: none;
+}
+
+.max-w-\[320px\]{
+  max-width: 320px;
 }
 
 .flex-1{

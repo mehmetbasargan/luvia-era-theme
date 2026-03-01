@@ -1234,6 +1234,14 @@ p{
   height: 2.5rem;
 }
 
+.h-\[200px\]{
+  height: 200px;
+}
+
+.min-h-\[3rem\]{
+  min-height: 3rem;
+}
+
 .\!w-\[50px\]{
   width: 50px !important;
 }
@@ -1401,6 +1409,10 @@ p{
 
 .max-w-\[900px\]{
   max-width: 900px;
+}
+
+.max-w-\[320px\]{
+  max-width: 320px;
 }
 
 .flex-1{
