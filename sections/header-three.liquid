@@ -253,20 +253,18 @@
   </div>
 </header>
 
-<style>
-    {% style %}
-    :root {
-      /* Seçilen rengi ve şeffaflığı birleştirip header'a özel bir değişken yapıyoruz */
-      --header-bg-transparent: color-mix(in srgb, {{ section.settings.header_bg_color }}, transparent {{ 100 | minus: section.settings.header_opacity }}%);
-    }
+{% style %}
+  :root {
+    /* Seçilen rengi ve şeffaflığı birleştirip header'a özel bir değişken yapıyoruz */
+    --header-bg-transparent: color-mix(in srgb, {{ section.settings.header_bg_color }}, transparent {{ 100 | minus: section.settings.header_opacity }}%);
+  }
 
-    #shopify-section-{{ section.id }} .header-wrapper {
-      background-color: var(--header-bg-transparent);
-      backdrop-filter: blur(8px); /* Opsiyonel: Buzlu cam efekti verir, çok profesyonel durur */
-      transition: background-color 0.3s ease;
-    }
-  {% endstyle %}
-</style>
+  #shopify-section-{{ section.id }} .header-wrapper {
+    background-color: var(--header-bg-transparent);
+    backdrop-filter: blur(8px); /* Opsiyonel: Buzlu cam efekti verir, çok profesyonel durur */
+    transition: background-color 0.3s ease;
+  }
+{% endstyle %}
 
 <script>
   const header = document.getElementById('main-header');
