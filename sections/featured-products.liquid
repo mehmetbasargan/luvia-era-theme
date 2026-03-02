@@ -13,23 +13,28 @@
             href="{{ section.settings.button_url }}"
             class="text-primary border-b border-line pb-1 hover:text-secondary hover:border-secondary transition-all"
           >
-            {{- section.settings.button_text -}}
+            {{ section.settings.button_text }}
           </a>
         {% endif %}
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {% for product in collections[section.settings.collection].products limit: 4 %}
-          <div class="group relative overflow-hidden" id="product-card-{{ product.id }}">
+          <div class="group relative product-card-container">
             <div class="absolute top-4 right-4 z-[100]">
               <button
                 type="button"
-                class="luvia-wishlist-btn-final w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-xl transition-all duration-300 active:scale-90"
-                onclick="handleWishlistClick(this, '{{ product.id }}')"
-                data-id="{{ product.id }}"
-                style="cursor: pointer !important; -webkit-appearance: none; border: none;"
+                class="luvia-wishlist-btn w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-lg transition-all duration-300 active:scale-90"
+                data-product-id="{{ product.id }}"
+                style="cursor: pointer !important; position: relative; border: none; -webkit-appearance: none;"
               >
-                <svg class="w-5 h-5 heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  class="w-5 h-5 heart-icon pointer-events-none"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                 </svg>
               </button>
@@ -37,7 +42,7 @@
 
             <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-40 bg-secondary text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase shadow-sm">
+                <span class="absolute top-4 left-4 z-40 bg-secondary text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase">
                   {{ 'products.product.on_sale' | t }}
                 </span>
               {% endif %}
@@ -95,39 +100,40 @@
 </div>
 
 <style>
-  /* Favori Aktif Hali */
-  .luvia-wishlist-btn-final.is-active svg {
+  .luvia-wishlist-btn.is-active svg {
     fill: #e11d48 !important;
     stroke: #e11d48 !important;
   }
-  .luvia-wishlist-btn-final:hover {
-    transform: scale(1.1);
-    background: white !important;
+  .luvia-wishlist-btn:hover {
+    background: #fdfdfd;
   }
 </style>
 
 <script>
-  // Tıklama Fonksiyonu (Daha Güçlü)
-  function handleWishlistClick(btn, id) {
-    if (window.LuviaWishlist) {
-      window.LuviaWishlist.toggle(id);
-      btn.classList.toggle('is-active');
-    } else {
-      console.error('LuviaWishlist not found!');
-    }
-  }
-
-  // Sayfa yüklendiğinde favorileri işaretle
+  // Sayfa yüklendiğinde favorileri kontrol et ve Tıklama Dinleyicisi ata
   document.addEventListener('DOMContentLoaded', () => {
-    const data = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
-    document.querySelectorAll('.luvia-wishlist-btn-final').forEach((btn) => {
-      if (data.includes(btn.dataset.id)) {
+    const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+
+    document.querySelectorAll('.luvia-wishlist-btn').forEach((btn) => {
+      const pId = btn.dataset.productId;
+
+      // İlk hali işaretle
+      if (wishlistData.includes(pId)) {
         btn.classList.add('is-active');
       }
+
+      // Tıklama olayını bağla
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.LuviaWishlist) {
+          window.LuviaWishlist.toggle(pId);
+          btn.classList.toggle('is-active');
+        }
+      });
     });
   });
 
-  // Sepete ekleme (Diğerleri aynı...)
   function handleAddToCartFeatured(event, variantId) {
     event.preventDefault();
     const btn = event.currentTarget;
