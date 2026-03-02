@@ -26,10 +26,20 @@
     "hero_slider_yFYYic": {
       "type": "hero-slider",
       "blocks": {
+        "slide_UMRT6D": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3.jpg",
+            "title": "Yeni Sezon",
+            "sub_title": "En yeni koleksiyonu hemen keşfedin.",
+            "button_label": "Alışverişe Başla",
+            "button_link": ""
+          }
+        },
         "slide_QGpjDa": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/img1.jpg",
+            "image": "shopify://shop_images/1.jpg",
             "title": "New Season 2",
             "sub_title": "Discover the latest collection now.",
             "button_label": "Start Shopping",
@@ -39,7 +49,7 @@
         "slide_n3HckD": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/alpcem-portrait-4917796_1280.jpg",
+            "image": "shopify://shop_images/2.jpg",
             "title": "new season",
             "sub_title": "Discover the latest collection now.",
             "button_label": "DiscoverMore",
@@ -48,6 +58,7 @@
         }
       },
       "block_order": [
+        "slide_UMRT6D",
         "slide_QGpjDa",
         "slide_n3HckD"
       ],
