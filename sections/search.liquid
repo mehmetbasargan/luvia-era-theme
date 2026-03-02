@@ -150,7 +150,7 @@
         // Growave Buton Yapısı
         wishlistHtml = `
         <div class="absolute top-3 right-3 z-30 ssw-wishlist-wrapper">
-          <span class="ssw-faveit ssw-wishlist-btn ssw-fave-btn" data-id="${item.id}">
+          <span class="ssw-faveit ssw-wishlist-btn ssw-fave-btn" data-id="${item.id}" style="cursor:pointer; display:block !important; visibility:visible !important; opacity:1 !important;">
             <i class="ssw-icon-heart-o"></i>
           </span>
         </div>`;
@@ -243,23 +243,29 @@
     }
   }
 
-  /* Growave butonlarını hayalet modundan çıkar */
-  .ssw-faveit {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: relative;
-    z-index: 40;
-    min-width: 24px;
-    min-height: 24px;
-    align-items: center;
-    justify-content: center;
+  /* Growave ikonlarını manuel canlandır */
+  .ssw-faveit i.ssw-icon-heart-o::before {
+    content: '\e80a'; /* Growave'in standart boş kalp ikonu kodu */
+    font-family: 'sswfont' !important;
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0.2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0.2em;
+    -webkit-font-smoothing: antialiased;
+    color: var(--color-primary); /* Senin Tailwind primary rengin */
+    font-size: 20px;
   }
 
-  /* İkonun görünürlüğünü garanti et */
-  .ssw-faveit i {
-    display: inline-block !important;
-    font-style: normal;
-    color: var(--color-primary) !important;
+  /* Üzerine gelince dolması için (opsiyonel) */
+  .ssw-faveit:hover i.ssw-icon-heart-o::before {
+    content: '\e80b'; /* Dolu kalp ikonu */
+    color: var(--color-secondary);
   }
 </style>
