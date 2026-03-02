@@ -49,21 +49,24 @@
 
         container.innerHTML = products
           .map((product) => {
-            // Fiyatları güvenli bir şekilde sayıya çeviriyoruz
-            const currentPrice = parseFloat(product.price || 0);
-            const comparePrice = parseFloat(product.compare_at_price || 0);
-            const isOnSale = comparePrice > currentPrice;
+            // Fiyat Kontrolü (On Sale Etiketi İçin)
+            const cPrice = parseFloat(product.compare_at_price || 0);
+            const pPrice = parseFloat(product.price || 0);
+            const isOnSale = cPrice > pPrice;
+
+            // Sepete Ekleme İçin Variant ID (İlk mevcut varyantı al)
+            const variantId = product.variants && product.variants.length > 0 ? product.variants[0].id : '';
 
             return `
             <div class="group flex flex-col h-full bg-white overflow-hidden relative" id="wish-item-${product.id}">
               <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
                 
-                <div class="absolute top-3 inset-x-3 z-50 flex justify-between items-start">
+                <div class="absolute top-3 inset-x-3 z-50 flex justify-between items-start pointer-events-none">
                   <div class="flex-1">
                     ${
                       isOnSale
                         ? `
-                      <span class="inline-block bg-secondary text-white font-light text-[11px] px-2 py-1 tracking-widest uppercase shadow-md animate-fadeIn">
+                      <span class="inline-block bg-secondary text-white font-light text-[11px] px-2 py-1 tracking-widest uppercase shadow-md pointer-events-auto">
                         {{ 'products.product.on_sale' | t }}
                       </span>
                     `
@@ -75,7 +78,7 @@
                           onclick="LuviaWishlist.toggle('${product.id}'); document.getElementById('wish-item-${
               product.id
             }').remove();"
-                          class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-secondary hover:text-white transition-all duration-300 ml-auto">
+                          class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-secondary hover:text-white transition-all duration-300 ml-auto pointer-events-auto">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
@@ -87,6 +90,16 @@
               product.title
             }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                 </a>
+
+                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
+                  <form method="post" action="/cart/add" accept-charset="UTF-8" class="m-0" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="${variantId}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer">
+                      {{ 'products.product.add_to_cart' | t }}
+                    </button>
+                  </form>
+                </div>
               </div>
 
               <div class="pt-4 pb-2 flex flex-col items-center px-3">
