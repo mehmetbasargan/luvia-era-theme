@@ -63,15 +63,16 @@
             <div class="flex flex-col justify-center grow">
               <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
               <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
+               <button type="button" onclick="removeFromCart('${
+                 item.key
+               }')" class="text-red-500 hover:text-red-700 text-[10px] uppercase tracking-wider">
+                    Remove
+                  </button>
               <div class="flex justify-between items-end mt-4">
                 <p class="text-[11px]">${item.quantity} QTY</p>
                 <div class="flex items-center gap-2">
                   <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(2)} TL</p>
-                  <button type="button" onclick="removeFromCart('${
-                    item.key
-                  }')" class="text-red-500 hover:text-red-700 text-[10px] uppercase tracking-wider">
-                    Remove
-                  </button>
+                 
                 </div>
               </div>
             </div>
