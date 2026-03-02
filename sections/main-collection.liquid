@@ -170,6 +170,31 @@
   </div>
 </div>
 
+<script>
+  // Add to Cart Function for Collection Pages
+  function handleAddToCart(e, variantId) {
+    const btn = e.currentTarget;
+    btn.innerText = '...';
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: 1 }),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        btn.innerText = 'ADDED ✔';
+        if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
+        setTimeout(() => {
+          btn.innerText = '{{ "products.product.add_to_cart" | t }}';
+        }, 2000);
+      })
+      .catch(() => {
+        btn.innerText = 'ERROR';
+      });
+  }
+</script>
+
 {% schema %}
 {
   "name": "Collection Page",
