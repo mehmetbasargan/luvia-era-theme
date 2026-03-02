@@ -125,10 +125,10 @@
             const svg = btn.querySelector('svg');
             if (list.includes(id.toString())) {
               svg.setAttribute('fill', 'currentColor');
-              svg.classList.add('text-secondary');
+              svg.classList.add('text-red-500');
             } else {
               svg.setAttribute('fill', 'none');
-              svg.classList.remove('text-secondary');
+              svg.classList.remove('text-red-500');
             }
           });
         },
