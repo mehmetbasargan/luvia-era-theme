@@ -82,6 +82,19 @@
   const rawSearchLabel = "{{ 'general.search.search_results' | t }}";
   const searchLabel = rawSearchLabel.includes('search_results') ? 'Search Results' : rawSearchLabel;
 
+  // --- GROWAVE GÖZCÜSÜ (MutationObserver) ---
+  // Bu kısım, sonuçlar değiştikçe Growave butonlarını otomatik tarar.
+  const sswObserver = new MutationObserver((mutations) => {
+    if (typeof sswRun === 'function') { sswRun(); }
+    if (window.ssw && typeof window.ssw === 'function') {
+      window.ssw('.ssw-faveit').faveit();
+    }
+  });
+
+  if (resultsContainer) {
+    sswObserver.observe(resultsContainer, { childList: true });
+  }
+
   searchInput.addEventListener('input', function (e) {
     const searchTerm = e.target.value.trim();
     if (searchTerm.length <= 2) {
@@ -126,7 +139,6 @@
       let wishlistHtml = '';
 
       if (!isArticle) {
-        // Ürün Ayarları
         const currentPrice = Number(item.price);
         const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
         const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
@@ -135,7 +147,7 @@
           badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md">${translations.sale}</span>`;
         }
         
-        // --- GROWAVE/SSW WISHLIST BUTONU ---
+        // Growave Buton Yapısı
         wishlistHtml = `
           <div class="absolute top-3 right-3 z-30">
             <div class="ssw-faveit ssw-wishlist-btn ssw-fave-btn ssw-wishlist-btn-${item.id}" data-id="${item.id}">
@@ -156,7 +168,6 @@
             </a>
           </div>`;
       } else {
-        // Blog Ayarları
         badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white font-bold text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
         priceHtml = `<div class="mt-2 text-secondary text-[12px] font-medium uppercase tracking-wider">${translations.article}</div>`;
         actionButton = `
@@ -186,16 +197,9 @@
           </div>
         </div>`;
     }).join('');
-
-    // --- Uygulamaları Tetikle (Gecikmeli) ---
-    setTimeout(() => {
-      if (typeof sswRun === 'function') { sswRun(); }
-      if (window.ssw && typeof window.ssw === 'function') {
-         window.ssw('.ssw-faveit').faveit();
-      }
-      if (window.gwApp && typeof window.gwApp.init === 'function') { window.gwApp.init(); }
-      document.dispatchEvent(new CustomEvent('shopify:section:load'));
-    }, 150);
+    
+    // Shopify tema motoru tetikleme
+    document.dispatchEvent(new CustomEvent('shopify:section:load'));
   }
 </script>
 
