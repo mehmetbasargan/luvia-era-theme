@@ -18,12 +18,25 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const wishlistIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
     const container = document.getElementById('wishlist-container');
     const emptyMessage = document.getElementById('wishlist-empty');
 
-    if (wishlistIds.length === 0) {
-      emptyMessage.classList.remove('hidden');
+    // 1. Listenin boş olup olmadığını kontrol eden fonksiyon
+    const checkEmpty = () => {
+      const wishlistIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+      if (wishlistIds.length === 0) {
+        if (container) container.classList.add('hidden');
+        if (emptyMessage) emptyMessage.classList.remove('hidden');
+      } else {
+        if (container) container.classList.remove('hidden');
+        if (emptyMessage) emptyMessage.classList.add('hidden');
+      }
+    };
+
+    // İlk girişte kontrol
+    const initialIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+    if (initialIds.length === 0) {
+      checkEmpty();
       return;
     }
 
@@ -34,14 +47,15 @@
       });
     };
 
-    const searchQuery = wishlistIds.map((id) => `id:${id}`).join(' OR ');
+    const searchQuery = initialIds.map((id) => `id:${id}`).join(' OR ');
 
+    // Ürünleri çek
     fetch(`/search/suggest.json?q=${encodeURIComponent(searchQuery)}&resources[type]=product&resources[limit]=20`)
       .then((res) => res.json())
       .then(async (data) => {
         const initialProducts = data.resources.results.products;
         if (!initialProducts || initialProducts.length === 0) {
-          emptyMessage.classList.remove('hidden');
+          checkEmpty();
           return;
         }
 
@@ -64,11 +78,11 @@
                         : ''
                     }
                   </div>
-                  <button type="button" onclick="LuviaWishlist.toggle('${
-                    product.id
-                  }'); document.getElementById('wish-item-${
+                  <button type="button" 
+                          onclick="LuviaWishlist.toggle('${product.id}'); document.getElementById('wish-item-${
               product.id
-            }').remove();" class="flex items-center justify-center w-8 h-8 bg-[#ffffffc2] rounded-full shadow-sm hover:bg-secondary hover:text-white transition-all duration-300 ml-auto pointer-events-auto">
+            }').remove(); window.dispatchEvent(new CustomEvent('wishlist:updated'));"
+                          class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-secondary hover:text-white transition-all duration-300 ml-auto pointer-events-auto">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                   </button>
                 </div>
@@ -108,7 +122,12 @@
           })
           .join('');
 
-        // --- GELİŞMİŞ ÇEKMECE TETİKLEYİCİ ---
+        // --- SİLME İŞLEMİNİ DİNLE ---
+        window.addEventListener('wishlist:updated', () => {
+          checkEmpty();
+        });
+
+        // --- SEPETE EKLEME (AJAX) ---
         container.querySelectorAll('.custom-ajax-form').forEach((form) => {
           form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -123,26 +142,19 @@
               });
 
               if (response.ok) {
-                const productData = await response.json();
+                const cartData = await response.json();
 
-                // 1. ADIM: Temadaki sepet çekmecesini (drawer) açmak için gereken her şeyi tetikle
-                // Luvia/Prestige/Dawn gibi birçok temada bu event çekmeceyi uyandırır
+                // Temayı uyandır (Çekmece için)
                 document.dispatchEvent(
                   new CustomEvent('cart:updated', {
-                    detail: { cart: productData },
+                    detail: { cart: cartData },
                     bubbles: true,
                   })
                 );
 
-                // AJAX sepet kütüphanesini (eğer yüklüyse) uyandır
-                if (window.theme && window.theme.CartDrawer) {
-                  window.theme.CartDrawer.open();
-                }
-
-                // 2. ADIM: Çekmeceyi manuel zorla (Dawn ve türevleri için)
+                // Dawn/Luvia çekmece zorlaması
                 const drawer = document.querySelector('cart-drawer') || document.querySelector('.cart-drawer');
                 if (drawer) {
-                  // Çekmece içeriğini tazeleyelim
                   fetch(`${window.location.pathname}?sections=cart-drawer`)
                     .then((r) => r.json())
                     .then((html) => {
@@ -151,10 +163,8 @@
                         .getElementById('CartDrawer');
                       const currentDrawer = document.getElementById('CartDrawer');
                       if (newContent && currentDrawer) currentDrawer.innerHTML = newContent.innerHTML;
-
                       drawer.classList.add('active', 'is-open');
                       drawer.setAttribute('open', '');
-                      document.body.classList.add('overflow-hidden');
                     });
                 }
 
@@ -171,7 +181,7 @@
       })
       .catch((err) => {
         console.error('Wishlist Error:', err);
-        emptyMessage.classList.remove('hidden');
+        checkEmpty();
       });
   });
 </script>
