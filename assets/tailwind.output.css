@@ -727,6 +727,11 @@ p{
   right: 0px;
 }
 
+.inset-x-3{
+  left: 0.75rem;
+  right: 0.75rem;
+}
+
 .\!left-\[30px\]{
   left: 30px !important;
 }
@@ -1041,6 +1046,10 @@ p{
 
 .mt-auto{
   margin-top: auto;
+}
+
+.ml-auto{
+  margin-left: auto;
 }
 
 .line-clamp-2{
