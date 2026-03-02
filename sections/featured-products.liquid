@@ -134,10 +134,28 @@
       e.stopPropagation();
 
       const productId = btn.dataset.productId;
-      if (window.LuviaWishlist) {
-        window.LuviaWishlist.toggle(productId);
-        btn.classList.toggle('active');
+
+      // Basit wishlist toggle
+      const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+      const index = wishlistData.indexOf(productId);
+
+      if (index > -1) {
+        wishlistData.splice(index, 1);
+        btn.classList.remove('active');
+      } else {
+        wishlistData.push(productId);
+        btn.classList.add('active');
       }
+
+      localStorage.setItem('luvia_wishlist_data', JSON.stringify(wishlistData));
+
+      // Toast notification
+      const toast = document.createElement('div');
+      toast.className =
+        'fixed bottom-5 right-5 bg-primary text-white px-6 py-3 rounded-full shadow-2xl z-[9999] animate-bounce text-[13px] uppercase tracking-widest';
+      toast.innerText = index > -1 ? 'Favorilerden çıkarıldı' : 'Favorilere eklendi!';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
     });
   });
 
