@@ -25,74 +25,61 @@
           <div class="group relative">
             <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-40 bg-secondary text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase shadow-sm">
+                <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[12px] px-3 py-1 tracking-widest uppercase">
                   {{ 'products.product.on_sale' | t }}
                 </span>
               {% endif %}
 
-              <div class="absolute top-4 right-4 z-50 pointer-events-auto">
-                <button
-                  type="button"
-                  class="wishlist-btn-manual w-9 h-9 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all duration-300"
-                  data-product-id="{{ product.id }}"
-                  onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}'); this.classList.toggle('active'); }"
-                >
-                  <svg
-                    class="w-5 h-5 heart-icon pointer-events-none"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                  </svg>
-                </button>
+              <div class="absolute top-4 right-4 z-50 wishlist-container-fix">
+                {% render 'wishlist-heart', product: product %}
               </div>
 
-              <a href="{{ product.url }}" class="block w-full h-full relative z-10">
+              <a href="{{ product.url }}" class="block w-full h-full">
                 <img
                   src="{{ product.featured_image | image_url: width: 700 }}"
                   height=""
                   width=""
-                  class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %},group-hover:opacity-0{% endif %}"
+                  class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 z-0 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
                   alt="{{ product.title }}"
                 >
+
                 {% if product.images[1] %}
                   <img
                     src="{{ product.images[1] | image_url: width: 700 }}"
-                    width=""
                     height=""
-                    class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                    width=""
+                    class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0"
                     alt="{{ product.title }}"
                   >
                 {% endif %}
               </a>
 
-              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-40">
+              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
                 <button
                   type="button"
                   onclick="handleAddToCartFeatured(event, '{{ product.selected_or_first_available_variant.id }}')"
-                  class="w-full cursor-pointer bg-primary text-white font-medium py-4 text-[11px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors"
+                  class="w-full cursor-pointer bg-primary text-white font-medium py-4 text-xs uppercase tracking-[0.2em] hover:bg-secondary transition-colors"
+                  {% unless product.available %}
+                    disabled
+                  {% endunless %}
                 >
-                  {% if product.available -%}
-                    {{- 'products.product.add_to_cart' | t -}}
-                  {%- else -%}
-                    {{- 'products.product.sold_out' | t -}}
-                  {%- endif %}
+                  {% if product.available %}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {% else %}
+                    {{ 'products.product.sold_out' | t }}
+                  {% endif %}
                 </button>
               </div>
             </div>
 
             <div class="mt-6 text-center">
               <a href="{{ product.url }}">
-                <h3 class="text-secondary text-[16px] font-medium tracking-wide uppercase line-clamp-1">
-                  {{ product.title }}
-                </h3>
+                <h3 class="text-secondary text-[18px] font-medium tracking-wide uppercase">{{ product.title }}</h3>
                 <div class="mt-2 flex justify-center items-center gap-3">
-                  {% if product.compare_at_price > product.price -%}
-                    <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
-                  {%- endif %}
-                  <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price %}
+                    <span class="text-gray-400 line-through text-[14px]">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="text-primary text-[15px] font-medium">{{ product.price | money }}</span>
                 </div>
               </a>
             </div>
@@ -104,52 +91,215 @@
 </div>
 
 <style>
-  /* Favori Butonu Aktif Hali (Kırmızı Dolgu) */
-  .wishlist-btn-manual.active svg {
-    fill: #e11d48; /* secondary rengin veya kırmızı */
-    stroke: #e11d48;
-  }
-  .wishlist-btn-manual:hover svg {
-    transform: scale(1.1);
+  /* Wishlist butonunun doğru görünmesi için ekstra koruma */
+  .wishlist-container-fix {
+    display: block !important;
+    min-width: 40px;
+    min-height: 40px;
   }
 </style>
 
 <script>
-  // Sayfa yüklendiğinde favori durumlarını kontrol et
-  document.addEventListener('DOMContentLoaded', () => {
-    const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
-    document.querySelectorAll('.wishlist-btn-manual').forEach((btn) => {
-      if (wishlistData.includes(btn.dataset.productId)) {
-        btn.classList.add('active');
-      }
-    });
-  });
-
-  // Sepete ekleme ve çekmece fonksiyonları aynı kalıyor...
   function handleAddToCartFeatured(event, variantId) {
     event.preventDefault();
-    const btn = event.currentTarget;
+    const btn = event.currentTarget || event.target;
+
     btn.disabled = true;
     const originalText = btn.innerText;
-    btn.innerText = '...';
+    btn.innerText = 'PROCESSING...';
 
     fetch('/cart/add.js', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-      body: JSON.stringify({ id: variantId, quantity: 1 }),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: 1,
+      }),
     })
-      .then((res) => res.json())
+      .then((response) => {
+        if (!response.ok) throw new Error('Add to cart failed');
+        return response.json();
+      })
       .then((item) => {
         btn.innerText = 'ADDED ✔';
+        showToast('Item added to bag');
+
+        // Drawer fonksiyonlarını çağır
         if (typeof openCartDrawer === 'function') openCartDrawer();
+        if (typeof updateCartDrawer === 'function') updateCartDrawer();
+
         setTimeout(() => {
           btn.disabled = false;
           btn.innerText = originalText;
         }, 2000);
       })
-      .catch((err) => {
+      .catch((error) => {
         btn.innerText = 'ERROR';
         btn.disabled = false;
+        console.error('Error adding to cart:', error);
       });
   }
+
+  function openCartDrawer() {
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('cart-drawer-overlay');
+    const content = document.getElementById('cart-drawer-content');
+
+    if (!drawer) {
+      console.warn("Cart drawer ID 'cart-drawer' not found.");
+      return;
+    }
+
+    drawer.classList.remove('invisible');
+    setTimeout(() => {
+      overlay?.classList.replace('opacity-0', 'opacity-100');
+      content?.classList.replace('translate-x-full', 'translate-x-0');
+    }, 10);
+
+    updateCartDrawer();
+  }
+
+  function closeCartDrawer() {
+    const overlay = document.getElementById('cart-drawer-overlay');
+    const content = document.getElementById('cart-drawer-content');
+    if (!overlay) return;
+
+    overlay.classList.replace('opacity-100', 'opacity-0');
+    content.classList.replace('translate-x-0', 'translate-x-full');
+
+    setTimeout(() => {
+      document.getElementById('cart-drawer')?.classList.add('invisible');
+    }, 500);
+  }
+
+  function updateCartDrawer() {
+    fetch('/cart.js')
+      .then((res) => res.json())
+      .then((cart) => {
+        // Baloncukları güncelle
+        const cartBubbles = document.querySelectorAll('.cart-count-bubble');
+        cartBubbles.forEach((bubble) => {
+          bubble.innerText = cart.item_count;
+          if (cart.item_count > 0) {
+            bubble.classList.remove('hidden');
+            bubble.style.display = 'flex';
+          } else {
+            bubble.classList.add('hidden');
+            bubble.style.display = 'none';
+          }
+        });
+
+        const container = document.getElementById('cart-drawer-items');
+        const totalPrice = document.getElementById('cart-total-price');
+
+        if (totalPrice) totalPrice.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
+        if (!container) return;
+
+        if (cart.items.length === 0) {
+          container.innerHTML =
+            '<p class="text-[11px] italic text-gray-400 text-center py-10">{{ "products.product.empty_cart" | t }}</p>';
+          return;
+        }
+
+        container.innerHTML = cart.items
+          .map(
+            (item, index) => `
+          <div class="flex gap-4 border-b border-gray-50 pb-4 relative">
+            <img src="${item.image}" class="w-20 h-24 object-cover bg-custombg">
+            <div class="flex flex-col justify-center grow">
+              <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
+              <p class="text-[10px] text-gray-400 mt-1 italic">${item.variant_title || ''}</p>
+              <div class="flex justify-between items-end mt-4">
+                <p class="text-[11px]">${item.quantity} QTY</p>
+                <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(2)} TL</p>
+              </div>
+              <button type="button" onclick="removeCartItem(${
+                index + 1
+              })" class="text-[9px] uppercase tracking-[0.2em] text-red-900 mt-2 text-left hover:text-black transition-all cursor-pointer">
+                [ {{ "cart.remove" | t }} ]
+              </button>
+            </div>
+          </div>
+        `
+          )
+          .join('');
+      });
+  }
+
+  function removeCartItem(line) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ line: line, quantity: 0 }),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        showToast('Item removed from bag');
+        updateCartDrawer();
+      });
+  }
+
+  function showToast(message) {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-container';
+      container.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 z-[9999]';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = `px-8 py-4 bg-black text-white text-[10px] uppercase tracking-[0.3em] shadow-2xl translate-y-10 opacity-0 transition-all duration-500 ease-out flex items-center justify-center min-w-[250px] mb-2`;
+    toast.innerText = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.replace('translate-y-10', 'translate-y-0');
+      toast.classList.replace('opacity-0', 'opacity-100');
+    }, 10);
+    setTimeout(() => {
+      toast.classList.replace('translate-y-0', 'translate-y-10');
+      toast.classList.replace('opacity-100', 'opacity-0');
+      setTimeout(() => toast.remove(), 500);
+    }, 3000);
+  }
 </script>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to Feature"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}
