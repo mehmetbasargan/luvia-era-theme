@@ -856,6 +856,10 @@ p{
   top: 100%;
 }
 
+.right-4{
+  right: 1rem;
+}
+
 .z-0{
   z-index: 0;
 }
