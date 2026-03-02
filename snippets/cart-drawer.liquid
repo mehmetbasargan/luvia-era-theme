@@ -2,11 +2,12 @@
   <div
     id="cart-drawer-overlay"
     class="absolute inset-0 bg-black/30 opacity-0 transition-opacity duration-500 ease-in-out"
+    onclick="closeCartDrawer()"
   ></div>
 
   <div
     id="cart-drawer-content"
-    class="absolute right-0 top-0 h-full w-full max-w-[400px] bg-white translate-x-full transition-transform duration-500 ease-out p-8 shadow-2xl flex flex-col"
+    class="absolute right-0 t-full h-full w-full max-w-[400px] bg-white translate-x-full transition-transform duration-500 ease-out p-8 shadow-2xl flex flex-col"
   >
     <div class="flex justify-between items-center pb-6 border-b border-line">
       <h3 class="text-[12px] uppercase tracking-[0.3em] font-light text-primary">{{ 'cart.my_cart' | t }}</h3>
@@ -34,3 +35,36 @@
     </div>
   </div>
 </div>
+
+<script>
+  function closeCartDrawer() {
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('cart-drawer-overlay');
+    const content = document.getElementById('cart-drawer-content');
+
+    if (!drawer) return;
+
+    // Close animation
+    overlay?.classList.replace('opacity-100', 'opacity-0');
+    content?.classList.replace('translate-x-0', 'translate-x-full');
+
+    setTimeout(() => {
+      drawer.classList.add('invisible');
+    }, 500);
+  }
+
+  function openCartDrawer() {
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('cart-drawer-overlay');
+    const content = document.getElementById('cart-drawer-content');
+
+    if (!drawer) return;
+
+    drawer.classList.remove('invisible');
+
+    setTimeout(() => {
+      overlay?.classList.replace('opacity-0', 'opacity-100');
+      content?.classList.replace('translate-x-full', 'translate-x-0');
+    }, 10);
+  }
+</script>
