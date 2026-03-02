@@ -106,7 +106,7 @@
               </span>
               <span class="text-sm tracking-tight font-medium">{{ cart.total_price | money }}</span>
             </div>
-            <p class="text-[10px] text-gray-400 italic leading-relaxed">
+            <p class="text-[10px] text-gray-400 leading-relaxed">
               {{ 'cart.shipping_taxes_discounts' | t }}
             </p>
           </div>
@@ -131,7 +131,7 @@
     </form>
   {% else %}
     <div class="text-center py-32 animate-fadeIn">
-      <p class="text-[13px] italic text-secondary mb-10 tracking-widest font-light">
+      <p class="text-[13px] text-secondary mb-10 tracking-widest font-light">
         {{ 'cart.shopping_bg_is_empty' | t }}
       </p>
       <a
