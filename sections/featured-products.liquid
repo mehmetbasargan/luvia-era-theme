@@ -172,7 +172,7 @@
       .then((res) => res.json())
       .then(() => {
         btn.innerText = 'ADDED ✔';
-        if (typeof openCartDrawer === 'function') openCartDrawer();
+        if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
         setTimeout(() => {
           btn.innerText = '{{ "products.product.add_to_cart" | t }}';
         }, 2000);
