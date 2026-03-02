@@ -12,33 +12,36 @@
       <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
     {%- endif -%}
 
+    {%- assign heading_font = settings.heading_font -%}
+    {%- assign body_font = settings.body_font -%}
+
     <style>
+      {{ heading_font | font_face: font_display: 'swap' }}
+      {{ body_font | font_face: font_display: 'swap' }}
+
       :root {
+        /* Renkler - Shopify Panelinden Gelenler */
         --color-primary: {{ settings.primary_color }};
         --color-secondary: {{ settings.secondary_color }};
-        --color-bg: {{ settings.custom_bg_color }};
-        --font-heading: 'Josefin Sans', sans-serif;
-        --font-body: 'Inter', sans-serif;
+        --color-custombg: {{ settings.custom_bg_color }};
+        --color-line: {{ settings.line_color }};
+        --color-white: #ffffff;
+        --color-black: #000000;
+
+        /* Fontlar */
+        --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+        --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
       }
 
       body {
-        background-color: var(--color-bg);
+        background-color: var(--color-custombg);
         color: var(--color-primary);
         font-family: var(--font-body);
         margin: 0;
         -webkit-font-smoothing: antialiased;
-      }
-
-      /* Unresolved olsa bile body'yi zorla göster */
-      body[unresolved] {
-        opacity: 1 !important;
+        /* Flash effect (FOUC) engellemek için */
         display: block !important;
-        overflow: auto !important;
-        position: static !important;
-      }
-
-      body {
-        transition: none !important;
+        opacity: 1 !important;
       }
     </style>
 
