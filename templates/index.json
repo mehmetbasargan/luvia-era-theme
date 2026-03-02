@@ -139,44 +139,6 @@
         "button_url": "shopify://collections/all"
       }
     },
-    "shoppable_image_mTy7Xm": {
-      "type": "shoppable-image",
-      "blocks": {
-        "product_point_dBnzhe": {
-          "type": "product_point",
-          "settings": {
-            "product": "solstice-linen-blouse",
-            "top_position": 57,
-            "left_position": 46
-          }
-        },
-        "product_point_rKQwbd": {
-          "type": "product_point",
-          "settings": {
-            "product": "velvet-night-blazer",
-            "top_position": 41,
-            "left_position": 77
-          }
-        },
-        "product_point_JjixBg": {
-          "type": "product_point",
-          "settings": {
-            "product": "aura-oversized-cashmere-coat",
-            "top_position": 77,
-            "left_position": 28
-          }
-        }
-      },
-      "block_order": [
-        "product_point_dBnzhe",
-        "product_point_rKQwbd",
-        "product_point_JjixBg"
-      ],
-      "name": "Shoppable Image",
-      "settings": {
-        "image": "shopify://shop_images/img1.jpg"
-      }
-    },
     "featured_blog_carousel_rfnxdi": {
       "type": "featured-blog-carousel",
       "name": "Featured Blog Carousel",
@@ -238,7 +200,6 @@
     "marquee_text_cMiqhH",
     "collection_list_thQPNq",
     "featured_products_GFTLFG",
-    "shoppable_image_mTy7Xm",
     "featured_blog_carousel_rfnxdi",
     "full_width_gallery_7tAPz6"
   ]
