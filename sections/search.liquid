@@ -82,19 +82,37 @@
   const rawSearchLabel = "{{ 'general.search.search_results' | t }}";
   const searchLabel = rawSearchLabel.includes('search_results') ? 'Search Results' : rawSearchLabel;
 
-  // --- GROWAVE GÖZCÜSÜ (MutationObserver) ---
-  // Bu kısım, sonuçlar değiştikçe Growave butonlarını otomatik tarar.
-  const sswObserver = new MutationObserver((mutations) => {
-    if (typeof sswRun === 'function') { sswRun(); }
-    if (window.ssw && typeof window.ssw === 'function') {
-      window.ssw('.ssw-faveit').faveit();
+  // --- 1. TIKLAMA YÖNETİCİSİ (Global) ---
+  // Sayfaya bir kez eklenir, hem koleksiyonda hem aramada linke gitmeyi engeller.
+  document.addEventListener('click', function(e) {
+    const heartBtn = e.target.closest('.ssw-faveit');
+    if (heartBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (typeof sswRun !== 'undefined' || (window.ssw && typeof window.ssw === 'function')) {
+        if (window.ssw && typeof window.ssw === 'function') {
+          window.ssw(heartBtn).faveit();
+        } else {
+          sswRun();
+        }
+      } else {
+        const productUrl = heartBtn.closest('.group').querySelector('a').href;
+        window.location.href = productUrl + '?wishlist=1'; 
+      }
     }
+  }, true); // Capture fazında yakalayarak link tetiklenmesini kesin durdurur.
+
+  // --- 2. GROWAVE GÖZCÜSÜ ---
+  const sswObserver = new MutationObserver(() => {
+    if (typeof sswRun === 'function') sswRun();
   });
 
   if (resultsContainer) {
     sswObserver.observe(resultsContainer, { childList: true });
   }
 
+  // --- 3. ARAMA MANTIĞI ---
   searchInput.addEventListener('input', function (e) {
     const searchTerm = e.target.value.trim();
     if (searchTerm.length <= 2) {
@@ -127,16 +145,14 @@
       .catch(err => console.error('Arama Hatası:', err));
   });
 
+  // --- 4. SONUÇLARI ÇİZDİRME ---
   function renderResults(results) {
     resultsContainer.innerHTML = results.map(item => {
       const isArticle = item.url.includes('/blogs/') || item.type === 'article';
       const mainImage = item.featured_image ? item.featured_image.url : (item.image || '');
       const hoverImage = !isArticle && item.images && item.images.length > 1 ? item.images[1].url : null;
 
-      let badgeHtml = '';
-      let priceHtml = '';
-      let actionButton = '';
-      let wishlistHtml = '';
+      let badgeHtml = '', priceHtml = '', actionButton = '', wishlistHtml = '';
 
       if (!isArticle) {
         const currentPrice = Number(item.price);
@@ -147,25 +163,23 @@
           badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md">${translations.sale}</span>`;
         }
         
-        // Growave Buton Yapısı
-       wishlistHtml = `
-      <div class="absolute top-3 right-3 z-30 ssw-wishlist-wrapper">
-        <button class="ssw-faveit ssw-wishlist-btn group/heart flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all" data-id="${item.id}">
-          <svg class="w-5 h-5 text-primary group-hover/heart:text-secondary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-          </svg>
-        </button>
-      </div>`;
+        wishlistHtml = `
+          <div class="absolute top-3 right-3 z-30 ssw-wishlist-wrapper">
+            <button type="button" class="ssw-faveit ssw-wishlist-btn group/heart flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all pointer-events-auto" data-id="${item.id}">
+              <svg class="w-5 h-5 text-primary group-hover/heart:text-secondary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </button>
+          </div>`;
 
-        priceHtml = `
-          <div class="mt-2 flex items-center gap-2">
+        priceHtml = `<div class="mt-2 flex items-center gap-2">
             ${isOnSale ? `<span class="text-gray-400 line-through text-[13px]">${formatMoney(comparePriceRaw)}</span>` : ''}
             <span class="text-primary text-[14px] font-medium">${formatMoney(item.price)}</span>
           </div>`;
 
         actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
-            <a href="${item.url}" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
+            <a href="${item.url}" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
               ${translations.viewProduct}
             </a>
           </div>`;
@@ -174,7 +188,7 @@
         priceHtml = `<div class="mt-2 text-secondary text-[12px] font-medium uppercase tracking-wider">${translations.article}</div>`;
         actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
-            <a href="${item.url}" class="w-full bg-black text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
+            <a href="${item.url}" class="w-full bg-black text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
               ${translations.readMore}
             </a>
           </div>`;
@@ -192,7 +206,7 @@
             ${actionButton}
           </div>
           <div class="pt-4 pb-2 flex flex-col items-center px-3">
-            <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px]">
+            <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px] font-body">
               ${item.title}
             </a>
             ${priceHtml}
@@ -200,51 +214,7 @@
         </div>`;
     }).join('');
     
-    // Shopify tema motoru tetikleme
     document.dispatchEvent(new CustomEvent('shopify:section:load'));
-
-    // renderResults fonksiyonunun en sonuna, kapatma parantezinden hemen önce:
-    setTimeout(() => {
-      // Growave objesinin varlığını kontrol et
-      if (typeof sswRun !== 'undefined') {
-        sswRun();
-        if (window.ssw && typeof window.ssw === 'function') {
-          window.ssw('.ssw-faveit').faveit();
-        }
-        console.log("Growave başarıyla tetiklendi.");
-      } else {
-        // Eğer sswRun hala yoksa, Growave'in ana objesini aramayı dene
-        console.warn("Growave (sswRun) henüz yüklenmedi. Uygulama ayarlarını kontrol edin.");
-        
-        // Alternatif tetikleyici (Bazı versiyonlarda bu kullanılır)
-        if (window.Growave && typeof window.Growave.init === 'function') {
-          window.Growave.init();
-        }
-      }
-      
-      // Shopify motorunu her halükarda uyar
-      document.dispatchEvent(new CustomEvent('shopify:section:load'));
-    }, 500); // Süreyi biraz daha artırdık
-
-    document.addEventListener('click', function(e) {
-      const heartBtn = e.target.closest('.ssw-faveit');
-      if (!heartBtn) return;
-
-      // Eğer Growave kütüphanesi (ssw) yüklüyse onu çalıştır
-      if (typeof sswRun !== 'undefined') {
-        // Growave'in kendi fonksiyonunu tetikle
-        if (window.ssw && typeof window.ssw === 'function') {
-          window.ssw(heartBtn).faveit();
-        } else {
-          sswRun();
-        }
-      } else {
-        // Growave yüklü değilse ürüne git (En azından kullanıcı boşluğa tıklamasın)
-        const productUrl = heartBtn.closest('.group').querySelector('a').href;
-        window.location.href = productUrl + '#wishlist'; 
-      }
-    });
-
   }
 </script>
 
