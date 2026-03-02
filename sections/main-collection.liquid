@@ -182,9 +182,18 @@
       body: JSON.stringify({ id: variantId, quantity: 1 }),
     })
       .then((res) => res.json())
-      .then(() => {
+      .then((cartData) => {
         btn.innerText = 'ADDED ✔';
         if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
+
+        // Update cart drawer content
+        document.dispatchEvent(
+          new CustomEvent('cart:updated', {
+            detail: { cart: cartData },
+            bubbles: true,
+          })
+        );
+
         setTimeout(() => {
           btn.innerText = '{{ "products.product.add_to_cart" | t }}';
         }, 2000);
