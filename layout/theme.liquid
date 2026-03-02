@@ -76,6 +76,39 @@
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 
     <script>
+      // Global Cart Drawer Functions
+      window.openCartDrawer = function () {
+        const drawer = document.getElementById('cart-drawer');
+        const overlay = document.getElementById('cart-drawer-overlay');
+        const content = document.getElementById('cart-drawer-content');
+
+        if (!drawer) return;
+
+        drawer.classList.remove('invisible');
+
+        setTimeout(() => {
+          overlay?.classList.replace('opacity-0', 'opacity-100');
+          content?.classList.replace('translate-x-full', 'translate-x-0');
+        }, 10);
+      };
+
+      window.closeCartDrawer = function () {
+        const drawer = document.getElementById('cart-drawer');
+        const overlay = document.getElementById('cart-drawer-overlay');
+        const content = document.getElementById('cart-drawer-content');
+
+        if (!drawer) return;
+
+        overlay?.classList.replace('opacity-100', 'opacity-0');
+        content?.classList.replace('translate-x-0', 'translate-x-full');
+
+        setTimeout(() => {
+          drawer.classList.add('invisible');
+        }, 500);
+      };
+    </script>
+
+    <script>
       const LuviaWishlist = {
         storageKey: 'luvia_wishlist_data',
 

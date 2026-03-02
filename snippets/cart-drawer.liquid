@@ -35,36 +35,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function closeCartDrawer() {
-    const drawer = document.getElementById('cart-drawer');
-    const overlay = document.getElementById('cart-drawer-overlay');
-    const content = document.getElementById('cart-drawer-content');
-
-    if (!drawer) return;
-
-    // Close animation
-    overlay?.classList.replace('opacity-100', 'opacity-0');
-    content?.classList.replace('translate-x-0', 'translate-x-full');
-
-    setTimeout(() => {
-      drawer.classList.add('invisible');
-    }, 500);
-  }
-
-  function openCartDrawer() {
-    const drawer = document.getElementById('cart-drawer');
-    const overlay = document.getElementById('cart-drawer-overlay');
-    const content = document.getElementById('cart-drawer-content');
-
-    if (!drawer) return;
-
-    drawer.classList.remove('invisible');
-
-    setTimeout(() => {
-      overlay?.classList.replace('opacity-0', 'opacity-100');
-      content?.classList.replace('translate-x-full', 'translate-x-0');
-    }, 10);
-  }
-</script>
