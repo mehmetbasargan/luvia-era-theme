@@ -148,12 +148,14 @@
         }
         
         // Growave Buton Yapısı
-        wishlistHtml = `
-        <div class="absolute top-3 right-3 z-30 ssw-wishlist-wrapper">
-          <span class="ssw-faveit ssw-wishlist-btn ssw-fave-btn" data-id="${item.id}" style="cursor:pointer; display:block !important; visibility:visible !important; opacity:1 !important;">
-            <i class="ssw-icon-heart-o"></i>
-          </span>
-        </div>`;
+       wishlistHtml = `
+      <div class="absolute top-3 right-3 z-30 ssw-wishlist-wrapper">
+        <button class="ssw-faveit ssw-wishlist-btn group/heart flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all" data-id="${item.id}">
+          <svg class="w-5 h-5 text-primary group-hover/heart:text-secondary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        </button>
+      </div>`;
 
         priceHtml = `
           <div class="mt-2 flex items-center gap-2">
@@ -224,6 +226,24 @@
       document.dispatchEvent(new CustomEvent('shopify:section:load'));
     }, 500); // Süreyi biraz daha artırdık
 
+    document.addEventListener('click', function(e) {
+      const heartBtn = e.target.closest('.ssw-faveit');
+      if (!heartBtn) return;
+
+      // Eğer Growave kütüphanesi (ssw) yüklüyse onu çalıştır
+      if (typeof sswRun !== 'undefined') {
+        // Growave'in kendi fonksiyonunu tetikle
+        if (window.ssw && typeof window.ssw === 'function') {
+          window.ssw(heartBtn).faveit();
+        } else {
+          sswRun();
+        }
+      } else {
+        // Growave yüklü değilse ürüne git (En azından kullanıcı boşluğa tıklamasın)
+        const productUrl = heartBtn.closest('.group').querySelector('a').href;
+        window.location.href = productUrl + '#wishlist'; 
+      }
+    });
 
   }
 </script>

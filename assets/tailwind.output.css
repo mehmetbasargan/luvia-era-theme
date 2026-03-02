@@ -2764,6 +2764,10 @@ p{
   color: var(--color-secondary);
 }
 
+.group\/heart:hover .group-hover\/heart\:text-secondary{
+  color: var(--color-secondary);
+}
+
 .group\/hotspot:hover .group-hover\/hotspot\:opacity-100{
   opacity: 1;
 }
