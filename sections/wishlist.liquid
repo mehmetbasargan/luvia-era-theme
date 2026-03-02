@@ -92,13 +92,10 @@
             }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                 </a>
                 <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
-                  <form method="post" action="/cart/add" class="m-0 custom-ajax-form">
-                    <input type="hidden" name="id" value="${firstVariantId}">
-                    <input type="hidden" name="quantity" value="1">
-                    <button type="submit" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer">
-                      {{ 'products.product.add_to_cart' | t }}
-                    </button>
-                  </form>
+                  <button type="button" onclick="handleWishlistAddToCart(event, '${firstVariantId}')" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer">
+                    {{ 'products.product.add_to_cart' | t }}
+                  </button>
+                </div>
                 </div>
               </div>
               <div class="pt-4 pb-2 flex flex-col items-center px-3">
@@ -126,6 +123,39 @@
         window.addEventListener('wishlist:updated', () => {
           checkEmpty();
         });
+
+        // --- WISHLIST ADD TO CART ---
+        function handleWishlistAddToCart(e, variantId) {
+          const btn = e.currentTarget;
+          btn.innerText = '...';
+
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: variantId, quantity: 1 }),
+          })
+            .then((res) => res.json())
+            .then((cartData) => {
+              btn.innerText = 'ADDED ✔';
+
+              // Update cart drawer
+              document.dispatchEvent(
+                new CustomEvent('cart:updated', {
+                  detail: { cart: cartData },
+                  bubbles: true,
+                })
+              );
+
+              if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
+
+              setTimeout(() => {
+                btn.innerText = '{{ "products.product.add_to_cart" | t }}';
+              }, 2000);
+            })
+            .catch(() => {
+              btn.innerText = 'ERROR';
+            });
+        }
 
         // --- SEPETE EKLEME (AJAX) ---
         container.querySelectorAll('.custom-ajax-form').forEach((form) => {
