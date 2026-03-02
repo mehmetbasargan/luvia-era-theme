@@ -18,6 +18,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // 1. ID listesini alıyoruz
     const wishlistIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
     const container = document.getElementById('wishlist-container');
     const emptyMessage = document.getElementById('wishlist-empty');
@@ -27,42 +28,38 @@
       return;
     }
 
+    // Fiyat formatlama (Shopify formatına uygun)
     const formatPrice = (cents) => {
-      if (!cents) return '';
       return (cents / 100).toLocaleString('{{ shop.locale }}', {
         style: 'currency',
         currency: '{{ cart.currency.iso_code }}',
       });
     };
 
+    // ÖNCE: Tüm ürünlerin handle bilgilerini bulmak için hızlı bir arama yapıyoruz
     const searchQuery = wishlistIds.map((id) => `id:${id}`).join(' OR ');
 
     fetch(`/search/suggest.json?q=${encodeURIComponent(searchQuery)}&resources[type]=product&resources[limit]=20`)
       .then((res) => res.json())
-      .then((data) => {
-        const products = data.resources.results.products;
-        if (!products || products.length === 0) {
+      .then(async (data) => {
+        const initialProducts = data.resources.results.products;
+        if (!initialProducts || initialProducts.length === 0) {
           emptyMessage.classList.remove('hidden');
           return;
         }
 
+        // ŞİMDİ: Her ürünün tam detayını (Varyantlar dahil) çekiyoruz
+        const fullProductPromises = initialProducts.map((p) => fetch(`/products/${p.handle}.js`).then((r) => r.json()));
+
+        const products = await Promise.all(fullProductPromises);
+
         container.innerHTML = products
           .map((product) => {
-            // --- 1. FİYAT DÜZELTME (ON SALE İÇİN) ---
-            // Gelen veri "1500" mü yoksa "1.500,00 TL" mi kontrol edip sayıya çeviriyoruz
-            const parsePrice = (val) => {
-              if (!val) return 0;
-              if (typeof val === 'number') return val;
-              return parseFloat(val.replace(/[^0-9.-]+/g, ''));
-            };
+            // Fiyat ve İndirim Kontrolü (Tam sayı değerleri üzerinden)
+            const isOnSale = product.compare_at_price > product.price;
 
-            const cPrice = parsePrice(product.compare_at_price);
-            const pPrice = parsePrice(product.price);
-            const isOnSale = cPrice > pPrice;
-
-            // --- 2. VARYANT HATASI ÇÖZÜMÜ ---
-            // suggest.json'da bazen 'variants' gelmez, 'id' direkt variant id olabilir veya 'variants[0].id' gerekebilir
-            let finalVariantId = product.variants && product.variants.length > 0 ? product.variants[0].id : product.id;
+            // VARYANT HATASINI ÇÖZEN KISIM: İlk mevcut varyantın gerçek ID'si
+            const firstVariantId = product.variants[0].id;
 
             return `
             <div class="group flex flex-col h-full bg-white overflow-hidden relative" id="wish-item-${product.id}">
@@ -73,7 +70,7 @@
                     ${
                       isOnSale
                         ? `
-                      <span class="inline-block bg-secondary text-white font-light text-[11px] px-2 py-1 tracking-widest uppercase shadow-md pointer-events-auto">
+                      <span class="inline-block bg-secondary text-white font-light text-[11px] px-2 py-1 tracking-widest uppercase shadow-md pointer-events-auto animate-fadeIn">
                         {{ 'products.product.on_sale' | t }}
                       </span>
                     `
@@ -93,14 +90,14 @@
                 </div>
 
                 <a href="${product.url}" class="block h-full w-full">
-                  <img src="${product.image}" alt="${
+                  <img src="${product.featured_image}" alt="${
               product.title
             }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                 </a>
 
                 <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
                   <form method="post" action="/cart/add" class="m-0">
-                    <input type="hidden" name="id" value="${finalVariantId}">
+                    <input type="hidden" name="id" value="${firstVariantId}">
                     <input type="hidden" name="quantity" value="1">
                     <button type="submit" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer">
                       {{ 'products.product.add_to_cart' | t }}
@@ -117,14 +114,22 @@
                 </a>
                 <div class="mt-2 flex items-center gap-2">
                   ${
-                    isOnSale ? `<span class="text-gray-400 line-through text-[13px]">${formatPrice(cPrice)}</span>` : ''
+                    isOnSale
+                      ? `<span class="text-gray-400 line-through text-[13px]">${formatPrice(
+                          product.compare_at_price
+                        )}</span>`
+                      : ''
                   }
-                  <span class="text-primary text-[14px] font-medium">${formatPrice(pPrice)}</span>
+                  <span class="text-primary text-[14px] font-medium">${formatPrice(product.price)}</span>
                 </div>
               </div>
             </div>`;
           })
           .join('');
+      })
+      .catch((err) => {
+        console.error('Wishlist Error:', err);
+        emptyMessage.classList.remove('hidden');
       });
   });
 </script>
