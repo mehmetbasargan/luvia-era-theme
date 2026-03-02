@@ -77,9 +77,42 @@
         if (totalPrice) {
           totalPrice.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
         }
+
+        // Update cart count bubbles
+        const cartBubbles = document.querySelectorAll('.cart-count-bubble');
+        cartBubbles.forEach((bubble) => {
+          const count = cart.item_count || 0;
+          bubble.innerText = count;
+          if (count > 0) {
+            bubble.classList.remove('hidden');
+          } else {
+            bubble.classList.add('hidden');
+          }
+        });
       })
       .catch((error) => console.error('Cart update error:', error));
   }
+
+  // Update cart count every 2 seconds
+  function updateCartCount() {
+    fetch('/cart.js?t=' + Date.now())
+      .then((response) => response.json())
+      .then((cart) => {
+        const cartBubbles = document.querySelectorAll('.cart-count-bubble');
+        cartBubbles.forEach((bubble) => {
+          const count = cart.item_count || 0;
+          bubble.innerText = count;
+          if (count > 0) {
+            bubble.classList.remove('hidden');
+          } else {
+            bubble.classList.add('hidden');
+          }
+        });
+      })
+      .catch((error) => console.error('Cart update error:', error));
+  }
+
+  setInterval(updateCartCount, 2000);
 
   // Listen for cart updates
   document.addEventListener('cart:updated', updateCartDrawer);
