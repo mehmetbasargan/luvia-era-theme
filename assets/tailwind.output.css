@@ -891,6 +891,10 @@ p{
   z-index: 70;
 }
 
+.z-40{
+  z-index: 40;
+}
+
 .order-first{
   order: -9999;
 }
@@ -1210,6 +1214,10 @@ p{
   height: 100%;
 }
 
+.h-9{
+  height: 2.25rem;
+}
+
 .min-h-\[1rem\]{
   min-height: 1rem;
 }
@@ -1317,6 +1325,10 @@ p{
 .w-max{
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-9{
+  width: 2.25rem;
 }
 
 .min-w-\[200px\]{

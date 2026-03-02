@@ -74,5 +74,62 @@
 
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    <script>
+      const WishlistManager = {
+        key: 'luvia_era_wishlist',
+
+        get: function () {
+          return JSON.parse(localStorage.getItem(this.key)) || [];
+        },
+
+        toggle: function (id) {
+          let list = this.get();
+          const index = list.indexOf(id.toString());
+          if (index > -1) {
+            list.splice(index, 1);
+          } else {
+            list.push(id.toString());
+          }
+          localStorage.setItem(this.key, JSON.stringify(list));
+          this.updateAllIcons(); // Tüm sayfadaki ikonları senkronize et
+          return index === -1;
+        },
+
+        updateAllIcons: function () {
+          const list = this.get();
+          document.querySelectorAll('.custom-wishlist-btn').forEach((btn) => {
+            const id = btn.getAttribute('data-id');
+            const svg = btn.querySelector('svg');
+            if (list.includes(id.toString())) {
+              svg.setAttribute('fill', 'currentColor');
+              svg.classList.add('text-secondary');
+            } else {
+              svg.setAttribute('fill', 'none');
+              svg.classList.remove('text-secondary');
+            }
+          });
+        },
+      };
+
+      // --- TIKLAMA YÖNETİCİSİ (Linke gitmeyi engeller) ---
+      document.addEventListener(
+        'click',
+        function (e) {
+          const btn = e.target.closest('.custom-wishlist-btn');
+          if (btn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const productId = btn.getAttribute('data-id');
+            WishlistManager.toggle(productId);
+          }
+        },
+        true
+      );
+
+      // Sayfa ilk açıldığında ikonları boya
+      document.addEventListener('DOMContentLoaded', () => WishlistManager.updateAllIcons());
+      // Arama sonuçları gibi dinamik içerikler için her saniye kontrol (Opsiyonel ama garanti)
+      setInterval(() => WishlistManager.updateAllIcons(), 1000);
+    </script>
   </body>
 </html>

@@ -11,7 +11,26 @@
       </span>
     {% endif %}
 
-    <a href="{{ product.url }}" class="block h-full w-full">
+    <div class="absolute top-3 right-3 z-40">
+      <button
+        type="button"
+        class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:scale-110 transition-all duration-300 pointer-events-auto cursor-pointer"
+        data-id="{{ product.id }}"
+        aria-label="Add to wishlist"
+      >
+        <svg
+          class="w-5 h-5 text-primary transition-colors pointer-events-none"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <a href="{{ product.url }}" class="block h-full w-full z-10">
       <img
         src="{{ product.featured_image | image_url: width: 600 }}"
         alt="{{ product.title }}"
@@ -58,10 +77,10 @@
     </div>
   </div>
 
-  <div class="pt-4 pb-2 flex flex-col items-center">
+  <div class="pt-4 pb-2 flex flex-col items-center px-3">
     <a
       href="{{ product.url }}"
-      class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase"
+      class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center"
     >
       {{ product.title }}
     </a>
