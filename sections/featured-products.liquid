@@ -3,15 +3,17 @@
     <div class="max-w-7xl mx-auto">
       <div class="flex justify-between items-end mb-12">
         <div>
-          <h4 class="text-primary font-light tracking-widest uppercase">{{ section.settings.section_title }}</h4>
-          <p class="text-primary mt-2 text-xs font-ligh uppercase tracking-widest">
+          <h2 class="text-primary font-light tracking-widest uppercase text-xl">
+            {{ section.settings.section_title }}
+          </h2>
+          <p class="text-primary mt-2 text-xs font-light uppercase tracking-widest">
             {{ section.settings.section_subtitle }}
           </p>
         </div>
         {% if section.settings.button_url %}
           <a
             href="{{ section.settings.button_url }}"
-            class="text-primary border-b border-line pb-1 hover:text-secondary hover:border-secondary transition-all"
+            class="text-primary border-b border-line pb-1 hover:text-secondary transition-all text-sm uppercase tracking-widest"
           >
             {{ section.settings.button_text }}
           </a>
@@ -20,36 +22,35 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {% for product in collections[section.settings.collection].products limit: 4 %}
-          <div class="group relative product-card-container">
-            <div class="absolute top-4 right-4 z-[100]">
-              <button
-                type="button"
-                class="luvia-wishlist-btn w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-lg transition-all duration-300 active:scale-90"
-                data-product-id="{{ product.id }}"
-                style="cursor: pointer !important; position: relative; border: none; -webkit-appearance: none;"
-              >
-                <svg
-                  class="w-5 h-5 heart-icon pointer-events-none"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                </svg>
-              </button>
-            </div>
-
+          <div class="group relative flex flex-col h-full" id="prod-{{ product.id }}">
             <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-40 bg-secondary text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase">
+                <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase">
                   {{ 'products.product.on_sale' | t }}
                 </span>
               {% endif %}
 
+              <div class="absolute top-4 right-4 z-50">
+                <button
+                  type="button"
+                  class="wishlist-trigger-btn w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none"
+                  data-product-id="{{ product.id }}"
+                >
+                  <svg
+                    class="w-5 h-5 heart-svg pointer-events-none"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                  </svg>
+                </button>
+              </div>
+
               <a href="{{ product.url }}" class="block w-full h-full relative z-10">
                 <img
-                  src="{{ product.featured_image | image_url: width: 700 }}"
+                  src="{{ product.featured_image | image_url: width: 600 }}"
                   class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
                   alt="{{ product.title }}"
                   height=""
@@ -57,7 +58,7 @@
                 >
                 {% if product.images[1] %}
                   <img
-                    src="{{ product.images[1] | image_url: width: 700 }}"
+                    src="{{ product.images[1] | image_url: width: 600 }}"
                     class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                     alt="{{ product.title }}"
                     height=""
@@ -66,11 +67,11 @@
                 {% endif %}
               </a>
 
-              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-40">
+              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
                 <button
                   type="button"
-                  onclick="handleAddToCartFeatured(event, '{{ product.selected_or_first_available_variant.id }}')"
-                  class="w-full cursor-pointer bg-primary text-white font-medium py-4 text-[11px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors"
+                  onclick="handleAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
+                  class="w-full bg-primary text-white py-4 text-[10px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
                 >
                   {% if product.available -%}
                     {{- 'products.product.add_to_cart' | t -}}
@@ -81,16 +82,19 @@
               </div>
             </div>
 
-            <div class="mt-6 text-center">
-              <a href="{{ product.url }}">
-                <h3 class="text-secondary text-[16px] font-medium tracking-wide uppercase">{{ product.title }}</h3>
-                <div class="mt-2 flex justify-center items-center gap-3">
-                  {% if product.compare_at_price > product.price -%}
-                    <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
-                  {%- endif %}
-                  <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
-                </div>
+            <div class="mt-4 text-center">
+              <a
+                href="{{ product.url }}"
+                class="text-secondary text-sm font-medium uppercase tracking-wider block mb-1"
+              >
+                {{- product.title -}}
               </a>
+              <div class="flex justify-center items-center gap-2">
+                {% if product.compare_at_price > product.price %}
+                  <span class="text-gray-400 line-through text-xs">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+                <span class="text-primary text-sm font-semibold">{{ product.price | money }}</span>
+              </div>
             </div>
           </div>
         {% endfor %}
@@ -100,45 +104,48 @@
 </div>
 
 <style>
-  .luvia-wishlist-btn.is-active svg {
+  /* Favori tıklandığında içini doldur */
+  .wishlist-trigger-btn.active svg {
     fill: #e11d48 !important;
     stroke: #e11d48 !important;
-  }
-  .luvia-wishlist-btn:hover {
-    background: #fdfdfd;
   }
 </style>
 
 <script>
-  // Sayfa yüklendiğinde favorileri kontrol et ve Tıklama Dinleyicisi ata
   document.addEventListener('DOMContentLoaded', () => {
+    // 1. Favori Durumlarını Yükle
     const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
 
-    document.querySelectorAll('.luvia-wishlist-btn').forEach((btn) => {
-      const pId = btn.dataset.productId;
-
-      // İlk hali işaretle
-      if (wishlistData.includes(pId)) {
-        btn.classList.add('is-active');
-      }
-
-      // Tıklama olayını bağla
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (window.LuviaWishlist) {
-          window.LuviaWishlist.toggle(pId);
-          btn.classList.toggle('is-active');
+    const updateButtons = () => {
+      document.querySelectorAll('.wishlist-trigger-btn').forEach((btn) => {
+        if (wishlistData.includes(btn.dataset.productId)) {
+          btn.classList.add('active');
         }
       });
+    };
+    updateButtons();
+
+    // 2. Favori Tıklama Olayı (Event Delegation)
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.wishlist-trigger-btn');
+      if (!btn) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const productId = btn.dataset.productId;
+      if (window.LuviaWishlist) {
+        window.LuviaWishlist.toggle(productId);
+        btn.classList.toggle('active');
+      }
     });
   });
 
-  function handleAddToCartFeatured(event, variantId) {
-    event.preventDefault();
-    const btn = event.currentTarget;
-    btn.disabled = true;
+  // 3. Sepete Ekleme Fonksiyonu
+  function handleAddToCart(e, variantId) {
+    const btn = e.currentTarget;
     btn.innerText = '...';
+
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -149,9 +156,25 @@
         btn.innerText = 'ADDED ✔';
         if (typeof openCartDrawer === 'function') openCartDrawer();
         setTimeout(() => {
-          btn.disabled = false;
           btn.innerText = '{{ "products.product.add_to_cart" | t }}';
         }, 2000);
+      })
+      .catch(() => {
+        btn.innerText = 'ERROR';
       });
   }
 </script>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "section_title", "label": "Title" },
+    { "type": "text", "id": "section_subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "button_text", "label": "Button Text" },
+    { "type": "url", "id": "button_url", "label": "Button URL" }
+  ],
+  "presets": [{ "name": "Featured Products" }]
+}
+{% endschema %}
