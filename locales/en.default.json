@@ -24,6 +24,7 @@
 		"share": "Share",
 		"added_to_favorites": "Added to favorites!",
 		"removed_from_favorites": "Removed from favorites",
+		"empty": "Your cart is empty",
 		"pagination": {
 			"previous": "Previous",
 			"next": "Next"
