@@ -75,33 +75,26 @@
     <script src="{{ 'wishlist-proxy.js' | asset_url }}" defer></script>
     <script src="{{ 'wishlist.js' | asset_url }}" defer></script>
     <script>
-      // Simple Wishlist Function
-      function toggleWishlist(productHandle, button) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const isAdded = button.classList.contains('added');
-        const heartIcon = button.querySelector('svg');
-
-        if (isAdded) {
-          button.classList.remove('added');
-          heartIcon.style.fill = 'none';
-          // Remove from wishlist logic here
-          console.log('Removed from wishlist:', productHandle);
-        } else {
-          button.classList.add('added');
-          heartIcon.style.fill = 'currentColor';
-          // Add to wishlist logic here
-          console.log('Added to wishlist:', productHandle);
-        }
-      }
-
-      // Add click listeners for wishlist buttons
+      // Simple Wishlist Click Handler
       document.addEventListener('click', function (e) {
         const wishlistBtn = e.target.closest('.wishlist-heart');
         if (wishlistBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Toggle visual state only
+          if (wishlistBtn.classList.contains('added')) {
+            wishlistBtn.classList.remove('added');
+            wishlistBtn.querySelector('svg').style.fill = 'none';
+          } else {
+            wishlistBtn.classList.add('added');
+            wishlistBtn.querySelector('svg').style.fill = 'currentColor';
+          }
+
+          // Simple alert for now
           const productHandle = wishlistBtn.dataset.productHandle;
-          toggleWishlist(productHandle, wishlistBtn);
+          const action = wishlistBtn.classList.contains('added') ? 'Added to' : 'Removed from';
+          console.log(`${action} wishlist:`, productHandle);
         }
       });
     </script>
