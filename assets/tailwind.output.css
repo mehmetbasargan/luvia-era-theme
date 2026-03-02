@@ -1077,10 +1077,6 @@ p{
   aspect-ratio: 16/10;
 }
 
-.aspect-\[16\/9\]{
-  aspect-ratio: 16/9;
-}
-
 .aspect-\[2\/3\]{
   aspect-ratio: 2/3;
 }
@@ -1095,14 +1091,6 @@ p{
 
 .aspect-video{
   aspect-ratio: 16 / 9;
-}
-
-.aspect-\[4\/3\]{
-  aspect-ratio: 4/3;
-}
-
-.aspect-\[1\/1\]{
-  aspect-ratio: 1/1;
 }
 
 .size-8{
@@ -1160,10 +1148,6 @@ p{
 
 .h-8{
   height: 2rem;
-}
-
-.h-9{
-  height: 2.25rem;
 }
 
 .h-\[100px\]{
@@ -1226,30 +1210,6 @@ p{
   height: 100%;
 }
 
-.h-\[400px\]{
-  height: 400px;
-}
-
-.h-\[\!400px\]{
-  height: !400px;
-}
-
-.\!h-\[400px\]{
-  height: 400px !important;
-}
-
-.\!h-\[100px\]{
-  height: 100px !important;
-}
-
-.h-52{
-  height: 13rem;
-}
-
-.h-96{
-  height: 24rem;
-}
-
 .min-h-\[1rem\]{
   min-height: 1rem;
 }
@@ -1308,10 +1268,6 @@ p{
 
 .w-8{
   width: 2rem;
-}
-
-.w-9{
-  width: 2.25rem;
 }
 
 .w-\[12px\]{
@@ -1926,42 +1882,6 @@ p{
   background-color: var(--color-white);
 }
 
-.bg-\[\#ffffff20\]{
-  background-color: #ffffff20;
-}
-
-.bg-\[\#ffffff\/20\]{
-  background-color: #ffffff/20;
-}
-
-.bg-\[\#ffffff\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-.bg-red-900{
-  --tw-bg-opacity: 1;
-  background-color: rgb(127 29 29 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#fff\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-.\!bg-\[\#fff\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
-}
-
-.bg-red-500\/30{
-  background-color: rgb(239 68 68 / 0.3);
-}
-
-.bg-gray-50\/50{
-  background-color: rgb(249 250 251 / 0.5);
-}
-
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -2004,10 +1924,6 @@ p{
 
 .p-8{
   padding: 2rem;
-}
-
-.p-0{
-  padding: 0px;
 }
 
 .px-10{
@@ -2181,10 +2097,6 @@ p{
 
 .pt-8{
   padding-top: 2rem;
-}
-
-.pl-0{
-  padding-left: 0px;
 }
 
 .text-left{
@@ -2876,38 +2788,6 @@ p{
     display: block;
   }
 
-  .md\:aspect-\[21\/9\]{
-    aspect-ratio: 21/9;
-  }
-
-  .md\:aspect-\[11\/9\]{
-    aspect-ratio: 11/9;
-  }
-
-  .md\:aspect-\[14\/9\]{
-    aspect-ratio: 14/9;
-  }
-
-  .md\:aspect-\[21\/11\]{
-    aspect-ratio: 21/11;
-  }
-
-  .md\:aspect-\[21\/6\]{
-    aspect-ratio: 21/6;
-  }
-
-  .md\:aspect-\[1\/0\.5\]{
-    aspect-ratio: 1/0.5;
-  }
-
-  .md\:aspect-\[3\/4\]{
-    aspect-ratio: 3/4;
-  }
-
-  .md\:aspect-\[3\/1\]{
-    aspect-ratio: 3/1;
-  }
-
   .md\:h-8{
     height: 2rem;
   }
@@ -2918,14 +2798,6 @@ p{
 
   .md\:h-\[152px\]{
     height: 152px;
-  }
-
-  .md\:h-\[600px\]{
-    height: 600px;
-  }
-
-  .md\:\!h-\[600px\]{
-    height: 600px !important;
   }
 
   .md\:w-1\/4{
