@@ -16,11 +16,12 @@
     {%- assign body_font = settings.body_font -%}
 
     <style>
+      /* Shopify Fontlarını Yükle */
       {{ heading_font | font_face: font_display: 'swap' }}
       {{ body_font | font_face: font_display: 'swap' }}
 
       :root {
-        /* Renkler - Shopify Panelinden Gelenler */
+        /* Renkler - Tek Bir İsim Altında Toplandı */
         --color-primary: {{ settings.primary_color }};
         --color-secondary: {{ settings.secondary_color }};
         --color-custombg: {{ settings.custom_bg_color }};
@@ -28,48 +29,31 @@
         --color-white: #ffffff;
         --color-black: #000000;
 
-        /* Fontlar */
+        /* Fontlar - Shopify Ayarlarından Gelen Dinamik Fontlar */
         --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
         --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
       }
 
       body {
-       /*  background-color: var(--color-custombg); */
+        background-color: var(--color-custombg);
         color: var(--color-primary);
         font-family: var(--font-body);
         margin: 0;
         -webkit-font-smoothing: antialiased;
-        /* Flash effect (FOUC) engellemek için */
+        /* Sayfa yüklenirken oluşabilecek titremeleri engellemek için */
         display: block !important;
         opacity: 1 !important;
+        transition: none !important;
+      }
+
+      h1, h2, h3, h4, h5, h6, .font-heading {
+        font-family: var(--font-heading);
       }
     </style>
 
     {{ content_for_header }}
     {{ 'tailwind.css' | asset_url | stylesheet_tag }}
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
-
-    {% style %}
-      {%- assign heading_font = settings.heading_font -%}
-      {%- assign body_font = settings.body_font -%}
-
-      {{ heading_font | font_face: font_display: 'swap' }}
-      {{ body_font | font_face: font_display: 'swap' }}
-
-      :root {
-        /* Colors from Shopify Settings */
-        --color-primary: {{ settings.primary_color }};
-        --color-secondary: {{ settings.secondary_color }};
-        --color-custombg: {{ settings.custom_bg_color }};
-        --color-line: {{ settings.line_color }};
-        --color-white: #ffffff;
-        --color-black: #000000;
-
-        /* Fonts from Shopify Settings */
-        --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
-        --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
-      }
-    {% endstyle %}
   </head>
 
   <body>
@@ -81,7 +65,6 @@
     {% sections 'header-group' %}
     {% render 'cart-drawer' %}
 
-    <!-- Customer data for wishlist functionality -->
     <script>
       window.customer = {% if customer %}{{ customer | json }}{% else %}false{% endif %};
     </script>
