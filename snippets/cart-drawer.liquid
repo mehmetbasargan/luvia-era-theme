@@ -44,7 +44,7 @@
 
   // Update cart drawer function
   function updateCartDrawer() {
-    fetch('/cart.js')
+    fetch('/cart.js?t=' + Date.now())
       .then((response) => response.json())
       .then((cart) => {
         const container = document.getElementById('cart-drawer-items');

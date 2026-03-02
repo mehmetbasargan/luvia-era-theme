@@ -128,7 +128,7 @@
           const btn = e.currentTarget;
           btn.innerText = '...';
 
-          fetch('/cart/add.js', {
+          fetch('/cart/add.js?t=' + Date.now(), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: variantId, quantity: 1 }),
@@ -165,7 +165,7 @@
             submitBtn.innerText = '...';
 
             try {
-              const response = await fetch('/cart/add.js', {
+              const response = await fetch('/cart/add.js?t=' + Date.now(), {
                 method: 'POST',
                 body: new FormData(form),
               });
