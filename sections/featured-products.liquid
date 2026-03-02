@@ -25,61 +25,70 @@
           <div class="group relative">
             <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[12px] px-3 py-1 tracking-widest uppercase shadow-sm">
+                <span class="absolute top-4 left-4 z-40 bg-secondary text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase shadow-sm">
                   {{ 'products.product.on_sale' | t }}
                 </span>
               {% endif %}
 
-              <div class="absolute top-4 right-4 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {% render 'wishlist-heart', product: product %}
+              <div class="absolute top-4 right-4 z-50 pointer-events-auto">
+                <button
+                  type="button"
+                  class="wishlist-btn-manual w-9 h-9 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all duration-300"
+                  data-product-id="{{ product.id }}"
+                  onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}'); this.classList.toggle('active'); }"
+                >
+                  <svg
+                    class="w-5 h-5 heart-icon pointer-events-none"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                  </svg>
+                </button>
               </div>
 
-              <a href="{{ product.url }}" class="block w-full h-full">
+              <a href="{{ product.url }}" class="block w-full h-full relative z-10">
                 <img
                   src="{{ product.featured_image | image_url: width: 700 }}"
-                  height=""
-                  width=""
-                  class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 z-0 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+                  class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
                   alt="{{ product.title }}"
                 >
-
                 {% if product.images[1] %}
                   <img
                     src="{{ product.images[1] | image_url: width: 700 }}"
-                    height=""
-                    width=""
-                    class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0"
+                    class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                     alt="{{ product.title }}"
                   >
                 {% endif %}
               </a>
 
-              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
+              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-40">
                 <button
                   type="button"
                   onclick="handleAddToCartFeatured(event, '{{ product.selected_or_first_available_variant.id }}')"
-                  class="w-full cursor-pointer bg-primary text-white font-medium py-4 text-xs uppercase tracking-[0.2em] hover:bg-secondary transition-colors"
-                  {% unless product.available %}
-                    disabled
-                  {% endunless %}
+                  class="w-full cursor-pointer bg-primary text-white font-medium py-4 text-[11px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors"
                 >
-                  {% if product.available %}
-                    {{ 'products.product.add_to_cart' | t }}
-                  {% else %}
-                    {{ 'products.product.sold_out' | t }}
-                  {% endif %}
+                  {% if product.available -%}
+                    {{- 'products.product.add_to_cart' | t -}}
+                  {%- else -%}
+                    {{- 'products.product.sold_out' | t -}}
+                  {%- endif %}
                 </button>
               </div>
             </div>
 
             <div class="mt-6 text-center">
               <a href="{{ product.url }}">
-                <h3 class="text-secondary text-[18px] font-medium tracking-wide uppercase">{{ product.title }}</h3>
+                <h3 class="text-secondary text-[16px] font-medium tracking-wide uppercase line-clamp-1">
+                  {{ product.title }}
+                </h3>
                 <div class="mt-2 flex justify-center items-center gap-3">
-                  {% if product.compare_at_price > product.price %}
-                    <span class="text-gray-400 line-through text-[14px]">{{ product.compare_at_price | money }}</span>
-                  {% endif %}
-                  <span class="text-primary text-[15px] font-medium">{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price -%}
+                    <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
+                  {%- endif %}
+                  <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
                 </div>
               </a>
             </div>
@@ -90,105 +99,53 @@
   </section>
 </div>
 
-<div
-  id="toast-container"
-  class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[9999] flex flex-col items-center pointer-events-none"
-></div>
+<style>
+  /* Favori Butonu Aktif Hali (Kırmızı Dolgu) */
+  .wishlist-btn-manual.active svg {
+    fill: #e11d48; /* secondary rengin veya kırmızı */
+    stroke: #e11d48;
+  }
+  .wishlist-btn-manual:hover svg {
+    transform: scale(1.1);
+  }
+</style>
 
 <script>
-  // Wishlist Kalplerini Sayfa Açıldığında Güncelle
+  // Sayfa yüklendiğinde favori durumlarını kontrol et
   document.addEventListener('DOMContentLoaded', () => {
-    if (window.LuviaWishlist && typeof LuviaWishlist.updateHearts === 'function') {
-      LuviaWishlist.updateHearts();
-    }
+    const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+    document.querySelectorAll('.wishlist-btn-manual').forEach((btn) => {
+      if (wishlistData.includes(btn.dataset.productId)) {
+        btn.classList.add('active');
+      }
+    });
   });
 
+  // Sepete ekleme ve çekmece fonksiyonları aynı kalıyor...
   function handleAddToCartFeatured(event, variantId) {
     event.preventDefault();
-    const btn = event.currentTarget; // target yerine currentTarget daha güvenlidir
-
+    const btn = event.currentTarget;
     btn.disabled = true;
     const originalText = btn.innerText;
-    btn.innerText = 'PROCESSING...';
+    btn.innerText = '...';
 
     fetch('/cart/add.js', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-      body: JSON.stringify({
-        id: variantId,
-        quantity: 1,
-      }),
+      headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+      body: JSON.stringify({ id: variantId, quantity: 1 }),
     })
-      .then((response) => {
-        if (!response.ok) throw new Error('Add to cart failed');
-        return response.json();
-      })
+      .then((res) => res.json())
       .then((item) => {
         btn.innerText = 'ADDED ✔';
-        showToast('Item added to bag');
-
-        // Temadaki sepet çekmecesini tetikle
-        if (typeof openCartDrawer === 'function') {
-          openCartDrawer();
-        }
-        if (typeof updateCartDrawer === 'function') {
-          updateCartDrawer();
-        }
-
+        if (typeof openCartDrawer === 'function') openCartDrawer();
         setTimeout(() => {
           btn.disabled = false;
           btn.innerText = originalText;
         }, 2000);
       })
-      .catch((error) => {
+      .catch((err) => {
         btn.innerText = 'ERROR';
         btn.disabled = false;
-        console.error('Error adding to cart:', error);
       });
   }
-
-  // ... (Diğer fonksiyonlar: openCartDrawer, updateCartDrawer, showToast aynı kalıyor) ...
-  // Not: Eğer bu fonksiyonlar global JS dosyasında varsa buradan silebilirsin,
-  // ancak garantilemek için burada kalmaları güvenlidir.
 </script>
-
-{% schema %}
-{
-  "name": "Featured Products",
-  "settings": [
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection to Feature"
-    },
-    {
-      "type": "text",
-      "id": "section_title",
-      "label": "Section Title"
-    },
-    {
-      "type": "text",
-      "id": "section_subtitle",
-      "label": "Section Subtitle"
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text"
-    },
-    {
-      "type": "url",
-      "id": "button_url",
-      "label": "Button URL"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Featured Products"
-    }
-  ]
-}
-{% endschema %}
