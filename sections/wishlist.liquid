@@ -3,14 +3,12 @@
     {{ 'wishlist.title' | t }}
   </h4>
 
-  <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-6">
-    <!-- Wishlist items will be loaded here via JavaScript -->
-  </div>
+  <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[200px]"></div>
 
   <div id="wishlist-empty" class="hidden text-center py-20">
     <p class="text-primary text-lg">{{ 'wishlist.empty' | t }}</p>
     <a
-      href="{{ routes.root_url }}"
+      href="{{ routes.all_products_collection_url }}"
       class="inline-block mt-4 px-6 py-3 bg-primary text-white text-sm uppercase tracking-[0.2em] hover:bg-secondary transition-colors"
     >
       {{ 'wishlist.continue_shopping' | t }}
@@ -20,124 +18,91 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    try {
-      // Get wishlist from localStorage
-      const wishlistItems = JSON.parse(localStorage.getItem('luvia_wishlist') || '[]');
+    // 1. Yeni sistemin anahtarını kullanıyoruz: 'luvia_wishlist_data' (ID'lerin olduğu yer)
+    const wishlistIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+    const container = document.getElementById('wishlist-container');
+    const emptyMessage = document.getElementById('wishlist-empty');
 
-      const container = document.getElementById('wishlist-container');
-      const emptyMessage = document.getElementById('wishlist-empty');
+    if (wishlistIds.length === 0) {
+      emptyMessage.classList.remove('hidden');
+      return;
+    }
 
-      if (wishlistItems.length === 0) {
-        container.classList.add('hidden');
-        emptyMessage.classList.remove('hidden');
-        return;
-      }
-
-      // Load products for each handle in wishlist
-      const productPromises = wishlistItems.map((handle) => {
-        return fetch(`/products/${handle}.js`)
-          .then((response) => response.json())
-          .catch((error) => {
-            console.error(`Error loading product ${handle}:`, error);
-            return null;
-          });
+    // Fiyat formatlama fonksiyonu (Shopify kuruşu paraya çevirir)
+    const formatPrice = (cents) => {
+      return (cents / 100).toLocaleString('{{ shop.locale }}', {
+        style: 'currency',
+        currency: '{{ cart.currency.iso_code }}',
       });
+    };
 
-      Promise.all(productPromises)
-        .then((products) => {
-          // Filter out null products (failed to load)
-          const validProducts = products.filter((product) => product !== null);
+    // 2. Tüm ürünleri tarayıp ID eşleşmesi olanları bulmak için /search kullanıyoruz (En hızlı yöntem)
+    const searchQuery = wishlistIds.map((id) => `id:${id}`).join(' OR ');
 
-          if (validProducts.length === 0) {
-            container.classList.add('hidden');
-            emptyMessage.classList.remove('hidden');
-            return;
-          }
+    fetch(`/search/suggest.json?q=${encodeURIComponent(searchQuery)}&resources[type]=product&resources[limit]=10`)
+      .then((res) => res.json())
+      .then((data) => {
+        const products = data.resources.results.products;
 
-          container.innerHTML = validProducts
-            .map(
-              (product) => `
-              <div class="product-card group relative">
-                <a href="${product.url}" class="block overflow-hidden bg-custombg">
-                  <div class="relative w-full pb-[125%] overflow-hidden bg-custombg">
-                    ${
-                      product.compare_at_price > product.price
-                        ? `<span class="absolute top-3 left-3 z-10 bg-secondary text-white font-bold text-[13px] px-2 py-1 tracking-widest uppercase">
-                        {{ 'products.product.on_sale' | t }}
-                      </span>`
-                        : ''
-                    }
+        if (!products || products.length === 0) {
+          emptyMessage.classList.remove('hidden');
+          return;
+        }
 
-                    <!-- Wishlist Heart Button -->
-                    <button
-                      type="button"
-                      class="wishlist-heart absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center bg-white backdrop-blur-sm rounded-full hover:bg-white transition-all duration-300 text-red-500"
-                      onclick="event.stopPropagation(); toggleWishlist('${product.handle}', this)"
-                      data-product-handle="${product.handle}"
-                    >
-                      <svg
-                        class="w-5 h-5 transition-all duration-300"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                      </svg>
-                    </button>
+        container.innerHTML = products
+          .map((product) => {
+            const isOnSale = product.compare_at_price > product.price;
 
-                    <img
-                      src="${product.featured_image}"
-                      alt="${product.title}"
-                      height=""
-                      width=""
-                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      loading="lazy"
-                    >
-                  </div>
+            return `
+            <div class="group flex flex-col h-full bg-white overflow-hidden relative" id="wish-item-${product.id}">
+              <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
+                ${
+                  isOnSale
+                    ? `<span class="absolute top-3 left-3 z-10 bg-secondary text-white font-light text-[12px] px-2 py-1 tracking-widest uppercase shadow-md">{{ 'products.product.on_sale' | t }}</span>`
+                    : ''
+                }
+
+                <div class="absolute top-3 right-3 z-50">
+                  <button type="button" 
+                          onclick="LuviaWishlist.toggle('${product.id}'); document.getElementById('wish-item-${
+              product.id
+            }').remove();"
+                          class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-secondary hover:text-white transition-all duration-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  </button>
+                </div>
+
+                <a href="${product.url}" class="block h-full w-full">
+                  <img src="${product.image}" alt="${
+              product.title
+            }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                 </a>
+              </div>
 
-                <div class="mt-4 text-center">
-                  <h3 class="text-sm font-body text-primary uppercase tracking-wider">
-                    <a href="${product.url}">${product.title}</a>
-                  </h3>
-                  <div class="mt-1 flex justify-center items-center gap-2">
-                    ${
-                      product.compare_at_price > product.price
-                        ? `<span class="text-gray-400 line-through text-xs">${product.compare_at_price}</span>`
-                        : ''
-                    }
-                    <p class="text-secondary font-body">${product.price}</p>
-                  </div>
+              <div class="pt-4 pb-2 flex flex-col items-center">
+                <a href="${
+                  product.url
+                }" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2">${
+              product.title
+            }</a>
+                <div class="mt-2 flex items-center gap-2">
+                  ${
+                    isOnSale
+                      ? `<span class="text-gray-400 line-through text-[13px]">${formatPrice(
+                          product.compare_at_price
+                        )}</span>`
+                      : ''
+                  }
+                  <span class="text-primary text-[14px] font-medium">${formatPrice(product.price)}</span>
                 </div>
               </div>
-            `
-            )
-            .join('');
-
-          // Re-initialize wishlist functionality for new buttons
-          if (window.wishlistManager) {
-            window.wishlistManager.updateAllHeartIcons();
-          }
-        })
-        .catch((error) => {
-          console.error('Error loading wishlist:', error);
-          showToast('Error loading wishlist');
-        });
-    } catch (error) {
-      console.error('Error loading wishlist:', error);
-      showToast('Error loading wishlist');
-    }
+            </div>`;
+          })
+          .join('');
+      })
+      .catch((err) => {
+        console.error('Wishlist yükleme hatası:', err);
+        emptyMessage.classList.remove('hidden');
+      });
   });
 </script>
-
-{% schema %}
-{
-  "name": "Wishlist",
-  "settings": [],
-  "presets": [
-    {
-      "name": "Wishlist"
-    }
-  ]
-}
-{% endschema %}

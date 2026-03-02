@@ -843,6 +843,14 @@ p{
   top: 100%;
 }
 
+.bottom-5{
+  bottom: 1.25rem;
+}
+
+.right-5{
+  right: 1.25rem;
+}
+
 .z-0{
   z-index: 0;
 }
@@ -893,6 +901,10 @@ p{
 
 .z-40{
   z-index: 40;
+}
+
+.z-\[9999\]{
+  z-index: 9999;
 }
 
 .order-first{
@@ -1226,6 +1238,10 @@ p{
   min-height: 40px;
 }
 
+.min-h-\[200px\]{
+  min-height: 200px;
+}
+
 .\!w-\[50px\]{
   width: 50px !important;
 }
@@ -1469,6 +1485,22 @@ p{
 
 .animate-ping{
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes bounce{
+  0%, 100%{
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50%{
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.animate-bounce{
+  animation: bounce 1s infinite;
 }
 
 .cursor-default{

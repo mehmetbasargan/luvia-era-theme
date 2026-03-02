@@ -74,28 +74,51 @@
 
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
-    <script>
-      const WishlistManager = {
-        key: 'luvia_era_wishlist',
 
-        get: function () {
-          return JSON.parse(localStorage.getItem(this.key)) || [];
+    <script>
+      const LuviaWishlist = {
+        storageKey: 'luvia_wishlist_data',
+
+        init() {
+          this.bindEvents();
+          this.renderUI();
+          setInterval(() => this.renderUI(), 1000);
         },
 
-        toggle: function (id) {
+        get() {
+          return JSON.parse(localStorage.getItem(this.storageKey)) || [];
+        },
+
+        toggle(id, title = 'Ürün') {
           let list = this.get();
           const index = list.indexOf(id.toString());
+          let added = false;
+
           if (index > -1) {
             list.splice(index, 1);
+            this.showToast(`${title} favorilerden çıkarıldı.`);
           } else {
             list.push(id.toString());
+            this.showToast(`${title} favorilere eklendi!`);
+            added = true;
           }
-          localStorage.setItem(this.key, JSON.stringify(list));
-          this.updateAllIcons(); // Tüm sayfadaki ikonları senkronize et
-          return index === -1;
+
+          localStorage.setItem(this.storageKey, JSON.stringify(list));
+          this.renderUI();
+          return added;
         },
 
-        updateAllIcons: function () {
+        // Kullanıcıya küçük bir bildirim gösterir
+        showToast(message) {
+          const toast = document.createElement('div');
+          toast.className =
+            'fixed bottom-5 right-5 bg-primary text-white px-6 py-3 rounded-full shadow-2xl z-[9999] animate-bounce text-[13px] uppercase tracking-widest';
+          toast.innerText = message;
+          document.body.appendChild(toast);
+          setTimeout(() => toast.remove(), 3000);
+        },
+
+        renderUI() {
           const list = this.get();
           document.querySelectorAll('.custom-wishlist-btn').forEach((btn) => {
             const id = btn.getAttribute('data-id');
@@ -109,27 +132,27 @@
             }
           });
         },
+
+        bindEvents() {
+          document.addEventListener(
+            'click',
+            (e) => {
+              const btn = e.target.closest('.custom-wishlist-btn');
+              if (btn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const id = btn.getAttribute('data-id');
+                // Ürün başlığını karttan çekmeye çalışalım (opsiyonel)
+                const title = btn.closest('.group')?.querySelector('a.text-primary')?.innerText || 'Ürün';
+                this.toggle(id, title);
+              }
+            },
+            true
+          );
+        },
       };
 
-      // --- TIKLAMA YÖNETİCİSİ (Linke gitmeyi engeller) ---
-      document.addEventListener(
-        'click',
-        function (e) {
-          const btn = e.target.closest('.custom-wishlist-btn');
-          if (btn) {
-            e.preventDefault();
-            e.stopPropagation();
-            const productId = btn.getAttribute('data-id');
-            WishlistManager.toggle(productId);
-          }
-        },
-        true
-      );
-
-      // Sayfa ilk açıldığında ikonları boya
-      document.addEventListener('DOMContentLoaded', () => WishlistManager.updateAllIcons());
-      // Arama sonuçları gibi dinamik içerikler için her saniye kontrol (Opsiyonel ama garanti)
-      setInterval(() => WishlistManager.updateAllIcons(), 1000);
+      LuviaWishlist.init();
     </script>
   </body>
 </html>
