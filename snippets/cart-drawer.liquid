@@ -66,8 +66,8 @@
               <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
                <button type="button" onclick="removeFromCart('${
                  item.key
-               }')" class="text-red-500 hover:text-red-700 text-[12px] uppercase tracking-wider">
-                    x
+               }')" class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50 transition-colors">
+                    {% render 'icon-close' %}
                   </button>
                 </div>
               <div class="flex justify-between items-end mt-4">

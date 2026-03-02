@@ -2661,6 +2661,11 @@ p{
   background-color: var(--color-white);
 }
 
+.hover\:bg-red-50:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:\!text-white:hover{
   color: var(--color-white) !important;
 }
