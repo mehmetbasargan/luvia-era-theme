@@ -104,7 +104,7 @@
 </div>
 
 <style>
-  /* Favori tıklandığında içini doldur */
+  /* Fill heart when favorited */
   .wishlist-trigger-btn.active svg {
     fill: #e11d48 !important;
     stroke: #e11d48 !important;
@@ -113,7 +113,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // 1. Favori Durumlarını Yükle
+    // 1. Load Favorite States
     const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
 
     const updateButtons = () => {
@@ -125,7 +125,7 @@
     };
     updateButtons();
 
-    // 2. Favori Tıklama Olayı (Event Delegation)
+    // 2. Favorite Click Event (Event Delegation)
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.wishlist-trigger-btn');
       if (!btn) return;
@@ -135,7 +135,7 @@
 
       const productId = btn.dataset.productId;
 
-      // Basit wishlist toggle
+      // Simple wishlist toggle
       const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
       const index = wishlistData.indexOf(productId);
 
@@ -153,13 +153,13 @@
       const toast = document.createElement('div');
       toast.className =
         'fixed bottom-5 right-5 bg-primary text-white px-6 py-3 rounded-full shadow-2xl z-[9999] animate-bounce text-[13px] uppercase tracking-widest';
-      toast.innerText = index > -1 ? 'Favorilerden çıkarıldı' : 'Favorilere eklendi!';
+      toast.innerText = index > -1 ? '{{ 'general.removed_from_favorites' | t }}' : '{{ 'general.added_to_favorites' | t }}';
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 3000);
     });
   });
 
-  // 3. Sepete Ekleme Fonksiyonu
+  // 3. Add to Cart Function
   function handleAddToCart(e, variantId) {
     const btn = e.currentTarget;
     btn.innerText = '...';

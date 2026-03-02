@@ -22,6 +22,8 @@
 		"secure_payment": "Secure & Encrypted Checkout",
 		"view_product": "VIEW PRODUCT",
 		"share": "Share",
+		"added_to_favorites": "Added to favorites!",
+		"removed_from_favorites": "Removed from favorites",
 		"pagination": {
 			"previous": "Previous",
 			"next": "Next"
