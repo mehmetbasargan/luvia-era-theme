@@ -139,6 +139,28 @@
         "button_url": "shopify://collections/all"
       }
     },
+    "shoppable_image_pCJhcM": {
+      "type": "shoppable-image",
+      "blocks": {
+        "product_point_gXCrUc": {
+          "type": "product_point",
+          "settings": {
+            "product": "",
+            "top_position": 50,
+            "left_position": 50
+          }
+        }
+      },
+      "block_order": [
+        "product_point_gXCrUc"
+      ],
+      "name": "Shoppable Image",
+      "settings": {
+        "image": "shopify://shop_images/alpcem-portrait-4917796_1280.jpg",
+        "title": "Curated Collections",
+        "subtitle": "Touch the details and discover the artistry behind every piece."
+      }
+    },
     "featured_blog_carousel_rfnxdi": {
       "type": "featured-blog-carousel",
       "name": "Featured Blog Carousel",
@@ -192,28 +214,6 @@
       "settings": {
         "title": "Follow the Era"
       }
-    },
-    "shoppable_image_pCJhcM": {
-      "type": "shoppable-image",
-      "blocks": {
-        "product_point_gXCrUc": {
-          "type": "product_point",
-          "settings": {
-            "product": "",
-            "top_position": 50,
-            "left_position": 50
-          }
-        }
-      },
-      "block_order": [
-        "product_point_gXCrUc"
-      ],
-      "name": "Shoppable Image",
-      "settings": {
-        "image": "shopify://shop_images/alpcem-portrait-4917796_1280.jpg",
-        "title": "Curated Collections",
-        "subtitle": "Touch the details and discover the artistry behind every piece."
-      }
     }
   },
   "order": [
@@ -222,8 +222,8 @@
     "marquee_text_cMiqhH",
     "collection_list_thQPNq",
     "featured_products_GFTLFG",
+    "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
-    "full_width_gallery_7tAPz6",
-    "shoppable_image_pCJhcM"
+    "full_width_gallery_7tAPz6"
   ]
 }
