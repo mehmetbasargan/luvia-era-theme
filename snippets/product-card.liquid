@@ -12,8 +12,6 @@
     {% endif %}
 
     <a href="{{ product.url }}" class="block h-full w-full">
-      <!-- Wishlist Heart Button -->
-      {% render 'wishlist-heart', product: product %}
       <img
         src="{{ product.featured_image | image_url: width: 600 }}"
         alt="{{ product.title }}"

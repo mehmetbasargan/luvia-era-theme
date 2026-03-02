@@ -72,29 +72,6 @@
 
     {% sections 'footer-group' %}
 
-    <script>
-      // Ultra Simple Wishlist Handler
-      document.addEventListener('click', function (e) {
-        const wishlistBtn = e.target.closest('.wishlist-heart');
-        if (wishlistBtn) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          const productHandle = wishlistBtn.dataset.productHandle;
-
-          // Toggle visual state
-          if (wishlistBtn.classList.contains('added')) {
-            wishlistBtn.classList.remove('added');
-            wishlistBtn.querySelector('svg').style.fill = 'none';
-            alert('Removed from wishlist: ' + productHandle);
-          } else {
-            wishlistBtn.classList.add('added');
-            wishlistBtn.querySelector('svg').style.fill = 'currentColor';
-            alert('Added to wishlist: ' + productHandle);
-          }
-        }
-      });
-    </script>
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
   </body>
