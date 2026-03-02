@@ -175,6 +175,7 @@
         if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
 
         // Update cart drawer content
+        console.log('Featured products: Dispatching cart:updated event');
         document.dispatchEvent(new CustomEvent('cart:updated', {
           detail: { cart: cartData },
           bubbles: true
