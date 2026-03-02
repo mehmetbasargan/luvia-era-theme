@@ -1250,6 +1250,10 @@ p{
   height: 100%;
 }
 
+.h-10{
+  height: 2.5rem;
+}
+
 .min-h-\[1rem\]{
   min-height: 1rem;
 }
@@ -1365,6 +1369,10 @@ p{
 .w-max{
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-10{
+  width: 2.5rem;
 }
 
 .min-w-\[200px\]{

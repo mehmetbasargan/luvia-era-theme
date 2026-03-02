@@ -28,12 +28,13 @@
                 </span>
               {% endif %}
 
-              <div class="absolute top-4 right-4 z-50">
+              <div class="absolute top-4 right-4 z-[100]">
                 <button
                   type="button"
-                  class="luvia-wishlist-btn w-9 h-9 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-md hover:bg-white transition-all duration-300"
-                  onclick="toggleWishlistManually(this, '{{ product.id }}')"
+                  class="luvia-wishlist-btn w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-300 cursor-pointer border-none"
+                  onclick="event.preventDefault(); event.stopPropagation(); toggleWishlistManually(this, '{{ product.id }}');"
                   data-product-id="{{ product.id }}"
+                  style="pointer-events: auto !important; position: relative;"
                 >
                   <svg
                     class="w-5 h-5 heart-icon pointer-events-none"
