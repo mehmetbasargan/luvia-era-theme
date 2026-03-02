@@ -124,7 +124,7 @@
         });
 
         // --- WISHLIST ADD TO CART ---
-        function handleWishlistAddToCart(e, variantId) {
+        window.handleWishlistAddToCart = function (e, variantId) {
           const btn = e.currentTarget;
           btn.innerText = '...';
 
@@ -154,7 +154,7 @@
             .catch(() => {
               btn.innerText = 'ERROR';
             });
-        }
+        };
 
         // --- SEPETE EKLEME (AJAX) ---
         container.querySelectorAll('.custom-ajax-form').forEach((form) => {
