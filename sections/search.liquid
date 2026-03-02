@@ -31,11 +31,11 @@
     id="search-header-wrapper"
     class="mb-8 border-b border-line pb-4 {% unless search.performed %}hidden{% endunless %}"
   >
-    <h6 id="dynamic-search-title" class="font-josefin text-2xl text-primary uppercase tracking-widest leading-relaxed">
+    <h5 id="dynamic-search-title" class=" font-light text-primary uppercase tracking-widest leading-relaxed">
       {% if search.performed %}
         {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
       {% endif %}
-    </h6>
+    </h5>
   </div>
 
   {% comment %} Sonuç Alanı {% endcomment %}
@@ -49,7 +49,7 @@
         {% endfor %}
       {% endif %}
     </div>
-    <div id="search-empty-message" class="hidden text-center py-20 font-josefin text-lg text-gray-500">
+    <div id="search-empty-message" class="hidden text-center py-20 text-lg text-primary">
       {{ 'general.search.no_results' | t }}
     </div>
   </div>

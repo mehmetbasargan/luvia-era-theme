@@ -1,12 +1,14 @@
 <div class="container mx-auto px-4 py-12">
-  <h1 class="text-3xl font-heading text-primary mb-8 text-center">{{ 'wishlist.title' | t }}</h1>
+  <h4 class="text-primary uppercase mb-8 text-center font-light tracking-widest border-b border-line pb-2">
+    {{ 'wishlist.title' | t }}
+  </h4>
 
   <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-6">
     <!-- Wishlist items will be loaded here via JavaScript -->
   </div>
 
   <div id="wishlist-empty" class="hidden text-center py-20">
-    <p class="text-gray-400 text-lg">{{ 'wishlist.empty' | t }}</p>
+    <p class="text-primary text-lg">{{ 'wishlist.empty' | t }}</p>
     <a
       href="{{ routes.root_url }}"
       class="inline-block mt-4 px-6 py-3 bg-primary text-white text-sm uppercase tracking-[0.2em] hover:bg-secondary transition-colors"
@@ -55,60 +57,60 @@
           container.innerHTML = validProducts
             .map(
               (product) => `
-      <div class="product-card group relative">
-        <a href="${product.url}" class="block overflow-hidden bg-custombg">
-          <div class="relative w-full pb-[125%] overflow-hidden bg-custombg">
-            ${
-              product.compare_at_price > product.price
-                ? `<span class="absolute top-3 left-3 z-10 bg-secondary text-white font-bold text-[13px] px-2 py-1 tracking-widest uppercase">
-                {{ 'products.product.on_sale' | t }}
-              </span>`
-                : ''
-            }
+              <div class="product-card group relative">
+                <a href="${product.url}" class="block overflow-hidden bg-custombg">
+                  <div class="relative w-full pb-[125%] overflow-hidden bg-custombg">
+                    ${
+                      product.compare_at_price > product.price
+                        ? `<span class="absolute top-3 left-3 z-10 bg-secondary text-white font-bold text-[13px] px-2 py-1 tracking-widest uppercase">
+                        {{ 'products.product.on_sale' | t }}
+                      </span>`
+                        : ''
+                    }
 
-            <!-- Wishlist Heart Button -->
-            <button
-              type="button"
-              class="wishlist-heart absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center bg-white backdrop-blur-sm rounded-full hover:bg-white transition-all duration-300 text-red-500"
-              onclick="event.stopPropagation(); toggleWishlist('${product.handle}', this)"
-              data-product-handle="${product.handle}"
-            >
-              <svg
-                class="w-5 h-5 transition-all duration-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </button>
+                    <!-- Wishlist Heart Button -->
+                    <button
+                      type="button"
+                      class="wishlist-heart absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center bg-white backdrop-blur-sm rounded-full hover:bg-white transition-all duration-300 text-red-500"
+                      onclick="event.stopPropagation(); toggleWishlist('${product.handle}', this)"
+                      data-product-handle="${product.handle}"
+                    >
+                      <svg
+                        class="w-5 h-5 transition-all duration-300"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </button>
 
-            <img
-              src="${product.featured_image}"
-              alt="${product.title}"
-              height=""
-              width=""
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              loading="lazy"
-            >
-          </div>
-        </a>
+                    <img
+                      src="${product.featured_image}"
+                      alt="${product.title}"
+                      height=""
+                      width=""
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    >
+                  </div>
+                </a>
 
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-body text-primary uppercase tracking-wider">
-            <a href="${product.url}">${product.title}</a>
-          </h3>
-          <div class="mt-1 flex justify-center items-center gap-2">
-            ${
-              product.compare_at_price > product.price
-                ? `<span class="text-gray-400 line-through text-xs">${product.compare_at_price}</span>`
-                : ''
-            }
-            <p class="text-secondary font-body">${product.price}</p>
-          </div>
-        </div>
-      </div>
-    `
+                <div class="mt-4 text-center">
+                  <h3 class="text-sm font-body text-primary uppercase tracking-wider">
+                    <a href="${product.url}">${product.title}</a>
+                  </h3>
+                  <div class="mt-1 flex justify-center items-center gap-2">
+                    ${
+                      product.compare_at_price > product.price
+                        ? `<span class="text-gray-400 line-through text-xs">${product.compare_at_price}</span>`
+                        : ''
+                    }
+                    <p class="text-secondary font-body">${product.price}</p>
+                  </div>
+                </div>
+              </div>
+            `
             )
             .join('');
 

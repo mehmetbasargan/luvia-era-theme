@@ -6,7 +6,7 @@
 <div class="group flex flex-col h-full bg-white overflow-hidden relative">
   <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
     {% if product.compare_at_price > product.price %}
-      <span class="absolute top-3 left-3 z-10 bg-secondary text-white font-bold text-[13px] px-2 py-1 tracking-widest uppercase">
+      <span class="absolute top-3 left-3 z-10 bg-secondary text-white font-light text-[12px] px-2 py-1 tracking-widest uppercase">
         {{ 'products.product.on_sale' | t }}
       </span>
     {% endif %}
@@ -35,7 +35,6 @@
       {% endif %}
     </a>
 
-    {% comment %} ESKİ <a> ETİKETİNİ SİLİP YERİNE BU FORMU KOY MEHMET {% endcomment %}
     <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
       {%- assign product_form_id = 'quick-add-' | append: section.id | append: '-' | append: product.id -%}
 

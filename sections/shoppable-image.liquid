@@ -1,12 +1,15 @@
-<section class="relative w-full py-12 px-4 md:px-10">
-  <div class="container overflow-visible rounded-sm relative group">
-    <div class="relative w-full aspect-[16/9] md:aspect-[21/9]">
+<section class="relative w-full  bg-white ">
+  <div class="max-w-7xl mx-auto px-4 mb-10 flex justify-between items-end">
+    <div>
+      <h2 class="text-3xl font-light uppercase tracking-widest">Editor's Picks</h2>
+      <p class="text-primary mt-2">Luvia Era Capsule Collection</p>
+    </div>
+  </div>
+
+  <div class="overflow-visible rounded-sm relative group">
+    <div class="relative w-full" style="height: 600px;">
       {% if section.settings.image != blank %}
-        {{
-          section.settings.image
-          | image_url: width: 2500
-          | image_tag: class: 'w-full h-full object-cover shadow-2xl'
-        }}
+        {{ section.settings.image | image_url: width: 2500 | image_tag: class: 'w-full h-full object-cover' }}
       {% else %}
         {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-200' }}
       {% endif %}
@@ -82,6 +85,18 @@
       "type": "image_picker",
       "id": "image",
       "label": "Lifestyle Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Curated Collections"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Touch the details and discover the artistry behind every piece."
     }
   ],
   "blocks": [

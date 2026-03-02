@@ -1,6 +1,7 @@
 <button
   type="button"
-  class="wishlist-heart absolute top-3 right-3 z-20 w-9 h-9 flex items-center justify-center bg-white backdrop-blur-sm rounded-full hover:bg-white transition-all duration-300"
+  class="wishlist-heart absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center text-primary backdrop-blur-sm rounded-full transition-all duration-300"
+  style="background-color: rgba(255, 255, 255, 0.8);"
   onclick="event.stopPropagation(); toggleWishlist('{{ product.handle }}', this)"
   data-product-handle="{{ product.handle }}"
 >
