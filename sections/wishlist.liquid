@@ -41,7 +41,6 @@
       .then((res) => res.json())
       .then((data) => {
         const products = data.resources.results.products;
-
         if (!products || products.length === 0) {
           emptyMessage.classList.remove('hidden');
           return;
@@ -49,13 +48,21 @@
 
         container.innerHTML = products
           .map((product) => {
-            // Fiyat Kontrolü (On Sale Etiketi İçin)
-            const cPrice = parseFloat(product.compare_at_price || 0);
-            const pPrice = parseFloat(product.price || 0);
+            // --- 1. FİYAT DÜZELTME (ON SALE İÇİN) ---
+            // Gelen veri "1500" mü yoksa "1.500,00 TL" mi kontrol edip sayıya çeviriyoruz
+            const parsePrice = (val) => {
+              if (!val) return 0;
+              if (typeof val === 'number') return val;
+              return parseFloat(val.replace(/[^0-9.-]+/g, ''));
+            };
+
+            const cPrice = parsePrice(product.compare_at_price);
+            const pPrice = parsePrice(product.price);
             const isOnSale = cPrice > pPrice;
 
-            // Sepete Ekleme İçin Variant ID (İlk mevcut varyantı al)
-            const variantId = product.variants && product.variants.length > 0 ? product.variants[0].id : '';
+            // --- 2. VARYANT HATASI ÇÖZÜMÜ ---
+            // suggest.json'da bazen 'variants' gelmez, 'id' direkt variant id olabilir veya 'variants[0].id' gerekebilir
+            let finalVariantId = product.variants && product.variants.length > 0 ? product.variants[0].id : product.id;
 
             return `
             <div class="group flex flex-col h-full bg-white overflow-hidden relative" id="wish-item-${product.id}">
@@ -92,8 +99,8 @@
                 </a>
 
                 <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
-                  <form method="post" action="/cart/add" accept-charset="UTF-8" class="m-0" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="${variantId}">
+                  <form method="post" action="/cart/add" class="m-0">
+                    <input type="hidden" name="id" value="${finalVariantId}">
                     <input type="hidden" name="quantity" value="1">
                     <button type="submit" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer">
                       {{ 'products.product.add_to_cart' | t }}
@@ -110,22 +117,14 @@
                 </a>
                 <div class="mt-2 flex items-center gap-2">
                   ${
-                    isOnSale
-                      ? `<span class="text-gray-400 line-through text-[13px]">${formatPrice(
-                          product.compare_at_price
-                        )}</span>`
-                      : ''
+                    isOnSale ? `<span class="text-gray-400 line-through text-[13px]">${formatPrice(cPrice)}</span>` : ''
                   }
-                  <span class="text-primary text-[14px] font-medium">${formatPrice(product.price)}</span>
+                  <span class="text-primary text-[14px] font-medium">${formatPrice(pPrice)}</span>
                 </div>
               </div>
             </div>`;
           })
           .join('');
-      })
-      .catch((err) => {
-        console.error('Wishlist yükleme hatası:', err);
-        emptyMessage.classList.remove('hidden');
       });
   });
 </script>
