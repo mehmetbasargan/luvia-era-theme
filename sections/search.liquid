@@ -203,24 +203,26 @@
 
     // renderResults fonksiyonunun en sonuna, kapatma parantezinden hemen önce:
     setTimeout(() => {
-      if (window.sswApp && window.sswApp.wishlist) {
-        // Growave'in yeni nesil SDK'sı varsa
-        window.sswApp.wishlist.renderButtons('.ssw-faveit');
-      } else if (typeof sswRun === 'function') {
-        // Eski nesil tetikleyici
+      // Growave objesinin varlığını kontrol et
+      if (typeof sswRun !== 'undefined') {
         sswRun();
-      }
-
-      // Eğer hala tık yoksa, manuel tetikleme (Brute Force)
-      document.querySelectorAll('.ssw-faveit').forEach(btn => {
-        if (!btn.classList.contains('ssw-ready')) {
-          // Growave'in butonları tanıması için gereken event'i simüle et
-          btn.dispatchEvent(new Event('mouseenter')); 
+        if (window.ssw && typeof window.ssw === 'function') {
+          window.ssw('.ssw-faveit').faveit();
         }
-      });
+        console.log("Growave başarıyla tetiklendi.");
+      } else {
+        // Eğer sswRun hala yoksa, Growave'in ana objesini aramayı dene
+        console.warn("Growave (sswRun) henüz yüklenmedi. Uygulama ayarlarını kontrol edin.");
+        
+        // Alternatif tetikleyici (Bazı versiyonlarda bu kullanılır)
+        if (window.Growave && typeof window.Growave.init === 'function') {
+          window.Growave.init();
+        }
+      }
       
-      console.log("Growave zorla uyandırıldı!");
-    }, 300); // Süreyi biraz artırdık, garanti olsun.
+      // Shopify motorunu her halükarda uyar
+      document.dispatchEvent(new CustomEvent('shopify:section:load'));
+    }, 500); // Süreyi biraz daha artırdık
 
 
   }
@@ -241,20 +243,23 @@
     }
   }
 
-  /* Growave butonlarını zorla görünür yap */
-  .ssw-wishlist-wrapper .ssw-faveit {
-    display: block !important;
+  /* Growave butonlarını hayalet modundan çıkar */
+  .ssw-faveit {
+    display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    min-width: 30px;
-    min-height: 30px;
-    z-index: 50 !important;
+    position: relative;
+    z-index: 40;
+    min-width: 24px;
+    min-height: 24px;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* İkonun rengini ve boyutunu garantiye al */
-  .ssw-wishlist-wrapper i.ssw-icon-heart-o {
-    color: var(--color-primary) !important;
-    font-size: 20px !important;
+  /* İkonun görünürlüğünü garanti et */
+  .ssw-faveit i {
     display: inline-block !important;
+    font-style: normal;
+    color: var(--color-primary) !important;
   }
 </style>
