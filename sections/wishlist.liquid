@@ -18,7 +18,6 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // 1. ID listesini alıyoruz
     const wishlistIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
     const container = document.getElementById('wishlist-container');
     const emptyMessage = document.getElementById('wishlist-empty');
@@ -28,7 +27,6 @@
       return;
     }
 
-    // Fiyat formatlama (Shopify formatına uygun)
     const formatPrice = (cents) => {
       return (cents / 100).toLocaleString('{{ shop.locale }}', {
         style: 'currency',
@@ -36,7 +34,6 @@
       });
     };
 
-    // ÖNCE: Tüm ürünlerin handle bilgilerini bulmak için hızlı bir arama yapıyoruz
     const searchQuery = wishlistIds.map((id) => `id:${id}`).join(' OR ');
 
     fetch(`/search/suggest.json?q=${encodeURIComponent(searchQuery)}&resources[type]=product&resources[limit]=20`)
@@ -48,7 +45,6 @@
           return;
         }
 
-        // ŞİMDİ: Her ürünün tam detayını (Varyantlar dahil) çekiyoruz
         const fullProductPromises = initialProducts.map((p) => fetch(`/products/${p.handle}.js`).then((r) => r.json()));
         const products = await Promise.all(fullProductPromises);
 
@@ -64,18 +60,15 @@
                   <div class="flex-1">
                     ${
                       isOnSale
-                        ? `
-                      <span class="inline-block bg-secondary text-white font-light text-[11px] px-2 py-1 tracking-widest uppercase shadow-md pointer-events-auto animate-fadeIn">
-                        {{ 'products.product.on_sale' | t }}
-                      </span>`
+                        ? `<span class="inline-block bg-secondary text-white font-light text-[11px] px-2 py-1 tracking-widest uppercase shadow-md pointer-events-auto animate-fadeIn">{{ 'products.product.on_sale' | t }}</span>`
                         : ''
                     }
                   </div>
-                  <button type="button" 
-                          onclick="LuviaWishlist.toggle('${product.id}'); document.getElementById('wish-item-${
+                  <button type="button" onclick="LuviaWishlist.toggle('${
+                    product.id
+                  }'); document.getElementById('wish-item-${
               product.id
-            }').remove();"
-                          class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-secondary hover:text-white transition-all duration-300 ml-auto pointer-events-auto">
+            }').remove();" class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-secondary hover:text-white transition-all duration-300 ml-auto pointer-events-auto">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                   </button>
                 </div>
@@ -85,7 +78,7 @@
             }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                 </a>
                 <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
-                  <form method="post" action="/cart/add" class="m-0 custom-ajax-cart">
+                  <form method="post" action="/cart/add" class="m-0 custom-ajax-form">
                     <input type="hidden" name="id" value="${firstVariantId}">
                     <input type="hidden" name="quantity" value="1">
                     <button type="submit" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer">
@@ -115,8 +108,8 @@
           })
           .join('');
 
-        // --- ÇEKMECEYİ TETİKLEMEK İÇİN FORM DİNLEYİCİSİ ---
-        container.querySelectorAll('.custom-ajax-cart').forEach((form) => {
+        // --- GELİŞMİŞ ÇEKMECE TETİKLEYİCİ ---
+        container.querySelectorAll('.custom-ajax-form').forEach((form) => {
           form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitBtn = form.querySelector('button');
@@ -130,34 +123,40 @@
               });
 
               if (response.ok) {
-                const cartData = await response.json();
+                const productData = await response.json();
 
-                // 1. YÖNTEM: Global Event (Prestige, Impact, Luvia temaları için)
+                // 1. ADIM: Temadaki sepet çekmecesini (drawer) açmak için gereken her şeyi tetikle
+                // Luvia/Prestige/Dawn gibi birçok temada bu event çekmeceyi uyandırır
                 document.dispatchEvent(
                   new CustomEvent('cart:updated', {
-                    detail: { cart: cartData },
+                    detail: { cart: productData },
                     bubbles: true,
                   })
                 );
 
-                // 2. YÖNTEM: Dawn/Sense Çekmece Tetikleyici
-                const drawer = document.querySelector('cart-drawer');
+                // AJAX sepet kütüphanesini (eğer yüklüyse) uyandır
+                if (window.theme && window.theme.CartDrawer) {
+                  window.theme.CartDrawer.open();
+                }
+
+                // 2. ADIM: Çekmeceyi manuel zorla (Dawn ve türevleri için)
+                const drawer = document.querySelector('cart-drawer') || document.querySelector('.cart-drawer');
                 if (drawer) {
-                  // Sepet içeriğini yenile ve aç
+                  // Çekmece içeriğini tazeleyelim
                   fetch(`${window.location.pathname}?sections=cart-drawer`)
-                    .then((res) => res.json())
+                    .then((r) => r.json())
                     .then((html) => {
-                      const inner = new DOMParser()
+                      const newContent = new DOMParser()
                         .parseFromString(html['cart-drawer'], 'text/html')
-                        .querySelector('#CartDrawer');
-                      if (inner) document.querySelector('#CartDrawer').innerHTML = inner.innerHTML;
-                      drawer.classList.add('active');
+                        .getElementById('CartDrawer');
+                      const currentDrawer = document.getElementById('CartDrawer');
+                      if (newContent && currentDrawer) currentDrawer.innerHTML = newContent.innerHTML;
+
+                      drawer.classList.add('active', 'is-open');
+                      drawer.setAttribute('open', '');
                       document.body.classList.add('overflow-hidden');
                     });
                 }
-
-                // 3. YÖNTEM: Alternatif Sınıf Tetikleme
-                document.getElementById('CartDrawer')?.classList.add('active');
 
                 submitBtn.innerText = 'EKLEDİ!';
                 setTimeout(() => {
