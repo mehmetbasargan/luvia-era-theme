@@ -82,14 +82,15 @@
   const rawSearchLabel = "{{ 'general.search.search_results' | t }}";
   const searchLabel = rawSearchLabel.includes('search_results') ? 'Search Results' : rawSearchLabel;
 
-  // --- 1. TIKLAMA YÖNETİCİSİ (Global) ---
-  // Sayfaya bir kez eklenir, hem koleksiyonda hem aramada linke gitmeyi engeller.
+  // --- 1. GLOBAL TIKLAMA YÖNETİCİSİ ---
   document.addEventListener('click', function(e) {
     const heartBtn = e.target.closest('.ssw-faveit');
     if (heartBtn) {
+      // LINKI DURDUR
       e.preventDefault();
       e.stopPropagation();
 
+      // Growave yüklü mü kontrol et ve çalıştır
       if (typeof sswRun !== 'undefined' || (window.ssw && typeof window.ssw === 'function')) {
         if (window.ssw && typeof window.ssw === 'function') {
           window.ssw(heartBtn).faveit();
@@ -101,18 +102,9 @@
         window.location.href = productUrl + '?wishlist=1'; 
       }
     }
-  }, true); // Capture fazında yakalayarak link tetiklenmesini kesin durdurur.
+  }, true);
 
-  // --- 2. GROWAVE GÖZCÜSÜ ---
-  const sswObserver = new MutationObserver(() => {
-    if (typeof sswRun === 'function') sswRun();
-  });
-
-  if (resultsContainer) {
-    sswObserver.observe(resultsContainer, { childList: true });
-  }
-
-  // --- 3. ARAMA MANTIĞI ---
+  // --- 2. ARAMA MANTIĞI ---
   searchInput.addEventListener('input', function (e) {
     const searchTerm = e.target.value.trim();
     if (searchTerm.length <= 2) {
@@ -145,7 +137,7 @@
       .catch(err => console.error('Arama Hatası:', err));
   });
 
-  // --- 4. SONUÇLARI ÇİZDİRME ---
+  // --- 3. SONUÇLARI ÇİZDİRME ---
   function renderResults(results) {
     resultsContainer.innerHTML = results.map(item => {
       const isArticle = item.url.includes('/blogs/') || item.type === 'article';
@@ -163,10 +155,15 @@
           badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md">${translations.sale}</span>`;
         }
         
+        // Wishlist Butonu - Linkin DIŞINDA ve ÜSTÜNDE olması için Z-INDEX 50
+        // Onclick ekleyerek tarayıcıya "linki unut" diyoruz.
         wishlistHtml = `
-          <div class="absolute top-3 right-3 z-30 ssw-wishlist-wrapper">
-            <button type="button" class="ssw-faveit ssw-wishlist-btn group/heart flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all pointer-events-auto" data-id="${item.id}">
-              <svg class="w-5 h-5 text-primary group-hover/heart:text-secondary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="absolute top-3 right-3 z-50">
+            <button type="button" 
+                    onclick="event.preventDefault(); event.stopPropagation();"
+                    class="ssw-faveit ssw-wishlist-btn group/heart flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all pointer-events-auto" 
+                    data-id="${item.id}">
+              <svg class="w-5 h-5 text-primary group-hover/heart:text-secondary transition-colors pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
               </svg>
             </button>
@@ -178,16 +175,16 @@
           </div>`;
 
         actionButton = `
-          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
+          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
             <a href="${item.url}" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
               ${translations.viewProduct}
             </a>
           </div>`;
       } else {
         badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white font-bold text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
-        priceHtml = `<div class="mt-2 text-secondary text-[12px] font-medium uppercase tracking-wider">${translations.article}</div>`;
+        priceHtml = `<div class="mt-2 text-secondary text-[12px] font-medium uppercase tracking-wider font-body">${translations.article}</div>`;
         actionButton = `
-          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
+          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
             <a href="${item.url}" class="w-full bg-black text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
               ${translations.readMore}
             </a>
@@ -199,7 +196,7 @@
           <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
             ${badgeHtml}
             ${wishlistHtml}
-            <a href="${item.url}" class="block h-full w-full">
+            <a href="${item.url}" class="block h-full w-full z-10">
               <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-opacity duration-700 ${hoverImage ? 'group-hover:opacity-0' : ''}" loading="lazy">
               ${hoverImage ? `<img src="${hoverImage}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">` : ''}
             </a>
@@ -215,6 +212,11 @@
     }).join('');
     
     document.dispatchEvent(new CustomEvent('shopify:section:load'));
+    
+    // Growave Tetikleme (Gecikmeli)
+    setTimeout(() => {
+      if (typeof sswRun === 'function') sswRun();
+    }, 300);
   }
 </script>
 
