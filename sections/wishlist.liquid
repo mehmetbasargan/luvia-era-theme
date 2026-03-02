@@ -126,6 +126,51 @@
             </div>`;
           })
           .join('');
+
+        // --- ÇEKMECEYİ TETİKLEMEK İÇİN FORM DİNLEYİCİSİ ---
+        const cartForms = container.querySelectorAll('form[action="/cart/add"]');
+        cartForms.forEach((form) => {
+          form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Sayfa yenilemeyi durdur
+
+            const submitBtn = form.querySelector('button');
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = '...'; // Yükleniyor efekti
+
+            const formData = new FormData(form);
+
+            try {
+              const response = await fetch('/cart/add.js', {
+                method: 'POST',
+                body: formData,
+              });
+
+              if (response.ok) {
+                // 1. Temadaki sepet çekmecesini tetikle (Genelde bu event kullanılır)
+                document.dispatchEvent(
+                  new CustomEvent('cart:updated', {
+                    detail: { product: await response.json() },
+                  })
+                );
+
+                // 2. Eğer teman farklı bir tetikleyici kullanıyorsa (Örn: Dawn/Sense):
+                if (window.cartDrawer) {
+                  window.cartDrawer.open();
+                } else if (document.querySelector('cart-drawer')) {
+                  document.querySelector('cart-drawer').classList.add('active');
+                }
+
+                submitBtn.innerText = 'EKLEDİ!';
+                setTimeout(() => {
+                  submitBtn.innerText = originalText;
+                }, 2000);
+              }
+            } catch (error) {
+              console.error('Sepet hatası:', error);
+              window.location.href = '/cart'; // Hata olursa garantiye alıp sepet sayfasına yolla
+            }
+          });
+        });
       })
       .catch((err) => {
         console.error('Wishlist Error:', err);
