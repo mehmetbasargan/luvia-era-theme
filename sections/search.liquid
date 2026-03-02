@@ -148,12 +148,12 @@
         }
         
         // Growave Buton Yapısı
-        wishlistHtml = `
-          <div class="absolute top-3 right-3 z-30">
-            <div class="ssw-faveit ssw-wishlist-btn ssw-fave-btn ssw-wishlist-btn-${item.id}" data-id="${item.id}">
-              <i class="ssw-icon-heart-o"></i>
-            </div>
-          </div>`;
+       wishlistHtml = `
+        <div class="absolute top-3 right-3 z-30 ssw-wishlist-wrapper">
+          <button class="ssw-faveit ssw-wishlist-btn ssw-fave-btn" data-id="${item.id}" aria-label="Add to Wishlist">
+            <i class="ssw-icon-heart-o"></i>
+          </button>
+        </div>`;
 
         priceHtml = `
           <div class="mt-2 flex items-center gap-2">
@@ -200,6 +200,29 @@
     
     // Shopify tema motoru tetikleme
     document.dispatchEvent(new CustomEvent('shopify:section:load'));
+
+    // renderResults fonksiyonunun en sonuna, kapatma parantezinden hemen önce:
+    setTimeout(() => {
+      if (window.sswApp && window.sswApp.wishlist) {
+        // Growave'in yeni nesil SDK'sı varsa
+        window.sswApp.wishlist.renderButtons('.ssw-faveit');
+      } else if (typeof sswRun === 'function') {
+        // Eski nesil tetikleyici
+        sswRun();
+      }
+
+      // Eğer hala tık yoksa, manuel tetikleme (Brute Force)
+      document.querySelectorAll('.ssw-faveit').forEach(btn => {
+        if (!btn.classList.contains('ssw-ready')) {
+          // Growave'in butonları tanıması için gereken event'i simüle et
+          btn.dispatchEvent(new Event('mouseenter')); 
+        }
+      });
+      
+      console.log("Growave zorla uyandırıldı!");
+    }, 300); // Süreyi biraz artırdık, garanti olsun.
+
+
   }
 </script>
 
