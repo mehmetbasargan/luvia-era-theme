@@ -89,17 +89,17 @@
           return JSON.parse(localStorage.getItem(this.storageKey)) || [];
         },
 
-        toggle(id, title = 'Ürün') {
+        toggle(id, title = 'Product') {
           let list = this.get();
           const index = list.indexOf(id.toString());
           let added = false;
 
           if (index > -1) {
             list.splice(index, 1);
-            this.showToast(`${title} favorilerden çıkarıldı.`);
+            this.showToast(`${title} removed from favorites.`);
           } else {
             list.push(id.toString());
-            this.showToast(`${title} favorilere eklendi!`);
+            this.showToast(`${title} added to favorites!`);
             added = true;
           }
 
@@ -108,7 +108,7 @@
           return added;
         },
 
-        // Kullanıcıya küçük bir bildirim gösterir
+        // Show small notification to user
         showToast(message) {
           const toast = document.createElement('div');
           toast.className =
