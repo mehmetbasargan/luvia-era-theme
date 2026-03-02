@@ -16,12 +16,10 @@
     {%- assign body_font = settings.body_font -%}
 
     <style>
-      /* Shopify Fontlarını Yükle */
       {{ heading_font | font_face: font_display: 'swap' }}
       {{ body_font | font_face: font_display: 'swap' }}
 
       :root {
-        /* Renkler - Tek Bir İsim Altında Toplandı */
         --color-primary: {{ settings.primary_color }};
         --color-secondary: {{ settings.secondary_color }};
         --color-custombg: {{ settings.custom_bg_color }};
@@ -29,7 +27,6 @@
         --color-white: #ffffff;
         --color-black: #000000;
 
-        /* Fontlar - Shopify Ayarlarından Gelen Dinamik Fontlar */
         --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
         --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
       }
@@ -40,7 +37,6 @@
         font-family: var(--font-body);
         margin: 0;
         -webkit-font-smoothing: antialiased;
-        /* Sayfa yüklenirken oluşabilecek titremeleri engellemek için */
         display: block !important;
         opacity: 1 !important;
         transition: none !important;
@@ -52,7 +48,10 @@
     </style>
 
     {{ content_for_header }}
-    {{ 'tailwind.css' | asset_url | stylesheet_tag }}
+
+    {% # BURAYI GÜNCELLEDİM: Dosya ismini terminaldeki çıktıya (tailwind.output.css) göre ayarladım ve cache-buster ekledim %}
+    <link rel="stylesheet" href="{{ 'tailwind.output.css' | asset_url }}&v={{ "now" | date: "%N" }}">
+
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
   </head>
 
