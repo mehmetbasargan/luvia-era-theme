@@ -20,33 +20,27 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {% for product in collections[section.settings.collection].products limit: 4 %}
-          <div class="group relative product-card-container" data-id="{{ product.id }}">
+          <div class="group relative overflow-hidden" id="product-card-{{ product.id }}">
+            <div class="absolute top-4 right-4 z-[100]">
+              <button
+                type="button"
+                class="luvia-wishlist-btn-final w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-xl transition-all duration-300 active:scale-90"
+                onclick="handleWishlistClick(this, '{{ product.id }}')"
+                data-id="{{ product.id }}"
+                style="cursor: pointer !important; -webkit-appearance: none; border: none;"
+              >
+                <svg class="w-5 h-5 heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                </svg>
+              </button>
+            </div>
+
             <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
                 <span class="absolute top-4 left-4 z-40 bg-secondary text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase shadow-sm">
                   {{ 'products.product.on_sale' | t }}
                 </span>
               {% endif %}
-
-              <div class="absolute top-4 right-4 z-[100]">
-                <button
-                  type="button"
-                  class="luvia-wishlist-btn w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-300 cursor-pointer border-none"
-                  onclick="event.preventDefault(); event.stopPropagation(); toggleWishlistManually(this, '{{ product.id }}');"
-                  data-product-id="{{ product.id }}"
-                  style="pointer-events: auto !important; position: relative;"
-                >
-                  <svg
-                    class="w-5 h-5 heart-icon pointer-events-none"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                  </svg>
-                </button>
-              </div>
 
               <a href="{{ product.url }}" class="block w-full h-full relative z-10">
                 <img
@@ -102,72 +96,56 @@
 
 <style>
   /* Favori Aktif Hali */
-  .luvia-wishlist-btn.is-active svg {
-    fill: #e11d48; /* Kırmızı dolgu */
-    stroke: #e11d48;
+  .luvia-wishlist-btn-final.is-active svg {
+    fill: #e11d48 !important;
+    stroke: #e11d48 !important;
   }
-  .luvia-wishlist-btn:hover {
+  .luvia-wishlist-btn-final:hover {
     transform: scale(1.1);
+    background: white !important;
   }
 </style>
 
 <script>
-  // Wishlist Fonksiyonu
-  function toggleWishlistManually(btn, id) {
+  // Tıklama Fonksiyonu (Daha Güçlü)
+  function handleWishlistClick(btn, id) {
     if (window.LuviaWishlist) {
       window.LuviaWishlist.toggle(id);
       btn.classList.toggle('is-active');
+    } else {
+      console.error('LuviaWishlist not found!');
     }
   }
 
-  // Sayfa yüklendiğinde favorileri kontrol et
+  // Sayfa yüklendiğinde favorileri işaretle
   document.addEventListener('DOMContentLoaded', () => {
     const data = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
-    document.querySelectorAll('.luvia-wishlist-btn').forEach((btn) => {
-      if (data.includes(btn.dataset.productId)) {
+    document.querySelectorAll('.luvia-wishlist-btn-final').forEach((btn) => {
+      if (data.includes(btn.dataset.id)) {
         btn.classList.add('is-active');
       }
     });
   });
 
-  // Sepete Ekleme Fonksiyonu (Daha önce verdiğim fonksiyonun aynısı)
+  // Sepete ekleme (Diğerleri aynı...)
   function handleAddToCartFeatured(event, variantId) {
     event.preventDefault();
     const btn = event.currentTarget;
     btn.disabled = true;
     btn.innerText = '...';
-
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: variantId, quantity: 1 }),
     })
       .then((res) => res.json())
-      .then((item) => {
+      .then(() => {
         btn.innerText = 'ADDED ✔';
         if (typeof openCartDrawer === 'function') openCartDrawer();
         setTimeout(() => {
           btn.disabled = false;
           btn.innerText = '{{ "products.product.add_to_cart" | t }}';
         }, 2000);
-      })
-      .catch((err) => {
-        btn.innerText = 'ERROR';
-        btn.disabled = false;
       });
   }
 </script>
-
-{% schema %}
-{
-  "name": "Featured Products",
-  "settings": [
-    { "type": "collection", "id": "collection", "label": "Collection" },
-    { "type": "text", "id": "section_title", "label": "Title" },
-    { "type": "text", "id": "section_subtitle", "label": "Subtitle" },
-    { "type": "text", "id": "button_text", "label": "Button Text" },
-    { "type": "url", "id": "button_url", "label": "Button URL" }
-  ],
-  "presets": [{ "name": "Featured Products" }]
-}
-{% endschema %}
