@@ -860,6 +860,10 @@ p{
   top: 100%;
 }
 
+.top-6{
+  top: 1.5rem;
+}
+
 .z-0{
   z-index: 0;
 }
@@ -914,6 +918,10 @@ p{
 
 .z-\[9999\]{
   z-index: 9999;
+}
+
+.z-\[110\]{
+  z-index: 110;
 }
 
 .order-first{
@@ -1404,6 +1412,10 @@ p{
   max-width: none;
 }
 
+.max-w-\[90\%\]{
+  max-width: 90%;
+}
+
 .flex-1{
   flex: 1 1 0%;
 }
@@ -1478,6 +1490,12 @@ p{
 .scale-\[1\.5\]{
   --tw-scale-x: 1.5;
   --tw-scale-y: 1.5;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-95{
+  --tw-scale-x: .95;
+  --tw-scale-y: .95;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2235,6 +2253,11 @@ p{
   line-height: 1rem;
 }
 
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -2565,6 +2588,11 @@ p{
 
 .checked\:bg-black:checked{
   background-color: var(--color-black);
+}
+
+.hover\:rotate-90:hover{
+  --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .hover\:scale-105:hover{

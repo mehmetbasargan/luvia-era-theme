@@ -1,38 +1,96 @@
 <section class="w-full bg-white overflow-hidden">
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap" id="LuviaGallery-{{ section.id }}">
     {% for block in section.blocks %}
-      <div class="w-1/2 md:w-1/4 aspect-square relative group overflow-hidden">
+      <div
+        class="w-1/2 md:w-1/4 aspect-square relative group overflow-hidden cursor-pointer luvia-gallery-item"
+        data-src="{{ block.settings.image | image_url: width: 2000 }}"
+      >
         {% if block.settings.image != blank %}
           {{
             block.settings.image
             | image_url: width: 1000
             | image_tag:
-              alt: block.settings.title,
-              class: 'w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110',
-              loading: 'eager'
+            alt: block.settings.image.alt | escape,
+            class: 'w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110',
+            loading: 'lazy'
           }}
         {% else %}
           {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
         {% endif %}
 
-        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <span class="text-white text-[13px] tracking-[0.3em] uppercase border border-white px-4 py-2">
-            {{ 'general.discover_more' | t }}
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20">
+          <span class="text-white text-[11px] tracking-[0.4em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">
+            {{ 'general.discover_more' | t | default: 'VIEW IMAGE' }}
           </span>
         </div>
-
-        {% if block.settings.link != blank %}
-          <a href="{{ block.settings.link }}" class="absolute inset-0 z-10"></a>
-        {% endif %}
       </div>
     {% endfor %}
   </div>
 </section>
 
+<div
+  id="LuviaLightbox"
+  class="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  <button
+    class="absolute top-6 right-8 text-white text-4xl font-light hover:rotate-90 transition-transform duration-300 z-[110]"
+    onclick="closeLightbox()"
+  >
+    &times;
+  </button>
+  <img
+    id="LightboxImage"
+    src=""
+    width=""
+    height=""
+    class="max-w-[90%] max-height-[85vh] object-contain shadow-2xl transition-transform duration-500 scale-95"
+  >
+</div>
+
+<script>
+  function openLightbox(src) {
+    const lightbox = document.getElementById('LuviaLightbox');
+    const img = document.getElementById('LightboxImage');
+    img.src = src;
+    lightbox.classList.remove('opacity-0', 'pointer-events-none');
+    setTimeout(() => img.classList.remove('scale-95'), 10);
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('LuviaLightbox');
+    const img = document.getElementById('LightboxImage');
+    img.classList.add('scale-95');
+    lightbox.classList.add('opacity-0', 'pointer-events-none');
+  }
+
+  // Event Listeners
+  document.querySelectorAll('.luvia-gallery-item').forEach((item) => {
+    item.addEventListener('click', () => {
+      const fullResSrc = item.getAttribute('data-src');
+      openLightbox(fullResSrc);
+    });
+  });
+
+  // ESC tuşu ile kapatma
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+<style>
+  #LuviaLightbox {
+    backdrop-filter: blur(5px);
+  }
+  #LightboxImage {
+    pointer-events: none;
+    user-select: none;
+  }
+</style>
+
 {% schema %}
 {
   "name": "Full Width Gallery",
-  "max_blocks": 4,
+  "max_blocks": 8,
   "settings": [
     {
       "type": "text",
@@ -50,11 +108,6 @@
           "type": "image_picker",
           "id": "image",
           "label": "Select Image"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Image Link (Optional)"
         }
       ]
     }
