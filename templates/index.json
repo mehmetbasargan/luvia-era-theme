@@ -203,7 +203,9 @@
         },
         "image_RxbdpB": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/p3.jpg"
+          }
         },
         "image_FyjYLn": {
           "type": "image",
