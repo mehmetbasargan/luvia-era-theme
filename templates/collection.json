@@ -13,7 +13,7 @@
       "type": "main-collection-banner",
       "name": "Collection Banner",
       "settings": {
-        "fallback_image": "shopify://shop_images/pageheader4.jpg",
+        "fallback_image": "shopify://shop_images/pageheader3.jpg",
         "hero_height": 40,
         "overlay_opacity": 60
       }
