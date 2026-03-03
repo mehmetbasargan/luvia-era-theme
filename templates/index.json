@@ -192,39 +192,39 @@
         "header_opacity": 40
       }
     },
-    "full_width_gallery_7tAPz6": {
+    "full_width_gallery_q9giCc": {
       "type": "full-width-gallery",
       "blocks": {
-        "image_MpMjGq": {
+        "image_8eTgp3": {
           "type": "image",
           "settings": {
-            "link": "shopify://collections/golden-hour-muse"
+            "link": ""
           }
         },
-        "image_cWgADr": {
+        "image_Xj6bnT": {
           "type": "image",
           "settings": {
-            "link": "shopify://collections/midnight-elegance"
+            "link": ""
           }
         },
-        "image_9YfwDJ": {
+        "image_wwAYA9": {
           "type": "image",
           "settings": {
-            "link": "shopify://collections/silk-grace"
+            "link": ""
           }
         },
-        "image_QKP94A": {
+        "image_qcqbHn": {
           "type": "image",
           "settings": {
-            "link": "shopify://collections/the-minimalist-era"
+            "link": ""
           }
         }
       },
       "block_order": [
-        "image_MpMjGq",
-        "image_cWgADr",
-        "image_9YfwDJ",
-        "image_QKP94A"
+        "image_8eTgp3",
+        "image_Xj6bnT",
+        "image_wwAYA9",
+        "image_qcqbHn"
       ],
       "name": "Luvia Full Gallery",
       "settings": {
@@ -240,6 +240,6 @@
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
-    "full_width_gallery_7tAPz6"
+    "full_width_gallery_q9giCc"
   ]
 }
