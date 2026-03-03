@@ -12,10 +12,10 @@
     "header_hero": {
       "type": "main-page-header",
       "settings": {
-        "image": "shopify://shop_images/img1.jpg",
+        "image": "shopify://shop_images/pageheader4.jpg",
         "custom_title": "",
-        "hero_height": 60,
-        "overlay_opacity": 50
+        "hero_height": 40,
+        "overlay_opacity": 60
       }
     },
     "main_content": {
