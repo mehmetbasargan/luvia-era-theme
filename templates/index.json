@@ -195,6 +195,24 @@
     "full_width_gallery_TMh89n": {
       "type": "full-width-gallery",
       "blocks": {
+        "image_gbDd3k": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1.jpg"
+          }
+        },
+        "image_gkVVM4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p2-1.jpg"
+          }
+        },
+        "image_FqdD7Q": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p5-2.jpg"
+          }
+        },
         "image_CFD6JC": {
           "type": "image",
           "settings": {
@@ -227,6 +245,9 @@
         }
       },
       "block_order": [
+        "image_gbDd3k",
+        "image_gkVVM4",
+        "image_FqdD7Q",
         "image_CFD6JC",
         "image_UgXNNd",
         "image_RxbdpB",
@@ -235,7 +256,7 @@
       ],
       "name": "Luvia Full Gallery",
       "settings": {
-        "title": "Follow the Era"
+        "title": "THE CURATED ERA"
       }
     }
   },
