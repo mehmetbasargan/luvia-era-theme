@@ -34,7 +34,7 @@
       <img
         src="{{ product.featured_image | image_url: width: 600 }}"
         alt="{{ product.title }}"
-        loading="lazy"
+        loading="eager"
         width="600"
         height="800"
         class="w-full h-full object-cover transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
@@ -44,7 +44,7 @@
         <img
           src="{{ product.images[1] | image_url: width: 600 }}"
           alt="{{ product.title }}"
-          loading="lazy"
+          loading="eager"
           width="600"
           height="800"
           class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
