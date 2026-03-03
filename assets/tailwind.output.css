@@ -995,6 +995,26 @@ blockquote{
   margin-bottom: 2rem;
 }
 
+.my-4{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.my-1{
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.my-5{
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.my-11{
+  margin-top: 2.75rem;
+  margin-bottom: 2.75rem;
+}
+
 .mb-1{
   margin-bottom: 0.25rem;
 }
@@ -1089,6 +1109,10 @@ blockquote{
 
 .mt-auto{
   margin-top: auto;
+}
+
+.mb-7{
+  margin-bottom: 1.75rem;
 }
 
 .line-clamp-2{
@@ -1421,6 +1445,18 @@ blockquote{
 .w-max{
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-\[50\%\]{
+  width: 50%;
+}
+
+.w-\[650\%\]{
+  width: 650%;
+}
+
+.w-\[60\%\]{
+  width: 60%;
 }
 
 .min-w-\[200px\]{
@@ -2162,6 +2198,11 @@ blockquote{
 .py-\[80px\]{
   padding-top: 80px;
   padding-bottom: 80px;
+}
+
+.py-9{
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
 }
 
 .pb-1{
@@ -2980,6 +3021,10 @@ blockquote{
     width: 100%;
   }
 
+  .md\:w-\[60\%\]{
+    width: 60%;
+  }
+
   .md\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2990,6 +3035,10 @@ blockquote{
 
   .md\:grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-6{
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .md\:flex-row{
@@ -3138,6 +3187,10 @@ blockquote{
 
   .lg\:grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-6{
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .lg\:flex-row{
