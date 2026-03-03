@@ -181,7 +181,7 @@
         "logo": "shopify://shop_images/logo2.svg",
         "header_phone": "0532 463 24 47",
         "show_phone": true,
-        "header_bg_color": "#ffffff",
+        "header_bg_color": "#b2ac88",
         "header_opacity": 80
       }
     }
