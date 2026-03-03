@@ -32,7 +32,7 @@
         "heading": "Our Philosophy",
         "text": "<p><strong>Lorem ipsum</strong> dolor sit amet, consectetur adipiscing elit. Aliquam in eros sodales ante efficitur dignissim. Aliquam elementum, nulla ut tempus ullamcorper, magna eros ornare ante, vitae tempor est lorem vitae odio. Maecenas a urna at nunc ultricies finibus. Nullam quis mi sem. Nunc tincidunt mollis risus non varius. Proin eleifend lectus lacus, eu rutrum dui ultricies quis. Aenean sodales euismod iaculis. Sed elementum nisi elit, sed accumsan nulla venenatis sed.</p>",
         "since": "2026",
-        "image": "shopify://shop_images/cat4.jpg"
+        "image": "shopify://shop_images/1.jpg"
       }
     },
     "about_gallery_UMDFnP": {
@@ -40,27 +40,19 @@
       "blocks": {
         "image_block_FEkQgR": {
           "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/img1.jpg"
-          }
+          "settings": {}
         },
         "image_block_iiQ89z": {
           "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/cat4.jpg"
-          }
+          "settings": {}
         },
         "image_block_BWbRfc": {
           "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/cat2.jpg"
-          }
+          "settings": {}
         },
         "image_block_YRFJfP": {
           "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/cat6.jpg"
-          }
+          "settings": {}
         }
       },
       "block_order": [
