@@ -71,41 +71,48 @@
       <div class="flex justify-between w-full lg:w-auto md:gap-6">
         {% comment %} menu {% endcomment %}
         <nav class="shrink-0">
-          <ul class="hidden lg:flex gap-6">
+          <ul class="hidden lg:flex items-center gap-6 list-none">
             {% for link in linklists['main-menu'].links %}
-              {% if link.links != blank %}
-                <div class="group relative py-4">
-                  <button class="flex items-center hover:text-secondary transition-colors cursor-pointer">
-                    {{ link.title }}
-                    <svg
-                      class="w-3 h-3 ml-1 transition-transform duration-300 group-hover:rotate-180"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+              <li class="relative">
+                {% comment %} Her linki bir li içine almak standarttır {% endcomment %}
+                {% if link.links != blank %}
+                  <div class="group relative py-4">
+                    <button
+                      type="button"
+                      class="flex items-center inline-block hover:text-secondary transition-colors cursor-pointer select-auto"
                     >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </button>
-
-                  <div class="absolute left-0 top-full hidden group-hover:block min-w-[200px] bg-white shadow-xl border border-line py-4 z-[100] transition-all">
-                    {% for childlink in link.links %}
-                      <a
-                        href="{{ childlink.url }}"
-                        class="block px-6 py-2 text-primary text-[15px] hover:bg-custombg hover:text-secondary transition-all cursor-pointer select-none pointer-events-auto relative z-30 {% if childlink.active %}text-secondary font-medium active-link{% else %}text-black hover:text-secondary{% endif %}"
+                      {{ link.title }}
+                      <svg
+                        class="w-3 h-3 ml-1 transition-transform duration-300 group-hover:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        {{ childlink.title }}
-                      </a>
-                    {% endfor %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </button>
+
+                    {% comment %} Dropdown Menü {% endcomment %}
+                    <div class="absolute left-0 top-full hidden group-hover:block min-w-[200px] bg-white shadow-xl border border-line py-4 z-[100]">
+                      {% for childlink in link.links %}
+                        <a
+                          href="{{ childlink.url }}"
+                          class="block px-6 py-2 text-[15px] transition-all cursor-pointer relative z-[110] {% if childlink.active %}text-secondary font-medium active-link{% else %}text-black hover:text-secondary{% endif %}"
+                        >
+                          {{ childlink.title }}
+                        </a>
+                      {% endfor %}
+                    </div>
                   </div>
-                </div>
-              {% else %}
-                <a
-                  href="{{ link.url }}"
-                  class="hover:text-secondary text-[15px] transition-colors py-4 cursor-pointer select-none pointer-events-auto relative z-30 {% if link.active %}text-secondary font-medium active-link{% else %}text-black hover:text-secondary{% endif %}"
-                >
-                  {{ link.title }}
-                </a>
-              {% endif %}
+                {% else %}
+                  <a
+                    href="{{ link.url }}"
+                    class="inline-block hover:text-secondary text-[15px] transition-colors py-4 cursor-pointer relative z-30 {% if link.active %}text-secondary font-medium active-link{% else %}text-black hover:text-secondary{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                {% endif %}
+              </li>
             {% endfor %}
           </ul>
         </nav>

@@ -928,6 +928,10 @@ p{
   z-index: 9999;
 }
 
+.z-\[110\]{
+  z-index: 110;
+}
+
 .order-first{
   order: -9999;
 }
@@ -1568,6 +1572,12 @@ p{
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+}
+
+.select-auto{
+  -webkit-user-select: auto;
+     -moz-user-select: auto;
+          user-select: auto;
 }
 
 .resize{
