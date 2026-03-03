@@ -37,7 +37,10 @@
           class="absolute inset-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20"
           style="background: #00000040;"
         >
-          <span class="text-primary bg-white h-16 w-16 rounded-full flex items-center justify-center">
+          <span
+            class="text-primary h-16 w-16 rounded-full flex items-center justify-center"
+            style="background: #ffffff50;"
+          >
             {% render 'icon-zoom-pan' %}
           </span>
         </div>
@@ -52,14 +55,14 @@
 >
   <button
     type="button"
-    class="absolute top-8 right-8 text-white hover:bg-secondary bg-primary hover:text-white text-5xl z-[9999] h-[60px] w-[60px] cursor-pointer rounded-full flex items-center justify-center"
+    class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-secondary bg-primary hover:text-white text-5xl z-[10001] p-4 cursor-pointer rounded-full flex items-center justify-center"
     onclick="closeLuviaGallery()"
   >
     {% render 'icon-close' %}
   </button>
   <button
     type="button"
-    class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-secondary bg-primary hover:text-white text-5xl z-[10001] p-4 cursor-pointer rounded-full flex items-center justify-center"
+    class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-secondary bg-primary hover:text-white text-5xl z-[10001] p-4 cursor-pointer rounded-full flex items-center justify-center"
     onclick="changeImage(-1)"
   >
     {% render 'icon-chevron-left' %}
