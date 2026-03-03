@@ -156,9 +156,9 @@
         "product_point_cRcG8a": {
           "type": "product_point",
           "settings": {
-            "product": "velvet-night-blazer",
-            "top_position": 68,
-            "left_position": 65
+            "product": "luna-satin-slip-dress",
+            "top_position": 63,
+            "left_position": 48
           }
         },
         "product_point_gXCrUc": {
@@ -176,7 +176,7 @@
       ],
       "name": "Shoppable Image",
       "settings": {
-        "image": "shopify://shop_images/alpcem-portrait-4917796_1280.jpg",
+        "image": "shopify://shop_images/shoppable-image3.jpg",
         "title": "Curated Collections",
         "subtitle": "Touch the details and discover the artistry behind every piece."
       }
@@ -198,28 +198,24 @@
         "image_MpMjGq": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/cat4.jpg",
             "link": "shopify://collections/golden-hour-muse"
           }
         },
         "image_cWgADr": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/img3.jpg",
             "link": "shopify://collections/midnight-elegance"
           }
         },
         "image_9YfwDJ": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/img2.jpg",
             "link": "shopify://collections/silk-grace"
           }
         },
         "image_QKP94A": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/cat6.jpg",
             "link": "shopify://collections/the-minimalist-era"
           }
         }
