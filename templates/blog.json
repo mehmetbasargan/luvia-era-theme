@@ -15,6 +15,8 @@
       "settings": {
         "blog_title": "Latest Stories",
         "blog_subtitle": "Explore our latest stories and updates.",
+        "pagination_prev": "Previous",
+        "pagination_next": "Next",
         "header_opacity": 100
       }
     },
@@ -22,10 +24,10 @@
       "type": "main-page-header",
       "name": "Page Header",
       "settings": {
-        "image": "shopify://shop_images/alpcem-portrait-4917796_1280_1b998f3d-aaaf-4a05-96eb-5db1ffe1c4f3.jpg",
+        "image": "shopify://shop_images/pageheader_3.jpg",
         "custom_title": "Blog",
-        "hero_height": 60,
-        "overlay_opacity": 30
+        "hero_height": 40,
+        "overlay_opacity": 60
       }
     },
     "main_blog_KTRd6H": {
@@ -34,6 +36,8 @@
       "settings": {
         "blog_title": "",
         "blog_subtitle": "Explore our latest stories and updates.",
+        "pagination_prev": "Previous",
+        "pagination_next": "Next",
         "header_opacity": 100
       }
     }
