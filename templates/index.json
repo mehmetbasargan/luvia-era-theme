@@ -11,16 +11,15 @@
   "sections": {
     "promo_video_banner_yyDpHy": {
       "type": "promo-video-banner",
-      "disabled": true,
       "name": "Promo Video Banner",
       "settings": {
-        "video_file": "shopify://files/videos/video4.mp4",
+        "video_file": "shopify://files/videos/video3.mp4",
         "video_url": "",
         "title": "The Art of Living",
         "text": "Discover our new spring collection with cinematic pieces.",
         "button_label": "Discover Now",
         "button_link": "",
-        "overlay_opacity": 80
+        "overlay_opacity": 70
       }
     },
     "hero_slider_yFYYic": {
@@ -62,6 +61,7 @@
         "slide_QGpjDa",
         "slide_n3HckD"
       ],
+      "disabled": true,
       "name": "Hero Slider",
       "settings": {}
     },
