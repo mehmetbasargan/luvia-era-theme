@@ -28,7 +28,7 @@
             height="800"
           >
         {% else %}
-          <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+          <div class="w-full h-full bg-custombg flex items-center justify-center">
             {{ 'image' | placeholder_svg_tag: 'w-20 h-20 opacity-20' }}
           </div>
         {% endif %}
@@ -47,7 +47,7 @@
 >
   <button
     type="button"
-    class="absolute top-8 right-8 text-white text-5xl font-thin z-[9999] cursor-pointer"
+    class="absolute top-8 right-8 text-primary text-5xl font-thin z-[9999] cursor-pointer"
     onclick="closeLuviaGallery()"
   >
     &times;
