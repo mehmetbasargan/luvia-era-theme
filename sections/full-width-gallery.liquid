@@ -22,7 +22,7 @@
           <img
             src="{{ block.settings.image | image_url: width: 800 }}"
             alt="{{ block.settings.image.alt | default: 'Gallery' }}"
-            class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+            class="w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-110"
             loading="eager"
             width="800"
             height="800"
@@ -34,11 +34,15 @@
         {% endif %}
 
         <div
-          class="absolute inset-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20"
-          style="background: #00000080 !important;"
+          class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1500ms] ease-out flex items-center justify-center z-20"
+          style="background: rgba(0, 0, 0, 0.5) !important;"
         >
           <span
-            class="text-primary bg-white md:h-16 md:w-16 h-12 w-12 rounded-full flex items-center justify-center"
+            class="
+              flex text-primary bg-white md:h-16 md:w-16 h-12 w-12 rounded-full items-center justify-center
+              transition-all duration-[1500ms] ease-out
+              opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100
+            "
           >
             {% render 'icon-zoom-pan' %}
           </span>
