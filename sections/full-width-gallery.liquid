@@ -6,14 +6,14 @@
         data-src="{{ block.settings.image | image_url: width: 2000 }}"
       >
         {% if block.settings.image != blank %}
-          {{
-            block.settings.image
-            | image_url: width: 1000
-            | image_tag:
-            alt: block.settings.image.alt | escape,
-            class: 'w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110',
-            loading: 'lazy'
-          }}
+          <img
+            src="{{ block.settings.image | image_url: width: 800 }}"
+            alt="{{ block.settings.image.alt | default: 'Luvia Gallery' }}"
+            class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+            loading="lazy"
+            width="800"
+            height="800"
+          >
         {% else %}
           {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
         {% endif %}
@@ -30,20 +30,23 @@
 
 <div
   id="LuviaLightbox"
-  class="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+  class="fixed inset-0 z-[500] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300"
 >
   <button
-    class="absolute top-6 right-8 text-white text-4xl font-light hover:rotate-90 transition-transform duration-300 z-[110]"
+    type="button"
+    class="absolute top-6 right-8 text-white text-5xl font-light hover:rotate-90 transition-all duration-300 z-[510] cursor-pointer"
     onclick="closeLightbox()"
   >
     &times;
   </button>
   <img
     id="LightboxImage"
-    src=""
-    width=""
+    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+    class="max-w-[90%] max-h-[85vh] object-contain shadow-2xl transition-all duration-500 scale-95"
     height=""
-    class="max-w-[90%] max-height-[85vh] object-contain shadow-2xl transition-transform duration-500 scale-95"
+    width=""
+    loading="eager"
+    alt="Enlarged view"
   >
 </div>
 
@@ -51,27 +54,40 @@
   function openLightbox(src) {
     const lightbox = document.getElementById('LuviaLightbox');
     const img = document.getElementById('LightboxImage');
+    if (!lightbox || !img) return;
+
     img.src = src;
-    lightbox.classList.remove('opacity-0', 'pointer-events-none');
-    setTimeout(() => img.classList.remove('scale-95'), 10);
+    lightbox.style.opacity = '1';
+    lightbox.style.pointerEvents = 'auto';
+    setTimeout(() => {
+      img.style.transform = 'scale(1)';
+    }, 50);
   }
 
   function closeLightbox() {
     const lightbox = document.getElementById('LuviaLightbox');
     const img = document.getElementById('LightboxImage');
-    img.classList.add('scale-95');
-    lightbox.classList.add('opacity-0', 'pointer-events-none');
+    if (!lightbox || !img) return;
+
+    img.style.transform = 'scale(0.95)';
+    lightbox.style.opacity = '0';
+    lightbox.style.pointerEvents = 'none';
+    setTimeout(() => {
+      img.src = '';
+    }, 300); // Kapanınca resmi temizle
   }
 
-  // Event Listeners
-  document.querySelectorAll('.luvia-gallery-item').forEach((item) => {
-    item.addEventListener('click', () => {
-      const fullResSrc = item.getAttribute('data-src');
-      openLightbox(fullResSrc);
+  // Event Listeners (Tıklama yakalama)
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.luvia-gallery-item').forEach((item) => {
+      item.addEventListener('click', function () {
+        const fullResSrc = this.getAttribute('data-src');
+        openLightbox(fullResSrc);
+      });
     });
   });
 
-  // ESC tuşu ile kapatma
+  // ESC tuşu
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
   });
@@ -79,11 +95,11 @@
 
 <style>
   #LuviaLightbox {
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
   #LightboxImage {
-    pointer-events: none;
-    user-select: none;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 </style>
 
@@ -95,7 +111,7 @@
     {
       "type": "text",
       "id": "title",
-      "label": "Section Title (Optional)",
+      "label": "Section Title",
       "default": "Follow the Era"
     }
   ],

@@ -924,6 +924,14 @@ p{
   z-index: 110;
 }
 
+.z-\[500\]{
+  z-index: 500;
+}
+
+.z-\[510\]{
+  z-index: 510;
+}
+
 .order-first{
   order: -9999;
 }
@@ -1245,6 +1253,10 @@ p{
 
 .h-full{
   height: 100%;
+}
+
+.max-h-\[85vh\]{
+  max-height: 85vh;
 }
 
 .min-h-\[1rem\]{
@@ -2256,6 +2268,11 @@ p{
 .text-4xl{
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
 }
 
 .font-bold{
