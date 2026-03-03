@@ -35,7 +35,7 @@
         "menu_1_title": "Collections",
         "footer_menu_1": "footer",
         "menu_2_title": "Customer Care",
-        "footer_menu_2": ""
+        "footer_menu_2": "main-menu"
       }
     },
     "footer-three": {
@@ -43,9 +43,7 @@
       "blocks": {
         "gallery_image_HKdLtk": {
           "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/img2.jpg"
-          }
+          "settings": {}
         },
         "gallery_image_bkacNU": {
           "type": "gallery_image",
@@ -53,15 +51,11 @@
         },
         "gallery_image_zA7xgB": {
           "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/img1.jpg"
-          }
+          "settings": {}
         },
         "gallery_image_z3YhPw": {
           "type": "gallery_image",
-          "settings": {
-            "image": "shopify://shop_images/img3.jpg"
-          }
+          "settings": {}
         }
       },
       "block_order": [
