@@ -9,14 +9,14 @@
  */
 {
   "sections": {
-    "main_page_header_didBcL": {
+    "main_page_header_zDjt96": {
       "type": "main-page-header",
       "name": "Page Header",
       "settings": {
-        "image": "shopify://shop_images/alpcem-portrait-4917796_1280_1b998f3d-aaaf-4a05-96eb-5db1ffe1c4f3.jpg",
+        "image": "shopify://shop_images/pageheader3.jpg",
         "custom_title": "",
-        "hero_height": 55,
-        "overlay_opacity": 30
+        "hero_height": 40,
+        "overlay_opacity": 60
       }
     },
     "main": {
@@ -25,7 +25,7 @@
     }
   },
   "order": [
-    "main_page_header_didBcL",
+    "main_page_header_zDjt96",
     "main"
   ]
 }
