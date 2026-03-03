@@ -107,7 +107,7 @@
 
                 <a
                   href="{{ link.url }}"
-                  class="transition-colors duration-300 text-[15px] tracking-widest font-medium {% if link.active %}text-secondary font-medium active-link{% else %}text-black hover:text-secondary{% endif %}"
+                  class="transition-colors duration-300 hover:text-secondary text-[15px] py-4{% if link.active %}text-secondary font-medium active-link{% else %}text-black hover:text-secondary{% endif %}"
                 >
                   {{ link.title }}
                 </a>
