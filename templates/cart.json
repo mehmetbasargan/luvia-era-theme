@@ -8,21 +8,24 @@
  * ------------------------------------------------------------
  */
 {
-	"sections": {
-		"main_page_header_PKCTaz": {
-			"type": "main-page-header",
-			"name": "Page Title (Hero)",
-			"settings": {
-				"image": "shopify://shop_images/img1.jpg",
-				"custom_title": "CART",
-				"hero_height": 60,
-				"overlay_opacity": 50
-			}
-		},
-		"main": {
-			"type": "cart",
-			"settings": {}
-		}
-	},
-	"order": ["main_page_header_PKCTaz", "main"]
+  "sections": {
+    "main_page_header_4EJqhe": {
+      "type": "main-page-header",
+      "name": "Page Header",
+      "settings": {
+        "image": "shopify://shop_images/pageheader4.jpg",
+        "custom_title": "Cart",
+        "hero_height": 40,
+        "overlay_opacity": 60
+      }
+    },
+    "main": {
+      "type": "cart",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main_page_header_4EJqhe",
+    "main"
+  ]
 }
