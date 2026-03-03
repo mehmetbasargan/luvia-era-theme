@@ -9,11 +9,11 @@
  */
 {
   "sections": {
-    "main_collection_banner_3igPik": {
+    "main_collection_banner_LMYeKg": {
       "type": "main-collection-banner",
       "name": "Collection Banner",
       "settings": {
-        "fallback_image": "shopify://shop_images/page-header.jpg",
+        "fallback_image": "shopify://shop_images/pageheader4.jpg",
         "hero_height": 40,
         "overlay_opacity": 60
       }
@@ -77,7 +77,7 @@
     }
   },
   "order": [
-    "main_collection_banner_3igPik",
+    "main_collection_banner_LMYeKg",
     "main",
     "product_recommendations_jKgtbU",
     "full_width_gallery_7dxMQK"
