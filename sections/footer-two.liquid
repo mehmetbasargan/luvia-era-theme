@@ -38,7 +38,7 @@
         </h4>
         <ul class="space-y-4 text-sm font-light text-primary flex flex-row gap-3">
           {% for link in linklists[section.settings.footer_menu_2].links %}
-            <li>
+            <li class="pt-0">
               <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
                 {{ link.title }}
               </a>
