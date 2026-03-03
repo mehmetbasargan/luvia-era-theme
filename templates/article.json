@@ -13,7 +13,7 @@
       "type": "main-page-header",
       "name": "Page Header",
       "settings": {
-        "image": "{{ article.image }}",
+        "image": "shopify://shop_images/page-header.jpg",
         "custom_title": "{{ article.title }}",
         "hero_height": 40,
         "overlay_opacity": 60
