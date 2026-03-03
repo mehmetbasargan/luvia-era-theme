@@ -2233,6 +2233,10 @@ blockquote{
   padding-top: 2rem;
 }
 
+.pt-0{
+  padding-top: 0px;
+}
+
 .text-left{
   text-align: left;
 }
