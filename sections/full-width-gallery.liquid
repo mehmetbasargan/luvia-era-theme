@@ -47,17 +47,17 @@
 >
   <button
     type="button"
-    class="absolute top-8 right-8 text-primary text-5xl font-thin z-[9999] cursor-pointer bg-white rounded-full flex items-center justify-center"
+    class="absolute top-8 right-8 text-primary text-5xl font-thin z-[9999] h-[60px] w-[60px] cursor-pointer bg-white rounded-full flex items-center justify-center"
     onclick="closeLuviaGallery()"
   >
-    &times;
+    {% render 'icon-close' %}
   </button>
   <button
     type="button"
     class="absolute left-4 top-1/2 -translate-y-1/2 text-primary hover:text-secondary text-5xl font-thin z-[10001] p-4 cursor-pointer bg-white rounded-full flex items-center justify-center"
     onclick="changeImage(-1)"
   >
-    &#8249;
+    {% render 'icon-chevron-left' %}
   </button>
   <img
     id="LightboxImage"
@@ -73,7 +73,7 @@
     class="absolute right-4 top-1/2 -translate-y-1/2 text-primary hover:text-secondary text-5xl font-thin z-[10001] p-4 cursor-pointer bg-white rounded-full flex items-center justify-center"
     onclick="changeImage(1)"
   >
-    &#8250;
+    {% render 'icon-chevron-right' %}
   </button>
   <div id="GalleryCounter" class="absolute bottom-10 text-primary text-[10px] tracking-widest uppercase"></div>
 </div>
