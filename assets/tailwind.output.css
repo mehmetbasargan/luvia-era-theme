@@ -622,6 +622,22 @@ p{
   line-height: 1.6;
 }
 
+blockquote{
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  display: flex;
+  height: 70px !important;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-left-width: 6px !important;
+  border-color: var(--color-secondary) !important;
+  background-color: var(--color-custombg);
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  font-style: italic;
+}
+
 .\!container{
   width: 100% !important;
   margin-right: auto !important;
@@ -1792,6 +1808,10 @@ p{
   border-radius: 0.25rem;
 }
 
+.rounded-\[4px\]{
+  border-radius: 4px;
+}
+
 .rounded-full{
   border-radius: 9999px;
 }
@@ -2594,12 +2614,12 @@ p{
   transition-duration: 700ms;
 }
 
-.duration-\[1500ms\]{
-  transition-duration: 1500ms;
-}
-
 .duration-\[1000ms\]{
   transition-duration: 1000ms;
+}
+
+.duration-\[1500ms\]{
+  transition-duration: 1500ms;
 }
 
 .ease-in-out{

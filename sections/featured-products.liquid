@@ -1,19 +1,19 @@
 <div class="cotainer">
   <section class="bg-white py-20 px-6">
-    <div class="max-w-7xl mx-auto">
+    <div class="container">
       <div class="flex justify-between items-end mb-12">
         <div>
-          <h2 class="text-primary font-light tracking-widest uppercase text-xl">
+          <h4 class="text-primary font-light tracking-widest uppercase">
             {{ section.settings.section_title }}
-          </h2>
-          <p class="text-primary mt-2 text-xs font-light uppercase tracking-widest">
+          </h4>
+          <p class="text-primary mt-2 font-light uppercase tracking-widest">
             {{ section.settings.section_subtitle }}
           </p>
         </div>
         {% if section.settings.button_url %}
           <a
             href="{{ section.settings.button_url }}"
-            class="text-primary border-b border-line pb-1 hover:text-secondary transition-all text-sm uppercase tracking-widest"
+            class="text-primary border-b border-primary pb-1 hover:text-secondary transition-all uppercase tracking-widest"
           >
             {{ section.settings.button_text }}
           </a>
@@ -25,7 +25,7 @@
           <div class="group relative flex flex-col h-full" id="prod-{{ product.id }}">
             <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase">
+                <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[13px] rounded-[4px] px-2 py-1 tracking-widest uppercase">
                   {{ 'products.product.on_sale' | t }}
                 </span>
               {% endif %}
@@ -33,18 +33,22 @@
               <div class="absolute top-4 right-4 z-40">
                 <button
                   type="button"
-                  class="wishlist-trigger-btn w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none"
+                  class="wishlist-trigger-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none"
+                  style="background: rgba(255, 255, 255, 0.7);"
                   data-product-id="{{ product.id }}"
                 >
-                  <svg
-                    class="w-5 h-5 heart-svg pointer-events-none"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                  </svg>
+                  {% comment %}
+                    <svg
+                      class="w-5 h-5 heart-svg pointer-events-none"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                    </svg>
+                  {% endcomment %}
+                  {% render 'icon-heart' %}
                 </button>
               </div>
 
@@ -72,7 +76,7 @@
                 <button
                   type="button"
                   onclick="handleAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-                  class="w-full bg-primary text-white py-4 text-[10px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
+                  class="w-full bg-primary text-white py-4 text-[13px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
                 >
                   {% if product.available -%}
                     {{- 'products.product.add_to_cart' | t -}}
@@ -92,9 +96,9 @@
               </a>
               <div class="flex justify-center items-center gap-2">
                 {% if product.compare_at_price > product.price %}
-                  <span class="text-gray-400 line-through text-xs">{{ product.compare_at_price | money }}</span>
+                  <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
                 {% endif %}
-                <span class="text-primary text-sm font-semibold">{{ product.price | money }}</span>
+                <span class="text-primary text-[13px] font-semibold">{{ product.price | money }}</span>
               </div>
             </div>
           </div>

@@ -67,6 +67,10 @@
 	p {
 		@apply font-inter text-[16px] leading-[1.6];
 	}
+
+	blockquote {
+		@apply !border-l-[6px] !border-secondary mx-6 !h-[70px] !px-5 flex flex-col items-start justify-center italic bg-custombg;
+	}
 }
 
 @layer components {
