@@ -1142,8 +1142,16 @@ blockquote{
   aspect-ratio: 16/10;
 }
 
+.aspect-\[16\/9\]{
+  aspect-ratio: 16/9;
+}
+
 .aspect-\[2\/3\]{
   aspect-ratio: 2/3;
+}
+
+.aspect-\[3\/2\]{
+  aspect-ratio: 3/2;
 }
 
 .aspect-\[3\/4\]{
@@ -1156,38 +1164,6 @@ blockquote{
 
 .aspect-video{
   aspect-ratio: 16 / 9;
-}
-
-.aspect-\[2\/1\]{
-  aspect-ratio: 2/1;
-}
-
-.aspect-\[2\/2\]{
-  aspect-ratio: 2/2;
-}
-
-.aspect-\[3\/1\]{
-  aspect-ratio: 3/1;
-}
-
-.aspect-\[1\/2\]{
-  aspect-ratio: 1/2;
-}
-
-.aspect-\[2\/6\]{
-  aspect-ratio: 2/6;
-}
-
-.aspect-\[1\/1\]{
-  aspect-ratio: 1/1;
-}
-
-.aspect-\[3\/2\]{
-  aspect-ratio: 3/2;
-}
-
-.aspect-\[16\/9\]{
-  aspect-ratio: 16/9;
 }
 
 .size-8{
@@ -2187,21 +2163,6 @@ blockquote{
 .py-\[80px\]{
   padding-top: 80px;
   padding-bottom: 80px;
-}
-
-.py-28{
-  padding-top: 7rem;
-  padding-bottom: 7rem;
-}
-
-.py-60{
-  padding-top: 15rem;
-  padding-bottom: 15rem;
-}
-
-.py-44{
-  padding-top: 11rem;
-  padding-bottom: 11rem;
 }
 
 .pb-1{
