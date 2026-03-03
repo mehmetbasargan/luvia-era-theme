@@ -1,6 +1,6 @@
-<footer class="bg-custombg text-primary pt-16 pb-8 px-6 border-t border-gray-400">
+<footer class="bg-custombg text-primary border-t border-gray-400 pt-14">
   <div class="">
-    <div class="w-full flex items-center justify-center">
+    <div class="w-full flex items-center justify-center border-b border-line pb-10">
       <a href="{{ routes.root_url }}" class="block">
         {% if section.settings.footer_logo != blank %}
           {%- assign logo_alt = section.settings.footer_logo.alt | default: shop.name -%}
@@ -16,15 +16,18 @@
         {% endif %}
       </a>
     </div>
-    <div class="container w-full flex flex-wrap md:items-start items-center gap-8 justify-between mt-20">
+    <div class="container w-full xl:h-[200px] flex flex-wrap items-center xl:items-start gap-8 justify-between py-14">
       <div class="md:w-[400px] w-full">
-        <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
+        <h6 class="font-light uppercase tracking-widest mb-3 text-primary">
           {{ section.settings.menu_1_title }}
-        </h4>
-        <ul class="text-sm font-light text-primary flex flex-row gap-3">
+        </h6>
+        <ul class="text-sm font-light text-primary flex flex-row flex-wrap gap-3">
           {% for link in linklists[section.settings.footer_menu_1].links %}
             <li class="pt-0">
-              <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+              <a
+                href="{{ link.url }}"
+                class="hover:text-secondary transition-colors duration-300 {% if link.active %}text-primary font-bold active-link{% else %}text-black hover:text-secondary{% endif %}"
+              >
                 {{ link.title }}
               </a>
             </li>
@@ -33,13 +36,16 @@
       </div>
 
       <div class="md:w-[400px] w-full">
-        <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
+        <h6 class="font-light uppercase tracking-widest mb-3 text-primary">
           {{ section.settings.menu_2_title }}
-        </h4>
-        <ul class="text-sm font-light text-primary flex flex-row gap-3">
+        </h6>
+        <ul class="text-sm font-light text-primary flex flex-row flex-wrap gap-3">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li class="pt-0">
-              <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+              <a
+                href="{{ link.url }}"
+                class="hover:text-secondary transition-colors duration-300 {% if link.active %}text-primary font-bold active-link{% else %}text-black hover:text-secondary{% endif %}"
+              >
                 {{ link.title }}
               </a>
             </li>
@@ -47,20 +53,20 @@
         </ul>
       </div>
 
-      <div class="md:w-[300px] w-full">
-        <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
+      <div class="w-full lg:w-[300px] ">
+        <h6 class="font-light uppercase tracking-widest mb-3 text-primary">
           {{ 'footer.newsletter' | t }}
-        </h4>
+        </h6>
         <p class="text-xs text-primary mb-4 font-medium ">
           {{ 'footer.be_first_to_know' | t }}
         </p>
-        <form class="flex border-b border-secondary pb-2">
+        <form class="flex border-b border-gray-400 pb-2 mt-10">
           <input
             type="email"
             placeholder="Email address"
             class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"
           >
-          <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">
+          <button type="submit" class="text-primary uppercase text-xs tracking-widest font-semibold ml-2">
             {{ 'footer.join' | t }}
           </button>
         </form>
