@@ -209,11 +209,15 @@
         },
         "image_FyjYLn": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/p2-2.jpg"
+          }
         },
         "image_mp93kC": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/p7-4.jpg"
+          }
         }
       },
       "block_order": [
