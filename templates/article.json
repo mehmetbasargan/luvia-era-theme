@@ -15,8 +15,8 @@
       "settings": {
         "image": "{{ article.image }}",
         "custom_title": "{{ article.title }}",
-        "hero_height": 55,
-        "overlay_opacity": 30
+        "hero_height": 40,
+        "overlay_opacity": 60
       }
     },
     "main": {
