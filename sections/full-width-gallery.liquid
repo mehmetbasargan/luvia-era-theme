@@ -3,16 +3,17 @@
     {% for block in section.blocks %}
       <div
         class="w-1/2 md:w-1/4 aspect-square relative group overflow-hidden cursor-pointer luvia-gallery-item"
-        data-src="{{ block.settings.image | image_url: width: 2000 }}"
+        onclick="openLuviaGallery({{ forloop.index0 }})"
+        data-full-src="{{ block.settings.image | image_url: width: 2000 }}"
       >
         {% if block.settings.image != blank %}
           <img
             src="{{ block.settings.image | image_url: width: 800 }}"
-            alt="{{ block.settings.image.alt | default: 'Luvia Gallery' }}"
+            alt="{{ block.settings.title | default: 'Gallery Image' }}"
             class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
             loading="lazy"
-            width="800"
-            height="800"
+            height=""
+            width=""
           >
         {% else %}
           {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
@@ -20,7 +21,7 @@
 
         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20">
           <span class="text-white text-[11px] tracking-[0.4em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">
-            {{ 'general.discover_more' | t | default: 'VIEW IMAGE' }}
+            {{ 'general.discover_more' | t | default: 'VIEW' }}
           </span>
         </div>
       </div>
@@ -30,109 +31,99 @@
 
 <div
   id="LuviaLightbox"
-  class="fixed inset-0 z-[500] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300"
+  class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 backdrop-blur-xl"
 >
   <button
     type="button"
-    class="absolute top-6 right-8 text-white text-5xl font-light hover:rotate-90 transition-all duration-300 z-[510] cursor-pointer"
-    onclick="closeLightbox()"
+    class="absolute top-10 right-10 text-white/70 hover:text-white text-5xl font-thin transition-all z-[10000] cursor-pointer"
+    onclick="closeLuviaGallery()"
   >
     &times;
   </button>
+
+  <button
+    type="button"
+    class="absolute left-5 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-6xl font-thin z-[10000] p-4 cursor-pointer"
+    onclick="changeImage(-1)"
+  >
+    &#8249;
+  </button>
+
   <img
     id="LightboxImage"
     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
     class="max-w-[90%] max-h-[85vh] object-contain shadow-2xl transition-all duration-500 scale-95"
-    height=""
-    width=""
-    loading="eager"
     alt="Enlarged view"
+    width=""
+    height=""
+    loading="eager"
   >
+
+  <button
+    type="button"
+    class="absolute right-5 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-6xl font-thin z-[10000] p-4 cursor-pointer"
+    onclick="changeImage(1)"
+  >
+    &#8250;
+  </button>
+
+  <div id="GalleryCounter" class="absolute bottom-10 text-white/40 text-xs tracking-widest uppercase"></div>
 </div>
 
 <script>
-  function openLightbox(src) {
-    const lightbox = document.getElementById('LuviaLightbox');
-    const img = document.getElementById('LightboxImage');
-    if (!lightbox || !img) return;
+  let currentImgIndex = 0;
+  const galleryImages = [];
 
-    img.src = src;
-    lightbox.style.opacity = '1';
-    lightbox.style.pointerEvents = 'auto';
-    setTimeout(() => {
-      img.style.transform = 'scale(1)';
-    }, 50);
-  }
-
-  function closeLightbox() {
-    const lightbox = document.getElementById('LuviaLightbox');
-    const img = document.getElementById('LightboxImage');
-    if (!lightbox || !img) return;
-
-    img.style.transform = 'scale(0.95)';
-    lightbox.style.opacity = '0';
-    lightbox.style.pointerEvents = 'none';
-    setTimeout(() => {
-      img.src = '';
-    }, 300); // Kapanınca resmi temizle
-  }
-
-  // Event Listeners (Tıklama yakalama)
+  // Sayfa yüklendiğinde tüm resim adreslerini bir diziye (array) topla
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.luvia-gallery-item').forEach((item) => {
-      item.addEventListener('click', function () {
-        const fullResSrc = this.getAttribute('data-src');
-        openLightbox(fullResSrc);
-      });
+      galleryImages.push(item.getAttribute('data-full-src'));
     });
   });
 
-  // ESC tuşu
+  function openLuviaGallery(index) {
+    currentImgIndex = index;
+    updateLightbox();
+    const modal = document.getElementById('LuviaLightbox');
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+    document.body.style.overflow = 'hidden'; // Sayfa kaymasını engelle
+  }
+
+  function updateLightbox() {
+    const img = document.getElementById('LightboxImage');
+    const counter = document.getElementById('GalleryCounter');
+
+    img.style.opacity = '0'; // Geçiş efekti
+    setTimeout(() => {
+      img.src = galleryImages[currentImgIndex];
+      img.style.opacity = '1';
+      img.classList.remove('scale-95');
+      img.classList.add('scale-100');
+      counter.innerText = currentImgIndex + 1 + ' / ' + galleryImages.length;
+    }, 200);
+  }
+
+  function changeImage(step) {
+    currentImgIndex += step;
+    if (currentImgIndex >= galleryImages.length) currentImgIndex = 0;
+    if (currentImgIndex < 0) currentImgIndex = galleryImages.length - 1;
+    updateLightbox();
+  }
+
+  function closeLuviaGallery() {
+    const modal = document.getElementById('LuviaLightbox');
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
+    document.body.style.overflow = 'auto'; // Kaydırmayı geri aç
+  }
+
+  // Klavye Kontrolleri
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
+    if (document.getElementById('LuviaLightbox').style.opacity === '1') {
+      if (e.key === 'Escape') closeLuviaGallery();
+      if (e.key === 'ArrowRight') changeImage(1);
+      if (e.key === 'ArrowLeft') changeImage(-1);
+    }
   });
 </script>
-
-<style>
-  #LuviaLightbox {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-  #LightboxImage {
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-</style>
-
-{% schema %}
-{
-  "name": "Full Width Gallery",
-  "max_blocks": 8,
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Section Title",
-      "default": "Follow the Era"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "image",
-      "name": "Image Block",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Select Image"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Luvia Full Gallery",
-      "blocks": [{ "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }]
-    }
-  ]
-}
-{% endschema %}

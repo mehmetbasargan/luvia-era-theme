@@ -864,6 +864,14 @@ p{
   top: 1.5rem;
 }
 
+.left-5{
+  left: 1.25rem;
+}
+
+.right-10{
+  right: 2.5rem;
+}
+
 .z-0{
   z-index: 0;
 }
@@ -930,6 +938,10 @@ p{
 
 .z-\[510\]{
   z-index: 510;
+}
+
+.z-\[10000\]{
+  z-index: 10000;
 }
 
 .order-first{
@@ -1259,6 +1271,10 @@ p{
   max-height: 85vh;
 }
 
+.max-h-\[80vh\]{
+  max-height: 80vh;
+}
+
 .min-h-\[1rem\]{
   min-height: 1rem;
 }
@@ -1428,6 +1444,10 @@ p{
   max-width: 90%;
 }
 
+.max-w-\[85\%\]{
+  max-width: 85%;
+}
+
 .flex-1{
   flex: 1 1 0%;
 }
@@ -1508,6 +1528,12 @@ p{
 .scale-95{
   --tw-scale-x: .95;
   --tw-scale-y: .95;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-100{
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1998,6 +2024,10 @@ p{
   padding: 2rem;
 }
 
+.p-4{
+  padding: 1rem;
+}
+
 .px-10{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -2275,6 +2305,11 @@ p{
   line-height: 1;
 }
 
+.text-6xl{
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -2289,6 +2324,10 @@ p{
 
 .font-semibold{
   font-weight: 600;
+}
+
+.font-thin{
+  font-weight: 100;
 }
 
 .uppercase{
@@ -2504,6 +2543,11 @@ p{
 
 .backdrop-blur-sm{
   --tw-backdrop-blur: blur(4px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.backdrop-blur-xl{
+  --tw-backdrop-blur: blur(24px);
   backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
