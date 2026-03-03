@@ -104,9 +104,18 @@
                       </svg>
                     </button>
                   {% else %}
+                    {% comment %}
+                      <a
+                        href="{{ link.url }}"
+                        class="hover:text-secondary transition-colors cursor-pointer text-[15px] tracking-widest font-medium"
+                      >
+                        {{ link.title }}
+                      </a>
+                    {% endcomment %}
+
                     <a
                       href="{{ link.url }}"
-                      class="hover:text-secondary transition-colors cursor-pointer text-[15px] tracking-widest font-medium"
+                      class="transition-colors duration-300 {% if link.active %}text-primary font-medium active-link{% else %}text-black hover:text-primary{% endif %}"
                     >
                       {{ link.title }}
                     </a>
