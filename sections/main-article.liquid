@@ -11,7 +11,14 @@
 
   {% if article.image %}
     <div class="aspect-video overflow-hidden mb-12">
-      <img src="{{ article.image | image_url: width: 1200 }}" height="" width="" class="w-full h-full object-cover">
+      <img
+        src="{{ article.image | image_url: width: 1200 }}"
+        height=""
+        width=""
+        alt="{{ article.title }}"
+        loading="eager"
+        class="w-full h-full object-cover"
+      >
     </div>
   {% endif %}
 

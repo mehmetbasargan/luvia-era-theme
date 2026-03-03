@@ -7,7 +7,9 @@
             block.settings.image
             | image_url: width: 1000
             | image_tag:
-              class: 'w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110'
+              alt: block.settings.title,
+              class: 'w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110',
+              loading: 'eager'
           }}
         {% else %}
           {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}

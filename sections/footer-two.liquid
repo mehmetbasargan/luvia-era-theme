@@ -8,7 +8,7 @@
             {{
               section.settings.footer_logo
               | image_url: width: 200
-              | image_tag: class: 'h-8 w-auto object-contain', alt: logo_alt
+              | image_tag: class: 'h-8 w-auto object-contain', alt: logo_alt, loading: 'eager'
             }}
           {% else %}
             <span class="text-2xl font-light tracking-[0.2em] uppercase text-primary">

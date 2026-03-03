@@ -21,6 +21,8 @@
           src="{{ section.settings.image | image_url: width: 1200 }}"
           height=""
           width=""
+          alt="{{ section.settings.heading }}"
+          loading="eager"
           class="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
         >
       {% else %}
@@ -30,6 +32,7 @@
             height=""
             width=""
             alt="{{ section.settings.heading }}"
+            loading="eager"
           >
         </div>
       {% endif %}

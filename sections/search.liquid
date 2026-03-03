@@ -184,7 +184,7 @@
             ${badgeHtml}
             
             <a href="${item.url}" class="block h-full w-full relative z-10">
-              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-opacity duration-700 ${hoverImage ? 'group-hover:opacity-0' : ''}" loading="lazy">
+              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-opacity duration-700 ${hoverImage ? 'group-hover:opacity-0' : ''}" loading="eager">
               ${hoverImage ? `<img src="${hoverImage}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">` : ''}
             </a>
 
