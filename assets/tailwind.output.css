@@ -872,6 +872,10 @@ p{
   right: 2.5rem;
 }
 
+.top-8{
+  top: 2rem;
+}
+
 .z-0{
   z-index: 0;
 }
@@ -942,6 +946,10 @@ p{
 
 .z-\[10000\]{
   z-index: 10000;
+}
+
+.z-\[10001\]{
+  z-index: 10001;
 }
 
 .order-first{
@@ -1265,6 +1273,10 @@ p{
 
 .h-full{
   height: 100%;
+}
+
+.h-20{
+  height: 5rem;
 }
 
 .max-h-\[85vh\]{
@@ -2133,6 +2145,11 @@ p{
   padding-bottom: 80px;
 }
 
+.px-5{
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .pb-1{
   padding-bottom: 0.25rem;
 }
@@ -2477,6 +2494,10 @@ p{
 
 .opacity-80{
   opacity: 0.8;
+}
+
+.opacity-20{
+  opacity: 0.2;
 }
 
 .shadow-2xl{

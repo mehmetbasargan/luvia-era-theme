@@ -1,28 +1,40 @@
-<section class="w-full bg-white overflow-hidden">
-  <div class="flex flex-wrap" id="LuviaGallery-{{ section.id }}">
+<section
+  id="Gallery-{{ section.id }}"
+  class="w-full bg-white overflow-hidden py-10"
+  data-section-id="{{ section.id }}"
+  data-section-type="gallery"
+>
+  {% if section.settings.title != blank %}
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-light tracking-[0.3em] uppercase text-primary">{{ section.settings.title }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="flex flex-wrap">
     {% for block in section.blocks %}
       <div
         class="w-1/2 md:w-1/4 aspect-square relative group overflow-hidden cursor-pointer luvia-gallery-item"
+        {{ block.shopify_attributes }}
         onclick="openLuviaGallery({{ forloop.index0 }})"
         data-full-src="{{ block.settings.image | image_url: width: 2000 }}"
       >
         {% if block.settings.image != blank %}
           <img
             src="{{ block.settings.image | image_url: width: 800 }}"
-            alt="{{ block.settings.title | default: 'Gallery Image' }}"
+            alt="{{ block.settings.image.alt | default: 'Gallery' }}"
             class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
             loading="lazy"
-            height=""
-            width=""
+            width="800"
+            height="800"
           >
         {% else %}
-          {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+          <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+            {{ 'image' | placeholder_svg_tag: 'w-20 h-20 opacity-20' }}
+          </div>
         {% endif %}
 
         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20">
-          <span class="text-white text-[11px] tracking-[0.4em] uppercase border border-white/50 px-6 py-3 backdrop-blur-sm">
-            {{ 'general.discover_more' | t | default: 'VIEW' }}
-          </span>
+          <span class="text-white text-[10px] tracking-[0.4em] uppercase border border-white/50 px-5 py-2">VIEW</span>
         </div>
       </div>
     {% endfor %}
@@ -31,77 +43,67 @@
 
 <div
   id="LuviaLightbox"
-  class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 backdrop-blur-xl"
+  class="fixed inset-0 z-[10000] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300"
 >
   <button
     type="button"
-    class="absolute top-10 right-10 text-white/70 hover:text-white text-5xl font-thin transition-all z-[10000] cursor-pointer"
+    class="absolute top-8 right-8 text-white text-5xl font-thin z-[10001] cursor-pointer"
     onclick="closeLuviaGallery()"
   >
     &times;
   </button>
-
   <button
     type="button"
-    class="absolute left-5 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-6xl font-thin z-[10000] p-4 cursor-pointer"
+    class="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-5xl font-thin z-[10001] p-4 cursor-pointer"
     onclick="changeImage(-1)"
   >
     &#8249;
   </button>
-
   <img
     id="LightboxImage"
-    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-    class="max-w-[90%] max-h-[85vh] object-contain shadow-2xl transition-all duration-500 scale-95"
-    alt="Enlarged view"
+    src=""
     width=""
     height=""
     loading="eager"
+    class="max-w-[85%] max-h-[80vh] object-contain shadow-2xl transition-all duration-300"
+    alt="Luvia Gallery"
   >
-
   <button
     type="button"
-    class="absolute right-5 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-6xl font-thin z-[10000] p-4 cursor-pointer"
+    class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-5xl font-thin z-[10001] p-4 cursor-pointer"
     onclick="changeImage(1)"
   >
     &#8250;
   </button>
-
-  <div id="GalleryCounter" class="absolute bottom-10 text-white/40 text-xs tracking-widest uppercase"></div>
+  <div id="GalleryCounter" class="absolute bottom-10 text-white/40 text-[10px] tracking-widest uppercase"></div>
 </div>
 
 <script>
-  let currentImgIndex = 0;
-  const galleryImages = [];
+  var currentImgIndex = 0;
+  var galleryImages = [];
 
-  // Sayfa yüklendiğinde tüm resim adreslerini bir diziye (array) topla
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.luvia-gallery-item').forEach((item) => {
+  function initLuviaGallery() {
+    galleryImages = [];
+    document.querySelectorAll('.luvia-gallery-item').forEach(function (item) {
       galleryImages.push(item.getAttribute('data-full-src'));
     });
-  });
+  }
 
   function openLuviaGallery(index) {
+    if (galleryImages.length === 0) initLuviaGallery();
     currentImgIndex = index;
     updateLightbox();
-    const modal = document.getElementById('LuviaLightbox');
+    var modal = document.getElementById('LuviaLightbox');
     modal.style.opacity = '1';
     modal.style.pointerEvents = 'auto';
-    document.body.style.overflow = 'hidden'; // Sayfa kaymasını engelle
+    document.body.style.overflow = 'hidden';
   }
 
   function updateLightbox() {
-    const img = document.getElementById('LightboxImage');
-    const counter = document.getElementById('GalleryCounter');
-
-    img.style.opacity = '0'; // Geçiş efekti
-    setTimeout(() => {
-      img.src = galleryImages[currentImgIndex];
-      img.style.opacity = '1';
-      img.classList.remove('scale-95');
-      img.classList.add('scale-100');
-      counter.innerText = currentImgIndex + 1 + ' / ' + galleryImages.length;
-    }, 200);
+    var img = document.getElementById('LightboxImage');
+    var counter = document.getElementById('GalleryCounter');
+    img.src = galleryImages[currentImgIndex];
+    counter.innerText = currentImgIndex + 1 + ' / ' + galleryImages.length;
   }
 
   function changeImage(step) {
@@ -112,18 +114,45 @@
   }
 
   function closeLuviaGallery() {
-    const modal = document.getElementById('LuviaLightbox');
+    var modal = document.getElementById('LuviaLightbox');
     modal.style.opacity = '0';
     modal.style.pointerEvents = 'none';
-    document.body.style.overflow = 'auto'; // Kaydırmayı geri aç
+    document.body.style.overflow = 'auto';
   }
 
-  // Klavye Kontrolleri
-  document.addEventListener('keydown', (e) => {
-    if (document.getElementById('LuviaLightbox').style.opacity === '1') {
-      if (e.key === 'Escape') closeLuviaGallery();
-      if (e.key === 'ArrowRight') changeImage(1);
-      if (e.key === 'ArrowLeft') changeImage(-1);
-    }
-  });
+  document.addEventListener('shopify:section:load', initLuviaGallery);
+  document.addEventListener('DOMContentLoaded', initLuviaGallery);
 </script>
+
+{% schema %}
+{
+  "name": "Luvia Full Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Follow Era"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Gallery Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luvia Full Gallery",
+      "blocks": [{ "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }]
+    }
+  ]
+}
+{% endschema %}
