@@ -34,7 +34,7 @@
         {% endif %}
 
         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20">
-          <span class="text-white text-[10px] tracking-[0.4em] uppercase border border-white/50 px-5 py-2">VIEW</span>
+          <span class="text-primary text-[14px] tracking-[0.4em] uppercase border border-line px-5 py-2">VIEW</span>
         </div>
       </div>
     {% endfor %}
@@ -54,7 +54,7 @@
   </button>
   <button
     type="button"
-    class="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-5xl font-thin z-[10001] p-4 cursor-pointer"
+    class="absolute left-4 top-1/2 -translate-y-1/2 text-primary hover:text-secondary text-5xl font-thin z-[10001] p-4 cursor-pointer"
     onclick="changeImage(-1)"
   >
     &#8249;
@@ -70,12 +70,12 @@
   >
   <button
     type="button"
-    class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-5xl font-thin z-[10001] p-4 cursor-pointer"
+    class="absolute right-4 top-1/2 -translate-y-1/2 text-primary hover:text-secondary text-5xl font-thin z-[10001] p-4 cursor-pointer"
     onclick="changeImage(1)"
   >
     &#8250;
   </button>
-  <div id="GalleryCounter" class="absolute bottom-10 text-white/40 text-[10px] tracking-widest uppercase"></div>
+  <div id="GalleryCounter" class="absolute bottom-10 text-primary text-[10px] tracking-widest uppercase"></div>
 </div>
 
 <script>
