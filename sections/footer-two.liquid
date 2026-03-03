@@ -21,7 +21,7 @@
         <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
           {{ section.settings.menu_1_title }}
         </h4>
-        <ul class="space-y-4 text-sm font-light text-primary flex flex-row gap-3">
+        <ul class="text-sm font-light text-primary flex flex-row gap-3">
           {% for link in linklists[section.settings.footer_menu_1].links %}
             <li class="pt-0">
               <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
@@ -36,7 +36,7 @@
         <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
           {{ section.settings.menu_2_title }}
         </h4>
-        <ul class="space-y-4 text-sm font-light text-primary flex flex-row gap-3">
+        <ul class="text-sm font-light text-primary flex flex-row gap-3">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li class="pt-0">
               <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
