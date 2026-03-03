@@ -89,7 +89,7 @@
                 {%- endif -%}
               {%- endfor -%}
 
-              <li class="group {% if is_mega %}static{% else %}relative{% endif %} flex items-center">
+              <li class="group {% if is_mega %}static{% else %}relative{% endif %} flex items-center cursor-pointer">
                 <div class="py-4">
                   {% if is_mega or link.links != blank %}
                     <button class="flex items-center hover:text-secondary transition-colors cursor-pointer text-[15px] tracking-widest font-medium">
