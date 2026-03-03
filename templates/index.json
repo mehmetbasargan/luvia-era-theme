@@ -94,8 +94,8 @@
       ],
       "name": "Marquee Text",
       "settings": {
-        "bg_color": "#b2ac88",
-        "text_color": "#3b443c",
+        "bg_color": "#000000",
+        "text_color": "#f9f9f9",
         "speed": 30,
         "padding": 20,
         "show_separator": true,
