@@ -1,9 +1,9 @@
 {% paginate blog.articles by 10 %}
-  <div class="main-blog-section py-12 px-4 max-w-7xl mx-auto">
+  <div class="main-blog-section py-12 px-4 container">
     <header class="text-center mb-16">
-      <h3 class="font-light uppercase tracking-widest">
+      <h4 class="font-light uppercase tracking-widest ">
         {{ section.settings.blog_title | default: blog.title }}
-      </h3>
+      </h4>
       <p class="text-primary mt-2">
         {{ section.settings.blog_subtitle }}
       </p>
@@ -14,7 +14,7 @@
         href="{{ blog.url }}"
         class="px-4 py-2 rounded-md border border-primary hover:bg-secondary hover:text-white transition {% if current_tags == blank %}bg-primary text-white{% endif %}"
       >
-        All Posts
+        {{ 'blog.all_posts' | t }}
       </a>
       {% for tag in blog.all_tags %}
         <a
@@ -35,8 +35,8 @@
                 <img
                   src="{{ article.image | image_url: width: 800 }}"
                   alt="{{ article.title }}"
-                  height=""
-                  width=""
+                  height="450"
+                  width="800"
                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="eager"
                 >
@@ -44,10 +44,10 @@
             {% endif %}
 
             <div class="content space-y-3">
-              <span class="text-sm font-bold text-secondary tracking-wider">
+              <span class="text-sm font-bold text-primary tracking-wider">
                 {{- article.published_at | date: '%B %d, %Y' -}}
               </span>
-              <h5 class="font-light uppercase leading-tight group-hover:text-primary transition-colors text-xl">
+              <h5 class="font-light uppercase leading-tight group-hover:text-primary transition-colors">
                 <a href="{{ article.url }}">{{ article.title }}</a>
               </h5>
               <p class="text-primary line-clamp-3">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
@@ -55,7 +55,7 @@
                 href="{{ article.url }}"
                 class="inline-block pt-2 font-medium text-sm hover:underline text-secondary transition-all uppercase"
               >
-                Read More
+                {{ 'blog.read_more' | t }}
               </a>
             </div>
           </article>
