@@ -38,29 +38,25 @@
         "image_h4tRdW": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/alpcem-portrait-4778337_1280.jpg",
-            "link": "shopify://collections/golden-hour-muse"
+            "image": "shopify://shop_images/p7-2.jpg"
           }
         },
         "image_fRcTBf": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/img3.jpg",
-            "link": "shopify://collections/golden-hour-muse"
+            "image": "shopify://shop_images/p5-2.jpg"
           }
         },
         "image_BxJUwe": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/cat3.jpg",
-            "link": "shopify://collections/silk-grace"
+            "image": "shopify://shop_images/p6-1.jpg"
           }
         },
         "image_qR8XRW": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/img2.jpg",
-            "link": "shopify://collections/the-minimalist-era"
+            "image": "shopify://shop_images/p3.jpg"
           }
         }
       },
