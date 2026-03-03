@@ -1,5 +1,5 @@
-<div class="swiper myHeroSwiper w-full h-[calc(100dvh-var(--header-height,0px))] lg:h-[calc(100vh-var(--header-height,0px))]">
-  <div class="swiper-wrapper">
+<div class="swiper group myHeroSwiper w-full h-[calc(100dvh-var(--header-height,0px))] lg:h-[calc(100vh-var(--header-height,0px))]">
+  <div class="swiper-wrapper ">
     {% for block in section.blocks %}
       <div class="swiper-slide relative w-full h-full overflow-hidden">
         {% if block.settings.image != blank %}
@@ -46,7 +46,7 @@
   <div
     class="
       swiper-button-next !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
-      !right-[30px] transition-all duration-150 !w-[50px] !h-[50px]
+      !right-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
     "
   >
     <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
@@ -56,7 +56,7 @@
   <div
     class="
       swiper-button-prev !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
-      !left-[30px] transition-all duration-150 !w-[50px] !h-[50px]
+      !left-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
     "
   >
     <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
@@ -125,22 +125,26 @@
     background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
     z-index: 1;
   }
-
+  /* 
   .swiper-button-next {
-    display: none;
+    opacity: 0;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  .myHeroSwiper:hover .swiper-button-next {
+    opacity: 1;
   }
 
   .swiper-button-prev {
-    display: none;
+    opacity: 0;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
   }
-
-  .myHeroSwiper:hover .swiper-button-next {
-    display: flex;
-  }
-
   .myHeroSwiper:hover .swiper-button-prev {
-    display: flex;
-  }
+    opacity: 1;
+  } */
 </style>
 
 <script>
