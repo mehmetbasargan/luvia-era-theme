@@ -9,19 +9,21 @@
  */
 {
   "sections": {
+    "main_page_header_GR6D7d": {
+      "type": "main-page-header",
+      "name": "Page Header",
+      "settings": {
+        "image": "shopify://shop_images/pageheader3.jpg",
+        "custom_title": "",
+        "hero_height": 40,
+        "overlay_opacity": 50
+      }
+    },
     "main": {
       "type": "page",
       "disabled": true,
-      "settings": {}
-    },
-    "main_page_header_p7L6ej": {
-      "type": "main-page-header",
-      "name": "Sayfa Başlığı (Hero)",
       "settings": {
-        "image": "shopify://shop_images/img2.jpg",
-        "custom_title": "",
-        "hero_height": 60,
-        "overlay_opacity": 40
+        "show_title": false
       }
     },
     "story": {
@@ -74,8 +76,8 @@
     }
   },
   "order": [
+    "main_page_header_GR6D7d",
     "main",
-    "main_page_header_p7L6ej",
     "story",
     "about_gallery_UMDFnP"
   ]
