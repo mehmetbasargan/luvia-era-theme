@@ -11,6 +11,7 @@
   "sections": {
     "promo_video_banner_yyDpHy": {
       "type": "promo-video-banner",
+      "disabled": true,
       "name": "Promo Video Banner",
       "settings": {
         "video_file": "shopify://files/videos/video2.mp4",
@@ -61,7 +62,6 @@
         "slide_QGpjDa",
         "slide_n3HckD"
       ],
-      "disabled": true,
       "name": "Hero Slider",
       "settings": {}
     },
