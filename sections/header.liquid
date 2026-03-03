@@ -91,7 +91,7 @@
                     {% for childlink in link.links %}
                       <a
                         href="{{ childlink.url }}"
-                        class="block px-6 py-2 text-primary text-[15px] hover:bg-custombg hover:text-secondary transition-all "
+                        class="block px-6 py-2 text-primary text-[15px] hover:bg-custombg hover:text-secondary transition-all {% if childlink.active %}text-secondary font-medium active-link{% else %}text-black hover:text-secondary{% endif %}"
                       >
                         {{ childlink.title }}
                       </a>
