@@ -14,7 +14,7 @@
       "name": "Collection Banner",
       "settings": {
         "fallback_image": "shopify://shop_images/alpcem-portrait-4917796_1280_1b998f3d-aaaf-4a05-96eb-5db1ffe1c4f3.jpg",
-        "hero_height": 70,
+        "hero_height": 30,
         "overlay_opacity": 50
       }
     },
@@ -22,6 +22,14 @@
       "type": "main-collection",
       "settings": {
         "products_per_page": 12
+      }
+    },
+    "product_recommendations_jKgtbU": {
+      "type": "product-recommendations",
+      "name": "Product Recommendations",
+      "settings": {
+        "heading": "You May Also Like",
+        "products_to_show": 4
       }
     },
     "full_width_gallery_7dxMQK": {
@@ -65,14 +73,6 @@
       "name": "Luvia Full Gallery",
       "settings": {
         "title": "Follow the Era"
-      }
-    },
-    "product_recommendations_jKgtbU": {
-      "type": "product-recommendations",
-      "name": "Product Recommendations",
-      "settings": {
-        "heading": "You May Also Like",
-        "products_to_show": 4
       }
     }
   },
