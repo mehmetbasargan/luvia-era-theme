@@ -198,6 +198,7 @@
         "image_8eTgp3": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/p4-1.jpg",
             "link": ""
           }
         },
