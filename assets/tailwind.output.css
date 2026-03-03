@@ -1259,6 +1259,10 @@ p{
   height: 100%;
 }
 
+.h-12{
+  height: 3rem;
+}
+
 .max-h-\[80vh\]{
   max-height: 80vh;
 }
@@ -2888,6 +2892,10 @@ p{
     height: 152px;
   }
 
+  .md\:h-16{
+    height: 4rem;
+  }
+
   .md\:w-1\/4{
     width: 25%;
   }
@@ -2922,6 +2930,10 @@ p{
 
   .md\:w-full{
     width: 100%;
+  }
+
+  .md\:w-16{
+    width: 4rem;
   }
 
   .md\:grid-cols-2{
