@@ -195,6 +195,12 @@
     "full_width_gallery_TMh89n": {
       "type": "full-width-gallery",
       "blocks": {
+        "image_CFD6JC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p3-3.jpg"
+          }
+        },
         "image_UgXNNd": {
           "type": "image",
           "settings": {
@@ -221,6 +227,7 @@
         }
       },
       "block_order": [
+        "image_CFD6JC",
         "image_UgXNNd",
         "image_RxbdpB",
         "image_FyjYLn",
