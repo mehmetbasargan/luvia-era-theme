@@ -1412,6 +1412,10 @@ p{
   width: 60px;
 }
 
+.w-16{
+  width: 4rem;
+}
+
 .min-w-\[200px\]{
   min-width: 200px;
 }
