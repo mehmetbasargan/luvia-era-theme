@@ -192,40 +192,33 @@
         "header_opacity": 40
       }
     },
-    "full_width_gallery_q9giCc": {
+    "full_width_gallery_TMh89n": {
       "type": "full-width-gallery",
       "blocks": {
-        "image_8eTgp3": {
+        "image_UgXNNd": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/p4-1.jpg",
-            "link": ""
+            "image": "shopify://shop_images/p4-2.jpg"
           }
         },
-        "image_Xj6bnT": {
+        "image_RxbdpB": {
           "type": "image",
-          "settings": {
-            "link": ""
-          }
+          "settings": {}
         },
-        "image_wwAYA9": {
+        "image_FyjYLn": {
           "type": "image",
-          "settings": {
-            "link": ""
-          }
+          "settings": {}
         },
-        "image_qcqbHn": {
+        "image_mp93kC": {
           "type": "image",
-          "settings": {
-            "link": ""
-          }
+          "settings": {}
         }
       },
       "block_order": [
-        "image_8eTgp3",
-        "image_Xj6bnT",
-        "image_wwAYA9",
-        "image_qcqbHn"
+        "image_UgXNNd",
+        "image_RxbdpB",
+        "image_FyjYLn",
+        "image_mp93kC"
       ],
       "name": "Luvia Full Gallery",
       "settings": {
@@ -241,6 +234,6 @@
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
-    "full_width_gallery_q9giCc"
+    "full_width_gallery_TMh89n"
   ]
 }
