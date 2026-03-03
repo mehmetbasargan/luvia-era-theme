@@ -585,35 +585,43 @@ h1,
 	h3,
 	h4,
 	h5,
-	h6{
+	h6 {
+  /* Bold yerine Normal veya Light'a geçiyoruz */
   font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   color: var(--color-primary);
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  /* Max: 64px (4rem) yerine artık Max: 48px (3rem) */
+  font-size: clamp(2rem, 5vw, 3rem);
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
+  /* Max: 48px (3rem) yerine artık Max: 36px (2.25rem) */
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
 }
 
 h3 {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
 }
 
 h4 {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
 }
 
 h5 {
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
 }
 
 h6 {
-  font-size: clamp(1rem, 2vw, 1rem);
+  /* H6'yı biraz daha 'editorial' yapalım: Küçük ama geniş aralıklı */
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
 p{
@@ -1148,6 +1156,38 @@ blockquote{
 
 .aspect-video{
   aspect-ratio: 16 / 9;
+}
+
+.aspect-\[2\/1\]{
+  aspect-ratio: 2/1;
+}
+
+.aspect-\[2\/2\]{
+  aspect-ratio: 2/2;
+}
+
+.aspect-\[3\/1\]{
+  aspect-ratio: 3/1;
+}
+
+.aspect-\[1\/2\]{
+  aspect-ratio: 1/2;
+}
+
+.aspect-\[2\/6\]{
+  aspect-ratio: 2/6;
+}
+
+.aspect-\[1\/1\]{
+  aspect-ratio: 1/1;
+}
+
+.aspect-\[3\/2\]{
+  aspect-ratio: 3/2;
+}
+
+.aspect-\[16\/9\]{
+  aspect-ratio: 16/9;
 }
 
 .size-8{
@@ -2147,6 +2187,21 @@ blockquote{
 .py-\[80px\]{
   padding-top: 80px;
   padding-bottom: 80px;
+}
+
+.py-28{
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.py-60{
+  padding-top: 15rem;
+  padding-bottom: 15rem;
+}
+
+.py-44{
+  padding-top: 11rem;
+  padding-bottom: 11rem;
 }
 
 .pb-1{

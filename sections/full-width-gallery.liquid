@@ -13,7 +13,7 @@
   <div class="flex flex-wrap">
     {% for block in section.blocks %}
       <div
-        class="w-1/2 md:w-1/4 aspect-square relative group overflow-hidden cursor-pointer luvia-gallery-item"
+        class="w-1/2 md:w-1/4 aspect-[3/2] relative group overflow-hidden cursor-pointer luvia-gallery-item top-0"
         {{ block.shopify_attributes }}
         onclick="openLuviaGallery({{ forloop.index0 }})"
         data-full-src="{{ block.settings.image | image_url: width: 2000 }}"
@@ -22,7 +22,7 @@
           <img
             src="{{ block.settings.image | image_url: width: 800 }}"
             alt="{{ block.settings.image.alt | default: 'Gallery' }}"
-            class="w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-110"
+            class="w-full h-full object-cover object-top transition-transform duration-[1500ms] ease-out group-hover:scale-110"
             loading="eager"
             width="800"
             height="800"
