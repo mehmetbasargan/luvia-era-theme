@@ -74,7 +74,8 @@
 		"select_collection": "Select Collection",
 		"review": "View Collection",
 		"no_products_yet": "There are no products in this collection yet.",
-		"filters": "Filters"
+		"filters": "Filters",
+		"select_collection_placeholder": "Select Collection"
 	},
 	"products": {
 		"product": {

@@ -20,6 +20,8 @@
         {% endif %}
       </div>
 
+      {% comment %} grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 {% endcomment %}
+
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {% for product in collections[section.settings.collection].products limit: 4 %}
           <div class="group relative flex flex-col h-full" id="prod-{{ product.id }}">

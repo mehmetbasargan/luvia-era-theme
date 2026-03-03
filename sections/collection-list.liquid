@@ -1,4 +1,4 @@
-<section class="bg-custombg py-20 px-6">
+<section class="bg-custombg py-20 lg:px-6">
   <div class="container">
     <div class="text-center mb-16">
       <h4 class="font-josefin uppercase text-secondary font-light tracking-[0.2em]">
@@ -7,12 +7,15 @@
       <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       {% for block in section.blocks %}
         {%- assign collection = collections[block.settings.collection] -%}
 
         <div class="group relative flex flex-col items-center">
-          <a href="{{ collection.url | default: '#' }}" class="w-full aspect-[2/3] overflow-hidden bg-white relative">
+          <a
+            href="{{ collection.url | default: '#' }}"
+            class="w-full h-[250px] lg:h-[200px] overflow-hidden bg-white relative"
+          >
             {% if collection.featured_image != blank %}
               <img
                 src="{{ collection.featured_image | image_url: width: 600 }}"
@@ -30,18 +33,17 @@
               class="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/10 transition-colors duration-500"
             ></div>
           </a>
-
           <div class="mt-6 text-center">
             <h6 class="text-primary tracking-widest uppercase mb-2">
               {% if collection.title != blank %}
                 {{ collection.title }}
               {% else %}
-                Select Collection
+                {{ 'collections.select_collection_placeholder' | t }}
               {% endif %}
             </h6>
             <a
               href="{{ collection.url }}"
-              class="text-[10px] md:text-xs text-secondary border-b border-secondary pb-1 uppercase tracking-widest hover:text-primary hover:border-primary transition-all"
+              class="text-[12px] md:text-[13px] text-primary border-b border-primary pb-1 uppercase tracking-widest hover:text-primary hover:border-primary transition-all"
             >
               {{ 'collections.review' | t }}
             </a>
