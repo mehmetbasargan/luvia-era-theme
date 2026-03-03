@@ -99,16 +99,7 @@
                   </div>
                 </div>
               {% else %}
-                {% comment %}
-                  <a href="{{ link.url }}" class="hover:text-secondary text-[15px] transition-colors py-4">
-                    {{ link.title }}
-                  </a>
-                {% endcomment %}
-
-                <a
-                  href="{{ link.url }}"
-                  class="transition-colors duration-300 hover:text-secondary text-[15px] py-4{% if link.active %}text-secondary font-medium active-link{% else %}text-black hover:text-secondary{% endif %}"
-                >
+                <a href="{{ link.url }}" class="hover:text-secondary text-[15px] transition-colors py-4">
                   {{ link.title }}
                 </a>
               {% endif %}
