@@ -13,7 +13,7 @@
             {{ block.settings.text }}
           </span>
           {% if section.settings.show_separator %}
-            <span class="separator text-white/30">•</span>
+            <span class="separator" style="color: {{ section.settings.text_color }};">•</span>
           {% endif %}
         {% endfor %}
       </div>
