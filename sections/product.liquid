@@ -331,8 +331,8 @@
         return response.json();
       })
       .then((item) => {
-        btn.innerText = 'ADDED ✔';
-        showToast('Item added to bag');
+        btn.innerText = 'ADDED';
+        showToast('Product added to cart!', 'info');
         openCartDrawer();
 
         setTimeout(() => {

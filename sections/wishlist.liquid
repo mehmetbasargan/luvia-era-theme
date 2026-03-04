@@ -130,7 +130,8 @@
           })
             .then((res) => res.json())
             .then((cartData) => {
-              btn.innerText = 'ADDED ✔';
+              btn.innerText = 'ADDED';
+              showToast('Product added to cart!', 'info');
 
               document.dispatchEvent(
                 new CustomEvent('cart:updated', {

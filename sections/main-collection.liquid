@@ -183,7 +183,8 @@
     })
       .then((res) => res.json())
       .then((cartData) => {
-        btn.innerText = 'ADDED ✔';
+        btn.innerText = 'ADDED';
+        showToast('Product added to cart!', 'info');
         if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
 
         document.dispatchEvent(
