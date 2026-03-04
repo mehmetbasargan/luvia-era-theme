@@ -1,36 +1,35 @@
 <div class="cotainer">
-  <section class="bg-white py-20 px-6">
-    <div class="container">
-      <div class="flex justify-between items-end mb-12">
+  <section class="bg-white">
+    <div class="container py-12">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
         <div>
           <h4 class="text-primary font-light tracking-widest uppercase">
             {{ section.settings.section_title }}
           </h4>
-          <p class="text-primary mt-2 font-light uppercase tracking-widest">
+          <p class="text-primary mt-2 font-light uppercase tracking-widest mb-5 md:mb-0">
             {{ section.settings.section_subtitle }}
           </p>
         </div>
         {% if section.settings.button_url %}
           <a
             href="{{ section.settings.button_url }}"
-            class="text-primary border-b border-primary pb-1 hover:text-secondary transition-all uppercase tracking-widest"
+            class="text-primary text-sm border-b border-primary pb-1 hover:text-secondary transition-all uppercase tracking-widest"
           >
             {{ section.settings.button_text }}
           </a>
         {% endif %}
       </div>
-
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {% for product in collections[section.settings.collection].products limit: 4 %}
           <div class="group relative flex flex-col h-full" id="prod-{{ product.id }}">
             <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[13px] rounded-[4px] px-2 py-1 tracking-widest uppercase">
+                <span class="absolute top-4 left-2 md:left-4 z-20 bg-secondary text-white font-medium text-[13px] rounded-full px-2 py-1 tracking-widest uppercase">
                   {{ 'products.product.on_sale' | t }}
                 </span>
               {% endif %}
 
-              <div class="absolute top-4 right-4 z-40">
+              <div class="absolute top-4 right-2 md:right-4 z-40">
                 <button
                   type="button"
                   class="wishlist-trigger-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none"

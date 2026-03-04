@@ -130,15 +130,39 @@
           emptyMessage.classList.remove('hidden');
         }
       })
-      .catch(err => console.error('Arama Hatası:', err));
+      .catch(err => {});
   });
+
+  // Load hover images for search results
+  function loadHoverImages() {
+    const hoverImages = document.querySelectorAll('[data-hover-src]');
+    hoverImages.forEach(img => {
+      const hoverSrc = img.getAttribute('data-hover-src');
+      if (hoverSrc) {
+        fetch(hoverSrc + '?t=' + Date.now())
+          .then(response => response.json())
+          .then(product => {
+            if (product.media && product.media.length > 1) {
+              img.src = product.media[1].src;
+              img.style.display = 'block';
+            }
+          })
+          .catch(err => {});
+      }
+    });
+  }
+
+  // Load hover images after search results render
+  setTimeout(loadHoverImages, 500);
 
  
   function renderResults(results) {
     resultsContainer.innerHTML = results.map(item => {
       const isArticle = item.url.includes('/blogs/') || item.type === 'article';
       const mainImage = item.featured_image ? item.featured_image.url : (item.image || '');
-      const hoverImage = !isArticle && item.images && item.images.length > 1 ? item.images[1].url : null;
+      
+      // Fetch hover image with API call for better UX
+      const hoverImage = !isArticle ? `/products/${item.handle}.js` : null;
 
       let badgeHtml = '', priceHtml = '', actionButton = '';
 
@@ -148,7 +172,7 @@
         const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
 
         if (isOnSale) {
-          badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md">${translations.sale}</span>`;
+          badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary rounded-full text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md">${translations.sale}</span>`;
         }
         
         
@@ -180,15 +204,15 @@
             ${badgeHtml}
             
             <a href="${item.url}" class="block h-full w-full relative z-10">
-              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-opacity duration-700 ${hoverImage ? 'group-hover:opacity-0' : ''}" loading="eager">
-              ${hoverImage ? `<img src="${hoverImage}" alt="${item.title}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">` : ''}
+              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-opacity duration-700" loading="eager">
+              ${hoverImage ? `<img data-hover-src="${hoverImage}" alt="${item.title}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="display:none;">` : ''}
             </a>
 
             <div class="absolute top-3 right-3 z-50">
               <button type="button" 
-                      class="ssw-faveit ssw-wishlist-btn group/heart flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all pointer-events-auto" 
+                      class="bg-white custom-wishlist-btn flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all pointer-events-auto" 
                       data-id="${item.id}"
-                      onclick="event.preventDefault(); event.stopPropagation(); return false;">
+                      onclick="event.preventDefault(); event.stopPropagation();">
                 <svg class="w-5 h-5 text-primary group-hover/heart:text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                 </svg>
