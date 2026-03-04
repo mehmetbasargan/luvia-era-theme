@@ -342,7 +342,7 @@ function updateVariantID() {
                         <h4 class="text-[10px] uppercase tracking-widest text-primary">${item.product_title}</h4>
                         <button onclick="removeCartItem(${
                           index + 1
-                        })" class="text-[9px] text-gray-400 hover:text-black uppercase underline">${ "{{ 'cart.remove' | t }}" }</button>
+                        })" class="text-[9px] text-gray-400 hover:text-black uppercase underline" aria-label="Remove item from cart">${ "{{ 'cart.remove' | t }}" }</button>
                       </div>
                       <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
                       <p class="text-xs mt-2 font-medium">${(item.price / 100).toFixed(2)} {{ cart.currency.symbol }}</p>

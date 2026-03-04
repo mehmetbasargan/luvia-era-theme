@@ -1,6 +1,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+<!-- SEO Meta Tags -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="googlebot" content="index, follow">
+<meta name="bingbot" content="index, follow">
+
+<!-- Performance Meta Tags -->
+<meta name="theme-color" content="{{ settings.primary_color | default: '#000000' }}">
+<meta name="msapplication-TileColor" content="{{ settings.primary_color | default: '#000000' }}">
 
 {%- liquid
   assign og_title = page_title | default: shop.name
@@ -41,19 +50,27 @@
 {%- if page_image -%}
   <meta
     property="og:image"
-    content="http:{{ page_image | image_url }}"
+    content="https:{{ page_image | image_url: width: 1200, height: 630 }}"
   >
   <meta
     property="og:image:secure_url"
-    content="https:{{ page_image | image_url }}"
+    content="https:{{ page_image | image_url: width: 1200, height: 630 }}"
   >
   <meta
     property="og:image:width"
-    content="{{ page_image.width }}"
+    content="1200"
   >
   <meta
     property="og:image:height"
-    content="{{ page_image.height }}"
+    content="630"
+  >
+  <meta
+    property="og:image:type"
+    content="image/jpeg"
+  >
+  <meta
+    property="og:image:alt"
+    content="{{ page_image.alt | default: page_title | escape }}"
   >
 {%- endif -%}
 
