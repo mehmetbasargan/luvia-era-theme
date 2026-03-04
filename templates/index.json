@@ -102,28 +102,28 @@
         "pause_on_hover": true
       }
     },
-    "collection_list_thQPNq": {
+    "collection_list_Ebb7je": {
       "type": "collection-list",
       "blocks": {
-        "collection_RGtjwb": {
+        "collection_4wLKtU": {
           "type": "collection",
           "settings": {
             "collection": "golden-hour-muse"
           }
         },
-        "collection_Kij9aY": {
+        "collection_mRn8Dn": {
           "type": "collection",
           "settings": {
             "collection": "midnight-elegance"
           }
         },
-        "collection_eXpiMK": {
+        "collection_wbfTRK": {
           "type": "collection",
           "settings": {
             "collection": "silk-grace"
           }
         },
-        "collection_QgDg7i": {
+        "collection_fdaGhC": {
           "type": "collection",
           "settings": {
             "collection": "the-minimalist-era"
@@ -131,13 +131,39 @@
         }
       },
       "block_order": [
-        "collection_RGtjwb",
-        "collection_Kij9aY",
-        "collection_eXpiMK",
-        "collection_QgDg7i"
+        "collection_4wLKtU",
+        "collection_mRn8Dn",
+        "collection_wbfTRK",
+        "collection_fdaGhC"
       ],
-      "name": "Kategori Kartları",
+      "name": "Collection Cards",
       "settings": {}
+    },
+    "marquee_logo_zU4qHJ": {
+      "type": "marquee-logo",
+      "blocks": {
+        "logo_image_eA7Wwj": {
+          "type": "logo_image",
+          "settings": {}
+        },
+        "logo_image_pHR3qe": {
+          "type": "logo_image",
+          "settings": {}
+        },
+        "logo_image_ijcwFx": {
+          "type": "logo_image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "logo_image_eA7Wwj",
+        "logo_image_pHR3qe",
+        "logo_image_ijcwFx"
+      ],
+      "name": "Dinamik Marquee Logos",
+      "settings": {
+        "title": "AS FEATURED IN"
+      }
     },
     "featured_products_GFTLFG": {
       "type": "featured-products",
@@ -258,41 +284,15 @@
       "settings": {
         "title": "THE CURATED ERA"
       }
-    },
-    "marquee_logo_zU4qHJ": {
-      "type": "marquee-logo",
-      "blocks": {
-        "logo_image_eA7Wwj": {
-          "type": "logo_image",
-          "settings": {}
-        },
-        "logo_image_pHR3qe": {
-          "type": "logo_image",
-          "settings": {}
-        },
-        "logo_image_ijcwFx": {
-          "type": "logo_image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "logo_image_eA7Wwj",
-        "logo_image_pHR3qe",
-        "logo_image_ijcwFx"
-      ],
-      "name": "Dinamik Marquee Logos",
-      "settings": {
-        "title": "AS FEATURED IN"
-      }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_yFYYic",
     "marquee_text_cMiqhH",
-    "collection_list_thQPNq",
-    "featured_products_GFTLFG",
+    "collection_list_Ebb7je",
     "marquee_logo_zU4qHJ",
+    "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
     "full_width_gallery_TMh89n"
