@@ -14,7 +14,6 @@
 
       {% for block in section.blocks %}
         {%- assign product = block.settings.product -%}
-        {% comment %} Yeni Shopify standartlarında handle'a gerek yok, direkt objeyi alıyoruz {% endcomment %}
 
         {% if product != blank %}
           <div
@@ -27,10 +26,6 @@
               <span class="relative inline-flex rounded-full h-3 w-3 bg-white shadow-lg border border-line"></span>
             </button>
 
-            {% comment %}
-              'invisible' yerine sadece 'opacity-0' ve 'pointer-events-none' kullanarak
-              geçişleri daha yumuşak yapalım.
-            {% endcomment %}
             <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-40 md:w-48 bg-white p-3 shadow-2xl opacity-0 pointer-events-none group-hover/hotspot:opacity-100 group-hover/hotspot:pointer-events-auto transition-all duration-300 z-[60]">
               <div class="relative aspect-square mb-2 overflow-hidden bg-custombg">
                 <img
@@ -64,7 +59,6 @@
             </div>
           </div>
         {% else %}
-          {% comment %} Panelde ürün seçilmediyse hata olduğunu anlamak için geçici bir nokta koyalım {% endcomment %}
           {% if shop.preview_host %}
             <div
               class="absolute bg-red-500 w-2 h-2 rounded-full"

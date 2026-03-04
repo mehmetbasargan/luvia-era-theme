@@ -1,5 +1,5 @@
 <div class="container py-20">
-  {% comment %} Arama Formu {% endcomment %}
+  {% comment %} Search Formu {% endcomment %}
   <form
     action="{{ routes.search_url }}"
     method="get"
@@ -26,7 +26,7 @@
     </button>
   </form>
 
-  {% comment %} Sabit Başlık Alanı {% endcomment %}
+  {% comment %} Search Header {% endcomment %}
   <div
     id="search-header-wrapper"
     class="mb-8 border-b border-line pb-4 {% unless search.performed %}hidden{% endunless %}"
@@ -38,7 +38,7 @@
     </h5>
   </div>
 
-  {% comment %} Sonuç Alanı {% endcomment %}
+  {% comment %} Search Results {% endcomment %}
   <div id="search-results-container">
     <div id="search-results" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
       {% if search.performed %}
@@ -56,7 +56,6 @@
 </div>
 
 <script>
-  // --- Çeviri Sözlüğü ---
   const translations = {
     journal: {{ 'general.search.journal' | t | json }} || "Journal",
     article: {{ 'general.search.article' | t | json }} || "Article",
@@ -82,15 +81,12 @@
   const rawSearchLabel = "{{ 'general.search.search_results' | t }}";
   const searchLabel = rawSearchLabel.includes('search_results') ? 'Search Results' : rawSearchLabel;
 
-  // --- 1. GLOBAL TIKLAMA YÖNETİCİSİ ---
   document.addEventListener('click', function(e) {
     const heartBtn = e.target.closest('.ssw-faveit');
     if (heartBtn) {
-      // LINKI DURDUR
       e.preventDefault();
       e.stopPropagation();
 
-      // Growave yüklü mü kontrol et ve çalıştır
       if (typeof sswRun !== 'undefined' || (window.ssw && typeof window.ssw === 'function')) {
         if (window.ssw && typeof window.ssw === 'function') {
           window.ssw(heartBtn).faveit();
@@ -104,7 +100,7 @@
     }
   }, true);
 
-  // --- 2. ARAMA MANTIĞI ---
+
   searchInput.addEventListener('input', function (e) {
     const searchTerm = e.target.value.trim();
     if (searchTerm.length <= 2) {
@@ -137,7 +133,7 @@
       .catch(err => console.error('Arama Hatası:', err));
   });
 
-  // --- 3. SONUÇLARI ÇİZDİRME ---
+ 
   function renderResults(results) {
     resultsContainer.innerHTML = results.map(item => {
       const isArticle = item.url.includes('/blogs/') || item.type === 'article';
@@ -214,7 +210,6 @@
     
     document.dispatchEvent(new CustomEvent('shopify:section:load'));
     
-    // Growave Tetikleme (Gecikmeli)
     setTimeout(() => {
       if (typeof sswRun === 'function') sswRun();
     }, 300);
@@ -236,9 +231,8 @@
     }
   }
 
-  /* Growave ikonlarını manuel canlandır */
   .ssw-faveit i.ssw-icon-heart-o::before {
-    content: '\e80a'; /* Growave'in standart boş kalp ikonu kodu */
+    content: '\e80a';
     font-family: 'sswfont' !important;
     font-style: normal;
     font-weight: normal;
@@ -252,13 +246,12 @@
     line-height: 1em;
     margin-left: 0.2em;
     -webkit-font-smoothing: antialiased;
-    color: var(--color-primary); /* Senin Tailwind primary rengin */
+    color: var(--color-primary);
     font-size: 20px;
   }
 
-  /* Üzerine gelince dolması için (opsiyonel) */
   .ssw-faveit:hover i.ssw-icon-heart-o::before {
-    content: '\e80b'; /* Dolu kalp ikonu */
+    content: '\e80b';
     color: var(--color-secondary);
   }
 </style>

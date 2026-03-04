@@ -198,9 +198,8 @@
   .swiper-button-prev {
     height: 50px !important;
     width: 50px !important;
-    /* Beyaz rengi %40 şeffaflıkla karıştırıyoruz */
     background-color: color-mix(in srgb, var(--color-white), transparent 60%);
-    backdrop-filter: blur(4px); /* Opsiyonel: Buzlu cam efekti verir, çok şık durur */
+    backdrop-filter: blur(4px);
     border-radius: 50%;
     padding: 15px;
     color: var(--color-primary);
@@ -239,25 +238,23 @@
     }
   }
 
-  /* Sticky'nin çalışması için ana kapsayıcının overflow içermemesi şarttır */
   #MainContent,
   .shopify-section {
     overflow: visible !important;
   }
 
   @media screen and (min-width: 1024px) {
-    /* Ana Flex Kapsayıcısı */
     .container > .flex {
       display: flex !important;
-      align-items: flex-start !important; /* Sağ sütunun uzamasını engeller */
+      align-items: flex-start !important;
       overflow: visible !important;
     }
 
     .product-info-column {
-      position: -webkit-sticky; /* Safari desteği */
+      position: -webkit-sticky;
       position: sticky;
-      top: 100px; /* Header yüksekliğine göre burayı oynayabilirsin */
-      height: fit-content !important; /* Boyunun içeriği kadar olduğundan emin oluyoruz */
+      top: 100px;
+      height: fit-content !important;
       z-index: 10;
     }
   }
@@ -348,7 +345,7 @@ function updateVariantID() {
                         })" class="text-[9px] text-gray-400 hover:text-black uppercase underline">${ "{{ 'cart.remove' | t }}" }</button>
                       </div>
                       <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
-                      <p class="text-xs mt-2 font-medium">${(item.price / 100).toFixed(2)} TL</p>
+                      <p class="text-xs mt-2 font-medium">${(item.price / 100).toFixed(2)} {{ cart.currency.symbol }}</p>
                     </div>
                 </div>
             `
@@ -359,7 +356,7 @@ function updateVariantID() {
             '<p class="text-[10px] uppercase tracking-widest text-center mt-10 text-gray-400">${ "{{ 'products.product.empty_cart' | t }}" }</p>';
         }
 
-        totalPriceContainer.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
+        totalPriceContainer.innerText = (cart.total_price / 100).toFixed(2) + ' ' + cart.currency.symbol;
 
         const drawer = document.getElementById('cart-drawer');
         const overlay = document.getElementById('cart-drawer-overlay');

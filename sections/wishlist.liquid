@@ -21,7 +21,6 @@
     const container = document.getElementById('wishlist-container');
     const emptyMessage = document.getElementById('wishlist-empty');
 
-    // 1. Listenin boş olup olmadığını kontrol eden fonksiyon
     const checkEmpty = () => {
       const wishlistIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
       if (wishlistIds.length === 0) {
@@ -33,7 +32,6 @@
       }
     };
 
-    // İlk girişte kontrol
     const initialIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
     if (initialIds.length === 0) {
       checkEmpty();
@@ -49,7 +47,6 @@
 
     const searchQuery = initialIds.map((id) => `id:${id}`).join(' OR ');
 
-    // Ürünleri çek
     fetch(`/search/suggest.json?q=${encodeURIComponent(searchQuery)}&resources[type]=product&resources[limit]=20`)
       .then((res) => res.json())
       .then(async (data) => {
@@ -118,12 +115,10 @@
           })
           .join('');
 
-        // --- SİLME İŞLEMİNİ DİNLE ---
         window.addEventListener('wishlist:updated', () => {
           checkEmpty();
         });
 
-        // --- WISHLIST ADD TO CART ---
         window.handleWishlistAddToCart = function (e, variantId) {
           const btn = e.currentTarget;
           btn.innerText = '...';
@@ -137,7 +132,6 @@
             .then((cartData) => {
               btn.innerText = 'ADDED ✔';
 
-              // Update cart drawer
               document.dispatchEvent(
                 new CustomEvent('cart:updated', {
                   detail: { cart: cartData },
@@ -156,7 +150,6 @@
             });
         };
 
-        // --- SEPETE EKLEME (AJAX) ---
         container.querySelectorAll('.custom-ajax-form').forEach((form) => {
           form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -173,7 +166,6 @@
               if (response.ok) {
                 const cartData = await response.json();
 
-                // Temayı uyandır (Çekmece için)
                 document.dispatchEvent(
                   new CustomEvent('cart:updated', {
                     detail: { cart: cartData },
@@ -181,7 +173,6 @@
                   })
                 );
 
-                // Dawn/Luvia çekmece zorlaması
                 const drawer = document.querySelector('cart-drawer') || document.querySelector('.cart-drawer');
                 if (drawer) {
                   fetch(`${window.location.pathname}?sections=cart-drawer`)

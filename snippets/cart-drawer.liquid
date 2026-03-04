@@ -37,12 +37,10 @@
 </div>
 
 <script>
-  // Update cart drawer when page loads
   document.addEventListener('DOMContentLoaded', function () {
     updateCartDrawer();
   });
 
-  // Update cart drawer function
   function updateCartDrawer() {
     fetch('/cart.js?t=' + Date.now())
       .then((response) => response.json())
@@ -58,37 +56,36 @@
           container.innerHTML = cart.items
             .map(
               (item) => `
-          <div class="flex gap-4 border-b border-gray-50 pb-4" data-item-key="${item.key}">
-            <img src="${item.image}" alt="${item.product_title}" class="w-20 h-24 object-cover bg-custombg">
-            <div class="flex flex-col justify-center grow">
-              <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
-              <div class="flex items-center justify-between">
-              <p class="text-[12px] text-gray-400 mt-1">${item.variant_title || ''}</p>
-               <button type="button" onclick="removeFromCart('${
-                 item.key
-               }')" class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50 transition-colors">
-                    {% render 'icon-close' %}
-                  </button>
-                </div>
-              <div class="flex justify-between items-end mt-4">
-                <p class="text-[11px]">${item.quantity} QTY</p>
-                <div class="flex items-center gap-2">
-                  <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(2)} TL</p>
-                 
+              <div class="flex gap-4 border-b border-gray-50 pb-4" data-item-key="${item.key}">
+                <img src="${item.image}" alt="${item.product_title}" class="w-20 h-24 object-cover bg-custombg">
+                <div class="flex flex-col justify-center grow">
+                  <h4 class="text-[11px] uppercase tracking-wider font-medium">${item.product_title}</h4>
+                  <div class="flex items-center justify-between">
+                  <p class="text-[12px] text-gray-400 mt-1">${item.variant_title || ''}</p>
+                  <button type="button" onclick="removeFromCart('${
+                    item.key
+                  }')" class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50 transition-colors">
+                        {% render 'icon-close' %}
+                      </button>
+                    </div>
+                  <div class="flex justify-between items-end mt-4">
+                    <p class="text-[11px]">${item.quantity} QTY</p>
+                    <div class="flex items-center gap-2">
+                      <p class="text-[11px] font-medium tracking-tighter">${(item.price / 100).toFixed(
+                        2
+                      )} {{ cart.currency.symbol }}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        `
+            `
             )
             .join('');
         }
 
         if (totalPrice) {
-          totalPrice.innerText = (cart.total_price / 100).toFixed(2) + ' TL';
+          totalPrice.innerText = (cart.total_price / 100).toFixed(2) + ' ' + cart.currency.symbol;
         }
-
-        // Update cart count bubbles
         const cartBubbles = document.querySelectorAll('.cart-count-bubble');
         cartBubbles.forEach((bubble) => {
           const count = cart.item_count || 0;
@@ -103,7 +100,6 @@
       .catch((error) => console.error('Cart update error:', error));
   }
 
-  // Update cart count every 2 seconds
   function updateCartCount() {
     fetch('/cart.js?t=' + Date.now())
       .then((response) => response.json())
@@ -124,10 +120,8 @@
 
   setInterval(updateCartCount, 2000);
 
-  // Listen for cart updates
   document.addEventListener('cart:updated', updateCartDrawer);
 
-  // Remove from cart function
   window.removeFromCart = function (itemKey) {
     fetch('/cart/change.js?t=' + Date.now(), {
       method: 'POST',
@@ -139,15 +133,12 @@
     })
       .then((res) => res.json())
       .then((cartData) => {
-        // Update cart drawer
         document.dispatchEvent(
           new CustomEvent('cart:updated', {
             detail: { cart: cartData },
             bubbles: true,
           })
         );
-
-        // Remove item from DOM with animation
         const itemElement = document.querySelector(`[data-item-key="${itemKey}"]`);
         if (itemElement) {
           itemElement.style.opacity = '0';
@@ -159,7 +150,4 @@
       })
       .catch((error) => console.error('Cart remove error:', error));
   };
-
-  // Debug: Check if event listener is working
-  console.log('Cart drawer event listener attached');
 </script>

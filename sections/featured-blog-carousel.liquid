@@ -58,23 +58,15 @@
   </div>
 </section>
 
-{% comment %}
-  <style>
-    .featuredSwiper {
-      padding-right: 50px;
-    }
-  </style>
-{% endcomment %}
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     new Swiper('.featuredSwiper', {
       slidesPerView: 1.2,
       spaceBetween: 20,
       loop: true,
-      /*  autoplay: {
+      autoplay: {
         delay: 5000,
-      }, */
+      },
       navigation: {
         nextEl: '.swiper-button-next-custom',
         prevEl: '.swiper-button-prev-custom',

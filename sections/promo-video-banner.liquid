@@ -29,10 +29,6 @@
     {%- endif -%}
   </div>
 
-  {%- comment -%}
-    Buradaki 'z-[1]' videonun üstüne çıkmasını sağlar.
-    'pointer-events-none' videonun tıklanmasını engellemez (zaten kontroller kapalı).
-  {%- endcomment -%}
   <div
     class="absolute inset-0 z-[1] pointer-events-none"
     style="background-color: rgba(0,0,0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"
@@ -59,7 +55,6 @@
 </section>
 
 <style>
-  /* Sayfa kaydırıldığında (Intersection Observer ile) veya görünür olduğunda tetiklenecek sınıflar */
   .promo-video-active .promo-video-title,
   .promo-video-active .promo-video-subtitle,
   .promo-video-active .promo-video-button {
@@ -68,12 +63,11 @@
   }
 
   .promo-video-active .w-full.h-full.object-cover {
-    filter: grayscale(20%) contrast(1.1); /* Videoyu biraz soldurup kontrastı artırır */
+    filter: grayscale(20%) contrast(1.1);
   }
 </style>
 
 <script>
-  // Videolu banner görünür olduğunda animasyonun başlaması için küçük bir Observer
   const videoBannerObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
