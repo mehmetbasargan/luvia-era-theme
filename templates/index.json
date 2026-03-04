@@ -258,6 +258,38 @@
       "settings": {
         "title": "Follow Era"
       }
+    },
+    "marquee_logo_KdwFPg": {
+      "type": "marquee-logo",
+      "blocks": {
+        "logo_image_8DWTbe": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
+        },
+        "logo_image_dLEXmh": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
+        },
+        "logo_image_eFiNHf": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/favicon.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_image_8DWTbe",
+        "logo_image_dLEXmh",
+        "logo_image_eFiNHf"
+      ],
+      "name": "Dinamik Marquee Logos",
+      "settings": {
+        "title": "AS FEATURED IN"
+      }
     }
   },
   "order": [
@@ -268,6 +300,7 @@
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
-    "full_width_gallery_fnrnK7"
+    "full_width_gallery_fnrnK7",
+    "marquee_logo_KdwFPg"
   ]
 }
