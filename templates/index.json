@@ -139,38 +139,6 @@
       "name": "Collection Cards",
       "settings": {}
     },
-    "marquee_logo_zU4qHJ": {
-      "type": "marquee-logo",
-      "blocks": {
-        "logo_image_eA7Wwj": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        },
-        "logo_image_ijcwFx": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/favicon.png"
-          }
-        },
-        "logo_image_pHR3qe": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        }
-      },
-      "block_order": [
-        "logo_image_eA7Wwj",
-        "logo_image_ijcwFx",
-        "logo_image_pHR3qe"
-      ],
-      "name": "Dinamik Marquee Logos",
-      "settings": {
-        "title": "AS FEATURED IN"
-      }
-    },
     "featured_products_GFTLFG": {
       "type": "featured-products",
       "name": "Luvia Featured Collection",
@@ -297,7 +265,6 @@
     "hero_slider_yFYYic",
     "marquee_text_cMiqhH",
     "collection_list_Ebb7je",
-    "marquee_logo_zU4qHJ",
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
