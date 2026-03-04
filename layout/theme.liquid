@@ -81,22 +81,30 @@
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag: preload: true }}
   </head>
 
-  <body>
+  <body itemscope itemtype="https://schema.org/WebPage">
     <div
       id="toast-container"
       class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[200] space-y-2 pointer-events-none"
+      role="status"
+      aria-live="polite"
     ></div>
 
-    {% sections 'header-group' %}
+    <header role="banner" itemscope itemtype="https://schema.org/WPHeader">
+      {% sections 'header-group' %}
+    </header>
     {% render 'cart-drawer' %}
 
     <script>
       window.customer = {% if customer %}{{ customer | json }}{% else %}false{% endif %};
     </script>
 
-    {{ content_for_layout }}
+    <main role="main" itemprop="mainContentOfPage">
+      {{ content_for_layout }}
+    </main>
 
-    {% sections 'footer-group' %}
+    <footer role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+      {% sections 'footer-group' %}
+    </footer>
 
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
