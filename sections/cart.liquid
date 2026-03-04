@@ -157,7 +157,7 @@
     });
 
     if (localStorage.getItem('showRemoveToast') === 'true') {
-      showToast('Item removed from bag');
+      showToast('Product removed from cart!', 'error');
       localStorage.removeItem('showRemoveToast');
     }
   });
@@ -171,10 +171,10 @@
   window.addEventListener('load', function () {
     if (localStorage.getItem('cart_item_removed') === 'true') {
       if (typeof showToast === 'function') {
-        showToast('Item removed from bag');
+        showToast('Product removed from cart!', 'error');
       } else {
         const toast = document.createElement('div');
-        toast.innerText = 'Item removed from bag';
+        toast.innerText = 'Product removed from cart!';
         toast.style.cssText =
           'position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:black; color:white; padding:15px 30px; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; z-index:9999;';
         document.body.appendChild(toast);
