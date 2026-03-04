@@ -65,6 +65,7 @@
                 <button
                   type="button"
                   onclick="handleAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
+                  aria-label="Add {{ product.title }} to cart"
                   class="w-full bg-primary text-white py-4 text-[13px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
                 >
                   {% if product.available -%}

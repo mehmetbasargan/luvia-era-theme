@@ -1,6 +1,10 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+<html lang="{{ request.locale.iso_code }}" dir="ltr">
   <head>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover,user-scalable=no"
+    >
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
 
@@ -47,12 +51,34 @@
       }
     </style>
 
+    <style>
+      /* Critical CSS Reset */
+      * {
+        transition: none !important;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .font-heading {
+        font-family: var(--font-heading);
+      }
+
+      /* Mobile Performance */
+      img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+    </style>
+
     {{ content_for_header }}
 
-    {% # BURAYI GÜNCELLEDİM: Dosya ismini terminaldeki çıktıya (tailwind.output.css) göre ayarladım ve cache-buster ekledim %}
-    <link rel="stylesheet" href="{{ 'tailwind.output.css' | asset_url }}&v={{ "now" | date: "%N" }}">
-
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+    {% # Critical CSS with preload %}
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'tailwind.output.css' | asset_url | stylesheet_tag: preload: true }}
   </head>
 
   <body>
@@ -72,8 +98,8 @@
 
     {% sections 'footer-group' %}
 
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
-    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 
     <script>
       // Global Toast Function
