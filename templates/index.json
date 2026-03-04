@@ -224,71 +224,43 @@
         "header_opacity": 40
       }
     },
-    "full_width_gallery_TMh89n": {
+    "full_width_gallery_fnrnK7": {
       "type": "full-width-gallery",
       "blocks": {
-        "image_gbDd3k": {
+        "image_4BEeG9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p5-3.jpg"
+          }
+        },
+        "image_XEdfBj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p6-1.jpg"
+          }
+        },
+        "image_FfPJMh": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/p4-3.jpg"
           }
         },
-        "image_gkVVM4": {
+        "image_BMkcjB": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/p2-1.jpg"
-          }
-        },
-        "image_FqdD7Q": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p5-2.jpg"
-          }
-        },
-        "image_CFD6JC": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p3-3.jpg"
-          }
-        },
-        "image_UgXNNd": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p4-2.jpg"
-          }
-        },
-        "image_RxbdpB": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p3.jpg"
-          }
-        },
-        "image_FyjYLn": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p2-2.jpg"
-          }
-        },
-        "image_mp93kC": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p7-4.jpg"
+            "image": "shopify://shop_images/p1.jpg"
           }
         }
       },
       "block_order": [
-        "image_gbDd3k",
-        "image_gkVVM4",
-        "image_FqdD7Q",
-        "image_CFD6JC",
-        "image_UgXNNd",
-        "image_RxbdpB",
-        "image_FyjYLn",
-        "image_mp93kC"
+        "image_4BEeG9",
+        "image_XEdfBj",
+        "image_FfPJMh",
+        "image_BMkcjB"
       ],
       "name": "Luvia Full Gallery",
       "settings": {
-        "title": "THE CURATED ERA"
+        "title": "Follow Era"
       }
     }
   },
@@ -301,6 +273,6 @@
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
-    "full_width_gallery_TMh89n"
+    "full_width_gallery_fnrnK7"
   ]
 }
