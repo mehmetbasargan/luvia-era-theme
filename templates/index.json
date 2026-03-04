@@ -148,23 +148,23 @@
             "image": "shopify://shop_images/logo2.svg"
           }
         },
-        "logo_image_pHR3qe": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        },
         "logo_image_ijcwFx": {
           "type": "logo_image",
           "settings": {
             "image": "shopify://shop_images/favicon.png"
           }
+        },
+        "logo_image_pHR3qe": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
         }
       },
       "block_order": [
         "logo_image_eA7Wwj",
-        "logo_image_pHR3qe",
-        "logo_image_ijcwFx"
+        "logo_image_ijcwFx",
+        "logo_image_pHR3qe"
       ],
       "name": "Dinamik Marquee Logos",
       "settings": {
