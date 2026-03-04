@@ -144,15 +144,21 @@
       "blocks": {
         "logo_image_eA7Wwj": {
           "type": "logo_image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
         },
         "logo_image_pHR3qe": {
           "type": "logo_image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
         },
         "logo_image_ijcwFx": {
           "type": "logo_image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/favicon.png"
+          }
         }
       },
       "block_order": [
