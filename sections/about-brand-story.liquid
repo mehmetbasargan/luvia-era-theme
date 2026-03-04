@@ -19,8 +19,8 @@
       {% if section.settings.image %}
         <img
           src="{{ section.settings.image | image_url: width: 1200 }}"
-          height=""
-          width=""
+          height="600"
+          width="1200"
           alt="{{ section.settings.heading }}"
           loading="eager"
           class="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
@@ -29,8 +29,8 @@
         <div class="w-full h-[600px] bg-custombg flex items-center justify-center italic text-primary tracking-widest uppercase">
           <img
             src="{{ 'collection-1' | placeholder_svg_tag: 'w-full h-full bg-[#E5E5E5]' }}"
-            height=""
-            width=""
+            height="600"
+            width="1200"
             alt="{{ section.settings.heading }}"
             loading="eager"
           >

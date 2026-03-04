@@ -76,6 +76,26 @@
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 
     <script>
+      // Global Toast Function
+      window.showToast = function (message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `fixed top-4 right-4 z-[9999] px-4 py-2 rounded-lg text-white text-sm font-medium transition-all duration-300 transform translate-x-full ${
+          type === 'success' ? 'bg-green-500' : 'bg-red-500'
+        }`;
+        toast.textContent = message;
+
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.remove('translate-x-full');
+        }, 100);
+
+        setTimeout(() => {
+          toast.classList.add('translate-x-full', 'opacity-0');
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      };
+
       // Global Cart Drawer Functions
       window.openCartDrawer = function () {
         const drawer = document.getElementById('cart-drawer');
