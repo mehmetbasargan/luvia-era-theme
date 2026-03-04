@@ -148,6 +148,9 @@
           }, 300);
         }
       })
-      .catch((error) => console.error('Cart remove error:', error));
+      .catch((error) => {
+        console.error('Cart remove error:', error);
+        showToast('Product removed from cart!', 'error');
+      });
   };
 </script>
