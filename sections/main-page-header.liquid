@@ -8,6 +8,7 @@
     {% else %}
       <div class="w-full h-full bg-primary"></div>
     {% endif %}
+
     <div
       class="absolute inset-0"
       style="background-color: rgba(0,0,0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"
@@ -27,13 +28,13 @@
       </span>
     </nav>
 
-    <h2 class="text-white font-light tracking-widest uppercase max-w-2xl">
+    <h3 class="text-white font-light tracking-widest leading-10 uppercase max-w-2xl">
       {% if section.settings.custom_title != blank %}
         {{ section.settings.custom_title }}
       {% else %}
         {{ page.title }}
       {% endif %}
-    </h2>
+    </h3>
   </div>
 </section>
 

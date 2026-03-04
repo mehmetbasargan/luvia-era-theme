@@ -1483,6 +1483,14 @@ blockquote{
   max-width: none;
 }
 
+.max-w-\[1000px\]{
+  max-width: 1000px;
+}
+
+.max-w-6xl{
+  max-width: 72rem;
+}
+
 .flex-1{
   flex: 1 1 0%;
 }
@@ -2405,6 +2413,18 @@ blockquote{
   line-height: 1.25;
 }
 
+.leading-5{
+  line-height: 1.25rem;
+}
+
+.leading-8{
+  line-height: 2rem;
+}
+
+.leading-10{
+  line-height: 2.5rem;
+}
+
 .tracking-\[0\.15em\]{
   letter-spacing: 0.15em;
 }
@@ -2963,6 +2983,10 @@ blockquote{
     margin-right: 4rem;
   }
 
+  .md\:mb-0{
+    margin-bottom: 0px;
+  }
+
   .md\:block{
     display: block;
   }
@@ -3049,6 +3073,10 @@ blockquote{
 
   .md\:justify-end{
     justify-content: flex-end;
+  }
+
+  .md\:justify-between{
+    justify-content: space-between;
   }
 
   .md\:justify-around{
