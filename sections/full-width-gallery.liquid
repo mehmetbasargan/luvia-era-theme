@@ -100,18 +100,35 @@
   function initLuviaGallery() {
     galleryImages = [];
     document.querySelectorAll('.luvia-gallery-item').forEach(function (item) {
-      galleryImages.push(item.getAttribute('data-full-src'));
+      const fullSrc = item.getAttribute('data-full-src');
+      if (fullSrc) {
+        galleryImages.push(fullSrc);
+      }
     });
   }
 
   function openLuviaGallery(index) {
-    if (galleryImages.length === 0) initLuviaGallery();
-    currentImgIndex = index;
-    updateLightbox();
-    var modal = document.getElementById('LuviaLightbox');
-    modal.style.opacity = '1';
-    modal.style.pointerEvents = 'auto';
-    document.body.style.overflow = 'hidden';
+    if (galleryImages.length === 0) {
+      initLuviaGallery();
+      // Re-check after initialization
+      setTimeout(() => {
+        if (galleryImages.length > 0) {
+          currentImgIndex = index;
+          updateLightbox();
+          var modal = document.getElementById('LuviaLightbox');
+          modal.style.opacity = '1';
+          modal.style.pointerEvents = 'auto';
+          document.body.style.overflow = 'hidden';
+        }
+      }, 100);
+    } else {
+      currentImgIndex = index;
+      updateLightbox();
+      var modal = document.getElementById('LuviaLightbox');
+      modal.style.opacity = '1';
+      modal.style.pointerEvents = 'auto';
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   function updateLightbox() {
