@@ -337,7 +337,8 @@
               {% render 'icon-wishlist' %}
             </a>
             <a href="{{ routes.account_url }}" class="account-link relative inline-flex items-center justify-center">
-              {% if customer %}
+              {% assign customer_name = customer.first_name | default: 'Account' %}
+              {% if customer_name != 'Account' %}
                 {% comment %} Kullanıcı Giriş Yapmışsa Harf Göster {% endcomment %}
                 <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[11px] font-bold text-white uppercase tracking-tighter hover:bg-secondary transition-all duration-300">
                   {{ customer.first_name | slice: 0 -}}
