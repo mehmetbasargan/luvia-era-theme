@@ -382,6 +382,27 @@
   window.addEventListener('resize', updateHeaderHeight);
   window.addEventListener('load', updateHeaderHeight);
   window.addEventListener('scroll', updateHeaderHeight);
+
+  // Customer session debug
+  console.log('Customer object:', {{ customer | json }});
+
+  // Account link'ini düzelt
+  document.addEventListener('DOMContentLoaded', function() {
+    const accountLinks = document.querySelectorAll('a[href*="account"]');
+    accountLinks.forEach(function(link) {
+      if (link.href.includes('/account')) {
+        link.addEventListener('click', function(e) {
+          // Customer durumunu kontrol et
+          fetch('/cart.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }).then(response => response.json());
+        });
+      }
+    });
+  });
 </script>
 
 {% schema %}
