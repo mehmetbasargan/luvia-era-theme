@@ -7,10 +7,9 @@
       <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
       {% for block in section.blocks %}
         {%- assign collection = collections[block.settings.collection] -%}
-
         <div class="group relative flex flex-col items-center">
           <a
             href="{{ collection.url | default: '#' }}"
