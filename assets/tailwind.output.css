@@ -1487,12 +1487,12 @@ blockquote{
   max-width: 32rem;
 }
 
-.max-w-none{
-  max-width: none;
-}
-
 .max-w-md{
   max-width: 28rem;
+}
+
+.max-w-none{
+  max-width: none;
 }
 
 .flex-1{
@@ -2118,6 +2118,11 @@ blockquote{
   padding-right: 3rem;
 }
 
+.px-16{
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
 .px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -2221,11 +2226,6 @@ blockquote{
 .py-\[80px\]{
   padding-top: 80px;
   padding-bottom: 80px;
-}
-
-.px-16{
-  padding-left: 4rem;
-  padding-right: 4rem;
 }
 
 .pb-1{
@@ -2564,6 +2564,10 @@ blockquote{
   opacity: 0.2;
 }
 
+.opacity-30{
+  opacity: 0.3;
+}
+
 .opacity-40{
   opacity: 0.4;
 }
@@ -2582,10 +2586,6 @@ blockquote{
 
 .opacity-80{
   opacity: 0.8;
-}
-
-.opacity-30{
-  opacity: 0.3;
 }
 
 .shadow-2xl{
@@ -2807,9 +2807,9 @@ blockquote{
   background-color: var(--color-custombg);
 }
 
-.hover\:bg-gray-900:hover{
+.hover\:bg-gray-800:hover{
   --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-primary:hover{
@@ -2827,11 +2827,6 @@ blockquote{
 
 .hover\:bg-white:hover{
   background-color: var(--color-white);
-}
-
-.hover\:bg-gray-800:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:\!text-white:hover{
