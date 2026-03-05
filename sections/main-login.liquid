@@ -1,0 +1,102 @@
+<div class="login-page-wrapper min-h-[80vh] flex items-center justify-center px-6 py-20">
+  <div class="w-full max-w-[400px]">
+    {% comment %} Başlık Alanı {% endcomment %}
+    <div class="text-center mb-12">
+      <h1 class="text-3xl font-light uppercase tracking-[0.4em] text-primary mb-3">Giriş Yap</h1>
+      <p class="text-gray-400 text-xs uppercase tracking-widest font-light">Koleksiyonu keşfetmek için oturum açın</p>
+    </div>
+
+    {%- form 'customer_login' -%}
+      {%- if form.errors -%}
+        <div class="bg-red-50 text-red-700 p-4 mb-8 text-[11px] uppercase tracking-wider leading-relaxed">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      <div class="flex flex-col gap-10">
+        {% comment %} Email Alanı {% endcomment %}
+        <div class="relative group">
+          <label for="CustomerEmail" class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-1 block"
+            >E-posta</label
+          >
+          <input
+            type="email"
+            name="customer[email]"
+            id="CustomerEmail"
+            autocomplete="email"
+            class="w-full border-b border-gray-200 py-2 outline-none focus:border-primary transition-all bg-transparent font-light text-sm"
+            placeholder="E-posta adresinizi giriniz"
+            required
+          >
+        </div>
+
+        {% comment %} Şifre Alanı {% endcomment %}
+        <div class="relative group">
+          <div class="flex justify-between items-end mb-1">
+            <label for="CustomerPassword" class="text-[10px] uppercase tracking-[0.2em] text-gray-400 block"
+              >Şifre</label
+            >
+            <a
+              href="#recover"
+              id="RecoverPassword"
+              class="text-[9px] uppercase tracking-widest text-gray-400 hover:text-primary transition-colors"
+              >Şifremi Unuttum</a
+            >
+          </div>
+          <input
+            type="password"
+            name="customer[password]"
+            id="CustomerPassword"
+            autocomplete="current-password"
+            class="w-full border-b border-gray-200 py-2 outline-none focus:border-primary transition-all bg-transparent font-light text-sm"
+            placeholder="••••••••"
+            required
+          >
+        </div>
+
+        {% comment %} Aksiyon Butonları {% endcomment %}
+        <div class="mt-4 space-y-6 text-center">
+          <button
+            type="submit"
+            class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.4em] font-medium hover:bg-secondary transition-all duration-500 shadow-sm"
+          >
+            Oturum Aç
+          </button>
+
+          <div class="pt-6 border-t border-gray-50">
+            <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-4">Henüz üye değil misiniz?</p>
+            <a
+              href="{{ routes.account_register_url }}"
+              class="inline-block text-[11px] uppercase tracking-[0.2em] font-medium text-primary border-b border-primary pb-1 hover:text-secondary hover:border-secondary transition-all"
+            >
+              Hesap Oluştur
+            </a>
+          </div>
+        </div>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+<style>
+  /* Input focus olduğunda alt çizgi animasyonu */
+  input {
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+  input:focus {
+    border-bottom-color: var(--color-primary);
+  }
+  /* Otomatik doldurma arka planını temizle */
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Main Login",
+  "settings": [],
+  "presets": [{ "name": "Main Login" }]
+}
+{% endschema %}
