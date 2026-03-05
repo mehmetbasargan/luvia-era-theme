@@ -86,60 +86,12 @@
         "social_icon_pgVcp7",
         "social_icon_pYUtiM"
       ],
+      "disabled": true,
       "settings": {
         "menu": "main-menu",
         "logo": "shopify://shop_images/logo2.svg",
         "header_phone": "532 463 24 47",
         "show_phone": true
-      }
-    },
-    "header_three_TUgUkq": {
-      "type": "header-three",
-      "blocks": {
-        "social_icon_qtzc7J": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-linkedin",
-            "link": ""
-          }
-        },
-        "social_icon_ABVFmT": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-tiktok",
-            "link": ""
-          }
-        },
-        "social_icon_BGgw3h": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-youtube",
-            "link": ""
-          }
-        },
-        "social_icon_ADqT98": {
-          "type": "social_icon",
-          "settings": {
-            "icon_choice": "icon-instagram",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "social_icon_qtzc7J",
-        "social_icon_ABVFmT",
-        "social_icon_BGgw3h",
-        "social_icon_ADqT98"
-      ],
-      "disabled": true,
-      "name": "Header - Overlay",
-      "settings": {
-        "menu": "main-menu",
-        "logo": "shopify://shop_images/logo2.svg",
-        "header_phone": "+320 000 000 0",
-        "show_phone": true,
-        "header_bg_color": "#ffffff",
-        "header_opacity": 80
       }
     },
     "header_two_jmKjTX": {
@@ -172,7 +124,6 @@
         "social_icon_rRjGRG",
         "social_icon_WkhFWn"
       ],
-      "disabled": true,
       "name": "Header - Centered",
       "settings": {
         "menu": "main-menu",
@@ -185,7 +136,6 @@
   "order": [
     "marquee_text_JngeRi",
     "header",
-    "header_three_TUgUkq",
     "header_two_jmKjTX"
   ]
 }
