@@ -336,9 +336,20 @@
             <a href="/pages/wishlist" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
               {% render 'icon-wishlist' %}
             </a>
-            <a href="{{ routes.account_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
-              {% if shop.customer_accounts_enabled %}
-                {% render 'icon-account' | inline_asset_content | link_to: routes.account_url %}
+            <a
+              href="{{ routes.account_url }}"
+              class="flex items-center justify-center text-primary hover:text-secondary"
+            >
+              {% if customer %}
+                {% comment %} Giriş yapılmışsa ismin baş harfini göster {% endcomment %}
+                <div class="w-8 h-8 lg:w-9 lg:h-9 rounded-full bg-secondary text-white flex items-center justify-center text-sm font-medium tracking-tighter transition-transform hover:scale-105 shadow-sm">
+                  {{ customer.first_name | slice: 0 | upcase }}
+                </div>
+              {% else %}
+                {% comment %} Giriş yapılmamışsa eski ikonun kalsın {% endcomment %}
+                <div class="lg:w-[30px] w-[20px]">
+                  {% render 'icon-account' %}
+                </div>
               {% endif %}
             </a>
             <a
