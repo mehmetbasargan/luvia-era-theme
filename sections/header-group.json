@@ -132,6 +132,7 @@
         "social_icon_BGgw3h",
         "social_icon_ADqT98"
       ],
+      "disabled": true,
       "name": "Header - Overlay",
       "settings": {
         "menu": "main-menu",
