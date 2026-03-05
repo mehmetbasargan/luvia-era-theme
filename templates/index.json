@@ -65,75 +65,6 @@
       "name": "Hero Slider",
       "settings": {}
     },
-    "marquee_text_cMiqhH": {
-      "type": "marquee-text",
-      "blocks": {
-        "text_block_w9gTCm": {
-          "type": "text_block",
-          "settings": {
-            "text": "FREE SHIPPING WORLDWIDE"
-          }
-        },
-        "text_block_tNNh8T": {
-          "type": "text_block",
-          "settings": {
-            "text": "NEW SEASON ARRIVALS"
-          }
-        },
-        "text_block_hwJGAT": {
-          "type": "text_block",
-          "settings": {
-            "text": "15% OFF FIRST ORDER"
-          }
-        }
-      },
-      "block_order": [
-        "text_block_w9gTCm",
-        "text_block_tNNh8T",
-        "text_block_hwJGAT"
-      ],
-      "name": "Marquee Text",
-      "settings": {
-        "bg_color": "#000000",
-        "text_color": "#f4eeee",
-        "speed": 30,
-        "padding": 20,
-        "show_separator": true,
-        "pause_on_hover": true
-      }
-    },
-    "marquee_logo_KdwFPg": {
-      "type": "marquee-logo",
-      "blocks": {
-        "logo_image_8DWTbe": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        },
-        "logo_image_dLEXmh": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        },
-        "logo_image_eFiNHf": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/favicon.png"
-          }
-        }
-      },
-      "block_order": [
-        "logo_image_8DWTbe",
-        "logo_image_dLEXmh",
-        "logo_image_eFiNHf"
-      ],
-      "name": "Dinamik Marquee Logos",
-      "settings": {
-        "title": "AS FEATURED IN"
-      }
-    },
     "collection_list_Ebb7je": {
       "type": "collection-list",
       "blocks": {
@@ -295,8 +226,6 @@
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_yFYYic",
-    "marquee_text_cMiqhH",
-    "marquee_logo_KdwFPg",
     "collection_list_Ebb7je",
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
