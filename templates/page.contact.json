@@ -1,32 +1,18 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {
-    "header_hero": {
-      "type": "main-page-header",
-      "settings": {
-        "image": "shopify://shop_images/pageheader4.jpg",
-        "custom_title": "",
-        "hero_height": 40,
-        "overlay_opacity": 60
-      }
-    },
-    "main_content": {
-      "type": "page",
-      "settings": {
-        "show_title": false
-      }
-    }
-  },
-  "order": [
-    "header_hero",
-    "main_content"
-  ]
+	"sections": {
+		"main_page_header": {
+			"type": "main-page-header",
+			"settings": {
+				"image": "shopify://shop_images/pageheader3.jpg",
+				"custom_title": "CONTACT THE ERA",
+				"hero_height": 40,
+				"overlay_opacity": 60
+			}
+		},
+		"main": {
+			"type": "contact-custom",
+			"settings": {}
+		}
+	},
+	"order": ["main_page_header", "main"]
 }

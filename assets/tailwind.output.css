@@ -807,6 +807,10 @@ blockquote{
   left: 50%;
 }
 
+.left-2{
+  left: 0.5rem;
+}
+
 .left-3{
   left: 0.75rem;
 }
@@ -817,6 +821,10 @@ blockquote{
 
 .right-0{
   right: 0px;
+}
+
+.right-2{
+  right: 0.5rem;
 }
 
 .right-3{
@@ -885,14 +893,6 @@ blockquote{
 
 .top-full{
   top: 100%;
-}
-
-.right-2{
-  right: 0.5rem;
-}
-
-.left-2{
-  left: 0.5rem;
 }
 
 .z-0{
@@ -1491,6 +1491,10 @@ blockquote{
   max-width: none;
 }
 
+.max-w-md{
+  max-width: 28rem;
+}
+
 .flex-1{
   flex: 1 1 0%;
 }
@@ -1633,6 +1637,10 @@ blockquote{
           user-select: auto;
 }
 
+.resize-none{
+  resize: none;
+}
+
 .resize{
   resize: both;
 }
@@ -1729,6 +1737,10 @@ blockquote{
   gap: 0.5rem;
 }
 
+.gap-20{
+  gap: 5rem;
+}
+
 .gap-3{
   gap: 0.75rem;
 }
@@ -1763,10 +1775,6 @@ blockquote{
   row-gap: 3rem;
 }
 
-.gap-y-10{
-  row-gap: 2.5rem;
-}
-
 .space-x-4 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -1777,6 +1785,18 @@ blockquote{
   --tw-space-x-reverse: 0;
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
   margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-10 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
+}
+
+.space-y-12 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3rem * var(--tw-space-y-reverse));
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]){
@@ -1849,10 +1869,6 @@ blockquote{
 
 .rounded{
   border-radius: 0.25rem;
-}
-
-.rounded-\[4px\]{
-  border-radius: 4px;
 }
 
 .rounded-full{
@@ -2162,6 +2178,11 @@ blockquote{
   padding-bottom: 5rem;
 }
 
+.py-24{
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
 .py-3{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -2200,6 +2221,11 @@ blockquote{
 .py-\[80px\]{
   padding-top: 80px;
   padding-bottom: 80px;
+}
+
+.px-16{
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 .pb-1{
@@ -2413,6 +2439,10 @@ blockquote{
   line-height: 1.5rem;
 }
 
+.leading-loose{
+  line-height: 2;
+}
+
 .leading-relaxed{
   line-height: 1.625;
 }
@@ -2542,12 +2572,20 @@ blockquote{
   opacity: 0.5;
 }
 
+.opacity-60{
+  opacity: 0.6;
+}
+
 .opacity-75{
   opacity: 0.75;
 }
 
 .opacity-80{
   opacity: 0.8;
+}
+
+.opacity-30{
+  opacity: 0.3;
 }
 
 .shadow-2xl{
@@ -2717,6 +2755,14 @@ blockquote{
   color: var(--color-primary);
 }
 
+.placeholder\:opacity-30::-moz-placeholder{
+  opacity: 0.3;
+}
+
+.placeholder\:opacity-30::placeholder{
+  opacity: 0.3;
+}
+
 .checked\:bg-black:checked{
   background-color: var(--color-black);
 }
@@ -2761,6 +2807,11 @@ blockquote{
   background-color: var(--color-custombg);
 }
 
+.hover\:bg-gray-900:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-primary:hover{
   background-color: var(--color-primary);
 }
@@ -2776,6 +2827,11 @@ blockquote{
 
 .hover\:bg-white:hover{
   background-color: var(--color-white);
+}
+
+.hover\:bg-gray-800:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:\!text-white:hover{
@@ -2966,20 +3022,20 @@ blockquote{
 }
 
 @media (min-width: 768px){
-  .md\:right-\[-16px\]{
-    right: -16px;
-  }
-
-  .md\:right-\[-18px\]{
-    right: -18px;
-  }
-
   .md\:left-4{
     left: 1rem;
   }
 
   .md\:right-4{
     right: 1rem;
+  }
+
+  .md\:right-\[-16px\]{
+    right: -16px;
+  }
+
+  .md\:right-\[-18px\]{
+    right: -18px;
   }
 
   .md\:mx-16{
@@ -3117,6 +3173,16 @@ blockquote{
   .md\:py-24{
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+
+  .md\:py-32{
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .md\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .md\:text-5xl{
