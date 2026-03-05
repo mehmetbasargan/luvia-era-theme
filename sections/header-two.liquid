@@ -351,6 +351,10 @@
                 </div>
               {% endif %}
             </a>
+            {% if shop.customer_accounts_enabled %}
+              <shopify-account menu="customer-account-main-menu"> </shopify-account>
+            {% endif %}
+
             <a
               href="{{ routes.cart_url }}"
               class="lg:w-[30px] w-[20px] text-primary hover:text-secondary relative"
