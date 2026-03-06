@@ -452,13 +452,20 @@ function updateVariantID() {
     // Initialize wishlist status
     checkWishlistStatus('{{ product.id }}');
 
-    // Handle Add to Cart for product cards
-    function handleAddToCart(e, variantId) {
-      const btn = e.currentTarget;
-      const originalText = btn.innerText;
-      btn.innerText = 'Adding...';
-      btn.disabled = true;
-
+    // Handle Add to Cart Submit (without form)
+    function handleAddToCartSubmit() {
+      const variantId = document.getElementById('variant-id-input').value;
+      const submitBtn = event.target;
+      
+      if (!variantId) {
+        console.error('No variant ID found');
+        return;
+      }
+      
+      // Loading state
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Adding...';
+      
       fetch('/cart/add.js?t=' + Date.now(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
