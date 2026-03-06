@@ -558,6 +558,7 @@ video {
 
 :root {
   --color-primary: #3b443c;
+  /* Varsayılan renk */
   --color-secondary: #b2ac88;
   --color-custombg: #f9f9f9;
   --color-line: #e5e7eb;
