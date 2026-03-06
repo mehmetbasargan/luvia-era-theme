@@ -141,36 +141,30 @@
       {%- endunless -%}
 
       <div class="product-form-container mt-8">
-        {%- form 'product', product -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input
+          type="hidden"
+          name="id"
+          id="variant-id-input"
+          value="{{ product.selected_or_first_available_variant.id }}"
+        >
 
-          <div class="flex flex-col gap-4">
-            <button
-              type="submit"
-              name="add"
-              class="w-full bg-primary text-white py-5 text-[13px] font-medium uppercase tracking-[0.3em] hover:bg-secondary transition-all {% unless product.available %}opacity-50 cursor-not-allowed{% endunless %}"
-              {% unless product.available %}
-                disabled
-              {% endunless %}
-            >
-              {% if product.available %}
-                {{ 'products.product.add_to_cart' | t }}
-              {% else %}
-                {{ 'products.product.sold_out' | t }}
-              {% endif %}
-            </button>
-
-            <!-- Wishlist Button -->
-            <button
-              type="button"
-              id="wishlist-btn-{{ product.id }}"
-              onclick="console.log('Wishlist button clicked'); window.LuviaWishlist.toggle('{{ product.id }}')"
-              class="w-full border border-primary text-primary py-3 text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-primary hover:text-white transition-all"
-            >
-              <span id="wishlist-text-{{ product.id }}">Add to Wishlist</span>
-            </button>
-          </div>
-        {%- endform -%}
+        <div class="flex flex-col gap-4">
+          <button
+            type="button"
+            onclick="handleAddToCartSubmit()"
+            class="w-full bg-primary text-white py-5 text-[13px] font-medium uppercase tracking-[0.3em] hover:bg-secondary transition-all {% unless product.available %}opacity-50 cursor-not-allowed{% endunless %}"
+            {% unless product.available %}
+              disabled
+            {% endunless %}
+          >
+            {% if product.available %}
+              {{ 'products.product.add_to_cart' | t }}
+            {% else %}
+              {{ 'products.product.sold_out' | t }}
+            {% endif %}
+          </button>
+        </div>
+        <span id="wishlist-text-{{ product.id }}">Add to Wishlist</span>
       </div>
 
       <div class="pt-8 border-t border-line space-y-4">
