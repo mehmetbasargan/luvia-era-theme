@@ -47,11 +47,17 @@
           {{ product.title }}
         </h3>
         <div class="mt-4 flex items-center gap-4">
-          <span class="text-[20px] font-medium" style="color: {{ settings.product_primary_color }};">
-            {{- product.price | money -}}
+          <span
+            id="product-price-display"
+            class="text-[20px] font-medium"
+            style="color: {{ settings.product_primary_color }};"
+          >
+            {{- product.selected_or_first_available_variant.price | money -}}
           </span>
           {% if product.compare_at_price > product.price %}
-            <span class="text-gray-400 line-through">{{ product.compare_at_price | money }}</span>
+            <span id="product-compare-price" class="text-gray-400 line-through">
+              {{- product.compare_at_price | money -}}
+            </span>
           {% endif %}
         </div>
       </div>
@@ -138,14 +144,14 @@
       {%- endunless -%}
 
       <div class="product-form-container mt-8">
-        {%- form 'product', product -%}
+        {%- form 'product', product, id: 'product-form-installment' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
           <div class="flex flex-col gap-4">
             <button
               type="submit"
               name="add"
-              class="w-full bg-primary text-white py-5 text-[13px] font-medium uppercase tracking-[0.3em] hover:bg-secondary transition-all {% unless product.available %}opacity-50 cursor-not-allowed{% endunless %}"
+              class="add-to-cart-btn w-full bg-primary text-white py-5 text-[13px] font-medium uppercase tracking-[0.3em] hover:bg-secondary transition-all {% unless product.available %}opacity-50 cursor-not-allowed{% endunless %}"
               {% unless product.available %}
                 disabled
               {% endunless %}
@@ -275,14 +281,14 @@
         spaceBetween: 0,
         loop: true,
         zoom: {
-    maxRatio: 2.5,
-  },
+          maxRatio: 2.5,
+        },
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         thumbs: { swiper: thumbsSwiper },
       });
     }
 
-    const productForm = document.querySelector('form[action="/cart/add"]');
+    const productForm = document.querySelector('#product-form-installment');
     if (productForm) {
       productForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -290,39 +296,73 @@
         fetch('/cart/add.js', { method: 'POST', body: formData })
           .then((response) => response.json())
           .then(() => {
-            openAndRefreshCart();
+            if (typeof openAndRefreshCart === 'function') {
+              openAndRefreshCart();
+            } else {
+              window.location.href = '/cart';
+            }
           })
           .catch((error) => console.error('Sepet Hatası:', error));
       });
     }
-  });
 
+    // Varyant değişimlerini dinle
+    document.querySelectorAll('.variant-wrapper').forEach((wrapper, index) => {
+      const labelSpan = document.getElementById(`option-value-${index + 1}`);
+      const inputs = wrapper.querySelectorAll('input[type="radio"]');
 
-document.querySelectorAll('.variant-wrapper').forEach((wrapper, index) => {
-  const labelSpan = document.getElementById(`option-value-${index + 1}`);
-  const inputs = wrapper.querySelectorAll('input[type="radio"]');
-
-  inputs.forEach(input => {
-    input.addEventListener('change', (e) => {
-      labelSpan.textContent = e.target.value;
-      
-      updateVariantID(); 
+      inputs.forEach(input => {
+        input.addEventListener('change', (e) => {
+          labelSpan.textContent = e.target.value;
+          updateVariantID(); 
+        });
+      });
     });
   });
-});
 
-function updateVariantID() {
-  const selectedOptions = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(input => input.value);
-  const variantData = {{ product.variants | json }};
-  
-  const matchedVariant = variantData.find(variant => {
-    return variant.options.every((option, index) => option === selectedOptions[index]);
-  });
+  function updateVariantID() {
+    const selectedOptions = Array.from(document.querySelectorAll('.variant-wrapper input[type="radio"]:checked')).map(input => input.value);
+    const variantData = {{ product.variants | json }};
+    
+    const matchedVariant = variantData.find(variant => {
+      return variant.options.every((option, index) => option === selectedOptions[index]);
+    });
 
-  if (matchedVariant) {
-    document.querySelector('input[name="id"]').value = matchedVariant.id;
+    if (matchedVariant) {
+      // 1. Gizli input ID'yi güncelle
+      document.querySelector('input[name="id"]').value = matchedVariant.id;
+
+      // 2. Fiyatı güncelle
+      const priceDisplay = document.getElementById('product-price-display');
+      if (priceDisplay) {
+        priceDisplay.innerText = (matchedVariant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      }
+
+      // 3. Compare at price güncelle
+      const compareDisplay = document.getElementById('product-compare-price');
+      if (compareDisplay && matchedVariant.compare_at_price) {
+        compareDisplay.innerText = (matchedVariant.compare_at_price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        compareDisplay.classList.remove('hidden');
+      } else if (compareDisplay) {
+        compareDisplay.classList.add('hidden');
+      }
+
+      // 4. Buton ve Stok kontrolü
+      const btn = document.querySelector('.add-to-cart-btn');
+      if (matchedVariant.available) {
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+        btn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+      } else {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+        btn.innerText = "{{ 'products.product.sold_out' | t }}";
+      }
+
+      // 5. URL'i güncelle
+      window.history.replaceState({}, '', `?variant=${matchedVariant.id}`);
+    }
   }
-}
 
   function openAndRefreshCart() {
     fetch('/cart.js')
@@ -361,11 +401,13 @@ function updateVariantID() {
         const drawer = document.getElementById('cart-drawer');
         const overlay = document.getElementById('cart-drawer-overlay');
         const content = document.getElementById('cart-drawer-content');
-        drawer.classList.remove('invisible');
-        setTimeout(() => {
-          overlay.classList.replace('opacity-0', 'opacity-100');
-          content.classList.replace('translate-x-full', 'translate-x-0');
-        }, 10);
+        if (drawer) {
+          drawer.classList.remove('invisible');
+          setTimeout(() => {
+            overlay.classList.replace('opacity-0', 'opacity-100');
+            content.classList.replace('translate-x-full', 'translate-x-0');
+          }, 10);
+        }
       });
   }
 
@@ -386,11 +428,13 @@ function updateVariantID() {
     const drawer = document.getElementById('cart-drawer');
     const overlay = document.getElementById('cart-drawer-overlay');
     const content = document.getElementById('cart-drawer-content');
-    overlay.classList.replace('opacity-100', 'opacity-0');
-    content.classList.replace('translate-x-0', 'translate-x-full');
-    setTimeout(() => {
-      drawer.classList.add('invisible');
-    }, 500);
+    if (overlay && content) {
+      overlay.classList.replace('opacity-100', 'opacity-0');
+      content.classList.replace('translate-x-0', 'translate-x-full');
+      setTimeout(() => {
+        drawer.classList.add('invisible');
+      }, 500);
+    }
   }
 </script>
 
