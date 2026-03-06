@@ -892,6 +892,10 @@ blockquote{
   top: 100%;
 }
 
+.top-28{
+  top: 7rem;
+}
+
 .z-0{
   z-index: 0;
 }
