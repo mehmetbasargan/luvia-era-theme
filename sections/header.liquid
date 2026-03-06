@@ -249,36 +249,19 @@
           </div>
 
           {% comment %} account {% endcomment %}
-          <div class="flex items-center gap-1">
-            {% comment %} Gap biraz açıldı ki ikonlar nefes alsın {% endcomment %}
-
-            {% comment %} Search {% endcomment %}
-            <div class="lg:w-[30px] w-[20px] -2 text-primary hover:text-secondary transition-colors">
-              <a href="{{ routes.search_url }}" class="block w-5 h-5 lg:w-6 lg:h-6">
+          <div class="flex items-center gap-0">
+            <div class="bg-black/10 p-2 rounded-full bg-custombg hover:bg-secondary hover:!text-white">
+              <a href="{{ routes.search_url }}" class="lg:w-[12px] w-[12px] shrink-0">
                 {% render 'icon-search' %}
               </a>
             </div>
-
-            {% comment %} Wishlist {% endcomment %}
-            <div class="lg:w-[30px] w-[20px]  p-2 text-primary hover:text-secondary transition-colors">
-              <a href="/pages/wishlist" class="block w-5 h-5 lg:w-6 lg:h-6">
-                {% render 'icon-wishlist' %}
+            <div class="bg-black/10 p-2 rounded-full hover:bg-secondary hover:!text-white">
+              <a href="/pages/wishlist" class="lg:w-[12px] w-[12px] shrink-0">
+                {% if shop.customer_accounts_enabled %}
+                  {% render 'icon-wishlist' %}
+                {% endif %}
               </a>
             </div>
-
-            {% comment %} Cart {% endcomment %}
-            <div class="lg:w-[30px] w-[20px] p-2 text-primary hover:text-secondary relative transition-colors">
-              <a href="{{ routes.cart_url }}" class="block w-5 h-5 lg:w-6 lg:h-6">
-                {%- if cart.item_count > 0 -%}
-                  <span class="absolute -top-1 -right-1 bg-secondary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full shadow-sm animate-bounce-short">
-                    {{- cart.item_count -}}
-                  </span>
-                {%- endif -%}
-                {% render 'icon-cart' %}
-              </a>
-            </div>
-
-            {% comment %} Account / Avatar sss {% endcomment %}
             <div class="lg:w-[30px] w-[20px] p-2">
               <a href="{{ routes.account_url }}" class="relative inline-flex items-center justify-center group">
                 {% if customer %}
@@ -293,6 +276,16 @@
                     {% render 'icon-account' %}
                   </div>
                 {% endif %}
+              </a>
+            </div>
+            <div class="bg-black/10 p-2 rounded-full hover:bg-secondary hover:!text-white relative">
+              <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0">
+                <div class="absolute top-[0px] right-0">
+                  <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
+                    {{- cart.item_count -}}
+                  </span>
+                </div>
+                {% render 'icon-cart' %}
               </a>
             </div>
           </div>
@@ -378,3 +371,53 @@
   ]
 }
 {% endschema %}
+
+{% comment %}
+  <div class="flex items-center gap-1">
+    {% comment %} Gap biraz açıldı ki ikonlar nefes alsın {% endcomment %}
+
+    {% comment %} Search {% endcomment %}
+    <div class="lg:w-[30px] w-[20px] -2 text-primary hover:text-secondary transition-colors">
+      <a href="{{ routes.search_url }}" class="block w-5 h-5 lg:w-6 lg:h-6">
+        {% render 'icon-search' %}
+      </a>
+    </div>
+
+    {% comment %} Wishlist {% endcomment %}
+    <div class="lg:w-[30px] w-[20px]  p-2 text-primary hover:text-secondary transition-colors">
+      <a href="/pages/wishlist" class="block w-5 h-5 lg:w-6 lg:h-6">
+        {% render 'icon-wishlist' %}
+      </a>
+    </div>
+
+    {% comment %} Cart {% endcomment %}
+    <div class="lg:w-[30px] w-[20px] p-2 text-primary hover:text-secondary relative transition-colors">
+      <a href="{{ routes.cart_url }}" class="block w-5 h-5 lg:w-6 lg:h-6">
+        {%- if cart.item_count > 0 -%}
+          <span class="absolute -top-1 -right-1 bg-secondary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full shadow-sm animate-bounce-short">
+            {{- cart.item_count -}}
+          </span>
+        {%- endif -%}
+        {% render 'icon-cart' %}
+      </a>
+    </div>
+
+    {% comment %} Account / Avatar sss {% endcomment %}
+    <div class="lg:w-[30px] w-[20px] p-2">
+      <a href="{{ routes.account_url }}" class="relative inline-flex items-center justify-center group">
+        {% if customer %}
+          {% comment %} Giriş Yapmışsa: Harf Avatar {% endcomment %}
+          <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-bold uppercase tracking-tighter group-hover:bg-secondary transition-all duration-300 shadow-sm">
+            {{ customer.first_name | slice: 0 -}}
+            {{- customer.last_name | slice: 0 }}
+          </div>
+        {% else %}
+          {% comment %} Giriş Yapmamışsa: Standart İkon {% endcomment %}
+          <div class="w-6 h-6 lg:w-7 lg:h-7 text-primary group-hover:text-secondary transition-colors">
+            {% render 'icon-account' %}
+          </div>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+{% endcomment %}

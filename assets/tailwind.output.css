@@ -887,6 +887,10 @@ blockquote{
   top: 100%;
 }
 
+.top-\[0px\]{
+  top: 0px;
+}
+
 .z-0{
   z-index: 0;
 }
@@ -1419,6 +1423,10 @@ blockquote{
   width: max-content;
 }
 
+.w-\[12px\]{
+  width: 12px;
+}
+
 .min-w-\[200px\]{
   min-width: 200px;
 }
@@ -1735,6 +1743,10 @@ blockquote{
 
 .gap-8{
   gap: 2rem;
+}
+
+.gap-0{
+  gap: 0px;
 }
 
 .gap-x-4{
@@ -3250,6 +3262,10 @@ blockquote{
 
   .lg\:w-auto{
     width: auto;
+  }
+
+  .lg\:w-\[12px\]{
+    width: 12px;
   }
 
   .lg\:grid-cols-2{
