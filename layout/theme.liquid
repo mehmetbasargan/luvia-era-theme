@@ -32,7 +32,7 @@
         --color-white: #ffffff;
         --color-black: #000000;
 
-        /* Font Değişkenlericcc - BURASI EKSİKTİ dddddddd */
+        /* Font Değişkenlericcc - BURASI EKSİKTİ */
         --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
         --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
       }
@@ -51,6 +51,10 @@
         font-family: var(--font-heading); /* Artık yukarıdaki değişkeni okuyabilir */
       }
     </style>
+
+    <div style="position: fixed; top: 0; left: 0; z-index: 9999; background: {{ settings.primary_color }}; color: white; padding: 10px;">
+      GÜNCEL RENK KODU: {{ settings.primary_color }}
+    </div>
 
     {{ content_for_header }}
 

@@ -1,21 +1,28 @@
 {% comment %} Luvia Era - Custom Contact Section {% endcomment %}
-<section class="max-w-[1440px] mx-auto px-6 py-24 md:py-32 bg-white">
+<section class="container  py-24 md:py-32 bg-white">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
     <div class="flex flex-col space-y-12 animate-fade-in">
-      <h1 class="font-josefin font-light uppercase tracking-[0.4em] text-2xl md:text-3xl text-black">
+      <h4 class="font-josefin font-light uppercase tracking-[0.2em] text-primary">
         {{ section.settings.heading }}
-      </h1>
-      <div class="space-y-10 font-josefin font-light uppercase tracking-[0.2em] text-xs md:text-sm text-black">
-        <p class="opacity-60 leading-loose max-w-md">{{ section.settings.subtext }}</p>
+      </h4>
+      <div class="space-y-10 font-light tracking-[0.1em] text-primary">
+        <p class="leading-loose md:max-w-md">{{ section.settings.subtext }}</p>
 
         <div class="space-y-8 pt-4">
           <div class="group">
-            <p class="opacity-30 mb-2 text-[10px]">Paris Studio</p>
-            <p class="tracking-[0.3em]">22 Rue de Rivoli, 75004 Paris</p>
+            <p class="mb-2 text-[13px]">{{ section.settings.address_title }}</p>
+            <p class="tracking-[0.1em]">{{ section.settings.address_text }}</p>
           </div>
           <div class="group">
-            <p class="opacity-30 mb-2 text-[10px]">Inquiries</p>
-            <p class="tracking-[0.3em]">studio@luvialera.com</p>
+            <p class="mb-2 text-[13px]">{{ section.settings.email_title }}</p>
+            <p class="tracking-[0.1em]">
+              <a
+                href="mailto:{{ section.settings.email_text }}"
+                class="hover:text-secondary transition-all duration-150"
+              >
+                {{- section.settings.email_text -}}
+              </a>
+            </p>
           </div>
         </div>
       </div>
@@ -24,8 +31,12 @@
     <div class="animate-fade-in-delayed">
       {% form 'contact' %}
         {% if form.posted_successfully? %}
-          <p class="font-josefin text-xs tracking-[0.3em] mb-10 text-black italic">
-            MESSAGE SENT SUCCESSFULLY. WE WILL CONTACT YOU SHORTLY.
+          <p class="text-[16px] mb-10 text-primary italic font-light tracking-widest">
+            {%- if section.settings.success_message != blank -%}
+              {{ section.settings.success_message }}
+            {%- else -%}
+              {{ 'contact.success_message' | t }}
+            {%- endif -%}
           </p>
         {% endif %}
 
@@ -33,32 +44,52 @@
           <input
             type="text"
             name="contact[name]"
-            placeholder="FULL NAME"
+            placeholder="{{ 'contact.form.name' | t | default: 'FULL NAME' }}"
             required
-            class="w-full bg-transparent border-b border-gray-200 py-4 font-josefin text-xs uppercase tracking-[0.2em] focus:outline-none focus:border-black transition-colors duration-[1500ms] placeholder:opacity-30"
+            class="w-full bg-transparent border-b border-line py-4 text-[15px] tracking-[0.1em] focus:outline-none focus:border-black transition-colors duration-[1500ms] placeholder:text-gray-400"
           >
 
           <input
             type="email"
             name="contact[email]"
-            placeholder="EMAIL ADDRESS"
+            placeholder="{{ 'contact.form.email' | t | default: 'EMAIL ADDRESS' }}"
             required
-            class="w-full bg-transparent border-b border-gray-200 py-4 font-josefin text-xs uppercase tracking-[0.2em] focus:outline-none focus:border-black transition-colors duration-[1500ms] placeholder:opacity-30"
+            class="w-full bg-transparent border-b border-line py-4 tracking-[0.1em] text-[15px] focus:outline-none focus:border-black transition-colors duration-[1500ms] placeholder:text-gray-400"
           >
+
+          {% if section.settings.show_subject %}
+            <div class="relative border-b border-line">
+              <select
+                name="contact[note][Subject]"
+                required
+                onchange="this.style.color='black'"
+                style="color: #9ca3af;"
+                class="w-full bg-transparent border-b border-line py-4 text-[15px] tracking-[0.1em] focus:outline-none appearance-none cursor-pointer"
+              >
+                <option value="" disabled selected hidden>Select Subject</option>
+                <option value="General Inquiry" class="text-black italic">General Inquiry</option>
+                <option value="Order Support" class="text-black">Order Support</option>
+                <option value="Press" class="text-black">Press & Media</option>
+              </select>
+              <span class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none opacity-40 text-[10px]">
+                ▼
+              </span>
+            </div>
+          {% endif %}
 
           <textarea
             name="contact[body]"
             rows="4"
-            placeholder="YOUR MESSAGE"
+            placeholder="{{ 'contact.form.message' | t | default: 'YOUR MESSAGE' }}"
             required
-            class="w-full bg-transparent border-b border-gray-200 py-4 font-josefin text-xs uppercase tracking-[0.2em] focus:outline-none focus:border-black transition-colors duration-[1500ms] resize-none placeholder:opacity-30"
+            class="w-full bg-transparent border-b border-line py-4 text-[15px] tracking-[0.1em] focus:outline-none focus:border-black transition-colors duration-[1500ms] resize-none placeholder:text-gray-400"
           ></textarea>
 
           <button
             type="submit"
-            class="w-full md:w-auto px-16 py-5 bg-black text-white font-josefin text-[10px] uppercase tracking-[0.4em] hover:bg-gray-800 transition-all duration-500"
+            class="w-full md:w-auto px-16 py-5 bg-primary text-white text-[15px] tracking-[0.1em] hover:bg-secondary transition-all duration-500 uppercase"
           >
-            Send Message
+            {{ 'contact.send_message' | t | default: 'SEND MESSAGE' }}
           </button>
         </div>
       {% endform %}
@@ -76,6 +107,42 @@
       "id": "subtext",
       "label": "Subtext",
       "default": "FOR INQUIRIES REGARDING OUR COLLECTIONS, PRIVATE APPOINTMENTS OR PARTNERSHIPS."
+    },
+    {
+      "type": "text",
+      "id": "address_title",
+      "label": "Address Title",
+      "default": "PARIS STUDIO"
+    },
+    {
+      "type": "text",
+      "id": "address_text",
+      "label": "Address",
+      "default": "2 RUE DE RIVOLI, 75004 PARIS"
+    },
+    {
+      "type": "text",
+      "id": "email_title",
+      "label": "Email Title",
+      "default": "Inquiries Email"
+    },
+    {
+      "type": "text",
+      "id": "email_text",
+      "label": "Email",
+      "default": "studio@luvialera.com"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "THANK YOU. YOUR MESSAGE HAS BEEN RECEIVED."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subject",
+      "label": "Show Subject Dropdown",
+      "default": true
     }
   ],
   "presets": [

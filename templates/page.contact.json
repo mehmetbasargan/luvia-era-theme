@@ -1,18 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-	"sections": {
-		"main_page_header": {
-			"type": "main-page-header",
-			"settings": {
-				"image": "shopify://shop_images/pageheader3.jpg",
-				"custom_title": "CONTACT THE ERA",
-				"hero_height": 40,
-				"overlay_opacity": 60
-			}
-		},
-		"main": {
-			"type": "contact-custom",
-			"settings": {}
-		}
-	},
-	"order": ["main_page_header", "main"]
+  "sections": {
+    "main_page_header": {
+      "type": "main-page-header",
+      "settings": {
+        "image": "shopify://shop_images/pageheader3.jpg",
+        "custom_title": "CONTACT THE ERA",
+        "hero_height": 40,
+        "overlay_opacity": 60
+      }
+    },
+    "main": {
+      "type": "contact-custom",
+      "settings": {
+        "heading": "CONTACT THE ERA",
+        "address_title": "Paris Studio",
+        "address_text": "22 Rue de Rivoli, 75004 Paris, France",
+        "email_title": "Inquiries",
+        "email_text": "studio@luvialera.com",
+        "subtext": "FOR INQUIRIES REGARDING OUR COLLECTIONS, PRIVATE APPOINTMENTS OR PARTNERSHIPS."
+      }
+    }
+  },
+  "order": [
+    "main_page_header",
+    "main"
+  ]
 }

@@ -1,42 +1,92 @@
-<section
-  class="marquee-wrapper overflow-hidden select-none border-y border-white"
-  style="background-color: {{ section.settings.bg_color }}; padding: {{ section.settings.padding }}px 0;"
->
-  <div class="flex whitespace-nowrap animate-marquee-loop">
-    {% for i in (1..2) %}
-      <div class="flex items-center">
-        {% for block in section.blocks %}
-          <span
-            class="marquee-item text-xs md:text-sm font-light uppercase tracking-[0.3em] mx-8"
-            style="color: {{ section.settings.text_color }};"
-          >
-            {{ block.settings.text }}
-          </span>
-          {% if section.settings.show_separator %}
-            <span class="separator" style="color: {{ section.settings.text_color }};">•</span>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endfor %}
-  </div>
-</section>
+{%- liquid
+  assign show_marquee = false
+  if section.blocks.size > 0
+    assign show_marquee = true
+  endif
+-%}
 
-<style>
-  @keyframes marquee-infinite {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .animate-marquee-loop {
-    display: flex;
-    width: max-content;
-    animation: marquee-infinite {{ section.settings.speed }}s linear infinite;
-  }
-  {% if section.settings.pause_on_hover %}
-    .marquee-wrapper:hover .animate-marquee-loop {
+{%- if show_marquee -%}
+  <style>
+    :root {
+      /* Başlangıçta 0, JS ile gerçek yükseklik atanacak */
+      --marquee-height: 0px;
+    }
+    #shopify-section-{{ section.id }} {
+      /* Fixed yerine absolute yaparak scroll ile kaybolmasını sağlıyoruz */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1001;
+    }
+    .marquee-wrapper {
+      background-color: {{ section.settings.bg_color }};
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .animate-marquee {
+      display: inline-flex;
+      animation: marquee-animation {{ section.settings.speed | default: 30 }}s linear infinite;
+    }
+    {% if section.settings.pause_on_hover %}
+    .animate-marquee:hover {
       animation-play-state: paused;
     }
-  {% endif %}
-</style>
+    {% endif %}
+    @keyframes marquee-animation {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-25%); }
+    }
+  </style>
+
+  <section
+    id="Marquee-{{ section.id }}"
+    class="marquee-wrapper overflow-hidden select-none"
+  >
+    <div class="flex whitespace-nowrap animate-marquee">
+      {% for i in (1..4) %}
+        <div class="flex items-center">
+          {% for block in section.blocks %}
+            <span
+              class="marquee-item text-[10px] md:text-[11px] font-light uppercase tracking-[0.2em] mx-6 py-3 flex items-center gap-4"
+              style="color: {{ section.settings.text_color }};"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.text }}
+              {% if section.settings.show_separator %}
+                <span class="opacity-30">•</span>
+              {% endif %}
+            </span>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <script>
+    function updateMarqueeHeight() {
+      const marquee = document.getElementById('Marquee-{{ section.id }}');
+      if (marquee) {
+        // Bölümün yüksekliğini ölçüp CSS değişkenine gönderiyoruz
+        document.documentElement.style.setProperty('--marquee-height', marquee.offsetHeight + 'px');
+      }
+    }
+    // Sayfa yüklendiğinde ve boyut değiştiğinde tetikle
+    window.addEventListener('resize', updateMarqueeHeight);
+    window.addEventListener('load', updateMarqueeHeight);
+    // Shopify editor etkileşimi için
+    document.addEventListener('shopify:section:load', updateMarqueeHeight);
+    document.addEventListener('shopify:section:unload', () => {
+      document.documentElement.style.setProperty('--marquee-height', '0px');
+    });
+  </script>
+
+{%- else -%}
+  <style>
+    :root {
+      --marquee-height: 0px;
+    }
+  </style>
+{%- endif -%}
 
 {% schema %}
 {
@@ -57,27 +107,17 @@
     {
       "type": "range",
       "id": "speed",
-      "min": 5,
-      "max": 60,
+      "min": 10,
+      "max": 100,
       "step": 5,
       "unit": "s",
-      "label": "Speed (Lower is faster)",
+      "label": "Speed",
       "default": 30
-    },
-    {
-      "type": "range",
-      "id": "padding",
-      "min": 10,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "label": "Vertical Padding",
-      "default": 20
     },
     {
       "type": "checkbox",
       "id": "show_separator",
-      "label": "Show Separator (•)",
+      "label": "Show Separator",
       "default": true
     },
     {
@@ -104,11 +144,7 @@
   "presets": [
     {
       "name": "Marquee Text",
-      "blocks": [
-        { "type": "text_block", "settings": { "text": "FREE SHIPPING WORLDWIDE" } },
-        { "type": "text_block", "settings": { "text": "NEW SEASON ARRIVALS" } },
-        { "type": "text_block", "settings": { "text": "15% OFF FIRST ORDER" } }
-      ]
+      "blocks": [{ "type": "text_block" }]
     }
   ]
 }
