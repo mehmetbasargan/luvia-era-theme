@@ -2070,6 +2070,11 @@ blockquote{
   background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\#f9f9f9\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));
+}
+
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -3064,6 +3069,10 @@ blockquote{
 
   .md\:mb-0{
     margin-bottom: 0px;
+  }
+
+  .md\:mt-0{
+    margin-top: 0px;
   }
 
   .md\:block{
