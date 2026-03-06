@@ -96,3 +96,38 @@
 		transform: translateX(-100%);
 	}
 }
+
+/*  */
+/* Login/Register Container */
+.login-container {
+	@apply max-w-md mx-auto mt-16 p-8 bg-white rounded-xl shadow-lg;
+}
+
+/* Form Başlıkları */
+.login-container h1 {
+	@apply text-2xl font-bold mb-6 text-center text-gray-800;
+}
+
+/* Input alanları */
+.login-container input {
+	@apply w-full border border-gray-300 rounded-md px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-amber-500;
+}
+
+/* Submit Button */
+.login-container button {
+	@apply w-full bg-amber-700 text-white font-semibold py-2 rounded-md hover:bg-amber-800 transition-colors;
+}
+
+/* Error mesajları */
+.login-container .errors {
+	@apply mb-4 text-red-600 text-sm;
+}
+
+/* Footer linkleri */
+.login-container .footer-links {
+	@apply flex justify-between mt-4 text-sm text-gray-600;
+}
+
+.login-container .footer-links a {
+	@apply hover:underline text-amber-700;
+}
