@@ -892,10 +892,6 @@ blockquote{
   top: 100%;
 }
 
-.top-28{
-  top: 7rem;
-}
-
 .z-0{
   z-index: 0;
 }
@@ -1175,10 +1171,6 @@ blockquote{
   aspect-ratio: 16 / 9;
 }
 
-.aspect-\[4\/5\]{
-  aspect-ratio: 4/5;
-}
-
 .size-8{
   width: 2rem;
   height: 2rem;
@@ -1316,21 +1308,8 @@ blockquote{
   height: 100%;
 }
 
-.h-\[50px\]{
-  height: 50px;
-}
-
-.h-fit{
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
 .max-h-\[80vh\]{
   max-height: 80vh;
-}
-
-.max-h-\[600px\]{
-  max-height: 600px;
 }
 
 .min-h-\[1rem\]{
@@ -1464,10 +1443,6 @@ blockquote{
 
 .min-w-\[45px\]{
   min-width: 45px;
-}
-
-.min-w-\[50px\]{
-  min-width: 50px;
 }
 
 .max-w-2xl{
@@ -2076,9 +2051,19 @@ blockquote{
   background-color: var(--color-white);
 }
 
-.bg-slate-600{
+.bg-blue-500{
   --tw-bg-opacity: 1;
-  background-color: rgb(71 85 105 / var(--tw-bg-opacity, 1));
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
+}
+
+.bg-green-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
+}
+
+.bg-yellow-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
 }
 
 .object-contain{
@@ -2424,10 +2409,6 @@ blockquote{
   line-height: 1rem;
 }
 
-.text-\[22px\]{
-  font-size: 22px;
-}
-
 .font-bold{
   font-weight: 700;
 }
@@ -2644,18 +2625,8 @@ blockquote{
   outline-offset: 2px;
 }
 
-.ring-1{
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
 .ring-black{
   --tw-ring-color: var(--color-black);
-}
-
-.ring-transparent{
-  --tw-ring-color: transparent;
 }
 
 .ring-offset-2{
@@ -3042,10 +3013,6 @@ blockquote{
   background-color: var(--color-black);
 }
 
-.peer:checked ~ .peer-checked\:bg-primary{
-  background-color: var(--color-primary);
-}
-
 .peer:checked ~ .peer-checked\:text-white{
   color: var(--color-white);
 }
@@ -3054,10 +3021,6 @@ blockquote{
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-.peer:checked ~ .peer-checked\:ring-primary{
-  --tw-ring-color: var(--color-primary);
 }
 
 @media (min-width: 768px){
@@ -3084,10 +3047,6 @@ blockquote{
 
   .md\:block{
     display: block;
-  }
-
-  .md\:aspect-auto{
-    aspect-ratio: auto;
   }
 
   .md\:h-16{

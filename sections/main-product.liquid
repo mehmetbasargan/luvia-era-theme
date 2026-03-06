@@ -319,14 +319,25 @@
           })
           .then((response) => response.json())
           .then((data) => {
-            console.log('Product added to cart:', data);
-            openAndRefreshCart();
-            // Reset button state
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
-            }
-          })
+          console.log('Product added to cart:', data);
+          
+          // Dispatch events for other components
+          document.dispatchEvent(new CustomEvent('cart:updated', {
+            detail: { cart: data }
+          }));
+          document.dispatchEvent(new CustomEvent('product:added', {
+            detail: { product: data }
+          }));
+          
+          openAndRefreshCart();
+          showToast('Product added to cart!', 'success');
+          
+          // Reset button state
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+          }
+        })
           .catch((error) => {
             console.error('Sepet Hatası:', error);
             // Show error message and reset button
@@ -445,6 +456,55 @@ function updateVariantID() {
     // Initialize wishlist status
     checkWishlistStatus('{{ product.id }}');
 
+    // Handle Add to Cart for product cards
+    function handleAddToCart(e, variantId) {
+      const btn = e.currentTarget;
+      const originalText = btn.innerText;
+      btn.innerText = 'Adding...';
+      btn.disabled = true;
+
+      fetch('/cart/add.js?t=' + Date.now(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 }),
+      })
+        .then((res) => res.json())
+        .then((cartData) => {
+          btn.innerText = 'ADDED';
+          console.log('Product added to cart:', cartData);
+          
+          // Dispatch events for other components
+          document.dispatchEvent(new CustomEvent('cart:updated', {
+            detail: { cart: cartData }
+          }));
+          document.dispatchEvent(new CustomEvent('product:added', {
+            detail: { product: cartData }
+          }));
+          
+          // Open cart drawer
+          openAndRefreshCart();
+          showToast('Product added to cart!', 'success');
+          
+          // Reset button after delay
+          setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error('Add to cart error:', error);
+          btn.innerText = 'ERROR';
+          btn.classList.add('bg-red-500', 'text-white');
+          
+          // Reset button after delay
+          setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+            btn.classList.remove('bg-red-500', 'text-white');
+          }, 2000);
+        });
+    }
+
   function openAndRefreshCart() {
     console.log('Opening cart drawer...');
     fetch('/cart.js')
@@ -462,7 +522,10 @@ function updateVariantID() {
           overlay: !!overlay,
           content: !!content,
           itemsContainer: !!itemsContainer,
-          totalPriceContainer: !!totalPriceContainer
+          totalPriceContainer: !!totalPriceContainer,
+          drawerElement: drawer,
+          overlayElement: overlay,
+          contentElement: content
         });
         
         if (!drawer || !overlay || !content) {

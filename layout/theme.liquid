@@ -75,6 +75,62 @@
 
     <script>
       window.customer = {% if customer %}{{ customer | json }}{% else %}false{% endif %};
+  
+      // Global showToast function
+      window.showToast = function(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `fixed top-4 right-4 z-[9999] px-6 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full ${
+          type === 'success' ? 'bg-green-500 text-white' :
+          type === 'error' ? 'bg-red-500 text-white' :
+          type === 'warning' ? 'bg-yellow-500 text-white' :
+          'bg-blue-500 text-white'
+        }`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+          toast.classList.remove('translate-x-full');
+        }, 100);
+        
+        setTimeout(() => {
+          toast.classList.add('translate-x-full');
+          setTimeout(() => {
+            document.body.removeChild(toast);
+          }, 300);
+        }, 3000);
+      };
+  
+      // Global closeCartDrawer function
+      window.closeCartDrawer = function() {
+        const drawer = document.getElementById('cart-drawer');
+        const overlay = document.getElementById('cart-drawer-overlay');
+        const content = document.getElementById('cart-drawer-content');
+        
+        if (overlay && content) {
+          overlay.classList.replace('opacity-100', 'opacity-0');
+          content.classList.replace('translate-x-0', 'translate-x-full');
+          setTimeout(() => {
+            if (drawer) {
+              drawer.classList.add('invisible');
+            }
+          }, 500);
+        }
+      };
+  
+      // Global openCartDrawer function
+      window.openCartDrawer = function() {
+        const drawer = document.getElementById('cart-drawer');
+        const overlay = document.getElementById('cart-drawer-overlay');
+        const content = document.getElementById('cart-drawer-content');
+        
+        if (drawer && overlay && content) {
+          drawer.classList.remove('invisible');
+          setTimeout(() => {
+            overlay.classList.replace('opacity-0', 'opacity-100');
+            content.classList.replace('translate-x-full', 'translate-x-0');
+          }, 10);
+        }
+      };
     </script>
 
     <main role="main" itemprop="mainContentOfPage">

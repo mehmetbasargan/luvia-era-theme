@@ -118,9 +118,13 @@
       .catch((error) => console.error('Cart update error:', error));
   }
 
-  setInterval(updateCartCount, 2000);
-
+  // Event-based cart updates instead of setInterval
   document.addEventListener('cart:updated', updateCartDrawer);
+  document.addEventListener('wishlist:updated', updateCartDrawer);
+  document.addEventListener('product:added', updateCartCount);
+
+  // Initial cart count update
+  updateCartCount();
 
   window.removeFromCart = function (itemKey) {
     fetch('/cart/change.js?t=' + Date.now(), {
