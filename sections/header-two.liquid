@@ -205,7 +205,7 @@
         <div class="flex items-center lg:gap-2 gap-8 justify-start w-full lg:w-auto">
           <div class="flex lg:hidden">
             <div class="flex lg:hidden">
-              <button id="mobile-menu-open" class="group relative order-last">
+              <button id="mobile-menu-open" class="group relative">
                 <div id="icon-open" class="block">
                   {% render 'icon-menu' %}
                 </div>
@@ -329,7 +329,7 @@
           </div>
 
           {% comment %} account {% endcomment %}
-          <div class="order-first flex flex-row justify-start items-center gap-4 w-full lg:w-auto">
+          <div class="flex flex-row justify-start items-center gap-4 w-full lg:w-auto">
             <a href="{{ routes.search_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
               {% render 'icon-search' %}
             </a>
