@@ -16,6 +16,8 @@
         type="button"
         class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-[#ffffff] rounded-full shadow-sm hover:scale-110 transition-all duration-300 pointer-events-auto cursor-pointer"
         data-id="{{ product.id }}"
+        data-product-id="{{ product.id }}"
+        onclick="LuviaWishlist.toggle('{{ product.id }}')"
         aria-label="Add to wishlist"
       >
         <svg
