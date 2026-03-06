@@ -131,6 +131,70 @@
           }, 10);
         }
       };
+  
+      // Global Wishlist Functions
+      window.LuviaWishlist = {
+        toggle: function(productId) {
+          let wishlist = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+          
+          if (wishlist.includes(productId.toString())) {
+            // Remove from wishlist
+            wishlist = wishlist.filter(id => id !== productId.toString());
+            showToast('Product removed from wishlist!', 'info');
+          } else {
+            // Add to wishlist
+            wishlist.push(productId.toString());
+            showToast('Product added to wishlist!', 'success');
+          }
+          
+          localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
+          
+          // Update all wishlist buttons
+          document.querySelectorAll('.wishlist-trigger-btn, [id*="wishlist-btn"]').forEach(btn => {
+            const btnProductId = btn.dataset.productId || btn.id.replace('wishlist-btn-', '');
+            if (wishlist.includes(btnProductId.toString())) {
+              btn.classList.add('active', 'bg-primary', 'text-white');
+              btn.classList.remove('border', 'text-primary');
+              const btnText = btn.querySelector('[id*="wishlist-text"]');
+              if (btnText) btnText.textContent = 'Remove from Wishlist';
+            } else {
+              btn.classList.remove('active', 'bg-primary', 'text-white');
+              btn.classList.add('border', 'text-primary');
+              const btnText = btn.querySelector('[id*="wishlist-text"]');
+              if (btnText) btnText.textContent = 'Add to Wishlist';
+            }
+          });
+          
+          // Dispatch event for other components
+          window.dispatchEvent(new CustomEvent('wishlist:updated', {
+            detail: { productId, wishlist }
+          }));
+        },
+        
+        remove: function(productId) {
+          let wishlist = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+          wishlist = wishlist.filter(id => id !== productId.toString());
+          localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
+          
+          // Remove element from DOM
+          const itemElement = document.getElementById(`wish-item-${productId}`);
+          if (itemElement) {
+            itemElement.remove();
+          }
+          
+          // Dispatch event
+          window.dispatchEvent(new CustomEvent('wishlist:updated', {
+            detail: { productId, wishlist }
+          }));
+          
+          showToast('Product removed from wishlist!', 'info');
+        }
+      };
+      
+      // Global toggleWishlist function (alias for LuviaWishlist.toggle)
+      window.toggleWishlist = function(productId, button) {
+        window.LuviaWishlist.toggle(productId);
+      };
     </script>
 
     <main role="main" itemprop="mainContentOfPage">
