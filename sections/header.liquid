@@ -249,36 +249,41 @@
           </div>
 
           {% comment %} account {% endcomment %}
-          <div class="flex items-center gap-0">
-            <div class="bg-black/10 p-2 rounded-full bg-custombg hover:bg-secondary hover:!text-white">
-              <a href="{{ routes.search_url }}" class="lg:w-[12px] w-[12px] shrink-0">
-                {% render 'icon-search' %}
-              </a>
-            </div>
-            <div class="bg-black/10 p-2 rounded-full hover:bg-secondary hover:!text-white">
-              <a href="/pages/wishlist" class="lg:w-[12px] w-[12px] shrink-0">
-                {% if shop.customer_accounts_enabled %}
-                  {% render 'icon-wishlist' %}
-                {% endif %}
-              </a>
-            </div>
-            <div class="bg-black/10 p-2 rounded-full hover:bg-secondary hover:!text-white">
-              <a href="{{ routes.account_url }}" class="lg:w-[12px] w-[12px] shrink-0">
-                {% if shop.customer_accounts_enabled %}
-                  {% render 'icon-account' %}
-                {% endif %}
-              </a>
-            </div>
-            <div class="bg-black/10 p-2 rounded-full hover:bg-secondary hover:!text-white relative">
-              <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0">
-                <div class="absolute top-[0px] right-0">
-                  <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
-                    {{- cart.item_count -}}
-                  </span>
-                </div>
+          <div class="order-first flex flex-row justify-start items-center gap-4 w-full lg:w-auto">
+            <a href="{{ routes.search_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
+              {% render 'icon-search' %}
+            </a>
+            <a href="/pages/wishlist" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
+              {% render 'icon-wishlist' %}
+            </a>
+            <a
+              href="{{ routes.cart_url }}"
+              class="lg:w-[30px] w-[20px] text-primary hover:text-secondary relative"
+            >
+              <div class="absolute top-[-10px] right-[-18px] md:right-[-18px] lg:right-[-8px]">
+                <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full {% if cart.item_count == 0 %}hidden{% endif %}">
+                  {{- cart.item_count -}}
+                </span>
+              </div>
+              <div class="">
                 {% render 'icon-cart' %}
-              </a>
-            </div>
+              </div>
+            </a>
+            <a href="{{ routes.account_url }}" class="account-link relative inline-flex items-center justify-center">
+              {% assign customer_name = customer.first_name | default: 'Account' %}
+              {% if customer_name != 'Account' %}
+                {% comment %} Kullanıcı Giriş Yapmışsa Harf Göster {% endcomment %}
+                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[13px] font-bold text-white uppercase tracking-tighter hover:bg-secondary transition-all duration-300">
+                  {{ customer.first_name | slice: 0 -}}
+                  {{- customer.last_name | slice: 0 }}
+                </div>
+              {% else %}
+                {% comment %} Giriş Yapılmamışsa Senin Orijinal İkonun {% endcomment %}
+                <div class="w-6 h-6 lg:w-7 lg:h-7 text-primary hover:text-secondary transition-colors">
+                  {% render 'icon-account' %}
+                </div>
+              {% endif %}
+            </a>
           </div>
         </div>
       </div>

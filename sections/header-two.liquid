@@ -353,7 +353,7 @@
               {% assign customer_name = customer.first_name | default: 'Account' %}
               {% if customer_name != 'Account' %}
                 {% comment %} Kullanıcı Giriş Yapmışsa Harf Göster {% endcomment %}
-                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[12px] font-bold text-white uppercase tracking-tighter hover:bg-secondary transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[13px] font-bold text-white uppercase tracking-tighter hover:bg-secondary transition-all duration-300">
                   {{ customer.first_name | slice: 0 -}}
                   {{- customer.last_name | slice: 0 }}
                 </div>
