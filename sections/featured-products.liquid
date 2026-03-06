@@ -19,6 +19,7 @@
           </a>
         {% endif %}
       </div>
+
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
         {% for product in collections[section.settings.collection].products limit: 4 %}
           <div class="group relative flex flex-col h-full" id="prod-{{ product.id }}">
@@ -32,12 +33,18 @@
               <div class="absolute top-4 right-2 md:right-4 z-40">
                 <button
                   type="button"
-                  class="wishlist-trigger-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none"
-                  style="background: rgba(255, 255, 255, 0.7);"
+                  class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none bg-white/70 backdrop-blur-sm"
                   data-product-id="{{ product.id }}"
-                  onclick="console.log('Featured wishlist clicked'); LuviaWishlist.toggle('{{ product.id }}')"
+                  onclick="LuviaWishlist.toggle('{{ product.id }}')"
                 >
-                  {% render 'icon-heart' %}
+                  <svg
+                    class="w-5 h-5 text-primary transition-all duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                  </svg>
                 </button>
               </div>
 
@@ -65,7 +72,6 @@
                 <button
                   type="button"
                   onclick="handleAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-                  aria-label="Add {{ product.title }} to cart"
                   class="w-full bg-primary text-white py-4 text-[13px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
                 >
                   {% if product.available -%}
@@ -98,60 +104,21 @@
   </section>
 </div>
 
-<style>
-  .wishlist-trigger-btn.active svg {
-    fill: var(--color-primary) !important;
-    stroke: var(--color-primary) !important;
-  }
-</style>
-
 <script>
+  // Sayfa yüklendiğinde hafızadaki ürünleri boya
   document.addEventListener('DOMContentLoaded', () => {
-    const wishlistData = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
-
-    const updateButtons = () => {
-      document.querySelectorAll('.wishlist-trigger-btn').forEach((btn) => {
-        if (wishlistData.includes(btn.dataset.productId)) {
-          btn.classList.add('active');
-        }
-      });
-    };
-    updateButtons();
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.wishlist-trigger-btn');
-      if (!btn) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      const productId = btn.dataset.productId;
-      const wishlistData = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
-      const index = wishlistData.indexOf(productId);
-
-      if (index > -1) {
-        wishlistData.splice(index, 1);
-        btn.classList.remove('active');
-      } else {
-        wishlistData.push(productId);
-        btn.classList.add('active');
-      }
-
-      localStorage.setItem('luvia_wishlist_data', JSON.stringify(wishlistData));
-
-      const toast = document.createElement('div');
-      toast.className =
-        'fixed bottom-5 right-5 bg-primary text-white px-6 py-3 rounded-full shadow-2xl z-[9999] animate-bounce text-[13px] uppercase tracking-widest';
-      toast.innerText = index > -1 ? '{{ 'general.removed_from_favorites' | t }}' : '{{ 'general.added_to_favorites' | t }}';
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 3000);
-    });
+    if (window.LuviaWishlist && typeof window.LuviaWishlist.initIcons === 'function') {
+      window.LuviaWishlist.initIcons();
+    }
   });
 
+  // AJAX Sepete Ekleme Fonksiyonu
   function handleAddToCart(e, variantId) {
     const btn = e.currentTarget;
+    const originalText = btn.innerText;
     btn.innerText = '...';
 
-    fetch('/cart/add.js?t=' + Date.now(), {
+    fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: variantId, quantity: 1 }),
@@ -159,34 +126,18 @@
       .then((res) => res.json())
       .then((cartData) => {
         btn.innerText = 'ADDED';
-        showToast('Product added to cart!', 'info');
-        if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
+        if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
 
-        document.dispatchEvent(new CustomEvent('cart:updated', {
-          detail: { cart: cartData },
-          bubbles: true
-        }));
-
+        document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: cartData }, bubbles: true }));
         setTimeout(() => {
-          btn.innerText = '{{ "products.product.add_to_cart" | t }}';
+          btn.innerText = originalText;
         }, 2000);
       })
       .catch(() => {
         btn.innerText = 'ERROR';
+        setTimeout(() => {
+          btn.innerText = originalText;
+        }, 2000);
       });
   }
 </script>
-
-{% schema %}
-{
-  "name": "Featured Products",
-  "settings": [
-    { "type": "collection", "id": "collection", "label": "Collection" },
-    { "type": "text", "id": "section_title", "label": "Title" },
-    { "type": "text", "id": "section_subtitle", "label": "Subtitle" },
-    { "type": "text", "id": "button_text", "label": "Button Text" },
-    { "type": "url", "id": "button_url", "label": "Button URL" }
-  ],
-  "presets": [{ "name": "Featured Products" }]
-}
-{% endschema %}
