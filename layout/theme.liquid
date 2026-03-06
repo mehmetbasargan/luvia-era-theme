@@ -150,32 +150,38 @@
           localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
           
           // Update all wishlist buttons
-          document.querySelectorAll('.wishlist-trigger-btn, .custom-wishlist-btn, [id*="wishlist-btn"]').forEach(btn => {
-            const btnProductId = btn.dataset.productId || btn.dataset.id || btn.id.replace('wishlist-btn-', '');
-            if (wishlist.includes(btnProductId.toString())) {
-              btn.classList.add('active', 'bg-primary', 'text-white');
-              btn.classList.remove('border', 'text-primary');
-              const btnText = btn.querySelector('[id*="wishlist-text"]');
-              if (btnText) btnText.textContent = 'Remove from Wishlist';
-              // Update SVG fill for active state
-              const svg = btn.querySelector('svg');
-              if (svg) {
-                svg.style.fill = 'currentColor';
-                svg.classList.add('text-white');
+          const updateAllWishlistButtons = function() {
+            document.querySelectorAll('.wishlist-trigger-btn, .custom-wishlist-btn, [id*="wishlist-btn"]').forEach(btn => {
+              const btnProductId = btn.dataset.productId || btn.dataset.id || btn.id.replace('wishlist-btn-', '');
+              console.log('Updating button:', btnProductId, 'in wishlist:', wishlist.includes(btnProductId.toString()));
+              
+              if (wishlist.includes(btnProductId.toString())) {
+                btn.classList.add('active', 'bg-primary', 'text-white');
+                btn.classList.remove('border', 'text-primary');
+                const btnText = btn.querySelector('[id*="wishlist-text"]');
+                if (btnText) btnText.textContent = 'Remove from Wishlist';
+                // Update SVG fill for active state
+                const svg = btn.querySelector('svg');
+                if (svg) {
+                  svg.style.fill = 'currentColor';
+                  svg.classList.add('text-white');
+                }
+              } else {
+                btn.classList.remove('active', 'bg-primary', 'text-white');
+                btn.classList.add('border', 'text-primary');
+                const btnText = btn.querySelector('[id*="wishlist-text"]');
+                if (btnText) btnText.textContent = 'Add to Wishlist';
+                // Update SVG fill for inactive state
+                const svg = btn.querySelector('svg');
+                if (svg) {
+                  svg.style.fill = 'none';
+                  svg.classList.remove('text-white');
+                }
               }
-            } else {
-              btn.classList.remove('active', 'bg-primary', 'text-white');
-              btn.classList.add('border', 'text-primary');
-              const btnText = btn.querySelector('[id*="wishlist-text"]');
-              if (btnText) btnText.textContent = 'Add to Wishlist';
-              // Update SVG fill for inactive state
-              const svg = btn.querySelector('svg');
-              if (svg) {
-                svg.style.fill = 'none';
-                svg.classList.remove('text-white');
-              }
-            }
-          });
+            });
+          };
+          
+          updateAllWishlistButtons();
           
           // Dispatch event for other components
           window.dispatchEvent(new CustomEvent('wishlist:updated', {
@@ -207,6 +213,13 @@
       window.toggleWishlist = function(productId, button) {
         window.LuviaWishlist.toggle(productId);
       };
+  
+      // Listen for wishlist updates from other components
+      document.addEventListener('wishlist:updated', function() {
+        setTimeout(() => {
+          updateAllWishlistButtons();
+        }, 100);
+      });
     </script>
 
     <main role="main" itemprop="mainContentOfPage">
