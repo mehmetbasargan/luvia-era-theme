@@ -19,12 +19,11 @@
     {%- assign body_font = settings.body_font -%}
 
     <style>
-          {{ heading_font | font_face: font_display: 'swap' }}
-          {{ body_font | font_face: font_display: 'swap' }}
-
+      {{ heading_font | font_face: font_display: 'swap' }}
+      {{ body_font | font_face: font_display: 'swap' }}
 
       :root {
-        /* '| strip' filtresi gereksiz boşlukları siler, senkronizasyonu güçlendirir */
+        /* Renk Değişkenleri */
         --color-primary: {{ settings.primary_color | strip }};
         --color-secondary: {{ settings.secondary_color | strip }};
         --color-custombg: {{ settings.custom_bg_color | strip }};
@@ -32,23 +31,27 @@
         --color-bgtransparent: {{ settings.bgtransparent_color | strip }};
         --color-white: #ffffff;
         --color-black: #000000;
+
+        /* Font Değişkenleri - BURASI EKSİKTİ */
+        --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+        --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
       }
 
+      body {
+        background-color: var(--color-white);
+        color: var(--color-primary);
+        font-family: var(--font-body); /* Artık yukarıdaki değişkeni okuyabilir */
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        display: block !important;
+        opacity: 1 !important;
+      }
 
-          body {
-            background-color: var(--color-white);
-            color: var(--color-primary);
-            font-family: var(--font-body);
-            margin: 0;
-            -webkit-font-smoothing: antialiased;
-            display: block !important;
-            opacity: 1 !important;
-          }
-
-          h1, h2, h3, h4, h5, h6, .font-heading {
-            font-family: var(--font-heading);
-          }
+      h1, h2, h3, h4, h5, h6, .font-heading {
+        font-family: var(--font-heading); /* Artık yukarıdaki değişkeni okuyabilir */
+      }
     </style>
+
     <div style="position: fixed; top: 0; left: 0; z-index: 9999; background: {{ settings.primary_color }}; color: white; padding: 10px;">
       GÜNCEL RENK KODU: {{ settings.primary_color }}
     </div>
