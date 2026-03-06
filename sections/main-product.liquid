@@ -159,6 +159,16 @@
                 {{ 'products.product.sold_out' | t }}
               {% endif %}
             </button>
+
+            <!-- Wishlist Button -->
+            <button
+              type="button"
+              id="wishlist-btn-{{ product.id }}"
+              onclick="toggleWishlist('{{ product.id }}')"
+              class="w-full border border-primary text-primary py-3 text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-primary hover:text-white transition-all"
+            >
+              <span id="wishlist-text-{{ product.id }}">Add to Wishlist</span>
+            </button>
           </div>
         {%- endform -%}
       </div>
@@ -285,23 +295,56 @@
       });
     }
 
-    const productForm = document.querySelector('form[action="/cart/add"]');
-    if (productForm) {
-      productForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        let formData = new FormData(productForm);
-        fetch('/cart/add.js', { method: 'POST', body: formData })
-          .then((response) => response.json())
+    // Add to cart functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const productForm = document.querySelector('form[action="/cart/add"]');
+      if (productForm) {
+        productForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const formData = new FormData(productForm);
+          const submitBtn = productForm.querySelector('button[type="submit"]');
+          
+          // Loading state
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Adding...';
+          }
+          
+          fetch('/cart/add.js', { 
+            method: 'POST', 
+            body: formData,
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
           .then(() => {
             openAndRefreshCart();
+            // Reset button state
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+            }
           })
-          .catch((error) => console.error('Sepet Hatası:', error));
-      });
-    }
-  });
+          .catch((error) => {
+            console.error('Sepet Hatası:', error);
+            // Reset button state on error
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+            }
+          });
+        });
+      }
+    });
 
-
-document.querySelectorAll('.variant-wrapper').forEach((wrapper, index) => {
+    // Variant change listeners
+    document.querySelectorAll('.variant-wrapper').forEach((wrapper, index) => {
   const labelSpan = document.getElementById(`option-value-${index + 1}`);
   const inputs = wrapper.querySelectorAll('input[type="radio"]');
 
@@ -357,6 +400,50 @@ function updateVariantID() {
     window.history.replaceState({}, '', `?variant=${matchedVariant.id}`);
   }
 }
+
+  // Wishlist functionality
+    function toggleWishlist(productId) {
+      let wishlist = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+      const wishlistBtn = document.getElementById(`wishlist-btn-${productId}`);
+      const wishlistText = document.getElementById(`wishlist-text-${productId}`);
+      
+      if (wishlist.includes(productId.toString())) {
+        // Remove from wishlist
+        wishlist = wishlist.filter(id => id !== productId.toString());
+        wishlistText.textContent = 'Add to Wishlist';
+        wishlistBtn.classList.remove('bg-primary', 'text-white');
+        wishlistBtn.classList.add('border', 'text-primary');
+      } else {
+        // Add to wishlist
+        wishlist.push(productId.toString());
+        wishlistText.textContent = 'Remove from Wishlist';
+        wishlistBtn.classList.add('bg-primary', 'text-white');
+        wishlistBtn.classList.remove('border', 'text-primary');
+      }
+      
+      localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
+      
+      // Dispatch event for other components
+      window.dispatchEvent(new CustomEvent('wishlist:updated', {
+        detail: { productId, wishlist }
+      }));
+    }
+    
+    // Check if product is already in wishlist
+    function checkWishlistStatus(productId) {
+      const wishlist = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+      const wishlistBtn = document.getElementById(`wishlist-btn-${productId}`);
+      const wishlistText = document.getElementById(`wishlist-text-${productId}`);
+      
+      if (wishlist.includes(productId.toString())) {
+        wishlistText.textContent = 'Remove from Wishlist';
+        wishlistBtn.classList.add('bg-primary', 'text-white');
+        wishlistBtn.classList.remove('border', 'text-primary');
+      }
+    }
+    
+    // Initialize wishlist status
+    checkWishlistStatus('{{ product.id }}');
 
   function openAndRefreshCart() {
     fetch('/cart.js')
