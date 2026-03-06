@@ -253,21 +253,21 @@
             {% comment %} Gap biraz açıldı ki ikonlar nefes alsın {% endcomment %}
 
             {% comment %} Search {% endcomment %}
-            <div class="p-2 text-primary hover:text-secondary transition-colors">
+            <div class="lg:w-[30px] w-[20px] -2 text-primary hover:text-secondary transition-colors">
               <a href="{{ routes.search_url }}" class="block w-5 h-5 lg:w-6 lg:h-6">
                 {% render 'icon-search' %}
               </a>
             </div>
 
             {% comment %} Wishlist {% endcomment %}
-            <div class="p-2 text-primary hover:text-secondary transition-colors">
+            <div class="lg:w-[30px] w-[20px]  p-2 text-primary hover:text-secondary transition-colors">
               <a href="/pages/wishlist" class="block w-5 h-5 lg:w-6 lg:h-6">
                 {% render 'icon-wishlist' %}
               </a>
             </div>
 
             {% comment %} Cart {% endcomment %}
-            <div class="p-2 text-primary hover:text-secondary relative transition-colors">
+            <div class="lg:w-[30px] w-[20px] p-2 text-primary hover:text-secondary relative transition-colors">
               <a href="{{ routes.cart_url }}" class="block w-5 h-5 lg:w-6 lg:h-6">
                 {%- if cart.item_count > 0 -%}
                   <span class="absolute -top-1 -right-1 bg-secondary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full shadow-sm animate-bounce-short">
@@ -279,7 +279,7 @@
             </div>
 
             {% comment %} Account / Avatar sss {% endcomment %}
-            <div class="p-2">
+            <div class="lg:w-[30px] w-[20px] p-2">
               <a href="{{ routes.account_url }}" class="relative inline-flex items-center justify-center group">
                 {% if customer %}
                   {% comment %} Giriş Yapmışsa: Harf Avatar {% endcomment %}
