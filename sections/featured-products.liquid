@@ -54,13 +54,18 @@
                   src="{{ product.featured_image | image_url: width: 600 }}"
                   class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
                   alt="{{ product.title }}"
-                  loading="lazy"
+                  loading="eager"
+                  height=""
+                  width=""
                 >
                 {% if product.images[1] %}
                   <img
                     src="{{ product.images[1] | image_url: width: 600 }}"
                     class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                     alt="{{ product.title }}"
+                    loading="eager"
+                    height=""
+                    width=""
                   >
                 {% endif %}
               </a>
