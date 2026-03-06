@@ -2740,10 +2740,27 @@ blockquote{
 /* Login/Register Container */
 
 .login-container{
-  margin-left: auto;
+  width: 100%;
   margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+@media (min-width: 100%){
+  .login-container{
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1280px){
+  .login-container{
+    max-width: 1280px;
+  }
+}
+
+.login-container{
   margin-top: 4rem;
-  max-width: 28rem;
   border-radius: 0.75rem;
   background-color: var(--color-white);
   padding: 2rem;
@@ -2760,8 +2777,7 @@ blockquote{
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity, 1));
+  color: var(--color-primary);
 }
 
 /* Input alanları */
@@ -2771,8 +2787,7 @@ blockquote{
   width: 100%;
   border-radius: 0.375rem;
   border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));
+  border-color: var(--color-line);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 0.5rem;
@@ -2828,13 +2843,11 @@ blockquote{
   justify-content: space-between;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+  color: var(--color-primary);
 }
 
 .login-container .footer-links a{
-  --tw-text-opacity: 1;
-  color: rgb(180 83 9 / var(--tw-text-opacity, 1));
+  color: var(--color-primary);
 }
 
 .login-container .footer-links a:hover{
