@@ -4,37 +4,53 @@
   </h4>
 
   <script>
-    // Wishlist functionality
+    // Wishlist ana fonksiyonları
     window.LuviaWishlist = {
       toggle: function (productId) {
-        // Get current wishlist from localStorage
         let wishlist = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
 
-        // Remove product from wishlist
+        // Ürünü listeden çıkar
         wishlist = wishlist.filter((id) => id !== productId.toString());
-
-        // Save to localStorage
         localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
 
-        // Update UI
+        // 1. UI'dan elemanı kaldır
         const itemElement = document.getElementById(`wish-item-${productId}`);
         if (itemElement) {
-          itemElement.remove();
+          itemElement.style.opacity = '0';
+          setTimeout(() => {
+            itemElement.remove();
+            this.checkEmpty(); // Liste boşaldı mı kontrol et
+          }, 300);
         }
 
-        // Dispatch event
+        // 2. Global event fırlat (Header'daki sayaçlar vb. için)
         window.dispatchEvent(
           new CustomEvent('wishlist:updated', {
             detail: { productId, wishlist },
           })
         );
+      },
 
-        console.log(`Product ${productId} removed from wishlist`);
+      checkEmpty: function () {
+        const container = document.getElementById('wishlist-container');
+        const emptyMessage = document.getElementById('wishlist-empty');
+        const wishlistIds = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+
+        if (wishlistIds.length === 0) {
+          if (container) container.classList.add('hidden');
+          if (emptyMessage) emptyMessage.classList.remove('hidden');
+        } else {
+          if (container) container.classList.remove('hidden');
+          if (emptyMessage) emptyMessage.classList.add('hidden');
+        }
       },
     };
   </script>
 
-  <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[200px]"></div>
+  <div
+    id="wishlist-container"
+    class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[200px] transition-all duration-500"
+  ></div>
 
   <div id="wishlist-empty" class="hidden text-center py-20">
     <p class="text-primary text-lg">{{ 'wishlist.empty' | t }}</p>
@@ -50,24 +66,12 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('wishlist-container');
-    const emptyMessage = document.getElementById('wishlist-empty');
 
-    const checkEmpty = () => {
-      const wishlistIds = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
-      if (wishlistIds.length === 0) {
-        if (container) container.classList.add('hidden');
-        if (emptyMessage) emptyMessage.classList.remove('hidden');
-      } else {
-        if (container) container.classList.remove('hidden');
-        if (emptyMessage) emptyMessage.classList.add('hidden');
-      }
-    };
+    // İlk kontrol
+    window.LuviaWishlist.checkEmpty();
 
     const initialIds = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
-    if (initialIds.length === 0) {
-      checkEmpty();
-      return;
-    }
+    if (initialIds.length === 0) return;
 
     const formatPrice = (cents) => {
       return (cents / 100).toLocaleString('{{ shop.locale }}', {
@@ -76,6 +80,7 @@
       });
     };
 
+    // Arama sorgusu oluştur (Limit artırıldı)
     const searchQuery = initialIds.map((id) => `id:${id}`).join(' OR ');
 
     fetch(`/search/suggest.json?q=${encodeURIComponent(searchQuery)}&resources[type]=product&resources[limit]=20`)
@@ -83,10 +88,11 @@
       .then(async (data) => {
         const initialProducts = data.resources.results.products;
         if (!initialProducts || initialProducts.length === 0) {
-          checkEmpty();
+          window.LuviaWishlist.checkEmpty();
           return;
         }
 
+        // Ürün detaylarını çek
         const fullProductPromises = initialProducts.map((p) => fetch(`/products/${p.handle}.js`).then((r) => r.json()));
         const products = await Promise.all(fullProductPromises);
 
@@ -96,31 +102,24 @@
             const firstVariantId = product.variants[0].id;
 
             return `
-            <div class="group flex flex-col h-full bg-white overflow-hidden relative" id="wish-item-${product.id}">
-              <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
-                <div class="absolute top-3 inset-x-3 z-10 flex justify-between items-start">
-                  <div class="flex-1">
-                    ${
-                      isOnSale
-                        ? `<span class="inline-block bg-secondary text-white font-light text-[11px] px-2 py-1 tracking-widest uppercase shadow-md pointer-events-auto animate-fadeIn">{{ 'products.product.on_sale' | t }}</span>`
-                        : ''
-                    }
-                  </div>
-                  <button type="button" 
-                          onclick="LuviaWishlist.toggle('${product.id}'); document.getElementById('wish-item-${
+            <div class="group flex flex-col h-full bg-white overflow-hidden relative transition-all duration-300" id="wish-item-${
               product.id
-            }').remove(); window.dispatchEvent(new CustomEvent('wishlist:updated'));"
-                          class="flex items-center justify-center w-8 h-8 bg-[#ffffffc2] backdrop-blur-sm rounded-full shadow-sm hover:bg-secondary hover:text-white transition-all duration-300 ml-auto pointer-events-auto z-10">
+            }">
+              <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
+                <div class="absolute top-3 inset-x-3 z-10 flex justify-end items-start">
+                  <button type="button" 
+                          onclick="LuviaWishlist.toggle('${product.id}')"
+                          class="flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-red-500 hover:text-white transition-all duration-300 pointer-events-auto">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                   </button>
                 </div>
                 <a href="${product.url}" class="block h-full w-full">
                   <img src="${product.featured_image}" alt="${
               product.title
-            }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="eager">
+            }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 </a>
                 <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
-                  <button type="button" onclick="handleWishlistAddToCart(event, '${firstVariantId}')" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer" aria-label="Add to cart">
+                  <button type="button" onclick="handleWishlistAddToCart(event, '${firstVariantId}')" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
                     {{ 'products.product.add_to_cart' | t }}
                   </button>
                 </div>
@@ -145,95 +144,32 @@
             </div>`;
           })
           .join('');
-
-        window.addEventListener('wishlist:updated', () => {
-          checkEmpty();
-        });
-
-        window.handleWishlistAddToCart = function (e, variantId) {
-          const btn = e.currentTarget;
-          btn.innerText = '...';
-
-          fetch('/cart/add.js?t=' + Date.now(), {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: variantId, quantity: 1 }),
-          })
-            .then((res) => res.json())
-            .then((cartData) => {
-              btn.innerText = 'ADDED';
-              showToast('Product added to cart!', 'info');
-
-              document.dispatchEvent(
-                new CustomEvent('cart:updated', {
-                  detail: { cart: cartData },
-                  bubbles: true,
-                })
-              );
-
-              if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
-
-              setTimeout(() => {
-                btn.innerText = '{{ "products.product.add_to_cart" | t }}';
-              }, 2000);
-            })
-            .catch(() => {
-              btn.innerText = 'ERROR';
-            });
-        };
-
-        container.querySelectorAll('.custom-ajax-form').forEach((form) => {
-          form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitBtn = form.querySelector('button');
-            const originalText = submitBtn.innerText;
-            submitBtn.innerText = '...';
-
-            try {
-              const response = await fetch('/cart/add.js?t=' + Date.now(), {
-                method: 'POST',
-                body: new FormData(form),
-              });
-
-              if (response.ok) {
-                const cartData = await response.json();
-
-                document.dispatchEvent(
-                  new CustomEvent('cart:updated', {
-                    detail: { cart: cartData },
-                    bubbles: true,
-                  })
-                );
-
-                const drawer = document.querySelector('cart-drawer') || document.querySelector('.cart-drawer');
-                if (drawer) {
-                  fetch(`${window.location.pathname}?sections=cart-drawer`)
-                    .then((r) => r.json())
-                    .then((html) => {
-                      const newContent = new DOMParser()
-                        .parseFromString(html['cart-drawer'], 'text/html')
-                        .getElementById('CartDrawer');
-                      const currentDrawer = document.getElementById('CartDrawer');
-                      if (newContent && currentDrawer) currentDrawer.innerHTML = newContent.innerHTML;
-                      drawer.classList.add('active', 'is-open');
-                      drawer.setAttribute('open', '');
-                    });
-                }
-
-                submitBtn.innerText = 'EKLEDİ!';
-                setTimeout(() => {
-                  submitBtn.innerText = originalText;
-                }, 2000);
-              }
-            } catch (error) {
-              window.location.href = '/cart';
-            }
-          });
-        });
-      })
-      .catch((err) => {
-        console.error('Wishlist Error:', err);
-        checkEmpty();
       });
+
+    // Sayfa içindeki Add to Cart fonksiyonu
+    window.handleWishlistAddToCart = function (e, variantId) {
+      const btn = e.currentTarget;
+      const originalText = btn.innerText;
+      btn.innerText = '...';
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 }),
+      })
+        .then((res) => res.json())
+        .then((cartData) => {
+          btn.innerText = 'ADDED';
+          // Global sepeti güncelle (openAndRefreshCart senin ana fonksiyonsa onu tetikler)
+          if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
+
+          setTimeout(() => {
+            btn.innerText = originalText;
+          }, 2000);
+        })
+        .catch(() => {
+          btn.innerText = 'ERROR';
+        });
+    };
   });
 </script>
