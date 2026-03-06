@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      {% comment %} main images ffffdddd {% endcomment %}
+      {% comment %} main images {% endcomment %}
       <div class="grow h-full overflow-hidden bg-white">
         <div class="swiper product-main h-full">
           <div class="swiper-wrapper h-full">
@@ -444,163 +444,122 @@ function updateVariantID() {
       
       if (wishlist.includes(productId.toString())) {
         wishlistText.textContent = 'Remove from Wishlist';
-        wishlistBtn.classList.add('bg-primary', 'text-white');
-        wishlistBtn.classList.remove('border', 'text-primary');
+    // Initialize wishlist status
+    checkWishlistStatus('{{ product.id }}');
+    
+    // Simple variant change
+    document.querySelectorAll('.variant-wrapper').forEach((wrapper, index) => {
+      const labelSpan = document.getElementById(`option-value-${index + 1}`);
+      const inputs = wrapper.querySelectorAll('input[type="radio"]');
+      
+      inputs.forEach(input => {
+        input.addEventListener('change', function(e) {
+          labelSpan.textContent = e.target.value;
+          updateVariantPrice();
+        });
+      });
+    });
+    
+    // Simple variant price update
+    function updateVariantPrice() {
+      const selectedOptions = Array.from(document.querySelectorAll('input[type="radio"]:checked')).map(input => input.value);
+      const variantData = {{ product.variants | json }};
+      
+      const matchedVariant = variantData.find(variant => {
+        return variant.options.every((option, index) => option === selectedOptions[index]);
+      });
+      
+      if (matchedVariant) {
+        // Update hidden input
+        const variantInput = document.querySelector('input[name="id"]');
+        if (variantInput) {
+          variantInput.value = matchedVariant.id;
+        }
+        
+        // Update price display
+        const priceDisplay = document.querySelector('.product-price-display');
+        if (priceDisplay) {
+          priceDisplay.innerText = (matchedVariant.price / 100).toFixed(2) + ' {{ cart.currency.symbol }}';
+        }
+        
+        // Update compare price
+        const compareDisplay = document.querySelector('.product-compare-price');
+        if (compareDisplay && matchedVariant.compare_at_price > matchedVariant.price) {
+          compareDisplay.innerText = (matchedVariant.compare_at_price / 100).toFixed(2) + ' {{ cart.currency.symbol }}';
+          compareDisplay.classList.remove('hidden');
+        } else if (compareDisplay) {
+          compareDisplay.classList.add('hidden');
+        }
+        
+        // Update button state
+        const submitBtn = document.querySelector('button[onclick*="handleAddToCartSubmit"]');
+        if (submitBtn) {
+          if (matchedVariant.available) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+          } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            submitBtn.innerText = "{{ 'products.product.sold_out' | t }}";
+          }
+        }
+        
+        // Update URL without page refresh
+        const url = new URL(window.location);
+        url.searchParams.set('variant', matchedVariant.id);
+        window.history.replaceState({}, '', url.toString());
       }
     }
     
-    // Initialize wishlist status
-    checkWishlistStatus('{{ product.id }}');
-
-    // Handle Add to Cart Submit (without form)
+    // Simple add to cart
     function handleAddToCartSubmit(buttonElement) {
-      const variantId = document.getElementById('variant-id-input').value;
+      const variantId = document.querySelector('input[name="id"]').value;
       const submitBtn = buttonElement;
       
       if (!variantId) {
-        console.error('No variant ID found');
+        showToast('Please select a variant', 'error');
         return;
       }
       
       // Loading state
       submitBtn.disabled = true;
-      const originalText = submitBtn.innerText;
       submitBtn.innerText = 'Adding...';
       
-      fetch('/cart/add.js?t=' + Date.now(), {
+      fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: 1 }),
+        body: JSON.stringify({ id: variantId, quantity: 1 })
       })
-        .then((res) => res.json())
-        .then((cartData) => {
-          submitBtn.innerText = 'ADDED';
-          console.log('Product added to cart:', cartData);
-          
-          // Dispatch events for other components
-          document.dispatchEvent(new CustomEvent('cart:updated', {
-            detail: { cart: cartData }
-          }));
-          document.dispatchEvent(new CustomEvent('product:added', {
-            detail: { product: cartData }
-          }));
-          
-          openAndRefreshCart();
-          showToast('Product added to cart!', 'success');
-          
-          // Reset button after delay
-          setTimeout(() => {
-            submitBtn.innerText = originalText;
-            submitBtn.disabled = false;
-          }, 2000);
-        })
-        .catch((error) => {
-          console.error('Add to cart error:', error);
-          btn.innerText = 'ERROR';
-          btn.classList.add('bg-red-500', 'text-white');
-          
-          // Reset button after delay
-          setTimeout(() => {
-            btn.innerText = originalText;
-            btn.disabled = false;
-            btn.classList.remove('bg-red-500', 'text-white');
-          }, 2000);
-        });
-    }
-
-  function openAndRefreshCart() {
-    console.log('Opening cart drawer...');
-    fetch('/cart.js')
-      .then((res) => res.json())
-      .then((cart) => {
-        console.log('Cart data:', cart);
-        const itemsContainer = document.getElementById('cart-drawer-items');
-        const totalPriceContainer = document.getElementById('cart-total-price');
-        const drawer = document.getElementById('cart-drawer');
-        const overlay = document.getElementById('cart-drawer-overlay');
-        const content = document.getElementById('cart-drawer-content');
+      .then(response => response.json())
+      .then(data => {
+        console.log('Product added to cart:', data);
+        showToast('Product added to cart!', 'success');
         
-        console.log('Cart drawer elements:', {
-          drawer: !!drawer,
-          overlay: !!overlay,
-          content: !!content,
-          itemsContainer: !!itemsContainer,
-          totalPriceContainer: !!totalPriceContainer,
-          drawerElement: drawer,
-          overlayElement: overlay,
-          contentElement: content
+        // Update cart count
+        const cartBubbles = document.querySelectorAll('.cart-count-bubble');
+        cartBubbles.forEach(bubble => {
+          const count = data.items ? data.items.length : 0;
+          bubble.innerText = count;
+          if (count > 0) {
+            bubble.classList.remove('hidden');
+          } else {
+            bubble.classList.add('hidden');
+          }
         });
         
-        if (!drawer || !overlay || !content) {
-          console.error('Cart drawer elements not found');
-          return;
-        }
-
-        if (cart.items.length > 0) {
-          itemsContainer.innerHTML = cart.items
-            .map(
-              (item, index) => `
-                <div class="flex gap-4 border-b border-gray-50 pb-4">
-                    <img src="${item.image}" alt="${item.product_title}" class="w-20 h-24 object-cover">
-                    <div class="flex-1">
-                      <div class="flex justify-between">
-                        <h4 class="text-[10px] uppercase tracking-widest text-primary">${item.product_title}</h4>
-                        <button onclick="removeCartItem(${
-                          index + 1
-                        })" class="text-[9px] text-gray-400 hover:text-black uppercase underline" aria-label="Remove item from cart">${ "{{ 'cart.remove' | t }}" }</button>
-                      </div>
-                      <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
-                      <p class="text-xs mt-2 font-medium">${(item.price / 100).toFixed(2)} {{ cart.currency.symbol }}</p>
-                    </div>
-                </div>
-            `
-            )
-            .join('');
-        } else {
-          itemsContainer.innerHTML =
-            '<p class="text-[10px] uppercase tracking-widest text-center mt-10 text-gray-400">${ "{{ 'products.product.empty_cart' | t }}" }</p>';
-        }
-
-        totalPriceContainer.innerText = (cart.total_price / 100).toFixed(2) + ' ' + cart.currency.symbol;
-
-        const drawer = document.getElementById('cart-drawer');
-        const overlay = document.getElementById('cart-drawer-overlay');
-        const content = document.getElementById('cart-drawer-content');
-        if (drawer && overlay && content) {
-          drawer.classList.remove('invisible');
-          setTimeout(() => {
-            overlay.classList.replace('opacity-0', 'opacity-100');
-            content.classList.replace('translate-x-full', 'translate-x-0');
-          }, 10);
-        } else {
-          console.error('Cart drawer elements not found for opening');
-        }
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+      })
+      .catch(error => {
+        console.error('Add to cart error:', error);
+        submitBtn.disabled = false;
+        submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+        showToast('Failed to add to cart', 'error');
       });
-  }
-
-  function removeCartItem(line) {
-    fetch('/cart/change.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ line: line, quantity: 0 }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        openAndRefreshCart(); 
-      })
-      .catch((err) => console.error('Silme hatası:', err));
-  }
-
-  function closeCartDrawer() {
-    const drawer = document.getElementById('cart-drawer');
-    const overlay = document.getElementById('cart-drawer-overlay');
-    const content = document.getElementById('cart-drawer-content');
-    overlay.classList.replace('opacity-100', 'opacity-0');
-    content.classList.replace('translate-x-0', 'translate-x-full');
-    setTimeout(() => {
-      drawer.classList.add('invisible');
-    }, 500);
-  }
+    }
+  });
 </script>
 
 {% schema %}
