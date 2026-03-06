@@ -317,13 +317,9 @@
               'X-Requested-With': 'XMLHttpRequest'
             }
           })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(() => {
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Product added to cart:', data);
             openAndRefreshCart();
             // Reset button state
             if (submitBtn) {
@@ -333,10 +329,14 @@
           })
           .catch((error) => {
             console.error('Sepet Hatası:', error);
-            // Reset button state on error
+            // Show error message and reset button
             if (submitBtn) {
               submitBtn.disabled = false;
               submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+              submitBtn.classList.add('bg-red-500');
+              setTimeout(() => {
+                submitBtn.classList.remove('bg-red-500');
+              }, 2000);
             }
           });
         });
@@ -446,14 +446,24 @@ function updateVariantID() {
     checkWishlistStatus('{{ product.id }}');
 
   function openAndRefreshCart() {
+    console.log('Opening cart drawer...');
     fetch('/cart.js')
       .then((res) => res.json())
       .then((cart) => {
+        console.log('Cart data:', cart);
         const itemsContainer = document.getElementById('cart-drawer-items');
         const totalPriceContainer = document.getElementById('cart-total-price');
         const drawer = document.getElementById('cart-drawer');
         const overlay = document.getElementById('cart-drawer-overlay');
         const content = document.getElementById('cart-drawer-content');
+        
+        console.log('Cart drawer elements:', {
+          drawer: !!drawer,
+          overlay: !!overlay,
+          content: !!content,
+          itemsContainer: !!itemsContainer,
+          totalPriceContainer: !!totalPriceContainer
+        });
         
         if (!drawer || !overlay || !content) {
           console.error('Cart drawer elements not found');
@@ -490,11 +500,15 @@ function updateVariantID() {
         const drawer = document.getElementById('cart-drawer');
         const overlay = document.getElementById('cart-drawer-overlay');
         const content = document.getElementById('cart-drawer-content');
-        drawer.classList.remove('invisible');
-        setTimeout(() => {
-          overlay.classList.replace('opacity-0', 'opacity-100');
-          content.classList.replace('translate-x-full', 'translate-x-0');
-        }, 10);
+        if (drawer && overlay && content) {
+          drawer.classList.remove('invisible');
+          setTimeout(() => {
+            overlay.classList.replace('opacity-0', 'opacity-100');
+            content.classList.replace('translate-x-full', 'translate-x-0');
+          }, 10);
+        } else {
+          console.error('Cart drawer elements not found for opening');
+        }
       });
   }
 
