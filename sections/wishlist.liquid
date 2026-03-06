@@ -3,6 +3,37 @@
     {{ 'wishlist.title' | t }}
   </h4>
 
+  <script>
+    // Wishlist functionality
+    window.LuviaWishlist = {
+      toggle: function (productId) {
+        // Get current wishlist from localStorage
+        let wishlist = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+
+        // Remove product from wishlist
+        wishlist = wishlist.filter((id) => id !== productId.toString());
+
+        // Save to localStorage
+        localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
+
+        // Update UI
+        const itemElement = document.getElementById(`wish-item-${productId}`);
+        if (itemElement) {
+          itemElement.remove();
+        }
+
+        // Dispatch event
+        window.dispatchEvent(
+          new CustomEvent('wishlist:updated', {
+            detail: { productId, wishlist },
+          })
+        );
+
+        console.log(`Product ${productId} removed from wishlist`);
+      },
+    };
+  </script>
+
   <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[200px]"></div>
 
   <div id="wishlist-empty" class="hidden text-center py-20">
