@@ -123,12 +123,12 @@
 
                     {%- if option.name == 'Renk' or option.name == 'Color' -%}
                       <span
-                        class="block w-8 h-8 rounded-full border border-line ring-offset-2 ring-black peer-checked:ring-1 transition-all"
+                        class="block w-8 h-8 rounded-full border border-line ring-offset-2 ring-primary peer-checked:ring-1 transition-all"
                         style="background-color: {{ value | handle }};"
                       >
                       </span>
                     {%- else -%}
-                      <span class="min-w-[45px] h-[45px] flex items-center justify-center border border-line text-[14px] uppercase tracking-widest peer-checked:border-black peer-checked:bg-black peer-checked:text-white transition-all px-4">
+                      <span class="min-w-[45px] h-[45px] flex items-center justify-center border border-primary text-[14px] uppercase tracking-widest peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white transition-all px-4">
                         {{ value }}
                       </span>
                     {%- endif -%}
@@ -164,7 +164,7 @@
             <button
               type="button"
               id="wishlist-btn-{{ product.id }}"
-              onclick="toggleWishlist('{{ product.id }}')"
+              onclick="console.log('Wishlist button clicked'); window.LuviaWishlist.toggle('{{ product.id }}')"
               class="w-full border border-primary text-primary py-3 text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-primary hover:text-white transition-all"
             >
               <span id="wishlist-text-{{ product.id }}">Add to Wishlist</span>
@@ -364,6 +364,8 @@
       labelSpan.textContent = e.target.value;
       
       updateVariantID(); 
+      e.preventDefault();
+      e.stopPropagation();
     });
   });
 });

@@ -2629,6 +2629,10 @@ blockquote{
   --tw-ring-color: var(--color-black);
 }
 
+.ring-primary{
+  --tw-ring-color: var(--color-primary);
+}
+
 .ring-offset-2{
   --tw-ring-offset-width: 2px;
 }
@@ -3009,8 +3013,16 @@ blockquote{
   border-color: var(--color-black);
 }
 
+.peer:checked ~ .peer-checked\:border-primary{
+  border-color: var(--color-primary);
+}
+
 .peer:checked ~ .peer-checked\:bg-black{
   background-color: var(--color-black);
+}
+
+.peer:checked ~ .peer-checked\:bg-primary{
+  background-color: var(--color-primary);
 }
 
 .peer:checked ~ .peer-checked\:text-white{
