@@ -13,10 +13,10 @@
       "type": "main-page-header",
       "name": "Page Title (Hero)",
       "settings": {
-        "image": "shopify://shop_images/img1.jpg",
+        "image": "shopify://shop_images/pageheader4.jpg",
         "custom_title": "{{ product.title }}",
-        "hero_height": 60,
-        "overlay_opacity": 30
+        "hero_height": 40,
+        "overlay_opacity": 60
       }
     },
     "main": {
