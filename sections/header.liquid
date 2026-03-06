@@ -285,7 +285,7 @@
                   {% comment %} Giriş Yapmışsa: Harf Avatar {% endcomment %}
                   <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-bold uppercase tracking-tighter group-hover:bg-secondary transition-all duration-300 shadow-sm">
                     {{ customer.first_name | slice: 0 -}}
-                    {{- customer.last_name | slice: 0 }}
+                    {% comment %}  {{- customer.last_name | slice: 0 }} {% endcomment %}
                   </div>
                 {% else %}
                   {% comment %} Giriş Yapmamışsa: Standart İkon {% endcomment %}
