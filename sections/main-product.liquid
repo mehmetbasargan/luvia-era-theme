@@ -47,11 +47,14 @@
           {{ product.title }}
         </h3>
         <div class="mt-4 flex items-center gap-4">
-          <span class="text-[20px] font-medium" style="color: {{ settings.product_primary_color }};">
+          <span
+            class="product-price-display text-[20px] font-medium"
+            style="color: {{ settings.product_primary_color }};"
+          >
             {{- product.price | money -}}
           </span>
           {% if product.compare_at_price > product.price %}
-            <span class="text-gray-400 line-through">{{ product.compare_at_price | money }}</span>
+            <span class="product-compare-price text-gray-400 line-through">{{ product.compare_at_price | money }}</span>
           {% endif %}
         </div>
       </div>
@@ -320,7 +323,38 @@ function updateVariantID() {
   });
 
   if (matchedVariant) {
+    // 1. Gizli input ID'yi güncelle
     document.querySelector('input[name="id"]').value = matchedVariant.id;
+
+    // 2. Fiyatı güncelle
+    const priceDisplay = document.querySelector('.product-price-display');
+    if (priceDisplay) {
+      priceDisplay.innerText = (matchedVariant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    // 3. Compare at price güncelle
+    const compareDisplay = document.querySelector('.product-compare-price');
+    if (compareDisplay && matchedVariant.compare_at_price) {
+      compareDisplay.innerText = (matchedVariant.compare_at_price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      compareDisplay.classList.remove('hidden');
+    } else if (compareDisplay) {
+      compareDisplay.classList.add('hidden');
+    }
+
+    // 4. Buton ve Stok kontrolü
+    const btn = document.querySelector('button[type="submit"]');
+    if (matchedVariant.available) {
+      btn.disabled = false;
+      btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      btn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+    } else {
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+      btn.innerText = "{{ 'products.product.sold_out' | t }}";
+    }
+
+    // 5. URL'i güncelle
+    window.history.replaceState({}, '', `?variant=${matchedVariant.id}`);
   }
 }
 
@@ -330,6 +364,14 @@ function updateVariantID() {
       .then((cart) => {
         const itemsContainer = document.getElementById('cart-drawer-items');
         const totalPriceContainer = document.getElementById('cart-total-price');
+        const drawer = document.getElementById('cart-drawer');
+        const overlay = document.getElementById('cart-drawer-overlay');
+        const content = document.getElementById('cart-drawer-content');
+        
+        if (!drawer || !overlay || !content) {
+          console.error('Cart drawer elements not found');
+          return;
+        }
 
         if (cart.items.length > 0) {
           itemsContainer.innerHTML = cart.items
