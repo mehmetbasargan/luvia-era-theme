@@ -8,107 +8,92 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "collections_tpVVL9": {
-      "type": "collections",
-      "disabled": true,
-      "name": "t:general.collections_grid",
-      "settings": {
-        "grid_item_width": "collections--full",
-        "grid_gap": 10
-      }
-    },
-    "main_page_header_3JHRnY": {
-      "type": "main-page-header",
-      "name": "Page Header",
-      "settings": {
-        "image": "shopify://shop_images/pageheader2.jpg",
-        "custom_title": "Collectios",
-        "hero_height": 40,
-        "overlay_opacity": 60
-      }
-    },
-    "collection_list_JiHC3i": {
-      "type": "collection-list",
-      "blocks": {
-        "collection_eRLccp": {
-          "type": "collection",
-          "settings": {
-            "collection": "golden-hour-muse"
-          }
-        },
-        "collection_XhyYAm": {
-          "type": "collection",
-          "settings": {
-            "collection": "midnight-elegance"
-          }
-        },
-        "collection_UF96ed": {
-          "type": "collection",
-          "settings": {
-            "collection": "silk-grace"
-          }
-        },
-        "collection_nFK6L3": {
-          "type": "collection",
-          "settings": {
-            "collection": "the-minimalist-era"
-          }
-        }
-      },
-      "block_order": [
-        "collection_eRLccp",
-        "collection_XhyYAm",
-        "collection_UF96ed",
-        "collection_nFK6L3"
-      ],
-      "name": "Collection Cards",
-      "settings": {}
-    },
-    "about_gallery_Xe6f4p": {
-      "type": "about-gallery",
-      "blocks": {
-        "image_block_HmeCbk": {
-          "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/alpcem-portrait-4778337_1280_5970d338-dff6-4930-aea2-9d67087dfe85.jpg"
-          }
-        },
-        "image_block_PG9tTB": {
-          "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/alpcem-portrait-4917796_1280_1b998f3d-aaaf-4a05-96eb-5db1ffe1c4f3.jpg"
-          }
-        },
-        "image_block_DLWdLA": {
-          "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/alpcem-portrait-4644666_1280_88a6dade-d64f-4172-9e05-23b31bbbef21.jpg"
-          }
-        },
-        "image_block_TAAMD8": {
-          "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/alpcem-portrait-4927177_1280.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "image_block_HmeCbk",
-        "image_block_PG9tTB",
-        "image_block_DLWdLA",
-        "image_block_TAAMD8"
-      ],
-      "name": "About Gallery",
-      "settings": {
-        "title": "Curated Moments"
-      }
-    }
-  },
-  "order": [
-    "collections_tpVVL9",
-    "main_page_header_3JHRnY",
-    "collection_list_JiHC3i",
-    "about_gallery_Xe6f4p"
-  ]
+	"sections": {
+		"collections_tpVVL9": {
+			"type": "collections",
+			"disabled": false,
+			"name": "t:general.collections_grid",
+			"settings": {
+				"grid_item_width": "collections--full",
+				"grid_gap": 10
+			}
+		},
+		"main_page_header_3JHRnY": {
+			"type": "main-page-header",
+			"name": "Page Header",
+			"settings": {
+				"image": "shopify://shop_images/pageheader2.jpg",
+				"custom_title": "Collectios",
+				"hero_height": 40,
+				"overlay_opacity": 60
+			}
+		},
+		"collection_list_JiHC3i": {
+			"type": "collection-list",
+			"blocks": {
+				"collection_eRLccp": {
+					"type": "collection",
+					"settings": {
+						"collection": "golden-hour-muse"
+					}
+				},
+				"collection_XhyYAm": {
+					"type": "collection",
+					"settings": {
+						"collection": "midnight-elegance"
+					}
+				},
+				"collection_UF96ed": {
+					"type": "collection",
+					"settings": {
+						"collection": "silk-grace"
+					}
+				},
+				"collection_nFK6L3": {
+					"type": "collection",
+					"settings": {
+						"collection": "the-minimalist-era"
+					}
+				}
+			},
+			"block_order": ["collection_eRLccp", "collection_XhyYAm", "collection_UF96ed", "collection_nFK6L3"],
+			"name": "Collection Cards",
+			"settings": {}
+		},
+		"about_gallery_Xe6f4p": {
+			"type": "about-gallery",
+			"blocks": {
+				"image_block_HmeCbk": {
+					"type": "image_block",
+					"settings": {
+						"image": "shopify://shop_images/alpcem-portrait-4778337_1280_5970d338-dff6-4930-aea2-9d67087dfe85.jpg"
+					}
+				},
+				"image_block_PG9tTB": {
+					"type": "image_block",
+					"settings": {
+						"image": "shopify://shop_images/alpcem-portrait-4917796_1280_1b998f3d-aaaf-4a05-96eb-5db1ffe1c4f3.jpg"
+					}
+				},
+				"image_block_DLWdLA": {
+					"type": "image_block",
+					"settings": {
+						"image": "shopify://shop_images/alpcem-portrait-4644666_1280_88a6dade-d64f-4172-9e05-23b31bbbef21.jpg"
+					}
+				},
+				"image_block_TAAMD8": {
+					"type": "image_block",
+					"settings": {
+						"image": "shopify://shop_images/alpcem-portrait-4927177_1280.jpg"
+					}
+				}
+			},
+			"block_order": ["image_block_HmeCbk", "image_block_PG9tTB", "image_block_DLWdLA", "image_block_TAAMD8"],
+			"name": "About Gallery",
+			"settings": {
+				"title": "Curated Moments"
+			}
+		}
+	},
+	"order": ["collections_tpVVL9", "main_page_header_3JHRnY", "collection_list_JiHC3i", "about_gallery_Xe6f4p"]
 }

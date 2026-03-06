@@ -106,7 +106,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+    const wishlistData = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
 
     const updateButtons = () => {
       document.querySelectorAll('.wishlist-trigger-btn').forEach((btn) => {
@@ -124,7 +124,7 @@
       e.stopPropagation();
 
       const productId = btn.dataset.productId;
-      const wishlistData = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+      const wishlistData = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
       const index = wishlistData.indexOf(productId);
 
       if (index > -1) {

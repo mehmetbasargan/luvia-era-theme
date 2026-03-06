@@ -53,7 +53,7 @@
     const emptyMessage = document.getElementById('wishlist-empty');
 
     const checkEmpty = () => {
-      const wishlistIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+      const wishlistIds = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
       if (wishlistIds.length === 0) {
         if (container) container.classList.add('hidden');
         if (emptyMessage) emptyMessage.classList.remove('hidden');
@@ -63,7 +63,7 @@
       }
     };
 
-    const initialIds = JSON.parse(localStorage.getItem('luvia_wishlist_data') || '[]');
+    const initialIds = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
     if (initialIds.length === 0) {
       checkEmpty();
       return;

@@ -181,6 +181,8 @@
 
     const variants = JSON.parse(jsonElement.innerHTML);
 
+    const wishlistData = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+
     variantButtons.forEach((btn) => {
       btn.addEventListener('click', function () {
         const parent = this.closest('.flex') || this.parentElement;
