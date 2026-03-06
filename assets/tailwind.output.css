@@ -1320,6 +1320,11 @@ blockquote{
   height: 50px;
 }
 
+.h-fit{
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .max-h-\[80vh\]{
   max-height: 80vh;
 }

@@ -10,7 +10,7 @@
                 {{
                   media
                   | image_url: width: 200
-                  | image_tag: class: ' object-cover', alt: product.title, loading: 'eager'
+                  | image_tag: class: ' object-cover w-full h-full', alt: product.title, loading: 'eager'
                 }}
               </div>
             {% endfor %}
@@ -19,7 +19,7 @@
       </div>
 
       {% comment %} main images {% endcomment %}
-      <div class="grow h-full overflow-hidden bg-white">
+      <div class="grow h-full overflow-hidden bg-white relative">
         <div class="swiper product-main h-full">
           <div class="swiper-wrapper h-full">
             {% for media in product.media %}
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="product-info-column lg:w-2/5 space-y-8">
+    <div class="product-info-column lg:w-2/5 space-y-8 sticky top-28 h-fit">
       <div>
         <h3
           class="font-light tracking-tight uppercase"
@@ -66,36 +66,20 @@
         {{ product.description }}
       </div>
 
+      {% comment %} Trust Badges (Aynı Tasarım) {% endcomment %}
       <div class="product-trust-badges mt-8 pt-8 border-t border-line">
-        <div class="grid grid-cols-1 gap-4">
+        <div class="grid grid-cols-1 gap-4 text-primary">
           <div class="flex items-center gap-3">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
               <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span class="text-[12px] uppercase tracking-[0.15em] text-primary">
-              {{- 'general.ethically_sourced' | t -}}
-            </span>
+            <span class="text-[12px] uppercase tracking-[0.15em]">{{ 'general.ethically_sourced' | t }}</span>
           </div>
-
           <div class="flex items-center gap-3">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <rect x="1" y="3" width="15" height="13" />
-              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-              <circle cx="5.5" cy="18.5" r="2.5" />
-              <circle cx="18.5" cy="18.5" r="2.5" />
+              <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
             </svg>
-            <span class="text-[12px] uppercase tracking-[0.15em] text-primary">
-              {{ 'general.free_express_shipping' | t }}
-            </span>
-          </div>
-
-          <div class="flex items-center gap-3">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-            <span class="text-[12px] uppercase tracking-[0.15em] text-primary">
-              {{ 'general.secure_payment' | t }}
-            </span>
+            <span class="text-[12px] uppercase tracking-[0.15em]">{{ 'general.free_express_shipping' | t }}</span>
           </div>
         </div>
       </div>
@@ -103,7 +87,7 @@
       {%- unless product.has_only_default_variant -%}
         <div class="product-variants space-y-6 py-8 border-y border-line my-8">
           {%- for option in product.options_with_values -%}
-            <div class="variant-wrapper">
+            <div class="variant-wrapper" data-index="{{ forloop.index }}">
               <label class="text-[13px] uppercase tracking-[0.2em] text-primary mb-4 block">
                 {{ option.name }}:
                 <span id="option-value-{{ forloop.index }}" class="text-black font-medium">
@@ -123,13 +107,11 @@
                       {% endif %}
                       class="sr-only peer"
                     >
-
                     {%- if option.name == 'Renk' or option.name == 'Color' -%}
                       <span
                         class="block w-8 h-8 rounded-full border border-line ring-offset-2 ring-black peer-checked:ring-1 transition-all"
                         style="background-color: {{ value | handle }};"
-                      >
-                      </span>
+                      ></span>
                     {%- else -%}
                       <span class="min-w-[45px] h-[45px] flex items-center justify-center border border-line text-[14px] uppercase tracking-widest peer-checked:border-black peer-checked:bg-black peer-checked:text-white transition-all px-4">
                         {{ value }}
@@ -144,7 +126,7 @@
       {%- endunless -%}
 
       <div class="product-form-container mt-8">
-        {%- form 'product', product, id: 'product-form-installment' -%}
+        {%- form 'product', product, id: 'product-form-main' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
           <div class="flex flex-col gap-4">
@@ -162,27 +144,21 @@
                 {{ 'products.product.sold_out' | t }}
               {% endif %}
             </button>
+
+            {% comment %} Wishlist Butonu Genelde Buraya Uygulama Tarafından Eklenir {% endcomment %}
+            <div class="wishlist-anchor"></div>
           </div>
         {%- endform -%}
       </div>
 
       <div class="pt-8 border-t border-line space-y-4">
         <details class="group">
-          <summary class="flex justify-between items-center cursor-pointer list-none text-[14px] uppercase tracking-widest text-primary">
+          <summary class="flex justify-between items-center cursor-pointer list-none text-[14px] uppercase tracking-widest text-primary font-medium">
             {{ 'products.product.details_title' | t }}
             <span class="group-open:rotate-180 transition-transform">↓</span>
           </summary>
           <div class="pt-4 text-[14px] text-primary leading-6">
             {{ product.metafields.custom.product_details | newline_to_br }}
-          </div>
-        </details>
-        <details class="group">
-          <summary class="flex justify-between items-center cursor-pointer list-none text-[14px] uppercase tracking-widest text-primary">
-            {{ 'products.product.shipping_title' | t }}
-            <span class="group-open:rotate-180 transition-transform">↓</span>
-          </summary>
-          <div class="pt-4 text-[14px] text-primary leading-6">
-            {{ product.metafields.custom.shipping_returns | newline_to_br }}
           </div>
         </details>
       </div>
@@ -197,277 +173,86 @@
     margin-bottom: 10px;
     display: flex;
   }
-  .product-thumbs {
-    padding-right: 0px;
-  }
   .swiper-button-next,
   .swiper-button-prev {
     height: 50px !important;
     width: 50px !important;
-    background-color: color-mix(in srgb, var(--color-white), transparent 60%);
+    background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(4px);
     border-radius: 50%;
-    padding: 15px;
     color: var(--color-primary);
     z-index: 10;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
   }
-
   .swiper-button-next:hover,
   .swiper-button-prev:hover {
-    height: 50px !important;
-    width: 50px !important;
     background: var(--color-secondary);
-    border-radius: 50%;
-    padding: 15px;
-    color: var(--color-white);
-    z-index: 10;
+    color: white;
   }
-
-  .swiper-horizontal {
-    &.swiper-rtl .swiper-button-next,
-    &.swiper-rtl ~ .swiper-button-next,
-    & ~ .swiper-button-prev,
-    .swiper-button-prev {
-      left: 35px;
-      right: auto;
-    }
-  }
-
-  .swiper-horizontal {
-    &.swiper-rtl .swiper-button-next,
-    &.swiper-rtl ~ .swiper-button-next,
-    & ~ .swiper-button-prev,
-    .swiper-button-next {
-      right: 35px;
-      left: auto;
-    }
-  }
-
   #MainContent,
   .shopify-section {
     overflow: visible !important;
   }
-
-  @media screen and (min-width: 1024px) {
-    .container > .flex {
-      display: flex !important;
-      align-items: flex-start !important;
-      overflow: visible !important;
-    }
-
-    .product-info-column {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 100px;
-      height: fit-content !important;
-      z-index: 10;
-    }
-  }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (document.querySelector('.product-thumbs')) {
-      const thumbsSwiper = new Swiper('.product-thumbs', {
-        direction: 'vertical',
-        slidesPerView: 'auto',
-        loop: true,
-        spaceBetween: 10,
-        freeMode: true,
-        watchSlidesProgress: true,
-      });
-      const mainSwiper = new Swiper('.product-main', {
-        spaceBetween: 0,
-        loop: true,
-        zoom: {
-          maxRatio: 2.5,
-        },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        thumbs: { swiper: thumbsSwiper },
-      });
-    }
+document.addEventListener('DOMContentLoaded', function () {
+  // 1. Swiper Init
+  if (document.querySelector('.product-thumbs')) {
+    const thumbsSwiper = new Swiper('.product-thumbs', { direction: 'vertical', slidesPerView: 'auto', loop: true, spaceBetween: 10, freeMode: true, watchSlidesProgress: true });
+    new Swiper('.product-main', { loop: true, zoom: { maxRatio: 2.5 }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, thumbs: { swiper: thumbsSwiper } });
+  }
 
-    const productForm = document.querySelector('#product-form-installment');
-    if (productForm) {
-      productForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        let formData = new FormData(productForm);
-        fetch('/cart/add.js', { method: 'POST', body: formData })
-          .then((response) => response.json())
-          .then(() => {
-            if (typeof openAndRefreshCart === 'function') {
-              openAndRefreshCart();
-            } else {
-              window.location.href = '/cart';
-            }
-          })
-          .catch((error) => console.error('Sepet Hatası:', error));
-      });
-    }
+  // 2. Variant Logic
+  const variantData = {{ product.variants | json }};
+  const radios = document.querySelectorAll('.variant-wrapper input[type="radio"]');
 
-    // Varyant değişimlerini dinle
-    document.querySelectorAll('.variant-wrapper').forEach((wrapper, index) => {
-      const labelSpan = document.getElementById(`option-value-${index + 1}`);
-      const inputs = wrapper.querySelectorAll('input[type="radio"]');
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      // Label Güncelle
+      const wrapper = radio.closest('.variant-wrapper');
+      const labelId = `option-value-${wrapper.getAttribute('data-index')}`;
+      const labelSpan = document.getElementById(labelId);
+      if(labelSpan) labelSpan.textContent = radio.value;
 
-      inputs.forEach(input => {
-        input.addEventListener('change', (e) => {
-          labelSpan.textContent = e.target.value;
-          updateVariantID(); 
-        });
-      });
+      // ID ve Fiyat Güncelle
+      const selectedOptions = Array.from(document.querySelectorAll('.variant-wrapper input:checked')).map(r => r.value);
+      const matched = variantData.find(v => JSON.stringify(v.options) === JSON.stringify(selectedOptions));
+
+      if (matched) {
+        const idInput = document.querySelector('input[name="id"]');
+        idInput.value = matched.id;
+        
+        // Fiyat Senkronizasyonu
+        const priceDisplay = document.getElementById('product-price-display');
+        if (priceDisplay) priceDisplay.innerText = (matched.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+        // Dış Uygulama (Wishlist) Tetikleyicileri
+        idInput.dispatchEvent(new Event('change', { bubbles: true }));
+        document.dispatchEvent(new CustomEvent('variant:change', { detail: { variant: matched } }));
+        
+        // URL Güncelle
+        window.history.replaceState({}, '', `?variant=${matched.id}`);
+      }
     });
   });
 
-  function updateVariantID() {
-    const selectedOptions = Array.from(document.querySelectorAll('.variant-wrapper input[type="radio"]:checked')).map(input => input.value);
-    const variantData = {{ product.variants | json }};
-    
-    const matchedVariant = variantData.find(variant => {
-      return variant.options.every((option, index) => option === selectedOptions[index]);
-    });
+  // 3. Ajax Cart
+  const productForm = document.querySelector('#product-form-main');
+  if (productForm) {
+    productForm.addEventListener('submit', function (e) {
+      // Wishlist butonuna basıldıysa sepete ekleme kodunu durdur
+      if (e.submitter && (e.submitter.classList.contains('wishlist') || e.submitter.getAttribute('name') !== 'add')) return;
 
-    if (matchedVariant) {
-      // 1. Gizli input ID'yi güncelle
-      document.querySelector('input[name="id"]').value = matchedVariant.id;
-
-      // 2. Fiyatı güncelle
-      const priceDisplay = document.getElementById('product-price-display');
-      if (priceDisplay) {
-        priceDisplay.innerText = (matchedVariant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-      }
-
-      // 3. Compare at price güncelle
-      const compareDisplay = document.getElementById('product-compare-price');
-      if (compareDisplay && matchedVariant.compare_at_price) {
-        compareDisplay.innerText = (matchedVariant.compare_at_price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        compareDisplay.classList.remove('hidden');
-      } else if (compareDisplay) {
-        compareDisplay.classList.add('hidden');
-      }
-
-      // 4. Buton ve Stok kontrolü
-      const btn = document.querySelector('.add-to-cart-btn');
-      if (matchedVariant.available) {
-        btn.disabled = false;
-        btn.classList.remove('opacity-50', 'cursor-not-allowed');
-        btn.innerText = "{{ 'products.product.add_to_cart' | t }}";
-      } else {
-        btn.disabled = true;
-        btn.classList.add('opacity-50', 'cursor-not-allowed');
-        btn.innerText = "{{ 'products.product.sold_out' | t }}";
-      }
-
-      // 5. URL'i güncelle
-      window.history.replaceState({}, '', `?variant=${matchedVariant.id}`);
-    }
-  }
-
-  function openAndRefreshCart() {
-    fetch('/cart.js')
-      .then((res) => res.json())
-      .then((cart) => {
-        const itemsContainer = document.getElementById('cart-drawer-items');
-        const totalPriceContainer = document.getElementById('cart-total-price');
-
-        if (cart.items.length > 0) {
-          itemsContainer.innerHTML = cart.items
-            .map(
-              (item, index) => `
-                <div class="flex gap-4 border-b border-gray-50 pb-4">
-                    <img src="${item.image}" alt="${item.product_title}" class="w-20 h-24 object-cover">
-                    <div class="flex-1">
-                      <div class="flex justify-between">
-                        <h4 class="text-[10px] uppercase tracking-widest text-primary">${item.product_title}</h4>
-                        <button onclick="removeCartItem(${
-                          index + 1
-                        })" class="text-[9px] text-gray-400 hover:text-black uppercase underline" aria-label="Remove item from cart">${ "{{ 'cart.remove' | t }}" }</button>
-                      </div>
-                      <p class="text-[10px] text-gray-400 mt-1">${item.variant_title || ''}</p>
-                      <p class="text-xs mt-2 font-medium">${(item.price / 100).toFixed(2)} {{ cart.currency.symbol }}</p>
-                    </div>
-                </div>
-            `
-            )
-            .join('');
-        } else {
-          itemsContainer.innerHTML =
-            '<p class="text-[10px] uppercase tracking-widest text-center mt-10 text-gray-400">${ "{{ 'products.product.empty_cart' | t }}" }</p>';
-        }
-
-        totalPriceContainer.innerText = (cart.total_price / 100).toFixed(2) + ' ' + cart.currency.symbol;
-
-        const drawer = document.getElementById('cart-drawer');
-        const overlay = document.getElementById('cart-drawer-overlay');
-        const content = document.getElementById('cart-drawer-content');
-        if (drawer) {
-          drawer.classList.remove('invisible');
-          setTimeout(() => {
-            overlay.classList.replace('opacity-0', 'opacity-100');
-            content.classList.replace('translate-x-full', 'translate-x-0');
-          }, 10);
-        }
-      });
-  }
-
-  function removeCartItem(line) {
-    fetch('/cart/change.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ line: line, quantity: 0 }),
-    })
-      .then((res) => res.json())
+      e.preventDefault();
+      fetch('/cart/add.js', { method: 'POST', body: new FormData(productForm) })
+      .then(r => r.json())
       .then(() => {
-        openAndRefreshCart(); 
+        if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
+        else window.location.href = '/cart';
       })
-      .catch((err) => console.error('Silme hatası:', err));
+      .catch(err => console.error('Hata:', err));
+    });
   }
-
-  function closeCartDrawer() {
-    const drawer = document.getElementById('cart-drawer');
-    const overlay = document.getElementById('cart-drawer-overlay');
-    const content = document.getElementById('cart-drawer-content');
-    if (overlay && content) {
-      overlay.classList.replace('opacity-100', 'opacity-0');
-      content.classList.replace('translate-x-0', 'translate-x-full');
-      setTimeout(() => {
-        drawer.classList.add('invisible');
-      }, 500);
-    }
-  }
+});
 </script>
-
-{% schema %}
-{
-  "name": "Product Page",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "product_primary_color",
-      "label": "Primary Color",
-      "default": "#3b443c"
-    },
-    {
-      "type": "color",
-      "id": "product_secondary_color",
-      "label": "Secondary Color",
-      "default": "#b2ac88"
-    },
-    {
-      "type": "header",
-      "content": "Typography"
-    },
-    {
-      "type": "font_picker",
-      "id": "product_heading_font",
-      "label": "Heading Font",
-      "default": "josefin_sans_n4"
-    }
-  ]
-}
-{% endschema %}
