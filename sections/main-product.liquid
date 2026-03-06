@@ -464,6 +464,7 @@ function updateVariantID() {
       
       // Loading state
       submitBtn.disabled = true;
+      const originalText = submitBtn.innerText;
       submitBtn.innerText = 'Adding...';
       
       fetch('/cart/add.js?t=' + Date.now(), {
@@ -473,7 +474,7 @@ function updateVariantID() {
       })
         .then((res) => res.json())
         .then((cartData) => {
-          btn.innerText = 'ADDED';
+          submitBtn.innerText = 'ADDED';
           console.log('Product added to cart:', cartData);
           
           // Dispatch events for other components
@@ -484,14 +485,13 @@ function updateVariantID() {
             detail: { product: cartData }
           }));
           
-          // Open cart drawer
           openAndRefreshCart();
           showToast('Product added to cart!', 'success');
           
           // Reset button after delay
           setTimeout(() => {
-            btn.innerText = originalText;
-            btn.disabled = false;
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
           }, 2000);
         })
         .catch((error) => {
