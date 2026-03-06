@@ -19,39 +19,35 @@
     {%- assign body_font = settings.body_font -%}
 
     <style>
-      {{ heading_font | font_face: font_display: 'swap' }}
-      {{ body_font | font_face: font_display: 'swap' }}
+          {{ heading_font | font_face: font_display: 'swap' }}
+          {{ body_font | font_face: font_display: 'swap' }}
+
 
       :root {
-        /* Panelden Gelen Renk Değişkenleri dddd */
-        --color-primary: {{ settings.primary_color }};
-        --color-secondary: {{ settings.secondary_color }};
-        --color-custombg: {{ settings.custom_bg_color }};
-        --color-line: {{ settings.line_color }};
+        /* '| strip' filtresi gereksiz boşlukları siler, senkronizasyonu güçlendirir */
+        --color-primary: {{ settings.primary_color | strip }};
+        --color-secondary: {{ settings.secondary_color | strip }};
+        --color-custombg: {{ settings.custom_bg_color | strip }};
+        --color-line: {{ settings.line_color | strip }};
+        --color-bgtransparent: {{ settings.bgtransparent_color | strip }};
         --color-white: #ffffff;
         --color-black: #000000;
-
-        /* Şeffaf Arka Plan (Paneldeki bgtransparent_color ayarından gelir) */
-        --color-bgtransparent: {{ settings.bgtransparent_color }};
-
-        /* Font Tanımlamaları */
-        --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
-        --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
       }
 
-      body {
-        background-color: var(--color-white);
-        color: var(--color-primary);
-        font-family: var(--font-body);
-        margin: 0;
-        -webkit-font-smoothing: antialiased;
-        display: block !important;
-        opacity: 1 !important;
-      }
 
-      h1, h2, h3, h4, h5, h6, .font-heading {
-        font-family: var(--font-heading);
-      }
+          body {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+            font-family: var(--font-body);
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+            display: block !important;
+            opacity: 1 !important;
+          }
+
+          h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: var(--font-heading);
+          }
     </style>
 
     {{ content_for_header }}
