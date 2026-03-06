@@ -7,12 +7,16 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
+
 {
-  "sections": {
-    "main": {
-      "type": "main-login",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
+	"sections": {
+		"main": {
+			"type": "main-login",
+			"settings": {
+				"padding_top": 40,
+				"padding_bottom": 40
+			}
+		}
+	},
+	"order": ["main"]
 }

@@ -249,44 +249,52 @@
           </div>
 
           {% comment %} account {% endcomment %}
-          <div class="flex items-center gap-0">
-            <div class="p-2 rounded-full text-primary hover:!text-secondary relative">
-              <a href="{{ routes.search_url }}" class="lg:w-[12px] w-[12px] shrink-0">
+          <div class="flex items-center gap-1">
+            {% comment %} Gap biraz açıldı ki ikonlar nefes alsın {% endcomment %}
+
+            {% comment %} Search {% endcomment %}
+            <div class="p-2 text-primary hover:text-secondary transition-colors">
+              <a href="{{ routes.search_url }}" class="block w-5 h-5 lg:w-6 lg:h-6">
                 {% render 'icon-search' %}
               </a>
             </div>
-            <div class="p-2 rounded-full text-primary hover:!text-secondary relative">
-              <a href="/pages/wishlist" class="lg:w-[12px] w-[12px] shrink-0">
-                {% if shop.customer_accounts_enabled %}
-                  {% render 'icon-wishlist' %}
-                {% endif %}
+
+            {% comment %} Wishlist {% endcomment %}
+            <div class="p-2 text-primary hover:text-secondary transition-colors">
+              <a href="/pages/wishlist" class="block w-5 h-5 lg:w-6 lg:h-6">
+                {% render 'icon-wishlist' %}
               </a>
             </div>
-            <div class="p-2 rounded-full text-primary hover:!text-secondary relative">
-              <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0">
-                <div class="absolute top-[0px] right-0">
-                  <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
+
+            {% comment %} Cart {% endcomment %}
+            <div class="p-2 text-primary hover:text-secondary relative transition-colors">
+              <a href="{{ routes.cart_url }}" class="block w-5 h-5 lg:w-6 lg:h-6">
+                {%- if cart.item_count > 0 -%}
+                  <span class="absolute -top-1 -right-1 bg-secondary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full shadow-sm animate-bounce-short">
                     {{- cart.item_count -}}
                   </span>
-                </div>
+                {%- endif -%}
                 {% render 'icon-cart' %}
               </a>
             </div>
-            <a href="{{ routes.account_url }}" class="account-link relative inline-flex items-center justify-center">
-              {% assign customer_name = customer.first_name | default: 'Account' %}
-              {% if customer_name != 'Account' %}
-                {% comment %} Kullanıcı Giriş Yapmışsa Harf Göster {% endcomment %}
-                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[13px] font-bold text-white uppercase tracking-tighter hover:bg-secondary transition-all duration-300">
-                  {{ customer.first_name | slice: 0 -}}
-                  {{- customer.last_name | slice: 0 }}
-                </div>
-              {% else %}
-                {% comment %} Giriş Yapılmamışsa Senin Orijinal İkonun {% endcomment %}
-                <div class="w-6 h-6 lg:w-7 lg:h-7 text-primary hover:text-secondary transition-colors">
-                  {% render 'icon-account' %}
-                </div>
-              {% endif %}
-            </a>
+
+            {% comment %} Account / Avatar {% endcomment %}
+            <div class="p-2">
+              <a href="{{ routes.account_url }}" class="relative inline-flex items-center justify-center group">
+                {% if customer %}
+                  {% comment %} Giriş Yapmışsa: Harf Avatar {% endcomment %}
+                  <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-bold uppercase tracking-tighter group-hover:bg-secondary transition-all duration-300 shadow-sm">
+                    {{ customer.first_name | slice: 0 -}}
+                    {{- customer.last_name | slice: 0 }}
+                  </div>
+                {% else %}
+                  {% comment %} Giriş Yapmamışsa: Standart İkon {% endcomment %}
+                  <div class="w-6 h-6 lg:w-7 lg:h-7 text-primary group-hover:text-secondary transition-colors">
+                    {% render 'icon-account' %}
+                  </div>
+                {% endif %}
+              </a>
+            </div>
           </div>
         </div>
       </div>
