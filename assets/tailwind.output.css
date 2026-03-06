@@ -2877,6 +2877,14 @@ blockquote{
   color: var(--color-white);
 }
 
+.hover\:\!text-primary:hover{
+  color: var(--color-primary) !important;
+}
+
+.hover\:\!text-secondary:hover{
+  color: var(--color-secondary) !important;
+}
+
 .hover\:underline:hover{
   text-decoration-line: underline;
 }
