@@ -269,8 +269,16 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    // Check if Swiper is loaded
+    if (typeof Swiper === 'undefined') {
+      console.error('Swiper library not loaded!');
+      return;
+    }
+    
     // Initialize Swiper
     if (document.querySelector('.product-thumbs')) {
+      console.log('Initializing Swiper...');
+      
       const thumbsSwiper = new Swiper('.product-thumbs', {
         direction: 'vertical',
         slidesPerView: 'auto',
@@ -278,17 +286,31 @@
         spaceBetween: 10,
         freeMode: true,
         watchSlidesProgress: true,
+        on: {
+          init: function() {
+            console.log('Thumbs Swiper initialized');
+          }
+        }
       });
+      
       const mainSwiper = new Swiper('.product-main', {
         spaceBetween: 0,
         loop: true,
         zoom: {
     maxRatio: 2.5,
-  },
+    },
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         thumbs: { swiper: thumbsSwiper },
+        on: {
+          init: function() {
+            console.log('Main Swiper initialized');
+          }
+        }
       });
+    } else {
+      console.log('Swiper elements not found');
     }
+  });
 
     const productForm = document.querySelector('form[action="/cart/add"]');
     if (productForm) {
