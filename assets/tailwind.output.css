@@ -2021,6 +2021,11 @@ blockquote {
   background-color: var(--color-secondary);
 }
 
+.bg-slate-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity, 1));
+}
+
 .bg-transparent {
   background-color: transparent;
 }
@@ -2029,24 +2034,14 @@ blockquote {
   background-color: var(--color-white);
 }
 
-.bg-red-600 {
+.bg-slate-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));
 }
 
-.bg-slate-800 {
+.bg-slate-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1));
-}
-
-.bg-yellow-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(253 224 71 / var(--tw-bg-opacity, 1));
-}
-
-.bg-slate-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity, 1));
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity, 1));
 }
 
 .object-contain {
