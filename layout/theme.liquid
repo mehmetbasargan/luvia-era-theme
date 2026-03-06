@@ -220,6 +220,70 @@
           updateAllWishlistButtons();
         }, 100);
       });
+
+
+      /*  */
+
+      window.LuviaWishlist = {
+  get: function() {
+    return JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+  },
+  
+  toggle: function(productId) {
+    let wishlist = this.get();
+    const index = wishlist.indexOf(productId.toString());
+    const isAdding = index === -1;
+
+    if (isAdding) {
+      wishlist.push(productId.toString());
+    } else {
+      wishlist.splice(index, 1);
+    }
+
+    localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
+    
+    // UI Güncelleme (Sayfadaki tüm aynı ürün id'li kalpleri bulur)
+    this.updateUI(productId, isAdding);
+
+    // Wishlist sayfasındaysak ve ürün silindiyse satırı kaldır
+    const wishItem = document.getElementById(`wish-item-${productId}`);
+    if (!isAdding && wishItem) {
+      wishItem.style.opacity = '0';
+      setTimeout(() => {
+        wishItem.remove();
+        if (typeof this.checkEmpty === 'function') this.checkEmpty();
+      }, 300);
+    }
+
+    window.dispatchEvent(new CustomEvent('wishlist:updated', { detail: { productId, wishlist } }));
+  },
+
+  updateUI: function(productId, isActive) {
+    // Sayfadaki tüm ilgili butonları bul
+    const buttons = document.querySelectorAll(`.custom-wishlist-btn[data-product-id="${productId}"]`);
+    buttons.forEach(btn => {
+      const svg = btn.querySelector('svg');
+      if (isActive) {
+        btn.classList.add('wishlist-active');
+        svg.setAttribute('fill', 'currentColor'); // İçini boyar (Primary renk)
+      } else {
+        btn.classList.remove('wishlist-active');
+        svg.setAttribute('fill', 'none'); // İçini boşaltır
+      }
+    });
+  },
+
+  initIcons: function() {
+    const wishlist = this.get();
+    wishlist.forEach(id => this.updateUI(id, true));
+  }
+};
+
+// Sayfa yüklendiğinde kalpleri boya
+document.addEventListener('DOMContentLoaded', () => window.LuviaWishlist.initIcons());
+
+
+      /* ***** */
     </script>
 
     <main role="main" itemprop="mainContentOfPage">

@@ -14,14 +14,13 @@
     <div class="absolute top-3 right-3 z-40">
       <button
         type="button"
-        class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-[#ffffff] rounded-full shadow-sm hover:scale-110 transition-all duration-300 pointer-events-auto cursor-pointer"
-        data-id="{{ product.id }}"
+        class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-white rounded-full shadow-sm hover:scale-110 transition-all duration-300 cursor-pointer"
         data-product-id="{{ product.id }}"
-        onclick="console.log('Product card wishlist clicked'); LuviaWishlist.toggle('{{ product.id }}')"
-        aria-label="Add to wishlist"
+        onclick="LuviaWishlist.toggle('{{ product.id }}')"
+        aria-label="Wishlist"
       >
         <svg
-          class="w-5 h-5 text-primary transition-colors pointer-events-none"
+          class="w-5 h-5 text-primary transition-all duration-300 pointer-events-none"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
