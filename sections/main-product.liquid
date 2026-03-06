@@ -269,6 +269,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Swiper
     if (document.querySelector('.product-thumbs')) {
       const thumbsSwiper = new Swiper('.product-thumbs', {
         direction: 'vertical',
@@ -289,13 +290,24 @@
       });
     }
 
-    // Add to cart functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const productForm = document.querySelector('form[action="/cart/add"]');
-      if (productForm) {
-        productForm.addEventListener('submit', function (e) {
-          e.preventDefault();
-          const formData = new FormData(productForm);
+    const productForm = document.querySelector('form[action="/cart/add"]');
+    if (productForm) {
+      productForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(productForm);
+        const submitBtn = productForm.querySelector('button[type="submit"]');
+        
+        // Loading state
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerText = 'Adding...';
+        }
+        
+        fetch('/cart/add.js', { 
+          method: 'POST', 
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
           const submitBtn = productForm.querySelector('button[type="submit"]');
           
           // Loading state
