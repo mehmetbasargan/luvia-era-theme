@@ -13,32 +13,23 @@
 </div>
 
 <script>
-  const initSwiper = () => {
+  const initTestimonialSwiper = () => {
+    // Mevcut bir swiper örneği varsa önce onu yok et (Shopify Editör çakışmalarını önler)
+    const existingSwiper = document.querySelector('.myTestimonialSwiper')?.swiper;
+    if (existingSwiper) existingSwiper.destroy(true, true);
+
     new Swiper('.myTestimonialSwiper', {
       loop: true,
       effect: 'fade',
+      slidesPerView: 1, // Fade efekti için mutlaka 1 olmalı
       speed: 1200,
+      allowTouchMove: true,
       fadeEffect: {
-        crossFade: true,
+        crossFade: true, // Slaytların birbirinin içinden geçmesi için
       },
       autoplay: {
         delay: 6000,
         disableOnInteraction: false,
-      },
-      on: {
-        init: function () {
-          const activeSlide = this.slides[this.activeIndex];
-          activeSlide.classList.add('is-active');
-        },
-        slideChangeTransitionStart: function () {
-          this.slides.forEach((slide) => {
-            slide.classList.remove('is-active');
-          });
-        },
-        slideChangeTransitionEnd: function () {
-          const activeSlide = this.slides[this.activeIndex];
-          activeSlide.classList.add('is-active');
-        },
       },
       pagination: {
         el: '.swiper-pagination',
@@ -49,11 +40,23 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+      on: {
+        init: function () {
+          // İlk slaytı aktif et
+          this.slides[this.activeIndex].classList.add('is-active');
+        },
+        slideChange: function () {
+          // Tüm slaytlardan sınıfı kaldır ve yeni aktif olana ekle
+          this.slides.forEach((slide) => slide.classList.remove('is-active'));
+          this.slides[this.activeIndex].classList.add('is-active');
+        },
+      },
     });
   };
 
-  document.addEventListener('DOMContentLoaded', initSwiper);
-  document.addEventListener('shopify:section:load', initSwiper);
+  // Sayfa yüklenince ve Shopify Editör her güncellendiğinde çalıştır
+  document.addEventListener('DOMContentLoaded', initTestimonialSwiper);
+  document.addEventListener('shopify:section:load', initTestimonialSwiper);
 </script>
 
 {% schema %}
