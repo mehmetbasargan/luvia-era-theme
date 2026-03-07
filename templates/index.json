@@ -221,28 +221,6 @@
       "settings": {
         "title": "Follow Era"
       }
-    },
-    "marquee_text_Keaecq": {
-      "type": "marquee-text",
-      "blocks": {
-        "text_block_rPdaKr": {
-          "type": "text_block",
-          "settings": {
-            "text": "FREE SHIPPING WORLDWIDE"
-          }
-        }
-      },
-      "block_order": [
-        "text_block_rPdaKr"
-      ],
-      "name": "Marquee Text",
-      "settings": {
-        "bg_color": "#000000",
-        "text_color": "#ffffff",
-        "speed": 30,
-        "show_separator": true,
-        "pause_on_hover": true
-      }
     }
   },
   "order": [
@@ -252,7 +230,6 @@
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
-    "full_width_gallery_fnrnK7",
-    "marquee_text_Keaecq"
+    "full_width_gallery_fnrnK7"
   ]
 }
