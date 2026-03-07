@@ -11,42 +11,6 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
-    "marquee_text_JngeRi": {
-      "type": "marquee-text",
-      "blocks": {
-        "text_block_kQRt9w": {
-          "type": "text_block",
-          "settings": {
-            "text": "FREE SHIPPING WORLDWIDE"
-          }
-        },
-        "text_block_AAkbXR": {
-          "type": "text_block",
-          "settings": {
-            "text": "NEW SEASON ARRIVALS"
-          }
-        },
-        "text_block_qeFUxE": {
-          "type": "text_block",
-          "settings": {
-            "text": "15% OFF FIRST ORDER"
-          }
-        }
-      },
-      "block_order": [
-        "text_block_kQRt9w",
-        "text_block_AAkbXR",
-        "text_block_qeFUxE"
-      ],
-      "name": "Marquee Text",
-      "settings": {
-        "bg_color": "#000000",
-        "text_color": "#ffffff",
-        "speed": 30,
-        "show_separator": true,
-        "pause_on_hover": true
-      }
-    },
     "header": {
       "type": "header",
       "blocks": {
@@ -143,7 +107,6 @@
     }
   },
   "order": [
-    "marquee_text_JngeRi",
     "header",
     "header_two_jmKjTX"
   ]
