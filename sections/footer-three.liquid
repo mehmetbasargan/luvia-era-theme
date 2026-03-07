@@ -64,12 +64,13 @@
         {{ 'footer.be_first_to_know' | t }}
       </p>
 
-      {% form 'customer', class: 'flex border-b border-gray-400 pb-2' %}
+      {% form 'customer', class: 'flex border-b border-secondary pb-2' %}
         <input type="hidden" name="contact[tags]" value="newsletter">
 
         <input
           type="email"
           name="contact[email]"
+          id="NewsletterForm--{{ section.id }}"
           value="{{ form.email }}"
           placeholder="{{ 'footer.email_address' | t }}"
           class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"
@@ -85,15 +86,19 @@
         </button>
 
         {%- if form.posted_successfully? -%}
-          <p class="text-[14px] text-green-600 absolute mt-8 italic">
-            {{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}
-          </p>
+          <div class="absolute mt-10 w-full text-center">
+            <p class="text-[10px] text-green-600 font-bold italic">
+              {{ 'newsletter.success' | t | default: 'Success! You are on the list.' }}
+            </p>
+          </div>
         {%- endif -%}
 
         {%- if form.errors -%}
-          <p class="text-[14px] text-red-600 absolute mt-8 italic">
-            {{ form.errors.messages.email }}
-          </p>
+          <div class="absolute mt-10 w-full text-center">
+            <p class="text-[10px] text-red-600 font-bold italic">
+              {{ form.errors.messages.email }}
+            </p>
+          </div>
         {%- endif -%}
       {% endform %}
     </div>
