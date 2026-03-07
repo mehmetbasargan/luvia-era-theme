@@ -76,7 +76,7 @@ window.LuviaWishlist = {
 			window.showToast(window.LuviaStrings.wishlistAdded || 'ADDED TO WISHLIST', 'success');
 		} else {
 			wishlist.splice(index, 1);
-			window.showToast(window.LuviaStrings.wishlistRemoved || 'REMOVED FROM WISHLIST', 'info');
+			window.showToast(window.LuviaStrings.wishlistRemoved || 'REMOVED FROM WISHLIST', 'error');
 		}
 
 		localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
