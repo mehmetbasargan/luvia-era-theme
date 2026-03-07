@@ -131,3 +131,54 @@ document.addEventListener('wishlist:updated', function (e) {
 	// Diğer sayfa öğelerini güncellemek gerekirse burası kullanılabilir
 	console.log('Wishlist Sync:', e.detail.wishlist);
 });
+
+// Global Add to Cart Function (Tüm kartlar için ortak)
+window.handleGlobalAddToCart = function (e, variantId) {
+	const btn = e.currentTarget;
+	const originalText = btn.innerText;
+
+	if (!variantId) {
+		console.error('Variant ID missing!');
+		return;
+	}
+
+	btn.innerText = '...';
+	btn.disabled = true;
+
+	fetch('/cart/add.js', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ id: variantId, quantity: 1 }),
+	})
+		.then((res) => res.json())
+		.then((data) => {
+			btn.innerText = 'ADDED';
+
+			// Toast göster
+			if (window.showToast) window.showToast(window.LuviaStrings.cartAdded || 'Product added to cart', 'success');
+
+			// Drawer'ı aç
+			if (window.openCartDrawer) window.openCartDrawer();
+
+			// Sepeti yenile (Temanızdaki fonksiyon ismiyle eşleşmeli)
+			if (typeof openAndRefreshCart === 'function') {
+				openAndRefreshCart();
+			}
+
+			// Event fırlat
+			document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: data }, bubbles: true }));
+
+			setTimeout(() => {
+				btn.innerText = originalText;
+				btn.disabled = false;
+			}, 2000);
+		})
+		.catch((err) => {
+			btn.innerText = 'ERROR';
+			console.error('Cart error:', err);
+			setTimeout(() => {
+				btn.innerText = originalText;
+				btn.disabled = false;
+			}, 2000);
+		});
+};

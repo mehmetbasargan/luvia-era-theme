@@ -50,7 +50,7 @@
               <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
                 <button
                   type="button"
-                  onclick="handleFeaturedAddToCart(event, '{{ recommendation.first_available_variant.id }}')"
+                  onclick="handleGlobalAddToCart(event, '{{ recommendation.first_available_variant.id }}')"
                   class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors border-none cursor-pointer"
                 >
                   {{ 'products.product.add_to_cart' | t }}
