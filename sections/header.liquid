@@ -276,7 +276,7 @@
               </a>
             </div>
             <div class="p-2">
-              <a href="{{ routes.account_url }}" class="relative inline-flex items-center justify-center group">
+            {% comment %}   <a href="{{ routes.account_url }}" class="relative inline-flex items-center justify-center group">
                 {% if customer %}
                   {% comment %} Giriş Yapmışsa: Harf Avatar {% endcomment %}
                   <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-bold uppercase tracking-tighter group-hover:bg-secondary transition-all duration-300 shadow-sm">
@@ -289,7 +289,7 @@
                     {% render 'icon-account' %}
                   </div>
                 {% endif %}
-              </a>
+              </a> {% endcomment %}
 
               <style>
                 shopify-account::part(signed-out-avatar) {
@@ -300,7 +300,7 @@
               </style>
 
               <shopify-account menu="customer-account-main-menu">
-                <div slot="signed-out-avatar">
+                <div slot="signed-out-avatar" class="w-6 h-6 lg:w-7 lg:h-7 text-primary group-hover:text-secondary transition-colors"">
                   {% render 'icon-account' %}
                 </div>
               </shopify-account>
