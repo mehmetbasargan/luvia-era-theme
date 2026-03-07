@@ -66,5 +66,34 @@
 				"label": "Favicon Image"
 			}
 		]
+	},
+	{
+		"name": "Theme Support & Documentation",
+		"settings": [
+			{
+				"type": "header",
+				"content": "🚀 High-Performance Theme v1.0"
+			},
+			{
+				"type": "paragraph",
+				"content": "This theme is optimized for speed. Desktop Performance: 100/100."
+			},
+			{
+				"type": "header",
+				"content": "Rehber Bölümü"
+			},
+			{
+				"type": "paragraph",
+				"content": ">   - Sticky Header: The header automatically adapts to the Announcement Bar (Marquee)."
+			},
+			{
+				"type": "paragraph",
+				"content": "Header Opacity: Use the setting in Header section to adjust transparency. It becomes solid on scroll to ensure accessibility."
+			},
+			{
+				"type": "paragraph",
+				"content": "İletişim: For support: mbasargan77@gmail.com"
+			}
+		]
 	}
 ]

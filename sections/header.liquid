@@ -335,7 +335,19 @@
       "type": "checkbox",
       "id": "show_phone",
       "label": "Show Phone",
-      "default": true
+      "default": true,
+      "info": "Sets the initial transparency level. The header will transition to a solid background when scrolling starts for better readability."
+    },
+    {
+      "type": "range",
+      "id": "header_opacity_rate",
+      "label": "Header Opacity Rate",
+      "default": 90,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "info": "Sets the initial transparency level. The header will transition to a solid background when scrolling starts for better readability."
     }
   ],
   "blocks": [
