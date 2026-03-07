@@ -590,9 +590,9 @@ shopify-account {
 }
 
 .deneme svg {
-  width: 20px !important;
+  width: 40px !important;
   /* İhtiyacına göre ayarla */
-  height: 20px !important;
+  height: 40px !important;
   fill: currentColor !important;
 }
 
