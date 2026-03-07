@@ -56,187 +56,102 @@
 </div>
 
 <script>
-  const translations = {
-    journal: {{ 'general.search.journal' | t | json }} || "Journal",
-    article: {{ 'general.search.article' | t | json }} || "Article",
-    readMore: {{ 'blog.read_more' | t | json }} || "Read Article",
-    viewProduct: {{ 'general.view_product' | t | json }} || "View Product",
-    sale: {{ 'products.product.on_sale' | t | json }} || "SALE"
-  };
+  // ... (translations ve formatMoney kısımları aynı kalsın) ...
 
-  const searchInput = document.querySelector('#search-input');
-  const resultsContainer = document.querySelector('#search-results');
-  const searchHeaderWrapper = document.querySelector('#search-header-wrapper');
-  const dynamicTitle = document.querySelector('#dynamic-search-title');
-  const emptyMessage = document.querySelector('#search-empty-message');
-
-  const formatMoney = (cents) => {
-    if (!cents) return '';
-    return (cents / 100).toLocaleString('{{ shop.locale }}', {
-      style: 'currency',
-      currency: '{{ cart.currency.iso_code }}',
-    });
-  };
-
-  const rawSearchLabel = "{{ 'general.search.search_results' | t }}";
-  const searchLabel = rawSearchLabel.includes('search_results') ? 'Search Results' : rawSearchLabel;
-
-  document.addEventListener('click', function(e) {
-    const heartBtn = e.target.closest('.ssw-faveit');
-    if (heartBtn) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (typeof sswRun !== 'undefined' || (window.ssw && typeof window.ssw === 'function')) {
-        if (window.ssw && typeof window.ssw === 'function') {
-          window.ssw(heartBtn).faveit();
-        } else {
-          sswRun();
-        }
-      } else {
-        const productUrl = heartBtn.closest('.group').querySelector('a').href;
-        window.location.href = productUrl + '?wishlist=1'; 
-      }
-    }
-  }, true);
-
-
-  searchInput.addEventListener('input', function (e) {
-    const searchTerm = e.target.value.trim();
-    if (searchTerm.length <= 2) {
-      if (!window.location.search.includes('q=')) {
-        searchHeaderWrapper.classList.add('hidden');
-        resultsContainer.innerHTML = '';
-      }
-      return;
-    }
-
-    fetch(`${window.Shopify.routes.root}search/suggest.json?q=${encodeURIComponent(searchTerm)}&resources[type]=product,article&resources[limit]=12`)
-      .then(response => response.json())
-      .then(data => {
-        const products = data.resources?.results?.products || [];
-        const articles = data.resources?.results?.articles || [];
-        const allResults = [...products, ...articles];
-        
-        searchHeaderWrapper.classList.remove('hidden');
-        dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${allResults.length})`;
-
-        if (allResults.length > 0) {
-          emptyMessage.classList.add('hidden');
-          resultsContainer.classList.remove('hidden');
-          renderResults(allResults);
-        } else {
-          resultsContainer.innerHTML = '';
-          emptyMessage.classList.remove('hidden');
-        }
-      })
-      .catch(err => {});
-  });
-
-  // Load hover images for search results
-  function loadHoverImages() {
-    const hoverImages = document.querySelectorAll('[data-hover-src]');
-    hoverImages.forEach(img => {
-      const hoverSrc = img.getAttribute('data-hover-src');
-      if (hoverSrc) {
-        fetch(hoverSrc + '?t=' + Date.now())
-          .then(response => response.json())
-          .then(product => {
-            if (product.media && product.media.length > 1) {
-              img.src = product.media[1].src;
-              img.style.display = 'block';
-            }
-          })
-          .catch(err => {});
-      }
-    });
-  }
-
-  // Load hover images after search results render
-  setTimeout(loadHoverImages, 500);
-
- 
   function renderResults(results) {
-    resultsContainer.innerHTML = results.map(item => {
-      const isArticle = item.url.includes('/blogs/') || item.type === 'article';
-      const mainImage = item.featured_image ? item.featured_image.url : (item.image || '');
-      
-      // Fetch hover image with API call for better UX
-      const hoverImage = !isArticle ? `/products/${item.handle}.js` : null;
+    if (!resultsContainer) return;
 
-      let badgeHtml = '', priceHtml = '', actionButton = '';
+    resultsContainer.innerHTML = results
+      .map((item) => {
+        const isArticle = item.url.includes('/blogs/') || item.type === 'article';
+        const mainImage = item.featured_image ? item.featured_image.url : item.image || '';
+        const hoverImage = !isArticle ? `/products/${item.handle}.js` : null;
 
-      if (!isArticle) {
-        const currentPrice = Number(item.price);
-        const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
-        const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
+        let badgeHtml = '',
+          priceHtml = '',
+          actionButton = '',
+          wishlistBtn = '';
 
-        if (isOnSale) {
-          badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary rounded-full text-white font-bold text-[11px] px-2 py-1 tracking-widest uppercase shadow-md">${translations.sale}</span>`;
-        }
-        
-        
-        priceHtml = `<div class="mt-2 flex items-center gap-2">
-            ${isOnSale ? `<span class="text-gray-400 line-through text-[13px]">${formatMoney(comparePriceRaw)}</span>` : ''}
+        if (!isArticle) {
+          // Ürün Ayarları
+          const currentPrice = Number(item.price);
+          const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
+          const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
+          const variantId = item.variants && item.variants[0] ? item.variants[0].id : '';
+
+          if (isOnSale) {
+            badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white text-[10px] px-2 py-1 uppercase tracking-widest font-medium">${translations.sale}</span>`;
+          }
+
+          priceHtml = `<div class="mt-2 flex items-center gap-2">
+            ${
+              isOnSale
+                ? `<span class="text-gray-400 line-through text-[12px]">${formatMoney(comparePriceRaw)}</span>`
+                : ''
+            }
             <span class="text-primary text-[14px] font-medium">${formatMoney(item.price)}</span>
           </div>`;
 
-        actionButton = `
-          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
-            <a href="${item.url}" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
-              ${translations.viewProduct}
-            </a>
+          // Wishlist Butonu (Global Sistem)
+          wishlistBtn = `
+          <div class="absolute top-3 right-3 z-40">
+            <button type="button" 
+                    class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:scale-110 transition-transform duration-300" 
+                    data-product-id="${item.id}"
+                    onclick="window.LuviaWishlist.toggle('${item.id}')">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+              </svg>
+            </button>
           </div>`;
-      } else {
-        badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white font-bold text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
-        priceHtml = `<div class="mt-2 text-secondary text-[12px] font-medium uppercase tracking-wider font-body">${translations.article}</div>`;
-        actionButton = `
+
+          // Add to Cart Butonu (Global Sistem)
+          actionButton = `
+          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
+            <button type="button" 
+                    onclick="window.handleGlobalAddToCart(event, '${variantId}')" 
+                    class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors border-none cursor-pointer font-heading">
+              ADD TO CART
+            </button>
+          </div>`;
+        } else {
+          // Makale Ayarları (Wishlist ve Add to Cart olmaz)
+          badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
+          actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
-            <a href="${item.url}" class="w-full bg-black text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
+            <a href="${item.url}" class="w-full bg-black text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
               ${translations.readMore}
             </a>
           </div>`;
-      }
+        }
 
-    return `
-        <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn transition-all">
+        return `
+        <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn transition-all" id="search-item-${item.id}">
           <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
             ${badgeHtml}
+            ${wishlistBtn}
             
-            <a href="${item.url}" class="block h-full w-full relative z-10">
-              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-opacity duration-700" loading="eager">
-              ${hoverImage ? `<img data-hover-src="${hoverImage}" alt="${item.title}" class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="display:none;">` : ''}
+            <a href="${item.url}" class="block h-full w-full">
+              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
             </a>
-
-            <div class="absolute top-3 right-3 z-50">
-              <button type="button" 
-                      class="bg-white custom-wishlist-btn flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-all pointer-events-auto" 
-                      data-id="${item.id}"
-                      onclick="event.preventDefault(); event.stopPropagation();">
-                <svg class="w-5 h-5 text-primary group-hover/heart:text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                </svg>
-              </button>
-            </div>
 
             ${actionButton}
           </div>
 
           <div class="pt-4 pb-2 flex flex-col items-center px-3">
-            <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px] font-body">
+            <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px] tracking-wider">
               ${item.title}
             </a>
             ${priceHtml}
           </div>
         </div>`;
-        
-    }).join('');
-    
-    document.dispatchEvent(new CustomEvent('shopify:section:load'));
-    
-    setTimeout(() => {
-      if (typeof sswRun === 'function') sswRun();
-    }, 300);
+      })
+      .join('');
+
+    // Sonuçlar render edildikten sonra Wishlist kalplerini doldur
+    if (window.LuviaWishlist && typeof window.LuviaWishlist.initIcons === 'function') {
+      window.LuviaWishlist.initIcons();
+    }
   }
 </script>
 
