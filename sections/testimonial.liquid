@@ -13,13 +13,13 @@
     <div class="swiper-wrapper">
       {% for item in section.blocks %}
         <div
-          class="swiper-slide flex flex-col items-center text-center w-full bg-custombg p-4 rounded-lg min-h-[250px]"
+          class="swiper-slide flex flex-col items-center text-center w-full bg-custombg p-4 rounded-lg "
           itemscope
           itemtype="https://schema.org/Review"
         >
           <span class="w-[25px] mb-5 text-secondary">{% render 'icon-quote' %}</span>
           <div class="h-[90px] text-[14px]" itemprop="reviewBody">
-            {{ item.settings.testimonial }}
+            {{ item.settings.testimonial | strip_html | truncate: 150, '...' }}
           </div>
           <span class="mt-8 italic text-[13px]" itemprop="author">- {{ item.settings.name }}</span>
           <meta itemprop="datePublished" content="{{ 'now' | date: '%Y-%m-%d' }}">
@@ -125,7 +125,9 @@
         {
           "type": "textarea",
           "id": "testimonial",
-          "label": "Testimonial"
+          "label": "Testimonial",
+          "info": "Recommended: Max 150 characters for the best layout.",
+          "placeholder": "Write the customer feedback here..."
         },
         {
           "type": "text",

@@ -1370,6 +1370,10 @@ blockquote{
   max-height: 900px;
 }
 
+.max-h-\[90px\]{
+  max-height: 90px;
+}
+
 .min-h-\[1rem\]{
   min-height: 1rem;
 }
@@ -1400,6 +1404,10 @@ blockquote{
 
 .min-h-\[250px\]{
   min-height: 250px;
+}
+
+.min-h-\[90px\]{
+  min-height: 90px;
 }
 
 .\!w-\[50px\]{
