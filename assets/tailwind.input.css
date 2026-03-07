@@ -32,21 +32,30 @@
 	}
 
 	/* İkonun boyutunu ve kutusunu zorlamak için */
-	.deneme {
-		/* Shopify'ın kendi değişkenini kullanıyoruz */
-		width: var(--clamped-avatar-size, 40px) !important;
-		height: var(--clamped-avatar-size, 40px) !important;
-		display: flex !important;
-		align-items: center;
-		justify-content: center;
+	shopify-account {
+		/* Arka plan rengini ve boyutları buradan zorluyoruz */
+		--clamped-avatar-size: 40px !important;
+		--shopify-account-color-accent: var(--color-secondary) !important; /* Mavi yerine istediğin renk */
+
+		display: inline-block;
+		width: 40px !important;
+		height: 40px !important;
 	}
 
-	.deneme svg {
-		/* İkonun bu kutunun içine tam sığması için */
+	/* Slot içindeki div'i (senin .deneme class'ın) serbest bırakalım */
+	shopify-account [slot='signed-out-avatar'] {
+		display: flex !important;
 		width: 100% !important;
 		height: 100% !important;
-		max-width: 40px; /* İkonun kutu içinde çok devasa durmaması için opsiyonel */
-		max-height: 40px;
+		align-items: center;
+		justify-content: center;
+		background-color: var(--shopify-account-color-accent);
+		border-radius: 50%;
+	}
+
+	shopify-account [slot='signed-out-avatar'] svg {
+		width: 40px !important; /* İkonun kutu içindeki net boyutu */
+		height: 40px !important;
 	}
 
 	body {
