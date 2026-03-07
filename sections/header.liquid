@@ -276,33 +276,6 @@
               </a>
             </div>
             <div class="p-2">
-              {% comment %}
-                <a href="{{ routes.account_url }}" class="relative inline-flex items-center justify-center group">
-                  {% if customer %}
-                    {% comment %} Giriş Yapmışsa: Harf Avatar {% endcomment %}
-                    <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-bold uppercase tracking-tighter group-hover:bg-secondary transition-all duration-300 shadow-sm">
-                      {{ customer.first_name | slice: 0 -}}
-                      {{- customer.last_name | slice: 0 }}
-                    </div>
-                  {% else %}
-                    {% comment %} Giriş Yapmamışsa: Standart İkon {% endcomment %}
-                    <div class="w-6 h-6 lg:w-7 lg:h-7 text-primary group-hover:text-secondary transition-colors">
-                      {% render 'icon-account' %}
-                    </div>
-                  {% endif %}
-                </a>
-              {% endcomment %}
-
-              {% comment %}
-                <style>
-                  shopify-account::part(signed-out-avatar) {
-                    padding: 12px;
-                    width: 64px;
-                    height: 64px;
-                  }
-                </style>
-              {% endcomment %}
-
               <shopify-account menu="customer-account-main-menu">
                 <div slot="signed-out-avatar" class="deneme">
                   {% render 'icon-account' %}

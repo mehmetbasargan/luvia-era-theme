@@ -351,21 +351,11 @@
                 {% render 'icon-cart' %}
               </div>
             </a>
-            <a href="{{ routes.account_url }}" class="account-link relative inline-flex items-center justify-center">
-              {% assign customer_name = customer.first_name | default: 'Account' %}
-              {% if customer_name != 'Account' %}
-                {% comment %} Kullanıcı Giriş Yapmışsa Harf Göster {% endcomment %}
-                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[13px] font-bold text-white uppercase tracking-tighter hover:bg-secondary transition-all duration-300">
-                  {{ customer.first_name | slice: 0 -}}
-                  {{- customer.last_name | slice: 0 }}
-                </div>
-              {% else %}
-                {% comment %} Giriş Yapılmamışsa Senin Orijinal İkonun {% endcomment %}
-                <div class="w-6 h-6 lg:w-7 lg:h-7 text-primary hover:text-secondary transition-colors">
-                  {% render 'icon-account' %}
-                </div>
-              {% endif %}
-            </a>
+            <shopify-account menu="customer-account-main-menu">
+              <div slot="signed-out-avatar" class="deneme">
+                {% render 'icon-account' %}
+              </div>
+            </shopify-account>
           </div>
         </div>
       </div>
