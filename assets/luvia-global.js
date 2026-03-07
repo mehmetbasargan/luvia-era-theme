@@ -9,11 +9,19 @@ window.showToast = function (message, type = 'info') {
 	if (oldToast) oldToast.remove();
 
 	const toast = document.createElement('div');
-	// Renk ve tip belirleme
-	const bgClass = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : 'bg-primary';
 
-	toast.className = `luvia-toast fixed bottom-8 left-1/2 -translate-x-1/2 ${bgClass} text-white px-8 py-3 rounded-full shadow-2xl z-[9999] text-[12px] uppercase tracking-[0.2em] transition-all duration-500 opacity-0 translate-y-4`;
+	// Renkleri doğrudan JS içinden atayalım (Tailwind çakışmasını önler)
+	let bgColor = 'var(--color-primary, #000)'; // Varsayılan: Temanızdaki primary renk
+	if (type === 'success') bgColor = '#16a34a'; // bg-green-600
+	if (type === 'error') bgColor = '#dc2626'; // bg-red-600
+	if (type === 'info') bgColor = '#2563eb'; // bg-blue-600 (İsteğe bağlı)
+
+	toast.className = `luvia-toast fixed bottom-8 left-1/2 -translate-x-1/2 text-white px-8 py-3 rounded-full shadow-2xl z-[9999] text-[12px] uppercase tracking-[0.2em] transition-all duration-500 opacity-0 translate-y-4`;
+
+	// Arka plan rengini inline style olarak ekliyoruz
+	toast.style.backgroundColor = bgColor;
 	toast.innerText = message;
+
 	document.body.appendChild(toast);
 
 	setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-4'), 10);
