@@ -33,15 +33,20 @@
 
 	/* İkonun boyutunu ve kutusunu zorlamak için */
 	.deneme {
+		/* Shopify'ın kendi değişkenini kullanıyoruz */
+		width: var(--clamped-avatar-size, 40px) !important;
+		height: var(--clamped-avatar-size, 40px) !important;
 		display: flex !important;
 		align-items: center;
 		justify-content: center;
 	}
 
 	.deneme svg {
-		width: 40px !important; /* İhtiyacına göre ayarla */
-		height: 40px !important;
-		fill: currentColor !important;
+		/* İkonun bu kutunun içine tam sığması için */
+		width: 100% !important;
+		height: 100% !important;
+		max-width: 40px; /* İkonun kutu içinde çok devasa durmaması için opsiyonel */
+		max-height: 40px;
 	}
 
 	body {
