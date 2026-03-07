@@ -133,6 +133,25 @@
     })();
   </script>
 
+  <style>
+    /* Header'ın temel geçiş ayarları */
+    #main-header {
+      transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease !important;
+    }
+
+    /* Sayfa en tepedeyken (Marquee aktif) */
+    #main-header.marquee-text-active:not(.is-scrolled) {
+      top: 40px !important;
+    }
+
+    /* Sayfa kaydırıldığında */
+    #main-header.is-scrolled {
+      top: 0 !important;
+      /* İstersen burada gölge ekleyerek derinlik katabilirsin */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+
 {%- else -%}
   <style>
     :root {
