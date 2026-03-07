@@ -204,7 +204,8 @@
       "name": "Testimonial",
       "settings": {
         "slides_per_view": 3,
-        "testimonial_title": "Testimonials"
+        "testimonial_title": "Testimonials",
+        "background_color": "#640c0c"
       }
     },
     "full_width_gallery_fnrnK7": {
