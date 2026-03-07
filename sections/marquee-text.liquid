@@ -81,43 +81,48 @@
 
     /* **** */
     (function () {
-      const addMarqueeClass = () => {
-        // Doğrudan ID üzerinden hedef alıyoruz (En garantisi budur)
-        const header = document.getElementById('main-header');
+      const header = document.getElementById('main-header');
+      if (!header) return;
 
-        if (header) {
-          // Eğer class yoksa ekle
-          if (!header.classList.contains('marquee-text-active')) {
-            header.classList.add('marquee-text-active');
-            console.log('Class başarıyla eklendi.');
+      // 1. Marquee varlığını belirten class'ı ekle (MutationObserver ile korumalı)
+      const addMarqueeClass = () => {
+        if (!header.classList.contains('marquee-text-active')) {
+          header.classList.add('marquee-text-active');
+        }
+      };
+
+      // 2. Scroll kontrol fonksiyonu
+      const handleScroll = () => {
+        const scrollY = window.scrollY;
+
+        if (scrollY > 10) {
+          // 10px'den fazla kaydırıldıysa
+          header.classList.add('is-scrolled');
+          // Scroll edildiğinde top: 40px'i geçersiz kılmak için style'ı sıfırla
+          header.style.top = '0px';
+        } else {
+          header.classList.remove('is-scrolled');
+          // Sayfa en üstteyse ve marquee class'ı varsa 40px aşağı çek
+          if (header.classList.contains('marquee-text-active')) {
+            header.style.top = '40px';
           }
         }
       };
 
-      // 1. Sayfa yüklendiğinde dene
-      window.addEventListener('load', addMarqueeClass);
+      // Bekçi (Observer) - Diğer scriptlerin class'ı silmesini engeller
+      const observer = new MutationObserver(() => addMarqueeClass());
+      observer.observe(header, { attributes: true, attributeFilter: ['class'] });
 
-      // 2. DOMContentLoaded'da dene
-      document.addEventListener('DOMContentLoaded', addMarqueeClass);
+      // Event Listeners
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('load', () => {
+        addMarqueeClass();
+        handleScroll();
+      });
 
-      // 3. Diğer scriptlerin ezmesine karşı kısa bir süre gözlemle (MutationObserver)
-      const targetHeader = document.getElementById('main-header');
-      if (targetHeader) {
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-              if (!targetHeader.classList.contains('marquee-text-active')) {
-                targetHeader.classList.add('marquee-text-active');
-              }
-            }
-          });
-        });
-
-        observer.observe(targetHeader, { attributes: true });
-      }
-
-      // 4. Hemen çalıştır
+      // İlk çalıştırma
       addMarqueeClass();
+      handleScroll();
     })();
   </script>
 
