@@ -77,16 +77,39 @@
       <p class="text-xs text-primary mb-4 font-light italic">
         {{ 'footer.be_first_to_know' | t }}
       </p>
-      <form class="flex border-b border-gray-400 pb-2">
+
+      {% form 'customer', class: 'flex border-b border-gray-400 pb-2' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+
         <input
           type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
           placeholder="{{ 'footer.email_address' | t }}"
           class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"
+          aria-required="true"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          required
         >
+
         <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">
           {{ 'footer.join' | t }}
         </button>
-      </form>
+
+        {%- if form.posted_successfully? -%}
+          <p class="text-[10px] text-green-600 absolute mt-8 italic">
+            {{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}
+          </p>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <p class="text-[10px] text-red-600 absolute mt-8 italic">
+            {{ form.errors.messages.email }}
+          </p>
+        {%- endif -%}
+      {% endform %}
     </div>
   </div>
 </footer>

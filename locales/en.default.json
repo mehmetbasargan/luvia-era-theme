@@ -167,5 +167,8 @@
 			"subject_press": "Press & Media",
 			"message": "Your Message"
 		}
+	},
+	"newsletter": {
+		"success": "Thanks for subscribing!"
 	}
 }
