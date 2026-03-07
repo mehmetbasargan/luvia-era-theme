@@ -54,22 +54,47 @@
       </div>
 
       <div class="w-full lg:w-[300px] ">
-        <h6 class="font-light uppercase tracking-widest mb-3 text-primary">
-          {{ 'footer.newsletter' | t }}
-        </h6>
-        <p class="text-xs text-primary mb-4 font-medium ">
-          {{ 'footer.be_first_to_know' | t }}
-        </p>
-        <form class="flex border-b border-gray-400 pb-2 mt-10">
-          <input
-            type="email"
-            placeholder="Email address"
-            class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"
-          >
-          <button type="submit" class="text-primary uppercase text-xs tracking-widest font-semibold ml-2">
-            {{ 'footer.join' | t }}
-          </button>
-        </form>
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
+            {{ 'footer.newsletter' | t }}
+          </h4>
+          <p class="text-xs text-primary mb-4 font-light italic">
+            {{ 'footer.be_first_to_know' | t }}
+          </p>
+
+          {% form 'customer', class: 'flex border-b border-gray-400 pb-2' %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+
+            <input
+              type="email"
+              name="contact[email]"
+              value="{{ form.email }}"
+              placeholder="{{ 'footer.email_address' | t }}"
+              class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              required
+            >
+
+            <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">
+              {{ 'footer.join' | t }}
+            </button>
+
+            {%- if form.posted_successfully? -%}
+              <p class="text-[14px] text-green-600 absolute mt-8 italic">
+                {{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}
+              </p>
+            {%- endif -%}
+
+            {%- if form.errors -%}
+              <p class="text-[14px] text-red-600 absolute mt-8 italic">
+                {{ form.errors.messages.email }}
+              </p>
+            {%- endif -%}
+          {% endform %}
+        </div>
       </div>
     </div>
   </div>
