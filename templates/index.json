@@ -225,6 +225,13 @@
     "testimonial_CxWzTk": {
       "type": "testimonial",
       "blocks": {
+        "testimonial_mgkKpV": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Ut eget neque ultricies neque semper porta iaculis tincidunt ante. Sed lorem dolor, dictum blandit metus quis, mollis interdum enim. Praesent venenatis fermentum vulputate. Nulla condimentum urna quis egestas lobortis. Maecenas varius enim nec urna tristique fermentum.",
+            "name": "Deneme Başlık"
+          }
+        },
         "testimonial_kk6pic": {
           "type": "testimonial",
           "settings": {
@@ -248,6 +255,7 @@
         }
       },
       "block_order": [
+        "testimonial_mgkKpV",
         "testimonial_kk6pic",
         "testimonial_BBAPTn",
         "testimonial_9GUqLM"
