@@ -228,19 +228,22 @@
         "testimonial_kk6pic": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium."
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
+            "name": "Mehmet"
           }
         },
         "testimonial_BBAPTn": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean"
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean",
+            "name": ""
           }
         },
         "testimonial_9GUqLM": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium."
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
+            "name": ""
           }
         }
       },
