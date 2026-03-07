@@ -155,6 +155,50 @@
         "header_opacity": 40
       }
     },
+    "testimonial_CxWzTk": {
+      "type": "testimonial",
+      "blocks": {
+        "testimonial_mgkKpV": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Ut eget neque ultricies neque semper porta iaculis tincidunt ante. Sed lorem dolor, dictum blandit metus quis, mollis interdum enim. Praesent venenatis",
+            "name": "Deneme Başlık"
+          }
+        },
+        "testimonial_kk6pic": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
+            "name": "Mehmet Başargan"
+          }
+        },
+        "testimonial_BBAPTn": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean",
+            "name": "Mehmet Başargan"
+          }
+        },
+        "testimonial_9GUqLM": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
+            "name": "Mehmet Başargan"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_mgkKpV",
+        "testimonial_kk6pic",
+        "testimonial_BBAPTn",
+        "testimonial_9GUqLM"
+      ],
+      "name": "Testimonial",
+      "settings": {
+        "slides_per_view": 3,
+        "testimonial_title": "Testimonials"
+      }
+    },
     "full_width_gallery_fnrnK7": {
       "type": "full-width-gallery",
       "blocks": {
@@ -221,50 +265,6 @@
       "settings": {
         "title": "Follow Era"
       }
-    },
-    "testimonial_CxWzTk": {
-      "type": "testimonial",
-      "blocks": {
-        "testimonial_mgkKpV": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "Ut eget neque ultricies neque semper porta iaculis tincidunt ante. Sed lorem dolor, dictum blandit metus quis, mollis interdum enim. Praesent venenatis",
-            "name": "Deneme Başlık"
-          }
-        },
-        "testimonial_kk6pic": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
-            "name": "Mehmet Başargan"
-          }
-        },
-        "testimonial_BBAPTn": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean",
-            "name": "Mehmet Başargan"
-          }
-        },
-        "testimonial_9GUqLM": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
-            "name": "Mehmet Başargan"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_mgkKpV",
-        "testimonial_kk6pic",
-        "testimonial_BBAPTn",
-        "testimonial_9GUqLM"
-      ],
-      "name": "Testimonial",
-      "settings": {
-        "slides_per_view": 3,
-        "testimonial_title": "Testimonials"
-      }
     }
   },
   "order": [
@@ -274,7 +274,7 @@
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
-    "full_width_gallery_fnrnK7",
-    "testimonial_CxWzTk"
+    "testimonial_CxWzTk",
+    "full_width_gallery_fnrnK7"
   ]
 }
