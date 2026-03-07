@@ -119,33 +119,12 @@
     <div class="grid__item site-footer__payment-icons">
       <ul class="flex items-center gap-2 mb-5 md:mb-0">
         {% for block in section.blocks %}
-          {% if block.settings.image != blank %}
+          {% if block.settings.payment_icon != blank %}
             <li class="payment-icon">
-              {{ block.settings.image | image_url: width: 50 | image_tag: class: 'w-12 h-8' }}
+              {{ block.settings.payment_icon | image_url: width: 50 | image_tag: class: 'w-13 h-8' }}
             </li>
           {% endif %}
         {% endfor %}
-
-        {% comment %}
-          <li class="payment-icon">
-            {% render 'icon-visa' %}
-          </li>
-          <li class="payment-icon">
-            {% render 'icon-master' %}
-          </li>
-          <li class="payment-icon">
-            {% render '.con-american-express' %}
-          </li>
-          <li class="payment-icon">
-            {% render 'icon-paypal' %}
-          </li>
-          <li class="payment-icon">
-            {% render 'icon-diners-club' %}
-          </li>
-          <li class="payment-icon">
-            {% render 'icon-discover' %}
-          </li>
-        {% endcomment %}
       </ul>
     </div>
 
@@ -227,7 +206,8 @@
         {
           "type": "image_picker",
           "id": "payment_icon",
-          "label": "Payment Icon"
+          "label": "Payment Icon",
+          "info": "Upload payment method icons (e.g., Visa, Mastercard, PayPal)"
         }
       ]
     }
