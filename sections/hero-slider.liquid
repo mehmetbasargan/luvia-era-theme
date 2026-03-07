@@ -177,22 +177,51 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "ℹ️ **İpucu:** En iyi görünüm için 1920x1080px çözünürlüğünde görseller kullanın. Slayt geçişleri otomatik olarak optimize edilmiştir."
+      "content": "ℹ️ **Tip:** For optimal display, use images with a **1920x1080px** resolution. Slide transitions are automatically optimized for performance."
     }
   ],
   "blocks": [
     {
       "type": "slide",
-      "name": "Slayt",
+      "name": "Slide",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Görsel" },
-        { "type": "text", "id": "title", "label": "Başlık", "default": "Yeni Sezon" },
-        { "type": "text", "id": "sub_title", "label": "Alt Başlık", "default": "En yeni koleksiyonu hemen keşfedin." },
-        { "type": "text", "id": "button_label", "label": "Buton Yazısı", "default": "Alışverişe Başla" },
-        { "type": "url", "id": "button_link", "label": "Buton Linki" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "The center of the image should be the main focus of the slide."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "New Season"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Subheading",
+          "default": "Discover the latest collection now."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Now",
+          "info": "Leave blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Hero Slider" }]
+  "presets": [
+    {
+      "name": "Hero Slider"
+    }
+  ]
 }
 {% endschema %}
