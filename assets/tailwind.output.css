@@ -583,36 +583,26 @@ shopify-account {
 
 /* İkonun boyutunu ve kutusunu zorlamak için */
 
-/* 1. Tüm account butonunun ana renklerini ve boyutunu ez */
-
 shopify-account {
-  --shopify-account-color-accent: #ff0000 !important;
-  /* Mavi yerine senin rengin */
+  /* Boyut için gerçek değişken bu */
+  --shopify-account-signed-in-avatar-size: 40px !important;
+  /* Renkler için bunlar */
   --shopify-account-signed-in-avatar-color-background: #ff0000 !important;
-  --clamped-avatar-size: 40px !important;
-  --hover-opacity: 0 !important;
-  /* O inatçı gölgeyi/efekti sıfırlamak için */
+  /* İstediğin renk */
+  --shopify-account-signed-in-avatar-color-text: #ffffff !important;
+  /* Genel tema uyumu için (Signed out durumu için de geçerli olabilir) */
+  --shopify-account-color-accent: #ff0000 !important;
 }
 
-/* 2. Senin eklediğin ikonun (slot) kutunun içine tam oturmasını sağla */
+/* İkonun bu yeni boyuta tam ortalanması için */
 
 shopify-account [slot='signed-out-avatar'],
 	shopify-account [slot='signed-in-avatar'] {
-  display: flex !important;
   width: 40px !important;
   height: 40px !important;
-  background-color: var(--shopify-account-color-accent) !important;
-  border-radius: 50% !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
-
-/* 3. İkonun boyutunu netleştir */
-
-shopify-account svg {
-  width: 20px !important;
-  height: 20px !important;
-  fill: currentColor !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 body{
