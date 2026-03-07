@@ -1,5 +1,4 @@
 <div class="container py-20 mx-auto px-4">
-  {% comment %} Search Formu {% endcomment %}
   <form
     action="{{ routes.search_url }}"
     method="get"
@@ -26,7 +25,6 @@
     </button>
   </form>
 
-  {% comment %} Search Header {% endcomment %}
   <div
     id="search-header-wrapper"
     class="mb-8 border-b border-line pb-4 {% unless search.performed %}hidden{% endunless %}"
@@ -38,7 +36,6 @@
     </h5>
   </div>
 
-  {% comment %} Search Results {% endcomment %}
   <div id="search-results-container">
     <div id="search-results" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
       {% if search.performed %}

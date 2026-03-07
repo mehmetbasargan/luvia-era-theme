@@ -37,6 +37,7 @@
                   class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none bg-white"
                   data-product-id="{{ product.id }}"
                   onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') } else { console.error('Wishlist script not loaded') }"
+                  aria-label="Add to wishlist"
                 >
                   <svg
                     class="w-6 h-6 text-primary transition-all duration-300"
@@ -53,8 +54,8 @@
                 <img
                   src="{{ product.featured_image | image_url: width: 600 }}"
                   class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
-                  alt="{{ product.title }}"
-                  loading="eager"
+                  alt="{{ product.title | escape }}"
+                  loading="lazy"
                   height=""
                   width=""
                 >
@@ -62,8 +63,8 @@
                   <img
                     src="{{ product.images[1] | image_url: width: 600 }}"
                     class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                    alt="{{ product.title }}"
-                    loading="eager"
+                    alt="{{ product.title | escape }}"
+                    loading="lazy"
                     height=""
                     width=""
                   >
