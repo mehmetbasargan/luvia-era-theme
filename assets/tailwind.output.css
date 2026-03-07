@@ -710,10 +710,6 @@ blockquote{
   pointer-events: auto;
 }
 
-.visible{
-  visibility: visible;
-}
-
 .invisible{
   visibility: hidden;
 }
@@ -792,10 +788,6 @@ blockquote{
   bottom: 2.5rem;
 }
 
-.bottom-5{
-  bottom: 1.25rem;
-}
-
 .bottom-8{
   bottom: 2rem;
 }
@@ -812,10 +804,6 @@ blockquote{
   left: 50%;
 }
 
-.left-2{
-  left: 0.5rem;
-}
-
 .left-3{
   left: 0.75rem;
 }
@@ -828,20 +816,12 @@ blockquote{
   right: 0px;
 }
 
-.right-2{
-  right: 0.5rem;
-}
-
 .right-3{
   right: 0.75rem;
 }
 
 .right-4{
   right: 1rem;
-}
-
-.right-5{
-  right: 1.25rem;
 }
 
 .right-8{
@@ -868,6 +848,10 @@ blockquote{
   top: 6rem;
 }
 
+.top-28{
+  top: 7rem;
+}
+
 .top-3{
   top: 0.75rem;
 }
@@ -890,10 +874,6 @@ blockquote{
 
 .top-full{
   top: 100%;
-}
-
-.top-28{
-  top: 7rem;
 }
 
 .z-0{
@@ -1055,10 +1035,6 @@ blockquote{
 
 .ml-2{
   margin-left: 0.5rem;
-}
-
-.ml-auto{
-  margin-left: auto;
 }
 
 .mr-2{
@@ -1548,6 +1524,11 @@ blockquote{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.translate-y-4{
+  --tw-translate-y: 1rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .translate-y-8{
   --tw-translate-y: 2rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1555,11 +1536,6 @@ blockquote{
 
 .translate-y-full{
   --tw-translate-y: 100%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-y-4{
-  --tw-translate-y: 1rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1583,22 +1559,6 @@ blockquote{
 
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-@keyframes bounce{
-  0%, 100%{
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8,0,1,1);
-  }
-
-  50%{
-    transform: none;
-    animation-timing-function: cubic-bezier(0,0,0.2,1);
-  }
-}
-
-.animate-bounce{
-  animation: bounce 1s infinite;
 }
 
 @keyframes ping{
@@ -2002,17 +1962,18 @@ blockquote{
   background-color: rgb(229 229 229 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[\#ffffff\]{
+.bg-\[\#f9f9f9\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#ffffffc2\]{
-  background-color: #ffffffc2;
+  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));
 }
 
 .bg-black{
   background-color: var(--color-black);
+}
+
+.bg-blue-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
 }
 
 .bg-custombg{
@@ -2039,6 +2000,11 @@ blockquote{
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
 }
 
+.bg-green-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
+}
+
 .bg-primary{
   background-color: var(--color-primary);
 }
@@ -2060,24 +2026,9 @@ blockquote{
   background-color: var(--color-white);
 }
 
-.bg-blue-500{
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
-}
-
-.bg-green-500{
-  --tw-bg-opacity: 1;
-  background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
-}
-
 .bg-yellow-500{
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#f9f9f9\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));
 }
 
 .object-contain{
@@ -2471,10 +2422,6 @@ blockquote{
   line-height: 1.25;
 }
 
-.tracking-\[0\.15em\]{
-  letter-spacing: 0.15em;
-}
-
 .tracking-\[0\.1em\]{
   letter-spacing: 0.1em;
 }
@@ -2557,10 +2504,6 @@ blockquote{
 
 .text-white{
   color: var(--color-white);
-}
-
-.underline{
-  text-decoration-line: underline;
 }
 
 .line-through{
@@ -2838,17 +2781,17 @@ blockquote{
   background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-red-500:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-secondary:hover{
   background-color: var(--color-secondary);
 }
 
 .hover\:bg-white:hover{
   background-color: var(--color-white);
-}
-
-.hover\:bg-red-500:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:\!text-white:hover{
@@ -3028,18 +2971,6 @@ blockquote{
   opacity: 1;
 }
 
-.peer:checked ~ .peer-checked\:border-black{
-  border-color: var(--color-black);
-}
-
-.peer:checked ~ .peer-checked\:border-primary{
-  border-color: var(--color-primary);
-}
-
-.peer:checked ~ .peer-checked\:bg-black{
-  background-color: var(--color-black);
-}
-
 .peer:checked ~ .peer-checked\:bg-primary{
   background-color: var(--color-primary);
 }
@@ -3055,14 +2986,6 @@ blockquote{
 }
 
 @media (min-width: 768px){
-  .md\:left-4{
-    left: 1rem;
-  }
-
-  .md\:right-4{
-    right: 1rem;
-  }
-
   .md\:right-\[-18px\]{
     right: -18px;
   }
