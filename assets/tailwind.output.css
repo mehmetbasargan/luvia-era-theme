@@ -3007,6 +3007,14 @@ blockquote{
     display: block;
   }
 
+  .md\:flex{
+    display: flex;
+  }
+
+  .md\:hidden{
+    display: none;
+  }
+
   .md\:h-16{
     height: 4rem;
   }

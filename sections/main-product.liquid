@@ -32,8 +32,9 @@
               </div>
             {% endfor %}
           </div>
-          <div class="swiper-button-next text-primary !after:text-lg"></div>
-          <div class="swiper-button-prev text-primary !after:text-lg"></div>
+          <div class="swiper-button-next hidden md:flex"></div>
+          <div class="swiper-button-prev hidden md:flex"></div>
+          <div class="swiper-pagination flex md:hidden"></div>
         </div>
       </div>
     </div>
@@ -152,6 +153,55 @@
     border-radius: 50%;
     color: var(--color-primary);
   }
+  .swiper-button-next .swiper-navigation-icon,
+  .swiper-button-prev .swiper-navigation-icon {
+    width: 10px !important;
+  }
+  .swiper-horizontal {
+    &.swiper-rtl .swiper-button-next,
+    &.swiper-rtl ~ .swiper-button-next,
+    & ~ .swiper-button-prev,
+    .swiper-button-prev {
+      left: 20px;
+      right: auto;
+    }
+  }
+  .swiper-horizontal {
+    &.swiper-rtl .swiper-button-prev,
+    &.swiper-rtl ~ .swiper-button-prev,
+    & ~ .swiper-button-next,
+    .swiper-button-next {
+      left: auto;
+      right: 20px;
+    }
+  }
+
+  .swiper-horizontal > .swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal,
+  .swiper-pagination-custom,
+  .swiper-pagination-fraction {
+    bottom: 20px;
+    left: 0;
+    top: var(--swiper-pagination-top, auto);
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .swiper-pagination-bullet {
+    background: var(--color-secondary);
+    height: 12px !important;
+    width: 12px !important;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+  .swiper-pagination-bullet-active {
+    background: var(--color-secondary);
+    opacity: 1;
+    width: 30px !important;
+    border-radius: 6px;
+  }
+
   @media screen and (min-width: 1024px) {
     .product-info-column {
       position: sticky;
@@ -171,7 +221,15 @@ document.addEventListener('DOMContentLoaded', function () {
     new Swiper('.product-main', {
       loop: true, zoom: { maxRatio: 2.5 },
       navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      thumbs: { swiper: thumbsSwiper }
+      thumbs: { swiper: thumbsSwiper },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
     });
   }
 
