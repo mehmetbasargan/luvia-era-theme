@@ -291,13 +291,13 @@
                 {% endif %}
               </a> {% endcomment %}
 
-              <style>
+             {% comment %}  <style>
                 shopify-account::part(signed-out-avatar) {
                   padding: 12px;
                   width: 64px;
                   height: 64px;
                 }
-              </style>
+              </style> {% endcomment %}
 
               <shopify-account menu="customer-account-main-menu">
                 <div slot="signed-out-avatar" class="w-6 h-6 lg:w-7 lg:h-7 text-primary group-hover:text-secondary transition-colors"">
