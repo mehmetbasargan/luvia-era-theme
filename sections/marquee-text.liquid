@@ -78,6 +78,21 @@
     document.addEventListener('shopify:section:unload', () => {
       document.documentElement.style.setProperty('--marquee-height', '0px');
     });
+
+    (function () {
+      // Header elementini seçiyoruz (Genellikle HTML5 'header' etiketi veya ID/Class ile)
+      const siteHeader =
+        document.querySelector('header') ||
+        document.querySelector('.site-header') ||
+        document.querySelector('#main-header');
+
+      if (siteHeader) {
+        // Header'a '.marquee-text' class'ını ekliyoruz
+        siteHeader.classList.add('marquee-text-active');
+        // Not: 'marquee-text' direkt eklenebilir ama 'active' gibi bir takı
+        // stil karışıklığını önlemek için daha güvenlidir.
+      }
+    })();
   </script>
 
 {%- else -%}
