@@ -66,50 +66,5 @@
 				"label": "Favicon Image"
 			}
 		]
-	},
-	{
-		"name": "Theme Documentation",
-		"settings": [
-			{
-				"type": "header",
-				"content": "📖 Tema Kullanım Rehberi"
-			},
-			{
-				"type": "paragraph",
-				"content": "Bu tema, yüksek performans ve modern özellikler için optimize edilmiştir. Aşağıda temel ayarların kullanımına dair bilgiler yer almaktadır."
-			},
-			{
-				"type": "header",
-				"content": "1. Header Şeffaflık (Opacity)"
-			},
-			{
-				"type": "paragraph",
-				"content": "**Header Opacity Rate:** Header ayarlarından erişilen bu değer, ana sayfa ilk yüklendiğinde menünün ne kadar şeffaf olacağını belirler. 0 değeri tam şeffaf, 1 değeri ise düz renk arka plan sağlar."
-			},
-			{
-				"type": "header",
-				"content": "2. Bülten (Newsletter)"
-			},
-			{
-				"type": "paragraph",
-				"content": "Footer alanındaki bülten formu Shopify'ın yerel 'Customer' formunu kullanır. Kayıt olan kullanıcılar 'Müşteriler' panelinde 'newsletter' etiketiyle otomatik olarak listelenir."
-			},
-			{
-				"type": "header",
-				"content": "3. Müşteri Hesabı Ayarları"
-			},
-			{
-				"type": "paragraph",
-				"content": "Hesap butonu Shopify'ın yeni 'Customer Accounts' bileşenini kullanır. Renk ve boyut ayarları temanın genel stiliyle uyumludur ve 50px olarak sabitlenmiştir."
-			},
-			{
-				"type": "header",
-				"content": "🆘 Destek"
-			},
-			{
-				"type": "paragraph",
-				"content": "Daha fazla teknik destek veya özelleştirme talepleriniz için geliştirici ile iletişime geçebilirsiniz."
-			}
-		]
 	}
 ]
