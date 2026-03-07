@@ -3,9 +3,9 @@
   <div class="swiper myTestimonialSwiper">
     <div class="swiper-wrapper">
       {% for item in section.blocks %}
-        <div class="swiper-slide">
+        <div class="swiper-slide flex flex-col items-center text-center w-full bg-custombg p-8 rounded-lg min-h-[250px]">
           {{ item.settings.testimonial }}
-          <span>{{ settings.name }}</span>
+          <span class="mt-8">- {{ item.settings.name }}</span>
         </div>
       {% endfor %}
     </div>
