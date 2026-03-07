@@ -18,7 +18,7 @@
 
 <script>
   var swiper = new Swiper('.mySwiper', {
-    slidesPerView: 3,
+    slidesPerView: {{ section.settings.slides_per_view }},
     spaceBetween: 30,
     freeMode: true,
     pagination: {
@@ -31,7 +31,14 @@
 {% schema %}
 {
   "name": "Testimonial",
-  "settings": [],
+  "settings": [
+    {
+      "type": "number",
+      "id": "slides_per_view",
+      "label": "Slides per view",
+      "default": 3
+    }
+  ],
   "blocks": [
     {
       "type": "testimonial",
