@@ -573,12 +573,12 @@ video {
 
 shopify-account {
   /* Arka plan rengini buradan değiştir */
-  --shopify-account-color-accent: #ff0000 !important;
+  --shopify-account-color-accent: var(--color-secondary) !important;
   /* İkon veya metin rengini buradan değiştir */
-  --shopify-account-color-accent-text: #ffffff !important;
+  --shopify-account-color-accent-text: var(--color-white) !important;
   /* Eğer giriş yapılmışsa özel renkler */
-  --shopify-account-signed-in-avatar-color-background: #ff0000 !important;
-  --shopify-account-signed-in-avatar-color-text: #ffffff !important;
+  --shopify-account-signed-in-avatar-color-background: var(--color-secondary) !important;
+  --shopify-account-signed-in-avatar-color-text: var(--color-white) !important;
 }
 
 /* İkonun boyutunu ve kutusunu zorlamak için */
