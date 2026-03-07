@@ -11,6 +11,29 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
+    "marquee_text_LitapC": {
+      "type": "marquee-text",
+      "blocks": {
+        "text_block_HeqF77": {
+          "type": "text_block",
+          "settings": {
+            "text": "FREE SHIPPING WORLDWIDE"
+          }
+        }
+      },
+      "block_order": [
+        "text_block_HeqF77"
+      ],
+      "disabled": true,
+      "name": "Marquee Text",
+      "settings": {
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "speed": 30,
+        "show_separator": true,
+        "pause_on_hover": true
+      }
+    },
     "header": {
       "type": "header",
       "blocks": {
@@ -104,33 +127,11 @@
         "header_phone": "+90 532 463 24 47",
         "show_phone": true
       }
-    },
-    "marquee_text_LitapC": {
-      "type": "marquee-text",
-      "blocks": {
-        "text_block_HeqF77": {
-          "type": "text_block",
-          "settings": {
-            "text": "FREE SHIPPING WORLDWIDE"
-          }
-        }
-      },
-      "block_order": [
-        "text_block_HeqF77"
-      ],
-      "name": "Marquee Text",
-      "settings": {
-        "bg_color": "#000000",
-        "text_color": "#ffffff",
-        "speed": 30,
-        "show_separator": true,
-        "pause_on_hover": true
-      }
     }
   },
   "order": [
+    "marquee_text_LitapC",
     "header",
-    "header_two_jmKjTX",
-    "marquee_text_LitapC"
+    "header_two_jmKjTX"
   ]
 }
