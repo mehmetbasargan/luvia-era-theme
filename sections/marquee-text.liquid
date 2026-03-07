@@ -81,48 +81,55 @@
 
     /* **** */
     (function () {
-      const header = document.getElementById('main-header');
-      if (!header) return;
+      // Header'ı bulmak için yardımcı fonksiyon
+      function getHeader() {
+        return document.getElementById('main-header') || document.querySelector('.site-header');
+      }
 
-      // 1. Marquee varlığını belirten class'ı ekle (MutationObserver ile korumalı)
-      const addMarqueeClass = () => {
-        if (!header.classList.contains('marquee-text-active')) {
-          header.classList.add('marquee-text-active');
-        }
-      };
+      function initMarqueeHeader() {
+        const header = getHeader();
+        if (!header) return;
 
-      // 2. Scroll kontrol fonksiyonu
-      const handleScroll = () => {
-        const scrollY = window.scrollY;
+        // 1. Marquee class'ını ekle
+        header.classList.add('marquee-text-active');
 
-        if (scrollY > 10) {
-          // 10px'den fazla kaydırıldıysa
-          header.classList.add('is-scrolled');
-          // Scroll edildiğinde top: 40px'i geçersiz kılmak için style'ı sıfırla
-          header.style.top = '0px';
-        } else {
-          header.classList.remove('is-scrolled');
-          // Sayfa en üstteyse ve marquee class'ı varsa 40px aşağı çek
-          if (header.classList.contains('marquee-text-active')) {
-            header.style.top = '40px';
+        // 2. Scroll kontrolü
+        const updateHeaderPosition = () => {
+          const isScrolled = window.scrollY > 20;
+          if (isScrolled) {
+            header.classList.add('is-scrolled');
+            header.style.setProperty('top', '0px', 'important');
+          } else {
+            header.classList.remove('is-scrolled');
+            header.style.setProperty('top', '40px', 'important');
           }
+        };
+
+        // Event'leri bağla
+        window.addEventListener('scroll', updateHeaderPosition, { passive: true });
+        updateHeaderPosition(); // İlk açılışta çalıştır
+
+        // Bekçi: Başka bir JS class'ı silerse geri ekle
+        const observer = new MutationObserver(() => {
+          if (!header.classList.contains('marquee-text-active')) {
+            header.classList.add('marquee-text-active');
+            updateHeaderPosition();
+          }
+        });
+        observer.observe(header, { attributes: true, attributeFilter: ['class'] });
+      }
+
+      // DOM'un yüklenmesini beklemeden hemen denemeye başla (Interval yöntemi)
+      let retryCount = 0;
+      const checkHeader = setInterval(() => {
+        const header = getHeader();
+        if (header) {
+          initMarqueeHeader();
+          clearInterval(checkHeader);
         }
-      };
-
-      // Bekçi (Observer) - Diğer scriptlerin class'ı silmesini engeller
-      const observer = new MutationObserver(() => addMarqueeClass());
-      observer.observe(header, { attributes: true, attributeFilter: ['class'] });
-
-      // Event Listeners
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      window.addEventListener('load', () => {
-        addMarqueeClass();
-        handleScroll();
-      });
-
-      // İlk çalıştırma
-      addMarqueeClass();
-      handleScroll();
+        if (retryCount > 100) clearInterval(checkHeader); // 10 saniye sonra aramayı bırak
+        retryCount++;
+      }, 100);
     })();
   </script>
 
