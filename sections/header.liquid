@@ -332,7 +332,7 @@
   window.addEventListener('scroll', updateHeaderHeight);
 </script>
 
-<style>
+{% style %}
   .account-button__avatar {
     position: relative;
     width: var(--clamped-avatar-size);
@@ -347,7 +347,7 @@
     transition: scale var(--timing-short) var(--easing-default),
       background-color var(--timing-short) var(--easing-default), color var(--timing-short) var(--easing-default);
   }
-</style>
+{% endstyle %}
 
 {% schema %}
 {
