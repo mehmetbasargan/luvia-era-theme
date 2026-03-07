@@ -146,13 +146,6 @@
         {{ shop.name | link_to: routes.root_url }} -
         {{ 'footer.all_rights_reserved' | t }}
       </div>
-      <div class="footer__payment">
-        {% if section.settings.show_payment_icons %}
-          {% for type in shop.enabled_payment_types %}
-            {{ type | payment_type_svg_tag }}
-          {% endfor %}
-        {% endif %}
-      </div>
     </div>
   </div>
 </div>
@@ -214,11 +207,19 @@
       "type": "link_list",
       "id": "footer_menu_2",
       "label": "2. Menu Selection"
-    },
+    }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "copyright",
-      "label": "Copyright Text"
+      "type": "payment_icons",
+      "name": "Payment Icons",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "payment_icon",
+          "label": "Payment Icon"
+        }
+      ]
     }
   ]
 }
