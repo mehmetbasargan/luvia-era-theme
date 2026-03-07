@@ -79,23 +79,46 @@
       document.documentElement.style.setProperty('--marquee-height', '0px');
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-      // Yaygın kullanılan tüm header class ve ID'lerini kontrol edelim
-      const selectors = ['header', '.header', '.site-header', '#header', '.header-wrapper'];
+    /* **** */
+    (function () {
+      const addMarqueeClass = () => {
+        // Doğrudan ID üzerinden hedef alıyoruz (En garantisi budur)
+        const header = document.getElementById('main-header');
 
-      let siteHeader = null;
-      for (const selector of selectors) {
-        siteHeader = document.querySelector(selector);
-        if (siteHeader) break;
+        if (header) {
+          // Eğer class yoksa ekle
+          if (!header.classList.contains('marquee-text-active')) {
+            header.classList.add('marquee-text-active');
+            console.log('Class başarıyla eklendi.');
+          }
+        }
+      };
+
+      // 1. Sayfa yüklendiğinde dene
+      window.addEventListener('load', addMarqueeClass);
+
+      // 2. DOMContentLoaded'da dene
+      document.addEventListener('DOMContentLoaded', addMarqueeClass);
+
+      // 3. Diğer scriptlerin ezmesine karşı kısa bir süre gözlemle (MutationObserver)
+      const targetHeader = document.getElementById('main-header');
+      if (targetHeader) {
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              if (!targetHeader.classList.contains('marquee-text-active')) {
+                targetHeader.classList.add('marquee-text-active');
+              }
+            }
+          });
+        });
+
+        observer.observe(targetHeader, { attributes: true });
       }
 
-      if (siteHeader) {
-        siteHeader.classList.add('marquee-text-active');
-        console.log('Header bulundu ve class eklendi:', siteHeader); // Test için konsola yazar
-      } else {
-        console.error('Header bulunamadı! Lütfen temanızdaki header class/ID ismini kontrol edin.');
-      }
-    });
+      // 4. Hemen çalıştır
+      addMarqueeClass();
+    })();
   </script>
 
 {%- else -%}
