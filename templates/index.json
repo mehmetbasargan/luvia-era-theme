@@ -158,6 +158,13 @@
     "testimonial_CxWzTk": {
       "type": "testimonial",
       "blocks": {
+        "testimonial_P4nawc": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
+            "name": "John Doe"
+          }
+        },
         "testimonial_mgkKpV": {
           "type": "testimonial",
           "settings": {
@@ -188,6 +195,7 @@
         }
       },
       "block_order": [
+        "testimonial_P4nawc",
         "testimonial_mgkKpV",
         "testimonial_kk6pic",
         "testimonial_BBAPTn",
