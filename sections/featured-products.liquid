@@ -110,7 +110,10 @@
   function handleFeaturedAddToCart(e, variantId) {
     const btn = e.currentTarget;
     const originalText = btn.innerText;
+
+    // Buton durumunu güncelle
     btn.innerText = '...';
+    btn.disabled = true; // Çift tıklamayı engellemek için
 
     fetch('/cart/add.js', {
       method: 'POST',
@@ -120,16 +123,44 @@
       .then((res) => res.json())
       .then((data) => {
         btn.innerText = 'ADDED';
-        if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
-        document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: data }, bubbles: true }));
+
+        // 1. Global Toast Bildirimi (luvia-global.js içinden gelir)
+        if (window.showToast) {
+          window.showToast(window.LuviaStrings.cartAdded || 'Product added to cart', 'success');
+        }
+
+        // 2. Cart Drawer'ı Aç (luvia-global.js içinden gelir)
+        if (window.openCartDrawer) {
+          window.openCartDrawer();
+        }
+
+        // 3. Sepet İçeriğini Yenile
+        // Eğer temanızda 'openAndRefreshCart' varsa çalıştırır
+        if (typeof openAndRefreshCart === 'function') {
+          openAndRefreshCart();
+        }
+
+        // Temanızdaki cart listener'ları için eventi tetikle
+        document.dispatchEvent(
+          new CustomEvent('cart:updated', {
+            detail: { cart: data },
+            bubbles: true,
+          })
+        );
+
         setTimeout(() => {
           btn.innerText = originalText;
+          btn.disabled = false;
         }, 2000);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error('Cart Error:', error);
         btn.innerText = 'ERROR';
+        if (window.showToast) window.showToast('Error adding to cart', 'error');
+
         setTimeout(() => {
           btn.innerText = originalText;
+          btn.disabled = false;
         }, 2000);
       });
   }
