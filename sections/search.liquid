@@ -59,12 +59,13 @@
 </div>
 
 <script>
+  // HATALI OLAN TRANSLATIONS KISMI DÜZELTİLDİ
   const translations = {
-    journal: {{ 'general.search.journal' | t | json }},
-  article: { { 'general.search.article' | t | json } },
-  readMore: { { 'blog.read_more' | t | json } },
-  viewProduct: { { 'general.view_product' | t | json } },
-  sale: { { 'products.product.on_sale' | t | json } }
+    journal: {{ 'general.search.journal' | t | json }} || "Journal",
+    article: {{ 'general.search.article' | t | json }} || "Article",
+    readMore: {{ 'blog.read_more' | t | json }} || "Read Article",
+    viewProduct: {{ 'general.view_product' | t | json }} || "View Product",
+    sale: {{ 'products.product.on_sale' | t | json }} || "SALE"
   };
 
   const searchInput = document.querySelector('#search-input');
@@ -132,7 +133,6 @@
         const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
         const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
 
-        // VARYANT MANTIĞI: Birden fazla varyant varsa "Select Options" yap
         const hasMultipleVariants = item.variants && item.variants.length > 1;
         const variantId = item.variants && item.variants[0] ? item.variants[0].id : item.id;
 
@@ -157,7 +157,6 @@
             </button>
           </div>`;
 
-        // DİNAMİK BUTON: Seçenek varsa detaya, yoksa sepete
         if (hasMultipleVariants) {
           actionButton = `
               <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
@@ -214,13 +213,11 @@
   .animate-fadeIn {
     animation: fadeIn 0.4s ease-out forwards;
   }
-
   @keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateY(8px);
     }
-
     to {
       opacity: 1;
       transform: translateY(0);
