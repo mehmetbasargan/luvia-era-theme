@@ -221,6 +221,31 @@
       "settings": {
         "title": "Follow Era"
       }
+    },
+    "testimonial_CxWzTk": {
+      "type": "testimonial",
+      "blocks": {
+        "testimonial_BBAPTn": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean"
+          }
+        },
+        "testimonial_9GUqLM": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_BBAPTn",
+        "testimonial_9GUqLM"
+      ],
+      "name": "Testimonial",
+      "settings": {
+        "slides_per_view": 3
+      }
     }
   },
   "order": [
@@ -230,6 +255,7 @@
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
-    "full_width_gallery_fnrnK7"
+    "full_width_gallery_fnrnK7",
+    "testimonial_CxWzTk"
   ]
 }
