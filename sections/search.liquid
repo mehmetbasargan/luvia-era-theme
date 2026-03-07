@@ -59,7 +59,6 @@
 </div>
 
 <script>
-  // HATALI OLAN TRANSLATIONS KISMI DÜZELTİLDİ
   const translations = {
     journal: {{ 'general.search.journal' | t | json }} || "Journal",
     article: {{ 'general.search.article' | t | json }} || "Article",
@@ -133,7 +132,12 @@
         const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
         const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
 
-        const hasMultipleVariants = item.variants && item.variants.length > 1;
+        // --- GÜÇLENDİRİLMİŞ VARYANT KONTROLÜ ---
+        // Eğer ürünün birden fazla varyantı VARSA veya seçenekleri (options) varsa TRUE döner.
+        const hasOptions = (item.variants && item.variants.length > 1) || 
+                          (item.options && item.options.length > 1) ||
+                          (item.options && item.options[0] && item.options[0].values && item.options[0].values.length > 1);
+
         const variantId = item.variants && item.variants[0] ? item.variants[0].id : item.id;
 
         if (isOnSale) {
@@ -157,7 +161,8 @@
             </button>
           </div>`;
 
-        if (hasMultipleVariants) {
+        // BUTON KARAR MANTIĞI
+        if (hasOptions) {
           actionButton = `
               <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
                 <a href="${item.url}" class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
