@@ -1,5 +1,64 @@
+<div class="container py-20 mx-auto px-4">
+  {% comment %} Search Formu {% endcomment %}
+  <form
+    action="{{ routes.search_url }}"
+    method="get"
+    role="search"
+    class="flex items-center gap-2 max-w-3xl mx-auto mb-10"
+  >
+    <input type="hidden" name="type" value="product,article">
+    <div class="relative w-full">
+      <input
+        id="search-input"
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ 'general.search.placeholder' | t }}"
+        class="border border-line rounded px-4 py-2 h-16 w-full focus:outline-none focus:ring-1 focus:ring-secondary font-inter bg-white"
+        autocomplete="off"
+      >
+    </div>
+    <button
+      type="submit"
+      class="h-[64px] w-[64px] bg-secondary text-white rounded flex items-center justify-center hover:bg-primary transition-colors shrink-0"
+    >
+      {% render 'icon-search', class: 'w-6 h-6' %}
+    </button>
+  </form>
+
+  {% comment %} Search Header {% endcomment %}
+  <div
+    id="search-header-wrapper"
+    class="mb-8 border-b border-line pb-4 {% unless search.performed %}hidden{% endunless %}"
+  >
+    <h5
+      id="dynamic-search-title"
+      class=" font-light text-primary uppercase tracking-widest leading-relaxed text-center"
+    >
+      {% if search.performed %}
+        {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+      {% endif %}
+    </h5>
+  </div>
+
+  {% comment %} Search Results {% endcomment %}
+  <div id="search-results-container">
+    <div id="search-results" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+      {% if search.performed %}
+        {% for result in search.results %}
+          {% if result.object_type == 'product' %}
+            {% render 'product-card', product: result %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div id="search-empty-message" class="hidden text-center py-20 text-lg text-primary">
+      {{ 'general.search.no_results' | t }}
+    </div>
+  </div>
+</div>
+
 <script>
-  // 1. Gerekli Değişkenler ve Çeviriler
   const translations = {
     journal: {{ 'general.search.journal' | t | json }} || "Journal",
     article: {{ 'general.search.article' | t | json }} || "Article",
@@ -25,20 +84,18 @@
   const rawSearchLabel = "{{ 'general.search.search_results' | t }}";
   const searchLabel = rawSearchLabel.includes('search_results') ? 'Search Results' : rawSearchLabel;
 
-  // 2. Arama Girişi Dinleyicisi (Input Listener)
+  // CANLI ARAMA TETİKLEYİCİSİ
   if (searchInput) {
     searchInput.addEventListener('input', function (e) {
       const searchTerm = e.target.value.trim();
-      
       if (searchTerm.length <= 2) {
         if (!window.location.search.includes('q=')) {
-          if (searchHeaderWrapper) searchHeaderWrapper.classList.add('hidden');
-          if (resultsContainer) resultsContainer.innerHTML = '';
+          searchHeaderWrapper.classList.add('hidden');
+          resultsContainer.innerHTML = '';
         }
         return;
       }
 
-      // Shopify Suggest API'den veriyi çek
       fetch(`${window.Shopify.routes.root}search/suggest.json?q=${encodeURIComponent(searchTerm)}&resources[type]=product,article&resources[limit]=12`)
         .then(response => response.json())
         .then(data => {
@@ -46,53 +103,51 @@
           const articles = data.resources?.results?.articles || [];
           const allResults = [...products, ...articles];
           
-          if (searchHeaderWrapper) searchHeaderWrapper.classList.remove('hidden');
-          if (dynamicTitle) dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${allResults.length})`;
+          searchHeaderWrapper.classList.remove('hidden');
+          dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${allResults.length})`;
 
           if (allResults.length > 0) {
-            if (emptyMessage) emptyMessage.classList.add('hidden');
-            if (resultsContainer) resultsContainer.classList.remove('hidden');
-            renderResults(allResults); // Kartları oluştur
+            emptyMessage.classList.add('hidden');
+            resultsContainer.classList.remove('hidden');
+            renderResults(allResults);
           } else {
-            if (resultsContainer) resultsContainer.innerHTML = '';
-            if (emptyMessage) emptyMessage.classList.remove('hidden');
+            resultsContainer.innerHTML = '';
+            emptyMessage.classList.remove('hidden');
           }
         })
-        .catch(err => console.error("Search Fetch Error:", err));
+        .catch(err => console.error("Search fetch error:", err));
     });
   }
 
-  // 3. Kartları Ekrana Basan Fonksiyon
   function renderResults(results) {
-    if (!resultsContainer) return;
+    if(!resultsContainer) return;
+    
+    resultsContainer.innerHTML = results.map(item => {
+      const isArticle = item.url.includes('/blogs/') || item.type === 'article';
+      const mainImage = item.featured_image ? item.featured_image.url : (item.image || '');
+      const variantId = item.variants && item.variants[0] ? item.variants[0].id : '';
 
-    resultsContainer.innerHTML = results.map((item) => {
-        const isArticle = item.url.includes('/blogs/') || item.type === 'article';
-        const mainImage = item.featured_image ? item.featured_image.url : (item.image || '');
+      let badgeHtml = '', priceHtml = '', actionButton = '', wishlistBtn = '';
+
+      if (!isArticle) {
+        const currentPrice = Number(item.price);
+        const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
+        const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
+
+        if (isOnSale) {
+          badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white text-[10px] px-2 py-1 uppercase tracking-widest font-medium">${translations.sale}</span>`;
+        }
         
-        let badgeHtml = '', priceHtml = '', actionButton = '', wishlistBtn = '';
-
-        if (!isArticle) {
-          // Ürün Ayarları
-          const currentPrice = Number(item.price);
-          const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
-          const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
-          const variantId = item.variants && item.variants[0] ? item.variants[0].id : '';
-
-          if (isOnSale) {
-            badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white text-[10px] px-2 py-1 uppercase tracking-widest font-medium">${translations.sale}</span>`;
-          }
-
-          priceHtml = `<div class="mt-2 flex items-center gap-2">
+        priceHtml = `<div class="mt-2 flex items-center gap-2">
             ${isOnSale ? `<span class="text-gray-400 line-through text-[12px]">${formatMoney(comparePriceRaw)}</span>` : ''}
             <span class="text-primary text-[14px] font-medium">${formatMoney(item.price)}</span>
           </div>`;
 
-          // Global Wishlist Butonu
-          wishlistBtn = `
-          <div class="absolute top-3 right-3 z-40">
+        // Wishlist Butonu (Luvia Global)
+        wishlistBtn = `
+          <div class="absolute top-3 right-3 z-50">
             <button type="button" 
-                    class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:scale-110 transition-transform duration-300 pointer-events-auto" 
+                    class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:scale-110 transition-transform duration-300" 
                     data-product-id="${item.id}"
                     onclick="window.LuviaWishlist.toggle('${item.id}')">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,34 +156,33 @@
             </button>
           </div>`;
 
-          // Global Add to Cart Butonu
-          actionButton = `
-          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
+        // Add to Cart Butonu (Luvia Global)
+        actionButton = `
+          <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
             <button type="button" 
                     onclick="window.handleGlobalAddToCart(event, '${variantId}')" 
-                    class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors border-none cursor-pointer font-heading">
+                    class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors border-none cursor-pointer">
               ADD TO CART
             </button>
           </div>`;
-        } else {
-          // Blog Yazısı Ayarları
-          badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
-          actionButton = `
+      } else {
+        badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
+        actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
-            <a href="${item.url}" class="w-full bg-black text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
+            <a href="${item.url}" class="w-full bg-black text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
               ${translations.readMore}
             </a>
           </div>`;
-        }
+      }
 
-        return `
-        <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn transition-all" id="search-item-${item.id}">
+    return `
+        <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn transition-all">
           <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
             ${badgeHtml}
             ${wishlistBtn}
             
             <a href="${item.url}" class="block h-full w-full">
-              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+              <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
             </a>
 
             ${actionButton}
@@ -141,9 +195,10 @@
             ${priceHtml}
           </div>
         </div>`;
-      }).join('');
-
-    // Kartlar basıldıktan sonra favori ikonlarını (kalpleri) boya
+        
+    }).join('');
+    
+    // Favori ikonlarını başlat
     if (window.LuviaWishlist && typeof window.LuviaWishlist.initIcons === 'function') {
       window.LuviaWishlist.initIcons();
     }
