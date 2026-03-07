@@ -37,11 +37,11 @@
 		--shopify-account-signed-in-avatar-size: 40px !important;
 
 		/* Renkler için bunlar */
-		--shopify-account-signed-in-avatar-color-background: #ff0000 !important; /* İstediğin renk */
+		--shopify-account-signed-in-avatar-color-background: var(--color-primary) !important; /* İstediğin renk */
 		--shopify-account-signed-in-avatar-color-text: #ffffff !important;
 
 		/* Genel tema uyumu için (Signed out durumu için de geçerli olabilir) */
-		--shopify-account-color-accent: #ff0000 !important;
+		--shopify-account-color-accent: var(--color-secondary) !important;
 	}
 
 	/* İkonun bu yeni boyuta tam ortalanması için */
