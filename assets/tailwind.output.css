@@ -1346,10 +1346,6 @@ blockquote{
   height: 100%;
 }
 
-.h-11{
-  height: 2.75rem;
-}
-
 .max-h-\[80vh\]{
   max-height: 80vh;
 }
@@ -1477,18 +1473,6 @@ blockquote{
 .w-max{
   width: -moz-max-content;
   width: max-content;
-}
-
-.w-10{
-  width: 2.5rem;
-}
-
-.w-11{
-  width: 2.75rem;
-}
-
-.w-14{
-  width: 3.5rem;
 }
 
 .min-w-\[200px\]{
