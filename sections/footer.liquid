@@ -99,13 +99,13 @@
         </button>
 
         {%- if form.posted_successfully? -%}
-          <p class="text-[10px] text-green-600 absolute mt-8 italic">
+          <p class="text-[14px] text-green-600 absolute mt-8 italic">
             {{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}
           </p>
         {%- endif -%}
 
         {%- if form.errors -%}
-          <p class="text-[10px] text-red-600 absolute mt-8 italic">
+          <p class="text-[14px] text-red-600 absolute mt-8 italic">
             {{ form.errors.messages.email }}
           </p>
         {%- endif -%}
