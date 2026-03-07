@@ -5,6 +5,7 @@
       {% for item in section.blocks %}
         <div class="swiper-slide">
           {{ item.settings.testimonial }}
+          <span>{{ item.settings.name }}</span>
         </div>
       {% endfor %}
     </div>
@@ -55,6 +56,11 @@
           "type": "textarea",
           "id": "testimonial",
           "label": "Testimonial"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
         }
       ]
     }
