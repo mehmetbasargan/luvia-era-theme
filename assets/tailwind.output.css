@@ -1346,6 +1346,10 @@ blockquote{
   height: 100%;
 }
 
+.h-\[90px\]{
+  height: 90px;
+}
+
 .max-h-\[80vh\]{
   max-height: 80vh;
 }
@@ -1505,6 +1509,18 @@ blockquote{
 .w-max{
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-\[40px\]{
+  width: 40px;
+}
+
+.w-\[350px\]{
+  width: 350px;
+}
+
+.w-\[35px\]{
+  width: 35px;
 }
 
 .min-w-\[200px\]{
@@ -2281,6 +2297,11 @@ blockquote{
 .py-\[300px\]{
   padding-top: 300px;
   padding-bottom: 300px;
+}
+
+.py-\[100px\]{
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .pb-1{
