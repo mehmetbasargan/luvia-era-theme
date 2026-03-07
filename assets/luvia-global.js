@@ -182,3 +182,60 @@ window.handleGlobalAddToCart = function (e, variantId) {
 			}, 2000);
 		});
 };
+
+// Global Sepete Ekleme Fonksiyonu
+window.handleGlobalAddToCart = function (e, variantId) {
+	if (!variantId || variantId === '') {
+		console.error('Hata: Variant ID bulunamadı.');
+		window.showToast('Please select a variant', 'error');
+		return;
+	}
+
+	const btn = e.currentTarget;
+	const originalText = btn.innerText;
+
+	btn.innerText = '...';
+	btn.disabled = true;
+
+	fetch('/cart/add.js', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ id: variantId, quantity: 1 }),
+	})
+		.then((res) => res.json())
+		.then((data) => {
+			btn.innerText = 'ADDED';
+
+			// 1. Bildirim (Toast) Göster
+			if (window.showToast) {
+				window.showToast(window.LuviaStrings?.cartAdded || 'Product added to cart', 'success');
+			}
+
+			// 2. Sepet Çekmecesini Aç
+			if (window.openCartDrawer) {
+				window.openCartDrawer();
+			}
+
+			// 3. Sepet İçeriğini Yenile (Eğer temanızda bu isimde bir fonksiyon varsa)
+			if (typeof openAndRefreshCart === 'function') {
+				openAndRefreshCart();
+			}
+
+			// Genel sepet güncelleme olayını tetikle
+			document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: data }, bubbles: true }));
+
+			setTimeout(() => {
+				btn.innerText = originalText;
+				btn.disabled = false;
+			}, 2000);
+		})
+		.catch((err) => {
+			console.error('Sepet Hatası:', err);
+			btn.innerText = 'ERROR';
+			if (window.showToast) window.showToast('Error adding to cart', 'error');
+			setTimeout(() => {
+				btn.innerText = originalText;
+				btn.disabled = false;
+			}, 2000);
+		});
+};
