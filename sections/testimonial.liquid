@@ -19,37 +19,12 @@
     if (existingSwiper) existingSwiper.destroy(true, true);
 
     new Swiper('.myTestimonialSwiper', {
-      loop: true,
-      effect: 'fade',
-      slidesPerView: 1, // Fade efekti için mutlaka 1 olmalı
-      speed: 1200,
-      allowTouchMove: true,
-      fadeEffect: {
-        crossFade: true, // Slaytların birbirinin içinden geçmesi için
-      },
-      autoplay: {
-        delay: 6000,
-        disableOnInteraction: false,
-      },
+      slidesPerView: {{ section.settings.slides_per_view }},
+      spaceBetween: 30,
+      freeMode: true,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
-        dynamicBullets: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      on: {
-        init: function () {
-          // İlk slaytı aktif et
-          this.slides[this.activeIndex].classList.add('is-active');
-        },
-        slideChange: function () {
-          // Tüm slaytlardan sınıfı kaldır ve yeni aktif olana ekle
-          this.slides.forEach((slide) => slide.classList.remove('is-active'));
-          this.slides[this.activeIndex].classList.add('is-active');
-        },
       },
     });
   };
