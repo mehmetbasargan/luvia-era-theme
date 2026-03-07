@@ -64,11 +64,11 @@
               </h3>
               <div class="mt-2 flex items-center justify-center gap-2">
                 {% if recommendation.compare_at_price > recommendation.price %}
-                  <span class="text-gray-400 line-through text-[12px]">
+                  <span class="text-gray-400 line-through text-[13px]">
                     {{- recommendation.compare_at_price | money -}}
                   </span>
                 {% endif %}
-                <span class="text-primary text-[14px] font-medium tracking-tight">
+                <span class="text-primary text-[13px] font-medium tracking-tight">
                   {{- recommendation.price | money -}}
                 </span>
               </div>
