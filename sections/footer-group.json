@@ -13,7 +13,6 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "disabled": true,
       "settings": {
         "footer_logo": "shopify://shop_images/logo2.svg",
         "footer_description": "Defining your essence through timeless designs.",
@@ -27,6 +26,7 @@
     },
     "footer-two": {
       "type": "footer-two",
+      "disabled": true,
       "settings": {
         "footer_logo": "shopify://shop_images/logo2.svg",
         "footer_description": "Defining your essence through timeless designs.",
