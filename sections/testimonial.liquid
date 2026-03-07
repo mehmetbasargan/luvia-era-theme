@@ -1,31 +1,59 @@
 <div class="container py-[300px]">
   <!-- Swiper -->
-  <div class="swiper mySwiper">
+  <div class="swiper myTestimonialSwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-      <div class="swiper-slide">Slide 9</div>
+      {% for item in section.blocks %}
+        <div class="swiper-slide">
+          {{ item.settings.testimonial }}
+        </div>
+      {% endfor %}
     </div>
     <div class="swiper-pagination"></div>
   </div>
 </div>
 
 <script>
-  var swiper = new Swiper('.mySwiper', {
-    slidesPerView: {{ section.settings.slides_per_view }},
-    spaceBetween: 30,
-    freeMode: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  });
+  const initSwiper = () => {
+    new Swiper('.myTestimonialSwiper', {
+      loop: true,
+      effect: 'fade',
+      speed: 1200,
+      fadeEffect: {
+        crossFade: true,
+      },
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+      on: {
+        init: function () {
+          const activeSlide = this.slides[this.activeIndex];
+          activeSlide.classList.add('is-active');
+        },
+        slideChangeTransitionStart: function () {
+          this.slides.forEach((slide) => {
+            slide.classList.remove('is-active');
+          });
+        },
+        slideChangeTransitionEnd: function () {
+          const activeSlide = this.slides[this.activeIndex];
+          activeSlide.classList.add('is-active');
+        },
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        dynamicBullets: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', initSwiper);
+  document.addEventListener('shopify:section:load', initSwiper);
 </script>
 
 {% schema %}
