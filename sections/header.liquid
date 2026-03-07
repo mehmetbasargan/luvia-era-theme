@@ -30,7 +30,9 @@
                     <a
                       href="{{ block.settings.link | default: '#' }}"
                       target="_blank"
+                      rel="noopener"
                       class="flex items-center justify-center w-8 h-8 p-1"
+                      aria-label="{{ block.settings.icon_choice | replace: 'icon-', '' | capitalize }} on social media"
                     >
                       {%- case block.settings.icon_choice -%}
                         {%- when 'icon-facebook' -%}

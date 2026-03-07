@@ -7,6 +7,7 @@
   >
     <input type="hidden" name="type" value="product,article">
     <div class="relative w-full">
+      <label class="sr-only" for="search-input">{{ 'general.search.placeholder' | t }}</label>
       <input
         id="search-input"
         type="search"
@@ -20,6 +21,7 @@
     <button
       type="submit"
       class="h-[64px] w-[64px] bg-secondary text-white rounded flex items-center justify-center hover:bg-primary transition-colors shrink-0"
+      aria-label="{{ 'general.search.submit' | t | default: 'Submit search' }}"
     >
       {% render 'icon-search', class: 'w-6 h-6' %}
     </button>
