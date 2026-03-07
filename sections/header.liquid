@@ -332,6 +332,23 @@
   window.addEventListener('scroll', updateHeaderHeight);
 </script>
 
+<style>
+  .account-button__avatar {
+    position: relative;
+    width: var(--clamped-avatar-size);
+    height: var(--clamped-avatar-size);
+    border-radius: 50%;
+    background-color: red;
+    color: var(--shopify-account-signed-in-avatar-color-text, var(--shopify-account-color-accent-text, #1a1a1a));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 0 1px #00000014;
+    transition: scale var(--timing-short) var(--easing-default),
+      background-color var(--timing-short) var(--easing-default), color var(--timing-short) var(--easing-default);
+  }
+</style>
+
 {% schema %}
 {
   "name": "Header - Classic",
