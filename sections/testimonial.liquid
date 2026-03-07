@@ -4,6 +4,7 @@
     <div class="swiper-wrapper">
       {% for item in section.blocks %}
         <div class="swiper-slide flex flex-col items-center text-center w-full bg-custombg p-8 rounded-lg min-h-[250px]">
+          <span class="bg-red-500">{% render 'icon-quote' %}</span>
           {{ item.settings.testimonial }}
           <span class="mt-8">- {{ item.settings.name }}</span>
         </div>
