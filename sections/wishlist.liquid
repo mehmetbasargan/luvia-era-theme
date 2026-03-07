@@ -3,78 +3,6 @@
     {{ 'wishlist.title' | t }}
   </h4>
 
-  <script>
-    // Wishlist Merkezi Yönetim
-    window.LuviaWishlist = {
-      get: function () {
-        return JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
-      },
-
-      toggle: function (productId) {
-        let wishlist = this.get();
-        const index = wishlist.indexOf(productId.toString());
-        const isAdding = index === -1;
-
-        if (isAdding) {
-          wishlist.push(productId.toString());
-        } else {
-          wishlist.splice(index, 1);
-        }
-
-        localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
-
-        // 1. UI Güncelleme (Sayfadaki tüm kalpleri bul ve boya/boşalt)
-        this.updateIcons(productId, isAdding);
-
-        // 2. Wishlist sayfasındaysak elemanı kaldır
-        const itemElement = document.getElementById(`wish-item-${productId}`);
-        if (!isAdding && itemElement) {
-          itemElement.style.opacity = '0';
-          itemElement.style.transform = 'scale(0.9)';
-          setTimeout(() => {
-            itemElement.remove();
-            this.checkEmpty();
-          }, 300);
-        }
-
-        // 3. Global Event (Header sayacı vb. için)
-        window.dispatchEvent(
-          new CustomEvent('wishlist:updated', {
-            detail: { productId, wishlist, isAdding },
-          })
-        );
-      },
-
-      updateIcons: function (productId, isActive) {
-        const buttons = document.querySelectorAll(`.custom-wishlist-btn[data-product-id="${productId}"]`);
-        buttons.forEach((btn) => {
-          const svg = btn.querySelector('svg');
-          if (isActive) {
-            btn.classList.add('wishlist-active');
-            if (svg) svg.setAttribute('fill', 'currentColor');
-          } else {
-            btn.classList.remove('wishlist-active');
-            if (svg) svg.setAttribute('fill', 'none');
-          }
-        });
-      },
-
-      checkEmpty: function () {
-        const container = document.getElementById('wishlist-container');
-        const emptyMessage = document.getElementById('wishlist-empty');
-        const wishlistIds = this.get();
-
-        if (wishlistIds.length === 0) {
-          if (container) container.classList.add('hidden');
-          if (emptyMessage) emptyMessage.classList.remove('hidden');
-        } else {
-          if (container) container.classList.remove('hidden');
-          if (emptyMessage) emptyMessage.classList.add('hidden');
-        }
-      },
-    };
-  </script>
-
   <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[200px] transition-all duration-500">
     {% comment %} Ürünler JS ile buraya gelecek {% endcomment %}
   </div>
@@ -93,8 +21,23 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('wishlist-container');
+    const emptyMessage = document.getElementById('wishlist-empty');
 
-    // İlk kontrol
+    // 1. Boş Kontrolü (Global Obje Üzerinden)
+    window.LuviaWishlist.checkEmpty = function () {
+      const wishlistIds = this.get();
+      if (wishlistIds.length === 0) {
+        if (container) container.classList.add('hidden');
+        if (emptyMessage) emptyMessage.classList.remove('hidden');
+      } else {
+        if (container) container.classList.remove('hidden');
+        if (emptyMessage) emptyMessage.add ? emptyMessage.classList.add('hidden') : null;
+        // fallback for classList
+        emptyMessage.classList.add('hidden');
+      }
+    };
+
+    // İlk kontrolü yap
     window.LuviaWishlist.checkEmpty();
 
     const initialIds = window.LuviaWishlist.get();
@@ -107,7 +50,7 @@
       });
     };
 
-    // Shopify Search API ile ürünleri getir
+    // 2. Shopify Search API ile ürünleri çek
     const searchQuery = initialIds.map((id) => `id:${id}`).join(' OR ');
 
     fetch(`/search/suggest.json?q=${encodeURIComponent(searchQuery)}&resources[type]=product&resources[limit]=20`)
@@ -135,17 +78,17 @@
                 <div class="absolute top-3 inset-x-3 z-10 flex justify-end items-start">
                   <button type="button" 
                           onclick="LuviaWishlist.toggle('${product.id}')"
-                          class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-red-500 hover:text-white transition-all duration-300 pointer-events-auto">
+                          class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-red-500 hover:text-white transition-all duration-300 pointer-events-auto border-none cursor-pointer">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                   </button>
                 </div>
                 <a href="${product.url}" class="block h-full w-full">
                   <img src="${product.featured_image}" alt="${
               product.title
-            }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                 </a>
                 <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
-                  <button type="button" onclick="handleWishlistAddToCart(event, '${firstVariantId}')" class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
+                  <button type="button" onclick="handleWishlistAddToCart(event, '${firstVariantId}')" class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer border-none">
                     {{ 'products.product.add_to_cart' | t }}
                   </button>
                 </div>
@@ -172,7 +115,7 @@
           .join('');
       });
 
-    // Sepete Ekleme
+    // 3. Global Toast Destekli Sepete Ekleme
     window.handleWishlistAddToCart = function (e, variantId) {
       const btn = e.currentTarget;
       const originalText = btn.innerText;
@@ -186,13 +129,22 @@
         .then((res) => res.json())
         .then((cartData) => {
           btn.innerText = 'ADDED';
+          // Global Toast Kullanımı
+          if (window.showToast) window.showToast(window.LuviaStrings.cartAdded, 'success');
           if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
+
+          // Cart Drawer'ı tetikle
+          document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: cartData }, bubbles: true }));
+
           setTimeout(() => {
             btn.innerText = originalText;
           }, 2000);
         })
         .catch(() => {
           btn.innerText = 'ERROR';
+          setTimeout(() => {
+            btn.innerText = originalText;
+          }, 2000);
         });
     };
   });
