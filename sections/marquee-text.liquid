@@ -79,20 +79,23 @@
       document.documentElement.style.setProperty('--marquee-height', '0px');
     });
 
-    (function () {
-      // Header elementini seçiyoruz (Genellikle HTML5 'header' etiketi veya ID/Class ile)
-      const siteHeader =
-        document.querySelector('header') ||
-        document.querySelector('site-header') ||
-        document.querySelector('#main-header');
+    document.addEventListener('DOMContentLoaded', function () {
+      // Yaygın kullanılan tüm header class ve ID'lerini kontrol edelim
+      const selectors = ['header', '.header', '.site-header', '#header', '.header-wrapper'];
+
+      let siteHeader = null;
+      for (const selector of selectors) {
+        siteHeader = document.querySelector(selector);
+        if (siteHeader) break;
+      }
 
       if (siteHeader) {
-        // Header'a '.marquee-text' class'ını ekliyoruz
         siteHeader.classList.add('marquee-text-active');
-        // Not: 'marquee-text' direkt eklenebilir ama 'active' gibi bir takı
-        // stil karışıklığını önlemek için daha güvenlidir.
+        console.log('Header bulundu ve class eklendi:', siteHeader); // Test için konsola yazar
+      } else {
+        console.error('Header bulunamadı! Lütfen temanızdaki header class/ID ismini kontrol edin.');
       }
-    })();
+    });
   </script>
 
 {%- else -%}
