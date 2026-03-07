@@ -585,11 +585,11 @@ shopify-account {
 
 shopify-account {
   /* Boyut için gerçek değişken bu */
-  --shopify-account-signed-in-avatar-size: 40px !important;
+  --shopify-account-signed-in-avatar-size: 50px !important;
   /* Renkler için bunlar */
   --shopify-account-signed-in-avatar-color-background: var(--color-primary) !important;
   /* İstediğin renk */
-  --shopify-account-signed-in-avatar-color-text: #ffffff !important;
+  --shopify-account-signed-in-avatar-color-text: var(--color-white) !important;
   /* Genel tema uyumu için (Signed out durumu için de geçerli olabilir) */
   --shopify-account-color-accent: var(--color-secondary) !important;
 }
@@ -598,8 +598,8 @@ shopify-account {
 
 shopify-account [slot='signed-out-avatar'],
 	shopify-account [slot='signed-in-avatar'] {
-  width: 40px !important;
-  height: 40px !important;
+  width: 50px !important;
+  height: 50px !important;
   display: flex !important;
   align-items: center;
   justify-content: center;
