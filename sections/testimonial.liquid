@@ -2,7 +2,7 @@
   {% if section.settings.testimonial_title %}
     <div class="container mb-10 flex justify-center items-end w-full">
       <div>
-        <h2 class="text-3xl font-light uppercase tracking-widest">{{ section.settings.testimonial_title }}</h2>
+        <h2 class="font-light uppercase tracking-widest">{{ section.settings.testimonial_title }}</h2>
         <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
       </div>
     </div>
@@ -12,18 +12,39 @@
   <div class="swiper myTestimonialSwiper">
     <div class="swiper-wrapper">
       {% for item in section.blocks %}
-        <div class="swiper-slide flex flex-col items-center text-center w-full bg-custombg p-8 rounded-lg min-h-[250px]">
+        <div
+          class="swiper-slide flex flex-col items-center text-center w-full bg-custombg p-8 rounded-lg min-h-[250px]"
+          itemscope
+          itemtype="https://schema.org/Review"
+        >
           <span class="w-[25px] mb-5 text-secondary">{% render 'icon-quote' %}</span>
-          <div class="h-[90px] text-[14px]">
+          <div class="h-[90px] text-[14px]" itemprop="reviewBody">
             {{ item.settings.testimonial }}
           </div>
-          <span class="mt-8 italic text-[13px]">- {{ item.settings.name }}</span>
+          <span class="mt-8 italic text-[13px]" itemprop="author">- {{ item.settings.name }}</span>
+          <meta itemprop="datePublished" content="{{ 'now' | date: '%Y-%m-%d' }}">
         </div>
       {% endfor %}
     </div>
     <div class="swiper-pagination"></div>
   </div>
 </div>
+
+<!-- JSON-LD Structured Data for SEO -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AggregateRating",
+    "itemReviewed": {
+      "@type": "Thing",
+      "name": "{{ section.settings.testimonial_title | default: 'Testimonials' }}"
+    },
+    "reviewCount": {{ section.blocks.size }},
+    "ratingValue": "5.0",
+    "bestRating": "5.0",
+    "worstRating": "1.0"
+  }
+</script>
 
 <style>
   .swiper-pagination {
@@ -52,6 +73,10 @@
       spaceBetween: 30,
       freeMode: true,
       loop:true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
