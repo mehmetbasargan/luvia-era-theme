@@ -290,6 +290,20 @@
                   </div>
                 {% endif %}
               </a>
+
+              <style>
+                shopify-account::part(signed-out-avatar) {
+                  padding: 12px;
+                  width: 64px;
+                  height: 64px;
+                }
+              </style>
+
+              <shopify-account menu="customer-account-main-menu">
+                <div slot="signed-out-avatar">
+                  {% render 'icon-account' %}
+                </div>
+              </shopify-account>
             </div>
           </div>
         </div>
