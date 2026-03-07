@@ -119,13 +119,21 @@
     });
   }
 
-  function renderResults(results) {
+function renderResults(results) {
     if(!resultsContainer) return;
     
     resultsContainer.innerHTML = results.map(item => {
       const isArticle = item.url.includes('/blogs/') || item.type === 'article';
       const mainImage = item.featured_image ? item.featured_image.url : (item.image || '');
-      const variantId = item.variants && item.variants[0] ? item.variants[0].id : '';
+      
+      // VARYANT ID YAKALAMA (GÜNCELLENDİ)
+      // API'den gelen farklı isimlendirmeleri kontrol ediyoruz
+      let variantId = '';
+      if (item.variants && item.variants.length > 0) {
+        variantId = item.variants[0].id;
+      } else if (item.id && !isArticle) {
+        variantId = item.id; // Bazı API sürümlerinde ana ID aynı zamanda ilk varyanttır
+      }
 
       let badgeHtml = '', priceHtml = '', actionButton = '', wishlistBtn = '';
 
@@ -143,7 +151,6 @@
             <span class="text-primary text-[14px] font-medium">${formatMoney(item.price)}</span>
           </div>`;
 
-        // Wishlist Butonu (Luvia Global)
         wishlistBtn = `
           <div class="absolute top-3 right-3 z-50">
             <button type="button" 
@@ -156,7 +163,7 @@
             </button>
           </div>`;
 
-        // Add to Cart Butonu (Luvia Global)
+        // "ADD TO CART" BUTONU
         actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
             <button type="button" 
@@ -169,25 +176,22 @@
         badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
         actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
-            <a href="${item.url}" class="w-full bg-black text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors">
+            <a href="${item.url}" class="w-full bg-black text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
               ${translations.readMore}
             </a>
           </div>`;
       }
 
-    return `
+      return `
         <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn transition-all">
           <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
             ${badgeHtml}
             ${wishlistBtn}
-            
             <a href="${item.url}" class="block h-full w-full">
               <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
             </a>
-
             ${actionButton}
           </div>
-
           <div class="pt-4 pb-2 flex flex-col items-center px-3 text-center">
             <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase line-clamp-2 min-h-[40px] tracking-wider font-body">
               ${item.title}
@@ -195,10 +199,8 @@
             ${priceHtml}
           </div>
         </div>`;
-        
     }).join('');
     
-    // Favori ikonlarını başlat
     if (window.LuviaWishlist && typeof window.LuviaWishlist.initIcons === 'function') {
       window.LuviaWishlist.initIcons();
     }
