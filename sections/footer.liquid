@@ -118,24 +118,34 @@
   <div class="container flex flex-col md:flex-row items-center justify-between">
     <div class="grid__item site-footer__payment-icons">
       <ul class="flex items-center gap-2 mb-5 md:mb-0">
-        <li class="payment-icon">
-          {% render 'icon-visa' %}
-        </li>
-        <li class="payment-icon">
-          {% render 'icon-master' %}
-        </li>
-        <li class="payment-icon">
-          {% render '.con-american-express' %}
-        </li>
-        <li class="payment-icon">
-          {% render 'icon-paypal' %}
-        </li>
-        <li class="payment-icon">
-          {% render 'icon-diners-club' %}
-        </li>
-        <li class="payment-icon">
-          {% render 'icon-discover' %}
-        </li>
+        {% for block in section.blocks %}
+          {% if block.settings.image != blank %}
+            <li class="payment-icon">
+              {{ block.settings.image | image_url: width: 50 | image_tag: class: 'w-12 h-8' }}
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% comment %}
+          <li class="payment-icon">
+            {% render 'icon-visa' %}
+          </li>
+          <li class="payment-icon">
+            {% render 'icon-master' %}
+          </li>
+          <li class="payment-icon">
+            {% render '.con-american-express' %}
+          </li>
+          <li class="payment-icon">
+            {% render 'icon-paypal' %}
+          </li>
+          <li class="payment-icon">
+            {% render 'icon-diners-club' %}
+          </li>
+          <li class="payment-icon">
+            {% render 'icon-discover' %}
+          </li>
+        {% endcomment %}
       </ul>
     </div>
 
