@@ -225,6 +225,12 @@
     "testimonial_CxWzTk": {
       "type": "testimonial",
       "blocks": {
+        "testimonial_kk6pic": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium."
+          }
+        },
         "testimonial_BBAPTn": {
           "type": "testimonial",
           "settings": {
@@ -239,6 +245,7 @@
         }
       },
       "block_order": [
+        "testimonial_kk6pic",
         "testimonial_BBAPTn",
         "testimonial_9GUqLM"
       ],
