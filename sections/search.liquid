@@ -60,11 +60,11 @@
 
 <script>
   const translations = {
-    journal: {{ 'general.search.journal' | t | json }} || "Journal",
-      article: { { 'general.search.article' | t | json } } || "Article",
-        readMore: { { 'blog.read_more' | t | json } } || "Read Article",
-          viewProduct: { { 'general.view_product' | t | json } } || "View Product",
-            sale: { { 'products.product.on_sale' | t | json } } || "SALE"
+    journal: {{ 'general.search.journal' | t | json }},
+  article: { { 'general.search.article' | t | json } },
+  readMore: { { 'blog.read_more' | t | json } },
+  viewProduct: { { 'general.view_product' | t | json } },
+  sale: { { 'products.product.on_sale' | t | json } }
   };
 
   const searchInput = document.querySelector('#search-input');
@@ -84,14 +84,13 @@
   const rawSearchLabel = "{{ 'general.search.search_results' | t }}";
   const searchLabel = rawSearchLabel.includes('search_results') ? 'Search Results' : rawSearchLabel;
 
-  // CANLI ARAMA TETİKLEYİCİSİ
   if (searchInput) {
     searchInput.addEventListener('input', function (e) {
       const searchTerm = e.target.value.trim();
       if (searchTerm.length <= 2) {
         if (!window.location.search.includes('q=')) {
-          searchHeaderWrapper.classList.add('hidden');
-          resultsContainer.innerHTML = '';
+          if (searchHeaderWrapper) searchHeaderWrapper.classList.add('hidden');
+          if (resultsContainer) resultsContainer.innerHTML = '';
         }
         return;
       }
@@ -103,16 +102,16 @@
           const articles = data.resources?.results?.articles || [];
           const allResults = [...products, ...articles];
 
-          searchHeaderWrapper.classList.remove('hidden');
-          dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${allResults.length})`;
+          if (searchHeaderWrapper) searchHeaderWrapper.classList.remove('hidden');
+          if (dynamicTitle) dynamicTitle.innerText = `${searchLabel}: "${searchTerm}" (${allResults.length})`;
 
           if (allResults.length > 0) {
-            emptyMessage.classList.add('hidden');
-            resultsContainer.classList.remove('hidden');
+            if (emptyMessage) emptyMessage.classList.add('hidden');
+            if (resultsContainer) resultsContainer.classList.remove('hidden');
             renderResults(allResults);
           } else {
-            resultsContainer.innerHTML = '';
-            emptyMessage.classList.remove('hidden');
+            if (resultsContainer) resultsContainer.innerHTML = '';
+            if (emptyMessage) emptyMessage.classList.remove('hidden');
           }
         })
         .catch(err => console.error("Search fetch error:", err));
@@ -126,21 +125,16 @@
       const isArticle = item.url.includes('/blogs/') || item.type === 'article';
       const mainImage = item.featured_image ? item.featured_image.url : (item.image || '');
 
-      // VARYANT ID YAKALAMA (GÜNCELLENDİ)
-      // API'den gelen farklı isimlendirmeleri kontrol ediyoruz
-      let variantId = '';
-      if (item.variants && item.variants.length > 0) {
-        variantId = item.variants[0].id;
-      } else if (item.id && !isArticle) {
-        variantId = item.id; // Bazı API sürümlerinde ana ID aynı zamanda ilk varyanttır
-      }
-
       let badgeHtml = '', priceHtml = '', actionButton = '', wishlistBtn = '';
 
       if (!isArticle) {
         const currentPrice = Number(item.price);
         const comparePriceRaw = Number(item.compare_at_price || item.compare_at_price_max || 0);
         const isOnSale = comparePriceRaw > currentPrice && comparePriceRaw > 0;
+
+        // VARYANT MANTIĞI: Birden fazla varyant varsa "Select Options" yap
+        const hasMultipleVariants = item.variants && item.variants.length > 1;
+        const variantId = item.variants && item.variants[0] ? item.variants[0].id : item.id;
 
         if (isOnSale) {
           badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-secondary text-white text-[10px] px-2 py-1 uppercase tracking-widest font-medium">${translations.sale}</span>`;
@@ -163,46 +157,35 @@
             </button>
           </div>`;
 
-        // "ADD TO CART" BUTONU
-
-        // Varyant ve Buton Mantığı
-        let actionButton = '';
-        if (!isArticle) {
-          // Ürünün birden fazla varyantı/seçeneği var mı kontrol et
-          const hasOptions = item.variants && item.variants.length > 1;
-          const variantId = item.variants && item.variants[0] ? item.variants[0].id : item.id;
-
-          if (hasOptions) {
-            // Birden fazla seçenek varsa: "SELECT OPTIONS" (Detaya yönlendir)
-            actionButton = `
-            <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
-              <a href="${item.url}" class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
-                SELECT OPTIONS
-              </a>
-            </div>`;
-          } else {
-            // Tek varyant varsa: "ADD TO CART" (Doğrudan sepete ekle)
-            actionButton = `
-            <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
-              <button type="button" 
-                      onclick="window.handleGlobalAddToCart(event, '${variantId}')" 
-                      class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors border-none cursor-pointer">
-                ADD TO CART
-              </button>
-            </div>`;
-          }
-        } else {
-          // Blog yazıları için her zaman "READ MORE"
+        // DİNAMİK BUTON: Seçenek varsa detaya, yoksa sepete
+        if (hasMultipleVariants) {
           actionButton = `
+              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
+                <a href="${item.url}" class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
+                  SELECT OPTIONS
+                </a>
+              </div>`;
+        } else {
+          actionButton = `
+              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
+                <button type="button" 
+                        onclick="window.handleGlobalAddToCart(event, '${variantId}')" 
+                        class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors border-none cursor-pointer">
+                  ADD TO CART
+                </button>
+              </div>`;
+        }
+      } else {
+        badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
+        actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
             <a href="${item.url}" class="w-full bg-black text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading">
               ${translations.readMore}
             </a>
           </div>`;
-        }
+      }
 
-
-        return `
+      return `
         <div class="group flex flex-col h-full bg-white overflow-hidden relative animate-fadeIn transition-all">
           <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
             ${badgeHtml}
@@ -219,7 +202,7 @@
             ${priceHtml}
           </div>
         </div>`;
-      }).join('');
+    }).join('');
 
     if (window.LuviaWishlist && typeof window.LuviaWishlist.initIcons === 'function') {
       window.LuviaWishlist.initIcons();
