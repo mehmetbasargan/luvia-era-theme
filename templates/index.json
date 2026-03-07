@@ -254,7 +254,7 @@
       ],
       "name": "Testimonial",
       "settings": {
-        "slides_per_view": 2
+        "slides_per_view": 3
       }
     }
   },
