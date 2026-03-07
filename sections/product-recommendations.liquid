@@ -13,7 +13,7 @@
           <div class="product-card group relative flex flex-col h-full bg-white transition-all duration-500">
             <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if recommendation.compare_at_price > recommendation.price %}
-                <span class="absolute top-3 left-3 z-20 bg-red-600 text-white text-[10px] px-2 py-1 uppercase tracking-tighter font-medium">
+                <span class="absolute top-3 left-3 z-20 bg-secondary text-white text-[13px] px-2 py-1 uppercase tracking-tighter font-medium">
                   {{ 'products.product.on_sale' | t | default: 'SALE' }}
                 </span>
               {% endif %}
