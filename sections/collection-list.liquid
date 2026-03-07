@@ -18,7 +18,7 @@
             {% if collection.featured_image != blank %}
               <img
                 src="{{ collection.featured_image | image_url: width: 600 }}"
-                alt="{{ collection.title }}"
+                alt="{{ collection.title | escape }}"
                 width="600"
                 height="400"
                 loading="eager"

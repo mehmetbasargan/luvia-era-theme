@@ -15,7 +15,7 @@
         src="{{ article.image | image_url: width: 1200 }}"
         height="400"
         width="600"
-        alt="{{ article.title }}"
+        alt="{{ article.title | escape }}"
         loading="eager"
         class="w-full h-full object-cover"
       >

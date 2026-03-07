@@ -26,7 +26,7 @@
         </div>
       {% endfor %}
     </div>
-    <div class="swiper-pagination"></div>
+    <div class="swiper-pagination" role="tablist" aria-label="Testimonial slide navigation"></div>
   </div>
 </div>
 
@@ -47,7 +47,7 @@
 </script>
 
 <style>
-  .swiper-pagination {
+  .myTestimonialSwiper .swiper-pagination {
     position: initial;
     text-align: center;
     transform: translateZ(0);
@@ -55,10 +55,10 @@
     z-index: 10;
   }
 
-  .swiper-horizontal > .swiper-pagination-bullets,
-  .swiper-pagination-bullets.swiper-pagination-horizontal,
-  .swiper-pagination-custom,
-  .swiper-pagination-fraction {
+  .myTestimonialSwiper .swiper-horizontal > .swiper-pagination-bullets,
+  .myTestimonialSwiper .swiper-pagination-bullets.swiper-pagination-horizontal,
+  .myTestimonialSwiper .swiper-pagination-custom,
+  .myTestimonialSwiper .swiper-pagination-fraction {
     margin-top: 20px;
   }
 </style>
