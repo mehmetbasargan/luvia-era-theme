@@ -1,17 +1,18 @@
 /**
- * Luvia Era - Global JS (Wishlist, Cart Drawer, Notifications)
+ * Luvia Era - Global JS
+ * Handles: Toast, Cart Drawer, Wishlist
  */
 
-// Global showToast function
+// 1. Toast System
 window.showToast = function (message, type = 'info') {
 	const oldToast = document.querySelector('.luvia-toast');
 	if (oldToast) oldToast.remove();
 
 	const toast = document.createElement('div');
-	// Tasarımına göre renkleri ayarlayabilirsin
-	const bgColor = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : 'bg-primary';
+	// Renk ve tip belirleme
+	const bgClass = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : 'bg-primary';
 
-	toast.className = `luvia-toast fixed bottom-8 left-1/2 -translate-x-1/2 ${bgColor} text-white px-8 py-3 rounded-full shadow-2xl z-[9999] text-[12px] uppercase tracking-[0.2em] transition-all duration-500 opacity-0 translate-y-4`;
+	toast.className = `luvia-toast fixed bottom-8 left-1/2 -translate-x-1/2 ${bgClass} text-white px-8 py-3 rounded-full shadow-2xl z-[9999] text-[12px] uppercase tracking-[0.2em] transition-all duration-500 opacity-0 translate-y-4`;
 	toast.innerText = message;
 	document.body.appendChild(toast);
 
@@ -22,11 +23,12 @@ window.showToast = function (message, type = 'info') {
 	}, 3000);
 };
 
-// Global Cart Drawer Functions
+// 2. Cart Drawer Management
 window.closeCartDrawer = function () {
 	const drawer = document.getElementById('cart-drawer');
 	const overlay = document.getElementById('cart-drawer-overlay');
 	const content = document.getElementById('cart-drawer-content');
+
 	if (overlay && content) {
 		overlay.classList.replace('opacity-100', 'opacity-0');
 		content.classList.replace('translate-x-0', 'translate-x-full');
@@ -40,6 +42,7 @@ window.openCartDrawer = function () {
 	const drawer = document.getElementById('cart-drawer');
 	const overlay = document.getElementById('cart-drawer-overlay');
 	const content = document.getElementById('cart-drawer-content');
+
 	if (drawer && overlay && content) {
 		drawer.classList.remove('invisible');
 		setTimeout(() => {
@@ -49,7 +52,7 @@ window.openCartDrawer = function () {
 	}
 };
 
-// Global Wishlist Object
+// 3. Wishlist Management
 window.LuviaWishlist = {
 	get: function () {
 		return JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
@@ -62,29 +65,35 @@ window.LuviaWishlist = {
 
 		if (isAdding) {
 			wishlist.push(productId.toString());
-			window.showToast(window.LuviaStrings.wishlistAdded, 'success');
+			window.showToast(window.LuviaStrings.wishlistAdded || 'ADDED TO WISHLIST', 'success');
 		} else {
 			wishlist.splice(index, 1);
-			window.showToast(window.LuviaStrings.wishlistRemoved, 'info');
+			window.showToast(window.LuviaStrings.wishlistRemoved || 'REMOVED FROM WISHLIST', 'info');
 		}
 
 		localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
 		this.updateUI(productId, isAdding);
 
+		// Wishlist sayfasındaysak satırı kaldır
 		const wishItem = document.getElementById(`wish-item-${productId}`);
 		if (!isAdding && wishItem) {
 			wishItem.style.opacity = '0';
+			wishItem.style.transform = 'scale(0.9)';
 			setTimeout(() => {
 				wishItem.remove();
 				if (typeof this.checkEmpty === 'function') this.checkEmpty();
 			}, 300);
 		}
 
-		window.dispatchEvent(new CustomEvent('wishlist:updated', { detail: { productId, wishlist, isAdding } }));
+		window.dispatchEvent(
+			new CustomEvent('wishlist:updated', {
+				detail: { productId, wishlist, isAdding },
+			}),
+		);
 	},
 
 	updateUI: function (productId, isActive) {
-		const selectors = `.custom-wishlist-btn[data-product-id="${productId}"], .wishlist-trigger-btn[data-product-id="${productId}"], [data-id="${productId}"].custom-wishlist-btn`;
+		const selectors = `.custom-wishlist-btn[data-product-id="${productId}"], .wishlist-trigger-btn[data-product-id="${productId}"]`;
 		const buttons = document.querySelectorAll(selectors);
 
 		buttons.forEach((btn) => {
@@ -105,6 +114,12 @@ window.LuviaWishlist = {
 	},
 };
 
+// 4. Initialize & Listeners
 document.addEventListener('DOMContentLoaded', () => {
 	window.LuviaWishlist.initIcons();
+});
+
+document.addEventListener('wishlist:updated', function (e) {
+	// Diğer sayfa öğelerini güncellemek gerekirse burası kullanılabilir
+	console.log('Wishlist Sync:', e.detail.wishlist);
 });
