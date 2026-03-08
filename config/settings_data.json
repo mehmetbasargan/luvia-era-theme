@@ -9,10 +9,10 @@
  */
 {
   "current": {
-    "primary_color": "#3b443c",
-    "secondary_color": "#b2ac88",
-    "custom_bg_color": "#f9f9f9",
-    "line_color": "#e5e7eb",
+    "primary_color": "#1cea33",
+    "secondary_color": "#c528da",
+    "custom_bg_color": "#ea2020",
+    "line_color": "#00b8ed",
     "heading_font": "josefin_sans_n4",
     "body_font": "inter_n4",
     "favicon": "shopify://shop_images/favicon.png",
