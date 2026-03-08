@@ -1,20 +1,23 @@
 <div class="swiper group myHeroSwiper w-full h-[calc(100dvh-var(--header-height,0px))] lg:h-[calc(100vh-var(--header-height,0px))]">
-  <div class="swiper-wrapper ">
+  <div class="swiper-wrapper">
     {% for block in section.blocks %}
       <div class="swiper-slide relative w-full h-full overflow-hidden">
-        {% if block.settings.image != blank %}
-          {{
-            block.settings.image
-            | image_url: width: 2000
-            | image_tag:
-              class: 'w-full h-full object-cover object-top hero-image-bg',
-              loading: 'eager',
-              fetchpriority: 'high',
-              preload: true
-          }}
-        {% else %}
-          {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-200 hero-image-bg' }}
-        {% endif %}
+        <div class="bg-[{{ section.settings.overlay_color }}] bg-opacity-[{{ section.settings.overlay_opacity }}]">
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 2000
+              | image_tag:
+                class: 'w-full h-full object-cover object-top hero-image-bg',
+                loading: 'eager',
+                fetchpriority: 'high',
+                alt: block.settings.image.alt,
+                preload: true
+            }}
+          {% else %}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-200 hero-image-bg' }}
+          {% endif %}
+        </div>
 
         <div class="absolute inset-0 flex items-center justify-center text-center px-4">
           <div class="max-w-3xl">
@@ -178,6 +181,22 @@
     {
       "type": "paragraph",
       "content": "ℹ️ **Tip:** For optimal display, use images with a **1920x1080px** resolution. Slide transitions are automatically optimized for performance."
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 30
     }
   ],
   "blocks": [
