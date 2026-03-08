@@ -1,76 +1,48 @@
-{%- liquid
-  # Renkleri belirle: Eğer 'Global' kutusu seçiliyse ana ayarlardan, değilse section ayarlarından al.
-  assign bg_color = section.settings.section_bg_color
-  assign text_color = section.settings.section_text_color
-
-  if section.settings.use_global_colors
-    assign bg_color = settings.custom_background
-    assign text_color = settings.body_text_color
-  endif
--%}
-
-{%- style -%}
-  #shopify-section-{{ section.id }} {
-    background-color: {{ bg_color }};
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    transition: all 0.3s ease;
-  }
-
-  #shopify-section-{{ section.id }} h3,
-  #shopify-section-{{ section.id }} h6,
-  #shopify-section-{{ section.id }} a:not(.bg-primary) {
-    color: {{ text_color }};
-  }
-
-  #shopify-section-{{ section.id }} .header-line {
-    background-color: {{ text_color | opacity: 0.3 }};
-  }
-
-  #shopify-section-{{ section.id }} .collection-card-link {
-    border-color: {{ text_color }};
-  }
-{%- endstyle -%}
-
-<section class="lg:px-6">
-  <div class="container mx-auto">
+<section class="bg-custombg py-20 lg:px-6">
+  <div class="container">
     <div class="text-center mb-16">
-      <h3 class="uppercase font-light tracking-[0.2em]">
+      <h3 class="uppercase text-secondary font-light tracking-[0.2em]">
         {{ 'collections.explore_categories' | t }}
       </h3>
-      <div class="header-line h-[1px] w-20 mx-auto mt-4"></div>
+      <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
       {% for block in section.blocks %}
         {%- assign collection = collections[block.settings.collection] -%}
-        <div class="group relative flex flex-col items-center" {{ block.shopify_attributes }}>
+        <div class="group relative flex flex-col items-center">
           <a
             href="{{ collection.url | default: '#' }}"
             class="w-full h-[250px] lg:h-[200px] overflow-hidden bg-white relative"
-            aria-label="{{ collection.title | default: 'Collection' }}"
           >
             {% if collection.featured_image != blank %}
               <img
                 src="{{ collection.featured_image | image_url: width: 600 }}"
-                alt="{{ collection.featured_image.alt | default: collection.title | escape }}"
+                alt="{{ collection.title | escape }}"
                 width="600"
                 height="400"
-                loading="lazy"
+                loading="eager"
                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               >
             {% else %}
               {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full bg-[#E5E5E5]' }}
             {% endif %}
-          </a>
 
+            <div
+              class="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/10 transition-colors duration-500"
+            ></div>
+          </a>
           <div class="mt-6 text-center">
-            <h6 class="tracking-widest uppercase mb-2">
-              {{ collection.title | default: 'Collection Title' }}
+            <h6 class="text-primary tracking-widest uppercase mb-2">
+              {% if collection.title != blank %}
+                {{ collection.title }}
+              {% else %}
+                {{ 'collections.select_collection_placeholder' | t }}
+              {% endif %}
             </h6>
             <a
-              href="{{ collection.url | default: '#' }}"
-              class="collection-card-link text-[12px] md:text-[13px] border-b pb-1 uppercase tracking-widest hover:opacity-70 transition-all"
+              href="{{ collection.url }}"
+              class="text-[12px] md:text-[13px] text-primary border-b border-primary pb-1 uppercase tracking-widest hover:text-secondary hover:border-primary transition-all"
             >
               {{ 'collections.review' | t }}
             </a>
@@ -84,57 +56,8 @@
 {% schema %}
 {
   "name": "Collection Cards",
-  "max_blocks": 8,
-  "settings": [
-    {
-      "type": "header",
-      "content": "Color Schemes",
-      "info": "Manage how colors are applied to this section."
-    },
-    {
-      "type": "checkbox",
-      "id": "use_global_colors",
-      "label": "Use Global Theme Colors",
-      "default": true,
-      "info": "If checked, this section will use colors from your Theme Settings."
-    },
-    {
-      "type": "color",
-      "id": "section_bg_color",
-      "label": "Custom Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "section_text_color",
-      "label": "Custom Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "header",
-      "content": "Section Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding Top",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding Bottom",
-      "default": 80
-    }
-  ],
+  "max_blocks": 4,
+  "settings": [],
   "blocks": [
     {
       "type": "collection",
