@@ -2421,6 +2421,11 @@ blockquote{
   line-height: 1rem;
 }
 
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -3224,6 +3229,11 @@ blockquote{
 
   .md\:text-\[13px\]{
     font-size: 13px;
+  }
+
+  .md\:text-6xl{
+    font-size: 3.75rem;
+    line-height: 1;
   }
 }
 
