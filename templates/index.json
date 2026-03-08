@@ -101,8 +101,11 @@
       ],
       "name": "Collection Cards",
       "settings": {
-        "background_color": "#f9f9f9",
-        "title_color": "#10ed29"
+        "section_title": "Explore Categories",
+        "section_bg_color": "#8b8b8b",
+        "section_text_color": "#ffffff",
+        "padding_top": 84,
+        "padding_bottom": 76
       }
     },
     "featured_products_GFTLFG": {
