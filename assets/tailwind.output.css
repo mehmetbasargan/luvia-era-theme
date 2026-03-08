@@ -2200,6 +2200,11 @@ blockquote{
   padding-bottom: 5rem;
 }
 
+.py-24{
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
 .py-3{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -2243,11 +2248,6 @@ blockquote{
 .py-\[80px\]{
   padding-top: 80px;
   padding-bottom: 80px;
-}
-
-.py-24{
-  padding-top: 6rem;
-  padding-bottom: 6rem;
 }
 
 .pb-1{
@@ -2817,10 +2817,6 @@ blockquote{
   border-color: var(--color-black);
 }
 
-.hover\:border-primary:hover{
-  border-color: var(--color-primary);
-}
-
 .hover\:border-secondary:hover{
   border-color: var(--color-secondary);
 }
@@ -3207,14 +3203,14 @@ blockquote{
     padding-bottom: 0px;
   }
 
-  .md\:py-32{
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-  }
-
   .md\:py-24{
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+
+  .md\:py-32{
+    padding-top: 8rem;
+    padding-bottom: 8rem;
   }
 
   .md\:text-5xl{

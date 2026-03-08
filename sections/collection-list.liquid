@@ -1,25 +1,39 @@
+{%- liquid
+  # Renkleri belirle: Eğer 'Global' kutusu seçiliyse ana ayarlardan, değilse section ayarlarından al.
+  assign bg_color = section.settings.section_bg_color
+  assign text_color = section.settings.section_text_color
+
+  if section.settings.use_global_colors
+    assign bg_color = settings.custom_background
+    assign text_color = settings.body_text_color
+  endif
+-%}
+
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    /* Öncelik: Section ayarı, eğer boşsa Global ayar */
-    background-color: {{ section.settings.section_bg_color | default: settings.custom_background }};
+    background-color: {{ bg_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+    transition: all 0.3s ease;
   }
 
   #shopify-section-{{ section.id }} h3,
   #shopify-section-{{ section.id }} h6,
-  #shopify-section-{{ section.id }} a {
-    color: {{ section.settings.section_text_color | default: settings.body_text_color }};
+  #shopify-section-{{ section.id }} a:not(.bg-primary) {
+    color: {{ text_color }};
   }
 
-  /* Ayraç çizgisi için metin rengini kullan */
   #shopify-section-{{ section.id }} .header-line {
-    background-color: {{ section.settings.section_text_color | default: settings.secondary_color }};
+    background-color: {{ text_color | opacity: 0.3 }};
+  }
+
+  #shopify-section-{{ section.id }} .collection-card-link {
+    border-color: {{ text_color }};
   }
 {%- endstyle -%}
 
 <section class="lg:px-6">
-  <div class="container">
+  <div class="container mx-auto">
     <div class="text-center mb-16">
       <h3 class="uppercase font-light tracking-[0.2em]">
         {{ 'collections.explore_categories' | t }}
@@ -34,11 +48,12 @@
           <a
             href="{{ collection.url | default: '#' }}"
             class="w-full h-[250px] lg:h-[200px] overflow-hidden bg-white relative"
+            aria-label="{{ collection.title | default: 'Collection' }}"
           >
             {% if collection.featured_image != blank %}
               <img
                 src="{{ collection.featured_image | image_url: width: 600 }}"
-                alt="{{ collection.title | escape }}"
+                alt="{{ collection.featured_image.alt | default: collection.title | escape }}"
                 width="600"
                 height="400"
                 loading="lazy"
@@ -48,14 +63,14 @@
               {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full bg-[#E5E5E5]' }}
             {% endif %}
           </a>
+
           <div class="mt-6 text-center">
             <h6 class="tracking-widest uppercase mb-2">
               {{ collection.title | default: 'Collection Title' }}
             </h6>
             <a
               href="{{ collection.url | default: '#' }}"
-              class="text-[12px] md:text-[13px] border-b pb-1 uppercase tracking-widest hover:opacity-70 transition-all"
-              style="border-color: {{ section.settings.section_text_color | default: settings.body_text_color }};"
+              class="collection-card-link text-[12px] md:text-[13px] border-b pb-1 uppercase tracking-widest hover:opacity-70 transition-all"
             >
               {{ 'collections.review' | t }}
             </a>
@@ -73,24 +88,31 @@
   "settings": [
     {
       "type": "header",
-      "content": "Appearance Settings",
-      "info": "Reset settings to use global theme colors."
+      "content": "Color Schemes",
+      "info": "Manage how colors are applied to this section."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_global_colors",
+      "label": "Use Global Theme Colors",
+      "default": true,
+      "info": "If checked, this section will use colors from your Theme Settings."
     },
     {
       "type": "color",
       "id": "section_bg_color",
-      "label": "Section Background Color",
+      "label": "Custom Background Color",
       "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "section_text_color",
-      "label": "Section Text Color",
+      "label": "Custom Text Color",
       "default": "#000000"
     },
     {
       "type": "header",
-      "content": "Spacing (Padding)"
+      "content": "Section Spacing"
     },
     {
       "type": "range",
