@@ -1,10 +1,10 @@
-<section class="py-20 lg:px-6" style="background-color: {{ section.settings.background_color }};">
+<section class="bg-custombg py-20 lg:px-6">
   <div class="container">
     <div class="text-center mb-16">
-      <h3 class="uppercase font-light tracking-[0.2em]" style="color: {{ section.settings.title_color }};">
+      <h3 class="uppercase text-secondary font-light tracking-[0.2em]">
         {{ 'collections.explore_categories' | t }}
       </h3>
-      <div class="h-[1px] w-20 mx-auto mt-4" style="background-color;: {{ section.settings.title_color }};"></div>
+      <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
@@ -56,18 +56,13 @@
 {% schema %}
 {
   "name": "Collection Cards",
+  "max_blocks": 4,
   "settings": [
     {
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
-      "default": "#f9f9f9"
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "Title Color",
-      "default": "#b2ac88"
+      "default": "#ffffff"
     }
   ],
   "blocks": [
