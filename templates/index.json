@@ -63,7 +63,10 @@
         "slide_n3HckD"
       ],
       "name": "Hero Slider",
-      "settings": {}
+      "settings": {
+        "overlay_color": "#e91f1f",
+        "overlay_opacity": 30
+      }
     },
     "collection_list_Ebb7je": {
       "type": "collection-list",
