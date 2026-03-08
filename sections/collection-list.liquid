@@ -41,7 +41,7 @@
             ></div>
           </a>
           <div class="mt-6 text-center">
-            <h6 class="text-primary tracking-widest uppercase mb-2">
+            <h6 class=" tracking-widest uppercase mb-2" style="color: {{ section.settings.section_text_color }};">
               {% if collection.title != blank %}
                 {{ collection.title }}
               {% else %}
@@ -50,7 +50,8 @@
             </h6>
             <a
               href="{{ collection.url }}"
-              class="text-[12px] md:text-[13px] text-primary border-b border-primary pb-1 uppercase tracking-widest hover:text-secondary hover:border-primary transition-all"
+              class="text-[12px] md:text-[13px] border-b border-primary pb-1 uppercase tracking-widest hover:text-secondary hover:border-primary transition-all"
+              style="color: {{ section.settings.section_text_color }};"
             >
               {{ 'collections.review' | t }}
             </a>
