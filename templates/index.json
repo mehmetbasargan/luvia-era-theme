@@ -101,9 +101,9 @@
       ],
       "name": "Collection Cards",
       "settings": {
-        "section_title": "Explore Categories",
-        "section_bg_color": "#8b8b8b",
-        "section_text_color": "#ffffff",
+        "use_global_colors": false,
+        "section_bg_color": "#b2ac88",
+        "section_text_color": "#362e2e",
         "padding_top": 100,
         "padding_bottom": 100
       }
