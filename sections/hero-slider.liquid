@@ -2,7 +2,7 @@
   <div class="swiper-wrapper">
     {% for block in section.blocks %}
       <div class="swiper-slide relative w-full h-full overflow-hidden">
-        <div id="slider-{{ section.id }}" class="slider_ovarlay relative">
+        <div class="bg-{{ block.settings.overlay_color }} z-50">
           {% if block.settings.image != blank %}
             {{
               block.settings.image
@@ -42,21 +42,6 @@
             {% endif %}
           </div>
         </div>
-
-        <div class="relative overflow-hidden">
-          {{ block.settings.image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover' }}
-
-          <div
-            class="absolute inset-0 pointer-events-none"
-            style="
-              background-color: {{ section.settings.overlay_color }};
-              opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
-              z-index: 1;
-            "
-          ></div>
-
-          <div class="relative z-10"></div>
-        </div>
       </div>
     {% endfor %}
   </div>
@@ -85,77 +70,75 @@
 </div>
 
 <style>
-  #slider-{{ section.id }} .slider_ovarlay::before {
-     content: '';
-     width: 100%;
-     height: 100%; /* vh yerine % kullanmak daha güvenlidir, slider boyuna göre ayarlanır */
-     background-color: {{ section.settings.overlay_color }};
-     opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
-     position: absolute;
-     top: 0;
-     left: 0;
-     z-index: 1; /* 9999 çok yüksek, metinlerin (z-10 gibi) altında kalması için düşük tutalım */
-     pointer-events: none; /* Butonlara tıklamayı engellememesi için şart */
-   }
+  /*  .slider_ovarlay::before {
+    content: '';
+    width: 100%;
+    height: 100vh;
+    background-color: #00000080;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+  } */
 
-   .swiper-pagination-bullet {
-     background: var(--color-secondary);
-     height: 12px !important;
-     width: 12px !important;
-     opacity: 0.5;
-     transition: all 0.3s ease;
-   }
-   .swiper-pagination-bullet-active {
-     background: var(--color-secondary);
-     opacity: 1;
-     width: 30px !important;
-     border-radius: 6px;
-   }
+  .swiper-pagination-bullet {
+    background: var(--color-secondary);
+    height: 12px !important;
+    width: 12px !important;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+  .swiper-pagination-bullet-active {
+    background: var(--color-secondary);
+    opacity: 1;
+    width: 30px !important;
+    border-radius: 6px;
+  }
 
-   .hero-title,
-   .hero-subtitle,
-   .hero-button {
-     opacity: 0;
-     transform: translateY(20px);
-     transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-   }
+  .hero-title,
+  .hero-subtitle,
+  .hero-button {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
-   .is-active .hero-title {
-     opacity: 1;
-     transform: translateY(0);
-     transition-delay: 400ms;
-   }
-   .is-active .hero-subtitle {
-     opacity: 1;
-     transform: translateY(0);
-     transition-delay: 600ms;
-   }
-   .is-active .hero-button {
-     opacity: 1;
-     transform: translateY(0);
-     transition-delay: 800ms;
-   }
+  .is-active .hero-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 400ms;
+  }
+  .is-active .hero-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 600ms;
+  }
+  .is-active .hero-button {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 800ms;
+  }
 
-   .is-active img {
-     animation: kenburns 8s ease-out forwards;
-   }
+  .is-active img {
+    animation: kenburns 8s ease-out forwards;
+  }
 
-   @keyframes kenburns {
-     0% {
-       transform: scale(1);
-     }
-     100% {
-       transform: scale(1.1);
-     }
-   }
+  @keyframes kenburns {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
 
-   .hero-overlay::after {
-     content: '';
-     position: absolute;
-     inset: 0;
-     background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
-     z-index: 1;
-   }
+  .hero-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
+    z-index: 1;
+  }
 </style>
 {% comment %} ddd {% endcomment %}
 <script>
