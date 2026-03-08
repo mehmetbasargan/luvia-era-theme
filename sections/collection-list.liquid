@@ -6,12 +6,14 @@
   "
 >
   <div class="container">
-    <div class="text-center mb-16">
-      <h3 class="uppercase text-secondary font-light tracking-[0.2em]">
-        {{ 'collections.explore_categories' | t }}
-      </h3>
-      <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
-    </div>
+    {% if section.settings.section_title != blank %}
+      <div class="text-center mb-16">
+        <h3 class="uppercase font-light tracking-[0.2em]" style="color: {{ section.settings.section_text_color }};">
+          {{ section.settings.section_title }}
+        </h3>
+        <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
+      </div>
+    {% endif %}
 
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
       {% for block in section.blocks %}
@@ -65,10 +67,22 @@
   "max_blocks": 4,
   "settings": [
     {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Explore Categories"
+    },
+    {
       "type": "color",
       "id": "section_bg_color",
       "label": "Section Background Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "section_text_color",
+      "label": "Section Text Color",
+      "default": "#000000"
     },
     {
       "type": "range",
