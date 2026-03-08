@@ -30,10 +30,10 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/3.jpg",
-            "title": "Yeni Sezon",
-            "sub_title": "En yeni koleksiyonu hemen keşfedin.",
-            "button_label": "Alışverişe Başla",
-            "button_link": ""
+            "title": "Elevate Your Lifestyle",
+            "sub_title": "Discover our curated collection of premium essentials designed for modern living. Quality meets elegance in every detail.",
+            "button_label": "Shop Collection",
+            "button_link": "shopify://collections/golden-hour-muse"
           }
         },
         "slide_QGpjDa": {
