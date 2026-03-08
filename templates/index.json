@@ -40,10 +40,10 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/1.jpg",
-            "title": "New Season 2",
-            "sub_title": "Discover the latest collection now.",
-            "button_label": "Start Shopping",
-            "button_link": "shopify://products/aura-silk-maxi-dress"
+            "title": "The Art of Minimalism",
+            "sub_title": "Experience the perfect balance of form and function. Timeless designs crafted with sustainable materials for a better future.",
+            "button_label": "Explore Now",
+            "button_link": "shopify://collections/all"
           }
         },
         "slide_n3HckD": {
