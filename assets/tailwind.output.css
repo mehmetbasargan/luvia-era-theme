@@ -2817,12 +2817,12 @@ blockquote{
   border-color: var(--color-black);
 }
 
-.hover\:border-secondary:hover{
-  border-color: var(--color-secondary);
-}
-
 .hover\:border-primary:hover{
   border-color: var(--color-primary);
+}
+
+.hover\:border-secondary:hover{
+  border-color: var(--color-secondary);
 }
 
 .hover\:\!bg-primary:hover{
@@ -2919,10 +2919,6 @@ blockquote{
 
 .hover\:opacity-50:hover{
   opacity: 0.5;
-}
-
-.hover\:opacity-70:hover{
-  opacity: 0.7;
 }
 
 .hover\:grayscale-0:hover{

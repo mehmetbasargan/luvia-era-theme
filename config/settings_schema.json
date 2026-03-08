@@ -28,9 +28,9 @@
 			},
 			{
 				"type": "color",
-				"id": "custom_bg_color",
-				"label": "Custom Background",
-				"default": "#f9f9f9"
+				"id": "theme_bg_color",
+				"label": "Theme Background",
+				"default": "#ffffff"
 			},
 			{
 				"type": "color",
