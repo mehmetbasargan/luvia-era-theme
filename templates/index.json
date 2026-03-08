@@ -63,10 +63,7 @@
         "slide_n3HckD"
       ],
       "name": "Hero Slider",
-      "settings": {
-        "overlay_color": "#b2ac88",
-        "overlay_opacity": 30
-      }
+      "settings": {}
     },
     "collection_list_Ebb7je": {
       "type": "collection-list",
@@ -103,7 +100,10 @@
         "collection_fdaGhC"
       ],
       "name": "Collection Cards",
-      "settings": {}
+      "settings": {
+        "background_color": "#f9f9f9",
+        "title_color": "#10ed29"
+      }
     },
     "featured_products_GFTLFG": {
       "type": "featured-products",
