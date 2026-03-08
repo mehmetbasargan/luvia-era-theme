@@ -1,21 +1,20 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    /* Eğer panelden renk seçilmezse global 'custom_background' (Theme Settings) kullanır */
+    /* Öncelik: Section ayarı, eğer boşsa Global ayar */
     background-color: {{ section.settings.section_bg_color | default: settings.custom_background }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 
-  /* Başlık ve metin renklerini burada tanımlıyoruz */
   #shopify-section-{{ section.id }} h3,
   #shopify-section-{{ section.id }} h6,
   #shopify-section-{{ section.id }} a {
     color: {{ section.settings.section_text_color | default: settings.body_text_color }};
   }
 
-  /* Altı çizili linkin border rengini de metin rengiyle aynı yapalım */
-  #shopify-section-{{ section.id }} .border-primary {
-    border-color: {{ section.settings.section_text_color | default: settings.body_text_color }};
+  /* Ayraç çizgisi için metin rengini kullan */
+  #shopify-section-{{ section.id }} .header-line {
+    background-color: {{ section.settings.section_text_color | default: settings.secondary_color }};
   }
 {%- endstyle -%}
 
@@ -25,10 +24,7 @@
       <h3 class="uppercase font-light tracking-[0.2em]">
         {{ 'collections.explore_categories' | t }}
       </h3>
-      <div
-        class="h-[1px] w-20 mx-auto mt-4"
-        style="background-color: {{ section.settings.section_text_color | default: settings.secondary_color }};"
-      ></div>
+      <div class="header-line h-[1px] w-20 mx-auto mt-4"></div>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
@@ -51,22 +47,15 @@
             {% else %}
               {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full bg-[#E5E5E5]' }}
             {% endif %}
-
-            <div
-              class="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/10 transition-colors duration-500"
-            ></div>
           </a>
           <div class="mt-6 text-center">
             <h6 class="tracking-widest uppercase mb-2">
-              {% if collection.title != blank %}
-                {{ collection.title }}
-              {% else %}
-                {{ 'collections.select_collection_placeholder' | t }}
-              {% endif %}
+              {{ collection.title | default: 'Collection Title' }}
             </h6>
             <a
-              href="{{ collection.url }}"
-              class="text-[12px] md:text-[13px] border-b pb-1 uppercase tracking-widest hover:text-secondary hover:border-secondary transition-all"
+              href="{{ collection.url | default: '#' }}"
+              class="text-[12px] md:text-[13px] border-b pb-1 uppercase tracking-widest hover:opacity-70 transition-all"
+              style="border-color: {{ section.settings.section_text_color | default: settings.body_text_color }};"
             >
               {{ 'collections.review' | t }}
             </a>
@@ -84,7 +73,8 @@
   "settings": [
     {
       "type": "header",
-      "content": "Appearance Settings"
+      "content": "Appearance Settings",
+      "info": "Reset settings to use global theme colors."
     },
     {
       "type": "color",

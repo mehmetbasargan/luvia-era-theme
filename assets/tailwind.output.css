@@ -2921,6 +2921,10 @@ blockquote{
   opacity: 0.5;
 }
 
+.hover\:opacity-70:hover{
+  opacity: 0.7;
+}
+
 .hover\:grayscale-0:hover{
   --tw-grayscale: grayscale(0);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
