@@ -998,10 +998,6 @@ blockquote{
   z-index: 9999;
 }
 
-.z-\[999\]{
-  z-index: 999;
-}
-
 .order-first{
   order: -9999;
 }
@@ -1921,10 +1917,6 @@ blockquote{
   border-width: 1px;
 }
 
-.border-\[0\.5px\]{
-  border-width: 0.5px;
-}
-
 .border-y{
   border-top-width: 1px;
   border-bottom-width: 1px;
@@ -1956,10 +1948,6 @@ blockquote{
 
 .border-t-\[6px\]{
   border-top-width: 6px;
-}
-
-.border-b-\[0\.5px\]{
-  border-bottom-width: 0.5px;
 }
 
 .border-none{
@@ -2026,10 +2014,6 @@ blockquote{
   border-top-color: var(--color-white);
 }
 
-.border-opacity-15{
-  --tw-border-opacity: 0.15;
-}
-
 .\!bg-secondary{
   background-color: var(--color-secondary) !important;
 }
@@ -2091,11 +2075,6 @@ blockquote{
 
 .bg-white{
   background-color: var(--color-white);
-}
-
-.bg-red-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
 }
 
 .object-contain{
@@ -2221,11 +2200,6 @@ blockquote{
   padding-bottom: 5rem;
 }
 
-.py-24{
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
-
 .py-3{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -2269,6 +2243,11 @@ blockquote{
 .py-\[80px\]{
   padding-top: 80px;
   padding-bottom: 80px;
+}
+
+.py-24{
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 .pb-1{
@@ -2440,11 +2419,6 @@ blockquote{
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 
 .font-bold{
@@ -3229,14 +3203,14 @@ blockquote{
     padding-bottom: 0px;
   }
 
-  .md\:py-24{
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
   .md\:py-32{
     padding-top: 8rem;
     padding-bottom: 8rem;
+  }
+
+  .md\:py-24{
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 
   .md\:text-5xl{
@@ -3250,11 +3224,6 @@ blockquote{
 
   .md\:text-\[13px\]{
     font-size: 13px;
-  }
-
-  .md\:text-6xl{
-    font-size: 3.75rem;
-    line-height: 1;
   }
 }
 
