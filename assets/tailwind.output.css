@@ -2473,6 +2473,10 @@ blockquote{
   line-height: 1.25;
 }
 
+.leading-5{
+  line-height: 1.25rem;
+}
+
 .tracking-\[0\.1em\]{
   letter-spacing: 0.1em;
 }

@@ -13,9 +13,10 @@
         {% if section.settings.button_url %}
           <a
             href="{{ section.settings.button_url }}"
-            class="text-primary text-sm border-b border-primary pb-1 hover:text-secondary transition-all uppercase tracking-widest mt-4 md:mt-0"
+            class="text-primary text-sm hover:text-secondary transition-all uppercase tracking-widest mt-4 md:mt-0 flex items-center gap-2"
           >
             {{ section.settings.button_text }}
+            {% render 'icon-arrow-right' %}
           </a>
         {% endif %}
       </div>
@@ -24,7 +25,7 @@
         {%- assign collection = collections[section.settings.collection] -%}
         {% for product in collection.products limit: 4 %}
           <div class="group relative flex flex-col h-full" id="prod-{{ product.id }}">
-            <div class="relative aspect-[3/4] overflow-hidden bg-[#f9f9f9]">
+            <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
               {% if product.compare_at_price > product.price %}
                 <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[11px] px-2 py-1 tracking-widest uppercase">
                   {{ 'products.product.on_sale' | t }}

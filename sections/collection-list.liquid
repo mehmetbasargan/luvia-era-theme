@@ -1,9 +1,9 @@
 <section class="bg-custombg py-20 lg:px-6">
   <div class="container">
     <div class="text-center mb-16">
-      <h3 class="uppercase text-secondary font-light tracking-[0.2em]">
+      <h4 class="uppercase text-secondary font-light tracking-[0.2em]">
         {{ 'collections.explore_categories' | t }}
-      </h3>
+      </h4>
       <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
     </div>
 
@@ -42,9 +42,10 @@
             </h6>
             <a
               href="{{ collection.url }}"
-              class="text-[12px] md:text-[13px] text-primary border-b border-primary pb-1 uppercase tracking-widest hover:text-secondary hover:border-primary transition-all"
+              class="text-[11px] md:text-[13px] text-primary uppercase tracking-widest hover:text-secondary transition-all flex items-center justify-center gap-2"
             >
               {{ 'collections.review' | t }}
+              {% render 'icon-arrow-right' %}
             </a>
           </div>
         </div>
