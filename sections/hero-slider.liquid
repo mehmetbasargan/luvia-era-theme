@@ -2,13 +2,7 @@
   <div class="swiper-wrapper">
     {% for block in section.blocks %}
       <div class="swiper-slide relative w-full h-full overflow-hidden">
-        <div
-          class="absolute inset-0 z-10"
-          style="
-            background-color: {{ section.settings.overlay_color }};
-            opacity: {{ section.settings.overlay_color_opacity | divided_by: 100.0 }};
-          "
-        >
+        <div class="slider_ovarlay">
           {% if block.settings.image != blank %}
             {{
               block.settings.image
@@ -25,7 +19,7 @@
           {% endif %}
         </div>
 
-        <div class="absolute inset-0 flex items-center justify-center text-center px-4">
+        <div class="absolute inset-0 flex items-center justify-center text-center px-4 z-[9999]">
           <div class="max-w-3xl">
             <h1 class="hero-title text-white font-light uppercase mb-4">
               {{ block.settings.title }}
@@ -76,64 +70,77 @@
 </div>
 
 <style>
-  .swiper-pagination-bullet {
-    background: var(--color-secondary);
-    height: 12px !important;
-    width: 12px !important;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-  }
-  .swiper-pagination-bullet-active {
-    background: var(--color-secondary);
-    opacity: 1;
-    width: 30px !important;
-    border-radius: 6px;
-  }
+  #slider-{{ section.id }} .slider_ovarlay::before {
+     content: '';
+     width: 100%;
+     height: 100%; /* vh yerine % kullanmak daha güvenlidir, slider boyuna göre ayarlanır */
+     background-color: {{ section.settings.overlay_color }};
+     opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+     position: absolute;
+     top: 0;
+     left: 0;
+     z-index: 1; /* 9999 çok yüksek, metinlerin (z-10 gibi) altında kalması için düşük tutalım */
+     pointer-events: none; /* Butonlara tıklamayı engellememesi için şart */
+   }
 
-  .hero-title,
-  .hero-subtitle,
-  .hero-button {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+   .swiper-pagination-bullet {
+     background: var(--color-secondary);
+     height: 12px !important;
+     width: 12px !important;
+     opacity: 0.5;
+     transition: all 0.3s ease;
+   }
+   .swiper-pagination-bullet-active {
+     background: var(--color-secondary);
+     opacity: 1;
+     width: 30px !important;
+     border-radius: 6px;
+   }
 
-  .is-active .hero-title {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 400ms;
-  }
-  .is-active .hero-subtitle {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 600ms;
-  }
-  .is-active .hero-button {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 800ms;
-  }
+   .hero-title,
+   .hero-subtitle,
+   .hero-button {
+     opacity: 0;
+     transform: translateY(20px);
+     transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+   }
 
-  .is-active img {
-    animation: kenburns 8s ease-out forwards;
-  }
+   .is-active .hero-title {
+     opacity: 1;
+     transform: translateY(0);
+     transition-delay: 400ms;
+   }
+   .is-active .hero-subtitle {
+     opacity: 1;
+     transform: translateY(0);
+     transition-delay: 600ms;
+   }
+   .is-active .hero-button {
+     opacity: 1;
+     transform: translateY(0);
+     transition-delay: 800ms;
+   }
 
-  @keyframes kenburns {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.1);
-    }
-  }
+   .is-active img {
+     animation: kenburns 8s ease-out forwards;
+   }
 
-  .hero-overlay::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
-    z-index: 1;
-  }
+   @keyframes kenburns {
+     0% {
+       transform: scale(1);
+     }
+     100% {
+       transform: scale(1.1);
+     }
+   }
+
+   .hero-overlay::after {
+     content: '';
+     position: absolute;
+     inset: 0;
+     background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
+     z-index: 1;
+   }
 </style>
 {% comment %} ddd {% endcomment %}
 <script>
@@ -145,10 +152,10 @@
       fadeEffect: {
         crossFade: true,
       },
-      autoplay: {
+      /*   autoplay: {
         delay: 6000,
         disableOnInteraction: false,
-      },
+      }, */
       on: {
         init: function () {
           const activeSlide = this.slides[this.activeIndex];
