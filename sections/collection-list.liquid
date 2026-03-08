@@ -1,9 +1,9 @@
-<section class="bg-custombg py-20 lg:px-6">
+<section class="py-20 lg:px-6" style="background-color: {{ section.settings.background_color }};">
   <div class="container">
     <div class="text-center mb-16">
-      <h4 class="font-josefin uppercase text-secondary font-light tracking-[0.2em]">
+      <h3 class="uppercase text-secondary font-light tracking-[0.2em]">
         {{ 'collections.explore_categories' | t }}
-      </h4>
+      </h3>
       <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
     </div>
 
@@ -42,7 +42,7 @@
             </h6>
             <a
               href="{{ collection.url }}"
-              class="text-[12px] md:text-[13px] text-primary border-b border-primary pb-1 uppercase tracking-widest hover:text-primary hover:border-primary transition-all"
+              class="text-[12px] md:text-[13px] text-primary border-b-[0.5px] border-primary pb-1 uppercase tracking-widest hover:text-secondary hover:border-secondary transition-all"
             >
               {{ 'collections.review' | t }}
             </a>
@@ -56,8 +56,14 @@
 {% schema %}
 {
   "name": "Collection Cards",
-  "max_blocks": 4,
-  "settings": [],
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f9f9f9"
+    }
+  ],
   "blocks": [
     {
       "type": "collection",

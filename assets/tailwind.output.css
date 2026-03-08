@@ -1921,6 +1921,10 @@ blockquote{
   border-width: 1px;
 }
 
+.border-\[0\.5px\]{
+  border-width: 0.5px;
+}
+
 .border-y{
   border-top-width: 1px;
   border-bottom-width: 1px;
@@ -1952,6 +1956,10 @@ blockquote{
 
 .border-t-\[6px\]{
   border-top-width: 6px;
+}
+
+.border-b-\[0\.5px\]{
+  border-bottom-width: 0.5px;
 }
 
 .border-none{
@@ -2016,6 +2024,10 @@ blockquote{
 
 .border-t-white{
   border-top-color: var(--color-white);
+}
+
+.border-opacity-15{
+  --tw-border-opacity: 0.15;
 }
 
 .\!bg-secondary{
