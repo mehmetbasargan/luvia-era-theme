@@ -50,10 +50,10 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/2.jpg",
-            "title": "new season",
-            "sub_title": "Discover the latest collection now.",
-            "button_label": "DiscoverMore",
-            "button_link": "shopify://collections/golden-hour-muse"
+            "title": "New Season Arrivals",
+            "sub_title": "Be the first to own our latest drops. Limited edition pieces that define the trends of tomorrow. Available now online.",
+            "button_label": "Shop the Drop",
+            "button_link": "shopify://products/luna-satin-slip-dress"
           }
         }
       },
