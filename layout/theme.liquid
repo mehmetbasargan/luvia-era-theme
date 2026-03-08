@@ -26,10 +26,9 @@
         /* Renk Değişkenleri */
         --color-primary: {{ settings.primary_color | strip }};
         --color-secondary: {{ settings.secondary_color | strip }};
-       /*  --color-custombg: {{ settings.custom_bg_color | strip }}; */
+        --color-custombg: {{ settings.custom_bg_color | strip }};
         --color-line: {{ settings.line_color | strip }};
-       /*  --color-bgtransparent: {{ settings.bgtransparent_color | strip }}; */
-        --color-themebg: {{ settings.theme_bg_color | strip }};
+        --color-bgtransparent: {{ settings.bgtransparent_color | strip }};
         --color-white: #ffffff;
         --color-black: #000000;
 
@@ -60,7 +59,7 @@
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag: preload: true }}
   </head>
 
-  <body itemscope itemtype="https://schema.org/WebPage" class="bg-themebg">
+  <body itemscope itemtype="https://schema.org/WebPage">
     <div
       id="toast-container"
       class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[200] space-y-2 pointer-events-none"
