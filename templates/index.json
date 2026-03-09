@@ -65,8 +65,8 @@
       "name": "Hero Slider",
       "settings": {
         "slider_effect": "fade",
-        "overlay_color": "#3b443c",
-        "overlay_opacity": 10,
+        "overlay_color": "#12ed15",
+        "overlay_opacity": 25,
         "show_arrows": true,
         "show_pagination": true
       }
