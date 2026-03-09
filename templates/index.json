@@ -72,42 +72,44 @@
         "show_pagination": true
       }
     },
-    "collection_list_Ebb7je": {
+    "collection_list_zHTtyQ": {
       "type": "collection-list",
       "blocks": {
-        "collection_4wLKtU": {
+        "collection_EbQTGh": {
           "type": "collection",
           "settings": {
-            "collection": "golden-hour-muse"
+            "collection": ""
           }
         },
-        "collection_mRn8Dn": {
+        "collection_YatzNq": {
           "type": "collection",
           "settings": {
-            "collection": "midnight-elegance"
+            "collection": ""
           }
         },
-        "collection_wbfTRK": {
+        "collection_YV6ztR": {
           "type": "collection",
           "settings": {
-            "collection": "silk-grace"
+            "collection": ""
           }
         },
-        "collection_fdaGhC": {
+        "collection_niVEQf": {
           "type": "collection",
           "settings": {
-            "collection": "the-minimalist-era"
+            "collection": ""
           }
         }
       },
       "block_order": [
-        "collection_4wLKtU",
-        "collection_mRn8Dn",
-        "collection_wbfTRK",
-        "collection_fdaGhC"
+        "collection_EbQTGh",
+        "collection_YatzNq",
+        "collection_YV6ztR",
+        "collection_niVEQf"
       ],
-      "name": "Collection Cards",
-      "settings": {}
+      "name": "Collection List",
+      "settings": {
+        "collection_list_title": "Explore Categories"
+      }
     },
     "featured_products_GFTLFG": {
       "type": "featured-products",
@@ -286,7 +288,7 @@
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_yFYYic",
-    "collection_list_Ebb7je",
+    "collection_list_zHTtyQ",
     "featured_products_GFTLFG",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
