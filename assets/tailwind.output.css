@@ -930,6 +930,18 @@ blockquote{
   top: 100%;
 }
 
+.\!bottom-10{
+  bottom: 2.5rem !important;
+}
+
+.\!left-8{
+  left: 2rem !important;
+}
+
+.\!right-8{
+  right: 2rem !important;
+}
+
 .z-0{
   z-index: 0;
 }
@@ -1000,6 +1012,10 @@ blockquote{
 
 .z-\[999\]{
   z-index: 999;
+}
+
+.z-\[2\]{
+  z-index: 2;
 }
 
 .order-first{
@@ -2420,6 +2436,11 @@ blockquote{
   line-height: 1rem;
 }
 
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -2564,6 +2585,10 @@ blockquote{
 
 .text-white{
   color: var(--color-white);
+}
+
+.\!text-white{
+  color: var(--color-white) !important;
 }
 
 .line-through{
@@ -2790,6 +2815,12 @@ blockquote{
 
 .placeholder\:text-primary::placeholder{
   color: var(--color-primary);
+}
+
+.after\:\!text-2xl::after{
+  content: var(--tw-content);
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
 }
 
 .checked\:bg-black:checked{
@@ -3215,6 +3246,16 @@ blockquote{
 
   .md\:text-\[13px\]{
     font-size: 13px;
+  }
+
+  .md\:text-6xl{
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .md\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 
