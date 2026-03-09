@@ -9,9 +9,16 @@
 <section id="shopify-section-{{ section.id }}">
   <div class="container">
     <div class="text-center mb-16">
+      {%- liquid
+        # Önce rengi değişkene atayalım ki yönetmesi kolay olsun
+        assign title_color = section.settings.title_color
+        if title_color == blank or title_color == 'rgba(0,0,0,0)'
+          assign title_color = 'var(--color-secondary)'
+        endif
+      -%}
       <h4
         class="uppercase font-light tracking-[0.2em]"
-        style="color:{{ section.settings.title_color | default: 'var(--color-secondary)' }};"
+        style="color:{{ title_color }};"
       >
         {{ section.settings.collection_list_title | default: 'Our Collections' }}
       </h4>
