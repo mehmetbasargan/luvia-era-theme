@@ -64,6 +64,7 @@
       ],
       "name": "Hero Slider",
       "settings": {
+        "slider_effect": "slide",
         "show_arrows": true,
         "show_pagination": true
       }
