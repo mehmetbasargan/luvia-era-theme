@@ -67,7 +67,9 @@
     </div>
   {% endif %}
 
-  <div class="swiper-pagination mb-6"></div>
+  {% if section.settings.show_pagination %}
+    <div class="swiper-pagination mb-6"></div>
+  {% endif %}
 </div>
 
 <style>
@@ -187,6 +189,12 @@
       "type": "checkbox",
       "id": "show_arrows",
       "label": "Show Navigation Arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Show Pagination",
       "default": true
     }
   ],
