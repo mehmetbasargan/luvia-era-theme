@@ -65,7 +65,7 @@
       "name": "Hero Slider",
       "settings": {
         "show_arrows": true,
-        "show_pagination": false
+        "show_pagination": true
       }
     },
     "collection_list_Ebb7je": {
