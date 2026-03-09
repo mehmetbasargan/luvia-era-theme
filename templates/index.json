@@ -108,7 +108,13 @@
       ],
       "name": "Collection List",
       "settings": {
-        "collection_list_title": "Explore Categories"
+        "collection_list_title": "Explore Categories",
+        "title_color": "#bea81e",
+        "section_bg_color": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "featured_products_GFTLFG": {
