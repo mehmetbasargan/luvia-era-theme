@@ -1,6 +1,6 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    background-color: {{ section.settings.section_bg_color | default: '#f9f9f9' }};
+    background-color: {{ section.settings.section_bg_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
@@ -111,7 +111,7 @@
       "type": "color",
       "id": "section_bg_color",
       "label": "Background Color",
-      "default": "#ffffff"
+      "default": "#f9f9f9"
     },
     {
       "type": "header",
