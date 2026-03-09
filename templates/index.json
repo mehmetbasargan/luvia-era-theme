@@ -108,11 +108,10 @@
       ],
       "name": "Collection List",
       "settings": {
-        "use_standard_settings": true,
         "collection_list_title": "Explore Categories",
         "title_color": "#b2ac88",
         "line_color": "#b2ac88",
-        "bg_color_new": "#ffffff",
+        "bg_color_new": "#e5e7eb",
         "padding_top": 120,
         "padding_bottom": 120,
         "margin_top": 0,
