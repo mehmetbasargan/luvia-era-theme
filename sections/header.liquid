@@ -412,13 +412,13 @@
     <div class="lg:w-[30px] w-[20px] p-2">
       <a href="{{ routes.account_url }}" class="relative inline-flex items-center justify-center group">
         {% if customer %}
-          {% comment %} Giriş Yapmışsa: Harf Avatar {% endcomment %}
+          {% comment %} If Logged In: User Avatar {% endcomment %}
           <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-bold uppercase tracking-tighter group-hover:bg-secondary transition-all duration-300 shadow-sm">
             {{ customer.first_name | slice: 0 -}}
             {{- customer.last_name | slice: 0 }}
           </div>
         {% else %}
-          {% comment %} Giriş Yapmamışsa: Standart İkon {% endcomment %}
+          {% comment %} If Not Logged In: Default Icon {% endcomment %}
           <div class="w-6 h-6 lg:w-7 lg:h-7 text-primary group-hover:text-secondary transition-colors">
             {% render 'icon-account' %}
           </div>

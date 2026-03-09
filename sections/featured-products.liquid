@@ -113,9 +113,9 @@
     const btn = e.currentTarget;
     const originalText = btn.innerText;
 
-    // Buton durumunu güncelle
+    // Update button state
     btn.innerText = '...';
-    btn.disabled = true; // Çift tıklamayı engellemek için
+    btn.disabled = true; // Prevent multiple clicks
 
     fetch('/cart/add.js', {
       method: 'POST',
@@ -126,23 +126,23 @@
       .then((data) => {
         btn.innerText = 'ADDED';
 
-        // 1. Global Toast Bildirimi (luvia-global.js içinden gelir)
+        // 1. Global Toast Notification (from luvia-global.js)
         if (window.showToast) {
           window.showToast(window.LuviaStrings.cartAdded || 'Product added to cart', 'success');
         }
 
-        // 2. Cart Drawer'ı Aç (luvia-global.js içinden gelir)
+        // 2. Open Cart Drawer (from luvia-global.js)
         if (window.openCartDrawer) {
           window.openCartDrawer();
         }
 
-        // 3. Sepet İçeriğini Yenile
-        // Eğer temanızda 'openAndRefreshCart' varsa çalıştırır
+        // 3. Refresh Cart Content
+        // If your theme has 'openAndRefreshCart' function, run it
         if (typeof openAndRefreshCart === 'function') {
           openAndRefreshCart();
         }
 
-        // Temanızdaki cart listener'ları için eventi tetikle
+        // Trigger cart event listeners in theme
         document.dispatchEvent(
           new CustomEvent('cart:updated', {
             detail: { cart: data },

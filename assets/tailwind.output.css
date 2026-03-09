@@ -2023,11 +2023,6 @@ blockquote{
   background-color: rgb(229 229 229 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[\#f9f9f9\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));
-}
-
 .bg-black{
   background-color: var(--color-black);
 }
@@ -2473,10 +2468,6 @@ blockquote{
   line-height: 1.25;
 }
 
-.leading-5{
-  line-height: 1.25rem;
-}
-
 .tracking-\[0\.1em\]{
   letter-spacing: 0.1em;
 }
@@ -2819,14 +2810,6 @@ blockquote{
 
 .hover\:border-black:hover{
   border-color: var(--color-black);
-}
-
-.hover\:border-primary:hover{
-  border-color: var(--color-primary);
-}
-
-.hover\:border-secondary:hover{
-  border-color: var(--color-secondary);
 }
 
 .hover\:\!bg-primary:hover{

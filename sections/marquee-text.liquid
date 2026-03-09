@@ -8,11 +8,11 @@
 {%- if show_marquee -%}
   <style>
     :root {
-      /* Başlangıçta 0, JS ile gerçek yükseklik atanacak */
+      /* Initially 0, real height will be assigned by JS */
       --marquee-height: 0px;
     }
     #shopify-section-{{ section.id }} {
-      /* Fixed yerine absolute yaparak scroll ile kaybolmasını sağlıyoruz */
+      /* Use absolute instead of fixed to allow scrolling with fade out */
       position: absolute;
       top: 0;
       left: 0;

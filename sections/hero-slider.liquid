@@ -44,26 +44,29 @@
     {% endfor %}
   </div>
 
-  <div
-    class="
-      swiper-button-next !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
-      !right-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
-    "
-  >
-    <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
-      {% render 'icon-arrow-bar-right', class: 'w-5 h-5' %}
-    </button>
-  </div>
-  <div
-    class="
-      swiper-button-prev !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
-      !left-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
-    "
-  >
-    <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
-      {% render 'icon-arrow-bar-left', class: 'w-5 h-5' %}
-    </button>
-  </div>
+  {% if section.settings.show_arrows %}
+    <div
+      class="
+        swiper-button-next !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
+        !right-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
+      "
+    >
+      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
+        {% render 'icon-arrow-bar-right', class: 'w-5 h-5' %}
+      </button>
+    </div>
+    <div
+      class="
+        swiper-button-prev !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
+        !left-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
+      "
+    >
+      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
+        {% render 'icon-arrow-bar-left', class: 'w-5 h-5' %}
+      </button>
+    </div>
+  {% endif %}
+
   <div class="swiper-pagination mb-6"></div>
 </div>
 
@@ -127,7 +130,7 @@
     z-index: 1;
   }
 </style>
-{% comment %} ddd {% endcomment %}
+
 <script>
   const initSwiper = () => {
     new Swiper('.myHeroSwiper', {
@@ -179,6 +182,12 @@
     {
       "type": "paragraph",
       "content": "ℹ️ **Tip:** For optimal display, use images with a **1920x1080px** resolution. Slide transitions are automatically optimized for performance."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Navigation Arrows",
+      "default": true
     }
   ],
   "blocks": [
