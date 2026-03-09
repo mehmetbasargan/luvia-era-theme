@@ -1,170 +1,311 @@
 {%- liquid
+  # Slider yüksekliği ayarı
   assign slider_height = section.settings.slider_height
 
-  # Yükseklik hesaplama mantığını sağlamlaştıralım
+  # Eğer "full" ise header yüksekliğini düşerek hesapla, değilse kullanıcının değerini bas
   if slider_height == 'full'
-    assign height_style = 'height: calc(100dvh - var(--header-height, 0px)); min-height: 500px;'
-  elsif slider_height == 'auto'
-    assign height_style = 'height: auto; aspect-ratio: 16/9;'
+    assign height_style = 'height: calc(100dvh - var(--header-height, 0px));'
   else
     assign height_style = 'height: ' | append: slider_height | append: ';'
   endif
 -%}
 
-{%- style -%}
-  #Slider-{{ section.id }} {
-    display: block;
-    position: relative;
-    background-color: #f0f0f0;
-  }
-  #Slider-{{ section.id }} .swiper-wrapper {
-    height: 100%;
-  }
-  .swiper-pagination-bullet {
-    background: var(--color-secondary, #000);
-    height: 10px !important;
-    width: 10px !important;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-  }
-  .swiper-pagination-bullet-active {
-    opacity: 1;
-    width: 25px !important;
-    border-radius: 5px;
-  }
-  .hero-title, .hero-subtitle, .hero-button {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .is-active .hero-title { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
-  .is-active .hero-subtitle { opacity: 1; transform: translateY(0); transition-delay: 500ms; }
-  .is-active .hero-button { opacity: 1; transform: translateY(0); transition-delay: 700ms; }
-
-  .is-active .hero-image-bg {
-    animation: kenburns 10s ease-out forwards;
-  }
-  @keyframes kenburns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
-  }
-{%- endstyle -%}
-
 <div
-  id="Slider-{{ section.id }}"
-  class="swiper group myHeroSwiper w-full overflow-hidden"
-  style="{{ height_style }}"
+  class="
+    swiper group myHeroSwiper w-full {% if section.settings.slider_height == 'full' %}
+      h-[calc(100dvh-var(--header-height,0px))] lg:h-[calc(100vh-var(--header-height,0px))]
+    {% else %}
+      h-[{{ section.settings.slider_height }}]
+    {% endif %}
+  "
 >
   <div class="swiper-wrapper">
     {% for block in section.blocks %}
-      <div
-        class="swiper-slide relative w-full h-full overflow-hidden flex items-center justify-center"
-        {{ block.shopify_attributes }}
-      >
+      <div class="swiper-slide relative w-full h-full overflow-hidden">
         {% if block.settings.image != blank %}
           {{
             block.settings.image
             | image_url: width: 2000
             | image_tag:
-              class: 'absolute inset-0 w-full h-full object-cover object-top hero-image-bg',
+              class: 'w-full h-full object-cover object-top hero-image-bg',
               loading: 'eager',
               fetchpriority: 'high',
-              alt: block.settings.image.alt
-            | default: block.settings.title
+              alt: block.settings.image.alt,
+              preload: true
           }}
         {% else %}
-          {{
-            'lifestyle-1'
-            | placeholder_svg_tag: 'absolute inset-0 w-full h-full object-cover bg-gray-200 hero-image-bg'
-          }}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-200 hero-image-bg' }}
         {% endif %}
 
-        {%- comment -%} Overlay Düzeltildi {%- endcomment -%}
         <div
-          class="hero_overlay absolute inset-0 pointer-events-none"
-          style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; z-index: 1;"
+          class="hero_overlay"
+          style="width: 100%; height: 100vh; position: absolute; top: 0;left: 0;right: 0; background-color: {{ section.settings.overlay_color }}; opacity:{{ section.settings.overlay_opacity | divided_by: 100.0 }}; z-index: 1;"
         ></div>
 
-        <div class="relative max-w-3xl text-center px-6 z-[2]">
-          <h1 class="hero-title text-white text-4xl md:text-6xl font-light uppercase mb-4">
-            {{ block.settings.title }}
-          </h1>
-          <p class="hero-subtitle text-white text-lg md:text-xl font-light mb-8">
-            {{ block.settings.sub_title }}
-          </p>
-          {% if block.settings.button_link != blank %}
-            <div class="hero-button">
-              <a
-                href="{{ block.settings.button_link }}"
-                class="inline-flex items-center gap-3 bg-white text-black hover:bg-black hover:text-white px-10 py-4 transition-all duration-300 uppercase tracking-widest text-sm"
-              >
-                {{ block.settings.button_label }}
-                {% render 'icon-arrow2' %}
-              </a>
-            </div>
-          {% endif %}
+        <div class="absolute inset-0 flex items-center justify-center text-center px-4 z-[999]">
+          <div class="max-w-3xl">
+            <h1 class="hero-title text-white font-light uppercase mb-4">
+              {{ block.settings.title }}
+            </h1>
+
+            <p class="hero-subtitle text-white font-light mb-8">
+              {{ block.settings.sub_title }}
+            </p>
+
+            {% if block.settings.button_link != blank %}
+              <div class="hero-button">
+                <a
+                  href="{{ block.settings.button_link }}"
+                  class="inline-flex items-center gap-2 bg-secondary text-white px-8 py-3 rounded-sm font-light hover:bg-primary transition-all duration-150"
+                >
+                  {{ block.settings.button_label }}
+                  {% render 'icon-arrow2' %}
+                </a>
+              </div>
+            {% endif %}
+          </div>
         </div>
       </div>
     {% endfor %}
   </div>
 
-  {% if section.settings.show_arrows and section.blocks.size > 1 %}
-    <div class="swiper-button-next !text-white !right-8 hidden md:flex after:!text-2xl"></div>
-    <div class="swiper-button-prev !text-white !left-8 hidden md:flex after:!text-2xl"></div>
+  {% if section.settings.show_arrows %}
+    <div
+      class="
+        swiper-button-next !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
+        !right-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
+      "
+    >
+      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
+        {% render 'icon-arrow-bar-right', class: 'w-5 h-5' %}
+      </button>
+    </div>
+    <div
+      class="
+        swiper-button-prev !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
+        !left-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
+      "
+    >
+      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
+        {% render 'icon-arrow-bar-left', class: 'w-5 h-5' %}
+      </button>
+    </div>
   {% endif %}
 
-  {% if section.settings.show_pagination and section.blocks.size > 1 %}
-    <div class="swiper-pagination !bottom-10"></div>
+  {% if section.settings.show_pagination %}
+    <div class="swiper-pagination mb-6"></div>
   {% endif %}
 </div>
 
-<script>
-  function initHeroSlider() {
-    const swiperEl = document.querySelector('#Slider-{{ section.id }}');
-    if (!swiperEl) return;
+<style>
+  .swiper-pagination-bullet {
+    background: var(--color-secondary);
+    height: 12px !important;
+    width: 12px !important;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+  .swiper-pagination-bullet-active {
+    background: var(--color-secondary);
+    opacity: 1;
+    width: 30px !important;
+    border-radius: 6px;
+  }
 
-    // Eğer Swiper kütüphanesi hazır değilse bekle
-    if (typeof Swiper === 'undefined') {
-      setTimeout(initHeroSlider, 200);
-      return;
+  .hero-title,
+  .hero-subtitle,
+  .hero-button {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .is-active .hero-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 400ms;
+  }
+  .is-active .hero-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 600ms;
+  }
+  .is-active .hero-button {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 800ms;
+  }
+
+  .is-active img {
+    animation: kenburns 8s ease-out forwards;
+  }
+
+  @keyframes kenburns {
+    0% {
+      transform: scale(1);
     }
+    100% {
+      transform: scale(1.1);
+    }
+  }
 
-    // Varsa eski Swiper'ı temizle
-    if (swiperEl.swiper) swiperEl.swiper.destroy(true, true);
+  /*  .hero_overlay {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: red;
+    opacity: 0.5;
+    z-index: 1;
+  } */
+</style>
 
-    new Swiper(swiperEl, {
-     loop: {% if section.blocks.size > 1 %}true{% else %}false{% endif %},
-      effect: '{{ section.settings.slider_effect }}',
-      speed: 1000,
-      grabCursor: true,
-      watchSlidesProgress: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
+<script>
+  const initSwiper = () => {
+    new Swiper('.myHeroSwiper', {
+      loop: true,
+      effect: '{{ section.settings.slider_effect }}', // Panelden gelen efekt (fade veya slide)
+      speed: 1200,
+      fadeEffect: {
+        crossFade: true,
       },
-      fadeEffect: { crossFade: true },
+      /*   autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      }, */
+      on: {
+        init: function () {
+          const activeSlide = this.slides[this.activeIndex];
+          activeSlide.classList.add('is-active');
+        },
+        slideChangeTransitionStart: function () {
+          this.slides.forEach((slide) => {
+            slide.classList.remove('is-active');
+          });
+        },
+        slideChangeTransitionEnd: function () {
+          const activeSlide = this.slides[this.activeIndex];
+          activeSlide.classList.add('is-active');
+        },
+      },
       pagination: {
         el: '.swiper-pagination',
-        clickable: true
+        clickable: true,
+        dynamicBullets: true,
       },
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      on: {
-        init: function() {
-          this.slides[this.activeIndex].classList.add('is-active');
-        },
-        slideChangeTransitionStart: function() {
-          this.slides.forEach(slide => slide.classList.remove('is-active'));
-        },
-        slideChangeTransitionEnd: function() {
-          this.slides[this.activeIndex].classList.add('is-active');
-        }
-      }
     });
-  }
+  };
 
-  document.addEventListener('DOMContentLoaded', initHeroSlider);
-  document.addEventListener('shopify:section:load', initHeroSlider);
+  document.addEventListener('DOMContentLoaded', initSwiper);
+  document.addEventListener('shopify:section:load', initSwiper);
 </script>
+
+{% schema %}
+{
+  "name": "Hero Slider",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "ℹ️ Luvia Era Performance Tip: For the fastest loading speeds, use WebP or JPG formats with a 1920x1080px resolution. We recommend keeping file sizes under 400KB to maintain a 99+ performance score."
+    },
+    {
+      "type": "select",
+      "id": "slider_effect",
+      "label": "Transition Effect",
+      "options": [
+        { "value": "slide", "label": "Slide (Classic)" },
+        { "value": "fade", "label": "Fade (Premium)" }
+      ],
+      "default": "fade"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "slider_height",
+      "label": "Slider Height",
+      "options": [
+        { "value": "full", "label": "Full Screen (Minus Header)" },
+        { "value": "600px", "label": "Fixed (600px)" },
+        { "value": "auto", "label": "Adapt to Image" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Navigation Arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Show Pagination",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "The center of the image should be the main focus of the slide."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "New Season"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Subheading",
+          "default": "Discover the latest collection now."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Now",
+          "info": "Leave blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slider"
+    }
+  ]
+}
+{% endschema %}
