@@ -69,7 +69,7 @@
         "overlay_opacity": 70,
         "slider_height": "full",
         "show_arrows": true,
-        "show_pagination": true
+        "show_pagination": false
       }
     },
     "collection_list_Ebb7je": {
