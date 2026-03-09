@@ -3,13 +3,14 @@
     background-color: {{ section.settings.section_bg_color | default: 'transparent' }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+    color: {{ section.settings.text_color | default: 'var(--color-primary)' }};
   }
 {%- endstyle -%}
 
 <section id="shopify-section-{{ section.id }}">
   <div class="container">
     <div class="text-center mb-16">
-      <h4 class="uppercase text-secondary font-light tracking-[0.2em]">
+      <h4 id="{{ section.id }}" class="uppercase font-light tracking-[0.2em]">
         {{ section.settings.collection_list_title | default: 'Our Collections' }}
       </h4>
       <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
