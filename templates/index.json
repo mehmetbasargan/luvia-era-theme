@@ -67,7 +67,7 @@
         "slider_effect": "fade",
         "overlay_color": "#000000",
         "overlay_opacity": 35,
-        "slider_height": "600px",
+        "slider_height": "auto",
         "show_arrows": true,
         "show_pagination": true
       }
