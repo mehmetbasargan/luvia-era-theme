@@ -137,7 +137,7 @@
   const initSwiper = () => {
     new Swiper('.myHeroSwiper', {
       loop: true,
-      effect: 'fade',
+      effect: '{{ section.settings.slider_effect }}', // Panelden gelen efekt (fade veya slide)
       speed: 1200,
       fadeEffect: {
         crossFade: true,
@@ -184,6 +184,16 @@
     {
       "type": "paragraph",
       "content": "ℹ️ **Tip:** For optimal display, use images with a **1920x1080px** resolution. Slide transitions are automatically optimized for performance."
+    },
+    {
+      "type": "select",
+      "id": "slider_effect",
+      "label": "Transition Effect",
+      "options": [
+        { "value": "slide", "label": "Slide (Classic)" },
+        { "value": "fade", "label": "Fade (Premium)" }
+      ],
+      "default": "fade"
     },
     {
       "type": "checkbox",
