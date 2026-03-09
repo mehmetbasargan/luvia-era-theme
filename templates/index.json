@@ -68,8 +68,8 @@
         "overlay_color": "#000000",
         "overlay_opacity": 25,
         "slider_height": "full",
-        "show_arrows": false,
-        "show_pagination": false
+        "show_arrows": true,
+        "show_pagination": true
       }
     },
     "collection_list_zHTtyQ": {
