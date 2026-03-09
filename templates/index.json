@@ -109,7 +109,7 @@
       "name": "Collection List",
       "settings": {
         "collection_list_title": "Explore Categories",
-        "title_color": "#cab532",
+        "title_color": "#000000",
         "section_bg_color": "#eeeeee",
         "padding_top": 44,
         "padding_bottom": 44,
