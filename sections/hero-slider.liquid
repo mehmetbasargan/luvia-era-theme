@@ -1,4 +1,12 @@
-<div class="swiper group myHeroSwiper w-full h-[calc(100dvh-var(--header-height,0px))] lg:h-[calc(100vh-var(--header-height,0px))]">
+<div
+  class="
+    swiper group myHeroSwiper w-full {% if section.settings.slider_height == 'full' %}
+      h-[calc(100dvh-var(--header-height,0px))] lg:h-[calc(100vh-var(--header-height,0px))]
+    {% else %}
+      h-[{{ section.settings.slider_height }}]
+    {% endif %}
+  "
+>
   <div class="swiper-wrapper">
     {% for block in section.blocks %}
       <div class="swiper-slide relative w-full h-full overflow-hidden">
@@ -219,6 +227,17 @@
       "unit": "%",
       "label": "Overlay Opacity",
       "default": 30
+    },
+    {
+      "type": "select",
+      "id": "slider_height",
+      "label": "Slider Height",
+      "options": [
+        { "value": "full", "label": "Full Screen (Minus Header)" },
+        { "value": "600px", "label": "Fixed (600px)" },
+        { "value": "auto", "label": "Adapt to Image" }
+      ],
+      "default": "full"
     },
     {
       "type": "checkbox",
