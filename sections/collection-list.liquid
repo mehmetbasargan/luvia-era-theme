@@ -2,7 +2,7 @@
   <div class="container">
     <div class="text-center mb-16">
       <h4 class="uppercase text-secondary font-light tracking-[0.2em]">
-        {{ 'collections.explore_categories' | t }}
+        {{ section.settings.collection_list_title | default: 'Explore Categories' }}
       </h4>
       <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
     </div>
@@ -58,7 +58,13 @@
 {
   "name": "Collection List",
   "max_blocks": 4,
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "collection_list_title",
+      "label": "Collection List Title"
+    }
+  ],
   "blocks": [
     {
       "type": "collection",
