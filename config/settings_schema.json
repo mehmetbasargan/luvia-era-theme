@@ -37,6 +37,12 @@
 				"id": "line_color",
 				"label": "Border/Line Color",
 				"default": "#e5e7eb"
+			},
+			{
+				"type": "color",
+				"id": "background_color",
+				"label": "Background Color",
+				"default": "#ffffff"
 			}
 		]
 	},
