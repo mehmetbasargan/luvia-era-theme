@@ -15,6 +15,7 @@
 		"theme_bg_color": "#ed1515",
 		"line_color": "#e5e7eb",
 		"background_color": "#ffffff",
+		"color_scheme": "scheme-1",
 		"heading_font": "josefin_sans_n4",
 		"body_font": "inter_n4",
 		"favicon": "shopify://shop_images/favicon.png",
@@ -55,6 +56,7 @@
 			"custom_bg_color": "#f9f9f9",
 			"line_color": "#e5e7eb",
 			"background_color": "#ffffff",
+			"color_scheme": "scheme-1",
 			"bgtransparent_color": "rgba(249, 249, 249, 0.3)",
 			"heading_font": "josefin_sans_n4",
 			"body_font": "inter_n4"
