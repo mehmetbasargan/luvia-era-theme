@@ -50,8 +50,10 @@
 		"name": "Color Schemes",
 		"settings": [
 			{
-				"type": "paragraph",
-				"content": "Color schemes will appear here once properly configured"
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color Scheme",
+				"default": "scheme-1"
 			}
 		]
 	},
