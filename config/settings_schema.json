@@ -55,48 +55,48 @@
 				"definition": [
 					{
 						"type": "header",
-						"content": "t:settings_schema.colors.groups.default"
+						"content": "Default"
 					},
 					{
 						"type": "color",
 						"id": "background",
-						"label": "t:settings_schema.colors.settings.background.label",
+						"label": "Background",
 						"default": "#ffffff"
 					},
 					{
 						"type": "color_background",
 						"id": "background_gradient",
-						"label": "t:settings_schema.colors.settings.background_gradient.label",
-						"info": "t:settings_schema.colors.settings.background_gradient.info"
+						"label": "Background gradient",
+						"info": "Add gradient to background"
 					},
 					{
 						"type": "color",
 						"id": "text",
-						"label": "t:settings_schema.colors.settings.text.label",
+						"label": "Text",
 						"default": "#121212"
 					},
 					{
 						"type": "color",
 						"id": "button",
-						"label": "t:settings_schema.colors.settings.button_background.label",
+						"label": "Button background",
 						"default": "#121212"
 					},
 					{
 						"type": "color",
 						"id": "button_label",
-						"label": "t:settings_schema.colors.settings.button_label.label",
+						"label": "Button label",
 						"default": "#ffffff"
 					},
 					{
 						"type": "color",
 						"id": "secondary_button_label",
-						"label": "t:settings_schema.colors.settings.secondary_button_label.label",
+						"label": "Secondary button label",
 						"default": "#121212"
 					},
 					{
 						"type": "color",
 						"id": "shadow",
-						"label": "t:settings_schema.colors.settings.shadow.label",
+						"label": "Shadow",
 						"default": "#121212"
 					}
 				],
