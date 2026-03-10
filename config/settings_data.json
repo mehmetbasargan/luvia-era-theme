@@ -23,6 +23,7 @@
 		"content_for_index": [],
 		"schemes": {
 			"scheme-1": {
+				"name": "Light",
 				"settings": {
 					"background": "#ffffff",
 					"background_gradient": "",
@@ -34,6 +35,7 @@
 				}
 			},
 			"scheme-2": {
+				"name": "Dark",
 				"settings": {
 					"background": "#3b443c",
 					"background_gradient": "",
@@ -52,6 +54,7 @@
 			"secondary_color": "#b2ac88",
 			"custom_bg_color": "#f9f9f9",
 			"line_color": "#e5e7eb",
+			"background_color": "#ffffff",
 			"bgtransparent_color": "rgba(249, 249, 249, 0.3)",
 			"heading_font": "josefin_sans_n4",
 			"body_font": "inter_n4"
