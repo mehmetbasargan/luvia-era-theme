@@ -23,24 +23,6 @@
 		"bgtransparent_color": "#fa0b0b4d",
 		"content_for_index": []
 	},
-	"scheme-1": {
-		"background": "#ffffff",
-		"background_gradient": "",
-		"text": "#3b443c",
-		"button": "#b2ac88",
-		"button_label": "#ffffff",
-		"secondary_button_label": "#3b443c",
-		"shadow": "#000000"
-	},
-	"scheme-2": {
-		"background": "#3b443c",
-		"background_gradient": "",
-		"text": "#ffffff",
-		"button": "#b2ac88",
-		"button_label": "#ffffff",
-		"secondary_button_label": "#ffffff",
-		"shadow": "#000000"
-	},
 	"presets": {
 		"Luvia Standard": {
 			"primary_color": "#3b443c",

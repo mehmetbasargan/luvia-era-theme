@@ -47,17 +47,6 @@
 		]
 	},
 	{
-		"name": "Color Schemes",
-		"settings": [
-			{
-				"type": "color_scheme",
-				"id": "color_scheme",
-				"label": "Color Scheme",
-				"default": "scheme-1"
-			}
-		]
-	},
-	{
 		"name": "Typography",
 		"settings": [
 			{
