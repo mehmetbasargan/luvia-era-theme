@@ -1,33 +1,32 @@
 {%- style -%}
-  #shopify-section-{{ section.id }} {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    margin-top: {{ section.settings.margin_top }}px;
-    margin-bottom: {{ section.settings.margin_bottom }}px;
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+
+    /* Şema Renklerini Uygula */
+    .section-{{ section.id }}-padding {
+      background-color: {{ section.settings.color_scheme.settings.background }};
+      color: {{ section.settings.color_scheme.settings.text }};
+    }
+
+   .section-{{ section.id }}-padding :is(h1, h2, h3, h4, h5, h6) {
+    color: {{ section.settings.color_scheme.settings.heading }} !important;
   }
 
-  /* Şema Renklerini Uygula */
-  .section-{{ section.id }}-padding {
-    background-color: {{ section.settings.color_scheme.settings.background }};
-    color: {{ section.settings.color_scheme.settings.text }};
-  }
+    .section-{{ section.id }}-padding .review-link {
+      color: {{ section.settings.color_scheme.settings.text }};
+    }
 
-  .section-{{ section.id }}-padding h4,
-  .section-{{ section.id }}-padding h6 {
-    color: {{ section.settings.color_scheme.settings.heading }};
-  }
+    .section-{{ section.id }}-padding .review-link:hover {
+      color: {{ section.settings.color_scheme.settings.button }}; /* Hover'da marka rengine dönsün */
+    }
 
-  .section-{{ section.id }}-padding .review-link {
-    color: {{ section.settings.color_scheme.settings.text }};
-  }
-
-  .section-{{ section.id }}-padding .review-link:hover {
-    color: {{ section.settings.color_scheme.settings.button }}; /* Hover'da marka rengine dönsün */
-  }
-
-  .section-{{ section.id }}-padding .divider-line {
-    background-color: {{ section.settings.color_scheme.settings.button }};
-  }
+    .section-{{ section.id }}-padding .divider-line {
+      background-color: {{ section.settings.color_scheme.settings.button }};
+    }
 {%- endstyle -%}
 
 <section
