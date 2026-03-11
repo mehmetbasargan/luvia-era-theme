@@ -10,6 +10,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				// --- Global Marka Renkleri (Settings > Colors) ---
 				primary: 'var(--color-primary)',
 				secondary: 'var(--color-secondary)',
 				custombg: 'var(--color-custombg)',
@@ -17,7 +18,16 @@ module.exports = {
 				white: 'var(--color-white)',
 				black: 'var(--color-black)',
 				bgtransparent: 'var(--color-bgtransparent)',
-				'bg-white': 'var(--color-white)',
+
+				// --- Dinamik Şema Renkleri (Color Schemes) ---
+				// Bu renkler seçilen şemaya göre section bazlı değişir
+				'scheme-bg': 'var(--color-background)',
+				'scheme-text': 'var(--color-text)',
+				'scheme-heading': 'var(--color-heading)',
+				'scheme-btn': 'var(--color-button)',
+				'scheme-btn-hover': 'var(--color-button-hover)',
+				'scheme-btn-text': 'var(--color-button-label)',
+				'scheme-shadow': 'var(--color-shadow)',
 			},
 
 			fontFamily: {

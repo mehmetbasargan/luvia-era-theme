@@ -23,32 +23,43 @@
       {{ body_font | font_face: font_display: 'swap' }}
 
       :root {
-        /* Renk Değişkenleri */
-        --color-primary: {{ settings.primary_color | strip }};
-        --color-secondary: {{ settings.secondary_color | strip }};
-        --color-custombg: {{ settings.custom_bg_color | strip }};
-        --color-line: {{ settings.line_color | strip }};
-        --color-bgtransparent: {{ settings.bgtransparent_color | strip }};
+        /* Global Sabitler */
         --color-white: #ffffff;
         --color-black: #000000;
-
-        /* Font Değişkenlericcc - BURASI EKSİKTİ */
         --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
         --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+
+        /* Fallback (Yedek) Renkler - Şema seçilmemişse bunlar çalışır */
+        --color-primary: {{ settings.primary_color }};
+        --color-secondary: {{ settings.secondary_color }};
       }
+
+      /* --- ŞEMA SİHİRBAZI --- */
+      /* Bu blok, section içinde seçilen şemayı CSS değişkenlerine bağlar */
+      {%- if section.settings.color_scheme -%}
+        .color-{{ section.settings.color_scheme }} {
+          --color-background: {{ section.settings.color_scheme.settings.background }};
+          --color-text: {{ section.settings.color_scheme.settings.text }};
+          --color-heading: {{ section.settings.color_scheme.settings.heading }};
+          --color-button: {{ section.settings.color_scheme.settings.button }};
+          --color-button-hover: {{ section.settings.color_scheme.settings.button_hover }};
+          --color-button-text: {{ section.settings.color_scheme.settings.button_label }};
+        }
+      {%- endif -%}
 
       body {
         background-color: var(--color-white);
         color: var(--color-primary);
-        font-family: var(--font-body); /* Artık yukarıdaki değişkeni okuyabilir */
+        font-family: var(--font-body);
         margin: 0;
-        -webkit-font-smoothing: antialiased;
         display: block !important;
         opacity: 1 !important;
       }
 
-      h1, h2, h3, h4, h5, h6, .font-heading {
-        font-family: var(--font-heading); /* Artık yukarıdaki değişkeni okuyabilir */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+        /* Başlık rengini değişkenden al, yoksa gövde rengini al */
+        color: var(--color-heading, var(--color-primary));
       }
     </style>
 
