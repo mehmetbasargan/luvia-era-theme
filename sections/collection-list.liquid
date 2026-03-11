@@ -1,33 +1,45 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    background-color: {{ section.settings.bg_color_new }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+
+  /* Şema Renklerini Uygula */
+  .section-{{ section.id }}-padding {
+    background-color: {{ section.settings.color_scheme.settings.background }};
+    color: {{ section.settings.color_scheme.settings.text }};
+  }
+
+  .section-{{ section.id }}-padding h4,
+  .section-{{ section.id }}-padding h6 {
+    color: {{ section.settings.color_scheme.settings.heading }};
+  }
+
+  .section-{{ section.id }}-padding .review-link {
+    color: {{ section.settings.color_scheme.settings.text }};
+  }
+
+  .section-{{ section.id }}-padding .review-link:hover {
+    color: {{ section.settings.color_scheme.settings.button }}; /* Hover'da marka rengine dönsün */
+  }
+
+  .section-{{ section.id }}-padding .divider-line {
+    background-color: {{ section.settings.color_scheme.settings.button }};
   }
 {%- endstyle -%}
 
-<section id="shopify-section-{{ section.id }}" class="color-{{ section.settings.color_scheme }}">
+<section
+  id="shopify-section-{{ section.id }}"
+  class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}"
+>
   <div class="container">
     <div class="text-center mb-16">
-      {%- liquid
-        # Önce rengi değişkene atayalım ki yönetmesi kolay olsun
-        assign title_color = section.settings.title_color
-        if title_color == blank or title_color == 'rgba(0,0,0,0)'
-          assign title_color = 'var(--color-secondary)'
-        endif
-        assign line_color = section.settings.line_color
-        if line_color == blank or line_color == 'rgba(0,0,0,0)'
-          assign line_color = 'var(--color-secondary)'
-        endif
-      -%}
-
-      <h4
-        class="uppercase font-light tracking-[0.2em]"
-        style="color:{{ title_color }};"
-      >
+      <h4 class="uppercase font-light tracking-[0.2em]">
         {{ section.settings.collection_list_title | default: 'Our Collections' }}
       </h4>
-      <div class="h-[1px] w-20 mx-auto mt-4" style="background-color: {{ line_color }};"></div>
+      <div class="h-[1px] w-20 mx-auto mt-4 divider-line"></div>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
@@ -44,30 +56,23 @@
                 alt="{{ collection.title | escape }}"
                 width="600"
                 height="400"
-                loading="eager"
+                loading="lazy"
                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               >
             {% else %}
               {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full bg-[#E5E5E5]' }}
             {% endif %}
-
-            <div
-              class="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/10 transition-colors duration-500"
-            ></div>
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500"></div>
           </a>
           <div class="mt-6 text-center">
-            <h6 class="text-primary tracking-widest uppercase mb-2">
-              {% if collection.title != blank %}
-                {{ collection.title }}
-              {% else %}
-                {{ 'collections.select_collection_placeholder' | t }}
-              {% endif %}
+            <h6 class="tracking-widest uppercase mb-2">
+              {{ collection.title | default: 'Collection Title' }}
             </h6>
             <a
               href="{{ collection.url }}"
-              class="text-[11px] md:text-[13px] text-primary uppercase tracking-widest hover:text-secondary transition-all flex items-center justify-center gap-2"
+              class="review-link text-[11px] md:text-[13px] uppercase tracking-widest transition-all flex items-center justify-center gap-2"
             >
-              {{ 'collections.review' | t }}
+              {{ 'collections.review' | t | default: 'Review' }}
               {% render 'icon-arrow-right' %}
             </a>
           </div>
@@ -77,28 +82,6 @@
   </div>
 </section>
 
-<style>
-    /* Seçilen şemaya göre renkleri otomatik dağıtır */
-  .color-{{ section.settings.color_scheme }} {
-    background-color: {{ section.settings.color_scheme.settings.background }};
-    color: {{ section.settings.color_scheme.settings.text }};
-  }
-
-  .color-{{ section.settings.color_scheme }} h2,
-  .color-{{ section.settings.color_scheme }} h3 {
-    color: {{ section.settings.color_scheme.settings.heading }};
-  }
-
-  .color-{{ section.settings.color_scheme }} .button {
-    background-color: {{ section.settings.color_scheme.settings.button }};
-    color: {{ section.settings.color_scheme.settings.button_label }};
-  }
-
-  .color-{{ section.settings.color_scheme }} .button:hover {
-    background-color: {{ section.settings.color_scheme.settings.button_hover }};
-  }
-</style>
-
 {% schema %}
 {
   "name": "Collection List",
@@ -106,13 +89,23 @@
   "settings": [
     {
       "type": "header",
-      "content": "Content Settings"
+      "content": "Appearance"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Color Scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "collection_list_title",
+      "label": "Title",
+      "default": "Our Collections"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
     },
     {
       "type": "range",
@@ -153,12 +146,6 @@
       "unit": "px",
       "label": "Margin Bottom",
       "default": 0
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color Scheme",
-      "default": "scheme-1"
     }
   ],
   "blocks": [
