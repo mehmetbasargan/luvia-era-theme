@@ -51,7 +51,7 @@
 		"settings": [
 			{
 				"type": "color_scheme_group",
-				"id": "color_schemes",
+				"id": "schemes",
 				"definition": [
 					{ "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
 					{ "type": "color_background", "id": "background_gradient", "label": "Background Gradient" },
@@ -61,7 +61,7 @@
 					{
 						"type": "color",
 						"id": "secondary_button_label",
-						"label": "Secondary Button Label",
+						"label": "Secondary Button",
 						"default": "#3b443c"
 					},
 					{ "type": "color", "id": "shadow", "label": "Shadow", "default": "#000000" }
