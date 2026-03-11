@@ -20,6 +20,7 @@
           assign line_color = 'var(--color-secondary)'
         endif
       -%}
+
       <h4
         class="uppercase font-light tracking-[0.2em]"
         style="color:{{ title_color }};"
@@ -130,6 +131,12 @@
       "unit": "px",
       "label": "Margin Bottom",
       "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
     }
   ],
   "blocks": [
