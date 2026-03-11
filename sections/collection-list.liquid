@@ -6,28 +6,6 @@
   }
 {%- endstyle -%}
 
-<style>
-    /* Seçilen şemaya göre renkleri otomatik dağıtır */
-  .color-{{ section.settings.color_scheme }} {
-    background-color: {{ section.settings.color_scheme.settings.background }};
-    color: {{ section.settings.color_scheme.settings.text }};
-  }
-
-  .color-{{ section.settings.color_scheme }} h2,
-  .color-{{ section.settings.color_scheme }} h3 {
-    color: {{ section.settings.color_scheme.settings.heading }};
-  }
-
-  .color-{{ section.settings.color_scheme }} .button {
-    background-color: {{ section.settings.color_scheme.settings.button }};
-    color: {{ section.settings.color_scheme.settings.button_label }};
-  }
-
-  .color-{{ section.settings.color_scheme }} .button:hover {
-    background-color: {{ section.settings.color_scheme.settings.button_hover }};
-  }
-</style>
-
 <section id="shopify-section-{{ section.id }}" class="color-{{ section.settings.color_scheme }}">
   <div class="container">
     <div class="text-center mb-16">
@@ -98,6 +76,28 @@
     </div>
   </div>
 </section>
+
+<style>
+    /* Seçilen şemaya göre renkleri otomatik dağıtır */
+  .color-{{ section.settings.color_scheme }} {
+    background-color: {{ section.settings.color_scheme.settings.background }};
+    color: {{ section.settings.color_scheme.settings.text }};
+  }
+
+  .color-{{ section.settings.color_scheme }} h2,
+  .color-{{ section.settings.color_scheme }} h3 {
+    color: {{ section.settings.color_scheme.settings.heading }};
+  }
+
+  .color-{{ section.settings.color_scheme }} .button {
+    background-color: {{ section.settings.color_scheme.settings.button }};
+    color: {{ section.settings.color_scheme.settings.button_label }};
+  }
+
+  .color-{{ section.settings.color_scheme }} .button:hover {
+    background-color: {{ section.settings.color_scheme.settings.button_hover }};
+  }
+</style>
 
 {% schema %}
 {
