@@ -97,7 +97,7 @@
 	h5,
 	h6 {
 		/* Bold yerine Normal veya Light'a geçiyoruz */
-		@apply font-josefin text-primary leading-[1.1] font-normal tracking-tight;
+		@apply font-josefin leading-[1.1] font-normal tracking-tight;
 	}
 
 	h1 {
