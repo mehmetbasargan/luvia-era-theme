@@ -1,32 +1,49 @@
 {%- style -%}
+  {%- liquid
+    # Şema renklerini değişkenlere atayalım (Daha temiz kod)
+    assign scheme = section.settings.color_scheme.settings
+    assign bg_color = scheme.background
+    assign text_color = scheme.text
+    assign heading_color = scheme.heading | default: scheme.text
+    assign button_color = scheme.button
+  -%}
+
+  /* 1. Section Genel Ayarları */
   #shopify-section-{{ section.id }} {
+    background-color: {{ bg_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     margin-top: {{ section.settings.margin_top }}px;
     margin-bottom: {{ section.settings.margin_bottom }}px;
   }
 
-  /* Şema Renklerini Uygula */
-  .section-{{ section.id }}-padding {
-    background-color: {{ section.settings.color_scheme.settings.background }};
-    color: {{ section.settings.color_scheme.settings.text }};
+  /* 2. Başlık Renkleri (H1-H6) - En yüksek öncelik için ID + Etiket kullanımı */
+  #shopify-section-{{ section.id }} h1,
+  #shopify-section-{{ section.id }} h2,
+  #shopify-section-{{ section.id }} h3,
+  #shopify-section-{{ section.id }} h4,
+  #shopify-section-{{ section.id }} h5,
+  #shopify-section-{{ section.id }} h6 {
+    color: {{ heading_color }} !important;
   }
 
-  /* Bu kural, ID üzerinden gittiği için tüm sınıf tanımlarını ezer geçer */
-  #shopify-section-{{ section.id }} :is(h1, h2, h3, h4, h5, h6) {
-    color: {{ section.settings.color_scheme.settings.heading }} !important;
+  /* 3. Genel Metin ve Linkler */
+  #shopify-section-{{ section.id }} .section-{{ section.id }}-padding {
+    color: {{ text_color }};
   }
 
-  .section-{{ section.id }}-padding .review-link {
-    color: {{ section.settings.color_scheme.settings.text }};
+  #shopify-section-{{ section.id }} .review-link {
+    color: {{ text_color }};
+    transition: color 0.3s ease;
   }
 
-  .section-{{ section.id }}-padding .review-link:hover {
-    color: {{ section.settings.color_scheme.settings.button }}; /* Hover'da marka rengine dönsün */
+  #shopify-section-{{ section.id }} .review-link:hover {
+    color: {{ button_color }};
   }
 
-  .section-{{ section.id }}-padding .divider-line {
-    background-color: {{ section.settings.color_scheme.settings.button }};
+  /* 4. Ayırıcı Çizgi */
+  #shopify-section-{{ section.id }} .divider-line {
+    background-color: {{ button_color }};
   }
 {%- endstyle -%}
 
