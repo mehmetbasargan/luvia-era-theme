@@ -28,7 +28,9 @@
 					"background": "#f9f9f9",
 					"background_gradient": "",
 					"text": "#3b443c",
+					"heading": "#3b443c",
 					"button": "#b2ac88",
+					"button_hover": "#8e896d",
 					"button_label": "#ffffff",
 					"secondary_button_label": "#3b443c",
 					"shadow": "#000000"
@@ -39,7 +41,9 @@
 					"background": "#ffffff",
 					"background_gradient": "",
 					"text": "#f70083",
+					"heading": "#f70083",
 					"button": "#b2ac88",
+					"button_hover": "#3b443c",
 					"button_label": "#ffffff",
 					"secondary_button_label": "#3b443c",
 					"shadow": "#000000"
@@ -50,7 +54,9 @@
 					"background": "#3b443c",
 					"background_gradient": "",
 					"text": "#ffffff",
+					"heading": "#ffffff",
 					"button": "#b2ac88",
+					"button_hover": "#ffffff",
 					"button_label": "#3b443c",
 					"secondary_button_label": "#ffffff",
 					"shadow": "#000000"
