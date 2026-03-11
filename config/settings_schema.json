@@ -56,7 +56,9 @@
 					{ "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
 					{ "type": "color_background", "id": "background_gradient", "label": "Background Gradient" },
 					{ "type": "color", "id": "text", "label": "Text", "default": "#121212" },
+					{ "type": "color", "id": "heading", "label": "Heading", "default": "#121212" }, // EKLE
 					{ "type": "color", "id": "button", "label": "Button", "default": "#3b443c" },
+					{ "type": "color", "id": "button_hover", "label": "Button Hover", "default": "#2a322b" }, // EKLE
 					{ "type": "color", "id": "button_label", "label": "Button Label", "default": "#ffffff" },
 					{
 						"type": "color",
