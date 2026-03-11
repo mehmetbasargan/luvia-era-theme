@@ -7,56 +7,74 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
+
 {
-  "current": {
-    "primary_color": "#3b443c",
-    "secondary_color": "#b2ac88",
-    "theme_bg_color": "#ed1515",
-    "line_color": "#e5e7eb",
-    "background_color": "#ffffff",
-    "color_scheme": "scheme-1",
-    "heading_font": "josefin_sans_n4",
-    "body_font": "inter_n4",
-    "favicon": "shopify://shop_images/favicon.png",
-    "custom_bg_color": "#f9f9f9",
-    "bgtransparent_color": "#fa0b0b4d",
-    "content_for_index": [],
-    "schemes": {
-      "scheme-1": {
-        "settings": {
-          "background": "#ffffff",
-          "background_gradient": "",
-          "text": "#3b443c",
-          "button": "#b2ac88",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#3b443c",
-          "shadow": "#000000"
-        }
-      },
-      "scheme-2": {
-        "settings": {
-          "background": "#f9f9f9",
-          "background_gradient": "",
-          "text": "#3b443c",
-          "button": "#b2ac88",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#3b443c",
-          "shadow": "#000000"
-        }
-      }
-    }
-  },
-  "presets": {
-    "Luvia Standard": {
-      "primary_color": "#3b443c",
-      "secondary_color": "#b2ac88",
-      "custom_bg_color": "#f9f9f9",
-      "line_color": "#e5e7eb",
-      "background_color": "#ffffff",
-      "color_scheme": "scheme-1",
-      "bgtransparent_color": "rgba(249, 249, 249, 0.3)",
-      "heading_font": "josefin_sans_n4",
-      "body_font": "inter_n4"
-    }
-  }
+	"current": {
+		"primary_color": "#3b443c",
+		"secondary_color": "#b2ac88",
+		"theme_bg_color": "#ed1515",
+		"line_color": "#e5e7eb",
+		"background_color": "#ffffff",
+		"color_scheme": "scheme-1",
+		"heading_font": "josefin_sans_n4",
+		"body_font": "inter_n4",
+		"favicon": "shopify://shop_images/favicon.png",
+		"custom_bg_color": "#f9f9f9",
+		"bgtransparent_color": "#fa0b0b4d",
+		"content_for_index": [],
+		"schemes": {
+			"scheme-1": {
+				"settings": {
+					"background": "#f9f9f9",
+					"background_gradient": "",
+					"text": "#3b443c",
+					"heading": "#b2ac88",
+					"button": "#b2ac88",
+					"button_hover": "#3b443c",
+					"button_label": "#ffffff",
+					"secondary_button_label": "#3b443c",
+					"shadow": "#000000"
+				}
+			},
+			"scheme-2": {
+				"settings": {
+					"background": "#ffffff",
+					"background_gradient": "",
+					"text": "#121212",
+					"heading": "#121212",
+					"button": "#b2ac88",
+					"button_hover": "#3b443c",
+					"button_label": "#ffffff",
+					"secondary_button_label": "#3b443c",
+					"shadow": "#000000"
+				}
+			},
+			"scheme-3": {
+				"settings": {
+					"background": "#3b443c",
+					"background_gradient": "",
+					"text": "#ffffff",
+					"heading": "#ffffff",
+					"button": "#b2ac88",
+					"button_hover": "#ffffff",
+					"button_label": "#3b443c",
+					"secondary_button_label": "#ffffff",
+					"shadow": "#000000"
+				}
+			}
+		}
+	},
+	"presets": {
+		"Luvia Standard": {
+			"primary_color": "#3b443c",
+			"secondary_color": "#b2ac88",
+			"custom_bg_color": "#f9f9f9",
+			"line_color": "#e5e7eb",
+			"background_color": "#ffffff",
+			"color_scheme": "scheme-1",
+			"bgtransparent_color": "rgba(249, 249, 249, 0.3)",
+			"heading_font": "josefin_sans_n4",
+			"body_font": "inter_n4"
+		}
+	}
 }
