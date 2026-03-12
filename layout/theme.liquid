@@ -70,6 +70,26 @@
       .active-link, a:hover, button:hover {
         color: var(--color-secondary) !important;
       }
+
+      /* Wishlist Aktifleşince Kalbin İçini Doldur */
+      .custom-wishlist-btn.wishlist-active svg,
+      .custom-wishlist-btn.active svg {
+        fill: var(--color-primary) !important;
+        stroke: var(--color-primary) !important;
+        color: var(--color-primary) !important;
+      }
+
+      /* Wishlist Aktif Değilse Kalp Boş */
+      .custom-wishlist-btn:not(.wishlist-active):not(.active) svg {
+        fill: none !important;
+        stroke: var(--color-primary) !important;
+        color: var(--color-primary) !important;
+      }
+
+      /* Hover yapınca hafif bir tepki */
+      .custom-wishlist-btn:hover svg {
+        transform: scale(1.1);
+      }
     </style>
 
     {{ content_for_header }}
