@@ -304,7 +304,7 @@
                   {% for link in linklists['main-menu'].links %}
                     <div class="mobile-nav-item">
                       {% if link.links != blank %}
-                        <button class="flex justify-between items-center w-full text-[15px] tracking-widest font-josefin py-2 border-b border-line mobile-dropdown-btn">
+                        <button class="flex justify-between items-center w-full text-[15px] tracking-widest font-josefin py-2 border-b mobile-dropdown-btn">
                           {{ link.title }}
                           <svg
                             class="w-4 h-4 transition-transform duration-300"
@@ -329,7 +329,7 @@
                       {% else %}
                         <a
                           href="{{ link.url }}"
-                          class="block text-[15px] tracking-widest py-2 border-b border-line"
+                          class="block text-[15px] tracking-widest py-2 border-b"
                         >
                           {{- link.title -}}
                         </a>
@@ -339,7 +339,7 @@
                 </nav>
 
                 <div class="container py-5 mt-10">
-                  <h5 class="text-center mb-5 border-b border-line pb-3">{{ 'general.social_media' | t }}</h5>
+                  <h5 class="text-center mb-5 border-b pb-3">{{ 'general.social_media' | t }}</h5>
                   <div class="flex flex-col lg:flex-row items-center justify-between md:justify-around gap-2">
                     <div class="">
                       {% if section.settings.show_phone and section.settings.header_phone != blank %}
