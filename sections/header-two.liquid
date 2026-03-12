@@ -1,58 +1,67 @@
 {%- style -%}
   {%- liquid
-    # Şema renklerini değişkenlere atayalım (Daha temiz kod)
+    # Şema nesnesini güvenli bir şekilde alalım
     assign scheme = section.settings.color_scheme.settings
-    assign bg_color = scheme.background
-    assign text_color = scheme.text
-    assign heading_color = scheme.heading | default: scheme.text
-    assign button_color = scheme.button
+
+    # Varsayılan renkleri tanımlayalım (Hata almamak için)
+    assign bg_color = scheme.background | default: '#ffffff'
+    assign text_color = scheme.text | default: '#000000'
+    assign accent_color = scheme.button | default: '#b2ac88'
+
+    # Opacity (Şeffaflık) hesaplama
+    assign opacity_val = section.settings.header_opacity | default: 100 | divided_by: 100.0
   -%}
 
-  /* 1. Section Genel Ayarları */
+  :root {
+    /* Senin temandaki değişkenleri şemaya köprülüyoruz */
+    --color-primary: {{ text_color }};
+    --color-secondary: {{ accent_color }};
+    --color-custombg: {{ bg_color }};
+
+    /* border-line için metin renginin %10 opak halini manuel RGBA yapalım */
+    --color-line: {{ text_color | color_modify: 'alpha', 0.1 }};
+
+    /* Header özel arka planı (Opacity dahil) */
+    --header-bg: {{ bg_color | color_modify: 'alpha', opacity_val }};
+  }
+
   #main-header-{{ section.id }} {
-    background-color: {{ bg_color }};
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    margin-top: {{ section.settings.margin_top }}px;
-    margin-bottom: {{ section.settings.margin_bottom }}px;
+    background-color: var(--header-bg) !important;
+    color: var(--color-primary);
   }
 
-  /* 2. Başlık Renkleri (H1-H6) - En yüksek öncelik için ID + Etiket kullanımı */
-  #main-header-{{ section.id }} h1,
-  #main-header-{{ section.id }} h2,
-  #main-header-{{ section.id }} h3,
-  #main-header-{{ section.id }} h4,
-  #main-header-{{ section.id }} h5,
-  #main-header-{{ section.id }} h6 {
-    color: {{ heading_color }} !important;
+  /* Mega Menü ve Dropdownlar */
+  #main-header-{{ section.id }} .bg-custombg,
+  #main-header-{{ section.id }} [class*="bg-white"],
+  #main-header-{{ section.id }} .absolute {
+    background-color: var(--color-custombg) !important;
   }
 
-  /* 3. Genel Metin ve Linkler */
-  #main-header-{{ section.id }} .section-{{ section.id }}-padding {
-    color: {{ text_color }};
+  /* Senin kullandığın border-line ve border-b sınıflarını şemaya bağladık */
+  #main-header-{{ section.id }} .border-line,
+  #main-header-{{ section.id }} .border-b,
+  #main-header-{{ section.id }} .border-t {
+    border-color: var(--color-line) !important;
   }
 
-  #main-header-{{ section.id }} .review-link {
-    color: {{ text_color }};
-    transition: color 0.3s ease;
+  /* Linkler ve Butonlar */
+  #main-header-{{ section.id }} a,
+  #main-header-{{ section.id }} button {
+    color: var(--color-primary) !important;
   }
 
-  #main-header-{{ section.id }} .review-link:hover {
-    color: {{ button_color }};
-  }
-
-  /* 4. Ayırıcı Çizgi */
-  #main-header-{{ section.id }} .divider-line {
-    background-color: {{ button_color }};
+  #main-header-{{ section.id }} a:hover,
+  #main-header-{{ section.id }} .active-link {
+    color: var(--color-secondary) !important;
   }
 {%- endstyle -%}
 
 <div class="relative w-full h-[153px] md:h-[152px] z[999]">
   <header
-    id="main-header-{{ section.id }}"
-    class="site-header overflow-visible fixed top-0 z-50 w-full border-b section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}"
+    id="main-header"
+    class="site-header overflow-visible fixed top-0 z-50 w-full border-b"
   >
-    {% comment %} logo cddddd{% endcomment %}
+    {% comment %} logo {% endcomment %}
     <div class="border-b ">
       <div class="container">
         <div class="w-full h-[80px] py-5 items-center justify-center lg:justify-between flex">
@@ -83,7 +92,7 @@
               {%- for block in section.blocks -%}
                 {%- if block.type == 'social_icon' -%}
                   <li
-                    class="rounded-full p-2 bg-custombg hover:bg-secondary text-primary hover:!text-white transition-colors"
+                    class="rounded-full p-2 transition-colors"
                     {{ block.shopify_attributes }}
                   >
                     <a
@@ -119,7 +128,7 @@
       </div>
     </div>
     {% comment %} menu {% endcomment %}
-    <div class="bg-custombg h-[70px] flex items-center relative">
+    <div class=" h-[70px] flex items-center relative">
       <div class="container flex lg:justify-between justify-end items-center w-full">
         {% comment %} desktop menu {% endcomment %}
         <nav>
@@ -446,6 +455,14 @@
     });
   });
 </script>
+
+{% comment %}
+  <style>
+    .marquee-text-active {
+      top: 40px;
+    }
+  </style>
+{% endcomment %}
 
 {% schema %}
 {
