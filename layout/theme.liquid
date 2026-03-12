@@ -98,6 +98,26 @@
       .custom-wishlist-btn:hover svg {
         transform: scale(1.1);
       }
+
+      /* Accessibility Focus States */
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+
+      /* Better Contrast for Interactive Elements */
+      .btn, button, a {
+        color: var(--color-primary) !important;
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
     </style>
 
     {{ content_for_header }}
