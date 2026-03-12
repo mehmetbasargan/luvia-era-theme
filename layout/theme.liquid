@@ -7,6 +7,14 @@
       content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover,user-scalable=no"
     >
 
+    <!-- SEO Meta Tags -->
+    <title>
+      {{ page_title }}
+      -
+      {{ shop.name }}
+    </title>
+    <meta name="description" content="{{ page_description | default: shop.description | escape }}">
+
     {% # Meta tags, social, favicon %}
     {% render 'meta-tags' %}
 
@@ -94,9 +102,14 @@
 
     {{ content_for_header }}
 
-    {% # Asset CSS %}
+    {% # Asset CSS -->
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag: preload: true }}
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag: preload: true }}
+    
+    <!-- Preload Critical Resources -->
+    {% if settings.favicon %}
+      <link rel="preload" href="{{ settings.favicon | image_url: width: 32 }}" as="image" type="image/png">
+    {% endif %}
   </head>
 
   <body itemscope itemtype="https://schema.org/WebPage">
