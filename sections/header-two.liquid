@@ -447,14 +447,6 @@
   });
 </script>
 
-{% comment %}
-  <style>
-    .marquee-text-active {
-      top: 40px;
-    }
-  </style>
-{% endcomment %}
-
 {% schema %}
 {
   "name": "Header - Centered",
@@ -480,6 +472,22 @@
       "id": "show_phone",
       "label": "Show Phone",
       "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "header_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Header Opacity Rate",
+      "default": 100
     }
   ],
   "blocks": [
