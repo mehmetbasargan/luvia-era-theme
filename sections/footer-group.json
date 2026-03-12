@@ -8,154 +8,157 @@
  * ------------------------------------------------------------
  */
 {
-	"type": "footer",
-	"name": "Footer Group",
-	"sections": {
-		"footer": {
-			"type": "footer",
-			"blocks": {
-				"payment_icons_CxHpfN": {
-					"type": "payment_icons",
-					"settings": {
-						"payment_icon": "shopify://shop_images/con-discover.svg"
-					}
-				},
-				"payment_icons_9BTh68": {
-					"type": "payment_icons",
-					"settings": {
-						"payment_icon": "shopify://shop_images/icon-dinners.svg"
-					}
-				},
-				"payment_icons_kFKnJA": {
-					"type": "payment_icons",
-					"settings": {
-						"payment_icon": "shopify://shop_images/icon-paypal.svg"
-					}
-				},
-				"payment_icons_kWjyzy": {
-					"type": "payment_icons",
-					"settings": {
-						"payment_icon": "shopify://shop_images/icon-american-express.svg"
-					}
-				},
-				"payment_icons_mbBwxX": {
-					"type": "payment_icons",
-					"settings": {
-						"payment_icon": "shopify://shop_images/icon-mastercard.svg"
-					}
-				},
-				"payment_icons_JUKEeF": {
-					"type": "payment_icons",
-					"settings": {
-						"payment_icon": "shopify://shop_images/icon-visa.svg"
-					}
-				}
-			},
-			"block_order": [
-				"payment_icons_CxHpfN",
-				"payment_icons_9BTh68",
-				"payment_icons_kFKnJA",
-				"payment_icons_kWjyzy",
-				"payment_icons_mbBwxX",
-				"payment_icons_JUKEeF"
-			],
-			"settings": {
-				"footer_logo": "shopify://shop_images/logo2.svg",
-				"footer_description": "Defining your essence through timeless designs.",
-				"footer_address": "22 Rue De Rivoli, Studio 1075004 Paris, France",
-				"footer_email": "studio@luviaera.com",
-				"menu_1_title": "Collections",
-				"footer_menu_1": "collections",
-				"menu_2_title": "Customer Care",
-				"footer_menu_2": "footer",
-				"header_opacity": 100
-			}
-		},
-		"footer-two": {
-			"type": "footer-two",
-			"disabled": true,
-			"settings": {
-				"footer_logo": "shopify://shop_images/logo2.svg",
-				"footer_description": "Defining your essence through timeless designs.",
-				"footer_address": "Nişantaşı, İstanbul / TR",
-				"footer_email": "info@luviaera.com",
-				"menu_1_title": "Collections",
-				"footer_menu_1": "footer",
-				"menu_2_title": "Customer Care",
-				"footer_menu_2": "main-menu"
-			}
-		},
-		"footer-three": {
-			"type": "footer-three",
-			"blocks": {
-				"gallery_image_7fEYdL": {
-					"type": "gallery_image",
-					"settings": {
-						"image": "shopify://shop_images/p4.jpg"
-					}
-				},
-				"gallery_image_TGLXEi": {
-					"type": "gallery_image",
-					"settings": {
-						"image": "shopify://shop_images/p2-2.jpg"
-					}
-				},
-				"gallery_image_KkCrAa": {
-					"type": "gallery_image",
-					"settings": {
-						"image": "shopify://shop_images/p2-3.jpg"
-					}
-				},
-				"gallery_image_ncRQ87": {
-					"type": "gallery_image",
-					"settings": {
-						"image": "shopify://shop_images/p5-3.jpg"
-					}
-				},
-				"gallery_image_HKdLtk": {
-					"type": "gallery_image",
-					"settings": {
-						"image": "shopify://shop_images/p4-2.jpg"
-					}
-				},
-				"gallery_image_bkacNU": {
-					"type": "gallery_image",
-					"settings": {
-						"image": "shopify://shop_images/p7-2.jpg"
-					}
-				},
-				"gallery_image_zA7xgB": {
-					"type": "gallery_image",
-					"settings": {
-						"image": "shopify://shop_images/p5-2.jpg"
-					}
-				},
-				"gallery_image_z3YhPw": {
-					"type": "gallery_image",
-					"settings": {
-						"image": "shopify://shop_images/p3.jpg"
-					}
-				}
-			},
-			"block_order": [
-				"gallery_image_7fEYdL",
-				"gallery_image_TGLXEi",
-				"gallery_image_KkCrAa",
-				"gallery_image_ncRQ87",
-				"gallery_image_HKdLtk",
-				"gallery_image_bkacNU",
-				"gallery_image_zA7xgB",
-				"gallery_image_z3YhPw"
-			],
-			"disabled": true,
-			"settings": {
-				"menu_1_title": "Collections",
-				"footer_menu_1": "footer",
-				"menu_2_title": "Customer Care",
-				"footer_menu_2": "main-menu",
-				"gallery_title": "Follow Us @LuviaEra"
-			}
-		}
-	},
-	"order": ["footer", "footer-two", "footer-three"]
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "payment_icons_CxHpfN": {
+          "type": "payment_icons",
+          "settings": {
+            "payment_icon": "shopify://shop_images/con-discover.svg"
+          }
+        },
+        "payment_icons_9BTh68": {
+          "type": "payment_icons",
+          "settings": {
+            "payment_icon": "shopify://shop_images/icon-dinners.svg"
+          }
+        },
+        "payment_icons_kFKnJA": {
+          "type": "payment_icons",
+          "settings": {
+            "payment_icon": "shopify://shop_images/icon-paypal.svg"
+          }
+        },
+        "payment_icons_kWjyzy": {
+          "type": "payment_icons",
+          "settings": {
+            "payment_icon": "shopify://shop_images/icon-american-express.svg"
+          }
+        },
+        "payment_icons_mbBwxX": {
+          "type": "payment_icons",
+          "settings": {
+            "payment_icon": "shopify://shop_images/icon-mastercard.svg"
+          }
+        },
+        "payment_icons_JUKEeF": {
+          "type": "payment_icons",
+          "settings": {
+            "payment_icon": "shopify://shop_images/icon-visa.svg"
+          }
+        }
+      },
+      "block_order": [
+        "payment_icons_CxHpfN",
+        "payment_icons_9BTh68",
+        "payment_icons_kFKnJA",
+        "payment_icons_kWjyzy",
+        "payment_icons_mbBwxX",
+        "payment_icons_JUKEeF"
+      ],
+      "settings": {
+        "footer_logo": "shopify://shop_images/logo2.svg",
+        "footer_description": "Defining your essence through timeless designs.",
+        "footer_address": "22 Rue De Rivoli, Studio 1075004 Paris, France",
+        "footer_email": "studio@luviaera.com",
+        "menu_1_title": "Collections",
+        "footer_menu_1": "collections",
+        "menu_2_title": "Customer Care",
+        "footer_menu_2": "footer"
+      }
+    },
+    "footer-two": {
+      "type": "footer-two",
+      "disabled": true,
+      "settings": {
+        "footer_logo": "shopify://shop_images/logo2.svg",
+        "footer_description": "Defining your essence through timeless designs.",
+        "footer_address": "Nişantaşı, İstanbul / TR",
+        "footer_email": "info@luviaera.com",
+        "menu_1_title": "Collections",
+        "footer_menu_1": "footer",
+        "menu_2_title": "Customer Care",
+        "footer_menu_2": "main-menu"
+      }
+    },
+    "footer-three": {
+      "type": "footer-three",
+      "blocks": {
+        "gallery_image_7fEYdL": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/p4.jpg"
+          }
+        },
+        "gallery_image_TGLXEi": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/p2-2.jpg"
+          }
+        },
+        "gallery_image_KkCrAa": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/p2-3.jpg"
+          }
+        },
+        "gallery_image_ncRQ87": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/p5-3.jpg"
+          }
+        },
+        "gallery_image_HKdLtk": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/p4-2.jpg"
+          }
+        },
+        "gallery_image_bkacNU": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/p7-2.jpg"
+          }
+        },
+        "gallery_image_zA7xgB": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/p5-2.jpg"
+          }
+        },
+        "gallery_image_z3YhPw": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/p3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "gallery_image_7fEYdL",
+        "gallery_image_TGLXEi",
+        "gallery_image_KkCrAa",
+        "gallery_image_ncRQ87",
+        "gallery_image_HKdLtk",
+        "gallery_image_bkacNU",
+        "gallery_image_zA7xgB",
+        "gallery_image_z3YhPw"
+      ],
+      "disabled": true,
+      "settings": {
+        "menu_1_title": "Collections",
+        "footer_menu_1": "footer",
+        "menu_2_title": "Customer Care",
+        "footer_menu_2": "main-menu",
+        "gallery_title": "Follow Us @LuviaEra"
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "footer-two",
+    "footer-three"
+  ]
 }
