@@ -7,60 +7,60 @@
     assign opacity_val = section.settings.header_opacity | default: 100 | divided_by: 100.0
   -%}
 
-  /* 1. Header Ana Yapısı */
+  /* 1. Ana Header ve Değişkenler */
   #main-header {
     background-color: {{ bg_color | color_modify: 'alpha', opacity_val }} !important;
     color: {{ text_color }} !important;
-  }
-
-  /* 2. Senin Özel Değişkenlerini Şemaya Zorla */
-  #main-header,
-  #main-header .bg-custombg,
-  #main-header .absolute,
-  #main-header .mobile-menu-drawer {
     --color-primary: {{ text_color }};
     --color-secondary: {{ accent_color }};
     --color-custombg: {{ bg_color }};
     --color-line: {{ text_color | color_modify: 'alpha', 0.1 }};
   }
 
-  /* 3. bg-custombg Sınıfını Manuel Olarak Ezme (En Önemli Kısım) */
-  #main-header .bg-custombg {
+  /* 2. Mega Menü ve Dropdown Arka Planı */
+  #main-header .absolute.left-0.top-full,
+  #main-header .absolute.min-w-\[200px\],
+  #main-header .mobile-menu-drawer {
     background-color: var(--color-custombg) !important;
   }
 
-  /* 4. Metin ve Link Renkleri */
-  #main-header .text-primary,
-  #main-header a,
-  #main-header button {
+  /* 3. Metin ve Link Renkleri */
+  #main-header a, #main-header button {
     color: var(--color-primary) !important;
+    transition: color 0.3s ease;
   }
 
-  #main-header a:hover,
-  #main-header button:hover,
-  #main-header .active-link {
+  #main-header a:hover, #main-header button:hover {
     color: var(--color-secondary) !important;
   }
 
-  /* 5. Çizgiler (border-line ve border-b) */
-  #main-header .border-line,
-  #main-header .border-b,
-  #main-header .border-t {
-    border-color: var(--color-line) !important;
+  /* 4. İKON ÇİZGİLERİ (DÜZELTİLDİ) */
+  #main-header svg {
+    fill: none !important; /* İkonların içinin dolmasını engeller */
+    stroke: currentColor !important; /* Sadece çizgileri renklendirir */
+    stroke-width: 1.5; /* Çizgi kalınlığı çok inceyse buradan ayarlayabilirsin */
+    transition: stroke 0.3s ease;
   }
 
-  /* 6. Mega Menü İçindeki Başlıklar */
-  #main-header h1, #main-header h2, #main-header h3,
-  #main-header h4, #main-header h5, #main-header h6 {
-    color: {{ scheme.heading | default: text_color }} !important;
-  }
+  /* Özel Durum: Bazı ikonlar (logo gibi) fill gerektirebilir.
+     Eğer logonun içi boşalırsa buraya logo class'ını ekleyebiliriz. */
 
-  /* 7. Sosyal İkon Arka Planları */
+  /* 5. Sosyal Medya İkonları Hover */
   #main-header .rounded-full.p-2 {
-    background-color: var(--color-line);
+    border: 1px solid var(--color-line);
+    transition: all 0.3s ease;
   }
   #main-header .rounded-full.p-2:hover {
     background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+  }
+  #main-header .rounded-full.p-2:hover svg {
+    stroke: #ffffff !important; /* Arka plan renkliyken çizgi beyaz olsun */
+  }
+
+  /* 6. Çizgiler ve Borderlar */
+  #main-header .border-b, #main-header .border-t, #main-header .border-line {
+    border-color: var(--color-line) !important;
   }
 {%- endstyle -%}
 
