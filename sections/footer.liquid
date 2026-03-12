@@ -1,4 +1,84 @@
-<footer class="bg-custombg text-primary pt-16 pb-8 px-6 border-t border-line">
+{%- style -%}
+    {%- liquid
+      assign scheme = section.settings.color_scheme.settings
+      assign bg_color = scheme.background | default: '#ffffff'
+      assign text_color = scheme.text | default: '#000000'
+      assign accent_color = scheme.button | default: '#b2ac88'
+      assign opacity_val = section.settings.header_opacity | default: 100 | divided_by: 100.0
+    -%}
+
+    /* 1. Ana Header ve Değişkenler */
+    #main-footer {
+      background-color: {{ bg_color | color_modify: 'alpha', opacity_val }} !important;
+      color: {{ text_color }} !important;
+      --color-primary: {{ text_color }};
+      --color-secondary: {{ accent_color }};
+      --color-custombg: {{ bg_color }};
+      --color-line: {{ text_color | color_modify: 'alpha', 0.1 }};
+    }
+
+    /* 2. Mega Menü ve Dropdown Arka Planı */
+    #main-footer .absolute.left-0.top-full,
+    #main-footer .absolute.min-w-\[200px\],
+    #main-footer .mobile-menu-drawer {
+      background-color: var(--color-custombg) !important;
+    }
+
+    /* 3. Metin ve Link Renkleri */
+    #main-footer a, #main-footer button {
+      color: var(--color-primary) !important;
+      transition: color 0.3s ease;
+    }
+
+    #main-footer a:hover, #main-footer button:hover {
+      color: var(--color-secondary) !important;
+    }
+
+    /* 4. İKON ÇİZGİLERİ (DÜZELTİLDİ) */
+    #main-footer svg {
+      fill: none !important; /* İkonların içinin dolmasını engeller */
+      stroke: currentColor !important; /* Sadece çizgileri renklendirir */
+      stroke-width: 1.5; /* Çizgi kalınlığı çok inceyse buradan ayarlayabilirsin */
+      transition: stroke 0.3s ease;
+    }
+
+    /* Özel Durum: Bazı ikonlar (logo gibi) fill gerektirebilir.
+       Eğer logonun içi boşalırsa buraya logo class'ını ekleyebiliriz. */
+
+    /* 5. Sosyal Medya İkonları Hover */
+    #main-footer .rounded-full.p-2 {
+      border: 1px solid var(--color-line);
+      transition: all 0.3s ease;
+    }
+    #main-footer .rounded-full.p-2:hover {
+      background-color: var(--color-secondary);
+      border-color: var(--color-secondary);
+    }
+    #main-footer .rounded-full.p-2:hover svg {
+      stroke: #ffffff !important; /* Arka plan renkliyken çizgi beyaz olsun */
+    }
+
+    /* 6. Çizgiler ve Borderlar */
+    #main-footer .border-b, #main-footer .border-t, #main-footer .border-line {
+      border-color: var(--color-line) !important;
+    }
+
+    /* Aktif Sayfa Linki (active-link) Kesin Çözüm */
+  #main-footer .active-link,
+  #main-footer a.active-link,
+  #main-footer .mobile-nav-item a.active-link {
+    color: var(--color-secondary) !important;
+    font-weight: 600 !important; /* Bir tık daha belirgin olması için */
+  }
+
+  /* Eğer menü elemanının altındaki bir sayfa aktifse, üst menü de yansın istersen: */
+  #main-footer .group:hover > div > a,
+  #main-footer .group:hover > div > button {
+    color: var(--color-secondary) !important;
+  }
+{%- endstyle -%}
+
+<footer id="main-footer" class="pt-16 pb-8 px-6 border-t">
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
     <div class="flex flex-col space-y-6">
       <div>
@@ -11,29 +91,29 @@
               | image_tag: class: 'h-8 w-auto object-contain', alt: logo_alt, loading: 'eager'
             }}
           {% else %}
-            <span class="text-2xl font-light tracking-[0.2em] uppercase text-primary">
+            <span class="text-2xl font-light tracking-[0.2em] uppercase">
               {{ 'footer.luvia_era' | t }}
             </span>
           {% endif %}
         </a>
 
-        <p class="mt-4 text-sm text-primary leading-relaxed font-light">
+        <p class="mt-4 text-sm leading-relaxed font-light">
           {{ section.settings.footer_description }}
         </p>
       </div>
 
-      <div class="space-y-2 text-sm text-primary">
+      <div class="space-y-2 text-sm ">
         <p class="flex items-center gap-2 text-[14px]">
-          <span class="text-primary">
+          <span class="">
             {% render 'icon-map' %}
           </span>
           <span class="text-[14px]"> {{ section.settings.footer_address }}</span>
         </p>
         <p class="flex items-center gap-2 text-[14px]">
-          <span class="text-primary">
+          <span class="">
             {% render 'icon-envelop' %}
           </span>
-          <a href="mailto:{{ section.settings.footer_email }}" class="hover:text-secondary transition-all duration-200">
+          <a href="mailto:{{ section.settings.footer_email }}" class="transition-all duration-200">
             {{- section.settings.footer_email -}}
           </a>
         </p>
@@ -41,13 +121,13 @@
     </div>
 
     <div>
-      <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
+      <h4 class="text-sm font-bold uppercase tracking-widest mb-6">
         {{ section.settings.menu_1_title }}
       </h4>
       <ul class="space-y-4 text-md font-light text-primary">
         {% for link in linklists[section.settings.footer_menu_1].links %}
           <li>
-            <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+            <a href="{{ link.url }}" class=" transition-colors duration-300">
               {{ link.title }}
             </a>
           </li>
@@ -56,13 +136,13 @@
     </div>
 
     <div>
-      <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
+      <h4 class="text-sm font-bold uppercase tracking-widest mb-6">
         {{ section.settings.menu_2_title }}
       </h4>
       <ul class="space-y-4 text-md font-light text-primary">
         {% for link in linklists[section.settings.footer_menu_2].links %}
           <li>
-            <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+            <a href="{{ link.url }}" class="transition-colors duration-300">
               {{ link.title }}
             </a>
           </li>
@@ -71,7 +151,7 @@
     </div>
 
     <div>
-      <h4 class="text-sm font-bold uppercase tracking-widest mb-6 text-secondary">
+      <h4 class="text-sm font-bold uppercase tracking-widest mb-6">
         {{ 'footer.newsletter' | t }}
       </h4>
       <p class="text-xs text-primary mb-4 font-light italic">
@@ -94,7 +174,7 @@
           required
         >
 
-        <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">
+        <button type="submit" class="uppercase text-xs tracking-widest font-semibold ml-2">
           {{ 'footer.join' | t }}
         </button>
 
@@ -141,7 +221,7 @@
 
 <button
   id="back-to-top"
-  class="fixed bottom-8 right-8 z-[120] bg-primary hover:bg-secondary text-white p-3 rounded-full shadow-2xl transition-all duration-500 transform translate-y-20 opacity-0 hover:scale-110 active:scale-95 cursor-pointer"
+  class="fixed bottom-8 right-8 z-[120] text-white p-3 rounded-full shadow-2xl transition-all duration-500 transform translate-y-20 opacity-0 hover:scale-110 active:scale-95 cursor-pointer"
   aria-label="Go Up"
 >
   {% render 'icon-arrow' %}
@@ -196,6 +276,22 @@
       "type": "link_list",
       "id": "footer_menu_2",
       "label": "2. Menu Selection"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "header_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Header Opacity Rate",
+      "default": 100
     }
   ],
   "blocks": [
