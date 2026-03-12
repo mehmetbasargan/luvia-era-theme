@@ -23,32 +23,30 @@
       {{ body_font | font_face: font_display: 'swap' }}
 
       :root {
-        /* Global Sabitler */
-        --color-white: #ffffff;
-        --color-black: #000000;
+        /* 1. Global Yazı Tipleri */
         --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
         --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
 
-        /* Fallback (Yedek) Renkler - Şema seçilmemişse bunlar çalışır */
-        --color-primary: {{ settings.primary_color }};
-        --color-secondary: {{ settings.secondary_color }};
+        /* 2. ANA RENK DEĞİŞKENLERİ (Settings'ten gelenler) */
+        --color-primary: {{ settings.primary_color | default: '#3b443c' }};
+        --color-secondary: {{ settings.secondary_color | default: '#b2ac88' }};
+        --color-custombg: {{ settings.custom_bg_color | default: '#f9f9f9' }};
+        --color-line: {{ settings.line_color | default: '#e5e7eb' }};
+        --color-white: #ffffff;
+        --color-black: #000000;
       }
 
-      /* --- ŞEMA SİHİRBAZI --- */
-      /* Bu blok, section içinde seçilen şemayı CSS değişkenlerine bağlar */
-      {%- if section.settings.color_scheme -%}
-        .color-{{ section.settings.color_scheme }} {
-          --color-background: {{ section.settings.color_scheme.settings.background }};
-          --color-text: {{ section.settings.color_scheme.settings.text }};
-          --color-heading: {{ section.settings.color_scheme.settings.heading }};
-          --color-button: {{ section.settings.color_scheme.settings.button }};
-          --color-button-hover: {{ section.settings.color_scheme.settings.button_hover }};
-          --color-button-text: {{ section.settings.color_scheme.settings.button_label }};
-        }
-      {%- endif -%}
+      /* 3. TAILWIND SINIFLARINI HAYATA DÖNDÜRME */
+      /* Şemaları sildiğimiz için bu sınıfları manuel eşliyoruz */
+      .bg-custombg { background-color: var(--color-custombg) !important; }
+      .text-primary { color: var(--color-primary) !important; }
+      .text-secondary { color: var(--color-secondary) !important; }
+      .border-line { border-color: var(--color-line) !important; }
+      .bg-secondary { background-color: var(--color-secondary) !important; }
 
+      /* 4. Genel Element Stilleri */
       body {
-        background-color: var(--color-white);
+        background-color: var(--color-custombg);
         color: var(--color-primary);
         font-family: var(--font-body);
         margin: 0;
@@ -58,8 +56,19 @@
 
       h1, h2, h3, h4, h5, h6 {
         font-family: var(--font-heading);
-        /* Başlık rengini değişkenden al, yoksa gövde rengini al */
-        color: var(--color-heading, var(--color-primary));
+        color: var(--color-primary); /* Başlıklar varsayılan ana renk */
+      }
+
+      /* İkonlar için Evrensel Kural */
+      svg {
+        stroke: currentColor;
+        fill: none;
+        transition: all 0.3s ease;
+      }
+
+      /* Aktif Link ve Hover Global Kural */
+      .active-link, a:hover, button:hover {
+        color: var(--color-secondary) !important;
       }
     </style>
 
