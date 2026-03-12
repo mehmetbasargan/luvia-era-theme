@@ -41,12 +41,12 @@
 					"background": "#ffffff",
 					"background_gradient": "",
 					"text": "#f70083",
-					"heading": "#d60071",
+					"heading": "#f70083",
 					"button": "#b2ac88",
-					"button_hover": "#8e896d",
+					"button_hover": "#3b443c",
 					"button_label": "#ffffff",
-					"secondary_button_label": "#f70083",
-					"shadow": "rgba(247, 0, 131, 0.1)"
+					"secondary_button_label": "#3b443c",
+					"shadow": "#000000"
 				}
 			},
 			"scheme-3": {
