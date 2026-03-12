@@ -338,18 +338,13 @@
             <a href="/pages/wishlist" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
               {% render 'icon-wishlist' %}
             </a>
-            <a
-              href="{{ routes.cart_url }}"
-              class="lg:w-[30px] w-[20px] text-primary hover:text-secondary relative"
-            >
-              <div class="absolute top-[-10px] right-[-18px] md:right-[-18px] lg:right-[-8px]">
-                <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full {% if cart.item_count == 0 %}hidden{% endif %}">
+            <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0">
+              <div class="absolute top-[0px] right-0">
+                <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
                   {{- cart.item_count -}}
                 </span>
               </div>
-              <div class="">
-                {% render 'icon-cart' %}
-              </div>
+              {% render 'icon-cart' %}
             </a>
             <div>
               <shopify-account menu="customer-account-main-menu">
