@@ -67,7 +67,9 @@
         "menu_1_title": "Collections",
         "footer_menu_1": "collections",
         "menu_2_title": "Customer Care",
-        "footer_menu_2": "footer"
+        "footer_menu_2": "footer",
+        "color_scheme": "scheme-3",
+        "header_opacity": 100
       }
     },
     "footer-two": {
