@@ -1,58 +1,66 @@
 {%- style -%}
   {%- liquid
-    # Şema nesnesini güvenli bir şekilde alalım
     assign scheme = section.settings.color_scheme.settings
-
-    # Varsayılan renkleri tanımlayalım (Hata almamak için)
     assign bg_color = scheme.background | default: '#ffffff'
     assign text_color = scheme.text | default: '#000000'
     assign accent_color = scheme.button | default: '#b2ac88'
-
-    # Opacity (Şeffaflık) hesaplama
     assign opacity_val = section.settings.header_opacity | default: 100 | divided_by: 100.0
   -%}
 
-  :root {
-    /* Senin temandaki değişkenleri şemaya köprülüyoruz */
+  /* 1. Header Ana Yapısı */
+  #main-header {
+    background-color: {{ bg_color | color_modify: 'alpha', opacity_val }} !important;
+    color: {{ text_color }} !important;
+  }
+
+  /* 2. Senin Özel Değişkenlerini Şemaya Zorla */
+  #main-header,
+  #main-header .bg-custombg,
+  #main-header .absolute,
+  #main-header .mobile-menu-drawer {
     --color-primary: {{ text_color }};
     --color-secondary: {{ accent_color }};
     --color-custombg: {{ bg_color }};
-
-    /* border-line için metin renginin %10 opak halini manuel RGBA yapalım */
     --color-line: {{ text_color | color_modify: 'alpha', 0.1 }};
-
-    /* Header özel arka planı (Opacity dahil) */
-    --header-bg: {{ bg_color | color_modify: 'alpha', opacity_val }};
   }
 
-  #main-header-{{ section.id }} {
-    background-color: var(--header-bg) !important;
-    color: var(--color-primary);
-  }
-
-  /* Mega Menü ve Dropdownlar */
-  #main-header-{{ section.id }} .bg-custombg,
-  #main-header-{{ section.id }} [class*="bg-white"],
-  #main-header-{{ section.id }} .absolute {
+  /* 3. bg-custombg Sınıfını Manuel Olarak Ezme (En Önemli Kısım) */
+  #main-header .bg-custombg {
     background-color: var(--color-custombg) !important;
   }
 
-  /* Senin kullandığın border-line ve border-b sınıflarını şemaya bağladık */
-  #main-header-{{ section.id }} .border-line,
-  #main-header-{{ section.id }} .border-b,
-  #main-header-{{ section.id }} .border-t {
-    border-color: var(--color-line) !important;
-  }
-
-  /* Linkler ve Butonlar */
-  #main-header-{{ section.id }} a,
-  #main-header-{{ section.id }} button {
+  /* 4. Metin ve Link Renkleri */
+  #main-header .text-primary,
+  #main-header a,
+  #main-header button {
     color: var(--color-primary) !important;
   }
 
-  #main-header-{{ section.id }} a:hover,
-  #main-header-{{ section.id }} .active-link {
+  #main-header a:hover,
+  #main-header button:hover,
+  #main-header .active-link {
     color: var(--color-secondary) !important;
+  }
+
+  /* 5. Çizgiler (border-line ve border-b) */
+  #main-header .border-line,
+  #main-header .border-b,
+  #main-header .border-t {
+    border-color: var(--color-line) !important;
+  }
+
+  /* 6. Mega Menü İçindeki Başlıklar */
+  #main-header h1, #main-header h2, #main-header h3,
+  #main-header h4, #main-header h5, #main-header h6 {
+    color: {{ scheme.heading | default: text_color }} !important;
+  }
+
+  /* 7. Sosyal İkon Arka Planları */
+  #main-header .rounded-full.p-2 {
+    background-color: var(--color-line);
+  }
+  #main-header .rounded-full.p-2:hover {
+    background-color: var(--color-secondary);
   }
 {%- endstyle -%}
 
