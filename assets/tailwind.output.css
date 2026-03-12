@@ -2248,6 +2248,11 @@ blockquote{
   padding-bottom: 80px;
 }
 
+.py-60{
+  padding-top: 15rem;
+  padding-bottom: 15rem;
+}
+
 .pb-1{
   padding-bottom: 0.25rem;
 }
