@@ -15,7 +15,6 @@
     </title>
     <meta name="description" content="{{ page_description | default: shop.description | escape }}">
 
-    {% # Meta tags, social, favicon %}
     {% render 'meta-tags' %}
 
     {%- if settings.favicon != blank -%}
@@ -122,13 +121,13 @@
 
     {{ content_for_header }}
 
-    {% # Asset CSS -->
+    <!-- Asset CSS -->
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag: preload: true }}
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag: preload: true }}
-    
+
     <!-- Preload Critical Resources -->
     {% if settings.favicon %}
-      <link rel="preload" href="{{ settings.favicon | image_url: width: 32 }}" as="image" type="image/png">
+      {{ settings.favicon | image_url: width: 32 | image_tag: preload: true, alt: '', style: 'display:none;' }}
     {% endif %}
   </head>
 
