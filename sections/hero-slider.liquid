@@ -56,10 +56,12 @@
               <div class="hero-button">
                 <a
                   href="{{ block.settings.button_link }}"
-                  class="inline-flex items-center gap-2 bg-secondary text-white px-8 py-3 rounded-sm font-light hover:bg-primary transition-all duration-150"
+                  class="hero-button-link inline-flex items-center gap-2 bg-secondary text-white px-8 py-3 rounded-sm font-light transition-all duration-150 hover:bg-primary hover-text-white"
                 >
                   {{ block.settings.button_label }}
-                  {% render 'icon-arrow2' %}
+                  <span class="icon-arrow2 hover-text-white">
+                    {% render 'icon-arrow2' %}
+                  </span>
                 </a>
               </div>
             {% endif %}
@@ -72,21 +74,21 @@
   {% if section.settings.show_arrows %}
     <div
       class="
-        swiper-button-next !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
+        swiper-button-next !text-primary hover-text-white !bg-secondary hover-bg-primary !items-center !justify-center !rounded-full
         !right-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
       "
     >
-      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
+      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover-bg-primary text-white hover-text-white transition-colors">
         {% render 'icon-arrow-bar-right', class: 'w-5 h-5' %}
       </button>
     </div>
     <div
       class="
-        swiper-button-prev !text-primary hover:!text-white !bg-secondary hover:!bg-primary !items-center !justify-center !rounded-full
+        swiper-button-prev !text-primary hover-text-white !bg-secondary hover-bg-primary !items-center !justify-center !rounded-full
         !left-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
       "
     >
-      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover:bg-primary text-white hover:!text-wrap transition-colors">
+      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover-bg-primary text-white hover-text-white transition-colors">
         {% render 'icon-arrow-bar-left', class: 'w-5 h-5' %}
       </button>
     </div>

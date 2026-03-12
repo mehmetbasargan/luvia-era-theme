@@ -140,6 +140,36 @@
 	.animate-marquee {
 		animation: marquee 15s linear infinite;
 	}
+
+	/* Hero Slider için Important Class'ler */
+	.hover-text-white:hover {
+		@apply !text-white;
+	}
+
+	.hover-text-primary:hover {
+		@apply !text-primary;
+	}
+
+	.hover-bg-primary:hover {
+		@apply !bg-primary;
+	}
+
+	.hover-bg-secondary:hover {
+		@apply !bg-secondary;
+	}
+
+	/* Hero Button Specific */
+	.hero-button-link {
+		transition: all 150ms ease;
+	}
+
+	.hero-button-link:hover {
+		background-color: var(--color-primary) !important;
+	}
+
+	.icon-arrow2:hover {
+		color: var(--color-white) !important;
+	}
 }
 
 @keyframes marquee {

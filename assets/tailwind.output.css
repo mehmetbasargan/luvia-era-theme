@@ -743,6 +743,30 @@ blockquote{
   animation: marquee 15s linear infinite;
 }
 
+/* Hero Slider için Important Class'ler */
+
+.hover-text-white:hover{
+  color: var(--color-white) !important;
+}
+
+.hover-bg-primary:hover{
+  background-color: var(--color-primary) !important;
+}
+
+/* Hero Button Specific */
+
+.hero-button-link {
+  transition: all 150ms ease;
+}
+
+.hero-button-link:hover {
+  background-color: var(--color-primary) !important;
+}
+
+.icon-arrow2:hover {
+  color: var(--color-white) !important;
+}
+
 .sr-only{
   position: absolute;
   width: 1px;
@@ -881,10 +905,6 @@ blockquote{
   right: 2rem;
 }
 
-.right-\[-18px\]{
-  right: -18px;
-}
-
 .top-0{
   top: 0px;
 }
@@ -917,28 +937,12 @@ blockquote{
   top: 2rem;
 }
 
-.top-\[-10px\]{
-  top: -10px;
-}
-
 .top-\[0px\]{
   top: 0px;
 }
 
 .top-full{
   top: 100%;
-}
-
-.top-\[-0px\]{
-  top: -0px;
-}
-
-.top-\[-5px\]{
-  top: -5px;
-}
-
-.right-\[-10px\]{
-  right: -10px;
 }
 
 .z-0{
@@ -2260,11 +2264,6 @@ blockquote{
   padding-bottom: 80px;
 }
 
-.py-60{
-  padding-top: 15rem;
-  padding-bottom: 15rem;
-}
-
 .pb-1{
   padding-bottom: 0.25rem;
 }
@@ -2582,6 +2581,10 @@ blockquote{
   color: var(--color-white);
 }
 
+.\!text-white{
+  color: var(--color-white) !important;
+}
+
 .line-through{
   text-decoration-line: line-through;
 }
@@ -2625,12 +2628,6 @@ blockquote{
 
 .opacity-80{
   opacity: 0.8;
-}
-
-.shadow{
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .shadow-2xl{
@@ -2834,16 +2831,8 @@ blockquote{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hover\:\!text-wrap:hover{
-  text-wrap: wrap !important;
-}
-
 .hover\:border-black:hover{
   border-color: var(--color-black);
-}
-
-.hover\:\!bg-primary:hover{
-  background-color: var(--color-primary) !important;
 }
 
 .hover\:bg-black:hover{
@@ -3064,10 +3053,6 @@ blockquote{
 }
 
 @media (min-width: 768px){
-  .md\:right-\[-18px\]{
-    right: -18px;
-  }
-
   .md\:mx-16{
     margin-left: 4rem;
     margin-right: 4rem;
@@ -3245,10 +3230,6 @@ blockquote{
 }
 
 @media (min-width: 1024px){
-  .lg\:right-\[-8px\]{
-    right: -8px;
-  }
-
   .lg\:flex{
     display: flex;
   }
