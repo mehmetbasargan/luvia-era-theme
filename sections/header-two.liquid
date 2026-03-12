@@ -1,73 +1,87 @@
 {%- style -%}
-  {%- liquid
-    assign scheme = section.settings.color_scheme.settings
-    assign bg_color = scheme.background | default: '#ffffff'
-    assign text_color = scheme.text | default: '#000000'
-    assign accent_color = scheme.button | default: '#b2ac88'
-    assign opacity_val = section.settings.header_opacity | default: 100 | divided_by: 100.0
-  -%}
+    {%- liquid
+      assign scheme = section.settings.color_scheme.settings
+      assign bg_color = scheme.background | default: '#ffffff'
+      assign text_color = scheme.text | default: '#000000'
+      assign accent_color = scheme.button | default: '#b2ac88'
+      assign opacity_val = section.settings.header_opacity | default: 100 | divided_by: 100.0
+    -%}
 
-  /* 1. Ana Header ve Değişkenler */
-  #main-header {
-    background-color: {{ bg_color | color_modify: 'alpha', opacity_val }} !important;
-    color: {{ text_color }} !important;
-    --color-primary: {{ text_color }};
-    --color-secondary: {{ accent_color }};
-    --color-custombg: {{ bg_color }};
-    --color-line: {{ text_color | color_modify: 'alpha', 0.1 }};
-  }
+    /* 1. Ana Header ve Değişkenler */
+    #main-header {
+      background-color: {{ bg_color | color_modify: 'alpha', opacity_val }} !important;
+      color: {{ text_color }} !important;
+      --color-primary: {{ text_color }};
+      --color-secondary: {{ accent_color }};
+      --color-custombg: {{ bg_color }};
+      --color-line: {{ text_color | color_modify: 'alpha', 0.1 }};
+    }
 
-  /* 2. Mega Menü ve Dropdown Arka Planı */
-  #main-header .absolute.left-0.top-full,
-  #main-header .absolute.min-w-\[200px\],
-  #main-header .mobile-menu-drawer {
-    background-color: var(--color-custombg) !important;
-  }
+    /* 2. Mega Menü ve Dropdown Arka Planı */
+    #main-header .absolute.left-0.top-full,
+    #main-header .absolute.min-w-\[200px\],
+    #main-header .mobile-menu-drawer {
+      background-color: var(--color-custombg) !important;
+    }
 
-  /* 3. Metin ve Link Renkleri */
-  #main-header a, #main-header button {
-    color: var(--color-primary) !important;
-    transition: color 0.3s ease;
-  }
+    /* 3. Metin ve Link Renkleri */
+    #main-header a, #main-header button {
+      color: var(--color-primary) !important;
+      transition: color 0.3s ease;
+    }
 
-  #main-header a:hover, #main-header button:hover {
+    #main-header a:hover, #main-header button:hover {
+      color: var(--color-secondary) !important;
+    }
+
+    /* 4. İKON ÇİZGİLERİ (DÜZELTİLDİ) */
+    #main-header svg {
+      fill: none !important; /* İkonların içinin dolmasını engeller */
+      stroke: currentColor !important; /* Sadece çizgileri renklendirir */
+      stroke-width: 1.5; /* Çizgi kalınlığı çok inceyse buradan ayarlayabilirsin */
+      transition: stroke 0.3s ease;
+    }
+
+    /* Özel Durum: Bazı ikonlar (logo gibi) fill gerektirebilir.
+       Eğer logonun içi boşalırsa buraya logo class'ını ekleyebiliriz. */
+
+    /* 5. Sosyal Medya İkonları Hover */
+    #main-header .rounded-full.p-2 {
+      border: 1px solid var(--color-line);
+      transition: all 0.3s ease;
+    }
+    #main-header .rounded-full.p-2:hover {
+      background-color: var(--color-secondary);
+      border-color: var(--color-secondary);
+    }
+    #main-header .rounded-full.p-2:hover svg {
+      stroke: #ffffff !important; /* Arka plan renkliyken çizgi beyaz olsun */
+    }
+
+    /* 6. Çizgiler ve Borderlar */
+    #main-header .border-b, #main-header .border-t, #main-header .border-line {
+      border-color: var(--color-line) !important;
+    }
+
+    /* Aktif Sayfa Linki (active-link) Kesin Çözüm */
+  #main-header .active-link,
+  #main-header a.active-link,
+  #main-header .mobile-nav-item a.active-link {
     color: var(--color-secondary) !important;
+    font-weight: 600 !important; /* Bir tık daha belirgin olması için */
   }
 
-  /* 4. İKON ÇİZGİLERİ (DÜZELTİLDİ) */
-  #main-header svg {
-    fill: none !important; /* İkonların içinin dolmasını engeller */
-    stroke: currentColor !important; /* Sadece çizgileri renklendirir */
-    stroke-width: 1.5; /* Çizgi kalınlığı çok inceyse buradan ayarlayabilirsin */
-    transition: stroke 0.3s ease;
-  }
-
-  /* Özel Durum: Bazı ikonlar (logo gibi) fill gerektirebilir.
-     Eğer logonun içi boşalırsa buraya logo class'ını ekleyebiliriz. */
-
-  /* 5. Sosyal Medya İkonları Hover */
-  #main-header .rounded-full.p-2 {
-    border: 1px solid var(--color-line);
-    transition: all 0.3s ease;
-  }
-  #main-header .rounded-full.p-2:hover {
-    background-color: var(--color-secondary);
-    border-color: var(--color-secondary);
-  }
-  #main-header .rounded-full.p-2:hover svg {
-    stroke: #ffffff !important; /* Arka plan renkliyken çizgi beyaz olsun */
-  }
-
-  /* 6. Çizgiler ve Borderlar */
-  #main-header .border-b, #main-header .border-t, #main-header .border-line {
-    border-color: var(--color-line) !important;
+  /* Eğer menü elemanının altındaki bir sayfa aktifse, üst menü de yansın istersen: */
+  #main-header .group:hover > div > a,
+  #main-header .group:hover > div > button {
+    color: var(--color-secondary) !important;
   }
 {%- endstyle -%}
 
 <div class="relative w-full h-[153px] md:h-[152px] z[999]">
   <header
     id="main-header"
-    class="site-header overflow-visible fixed top-0 z-50 w-full border-b"
+    class="site-header overflow-visible fixed top-0 z-50 w-full"
   >
     {% comment %} logo {% endcomment %}
     <div class="border-b ">
@@ -463,14 +477,6 @@
     });
   });
 </script>
-
-{% comment %}
-  <style>
-    .marquee-text-active {
-      top: 40px;
-    }
-  </style>
-{% endcomment %}
 
 {% schema %}
 {
