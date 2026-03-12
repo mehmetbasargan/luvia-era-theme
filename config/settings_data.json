@@ -38,15 +38,15 @@
 			},
 			"scheme-2": {
 				"settings": {
-					"background": "#ffffff",
+					"background": "#F9F8F6",
 					"background_gradient": "",
-					"text": "#f70083",
-					"heading": "#f70083",
-					"button": "#b2ac88",
-					"button_hover": "#3b443c",
-					"button_label": "#ffffff",
-					"secondary_button_label": "#3b443c",
-					"shadow": "#000000"
+					"text": "#2C302E",
+					"heading": "#3B443C",
+					"button": "#3B443C",
+					"button_hover": "#4D594E",
+					"button_label": "#FFFFFF",
+					"secondary_button_label": "#B2AC88",
+					"shadow": "rgba(0,0,0,0.05)"
 				}
 			},
 			"scheme-3": {
