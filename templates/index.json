@@ -242,6 +242,17 @@
         "header_opacity": 40
       }
     },
+    "rich_text_banner_b3LtW4": {
+      "type": "rich-text-banner",
+      "name": "Statement Banner",
+      "settings": {
+        "bg_image": "shopify://shop_images/4-2.jpg",
+        "title": "Our Craftsmanship",
+        "text": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>",
+        "button_label": "Shop The Collection",
+        "button_link": ""
+      }
+    },
     "testimonial_CxWzTk": {
       "type": "testimonial",
       "blocks": {
@@ -370,17 +381,6 @@
         "grid_item_width": "collections--full",
         "grid_gap": 10
       }
-    },
-    "rich_text_banner_b3LtW4": {
-      "type": "rich-text-banner",
-      "name": "Statement Banner",
-      "settings": {
-        "bg_image": "shopify://shop_images/4-2.jpg",
-        "title": "Our Craftsmanship",
-        "text": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>",
-        "button_label": "Shop The Collection",
-        "button_link": ""
-      }
     }
   },
   "order": [
@@ -392,9 +392,9 @@
     "rich_text_banner_yW67kH",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
+    "rich_text_banner_b3LtW4",
     "testimonial_CxWzTk",
     "full_width_gallery_fnrnK7",
-    "collections_yYcnYL",
-    "rich_text_banner_b3LtW4"
+    "collections_yYcnYL"
   ]
 }
