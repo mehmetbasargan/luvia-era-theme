@@ -153,6 +153,40 @@
         "button_url": "shopify://collections/all"
       }
     },
+    "image_with_text_multi_KVYKE3": {
+      "type": "image-with-text-multi",
+      "blocks": {
+        "image_block_B9EMda": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/p7-2.jpg",
+            "image_placement": "left",
+            "subheading": "Luvia Story",
+            "title": "Crafted with passion",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": ""
+          }
+        },
+        "image_block_HaCNaT": {
+          "type": "image_block",
+          "settings": {
+            "image_placement": "right",
+            "subheading": "Luvia Story",
+            "title": "Crafted with passion",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_block_B9EMda",
+        "image_block_HaCNaT"
+      ],
+      "name": "Image with Text Multi",
+      "settings": {}
+    },
     "shoppable_image_pCJhcM": {
       "type": "shoppable-image",
       "blocks": {
@@ -314,51 +348,6 @@
       "settings": {
         "title": "Follow Era"
       }
-    },
-    "image_with_text_multi_KVYKE3": {
-      "type": "image-with-text-multi",
-      "blocks": {
-        "image_block_B9EMda": {
-          "type": "image_block",
-          "settings": {
-            "image_placement": "left",
-            "subheading": "Luvia Story",
-            "title": "Crafted with passion",
-            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
-            "button_label": "Discover More",
-            "button_link": ""
-          }
-        },
-        "image_block_HaCNaT": {
-          "type": "image_block",
-          "settings": {
-            "image_placement": "right",
-            "subheading": "Luvia Story",
-            "title": "Crafted with passion",
-            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
-            "button_label": "Discover More",
-            "button_link": ""
-          }
-        },
-        "image_block_gHb9Dx": {
-          "type": "image_block",
-          "settings": {
-            "image_placement": "left",
-            "subheading": "Luvia Story",
-            "title": "Crafted with passion",
-            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
-            "button_label": "Discover More",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_block_B9EMda",
-        "image_block_HaCNaT",
-        "image_block_gHb9Dx"
-      ],
-      "name": "Image with Text Multi",
-      "settings": {}
     }
   },
   "order": [
