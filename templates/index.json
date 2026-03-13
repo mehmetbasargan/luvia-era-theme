@@ -500,8 +500,8 @@
           "type": "product_point",
           "settings": {
             "product": "ethereal-knit-cardigan",
-            "top_position": 50,
-            "left_position": 50
+            "top_position": 75,
+            "left_position": 51
           }
         }
       },
