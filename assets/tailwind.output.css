@@ -1298,6 +1298,10 @@ blockquote{
   aspect-ratio: 16 / 9;
 }
 
+.aspect-\[4\/5\]{
+  aspect-ratio: 4/5;
+}
+
 .size-8{
   width: 2rem;
   height: 2rem;
@@ -1441,6 +1445,10 @@ blockquote{
 
 .h-full{
   height: 100%;
+}
+
+.h-1\/2{
+  height: 50%;
 }
 
 .max-h-\[80vh\]{
@@ -2165,6 +2173,11 @@ blockquote{
   background-color: var(--color-white);
 }
 
+.bg-\[\#f4f4f4\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 244 244 / var(--tw-bg-opacity, 1));
+}
+
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -2704,6 +2717,10 @@ blockquote{
   opacity: 0.8;
 }
 
+.opacity-10{
+  opacity: 0.1;
+}
+
 .shadow-2xl{
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
@@ -3059,6 +3076,11 @@ blockquote{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.group:hover .group-hover\:translate-x-1{
+  --tw-translate-x: 0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .group:hover .group-hover\:rotate-180{
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3086,6 +3108,10 @@ blockquote{
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.group:hover .group-hover\:border-line{
+  border-color: var(--color-line);
 }
 
 .group:hover .group-hover\:bg-secondary{
