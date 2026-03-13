@@ -561,6 +561,16 @@
         "background_color": "#ffffff"
       }
     },
+    "newsletter_banner_fKkMaW": {
+      "type": "newsletter-banner",
+      "name": "Newsletter Banner",
+      "settings": {
+        "bg_image": "shopify://shop_images/pageheader3.jpg",
+        "overlay_opacity": 70,
+        "title": "Luvia Privileges",
+        "subtext": "Be the first to know about new collections and exclusive events."
+      }
+    },
     "full_width_gallery_JLkbMT": {
       "type": "full-width-gallery",
       "blocks": {
@@ -600,14 +610,15 @@
         "title": "Follow Era"
       }
     },
-    "newsletter_banner_fKkMaW": {
-      "type": "newsletter-banner",
-      "name": "Newsletter Banner",
+    "featured_collection_xxa4r7": {
+      "type": "featured-collection",
+      "name": "Featured Collection",
       "settings": {
-        "bg_image": "shopify://shop_images/pageheader3.jpg",
-        "overlay_opacity": 70,
-        "title": "Luvia Privileges",
-        "subtext": "Be the first to know about new collections and exclusive events."
+        "title": "Curated Selection",
+        "collection": "silk-grace",
+        "product_limit": 4,
+        "enable_slider": true,
+        "view_all": true
       }
     }
   },
@@ -631,6 +642,7 @@
     "shoppable_image_PQrjBw",
     "testimonial_MnhfEw",
     "newsletter_banner_fKkMaW",
-    "full_width_gallery_JLkbMT"
+    "full_width_gallery_JLkbMT",
+    "featured_collection_xxa4r7"
   ]
 }
