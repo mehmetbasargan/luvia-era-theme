@@ -9,11 +9,67 @@
 
     <!-- SEO Meta Tags -->
     <title>
-      {{ page_title }}
-      -
-      {{ shop.name }}
+      {%- if template == 'product' -%}
+        {{ product.title }} - {{ shop.name }}
+      {%- elsif template == 'collection' -%}
+        {{ collection.title }} - {{ shop.name }}
+      {%- elsif template == 'blog' -%}
+        {{ blog.title }} - {{ shop.name }}
+      {%- elsif template == 'article' -%}
+        {{ article.title }} - {{ blog.title }} - {{ shop.name }}
+      {%- else -%}
+        {{ page_title }} - {{ shop.name }}
+      {%- endif -%}
     </title>
-    <meta name="description" content="{{ page_description | default: shop.description | escape }}">
+
+    <meta name="description" content="{{ page_description | default: shop.description | truncate: 160 | escape }}">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | default: shop.name | escape }}">
+    <meta
+      property="og:description"
+      content="{{ page_description | default: shop.description | truncate: 160 | escape }}"
+    >
+    {% if settings.logo %}
+      <meta property="og:image" content="{{ settings.logo | image_url: width: 1200, height: 630 }}">
+    {% endif %}
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:site_name" content="{{ shop.name | escape }}">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title | default: shop.name | escape }}">
+    <meta
+      name="twitter:description"
+      content="{{ page_description | default: shop.description | truncate: 160 | escape }}"
+    >
+    {% if settings.logo %}
+      <meta name="twitter:image" content="{{ settings.logo | image_url: width: 1200, height: 630 }}">
+    {% endif %}
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="{{ shop.locale }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ shop.name | escape }}",
+        "url": "{{ shop.url }}",
+        {% if settings.logo %}
+        "logo": "{{ settings.logo | image_url: width: 400, height: 400 }}",
+        {% endif %}
+        "description": "{{ shop.description | escape }}"
+      }
+    </script>
 
     {% render 'meta-tags' %}
 
