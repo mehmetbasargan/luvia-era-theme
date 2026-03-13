@@ -193,6 +193,7 @@
       "name": "Statement Banner",
       "settings": {
         "bg_image": "shopify://shop_images/1.jpg",
+        "overlay_opacity": 50,
         "title": "THE ART OF ELEGANCE",
         "text": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>",
         "button_label": "Shop The Collection",
