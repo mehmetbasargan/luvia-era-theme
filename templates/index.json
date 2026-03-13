@@ -208,6 +208,14 @@
     "shoppable_image_pCJhcM": {
       "type": "shoppable-image",
       "blocks": {
+        "product_point_peFUVH": {
+          "type": "product_point",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat",
+            "top_position": 37,
+            "left_position": 24
+          }
+        },
         "product_point_cRcG8a": {
           "type": "product_point",
           "settings": {
@@ -226,6 +234,7 @@
         }
       },
       "block_order": [
+        "product_point_peFUVH",
         "product_point_cRcG8a",
         "product_point_gXCrUc"
       ],
