@@ -108,19 +108,52 @@
       ],
       "name": "Collection List",
       "settings": {
-        "color_scheme": "scheme-3",
-        "collection_list_title": "Our Collections",
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "margin_top": 0,
-        "margin_bottom": 0
+        "collection_list_title": "Our Collections"
       }
     },
     "featured_products_GFTLFG": {
       "type": "featured-products",
+      "blocks": {
+        "product_dwqjCE": {
+          "type": "product",
+          "settings": {
+            "product": "luna-satin-slip-dress"
+          }
+        },
+        "product_xXQfAy": {
+          "type": "product",
+          "settings": {
+            "product": "aura-silk-maxi-dress"
+          }
+        },
+        "product_P7bMT3": {
+          "type": "product",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat"
+          }
+        },
+        "product_Dng8JR": {
+          "type": "product",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat"
+          }
+        },
+        "product_AjH9rL": {
+          "type": "product",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat"
+          }
+        }
+      },
+      "block_order": [
+        "product_dwqjCE",
+        "product_xXQfAy",
+        "product_P7bMT3",
+        "product_Dng8JR",
+        "product_AjH9rL"
+      ],
       "name": "Luvia Featured Collection",
       "settings": {
-        "collection": "midnight-elegance",
         "section_title": "Editor's Picks",
         "section_subtitle": "Luvia Era Capsule Collection",
         "button_text": "All Products",
