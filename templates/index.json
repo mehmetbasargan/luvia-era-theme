@@ -72,6 +72,38 @@
         "show_pagination": true
       }
     },
+    "marquee_logo_Aana7d": {
+      "type": "marquee-logo",
+      "blocks": {
+        "logo_image_imLUGg": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
+        },
+        "logo_image_NR9zGi": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/favicon.png"
+          }
+        },
+        "logo_image_MKCMGt": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
+        }
+      },
+      "block_order": [
+        "logo_image_imLUGg",
+        "logo_image_NR9zGi",
+        "logo_image_MKCMGt"
+      ],
+      "name": "Dinamik Marquee Logos",
+      "settings": {
+        "title": "AS FEATURED IN"
+      }
+    },
     "collection_list_zHTtyQ": {
       "type": "collection-list",
       "blocks": {
@@ -658,43 +690,12 @@
         "button_text": "View All",
         "button_url": ""
       }
-    },
-    "marquee_logo_Aana7d": {
-      "type": "marquee-logo",
-      "blocks": {
-        "logo_image_imLUGg": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        },
-        "logo_image_NR9zGi": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/favicon.png"
-          }
-        },
-        "logo_image_MKCMGt": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        }
-      },
-      "block_order": [
-        "logo_image_imLUGg",
-        "logo_image_NR9zGi",
-        "logo_image_MKCMGt"
-      ],
-      "name": "Dinamik Marquee Logos",
-      "settings": {
-        "title": "AS FEATURED IN"
-      }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_yFYYic",
+    "marquee_logo_Aana7d",
     "collection_list_zHTtyQ",
     "rich_text_banner_m8j33U",
     "featured_products_GFTLFG",
@@ -713,7 +714,6 @@
     "testimonial_MnhfEw",
     "newsletter_banner_fKkMaW",
     "full_width_gallery_JLkbMT",
-    "featured_products_slider_7JHjiQ",
-    "marquee_logo_Aana7d"
+    "featured_products_slider_7JHjiQ"
   ]
 }
