@@ -473,6 +473,17 @@
       "settings": {
         "title": "Follow Era"
       }
+    },
+    "featured_blog_carousel_qhr9Th": {
+      "type": "featured-blog-carousel",
+      "name": "Featured Blog Carousel",
+      "settings": {
+        "title": "The Journal",
+        "subtitle": "Discover the world of Luvia Era",
+        "blog": "maintenance-guide",
+        "post_limit": 6,
+        "header_opacity": 100
+      }
     }
   },
   "order": [
@@ -490,6 +501,7 @@
     "testimonial_CxWzTk",
     "image_with_text_multi_ExeLfW",
     "featured_products_cdqPtt",
-    "full_width_gallery_fnrnK7"
+    "full_width_gallery_fnrnK7",
+    "featured_blog_carousel_qhr9Th"
   ]
 }
