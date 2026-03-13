@@ -610,13 +610,13 @@
         "title": "Follow Era"
       }
     },
-    "featured_collection_KcCNPk": {
+    "featured_collection_Ut66Ma": {
       "type": "featured-collection",
-      "name": "Featured Swiper Collection",
+      "name": "Featured Swiper Pro",
       "settings": {
-        "title": "Season Highlights",
+        "title": "The Seasonal Edit",
         "collection": "silk-grace",
-        "product_limit": 6,
+        "product_limit": 8,
         "view_all": true
       }
     }
@@ -642,6 +642,6 @@
     "testimonial_MnhfEw",
     "newsletter_banner_fKkMaW",
     "full_width_gallery_JLkbMT",
-    "featured_collection_KcCNPk"
+    "featured_collection_Ut66Ma"
   ]
 }
