@@ -658,6 +658,38 @@
         "button_text": "View All",
         "button_url": ""
       }
+    },
+    "marquee_logo_Aana7d": {
+      "type": "marquee-logo",
+      "blocks": {
+        "logo_image_imLUGg": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
+        },
+        "logo_image_NR9zGi": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/favicon.png"
+          }
+        },
+        "logo_image_MKCMGt": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/logo2.svg"
+          }
+        }
+      },
+      "block_order": [
+        "logo_image_imLUGg",
+        "logo_image_NR9zGi",
+        "logo_image_MKCMGt"
+      ],
+      "name": "Dinamik Marquee Logos",
+      "settings": {
+        "title": "AS FEATURED IN"
+      }
     }
   },
   "order": [
@@ -681,6 +713,7 @@
     "testimonial_MnhfEw",
     "newsletter_banner_fKkMaW",
     "full_width_gallery_JLkbMT",
-    "featured_products_slider_7JHjiQ"
+    "featured_products_slider_7JHjiQ",
+    "marquee_logo_Aana7d"
   ]
 }
