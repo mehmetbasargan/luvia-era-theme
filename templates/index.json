@@ -610,46 +610,39 @@
         "title": "Follow Era"
       }
     },
-    "featured_products_slider_zCcDxw": {
+    "featured_products_slider_7JHjiQ": {
       "type": "featured-products-slider",
       "blocks": {
-        "product_CzTgzA": {
+        "product_mkxBay": {
+          "type": "product",
+          "settings": {
+            "product": "aura-silk-maxi-dress"
+          }
+        },
+        "product_xGqpgA": {
           "type": "product",
           "settings": {
             "product": "ethereal-knit-cardigan"
           }
         },
-        "product_kdUEF4": {
+        "product_FzJptP": {
           "type": "product",
           "settings": {
             "product": "luna-satin-slip-dress"
           }
         },
-        "product_D3pcEa": {
-          "type": "product",
-          "settings": {
-            "product": "luna-high-waist-trousers"
-          }
-        },
-        "product_PANyAe": {
+        "product_J8rWxm": {
           "type": "product",
           "settings": {
             "product": "solstice-linen-blouse"
           }
-        },
-        "product_X6ddXJ": {
-          "type": "product",
-          "settings": {
-            "product": "aura-oversized-cashmere-coat"
-          }
         }
       },
       "block_order": [
-        "product_CzTgzA",
-        "product_kdUEF4",
-        "product_D3pcEa",
-        "product_PANyAe",
-        "product_X6ddXJ"
+        "product_mkxBay",
+        "product_xGqpgA",
+        "product_FzJptP",
+        "product_J8rWxm"
       ],
       "name": "Featured Products Slider",
       "settings": {
@@ -681,6 +674,6 @@
     "testimonial_MnhfEw",
     "newsletter_banner_fKkMaW",
     "full_width_gallery_JLkbMT",
-    "featured_products_slider_zCcDxw"
+    "featured_products_slider_7JHjiQ"
   ]
 }
