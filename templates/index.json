@@ -484,6 +484,28 @@
         "post_limit": 6,
         "header_opacity": 100
       }
+    },
+    "shoppable_image_PQrjBw": {
+      "type": "shoppable-image",
+      "blocks": {
+        "product_point_PRXXM9": {
+          "type": "product_point",
+          "settings": {
+            "product": "",
+            "top_position": 50,
+            "left_position": 50
+          }
+        }
+      },
+      "block_order": [
+        "product_point_PRXXM9"
+      ],
+      "name": "Shoppable Image",
+      "settings": {
+        "image": "shopify://shop_images/p2-1.jpg",
+        "title": "Curated Collections",
+        "subtitle": "Touch the details and discover the artistry behind every piece."
+      }
     }
   },
   "order": [
@@ -502,6 +524,7 @@
     "image_with_text_multi_ExeLfW",
     "featured_products_cdqPtt",
     "full_width_gallery_fnrnK7",
-    "featured_blog_carousel_qhr9Th"
+    "featured_blog_carousel_qhr9Th",
+    "shoppable_image_PQrjBw"
   ]
 }
