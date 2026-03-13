@@ -1427,6 +1427,10 @@ blockquote{
   height: 100%;
 }
 
+.h-\[450px\]{
+  height: 450px;
+}
+
 .max-h-\[80vh\]{
   max-height: 80vh;
 }
@@ -3006,6 +3010,10 @@ blockquote{
   border-color: var(--color-black);
 }
 
+.focus\:border-white:focus{
+  border-color: var(--color-white);
+}
+
 .focus\:outline-none:focus{
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -3181,6 +3189,10 @@ blockquote{
 
   .md\:h-full{
     height: 100%;
+  }
+
+  .md\:h-\[550px\]{
+    height: 550px;
   }
 
   .md\:min-h-\[500px\]{
