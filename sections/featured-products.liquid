@@ -112,6 +112,73 @@
   </section>
 </div>
 
+<script>
+  function handleFeaturedAddToCart(e, variantId) {
+    const btn = e.currentTarget;
+    // Butonun içindeki metni güvenle bulmak için (span varsa span'ı yoksa butonu baz al)
+    const label = btn.querySelector('span') || btn;
+    const originalText = label.innerText;
+
+    if (btn.classList.contains('loading')) return;
+
+    // Durumu güncelle
+    btn.classList.add('loading');
+    label.innerText = '...';
+    btn.disabled = true;
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: 1,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .then((data) => {
+        label.innerText = 'ADDED';
+
+        // Global Toast (Luvia Global JS'den gelir)
+        if (window.showToast) {
+          window.showToast(window.LuviaStrings.cartAdded || 'Added to cart', 'success');
+        }
+
+        // Cart Drawer'ı güncelle ve aç
+        if (typeof openAndRefreshCart === 'function') {
+          openAndRefreshCart();
+        } else if (window.openCartDrawer) {
+          window.openCartDrawer();
+        }
+
+        // Diğer bölümleri haberdar et
+        document.dispatchEvent(
+          new CustomEvent('cart:updated', {
+            detail: { cart: data },
+            bubbles: true,
+          })
+        );
+
+        setTimeout(() => {
+          label.innerText = originalText;
+          btn.disabled = false;
+          btn.classList.remove('loading');
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error('Cart Error:', error);
+        label.innerText = 'ERROR';
+        setTimeout(() => {
+          label.innerText = originalText;
+          btn.disabled = false;
+          btn.classList.remove('loading');
+        }, 2000);
+      });
+  }
+</script>
+
 {% schema %}
 {
   "name": "Featured Products",
