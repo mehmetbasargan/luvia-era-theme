@@ -613,6 +613,12 @@
     "featured_products_slider_7JHjiQ": {
       "type": "featured-products-slider",
       "blocks": {
+        "product_YChzNk": {
+          "type": "product",
+          "settings": {
+            "product": "luna-high-waist-trousers"
+          }
+        },
         "product_mkxBay": {
           "type": "product",
           "settings": {
@@ -639,6 +645,7 @@
         }
       },
       "block_order": [
+        "product_YChzNk",
         "product_mkxBay",
         "product_xGqpgA",
         "product_FzJptP",
