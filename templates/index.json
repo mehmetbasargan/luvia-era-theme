@@ -613,6 +613,12 @@
     "featured_products_slider_zCcDxw": {
       "type": "featured-products-slider",
       "blocks": {
+        "product_CzTgzA": {
+          "type": "product",
+          "settings": {
+            "product": "ethereal-knit-cardigan"
+          }
+        },
         "product_kdUEF4": {
           "type": "product",
           "settings": {
@@ -622,23 +628,24 @@
         "product_D3pcEa": {
           "type": "product",
           "settings": {
-            "product": ""
+            "product": "luna-high-waist-trousers"
           }
         },
         "product_PANyAe": {
           "type": "product",
           "settings": {
-            "product": ""
+            "product": "solstice-linen-blouse"
           }
         },
         "product_X6ddXJ": {
           "type": "product",
           "settings": {
-            "product": ""
+            "product": "aura-oversized-cashmere-coat"
           }
         }
       },
       "block_order": [
+        "product_CzTgzA",
         "product_kdUEF4",
         "product_D3pcEa",
         "product_PANyAe",
