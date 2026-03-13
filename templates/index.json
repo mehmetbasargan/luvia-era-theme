@@ -488,16 +488,25 @@
     "shoppable_image_PQrjBw": {
       "type": "shoppable-image",
       "blocks": {
+        "product_point_HAJWFA": {
+          "type": "product_point",
+          "settings": {
+            "product": "solstice-linen-blouse",
+            "top_position": 57,
+            "left_position": 68
+          }
+        },
         "product_point_PRXXM9": {
           "type": "product_point",
           "settings": {
-            "product": "",
+            "product": "ethereal-knit-cardigan",
             "top_position": 50,
             "left_position": 50
           }
         }
       },
       "block_order": [
+        "product_point_HAJWFA",
         "product_point_PRXXM9"
       ],
       "name": "Shoppable Image",
