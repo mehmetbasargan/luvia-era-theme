@@ -118,6 +118,19 @@
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
 
+    <!-- Minimal Critical CSS for FCP -->
+    <style>
+      .site-header {
+        background-color: var(--color-custombg);
+      }
+      .text-primary {
+        color: var(--color-primary) !important;
+      }
+      .bg-custombg {
+        background-color: var(--color-custombg) !important;
+      }
+    </style>
+
     <!-- Preload Critical Resources -->
     {% if settings.favicon %}
       {{ settings.favicon | image_url: width: 32 | image_tag: preload: true, alt: '', style: 'display:none;' }}
@@ -158,17 +171,27 @@
       };
     </script>
 
-    <!-- Reduce TBT - Lazy Load Non-Critical JS -->
+    <!-- Reduce TBT - Aggressive Lazy Loading -->
     <script>
-      // Load non-critical scripts after page load
-      window.addEventListener('load', function() {
-        setTimeout(function() {
+      // Load non-critical scripts after page is fully interactive
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() {
           const luviaScript = document.createElement('script');
           luviaScript.src = '{{ 'luvia-global.js' | asset_url }}';
           luviaScript.defer = true;
           document.body.appendChild(luviaScript);
-        }, 100);
-      });
+        });
+      } else {
+        // Fallback for older browsers
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            const luviaScript = document.createElement('script');
+            luviaScript.src = '{{ 'luvia-global.js' | asset_url }}';
+            luviaScript.defer = true;
+            document.body.appendChild(luviaScript);
+          }, 200);
+        });
+      }
     </script>
   </body>
 </html>
