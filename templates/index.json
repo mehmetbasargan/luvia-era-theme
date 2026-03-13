@@ -75,6 +75,12 @@
     "collection_list_zHTtyQ": {
       "type": "collection-list",
       "blocks": {
+        "collection_H7936w": {
+          "type": "collection",
+          "settings": {
+            "collection": "the-minimalist-era"
+          }
+        },
         "collection_EbQTGh": {
           "type": "collection",
           "settings": {
@@ -92,19 +98,13 @@
           "settings": {
             "collection": "silk-grace"
           }
-        },
-        "collection_niVEQf": {
-          "type": "collection",
-          "settings": {
-            "collection": "the-minimalist-era"
-          }
         }
       },
       "block_order": [
+        "collection_H7936w",
         "collection_EbQTGh",
         "collection_YatzNq",
-        "collection_YV6ztR",
-        "collection_niVEQf"
+        "collection_YV6ztR"
       ],
       "name": "Collection List",
       "settings": {
