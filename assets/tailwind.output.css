@@ -3365,6 +3365,10 @@ blockquote{
     gap: 1.5rem;
   }
 
+  .md\:gap-4{
+    gap: 1rem;
+  }
+
   .md\:p-10{
     padding: 2.5rem;
   }
