@@ -1,12 +1,14 @@
 <section class="bg-custombg py-16 border-t border-line">
   <div class="container mx-auto px-4">
-    {% comment %} Başlık (Luvia Tarzı Minimal) {% endcomment %}
-    <div class="text-center mb-12">
-      <h2 class="text-primary font-light uppercase tracking-[0.4em] text-[13px] opacity-70">
-        {{ section.settings.heading | default: 'Explore the Collections' }}
-      </h2>
-      <div class="h-[1px] w-12 bg-secondary/50 mx-auto mt-4"></div>
-    </div>
+    {% comment %} Başlık {% endcomment %}
+    {% if section.settings.heading != blank %}
+      <div class="text-center mb-12">
+        <h2 class="text-primary font-light uppercase tracking-[0.4em] text-[13px] opacity-70">
+          {{ section.settings.heading }}
+        </h2>
+        <div class="h-[1px] w-12 bg-secondary/50 mx-auto mt-4"></div>
+      </div>
+    {% endif %}
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       {% for block in section.blocks %}
@@ -30,17 +32,19 @@
           {% endif %}
 
           {% comment %}
-            🛠️ Dinamik Overlay Layer (Daima Okunabilirlik İçin)
-            bg-black/30: Sabit karartma (Açık renk görseller için koruma)
-            group-hover:bg-black/50: Üzerine gelince daha fazla karartma (Kontrast artırma)
+            🛠️ Dinamik Overlay Layer
+            Opacity değerini doğrudan block ayarlarından alıyoruz.
           {% endcomment %}
-          <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-500 z-10 flex items-center justify-center">
-            {% comment %} Metin ve Alt Çizgi Efekti {% endcomment %}
-            <div class="text-center px-4">
+          {%- assign overlay_opacity = block.settings.overlay_opacity | divided_by: 100.0 -%}
+          <div
+            class="absolute inset-0 bg-black transition-all duration-500 z-10 flex items-center justify-center group-hover:bg-opacity-60"
+            style="background-color: rgba(0,0,0, {{ overlay_opacity }});"
+          >
+            {% comment %} Metin Alanı {% endcomment %}
+            <div class="text-center px-4 relative z-20">
               <h3 class="text-white text-[12px] md:text-[13px] uppercase tracking-[0.3em] font-light leading-snug">
                 {{ block.settings.title }}
               </h3>
-              {% comment %} İnce, zarif hover çizgisi {% endcomment %}
               <div
                 class="h-[1px] w-0 group-hover:w-full bg-white mx-auto mt-2 transition-all duration-500 ease-in-out opacity-70"
               ></div>
@@ -84,6 +88,16 @@
           "type": "url",
           "id": "link",
           "label": "Link"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 80,
+          "step": 10,
+          "unit": "%",
+          "label": "Overlay Opacity",
+          "default": 30
         }
       ]
     }
@@ -92,10 +106,10 @@
     {
       "name": "Footer Promotion",
       "blocks": [
-        { "type": "promotion", "settings": { "title": "Dresses" } },
-        { "type": "promotion", "settings": { "title": "Accessories" } },
-        { "type": "promotion", "settings": { "title": "Best Sellers" } },
-        { "type": "promotion", "settings": { "title": "Final Sale" } }
+        { "type": "promotion", "settings": { "title": "Dresses", "overlay_opacity": 30 } },
+        { "type": "promotion", "settings": { "title": "Accessories", "overlay_opacity": 30 } },
+        { "type": "promotion", "settings": { "title": "Best Sellers", "overlay_opacity": 30 } },
+        { "type": "promotion", "settings": { "title": "Final Sale", "overlay_opacity": 30 } }
       ]
     }
   ]

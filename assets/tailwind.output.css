@@ -3163,6 +3163,10 @@ blockquote{
   background-color: var(--color-secondary);
 }
 
+.group:hover .group-hover\:bg-opacity-60{
+  --tw-bg-opacity: 0.6;
+}
+
 .group:hover .group-hover\:text-primary{
   color: var(--color-primary);
 }
