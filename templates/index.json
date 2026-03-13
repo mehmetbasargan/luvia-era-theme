@@ -430,15 +430,6 @@
         "title": "Follow Era"
       }
     },
-    "collections_yYcnYL": {
-      "type": "collections",
-      "disabled": true,
-      "name": "t:general.collections_grid",
-      "settings": {
-        "grid_item_width": "collections--full",
-        "grid_gap": 10
-      }
-    },
     "featured_products_cdqPtt": {
       "type": "featured-products",
       "blocks": {
@@ -480,6 +471,15 @@
         "button_text": "View All",
         "button_url": ""
       }
+    },
+    "collections_yYcnYL": {
+      "type": "collections",
+      "disabled": true,
+      "name": "t:general.collections_grid",
+      "settings": {
+        "grid_item_width": "collections--full",
+        "grid_gap": 10
+      }
     }
   },
   "order": [
@@ -497,7 +497,7 @@
     "testimonial_CxWzTk",
     "image_with_text_multi_ExeLfW",
     "full_width_gallery_fnrnK7",
-    "collections_yYcnYL",
-    "featured_products_cdqPtt"
+    "featured_products_cdqPtt",
+    "collections_yYcnYL"
   ]
 }
