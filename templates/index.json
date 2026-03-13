@@ -690,6 +690,51 @@
         "button_text": "View All",
         "button_url": ""
       }
+    },
+    "footer_promotion_E9VbTA": {
+      "type": "footer-promotion",
+      "blocks": {
+        "promotion_NwLEVk": {
+          "type": "promotion",
+          "settings": {
+            "image": "shopify://shop_images/5-2.jpg",
+            "title": "Dresses",
+            "link": ""
+          }
+        },
+        "promotion_Qe8Bx6": {
+          "type": "promotion",
+          "settings": {
+            "image": "shopify://shop_images/blg2-2.jpg",
+            "title": "Accessories",
+            "link": ""
+          }
+        },
+        "promotion_3j9iPB": {
+          "type": "promotion",
+          "settings": {
+            "image": "shopify://shop_images/blg1-2.jpg",
+            "title": "New Season",
+            "link": ""
+          }
+        },
+        "promotion_Ua8zGy": {
+          "type": "promotion",
+          "settings": {
+            "image": "shopify://shop_images/4-2.jpg",
+            "title": "Sale",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "promotion_NwLEVk",
+        "promotion_Qe8Bx6",
+        "promotion_3j9iPB",
+        "promotion_Ua8zGy"
+      ],
+      "name": "Footer Promotion",
+      "settings": {}
     }
   },
   "order": [
@@ -714,6 +759,7 @@
     "testimonial_MnhfEw",
     "newsletter_banner_fKkMaW",
     "full_width_gallery_JLkbMT",
-    "featured_products_slider_7JHjiQ"
+    "featured_products_slider_7JHjiQ",
+    "footer_promotion_E9VbTA"
   ]
 }
