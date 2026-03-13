@@ -254,6 +254,28 @@
         "header_opacity": 40
       }
     },
+    "image_with_text_multi_LgxGEe": {
+      "type": "image-with-text-multi",
+      "blocks": {
+        "image_block_AjiDDT": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/p2-2.jpg",
+            "image_placement": "right",
+            "subheading": "Luvia Story",
+            "title": "Crafted with passion",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_block_AjiDDT"
+      ],
+      "name": "Image with Text Multi",
+      "settings": {}
+    },
     "rich_text_banner_b3LtW4": {
       "type": "rich-text-banner",
       "name": "Statement Banner",
@@ -416,28 +438,6 @@
         "grid_item_width": "collections--full",
         "grid_gap": 10
       }
-    },
-    "image_with_text_multi_LgxGEe": {
-      "type": "image-with-text-multi",
-      "blocks": {
-        "image_block_AjiDDT": {
-          "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/p2-2.jpg",
-            "image_placement": "right",
-            "subheading": "Luvia Story",
-            "title": "Crafted with passion",
-            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
-            "button_label": "Discover More",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_block_AjiDDT"
-      ],
-      "name": "Image with Text Multi",
-      "settings": {}
     }
   },
   "order": [
@@ -450,11 +450,11 @@
     "rich_text_banner_yW67kH",
     "shoppable_image_pCJhcM",
     "featured_blog_carousel_rfnxdi",
+    "image_with_text_multi_LgxGEe",
     "rich_text_banner_b3LtW4",
     "testimonial_CxWzTk",
     "image_with_text_multi_ExeLfW",
     "full_width_gallery_fnrnK7",
-    "collections_yYcnYL",
-    "image_with_text_multi_LgxGEe"
+    "collections_yYcnYL"
   ]
 }
