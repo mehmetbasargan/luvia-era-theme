@@ -610,14 +610,13 @@
         "title": "Follow Era"
       }
     },
-    "featured_collection_xxa4r7": {
+    "featured_collection_KcCNPk": {
       "type": "featured-collection",
-      "name": "Featured Collection",
+      "name": "Featured Swiper Collection",
       "settings": {
-        "title": "Curated Selection",
+        "title": "Season Highlights",
         "collection": "silk-grace",
-        "product_limit": 8,
-        "enable_slider": true,
+        "product_limit": 6,
         "view_all": true
       }
     }
@@ -643,6 +642,6 @@
     "testimonial_MnhfEw",
     "newsletter_banner_fKkMaW",
     "full_width_gallery_JLkbMT",
-    "featured_collection_xxa4r7"
+    "featured_collection_KcCNPk"
   ]
 }
