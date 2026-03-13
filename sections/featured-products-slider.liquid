@@ -13,19 +13,20 @@
         </div>
 
         <div class="flex items-center gap-6 mt-6 md:mt-0">
-          {% comment %} Slider Butonları {% endcomment %}
+          {% comment %} Slider Navigasyon Butonları {% endcomment %}
           <div class="flex gap-4">
-            <button class="swiper-prev-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors bg-transparent border-none">
+            <button class="swiper-prev-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors bg-transparent border-none p-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                 <path d="M19 12H5M5 12L12 19M5 12L12 5"/>
               </svg>
             </button>
-            <button class="swiper-next-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors bg-transparent border-none">
+            <button class="swiper-next-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors bg-transparent border-none p-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                 <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
               </svg>
             </button>
           </div>
+
           {% if section.settings.button_url %}
             <a
               href="{{ section.settings.button_url }}"
@@ -51,7 +52,7 @@
                     </span>
                   {% endif %}
 
-                  {% comment %} Wishlist Butonu (Aynı Sistem) {% endcomment %}
+                  {% comment %} Wishlist Butonu {% endcomment %}
                   <div class="absolute top-4 right-4 z-40">
                     <button
                       type="button"
@@ -59,12 +60,18 @@
                       data-product-id="{{ product.id }}"
                       onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') }"
                     >
-                      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        class="w-6 h-6 text-primary transition-all duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                       </svg>
                     </button>
                   </div>
 
+                  {% comment %} Ürün Görselleri (Hover Efekti Dahil) {% endcomment %}
                   <a href="{{ product.url }}" class="block w-full h-full relative z-10">
                     <img
                       src="{{ product.featured_image | image_url: width: 600 }}"
@@ -86,7 +93,7 @@
                     {% endif %}
                   </a>
 
-                  {% comment %} Add to Cart (Alttan Kayarak Çıkan) {% endcomment %}
+                  {% comment %} Add to Cart Butonu (Alttan Kayarak Çıkan) {% endcomment %}
                   <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
                     <button
                       type="button"
@@ -98,6 +105,7 @@
                   </div>
                 </div>
 
+                {% comment %} Ürün Bilgileri {% endcomment %}
                 <div class="mt-4 text-center">
                   <a
                     href="{{ product.url }}"
@@ -126,6 +134,7 @@
     new Swiper('.featured-swiper-{{ section.id }}', {
       slidesPerView: 2,
       spaceBetween: 20,
+      loop: false,
       navigation: {
         nextEl: '.swiper-next-{{ section.id }}',
         prevEl: '.swiper-prev-{{ section.id }}',
@@ -137,12 +146,44 @@
     });
   });
 
-  // Paylaştığın JS fonksiyonunu buraya da dahil ediyoruz ki butonlar çalışsın
+  // Paylaştığın Sepete Ekleme Fonksiyonu (Eğer globalde yoksa çalışması için)
   if (typeof handleFeaturedAddToCart !== 'function') {
-    function handleFeaturedAddToCart(e, variantId) {
-      // ... senin paylaştığın fonksiyonun içeriği buraya gelecek (yukarıda zaten var) ...
-      // (Script karmaşası olmaması için fonksiyon ismini korudum)
-    }
+    window.handleFeaturedAddToCart = function (e, variantId) {
+      const btn = e.currentTarget;
+      const originalText = btn.innerText;
+
+      if (btn.classList.contains('loading')) return;
+      btn.classList.add('loading');
+      btn.innerText = '...';
+      btn.disabled = true;
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          btn.innerText = 'ADDED';
+          if (window.showToast) window.showToast('Added to cart', 'success');
+          if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
+
+          setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+            btn.classList.remove('loading');
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error(err);
+          btn.innerText = 'ERROR';
+          setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+            btn.classList.remove('loading');
+          }, 2000);
+        });
+    };
   }
 </script>
 

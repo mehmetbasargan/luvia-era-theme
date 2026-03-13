@@ -2239,6 +2239,10 @@ blockquote{
   padding: 2rem;
 }
 
+.p-0{
+  padding: 0px;
+}
+
 .px-10{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
