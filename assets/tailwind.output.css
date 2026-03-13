@@ -1451,6 +1451,10 @@ blockquote{
   height: 50%;
 }
 
+.h-\[400px\]{
+  height: 400px;
+}
+
 .max-h-\[80vh\]{
   max-height: 80vh;
 }
@@ -2610,6 +2614,10 @@ blockquote{
   letter-spacing: 0.1em;
 }
 
+.tracking-wide{
+  letter-spacing: 0.025em;
+}
+
 .\!text-primary{
   color: var(--color-primary) !important;
 }
@@ -3204,6 +3212,10 @@ blockquote{
     height: 100%;
   }
 
+  .md\:h-\[500px\]{
+    height: 500px;
+  }
+
   .md\:w-1\/4{
     width: 25%;
   }
@@ -3349,6 +3361,11 @@ blockquote{
 
   .md\:text-\[13px\]{
     font-size: 13px;
+  }
+
+  .md\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 

@@ -1,0 +1,87 @@
+<section class="relative w-full h-[400px] md:h-[500px] overflow-hidden flex items-center justify-center">
+  {% comment %} Arka Plan Görseli {% endcomment %}
+  <div class="absolute inset-0 z-0">
+    {% if section.settings.bg_image != blank %}
+      <img
+        src="{{ section.settings.bg_image | image_url: width: 2000 }}"
+        alt="{{ section.settings.title | escape }}"
+        class="w-full h-full object-cover"
+        width="2000"
+        height="400"
+        loading="lazy"
+      >
+    {% else %}
+      <div class="w-full h-full bg-primary opacity-20"></div>
+    {% endif %}
+
+    {% comment %} Yazıların okunması için hafif bir karartma (Overlay) {% endcomment %}
+    <div class="absolute inset-0 bg-black/30"></div>
+  </div>
+
+  {% comment %} İçerik Alanı {% endcomment %}
+  <div class="relative z-10 container mx-auto px-6 text-center text-white">
+    <div class="max-w-3xl mx-auto space-y-6">
+      {% if section.settings.title != blank %}
+        <h2 class="text-white text-3xl md:text-5xl font-light uppercase tracking-[0.3em] leading-tight">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="text-white/90 font-light text-lg md:text-xl tracking-wide max-w-2xl mx-auto">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        <a
+          href="{{ section.settings.button_link | default: '#' }}"
+          class="inline-block mt-8 px-12 py-4 border border-white text-white text-[12px] uppercase tracking-[0.2em] hover:bg-white hover:text-primary transition-all duration-500"
+        >
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Statement Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "THE ART OF ELEGANCE"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Statement Text",
+      "default": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop The Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Statement Banner"
+    }
+  ]
+}
+{% endschema %}
