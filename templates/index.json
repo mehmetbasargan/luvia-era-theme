@@ -478,7 +478,7 @@
       "type": "featured-blog-carousel",
       "name": "Featured Blog Carousel",
       "settings": {
-        "title": "The Journal",
+        "title": "Maintenance Guide",
         "subtitle": "Discover the world of Luvia Era",
         "blog": "maintenance-guide",
         "post_limit": 6,
