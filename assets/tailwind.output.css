@@ -3248,6 +3248,10 @@ blockquote{
     width: 100%;
   }
 
+  .md\:w-1\/2{
+    width: 50%;
+  }
+
   .md\:max-w-md{
     max-width: 28rem;
   }
@@ -3266,6 +3270,10 @@ blockquote{
 
   .md\:flex-row{
     flex-direction: row;
+  }
+
+  .md\:flex-row-reverse{
+    flex-direction: row-reverse;
   }
 
   .md\:items-end{
@@ -3290,6 +3298,10 @@ blockquote{
 
   .md\:gap-6{
     gap: 1.5rem;
+  }
+
+  .md\:gap-24{
+    gap: 6rem;
   }
 
   .md\:p-10{
@@ -3319,6 +3331,11 @@ blockquote{
   .md\:py-32{
     padding-top: 8rem;
     padding-bottom: 8rem;
+  }
+
+  .md\:px-0{
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .md\:text-5xl{

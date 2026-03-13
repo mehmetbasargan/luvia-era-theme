@@ -1,0 +1,128 @@
+<section class="bg-custombg overflow-hidden">
+  <div class="container mx-auto">
+    {% for block in section.blocks %}
+      <div
+        class="flex flex-col {% if block.settings.image_placement == 'right' %}md:flex-row-reverse{% else %}md:flex-row{% endif %} items-center gap-12 md:gap-24 py-16 md:py-24"
+        {{ block.shopify_attributes }}
+      >
+        {% comment %} Görsel Alanı {% endcomment %}
+        <div class="w-full md:w-1/2">
+          <div class="relative aspect-[4/5] overflow-hidden bg-white shadow-sm border border-line">
+            {% if block.settings.image != blank %}
+              <img
+                src="{{ block.settings.image | image_url: width: 1000 }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                loading="lazy"
+                height="500"
+                width="500"
+                class="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'w-full h-full opacity-10 bg-white' }}
+            {% endif %}
+          </div>
+        </div>
+
+        {% comment %} Metin Alanı {% endcomment %}
+        <div class="w-full md:w-1/2 text-left space-y-6 px-4 md:px-0">
+          {% if block.settings.subheading != blank %}
+            <span class="text-secondary uppercase tracking-[0.3em] text-[12px] font-medium block">
+              {{ block.settings.subheading }}
+            </span>
+          {% endif %}
+
+          <h2 class="text-primary text-3xl md:text-5xl font-light uppercase tracking-widest leading-tight">
+            {{ block.settings.title }}
+          </h2>
+
+          <div class="text-primary/80 font-light leading-relaxed text-lg">
+            {{ block.settings.text }}
+          </div>
+
+          {% if block.settings.button_label != blank %}
+            <a
+              href="{{ block.settings.button_link | default: '#' }}"
+              class="inline-block mt-4 px-10 py-4 bg-primary text-white text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors duration-300"
+            >
+              {{ block.settings.button_label }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      {% comment %} Bloklar arasına ince bir çizgi (Opsiyonel) {% endcomment %}
+      {% unless forloop.last %}
+        <div class="container mx-auto border-b border-line/50"></div>
+      {% endunless %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with Text Multi",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "image_block",
+      "name": "Image & Text Row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_placement",
+          "label": "Image Placement",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Sub-heading",
+          "default": "Luvia Story"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Crafted with passion"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Discover More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text Multi",
+      "blocks": [
+        { "type": "image_block", "settings": { "image_placement": "left" } },
+        { "type": "image_block", "settings": { "image_placement": "right" } },
+        { "type": "image_block", "settings": { "image_placement": "left" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
