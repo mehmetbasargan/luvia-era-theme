@@ -1,4 +1,4 @@
-<section id="FeaturedCollection-{{ section.id }}" class="bg-custombg py-16 md:py-24">
+<section id="FeaturedCollection-{{ section.id }}" class="bg-custombg py-16 md:py-24 overflow-hidden">
   <div class="container mx-auto px-4">
     {% comment %} Başlık Alanı {% endcomment %}
     <div class="flex justify-between items-end mb-12">
@@ -19,72 +19,109 @@
       {% endif %}
     </div>
 
-    {% comment %} Ürün Listesi {% endcomment %}
-    <div class="{% if section.settings.enable_slider %}flex overflow-x-auto snap-x scrollbar-hide gap-6{% else %}grid grid-cols-2 md:grid-cols-4 gap-8{% endif %}">
-      {%- assign collection = section.settings.collection -%}
+    {% comment %} Swiper Container {% endcomment %}
+    <div class="swiper featured-swiper-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {%- assign collection = section.settings.collection -%}
 
-      {% for product in collection.products limit: section.settings.product_limit %}
-        <div class="{% if section.settings.enable_slider %}min-w-[70%] md:min-w-[22%] snap-start{% endif %} group">
-          <a
-            href="{{ product.url }}"
-            class="block mb-4 relative overflow-hidden bg-white shadow-sm border border-line/50"
-          >
-            {% if product.featured_image != blank %}
-              <img
-                src="{{ product.featured_image | image_url: width: 600 }}"
-                alt="{{ product.title }}"
-                height="600"
-                width="600"
-                class="w-full aspect-[3/4] object-cover transition-transform duration-1000 group-hover:scale-105"
-                loading="lazy"
-              >
-            {% else %}
-              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full bg-custombg' }}
-            {% endif %}
-
-            {% comment %} Hızlı Ekle veya Badge (Opsiyonel) {% endcomment %}
-            {% if product.compare_at_price > product.price %}
-              <span class="absolute top-4 left-4 bg-secondary text-white text-[10px] px-2 py-1 uppercase tracking-widest"
-                >Sale</span
-              >
-            {% endif %}
-          </a>
-
-          <div class="text-center space-y-1">
-            <h3 class="text-primary text-[13px] font-light uppercase tracking-widest">
-              {{ product.title }}
-            </h3>
-            <div class="text-primary/70 text-[12px]">
-              {{ product.price | money }}
-              {% if product.compare_at_price > product.price %}
-                <span class="line-through opacity-50 ml-2">{{ product.compare_at_price | money }}</span>
+        {% for product in collection.products limit: section.settings.product_limit %}
+          <div class="swiper-slide group">
+            <a
+              href="{{ product.url }}"
+              class="block mb-4 relative overflow-hidden bg-white shadow-sm border border-line/50"
+            >
+              {% if product.featured_image != blank %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 800 }}"
+                  alt="{{ product.title }}"
+                  height="auto"
+                  width="800"
+                  class="w-full aspect-[3/4] object-cover transition-transform duration-1000 group-hover:scale-105"
+                  loading="lazy"
+                >
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full bg-custombg' }}
               {% endif %}
+
+              {% if product.compare_at_price > product.price %}
+                <span class="absolute top-4 left-4 bg-secondary text-white text-[10px] px-2 py-1 uppercase tracking-widest z-10"
+                  >Sale</span
+                >
+              {% endif %}
+            </a>
+
+            <div class="text-center space-y-1">
+              <h3 class="text-primary text-[13px] font-light uppercase tracking-widest">
+                {{ product.title }}
+              </h3>
+              <div class="text-primary/70 text-[12px]">
+                {{ product.price | money }}
+                {% if product.compare_at_price > product.price %}
+                  <span class="line-through opacity-50 ml-2">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
             </div>
           </div>
-        </div>
-      {% else %}
-        {% comment %} Placeholder Ürünler (Panelde boş görünmesin diye) {% endcomment %}
-        {% for i in (1..4) %}
-          <div class="space-y-4">
-            <div class="aspect-[3/4] bg-line/20 border border-line"></div>
-            <div class="h-4 bg-line/10 w-3/4 mx-auto"></div>
-            <div class="h-4 bg-line/10 w-1/2 mx-auto"></div>
-          </div>
+        {% else %}
+          {% for i in (1..4) %}
+            <div class="swiper-slide space-y-4">
+              <div class="aspect-[3/4] bg-line/20 border border-line"></div>
+              <div class="h-4 bg-line/10 w-3/4 mx-auto"></div>
+            </div>
+          {% endfor %}
         {% endfor %}
-      {% endfor %}
+      </div>
+
+      {% comment %} Slider Kontrolleri (Opsiyonel) {% endcomment %}
+      <div class="flex justify-center gap-4 mt-12">
+        <div class="swiper-button-prev-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5"/>
+          </svg>
+        </div>
+        <div class="swiper-button-next-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.featured-swiper-{{ section.id }}', {
+      slidesPerView: 2,
+      spaceBetween: 20,
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next-{{ section.id }}',
+        prevEl: '.swiper-button-prev-{{ section.id }}',
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+      },
+    });
+  });
+</script>
+
 {% schema %}
 {
-  "name": "Featured Collection",
+  "name": "Featured Swiper",
   "settings": [
     {
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Curated Selection"
+      "default": "Season Highlights"
     },
     {
       "id": "collection",
@@ -96,15 +133,9 @@
       "id": "product_limit",
       "min": 4,
       "max": 12,
-      "step": 4,
+      "step": 1,
       "label": "Product Limit",
-      "default": 4
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_slider",
-      "label": "Enable Horizontal Slider",
-      "default": false
+      "default": 8
     },
     {
       "type": "checkbox",
@@ -115,7 +146,7 @@
   ],
   "presets": [
     {
-      "name": "Featured Collection"
+      "name": "Featured Swiper Collection"
     }
   ]
 }
