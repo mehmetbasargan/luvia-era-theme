@@ -119,6 +119,12 @@
     "featured_products_GFTLFG": {
       "type": "featured-products",
       "blocks": {
+        "product_mGNYed": {
+          "type": "product",
+          "settings": {
+            "product": "luna-high-waist-trousers"
+          }
+        },
         "product_dwqjCE": {
           "type": "product",
           "settings": {
@@ -136,26 +142,13 @@
           "settings": {
             "product": "aura-oversized-cashmere-coat"
           }
-        },
-        "product_Dng8JR": {
-          "type": "product",
-          "settings": {
-            "product": "aura-oversized-cashmere-coat"
-          }
-        },
-        "product_AjH9rL": {
-          "type": "product",
-          "settings": {
-            "product": "aura-oversized-cashmere-coat"
-          }
         }
       },
       "block_order": [
+        "product_mGNYed",
         "product_dwqjCE",
         "product_xXQfAy",
-        "product_P7bMT3",
-        "product_Dng8JR",
-        "product_AjH9rL"
+        "product_P7bMT3"
       ],
       "name": "Luvia Featured Collection",
       "settings": {
