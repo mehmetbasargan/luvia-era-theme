@@ -987,6 +987,38 @@ blockquote{
   top: 100%;
 }
 
+.right-10{
+  right: 2.5rem;
+}
+
+.top-\[10px\]{
+  top: 10px;
+}
+
+.right-\[-10px\]{
+  right: -10px;
+}
+
+.right-\[-20px\]{
+  right: -20px;
+}
+
+.top-\[-20px\]{
+  top: -20px;
+}
+
+.top-\[-210px\]{
+  top: -210px;
+}
+
+.top-\[-10px\]{
+  top: -10px;
+}
+
+.right-\[-23px\]{
+  right: -23px;
+}
+
 .z-0{
   z-index: 0;
 }

@@ -30,11 +30,11 @@
           </div>
           {% comment %} Social Media Icons {% endcomment %}
           <div class="hidden lg:flex">
-            <ul class="flex items-center gap-1">
+            <ul class="flex items-center gap-3">
               {%- for block in section.blocks -%}
                 {%- if block.type == 'social_icon' -%}
                   <li
-                    class="rounded-full bg-custombg hover:bg-secondary text-primary hover:!text-white transition-colors"
+                    class="rounded-full border border-line p-2 hover:bg-secondary hover:text-white transition-colors"
                     {{ block.shopify_attributes }}
                   >
                     <a
@@ -69,6 +69,7 @@
         </div>
       </div>
     </div>
+
     {% comment %} menu {% endcomment %}
     <div class="bg-custombg h-[70px] flex items-center relative">
       <div class="container flex lg:justify-between justify-end items-center w-full">
@@ -203,7 +204,7 @@
             {% endfor %}
           </ul>
         </nav>
-        {% comment %} mobile menu dddd {% endcomment %}
+        {% comment %} mobile menu {% endcomment %}
         <div class="flex items-center lg:gap-2 gap-8 justify-start w-full lg:w-auto">
           <div class="flex lg:hidden">
             <div class="flex lg:hidden">
@@ -331,7 +332,7 @@
           </div>
 
           {% comment %} account {% endcomment %}
-          <div class="order-first flex flex-row justify-start items-center gap-0 w-full lg:w-auto relative">
+          <div class="order-first flex flex-row justify-start items-center gap-3 w-full lg:w-auto relative">
             <a href="{{ routes.search_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
               {% render 'icon-search' %}
             </a>
@@ -339,7 +340,7 @@
               {% render 'icon-wishlist' %}
             </a>
             <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0 relative">
-              <div class="absolute top-[0px] right-0">
+              <div class="absolute top-[-10px] right-[-23px]">
                 <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
                   {{- cart.item_count -}}
                 </span>
@@ -393,13 +394,26 @@
   });
 </script>
 
-{% comment %}
-  <style>
-    .marquee-text-active {
-      top: 40px;
-    }
-  </style>
-{% endcomment %}
+<style>
+  /* Sosyal Medya Listesi için Özel Hover Kuralları */
+  #main-header li.rounded-full:hover {
+    background-color: var(--color-secondary) !important;
+  }
+
+  #main-header li.rounded-full:hover a,
+  #main-header li.rounded-full:hover svg {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    fill: none !important;
+  }
+
+  /* İkonların varsayılan rengi (Primary olsun) */
+  #main-header li.rounded-full a,
+  #main-header li.rounded-full svg {
+    color: var(--color-primary);
+    stroke: var(--color-primary);
+  }
+</style>
 
 {% schema %}
 {
