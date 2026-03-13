@@ -7,600 +7,673 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-
 {
-	"sections": {
-		"promo_video_banner_yyDpHy": {
-			"type": "promo-video-banner",
-			"disabled": true,
-			"name": "Promo Video Banner",
-			"settings": {
-				"video_file": "shopify://files/videos/video2.mp4",
-				"video_url": "",
-				"title": "The Art of Living",
-				"text": "Discover our new spring collection with cinematic pieces.",
-				"button_label": "Discover Now",
-				"button_link": "",
-				"overlay_opacity": 70
-			}
-		},
-		"hero_slider_yFYYic": {
-			"type": "hero-slider",
-			"blocks": {
-				"slide_UMRT6D": {
-					"type": "slide",
-					"settings": {
-						"image": "shopify://shop_images/3.jpg",
-						"title": "Elevate Your Lifestyle",
-						"sub_title": "Discover our curated collection of premium essentials designed for modern living. Quality meets elegance in every detail.",
-						"button_label": "Shop Collection",
-						"button_link": "shopify://collections/golden-hour-muse"
-					}
-				},
-				"slide_QGpjDa": {
-					"type": "slide",
-					"settings": {
-						"image": "shopify://shop_images/1.jpg",
-						"title": "The Art of Minimalism",
-						"sub_title": "Experience the perfect balance of form and function. Timeless designs crafted with sustainable materials for a better future.",
-						"button_label": "Explore Now",
-						"button_link": "shopify://collections/all"
-					}
-				},
-				"slide_n3HckD": {
-					"type": "slide",
-					"settings": {
-						"image": "shopify://shop_images/2.jpg",
-						"title": "New Season Arrivals",
-						"sub_title": "Be the first to own our latest drops. Limited edition pieces that define the trends of tomorrow. Available now online.",
-						"button_label": "Shop the Drop",
-						"button_link": "shopify://products/luna-satin-slip-dress"
-					}
-				}
-			},
-			"block_order": ["slide_UMRT6D", "slide_QGpjDa", "slide_n3HckD"],
-			"name": "Hero Slider",
-			"settings": {
-				"slider_effect": "fade",
-				"overlay_color": "#000000",
-				"overlay_opacity": 45,
-				"slider_height": "full",
-				"show_arrows": true,
-				"show_pagination": true
-			}
-		},
-		"collection_list_zHTtyQ": {
-			"type": "collection-list",
-			"blocks": {
-				"collection_EbQTGh": {
-					"type": "collection",
-					"settings": {
-						"collection": "golden-hour-muse"
-					}
-				},
-				"collection_YatzNq": {
-					"type": "collection",
-					"settings": {
-						"collection": "midnight-elegance"
-					}
-				},
-				"collection_YV6ztR": {
-					"type": "collection",
-					"settings": {
-						"collection": "silk-grace"
-					}
-				}
-			},
-			"block_order": ["collection_EbQTGh", "collection_YatzNq", "collection_YV6ztR"],
-			"name": "Collection List",
-			"settings": {
-				"collection_list_title": "Our Collections"
-			}
-		},
-		"rich_text_banner_m8j33U": {
-			"type": "rich-text-banner",
-			"name": "Statement Banner",
-			"settings": {
-				"bg_image": "shopify://shop_images/5-2.jpg",
-				"overlay_opacity": 40,
-				"title": "Sustainable Luxury",
-				"text": "<p>Discover our curated collection of timeless pieces.</p>",
-				"button_label": "Shop The Collection",
-				"button_link": ""
-			}
-		},
-		"featured_products_GFTLFG": {
-			"type": "featured-products",
-			"blocks": {
-				"product_mGNYed": {
-					"type": "product",
-					"settings": {
-						"product": "luna-high-waist-trousers"
-					}
-				},
-				"product_dwqjCE": {
-					"type": "product",
-					"settings": {
-						"product": "luna-satin-slip-dress"
-					}
-				},
-				"product_xXQfAy": {
-					"type": "product",
-					"settings": {
-						"product": "aura-silk-maxi-dress"
-					}
-				},
-				"product_P7bMT3": {
-					"type": "product",
-					"settings": {
-						"product": "aura-oversized-cashmere-coat"
-					}
-				}
-			},
-			"block_order": ["product_mGNYed", "product_dwqjCE", "product_xXQfAy", "product_P7bMT3"],
-			"name": "Luvia Featured Collection",
-			"settings": {
-				"section_title": "Editor's Picks",
-				"section_subtitle": "Luvia Era Capsule Collection",
-				"button_text": "All Products",
-				"button_url": "shopify://collections/all"
-			}
-		},
-		"image_with_text_multi_KVYKE3": {
-			"type": "image-with-text-multi",
-			"blocks": {
-				"image_block_B9EMda": {
-					"type": "image_block",
-					"settings": {
-						"image": "shopify://shop_images/p7-2.jpg",
-						"image_placement": "left",
-						"subheading": "Luvia Story",
-						"title": "Crafted with passion",
-						"text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
-						"button_label": "Discover More",
-						"button_link": "shopify://collections/golden-hour-muse"
-					}
-				},
-				"image_block_HaCNaT": {
-					"type": "image_block",
-					"settings": {
-						"image": "shopify://shop_images/p5-2.jpg",
-						"image_placement": "right",
-						"subheading": "Luvia Story",
-						"title": "Crafted with passion",
-						"text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
-						"button_label": "Discover More",
-						"button_link": "shopify://collections/silk-grace"
-					}
-				}
-			},
-			"block_order": ["image_block_B9EMda", "image_block_HaCNaT"],
-			"name": "Image with Text Multi",
-			"settings": {}
-		},
-		"rich_text_banner_yW67kH": {
-			"type": "rich-text-banner",
-			"name": "Statement Banner",
-			"settings": {
-				"bg_image": "shopify://shop_images/1.jpg",
-				"overlay_opacity": 50,
-				"title": "THE ART OF ELEGANCE",
-				"text": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>",
-				"button_label": "Shop The Collection",
-				"button_link": ""
-			}
-		},
-		"shoppable_image_pCJhcM": {
-			"type": "shoppable-image",
-			"blocks": {
-				"product_point_peFUVH": {
-					"type": "product_point",
-					"settings": {
-						"product": "aura-oversized-cashmere-coat",
-						"top_position": 37,
-						"left_position": 24
-					}
-				},
-				"product_point_cRcG8a": {
-					"type": "product_point",
-					"settings": {
-						"product": "luna-satin-slip-dress",
-						"top_position": 63,
-						"left_position": 48
-					}
-				},
-				"product_point_gXCrUc": {
-					"type": "product_point",
-					"settings": {
-						"product": "",
-						"top_position": 50,
-						"left_position": 50
-					}
-				}
-			},
-			"block_order": ["product_point_peFUVH", "product_point_cRcG8a", "product_point_gXCrUc"],
-			"name": "Shoppable Image",
-			"settings": {
-				"image": "shopify://shop_images/shoppable-image3.jpg",
-				"title": "Curated Collections",
-				"subtitle": "Touch the details and discover the artistry behind every piece."
-			}
-		},
-		"featured_blog_carousel_rfnxdi": {
-			"type": "featured-blog-carousel",
-			"name": "Featured Blog Carousel",
-			"settings": {
-				"title": "The Journal",
-				"subtitle": "Discover the world of Luvia Era",
-				"blog": "news",
-				"post_limit": 8,
-				"header_opacity": 40
-			}
-		},
-		"image_with_text_multi_LgxGEe": {
-			"type": "image-with-text-multi",
-			"blocks": {
-				"image_block_AjiDDT": {
-					"type": "image_block",
-					"settings": {
-						"image": "shopify://shop_images/p2-1.jpg",
-						"image_placement": "right",
-						"subheading": "Luvia Story",
-						"title": "Crafted with passion",
-						"text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
-						"button_label": "Discover More",
-						"button_link": ""
-					}
-				}
-			},
-			"block_order": ["image_block_AjiDDT"],
-			"name": "Image with Text Multi",
-			"settings": {}
-		},
-		"rich_text_banner_b3LtW4": {
-			"type": "rich-text-banner",
-			"name": "Statement Banner",
-			"settings": {
-				"bg_image": "shopify://shop_images/4-2.jpg",
-				"overlay_opacity": 60,
-				"title": "Our Craftsmanship",
-				"text": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>",
-				"button_label": "Shop The Collection",
-				"button_link": ""
-			}
-		},
-		"testimonial_CxWzTk": {
-			"type": "testimonial",
-			"blocks": {
-				"testimonial_P4nawc": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
-						"name": "John Doe"
-					}
-				},
-				"testimonial_mgkKpV": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "Ut eget neque ultricies neque semper porta iaculis tincidunt ante. Sed lorem dolor, dictum blandit metus quis, mollis interdum enim. Praesent venenatis",
-						"name": "Deneme Başlık"
-					}
-				},
-				"testimonial_kk6pic": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
-						"name": "Mehmet Başargan"
-					}
-				},
-				"testimonial_BBAPTn": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean",
-						"name": "Mehmet Başargan"
-					}
-				},
-				"testimonial_9GUqLM": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
-						"name": "Mehmet Başargan"
-					}
-				}
-			},
-			"block_order": [
-				"testimonial_P4nawc",
-				"testimonial_mgkKpV",
-				"testimonial_kk6pic",
-				"testimonial_BBAPTn",
-				"testimonial_9GUqLM"
-			],
-			"name": "Testimonial",
-			"settings": {
-				"slides_per_view": 3,
-				"testimonial_title": "Testimonials",
-				"background_color": "#ffffff"
-			}
-		},
-		"image_with_text_multi_ExeLfW": {
-			"type": "image-with-text-multi",
-			"blocks": {
-				"image_block_AMpELL": {
-					"type": "image_block",
-					"settings": {
-						"image": "shopify://shop_images/blg1-2.jpg",
-						"image_placement": "left",
-						"subheading": "Luvia Story",
-						"title": "Crafted with passion",
-						"text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
-						"button_label": "Discover More",
-						"button_link": ""
-					}
-				}
-			},
-			"block_order": ["image_block_AMpELL"],
-			"name": "Image with Text Multi",
-			"settings": {}
-		},
-		"featured_products_cdqPtt": {
-			"type": "featured-products",
-			"blocks": {
-				"product_n3AKbz": {
-					"type": "product",
-					"settings": {
-						"product": "aura-silk-maxi-dress"
-					}
-				},
-				"product_JiTTKw": {
-					"type": "product",
-					"settings": {
-						"product": "luna-satin-slip-dress"
-					}
-				},
-				"product_tbz7ha": {
-					"type": "product",
-					"settings": {
-						"product": "solstice-linen-blouse"
-					}
-				},
-				"product_4Kk44e": {
-					"type": "product",
-					"settings": {
-						"product": "luna-high-waist-trousers"
-					}
-				}
-			},
-			"block_order": ["product_n3AKbz", "product_JiTTKw", "product_tbz7ha", "product_4Kk44e"],
-			"name": "Featured Products (Selectable)",
-			"settings": {
-				"section_title": "New Arrivals",
-				"section_subtitle": "Handpicked for you",
-				"button_text": "View All",
-				"button_url": ""
-			}
-		},
-		"full_width_gallery_fnrnK7": {
-			"type": "full-width-gallery",
-			"blocks": {
-				"image_V3jcgj": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p2-2.jpg"
-					}
-				},
-				"image_WwqUFN": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p3-1.jpg"
-					}
-				},
-				"image_Uj9bhJ": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p2-3.jpg"
-					}
-				},
-				"image_4Cyb9H": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p7-2.jpg"
-					}
-				},
-				"image_4BEeG9": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p5-3.jpg"
-					}
-				},
-				"image_XEdfBj": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p6-1.jpg"
-					}
-				},
-				"image_FfPJMh": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p4-3.jpg"
-					}
-				},
-				"image_BMkcjB": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p1.jpg"
-					}
-				}
-			},
-			"block_order": [
-				"image_V3jcgj",
-				"image_WwqUFN",
-				"image_Uj9bhJ",
-				"image_4Cyb9H",
-				"image_4BEeG9",
-				"image_XEdfBj",
-				"image_FfPJMh",
-				"image_BMkcjB"
-			],
-			"name": "Luvia Full Gallery",
-			"settings": {
-				"title": "Follow Era"
-			}
-		},
-		"featured_blog_carousel_qhr9Th": {
-			"type": "featured-blog-carousel",
-			"name": "Featured Blog Carousel",
-			"settings": {
-				"title": "Maintenance Guide",
-				"subtitle": "Discover the world of Luvia Era",
-				"blog": "maintenance-guide",
-				"post_limit": 6,
-				"header_opacity": 100
-			}
-		},
-		"shoppable_image_PQrjBw": {
-			"type": "shoppable-image",
-			"blocks": {
-				"product_point_HAJWFA": {
-					"type": "product_point",
-					"settings": {
-						"product": "solstice-linen-blouse",
-						"top_position": 57,
-						"left_position": 68
-					}
-				},
-				"product_point_PRXXM9": {
-					"type": "product_point",
-					"settings": {
-						"product": "ethereal-knit-cardigan",
-						"top_position": 75,
-						"left_position": 51
-					}
-				}
-			},
-			"block_order": ["product_point_HAJWFA", "product_point_PRXXM9"],
-			"name": "Shoppable Image",
-			"settings": {
-				"image": "shopify://shop_images/5-2.jpg",
-				"title": "Curated Collections",
-				"subtitle": "Touch the details and discover the artistry behind every piece."
-			}
-		},
-		"testimonial_MnhfEw": {
-			"type": "testimonial",
-			"blocks": {
-				"testimonial_9cKMAY": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
-						"name": "John Doe"
-					}
-				},
-				"testimonial_YTDEqd": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
-						"name": "John Doe"
-					}
-				},
-				"testimonial_4tbCCF": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
-						"name": "John Doe"
-					}
-				},
-				"testimonial_3YRVpa": {
-					"type": "testimonial",
-					"settings": {
-						"testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
-						"name": "John Doe"
-					}
-				}
-			},
-			"block_order": ["testimonial_9cKMAY", "testimonial_YTDEqd", "testimonial_4tbCCF", "testimonial_3YRVpa"],
-			"name": "Testimonial",
-			"settings": {
-				"slides_per_view": 3,
-				"testimonial_title": "Testimonials",
-				"background_color": "#ffffff"
-			}
-		},
-		"newsletter_banner_fKkMaW": {
-			"type": "newsletter-banner",
-			"name": "Newsletter Banner",
-			"settings": {
-				"bg_image": "shopify://shop_images/pageheader3.jpg",
-				"overlay_opacity": 70,
-				"title": "Luvia Privileges",
-				"subtext": "Be the first to know about new collections and exclusive events."
-			}
-		},
-		"full_width_gallery_JLkbMT": {
-			"type": "full-width-gallery",
-			"blocks": {
-				"image_dayYKD": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p7-2.jpg"
-					}
-				},
-				"image_43jFER": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p5-1.jpg"
-					}
-				},
-				"image_Gk8CkM": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p3-2.jpg"
-					}
-				},
-				"image_zTWijT": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p2.jpg"
-					}
-				}
-			},
-			"block_order": ["image_dayYKD", "image_43jFER", "image_Gk8CkM", "image_zTWijT"],
-			"name": "Luvia Full Gallery",
-			"settings": {
-				"title": "Follow Era"
-			}
-		},
-		"featured_collection_KcCNPk": {
-			"type": "featured-products-slider",
-			"name": "Featured Swiper Collection",
-			"settings": {
-				"title": "Season Highlights",
-				"collection": "silk-grace",
-				"product_limit": 6,
-				"view_all": true
-			}
-		}
-	},
-	"order": [
-		"promo_video_banner_yyDpHy",
-		"hero_slider_yFYYic",
-		"collection_list_zHTtyQ",
-		"rich_text_banner_m8j33U",
-		"featured_products_GFTLFG",
-		"image_with_text_multi_KVYKE3",
-		"rich_text_banner_yW67kH",
-		"shoppable_image_pCJhcM",
-		"featured_blog_carousel_rfnxdi",
-		"image_with_text_multi_LgxGEe",
-		"rich_text_banner_b3LtW4",
-		"testimonial_CxWzTk",
-		"image_with_text_multi_ExeLfW",
-		"featured_products_cdqPtt",
-		"full_width_gallery_fnrnK7",
-		"featured_blog_carousel_qhr9Th",
-		"shoppable_image_PQrjBw",
-		"testimonial_MnhfEw",
-		"newsletter_banner_fKkMaW",
-		"full_width_gallery_JLkbMT",
-		"featured_collection_KcCNPk"
-	]
+  "sections": {
+    "promo_video_banner_yyDpHy": {
+      "type": "promo-video-banner",
+      "disabled": true,
+      "name": "Promo Video Banner",
+      "settings": {
+        "video_file": "shopify://files/videos/video2.mp4",
+        "video_url": "",
+        "title": "The Art of Living",
+        "text": "Discover our new spring collection with cinematic pieces.",
+        "button_label": "Discover Now",
+        "button_link": "",
+        "overlay_opacity": 70
+      }
+    },
+    "hero_slider_yFYYic": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide_UMRT6D": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3.jpg",
+            "title": "Elevate Your Lifestyle",
+            "sub_title": "Discover our curated collection of premium essentials designed for modern living. Quality meets elegance in every detail.",
+            "button_label": "Shop Collection",
+            "button_link": "shopify://collections/golden-hour-muse"
+          }
+        },
+        "slide_QGpjDa": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/1.jpg",
+            "title": "The Art of Minimalism",
+            "sub_title": "Experience the perfect balance of form and function. Timeless designs crafted with sustainable materials for a better future.",
+            "button_label": "Explore Now",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "slide_n3HckD": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/2.jpg",
+            "title": "New Season Arrivals",
+            "sub_title": "Be the first to own our latest drops. Limited edition pieces that define the trends of tomorrow. Available now online.",
+            "button_label": "Shop the Drop",
+            "button_link": "shopify://products/luna-satin-slip-dress"
+          }
+        }
+      },
+      "block_order": [
+        "slide_UMRT6D",
+        "slide_QGpjDa",
+        "slide_n3HckD"
+      ],
+      "name": "Hero Slider",
+      "settings": {
+        "slider_effect": "fade",
+        "overlay_color": "#000000",
+        "overlay_opacity": 45,
+        "slider_height": "full",
+        "show_arrows": true,
+        "show_pagination": true
+      }
+    },
+    "collection_list_zHTtyQ": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_EbQTGh": {
+          "type": "collection",
+          "settings": {
+            "collection": "golden-hour-muse"
+          }
+        },
+        "collection_YatzNq": {
+          "type": "collection",
+          "settings": {
+            "collection": "midnight-elegance"
+          }
+        },
+        "collection_YV6ztR": {
+          "type": "collection",
+          "settings": {
+            "collection": "silk-grace"
+          }
+        }
+      },
+      "block_order": [
+        "collection_EbQTGh",
+        "collection_YatzNq",
+        "collection_YV6ztR"
+      ],
+      "name": "Collection List",
+      "settings": {
+        "collection_list_title": "Our Collections"
+      }
+    },
+    "rich_text_banner_m8j33U": {
+      "type": "rich-text-banner",
+      "name": "Statement Banner",
+      "settings": {
+        "bg_image": "shopify://shop_images/5-2.jpg",
+        "overlay_opacity": 40,
+        "title": "Sustainable Luxury",
+        "text": "<p>Discover our curated collection of timeless pieces.</p>",
+        "button_label": "Shop The Collection",
+        "button_link": ""
+      }
+    },
+    "featured_products_GFTLFG": {
+      "type": "featured-products",
+      "blocks": {
+        "product_mGNYed": {
+          "type": "product",
+          "settings": {
+            "product": "luna-high-waist-trousers"
+          }
+        },
+        "product_dwqjCE": {
+          "type": "product",
+          "settings": {
+            "product": "luna-satin-slip-dress"
+          }
+        },
+        "product_xXQfAy": {
+          "type": "product",
+          "settings": {
+            "product": "aura-silk-maxi-dress"
+          }
+        },
+        "product_P7bMT3": {
+          "type": "product",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat"
+          }
+        }
+      },
+      "block_order": [
+        "product_mGNYed",
+        "product_dwqjCE",
+        "product_xXQfAy",
+        "product_P7bMT3"
+      ],
+      "name": "Luvia Featured Collection",
+      "settings": {
+        "section_title": "Editor's Picks",
+        "section_subtitle": "Luvia Era Capsule Collection",
+        "button_text": "All Products",
+        "button_url": "shopify://collections/all"
+      }
+    },
+    "image_with_text_multi_KVYKE3": {
+      "type": "image-with-text-multi",
+      "blocks": {
+        "image_block_B9EMda": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/p7-2.jpg",
+            "image_placement": "left",
+            "subheading": "Luvia Story",
+            "title": "Crafted with passion",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": "shopify://collections/golden-hour-muse"
+          }
+        },
+        "image_block_HaCNaT": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/p5-2.jpg",
+            "image_placement": "right",
+            "subheading": "Luvia Story",
+            "title": "Crafted with passion",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": "shopify://collections/silk-grace"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_B9EMda",
+        "image_block_HaCNaT"
+      ],
+      "name": "Image with Text Multi",
+      "settings": {}
+    },
+    "rich_text_banner_yW67kH": {
+      "type": "rich-text-banner",
+      "name": "Statement Banner",
+      "settings": {
+        "bg_image": "shopify://shop_images/1.jpg",
+        "overlay_opacity": 50,
+        "title": "THE ART OF ELEGANCE",
+        "text": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>",
+        "button_label": "Shop The Collection",
+        "button_link": ""
+      }
+    },
+    "shoppable_image_pCJhcM": {
+      "type": "shoppable-image",
+      "blocks": {
+        "product_point_peFUVH": {
+          "type": "product_point",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat",
+            "top_position": 37,
+            "left_position": 24
+          }
+        },
+        "product_point_cRcG8a": {
+          "type": "product_point",
+          "settings": {
+            "product": "luna-satin-slip-dress",
+            "top_position": 63,
+            "left_position": 48
+          }
+        },
+        "product_point_gXCrUc": {
+          "type": "product_point",
+          "settings": {
+            "product": "",
+            "top_position": 50,
+            "left_position": 50
+          }
+        }
+      },
+      "block_order": [
+        "product_point_peFUVH",
+        "product_point_cRcG8a",
+        "product_point_gXCrUc"
+      ],
+      "name": "Shoppable Image",
+      "settings": {
+        "image": "shopify://shop_images/shoppable-image3.jpg",
+        "title": "Curated Collections",
+        "subtitle": "Touch the details and discover the artistry behind every piece."
+      }
+    },
+    "featured_blog_carousel_rfnxdi": {
+      "type": "featured-blog-carousel",
+      "name": "Featured Blog Carousel",
+      "settings": {
+        "title": "The Journal",
+        "subtitle": "Discover the world of Luvia Era",
+        "blog": "news",
+        "post_limit": 8,
+        "header_opacity": 40
+      }
+    },
+    "image_with_text_multi_LgxGEe": {
+      "type": "image-with-text-multi",
+      "blocks": {
+        "image_block_AjiDDT": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/p2-1.jpg",
+            "image_placement": "right",
+            "subheading": "Luvia Story",
+            "title": "Crafted with passion",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_block_AjiDDT"
+      ],
+      "name": "Image with Text Multi",
+      "settings": {}
+    },
+    "rich_text_banner_b3LtW4": {
+      "type": "rich-text-banner",
+      "name": "Statement Banner",
+      "settings": {
+        "bg_image": "shopify://shop_images/4-2.jpg",
+        "overlay_opacity": 60,
+        "title": "Our Craftsmanship",
+        "text": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>",
+        "button_label": "Shop The Collection",
+        "button_link": ""
+      }
+    },
+    "testimonial_CxWzTk": {
+      "type": "testimonial",
+      "blocks": {
+        "testimonial_P4nawc": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_mgkKpV": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Ut eget neque ultricies neque semper porta iaculis tincidunt ante. Sed lorem dolor, dictum blandit metus quis, mollis interdum enim. Praesent venenatis",
+            "name": "Deneme Başlık"
+          }
+        },
+        "testimonial_kk6pic": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
+            "name": "Mehmet Başargan"
+          }
+        },
+        "testimonial_BBAPTn": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean",
+            "name": "Mehmet Başargan"
+          }
+        },
+        "testimonial_9GUqLM": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
+            "name": "Mehmet Başargan"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_P4nawc",
+        "testimonial_mgkKpV",
+        "testimonial_kk6pic",
+        "testimonial_BBAPTn",
+        "testimonial_9GUqLM"
+      ],
+      "name": "Testimonial",
+      "settings": {
+        "slides_per_view": 3,
+        "testimonial_title": "Testimonials",
+        "background_color": "#ffffff"
+      }
+    },
+    "image_with_text_multi_ExeLfW": {
+      "type": "image-with-text-multi",
+      "blocks": {
+        "image_block_AMpELL": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/blg1-2.jpg",
+            "image_placement": "left",
+            "subheading": "Luvia Story",
+            "title": "Crafted with passion",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_block_AMpELL"
+      ],
+      "name": "Image with Text Multi",
+      "settings": {}
+    },
+    "featured_products_cdqPtt": {
+      "type": "featured-products",
+      "blocks": {
+        "product_n3AKbz": {
+          "type": "product",
+          "settings": {
+            "product": "aura-silk-maxi-dress"
+          }
+        },
+        "product_JiTTKw": {
+          "type": "product",
+          "settings": {
+            "product": "luna-satin-slip-dress"
+          }
+        },
+        "product_tbz7ha": {
+          "type": "product",
+          "settings": {
+            "product": "solstice-linen-blouse"
+          }
+        },
+        "product_4Kk44e": {
+          "type": "product",
+          "settings": {
+            "product": "luna-high-waist-trousers"
+          }
+        }
+      },
+      "block_order": [
+        "product_n3AKbz",
+        "product_JiTTKw",
+        "product_tbz7ha",
+        "product_4Kk44e"
+      ],
+      "name": "Featured Products (Selectable)",
+      "settings": {
+        "section_title": "New Arrivals",
+        "section_subtitle": "Handpicked for you",
+        "button_text": "View All",
+        "button_url": ""
+      }
+    },
+    "full_width_gallery_fnrnK7": {
+      "type": "full-width-gallery",
+      "blocks": {
+        "image_V3jcgj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p2-2.jpg"
+          }
+        },
+        "image_WwqUFN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p3-1.jpg"
+          }
+        },
+        "image_Uj9bhJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p2-3.jpg"
+          }
+        },
+        "image_4Cyb9H": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p7-2.jpg"
+          }
+        },
+        "image_4BEeG9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p5-3.jpg"
+          }
+        },
+        "image_XEdfBj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p6-1.jpg"
+          }
+        },
+        "image_FfPJMh": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p4-3.jpg"
+          }
+        },
+        "image_BMkcjB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p1.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_V3jcgj",
+        "image_WwqUFN",
+        "image_Uj9bhJ",
+        "image_4Cyb9H",
+        "image_4BEeG9",
+        "image_XEdfBj",
+        "image_FfPJMh",
+        "image_BMkcjB"
+      ],
+      "name": "Luvia Full Gallery",
+      "settings": {
+        "title": "Follow Era"
+      }
+    },
+    "featured_blog_carousel_qhr9Th": {
+      "type": "featured-blog-carousel",
+      "name": "Featured Blog Carousel",
+      "settings": {
+        "title": "Maintenance Guide",
+        "subtitle": "Discover the world of Luvia Era",
+        "blog": "maintenance-guide",
+        "post_limit": 6,
+        "header_opacity": 100
+      }
+    },
+    "shoppable_image_PQrjBw": {
+      "type": "shoppable-image",
+      "blocks": {
+        "product_point_HAJWFA": {
+          "type": "product_point",
+          "settings": {
+            "product": "solstice-linen-blouse",
+            "top_position": 57,
+            "left_position": 68
+          }
+        },
+        "product_point_PRXXM9": {
+          "type": "product_point",
+          "settings": {
+            "product": "ethereal-knit-cardigan",
+            "top_position": 75,
+            "left_position": 51
+          }
+        }
+      },
+      "block_order": [
+        "product_point_HAJWFA",
+        "product_point_PRXXM9"
+      ],
+      "name": "Shoppable Image",
+      "settings": {
+        "image": "shopify://shop_images/5-2.jpg",
+        "title": "Curated Collections",
+        "subtitle": "Touch the details and discover the artistry behind every piece."
+      }
+    },
+    "testimonial_MnhfEw": {
+      "type": "testimonial",
+      "blocks": {
+        "testimonial_9cKMAY": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_YTDEqd": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_4tbCCF": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_3YRVpa": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
+            "name": "John Doe"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_9cKMAY",
+        "testimonial_YTDEqd",
+        "testimonial_4tbCCF",
+        "testimonial_3YRVpa"
+      ],
+      "name": "Testimonial",
+      "settings": {
+        "slides_per_view": 3,
+        "testimonial_title": "Testimonials",
+        "background_color": "#ffffff"
+      }
+    },
+    "newsletter_banner_fKkMaW": {
+      "type": "newsletter-banner",
+      "name": "Newsletter Banner",
+      "settings": {
+        "bg_image": "shopify://shop_images/pageheader3.jpg",
+        "overlay_opacity": 70,
+        "title": "Luvia Privileges",
+        "subtext": "Be the first to know about new collections and exclusive events."
+      }
+    },
+    "full_width_gallery_JLkbMT": {
+      "type": "full-width-gallery",
+      "blocks": {
+        "image_dayYKD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p7-2.jpg"
+          }
+        },
+        "image_43jFER": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p5-1.jpg"
+          }
+        },
+        "image_Gk8CkM": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p3-2.jpg"
+          }
+        },
+        "image_zTWijT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_dayYKD",
+        "image_43jFER",
+        "image_Gk8CkM",
+        "image_zTWijT"
+      ],
+      "name": "Luvia Full Gallery",
+      "settings": {
+        "title": "Follow Era"
+      }
+    },
+    "featured_products_slider_zCcDxw": {
+      "type": "featured-products-slider",
+      "blocks": {
+        "product_kdUEF4": {
+          "type": "product",
+          "settings": {
+            "product": "luna-satin-slip-dress"
+          }
+        },
+        "product_D3pcEa": {
+          "type": "product",
+          "settings": {
+            "product": ""
+          }
+        },
+        "product_PANyAe": {
+          "type": "product",
+          "settings": {
+            "product": ""
+          }
+        },
+        "product_X6ddXJ": {
+          "type": "product",
+          "settings": {
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_kdUEF4",
+        "product_D3pcEa",
+        "product_PANyAe",
+        "product_X6ddXJ"
+      ],
+      "name": "Featured Products Slider",
+      "settings": {
+        "section_title": "Featured Selection",
+        "section_subtitle": "Handpicked for you",
+        "button_text": "View All",
+        "button_url": ""
+      }
+    }
+  },
+  "order": [
+    "promo_video_banner_yyDpHy",
+    "hero_slider_yFYYic",
+    "collection_list_zHTtyQ",
+    "rich_text_banner_m8j33U",
+    "featured_products_GFTLFG",
+    "image_with_text_multi_KVYKE3",
+    "rich_text_banner_yW67kH",
+    "shoppable_image_pCJhcM",
+    "featured_blog_carousel_rfnxdi",
+    "image_with_text_multi_LgxGEe",
+    "rich_text_banner_b3LtW4",
+    "testimonial_CxWzTk",
+    "image_with_text_multi_ExeLfW",
+    "featured_products_cdqPtt",
+    "full_width_gallery_fnrnK7",
+    "featured_blog_carousel_qhr9Th",
+    "shoppable_image_PQrjBw",
+    "testimonial_MnhfEw",
+    "newsletter_banner_fKkMaW",
+    "full_width_gallery_JLkbMT",
+    "featured_products_slider_zCcDxw"
+  ]
 }
