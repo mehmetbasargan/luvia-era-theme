@@ -50,6 +50,10 @@
     {%- assign heading_font = settings.heading_font -%}
     {%- assign body_font = settings.body_font -%}
 
+    <!-- Asset CSS - Optimized for Performance -->
+    {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+
     <style>
       {{ heading_font | font_face: font_display: 'swap' }}
       {{ body_font | font_face: font_display: 'swap' }}
@@ -113,23 +117,6 @@
     </style>
 
     {{ content_for_header }}
-
-    <!-- Asset CSS - Optimized for Performance -->
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
-    {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
-
-    <!-- Minimal Critical CSS for FCP -->
-    <style>
-      .site-header {
-        background-color: var(--color-custombg);
-      }
-      .text-primary {
-        color: var(--color-primary) !important;
-      }
-      .bg-custombg {
-        background-color: var(--color-custombg) !important;
-      }
-    </style>
 
     <!-- Preload Critical Resources -->
     {% if settings.favicon %}
