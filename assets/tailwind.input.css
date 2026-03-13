@@ -5,18 +5,15 @@
 @tailwind utilities;
 
 @layer base {
-	/* :root {
+	/* Theme Renk Değişkenleri - Settings'ten */
+	:root {
 		--color-primary: #3b443c;
 		--color-secondary: #b2ac88;
 		--color-custombg: #f9f9f9;
 		--color-line: #e5e7eb;
 		--color-white: #ffffff;
 		--color-black: #000000;
-		--color-bgtransparent: rgba(249, 249, 249, 0.3);
-
-		--font-heading: 'Josefin Sans', sans-serif;
-		--font-body: 'Inter', sans-serif;
-	} */
+	}
 
 	/* account */
 	shopify-account {
@@ -194,6 +191,21 @@
 	}
 
 	#LuviaLightbox button:hover {
+		color: var(--color-white) !important;
+	}
+
+	/* Product Card Button Specific */
+	.product-card button {
+		color: var(--color-white) !important;
+		background-color: var(--color-primary) !important;
+	}
+
+	.product-card button:hover {
+		color: var(--color-white) !important;
+		background-color: var(--color-secondary) !important;
+	}
+
+	.product-card button span {
 		color: var(--color-white) !important;
 	}
 }

@@ -30,93 +30,61 @@
       {{ body_font | font_face: font_display: 'swap' }}
 
       :root {
-        /* 1. Global Yazı Tipleri */
         --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
         --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
 
-        /* 2. ANA RENK DEĞİŞKENLERİ (Settings'ten gelenler) */
+        /* Global Değişkenler */
         --color-primary: {{ settings.primary_color | default: '#3b443c' }};
         --color-secondary: {{ settings.secondary_color | default: '#b2ac88' }};
         --color-custombg: {{ settings.custom_bg_color | default: '#f9f9f9' }};
         --color-line: {{ settings.line_color | default: '#e5e7eb' }};
-        --color-white: #ffffff;
-        --color-black: #000000;
       }
 
-      /* 3. TAILWIND SINIFLARINI HAYATA DÖNDÜRME */
-      /* Şemaları sildiğimiz için bu sınıfları manuel eşliyoruz */
+      /* 1. TAILWIND İLE ÇAKIŞMAYAN ÖZEL SINIFLAR */
+      /* Sadece bizim özel sınıflarımıza !important veriyoruz */
       .bg-custombg { background-color: var(--color-custombg) !important; }
       .text-primary { color: var(--color-primary) !important; }
       .text-secondary { color: var(--color-secondary) !important; }
       .border-line { border-color: var(--color-line) !important; }
       .bg-secondary { background-color: var(--color-secondary) !important; }
 
-      /* 4. Genel Element Stilleri */
+      /* 2. GENEL ELEMENTLER */
       body {
         background-color: var(--color-custombg);
         color: var(--color-primary);
         font-family: var(--font-body);
         margin: 0;
-        display: block !important;
-        opacity: 1 !important;
       }
 
       h1, h2, h3, h4, h5, h6 {
         font-family: var(--font-heading);
-        color: var(--color-primary); /* Başlıklar varsayılan ana renk */
+        color: var(--color-primary);
       }
 
-      /* İkonlar için Evrensel Kural */
+      /* 3. İKONLAR (Sadece varsayılanı belirle, !important kullanma ki değişebilsin) */
       svg {
         stroke: currentColor;
         fill: none;
         transition: all 0.3s ease;
       }
 
-      /* Aktif Link ve Hover Global Kural */
-      .active-link, a:hover, button:hover {
+      /* 4. WISHLIST AKTİF DURUMU */
+      /* Sınıf isimlerini tam eşleyelim: hem 'active' hem 'wishlist-active' */
+      .custom-wishlist-btn.active svg,
+      .custom-wishlist-btn.wishlist-active svg {
+        fill: var(--color-primary) !important;
+        stroke: var(--color-primary) !important;
+      }
+
+      /* 5. HOVER & ACTIVE LINK */
+      /* Tailwind sınıflarını ezmemesi için daha spesifik seçici kullanalım */
+      #main-header .active-link,
+      #main-header a:hover {
         color: var(--color-secondary) !important;
       }
 
-      /* Wishlist Aktifleşince Kalbin İçini Doldur */
-      .custom-wishlist-btn.wishlist-active svg,
-      .custom-wishlist-btn.active svg {
-        fill: var(--color-primary) !important;
-        stroke: var(--color-primary) !important;
-        color: var(--color-primary) !important;
-      }
-
-      /* Wishlist Aktif Değilse Kalp Boş */
-      .custom-wishlist-btn:not(.wishlist-active):not(.active) svg {
-        fill: none !important;
-        stroke: var(--color-primary) !important;
-        color: var(--color-primary) !important;
-      }
-
-      /* Hover yapınca hafif bir tepki */
-      .custom-wishlist-btn:hover svg {
-        transform: scale(1.1);
-      }
-
-      /* Accessibility Focus States */
-      button:focus-visible,
-      a:focus-visible,
-      input:focus-visible,
-      select:focus-visible,
-      textarea:focus-visible {
-        outline: 2px solid var(--color-primary);
-        outline-offset: 2px;
-      }
-
-      /* Better Contrast for Interactive Elements */
-      .btn, button, a {
-        color: var(--color-primary) !important;
-        min-height: 44px;
-        min-width: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
+      /* Tailwind text-white sınıfının çalışması için koruma */
+      .text-white { color: #ffffff !important; }
     </style>
 
     {{ content_for_header }}
