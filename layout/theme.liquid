@@ -114,8 +114,8 @@
 
     {{ content_for_header }}
 
-    <!-- Asset CSS - Optimized Loading -->
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag: preload: true }}
+    <!-- Asset CSS - Optimized for Performance -->
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
 
     <!-- Preload Critical Resources -->
@@ -157,6 +157,18 @@
         cartAdded: {{ 'products.product.add_to_cart' | t | json }}
       };
     </script>
-    <script src="{{ 'luvia-global.js' | asset_url }}" defer="defer"></script>
+
+    <!-- Reduce TBT - Lazy Load Non-Critical JS -->
+    <script>
+      // Load non-critical scripts after page load
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const luviaScript = document.createElement('script');
+          luviaScript.src = '{{ 'luvia-global.js' | asset_url }}';
+          luviaScript.defer = true;
+          document.body.appendChild(luviaScript);
+        }, 100);
+      });
+    </script>
   </body>
 </html>
