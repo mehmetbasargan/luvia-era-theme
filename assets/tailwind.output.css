@@ -767,18 +767,6 @@ blockquote{
 
 /* Featured Products Button Specific */
 
-.featured-add-to-cart {
-  transition: all 300ms ease;
-}
-
-.featured-add-to-cart:hover {
-  background-color: var(--color-secondary) !important;
-}
-
-.featured-add-to-cart span {
-  color: var(--color-white) !important;
-}
-
 /* Full Width Gallery Button Specific */
 
 .luvia-gallery-item span {
@@ -947,6 +935,10 @@ blockquote{
   right: 2rem;
 }
 
+.right-\[-23px\]{
+  right: -23px;
+}
+
 .top-0{
   top: 0px;
 }
@@ -979,44 +971,16 @@ blockquote{
   top: 2rem;
 }
 
+.top-\[-10px\]{
+  top: -10px;
+}
+
 .top-\[0px\]{
   top: 0px;
 }
 
 .top-full{
   top: 100%;
-}
-
-.right-10{
-  right: 2.5rem;
-}
-
-.top-\[10px\]{
-  top: 10px;
-}
-
-.right-\[-10px\]{
-  right: -10px;
-}
-
-.right-\[-20px\]{
-  right: -20px;
-}
-
-.top-\[-20px\]{
-  top: -20px;
-}
-
-.top-\[-210px\]{
-  top: -210px;
-}
-
-.top-\[-10px\]{
-  top: -10px;
-}
-
-.right-\[-23px\]{
-  right: -23px;
 }
 
 .z-0{
@@ -1228,6 +1192,22 @@ blockquote{
   margin-top: auto;
 }
 
+.mt-12{
+  margin-top: 3rem;
+}
+
+.mt-14{
+  margin-top: 3.5rem;
+}
+
+.mt-44{
+  margin-top: 11rem;
+}
+
+.mt-28{
+  margin-top: 7rem;
+}
+
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
@@ -1290,16 +1270,16 @@ blockquote{
   aspect-ratio: 3/4;
 }
 
+.aspect-\[4\/5\]{
+  aspect-ratio: 4/5;
+}
+
 .aspect-square{
   aspect-ratio: 1 / 1;
 }
 
 .aspect-video{
   aspect-ratio: 16 / 9;
-}
-
-.aspect-\[4\/5\]{
-  aspect-ratio: 4/5;
 }
 
 .size-8{
@@ -1317,6 +1297,10 @@ blockquote{
 
 .h-1{
   height: 0.25rem;
+}
+
+.h-1\/2{
+  height: 50%;
 }
 
 .h-12{
@@ -1387,10 +1371,6 @@ blockquote{
   height: 20px;
 }
 
-.h-\[250px\]{
-  height: 250px;
-}
-
 .h-\[25px\]{
   height: 25px;
 }
@@ -1447,14 +1427,6 @@ blockquote{
   height: 100%;
 }
 
-.h-1\/2{
-  height: 50%;
-}
-
-.h-\[400px\]{
-  height: 400px;
-}
-
 .max-h-\[80vh\]{
   max-height: 80vh;
 }
@@ -1471,12 +1443,12 @@ blockquote{
   min-height: 36px;
 }
 
-.min-h-\[40px\]{
-  min-height: 40px;
-}
-
 .min-h-\[400px\]{
   min-height: 400px;
+}
+
+.min-h-\[40px\]{
+  min-height: 40px;
 }
 
 .\!w-\[50px\]{
@@ -2181,11 +2153,6 @@ blockquote{
   background-color: var(--color-white);
 }
 
-.bg-\[\#f4f4f4\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(244 244 244 / var(--tw-bg-opacity, 1));
-}
-
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -2435,6 +2402,10 @@ blockquote{
   padding-top: 2rem;
 }
 
+.pt-9{
+  padding-top: 2.25rem;
+}
+
 .text-left{
   text-align: left;
 }
@@ -2610,16 +2581,16 @@ blockquote{
   letter-spacing: -0.05em;
 }
 
+.tracking-wide{
+  letter-spacing: 0.025em;
+}
+
 .tracking-wider{
   letter-spacing: 0.05em;
 }
 
 .tracking-widest{
   letter-spacing: 0.1em;
-}
-
-.tracking-wide{
-  letter-spacing: 0.025em;
 }
 
 .\!text-primary{
@@ -2701,6 +2672,10 @@ blockquote{
   opacity: 0;
 }
 
+.opacity-10{
+  opacity: 0.1;
+}
+
 .opacity-100{
   opacity: 1;
 }
@@ -2727,10 +2702,6 @@ blockquote{
 
 .opacity-80{
   opacity: 0.8;
-}
-
-.opacity-10{
-  opacity: 0.1;
 }
 
 .shadow-2xl{
@@ -2766,10 +2737,6 @@ blockquote{
 .outline-none{
   outline: 2px solid transparent;
   outline-offset: 2px;
-}
-
-.outline{
-  outline-style: solid;
 }
 
 .ring-black{
@@ -3083,13 +3050,13 @@ blockquote{
   display: block;
 }
 
-.group:hover .group-hover\:translate-y-0{
-  --tw-translate-y: 0px;
+.group:hover .group-hover\:translate-x-1{
+  --tw-translate-x: 0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.group:hover .group-hover\:translate-x-1{
-  --tw-translate-x: 0.25rem;
+.group:hover .group-hover\:translate-y-0{
+  --tw-translate-y: 0px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -3216,12 +3183,12 @@ blockquote{
     height: 100%;
   }
 
-  .md\:h-\[500px\]{
-    height: 500px;
-  }
-
   .md\:min-h-\[500px\]{
     min-height: 500px;
+  }
+
+  .md\:w-1\/2{
+    width: 50%;
   }
 
   .md\:w-1\/4{
@@ -3268,10 +3235,6 @@ blockquote{
     width: 100%;
   }
 
-  .md\:w-1\/2{
-    width: 50%;
-  }
-
   .md\:max-w-md{
     max-width: 28rem;
   }
@@ -3316,16 +3279,21 @@ blockquote{
     justify-content: space-around;
   }
 
-  .md\:gap-6{
-    gap: 1.5rem;
-  }
-
   .md\:gap-24{
     gap: 6rem;
   }
 
+  .md\:gap-6{
+    gap: 1.5rem;
+  }
+
   .md\:p-10{
     padding: 2.5rem;
+  }
+
+  .md\:px-0{
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .md\:px-10{
@@ -3353,11 +3321,6 @@ blockquote{
     padding-bottom: 8rem;
   }
 
-  .md\:px-0{
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
   .md\:text-5xl{
     font-size: 3rem;
     line-height: 1;
@@ -3365,10 +3328,6 @@ blockquote{
 
   .md\:text-\[11px\]{
     font-size: 11px;
-  }
-
-  .md\:text-\[13px\]{
-    font-size: 13px;
   }
 
   .md\:text-xl{
@@ -3396,10 +3355,6 @@ blockquote{
 
   .lg\:h-\[150px\]{
     height: 150px;
-  }
-
-  .lg\:h-\[200px\]{
-    height: 200px;
   }
 
   .lg\:h-\[800px\]{
