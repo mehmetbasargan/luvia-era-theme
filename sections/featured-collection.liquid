@@ -1,0 +1,122 @@
+<section id="FeaturedCollection-{{ section.id }}" class="bg-custombg py-16 md:py-24">
+  <div class="container mx-auto px-4">
+    {% comment %} Başlık Alanı {% endcomment %}
+    <div class="flex justify-between items-end mb-12">
+      <div class="space-y-2">
+        <h4 class="text-primary uppercase font-light tracking-[0.3em]">
+          {{ section.settings.title | default: 'Featured Collection' }}
+        </h4>
+        <div class="h-[1px] w-12 bg-secondary"></div>
+      </div>
+
+      {% if section.settings.view_all %}
+        <a
+          href="{{ section.settings.collection.url }}"
+          class="text-primary text-[11px] uppercase tracking-[0.2em] border-b border-line pb-1 hover:text-secondary hover:border-secondary transition-all"
+        >
+          View All
+        </a>
+      {% endif %}
+    </div>
+
+    {% comment %} Ürün Listesi {% endcomment %}
+    <div class="{% if section.settings.enable_slider %}flex overflow-x-auto snap-x scrollbar-hide gap-6{% else %}grid grid-cols-2 md:grid-cols-4 gap-8{% endif %}">
+      {%- assign collection = section.settings.collection -%}
+
+      {% for product in collection.products limit: section.settings.product_limit %}
+        <div class="{% if section.settings.enable_slider %}min-w-[70%] md:min-w-[22%] snap-start{% endif %} group">
+          <a
+            href="{{ product.url }}"
+            class="block mb-4 relative overflow-hidden bg-white shadow-sm border border-line/50"
+          >
+            {% if product.featured_image != blank %}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.title }}"
+                height="600"
+                width="600"
+                class="w-full aspect-[3/4] object-cover transition-transform duration-1000 group-hover:scale-105"
+                loading="lazy"
+              >
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full bg-custombg' }}
+            {% endif %}
+
+            {% comment %} Hızlı Ekle veya Badge (Opsiyonel) {% endcomment %}
+            {% if product.compare_at_price > product.price %}
+              <span class="absolute top-4 left-4 bg-secondary text-white text-[10px] px-2 py-1 uppercase tracking-widest"
+                >Sale</span
+              >
+            {% endif %}
+          </a>
+
+          <div class="text-center space-y-1">
+            <h3 class="text-primary text-[13px] font-light uppercase tracking-widest">
+              {{ product.title }}
+            </h3>
+            <div class="text-primary/70 text-[12px]">
+              {{ product.price | money }}
+              {% if product.compare_at_price > product.price %}
+                <span class="line-through opacity-50 ml-2">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        {% comment %} Placeholder Ürünler (Panelde boş görünmesin diye) {% endcomment %}
+        {% for i in (1..4) %}
+          <div class="space-y-4">
+            <div class="aspect-[3/4] bg-line/20 border border-line"></div>
+            <div class="h-4 bg-line/10 w-3/4 mx-auto"></div>
+            <div class="h-4 bg-line/10 w-1/2 mx-auto"></div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Curated Selection"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "label": "Product Limit",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_slider",
+      "label": "Enable Horizontal Slider",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all",
+      "label": "Show 'View All' link",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

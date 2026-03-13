@@ -1564,6 +1564,10 @@ blockquote{
   width: max-content;
 }
 
+.w-3\/4{
+  width: 75%;
+}
+
 .min-w-\[200px\]{
   min-width: 200px;
 }
@@ -1574,6 +1578,10 @@ blockquote{
 
 .min-w-\[45px\]{
   min-width: 45px;
+}
+
+.min-w-\[70\%\]{
+  min-width: 70%;
 }
 
 .max-w-2xl{
@@ -1748,6 +1756,14 @@ blockquote{
 
 .resize{
   resize: both;
+}
+
+.snap-x{
+  scroll-snap-type: x var(--tw-scroll-snap-strictness);
+}
+
+.snap-start{
+  scroll-snap-align: start;
 }
 
 .list-none{
@@ -1938,6 +1954,12 @@ blockquote{
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
+.space-y-1 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 
 .overflow-hidden{
@@ -2909,6 +2931,10 @@ blockquote{
   border-color: var(--color-black);
 }
 
+.hover\:border-secondary:hover{
+  border-color: var(--color-secondary);
+}
+
 .hover\:bg-black:hover{
   background-color: var(--color-black);
 }
@@ -3245,6 +3271,10 @@ blockquote{
 
   .md\:w-full{
     width: 100%;
+  }
+
+  .md\:min-w-\[22\%\]{
+    min-width: 22%;
   }
 
   .md\:max-w-md{
