@@ -560,6 +560,45 @@
         "testimonial_title": "Testimonials",
         "background_color": "#ffffff"
       }
+    },
+    "full_width_gallery_JLkbMT": {
+      "type": "full-width-gallery",
+      "blocks": {
+        "image_dayYKD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p7-2.jpg"
+          }
+        },
+        "image_43jFER": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p5-1.jpg"
+          }
+        },
+        "image_Gk8CkM": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p3-2.jpg"
+          }
+        },
+        "image_zTWijT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_dayYKD",
+        "image_43jFER",
+        "image_Gk8CkM",
+        "image_zTWijT"
+      ],
+      "name": "Luvia Full Gallery",
+      "settings": {
+        "title": "Follow Era"
+      }
     }
   },
   "order": [
@@ -580,6 +619,7 @@
     "full_width_gallery_fnrnK7",
     "featured_blog_carousel_qhr9Th",
     "shoppable_image_PQrjBw",
-    "testimonial_MnhfEw"
+    "testimonial_MnhfEw",
+    "full_width_gallery_JLkbMT"
   ]
 }
