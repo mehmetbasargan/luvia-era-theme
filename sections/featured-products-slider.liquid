@@ -1,0 +1,172 @@
+<div class="featured-products-slider-wrapper" id="Slider-{{ section.id }}">
+  <section class="bg-custombg py-12">
+    <div class="container mx-auto px-4 overflow-hidden">
+      {% comment %} Başlık ve Navigasyon Alanı {% endcomment %}
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+        <div>
+          <h4 class="text-primary font-light tracking-widest uppercase">
+            {{ section.settings.section_title }}
+          </h4>
+          <p class="text-primary mt-2 font-light tracking-widest text-sm">
+            {{ section.settings.section_subtitle }}
+          </p>
+        </div>
+
+        <div class="flex items-center gap-6 mt-6 md:mt-0">
+          {% comment %} Slider Butonları {% endcomment %}
+          <div class="flex gap-4">
+            <button class="swiper-prev-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors bg-transparent border-none">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M19 12H5M5 12L12 19M5 12L12 5"/>
+              </svg>
+            </button>
+            <button class="swiper-next-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors bg-transparent border-none">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
+              </svg>
+            </button>
+          </div>
+          {% if section.settings.button_url %}
+            <a
+              href="{{ section.settings.button_url }}"
+              class="text-primary text-sm hover:text-secondary transition-all uppercase tracking-widest border-b border-line pb-1"
+            >
+              {{ section.settings.button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      {% comment %} Swiper Container {% endcomment %}
+      <div class="swiper featured-swiper-{{ section.id }} !overflow-visible">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            {%- assign product = all_products[block.settings.product] -%}
+            {% if product != blank %}
+              <div class="swiper-slide group relative flex flex-col h-full" {{ block.shopify_attributes }}>
+                <div class="relative aspect-[3/4] overflow-hidden bg-white shadow-sm">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[11px] px-2 py-1 tracking-widest uppercase">
+                      {{ 'products.product.on_sale' | t }}
+                    </span>
+                  {% endif %}
+
+                  {% comment %} Wishlist Butonu (Aynı Sistem) {% endcomment %}
+                  <div class="absolute top-4 right-4 z-40">
+                    <button
+                      type="button"
+                      class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none bg-white"
+                      data-product-id="{{ product.id }}"
+                      onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') }"
+                    >
+                      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <a href="{{ product.url }}" class="block w-full h-full relative z-10">
+                    <img
+                      src="{{ product.featured_image | image_url: width: 600 }}"
+                      class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+                      height="auto"
+                      width="600"
+                      alt="{{ product.title }}"
+                      loading="lazy"
+                    >
+                    {% if product.images[1] %}
+                      <img
+                        src="{{ product.images[1] | image_url: width: 600 }}"
+                        class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                        height="auto"
+                        width="600"
+                        alt="{{ product.title }}"
+                        loading="lazy"
+                      >
+                    {% endif %}
+                  </a>
+
+                  {% comment %} Add to Cart (Alttan Kayarak Çıkan) {% endcomment %}
+                  <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
+                    <button
+                      type="button"
+                      onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
+                      class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
+                    >
+                      {{ 'products.product.add_to_cart' | t }}
+                    </button>
+                  </div>
+                </div>
+
+                <div class="mt-4 text-center">
+                  <a
+                    href="{{ product.url }}"
+                    class="text-primary text-[14px] font-light uppercase tracking-wider block mb-1"
+                  >
+                    {{- product.title -}}
+                  </a>
+                  <div class="flex justify-center items-center gap-2">
+                    {% if product.compare_at_price > product.price %}
+                      <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
+                    {% endif %}
+                    <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.featured-swiper-{{ section.id }}', {
+      slidesPerView: 2,
+      spaceBetween: 20,
+      navigation: {
+        nextEl: '.swiper-next-{{ section.id }}',
+        prevEl: '.swiper-prev-{{ section.id }}',
+      },
+      breakpoints: {
+        768: { slidesPerView: 3, spaceBetween: 24 },
+        1024: { slidesPerView: 4, spaceBetween: 30 },
+      },
+    });
+  });
+
+  // Paylaştığın JS fonksiyonunu buraya da dahil ediyoruz ki butonlar çalışsın
+  if (typeof handleFeaturedAddToCart !== 'function') {
+    function handleFeaturedAddToCart(e, variantId) {
+      // ... senin paylaştığın fonksiyonun içeriği buraya gelecek (yukarıda zaten var) ...
+      // (Script karmaşası olmaması için fonksiyon ismini korudum)
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Featured Products Slider",
+  "settings": [
+    { "type": "text", "id": "section_title", "label": "Title", "default": "Featured Selection" },
+    { "type": "text", "id": "section_subtitle", "label": "Subtitle", "default": "Handpicked for you" },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "View All" },
+    { "type": "url", "id": "button_url", "label": "Button URL" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [{ "type": "product", "id": "product", "label": "Select Product" }]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products Slider",
+      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }, { "type": "product" }]
+    }
+  ]
+}
+{% endschema %}
