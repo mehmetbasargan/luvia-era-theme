@@ -1970,6 +1970,10 @@ blockquote{
   overflow: visible;
 }
 
+.\!overflow-visible{
+  overflow: visible !important;
+}
+
 .overflow-scroll{
   overflow: scroll;
 }
@@ -2177,6 +2181,14 @@ blockquote{
 
 .bg-white{
   background-color: var(--color-white);
+}
+
+.bg-gradient-to-t{
+  background-image: linear-gradient(to top, var(--tw-gradient-stops));
+}
+
+.to-transparent{
+  --tw-gradient-to: transparent var(--tw-gradient-to-position);
 }
 
 .object-contain{

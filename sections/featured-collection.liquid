@@ -20,36 +20,63 @@
     </div>
 
     {% comment %} Swiper Container {% endcomment %}
-    <div class="swiper featured-swiper-{{ section.id }}">
+    <div class="swiper featured-swiper-{{ section.id }} !overflow-visible">
       <div class="swiper-wrapper">
         {%- assign collection = section.settings.collection -%}
 
         {% for product in collection.products limit: section.settings.product_limit %}
           <div class="swiper-slide group">
-            <a
-              href="{{ product.url }}"
-              class="block mb-4 relative overflow-hidden bg-white shadow-sm border border-line/50"
-            >
-              {% if product.featured_image != blank %}
-                <img
-                  src="{{ product.featured_image | image_url: width: 800 }}"
-                  alt="{{ product.title }}"
-                  height="auto"
-                  width="800"
-                  class="w-full aspect-[3/4] object-cover transition-transform duration-1000 group-hover:scale-105"
-                  loading="lazy"
-                >
-              {% else %}
-                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full bg-custombg' }}
-              {% endif %}
+            {% comment %} Ürün Görsel Alanı {% endcomment %}
+            <div class="relative aspect-[3/4] overflow-hidden bg-white border border-line/50 mb-4">
+              <a href="{{ product.url }}" class="block w-full h-full">
+                {% if product.featured_image != blank %}
+                  {% comment %} Birinci Görsel {% endcomment %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 800 }}"
+                    alt="{{ product.title }}"
+                    height="auto"
+                    width="800"
+                    class="w-full h-full object-cover transition-opacity duration-700 {% if product.images[1] != blank %}group-hover:opacity-0{% endif %}"
+                    loading="lazy"
+                  >
+                  {% comment %} İkinci Görsel (Hover) {% endcomment %}
+                  {% if product.images[1] != blank %}
+                    <img
+                      src="{{ product.images[1] | image_url: width: 800 }}"
+                      alt="{{ product.title }}"
+                      class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+                      height="auto"
+                      width="800"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'w-full h-full bg-custombg' }}
+                {% endif %}
+              </a>
 
+              {% comment %} Alttan Kayan Add to Cart Butonu {% endcomment %}
+              <div class="absolute bottom-0 left-0 w-full p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-20 bg-gradient-to-t from-black/20 to-transparent">
+                {% form 'product', product %}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <button
+                    type="submit"
+                    class="w-full py-3 bg-white text-primary text-[11px] uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all duration-300 shadow-xl"
+                  >
+                    Add to Cart
+                  </button>
+                {% endform %}
+              </div>
+
+              {% comment %} Sale Badge {% endcomment %}
               {% if product.compare_at_price > product.price %}
                 <span class="absolute top-4 left-4 bg-secondary text-white text-[10px] px-2 py-1 uppercase tracking-widest z-10"
                   >Sale</span
                 >
               {% endif %}
-            </a>
+            </div>
 
+            {% comment %} Ürün Bilgileri {% endcomment %}
             <div class="text-center space-y-1">
               <h3 class="text-primary text-[13px] font-light uppercase tracking-widest">
                 {{ product.title }}
@@ -57,12 +84,13 @@
               <div class="text-primary/70 text-[12px]">
                 {{ product.price | money }}
                 {% if product.compare_at_price > product.price %}
-                  <span class="line-through opacity-50 ml-2">{{ product.compare_at_price | money }}</span>
+                  <span class="line-through opacity-40 ml-2">{{ product.compare_at_price | money }}</span>
                 {% endif %}
               </div>
             </div>
           </div>
         {% else %}
+          {% comment %} Boş Koleksiyon Durumu {% endcomment %}
           {% for i in (1..4) %}
             <div class="swiper-slide space-y-4">
               <div class="aspect-[3/4] bg-line/20 border border-line"></div>
@@ -72,18 +100,18 @@
         {% endfor %}
       </div>
 
-      {% comment %} Slider Kontrolleri (Opsiyonel) {% endcomment %}
-      <div class="flex justify-center gap-4 mt-12">
-        <div class="swiper-button-prev-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+      {% comment %} Slider Navigasyon {% endcomment %}
+      <div class="flex justify-center gap-6 mt-12">
+        <button class="swiper-prev-{{ section.id }} text-primary/50 hover:text-primary transition-colors">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75">
             <path d="M19 12H5M5 12L12 19M5 12L12 5"/>
           </svg>
-        </div>
-        <div class="swiper-button-next-{{ section.id }} cursor-pointer text-primary hover:text-secondary transition-colors">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        </button>
+        <button class="swiper-next-{{ section.id }} text-primary/50 hover:text-primary transition-colors">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75">
             <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   </div>
@@ -94,20 +122,14 @@
     new Swiper('.featured-swiper-{{ section.id }}', {
       slidesPerView: 2,
       spaceBetween: 20,
-      loop: true,
+      loop: false,
       navigation: {
-        nextEl: '.swiper-button-next-{{ section.id }}',
-        prevEl: '.swiper-button-prev-{{ section.id }}',
+        nextEl: '.swiper-next-{{ section.id }}',
+        prevEl: '.swiper-prev-{{ section.id }}',
       },
       breakpoints: {
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        1024: {
-          slidesPerView: 4,
-          spaceBetween: 40,
-        },
+        768: { slidesPerView: 3, spaceBetween: 30 },
+        1024: { slidesPerView: 4, spaceBetween: 40 },
       },
     });
   });
@@ -115,39 +137,13 @@
 
 {% schema %}
 {
-  "name": "Featured Swiper",
+  "name": "Featured Swiper Pro",
   "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Season Highlights"
-    },
-    {
-      "id": "collection",
-      "type": "collection",
-      "label": "Collection"
-    },
-    {
-      "type": "range",
-      "id": "product_limit",
-      "min": 4,
-      "max": 12,
-      "step": 1,
-      "label": "Product Limit",
-      "default": 8
-    },
-    {
-      "type": "checkbox",
-      "id": "view_all",
-      "label": "Show 'View All' link",
-      "default": true
-    }
+    { "type": "text", "id": "title", "label": "Heading", "default": "The Seasonal Edit" },
+    { "id": "collection", "type": "collection", "label": "Collection" },
+    { "type": "range", "id": "product_limit", "min": 4, "max": 12, "step": 1, "label": "Product Limit", "default": 8 },
+    { "type": "checkbox", "id": "view_all", "label": "Show 'View All' link", "default": true }
   ],
-  "presets": [
-    {
-      "name": "Featured Swiper Collection"
-    }
-  ]
+  "presets": [{ "name": "Featured Swiper Pro" }]
 }
 {% endschema %}
