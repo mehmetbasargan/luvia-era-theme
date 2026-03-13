@@ -1,12 +1,13 @@
 <div class="featured-products-wrapper">
-  <section class="bg-white">
+  <section class="bg-custombg">
+    {% comment %} bg-white yerine global bg kullandık {% endcomment %}
     <div class="container py-12 mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
         <div>
           <h4 class="text-primary font-light tracking-widest uppercase">
             {{ section.settings.section_title }}
           </h4>
-          <p class="text-primary mt-2 font-light  tracking-widest">
+          <p class="text-primary mt-2 font-light tracking-widest">
             {{ section.settings.section_subtitle }}
           </p>
         </div>
@@ -22,174 +23,115 @@
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
-        {%- assign collection = collections[section.settings.collection] -%}
-        {% for product in collection.products limit: 4 %}
-          <div class="group relative flex flex-col h-full" id="prod-{{ product.id }}">
-            <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
-              {% if product.compare_at_price > product.price %}
-                <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[11px] px-2 py-1 tracking-widest uppercase">
-                  {{ 'products.product.on_sale' | t }}
-                </span>
-              {% endif %}
+        {% comment %} Koleksiyon yerine BLOKLARI dönüyoruz {% endcomment %}
+        {% for block in section.blocks %}
+          {%- assign product = all_products[block.settings.product] -%}
+          {% if product != blank %}
+            <div
+              class="group relative flex flex-col h-full"
+              id="prod-{{ product.id }}-{{ forloop.index }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="relative aspect-[3/4] overflow-hidden bg-white shadow-sm">
+                {% if product.compare_at_price > product.price %}
+                  <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[11px] px-2 py-1 tracking-widest uppercase">
+                    {{ 'products.product.on_sale' | t }}
+                  </span>
+                {% endif %}
 
-              <div class="absolute top-4 right-4 z-40">
-                <button
-                  type="button"
-                  class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none bg-white"
-                  data-product-id="{{ product.id }}"
-                  onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') } else { console.error('Wishlist script not loaded') }"
-                  aria-label="Add to wishlist"
-                >
-                  <svg
-                    class="w-6 h-6 text-primary transition-all duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                {% comment %} Wishlist Butonu {% endcomment %}
+                <div class="absolute top-4 right-4 z-40">
+                  <button
+                    type="button"
+                    class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none bg-white"
+                    data-product-id="{{ product.id }}"
+                    onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') } else { console.error('Wishlist script not loaded') }"
                   >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                  </svg>
-                </button>
-              </div>
+                    <svg
+                      class="w-6 h-6 text-primary transition-all duration-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                  </button>
+                </div>
 
-              <a href="{{ product.url }}" class="block w-full h-full relative z-10">
-                <picture>
-                  <source
-                    srcset="{{ product.featured_image | image_url: width: 600, format: 'webp' }}"
-                    type="image/webp"
-                  >
+                <a href="{{ product.url }}" class="block w-full h-full relative z-10">
                   <img
                     src="{{ product.featured_image | image_url: width: 600 }}"
                     class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
-                    alt="{{ product.title | escape }}"
+                    height="500"
+                    width="500"
+                    alt="{{ product.title }}"
                     loading="lazy"
-                    height="800"
-                    width="600"
                   >
-                </picture>
-                {% if product.images[1] %}
-                  <picture>
-                    <source srcset="{{ product.images[1] | image_url: width: 600, format: 'webp' }}" type="image/webp">
+                  {% if product.images[1] %}
                     <img
                       src="{{ product.images[1] | image_url: width: 600 }}"
                       class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                      alt="{{ product.title | escape }}"
+                      height="500"
+                      width="500"
+                      alt="{{ product.title }}"
                       loading="lazy"
-                      height="800"
-                      width="600"
                     >
-                  </picture>
-                {% endif %}
-              </a>
+                  {% endif %}
+                </a>
 
-              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
-                <button
-                  type="button"
-                  onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-                  class="featured-add-to-cart w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
+                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
+                  <button
+                    type="button"
+                    onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
+                    class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
+                  >
+                    {{ 'products.product.add_to_cart' | t }}
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-4 text-center">
+                <a
+                  href="{{ product.url }}"
+                  class="text-primary text-[14px] font-light uppercase tracking-wider block mb-1"
                 >
-                  {% if product.available -%}
-                    <span class="text-white">{{- 'products.product.add_to_cart' | t -}}</span>
-                  {%- else -%}
-                    <span class="text-white">{{- 'products.product.sold_out' | t -}}</span>
-                  {%- endif %}
-                </button>
+                  {{- product.title -}}
+                </a>
+                <div class="flex justify-center items-center gap-2">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
+                </div>
               </div>
             </div>
-
-            <div class="mt-4 text-center">
-              <a
-                href="{{ product.url }}"
-                class="text-primary text-[14px] font-light uppercase tracking-wider block mb-1"
-              >
-                {{- product.title -}}
-              </a>
-              <div class="flex justify-center items-center gap-2">
-                {% if product.compare_at_price > product.price %}
-                  <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
-                {% endif %}
-                <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
-              </div>
-            </div>
-          </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
   </section>
 </div>
 
-<script>
-  function handleFeaturedAddToCart(e, variantId) {
-    const btn = e.currentTarget;
-    const originalText = btn.innerText;
-
-    // Update button state
-    btn.innerText = '...';
-    btn.disabled = true; // Prevent multiple clicks
-
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: variantId, quantity: 1 }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        btn.innerText = 'ADDED';
-
-        // 1. Global Toast Notification (from luvia-global.js)
-        if (window.showToast) {
-          window.showToast(window.LuviaStrings.cartAdded || 'Product added to cart', 'success');
-        }
-
-        // 2. Open Cart Drawer (from luvia-global.js)
-        if (window.openCartDrawer) {
-          window.openCartDrawer();
-        }
-
-        // 3. Refresh Cart Content
-        // If your theme has 'openAndRefreshCart' function, run it
-        if (typeof openAndRefreshCart === 'function') {
-          openAndRefreshCart();
-        }
-
-        // Trigger cart event listeners in theme
-        document.dispatchEvent(
-          new CustomEvent('cart:updated', {
-            detail: { cart: data },
-            bubbles: true,
-          })
-        );
-
-        setTimeout(() => {
-          btn.innerText = originalText;
-          btn.disabled = false;
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error('Cart Error:', error);
-        btn.innerText = 'ERROR';
-        if (window.showToast) window.showToast('Error adding to cart', 'error');
-
-        setTimeout(() => {
-          btn.innerText = originalText;
-          btn.disabled = false;
-        }, 2000);
-      });
-  }
-</script>
-
 {% schema %}
 {
   "name": "Featured Products",
   "settings": [
-    { "type": "collection", "id": "collection", "label": "Collection" },
-    { "type": "text", "id": "section_title", "label": "Title", "default": "Featured Collection" },
-    { "type": "text", "id": "section_subtitle", "label": "Subtitle", "default": "Our handpicked favorites for you" },
+    { "type": "text", "id": "section_title", "label": "Title", "default": "Featured Selection" },
+    { "type": "text", "id": "section_subtitle", "label": "Subtitle", "default": "Handpicked for you" },
     { "type": "text", "id": "button_text", "label": "Button Text", "default": "View All" },
     { "type": "url", "id": "button_url", "label": "Button URL" }
   ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [{ "type": "product", "id": "product", "label": "Select Product" }]
+    }
+  ],
   "presets": [
     {
-      "name": "Featured Products"
+      "name": "Featured Products (Selectable)",
+      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }, { "type": "product" }]
     }
   ]
 }
