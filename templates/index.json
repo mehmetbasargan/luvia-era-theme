@@ -605,7 +605,7 @@
       "name": "Newsletter Banner",
       "settings": {
         "bg_image": "shopify://shop_images/pageheader3.jpg",
-        "overlay_opacity": 40,
+        "overlay_opacity": 70,
         "title": "Luvia Privileges",
         "subtext": "Be the first to know about new collections and exclusive events."
       }
@@ -630,7 +630,7 @@
     "featured_blog_carousel_qhr9Th",
     "shoppable_image_PQrjBw",
     "testimonial_MnhfEw",
-    "full_width_gallery_JLkbMT",
-    "newsletter_banner_fKkMaW"
+    "newsletter_banner_fKkMaW",
+    "full_width_gallery_JLkbMT"
   ]
 }
