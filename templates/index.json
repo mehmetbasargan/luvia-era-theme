@@ -699,28 +699,35 @@
           "settings": {
             "image": "shopify://shop_images/4-2.jpg",
             "title": "Dresses",
-            "link": ""
+            "link": "",
+            "overlay_opacity": 60
           }
         },
         "promotion_kiMWjD": {
           "type": "promotion",
           "settings": {
+            "image": "shopify://shop_images/5-2.jpg",
             "title": "Accessories",
-            "link": ""
+            "link": "",
+            "overlay_opacity": 60
           }
         },
         "promotion_Dtm6NA": {
           "type": "promotion",
           "settings": {
+            "image": "shopify://shop_images/blg1-2.jpg",
             "title": "New Season",
-            "link": ""
+            "link": "",
+            "overlay_opacity": 60
           }
         },
         "promotion_jgFDYf": {
           "type": "promotion",
           "settings": {
+            "image": "shopify://shop_images/p6-3.jpg",
             "title": "Sale",
-            "link": ""
+            "link": "",
+            "overlay_opacity": 60
           }
         }
       },
@@ -731,7 +738,9 @@
         "promotion_jgFDYf"
       ],
       "name": "Footer Promotion",
-      "settings": {}
+      "settings": {
+        "heading": "Curated Collections"
+      }
     }
   },
   "order": [
