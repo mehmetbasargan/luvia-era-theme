@@ -4,9 +4,9 @@
     <div class="container py-12 mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
         <div>
-          <h4 class="text-primary font-light tracking-widest uppercase">
+          <h2 class="text-secondary font-light tracking-widest uppercase">
             {{ section.settings.section_title }}
-          </h4>
+          </h2>
           <p class="text-primary mt-2 font-light tracking-widest">
             {{ section.settings.section_subtitle }}
           </p>
@@ -14,7 +14,7 @@
         {% if section.settings.button_url %}
           <a
             href="{{ section.settings.button_url }}"
-            class="text-primary text-sm hover:text-secondary transition-all uppercase tracking-widest mt-4 md:mt-0 flex items-center gap-2"
+            class="text-primary text-sm hover:!text-secondary transition-all duration-150 uppercase tracking-widest mt-4 md:mt-0 flex items-center gap-2"
           >
             {{ section.settings.button_text }}
             {% render 'icon-arrow-right' %}
@@ -34,7 +34,7 @@
             >
               <div class="relative aspect-[3/4] overflow-hidden bg-white shadow-sm">
                 {% if product.compare_at_price > product.price %}
-                  <span class="absolute top-4 left-4 z-20 bg-secondary text-white font-medium text-[11px] px-2 py-1 tracking-widest uppercase">
+                  <span class="absolute top-4 left-4 z-20 bg-primary rounded-sm text-white font-medium text-[11px] px-2 py-1 tracking-widest uppercase">
                     {{ 'products.product.on_sale' | t }}
                   </span>
                 {% endif %}
@@ -83,7 +83,7 @@
                   <button
                     type="button"
                     onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-                    class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
+                    class="w-full bg-primary text-white py-4 text-[14px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none font-medium"
                   >
                     {{ 'products.product.add_to_cart' | t }}
                   </button>
@@ -95,7 +95,7 @@
                   href="{{ product.url }}"
                   class="text-primary text-[14px] font-light uppercase tracking-wider block mb-1"
                 >
-                  {{- product.title -}}
+                  <h6>{{- product.title -}}</h6>
                 </a>
                 <div class="flex justify-center items-center gap-2">
                   {% if product.compare_at_price > product.price %}

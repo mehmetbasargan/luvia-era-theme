@@ -1604,6 +1604,10 @@ blockquote{
   max-width: none;
 }
 
+.max-w-xl{
+  max-width: 36rem;
+}
+
 .flex-1{
   flex: 1 1 0%;
 }
@@ -2895,6 +2899,14 @@ blockquote{
   color: var(--color-primary);
 }
 
+.placeholder\:text-white::-moz-placeholder{
+  color: var(--color-white);
+}
+
+.placeholder\:text-white::placeholder{
+  color: var(--color-white);
+}
+
 .checked\:bg-black:checked{
   background-color: var(--color-black);
 }
@@ -2913,6 +2925,10 @@ blockquote{
 
 .hover\:border-black:hover{
   border-color: var(--color-black);
+}
+
+.hover\:border-primary:hover{
+  border-color: var(--color-primary);
 }
 
 .hover\:bg-black:hover{
@@ -2943,6 +2959,10 @@ blockquote{
 
 .hover\:bg-white:hover{
   background-color: var(--color-white);
+}
+
+.hover\:\!text-secondary:hover{
+  color: var(--color-secondary) !important;
 }
 
 .hover\:\!text-white:hover{
@@ -3362,11 +3382,6 @@ blockquote{
 
   .md\:text-\[13px\]{
     font-size: 13px;
-  }
-
-  .md\:text-xl{
-    font-size: 1.25rem;
-    line-height: 1.75rem;
   }
 }
 

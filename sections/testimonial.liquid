@@ -14,11 +14,13 @@
       <div class="swiper-wrapper">
         {% for item in section.blocks %}
           <div
-            class="swiper-slide flex flex-col items-center text-center w-full bg-custombg p-4 rounded-lg "
+            class="swiper-slide flex flex-col items-center justify-center text-center w-full bg-custombg p-4 rounded-lg "
             itemscope
             itemtype="https://schema.org/Review"
           >
-            <span class="w-[25px] mb-5 text-secondary">{% render 'icon-quote' %}</span>
+            <div class="w-full h-[70px] flex items-center justify-center ny-7">
+              <span class="mb-5 text-secondary">{% render 'icon-quote' %}</span>
+            </div>
             <div class="h-[90px] text-[14px]" itemprop="reviewBody">
               {{ item.settings.testimonial | strip_html | truncate: 150, '...' }}
             </div>
@@ -75,10 +77,10 @@
       spaceBetween: 30,
       freeMode: true,
       loop:true,
-      autoplay: {
+     /*  autoplay: {
         delay: 3000,
         disableOnInteraction: false,
-      },
+      }, */
       pagination: {
         el: '.swiper-pagination',
         clickable: true,

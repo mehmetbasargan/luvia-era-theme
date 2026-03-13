@@ -1,7 +1,7 @@
 <section class="relative w-full bg-custombg mt-28">
   <div class="container px-4 mb-10 flex flex-col justify-between items-center">
-    <h4 class="font-light uppercase tracking-widest text-secondary">{{ section.settings.title }}</h4>
-    <p class="text-primary mt-2 text-[15px] font-light">{{ section.settings.subtitle }}</p>
+    <h2 class="font-light uppercase tracking-widest text-secondary">{{ section.settings.title }}</h2>
+    <p class="text-primary mt-2 font-light">{{ section.settings.subtitle }}</p>
   </div>
 
   <div class="overflow-visible rounded-sm relative group">
@@ -33,14 +33,14 @@
                   height="300"
                   width="300"
                   alt="{{ product.title | escape }}"
-                  class="w-full h-full object-cover"
+                  class="w-full h-full object-cover object-top"
                   loading="eager"
                 >
               </div>
 
-              <h4 class="text-[10px] uppercase tracking-widest font-medium truncate mb-1 text-primary">
+              <h6 class="uppercase text-sm tracking-widest font-medium truncate mb-1 text-secondary">
                 {{ product.title }}
-              </h4>
+              </h6>
 
               <p class="text-xs text-primary mb-2">
                 {{ product.price | money }}
@@ -48,7 +48,7 @@
 
               <a
                 href="{{ product.url }}"
-                class="block text-center text-[11px] uppercase tracking-widest border border-black py-2 hover:bg-black hover:text-white transition-colors"
+                class="block text-center text-[13px] uppercase tracking-widest border border-black py-2 hover:bg-black hover:text-white transition-colors"
               >
                 {{ 'products.product.view_product' | t }}
               </a>

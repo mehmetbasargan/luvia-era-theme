@@ -169,6 +169,7 @@
 		}
 	},
 	"newsletter": {
-		"success": "Thanks for subscribing!"
+		"success": "Thanks for subscribing!",
+		"subscribe_text": " Subscribe"
 	}
 }

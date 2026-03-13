@@ -25,10 +25,10 @@
   <div class="relative z-10 container mx-auto px-6 text-center text-white">
     <div class="max-w-2xl mx-auto space-y-8">
       <div class="space-y-4">
-        <h2 class="text-white text-3xl md:text-5xl font-light uppercase tracking-[0.3em]">
+        <h2 class="text-white font-light uppercase tracking-[0.3em]">
           {{ section.settings.title | default: 'Join the World of Luvia' }}
         </h2>
-        <p class="text-white/80 font-light text-lg tracking-wide">
+        <p class="text-white font-light tracking-wide">
           {{ section.settings.subtext | default: 'Subscribe to receive updates, access to exclusive deals, and more.' }}
         </p>
       </div>
@@ -36,24 +36,26 @@
       {% comment %} Newsletter Formu {% endcomment %}
       {% form 'customer', class: 'mt-10' %}
         <input type="hidden" name="contact[tags]" value="newsletter">
-        <div class="flex flex-col md:flex-row items-center gap-4 max-w-lg mx-auto">
+        <div class="flex flex-col md:flex-row items-center gap-4 max-w-xl mx-auto">
           <input
             type="email"
             name="contact[email]"
-            class="w-full bg-transparent border-b border-white/50 text-white placeholder:text-white/50 py-3 px-2 focus:outline-none focus:border-white transition-colors font-light"
+            class="w-full bg-transparent border-b border-white text-white placeholder:text-white py-3 px-2 focus:outline-none focus:border-white transition-colors font-light"
             placeholder="Your email address"
             required
           >
           <button
             type="submit"
-            class="w-full md:w-auto px-10 py-3 bg-white text-primary text-[12px] uppercase tracking-[0.2em] hover:bg-secondary hover:text-white transition-all duration-500 whitespace-nowrap"
+            class="w-full md:w-auto px-10 py-3 bg-white text-primary text-[13px] uppercase tracking-[0.2em] hover:bg-secondary hover:text-white transition-all duration-500 whitespace-nowrap"
           >
-            Subscribe
+            {{ 'newsletter.subscribe_text' | t }}
           </button>
         </div>
 
         {% if form.posted_successfully? %}
-          <p class="mt-4 text-secondary font-medium uppercase tracking-widest text-sm">Thank you for subscribing!</p>
+          <p class="mt-4 text-secondary font-medium uppercase tracking-widest text-sm">
+            {{ 'newsletter.success' | t }}
+          </p>
         {% endif %}
       {% endform %}
     </div>

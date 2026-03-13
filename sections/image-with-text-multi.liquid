@@ -26,23 +26,23 @@
         {% comment %} Metin Alanı {% endcomment %}
         <div class="w-full md:w-1/2 text-left space-y-6 px-4 md:px-0">
           {% if block.settings.subheading != blank %}
-            <span class="text-secondary uppercase tracking-[0.3em] text-[12px] font-medium block">
+            <span class="text-secondary uppercase tracking-[0.3em] text-[13px] font-medium block">
               {{ block.settings.subheading }}
             </span>
           {% endif %}
 
-          <h2 class="text-primary text-3xl md:text-5xl font-light uppercase tracking-widest leading-tight">
+          <h2 class="text-secondary font-light uppercase tracking-widest leading-tight">
             {{ block.settings.title }}
           </h2>
 
-          <div class="text-primary/80 font-light leading-relaxed text-lg">
+          <div class="text-primary font-light leading-relaxed">
             {{ block.settings.text }}
           </div>
 
           {% if block.settings.button_label != blank %}
             <a
               href="{{ block.settings.button_link | default: '#' }}"
-              class="inline-block mt-4 px-10 py-4 bg-primary text-white text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors duration-300"
+              class="inline-block mt-4 px-10 py-4 bg-primary text-white text-[14px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors duration-300"
             >
               {{ block.settings.button_label }}
             </a>
@@ -52,7 +52,7 @@
 
       {% comment %} Bloklar arasına ince bir çizgi (Opsiyonel) {% endcomment %}
       {% unless forloop.last %}
-        <div class="container mx-auto border-b border-line/50"></div>
+        <div class="container mx-auto border-b border-line"></div>
       {% endunless %}
     {% endfor %}
   </div>
