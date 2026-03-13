@@ -170,6 +170,32 @@
 	.icon-arrow2:hover {
 		color: var(--color-white) !important;
 	}
+
+	/* Featured Products Button Specific */
+	.featured-add-to-cart {
+		transition: all 300ms ease;
+	}
+
+	.featured-add-to-cart:hover {
+		background-color: var(--color-secondary) !important;
+	}
+
+	.featured-add-to-cart span {
+		color: var(--color-white) !important;
+	}
+
+	/* Full Width Gallery Button Specific */
+	.luvia-gallery-item span {
+		color: var(--color-primary) !important;
+	}
+
+	#LuviaLightbox button {
+		color: var(--color-white) !important;
+	}
+
+	#LuviaLightbox button:hover {
+		color: var(--color-white) !important;
+	}
 }
 
 @keyframes marquee {

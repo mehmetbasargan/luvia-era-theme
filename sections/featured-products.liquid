@@ -85,12 +85,12 @@
                 <button
                   type="button"
                   onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-                  class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
+                  class="featured-add-to-cart w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none"
                 >
                   {% if product.available -%}
-                    {{- 'products.product.add_to_cart' | t -}}
+                    <span class="text-white">{{- 'products.product.add_to_cart' | t -}}</span>
                   {%- else -%}
-                    {{- 'products.product.sold_out' | t -}}
+                    <span class="text-white">{{- 'products.product.sold_out' | t -}}</span>
                   {%- endif %}
                 </button>
               </div>
