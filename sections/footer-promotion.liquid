@@ -1,0 +1,82 @@
+<section class="bg-custombg py-16 border-t border-line">
+  <div class="container mx-auto px-4">
+    {% comment %} Başlık {% endcomment %}
+    <div class="text-center mb-12">
+      <h2 class="text-primary font-light uppercase tracking-[0.4em] text-[13px]">Explore the Collections</h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {% for block in section.blocks %}
+        <a
+          href="{{ block.settings.link }}"
+          class="group relative block overflow-hidden aspect-square"
+          {{ block.shopify_attributes }}
+        >
+          {% comment %} Görsel {% endcomment %}
+          {% if block.settings.image != blank %}
+            <img
+              src="{{ block.settings.image | image_url: width: 800 }}"
+              alt="{{ block.settings.title }}"
+              height="auto"
+              width="800"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              loading="lazy"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-line/20' }}
+          {% endif %}
+
+          {% comment %} Overlay ve Yazı {% endcomment %}
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500 flex items-center justify-center">
+            <h3 class="text-white text-[12px] md:text-[14px] uppercase tracking-[0.3em] font-light border-b border-transparent group-hover:border-white transition-all pb-1">
+              {{ block.settings.title }}
+            </h3>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Footer Promotion",
+  "max_blocks": 4,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "promotion",
+      "name": "Promotion Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Promotion Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "New Arrivals"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer Promotion",
+      "blocks": [
+        { "type": "promotion", "settings": { "title": "Dresses" } },
+        { "type": "promotion", "settings": { "title": "Accessories" } },
+        { "type": "promotion", "settings": { "title": "New Season" } },
+        { "type": "promotion", "settings": { "title": "Sale" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

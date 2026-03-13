@@ -3143,6 +3143,10 @@ blockquote{
   border-color: var(--color-line);
 }
 
+.group:hover .group-hover\:border-white{
+  border-color: var(--color-white);
+}
+
 .group:hover .group-hover\:bg-secondary{
   background-color: var(--color-secondary);
 }
@@ -3391,6 +3395,10 @@ blockquote{
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-\[14px\]{
+    font-size: 14px;
   }
 }
 
