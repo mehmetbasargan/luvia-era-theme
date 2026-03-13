@@ -363,6 +363,48 @@
       "name": "Image with Text Multi",
       "settings": {}
     },
+    "featured_products_cdqPtt": {
+      "type": "featured-products",
+      "blocks": {
+        "product_n3AKbz": {
+          "type": "product",
+          "settings": {
+            "product": "aura-silk-maxi-dress"
+          }
+        },
+        "product_JiTTKw": {
+          "type": "product",
+          "settings": {
+            "product": "luna-satin-slip-dress"
+          }
+        },
+        "product_tbz7ha": {
+          "type": "product",
+          "settings": {
+            "product": "solstice-linen-blouse"
+          }
+        },
+        "product_4Kk44e": {
+          "type": "product",
+          "settings": {
+            "product": "luna-high-waist-trousers"
+          }
+        }
+      },
+      "block_order": [
+        "product_n3AKbz",
+        "product_JiTTKw",
+        "product_tbz7ha",
+        "product_4Kk44e"
+      ],
+      "name": "Featured Products (Selectable)",
+      "settings": {
+        "section_title": "Our Craftsmanship",
+        "section_subtitle": "Handpicked for you",
+        "button_text": "View All",
+        "button_url": ""
+      }
+    },
     "full_width_gallery_fnrnK7": {
       "type": "full-width-gallery",
       "blocks": {
@@ -430,51 +472,8 @@
         "title": "Follow Era"
       }
     },
-    "featured_products_cdqPtt": {
-      "type": "featured-products",
-      "blocks": {
-        "product_n3AKbz": {
-          "type": "product",
-          "settings": {
-            "product": "aura-silk-maxi-dress"
-          }
-        },
-        "product_JiTTKw": {
-          "type": "product",
-          "settings": {
-            "product": "luna-satin-slip-dress"
-          }
-        },
-        "product_tbz7ha": {
-          "type": "product",
-          "settings": {
-            "product": "solstice-linen-blouse"
-          }
-        },
-        "product_4Kk44e": {
-          "type": "product",
-          "settings": {
-            "product": "luna-high-waist-trousers"
-          }
-        }
-      },
-      "block_order": [
-        "product_n3AKbz",
-        "product_JiTTKw",
-        "product_tbz7ha",
-        "product_4Kk44e"
-      ],
-      "name": "Featured Products (Selectable)",
-      "settings": {
-        "section_title": "Our Craftsmanship",
-        "section_subtitle": "Handpicked for you",
-        "button_text": "View All",
-        "button_url": ""
-      }
-    },
     "collections_yYcnYL": {
       "type": "collections",
-      "disabled": true,
       "name": "t:general.collections_grid",
       "settings": {
         "grid_item_width": "collections--full",
@@ -496,8 +495,8 @@
     "rich_text_banner_b3LtW4",
     "testimonial_CxWzTk",
     "image_with_text_multi_ExeLfW",
-    "full_width_gallery_fnrnK7",
     "featured_products_cdqPtt",
+    "full_width_gallery_fnrnK7",
     "collections_yYcnYL"
   ]
 }
