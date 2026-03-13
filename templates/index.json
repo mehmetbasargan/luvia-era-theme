@@ -382,6 +382,18 @@
         "grid_item_width": "collections--full",
         "grid_gap": 10
       }
+    },
+    "rich_text_banner_m8j33U": {
+      "type": "rich-text-banner",
+      "name": "Statement Banner",
+      "settings": {
+        "bg_image": "shopify://shop_images/3.jpg",
+        "overlay_opacity": 40,
+        "title": "Sustainable Luxury",
+        "text": "<p>Discover our curated collection of timeless pieces.</p>",
+        "button_label": "Shop The Collection",
+        "button_link": ""
+      }
     }
   },
   "order": [
@@ -396,6 +408,7 @@
     "rich_text_banner_b3LtW4",
     "testimonial_CxWzTk",
     "full_width_gallery_fnrnK7",
-    "collections_yYcnYL"
+    "collections_yYcnYL",
+    "rich_text_banner_m8j33U"
   ]
 }
