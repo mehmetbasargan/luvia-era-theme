@@ -616,7 +616,7 @@
       "settings": {
         "title": "Curated Selection",
         "collection": "silk-grace",
-        "product_limit": 4,
+        "product_limit": 8,
         "enable_slider": true,
         "view_all": true
       }
