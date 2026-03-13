@@ -7,11 +7,11 @@
       content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover,user-scalable=no"
     >
 
-    <!-- SEO Meta Tags - Optimized -->
+    <!-- SEO Meta Tags - Tasarım Bozmadan -->
     <title>{{ page_title | default: shop.name | escape }}</title>
     <meta name="description" content="{{ page_description | default: shop.description | truncate: 160 | escape }}">
 
-    <!-- Essential Meta Tags Only -->
+    <!-- Essential SEO Meta Tags -->
     <meta property="og:title" content="{{ page_title | default: shop.name | escape }}">
     <meta
       property="og:description"
@@ -28,6 +28,17 @@
     >
 
     <link rel="canonical" href="{{ canonical_url }}">
+
+    <!-- Structured Data - Tasarım Bozmadan -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ shop.name | escape }}",
+        "url": "{{ shop.url }}",
+        "description": "{{ shop.description | escape }}"
+      }
+    </script>
 
     {% render 'meta-tags' %}
 
