@@ -24,27 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 });
 
-/* back to top */
-const backToTop = document.getElementById('back-to-top');
+/* Luvia Back To Top - Updated to avoid conflict */
+const luviaBackToTop = document.getElementById('back-to-top');
 
-window.addEventListener('scroll', () => {
-	if (window.scrollY > 300) {
-		// Butonu göster
-		backToTop.classList.remove('translate-y-20', 'opacity-0');
-		backToTop.classList.add('translate-y-0', 'opacity-100');
-	} else {
-		// Butonu gizle
-		backToTop.classList.add('translate-y-20', 'opacity-0');
-		backToTop.classList.remove('translate-y-0', 'opacity-100');
-	}
-});
-
-backToTop.addEventListener('click', () => {
-	window.scrollTo({
-		top: 0,
-		behavior: 'smooth', // Yumuşak kaydırma
+if (luviaBackToTop) {
+	window.addEventListener('scroll', () => {
+		if (window.scrollY > 300) {
+			luviaBackToTop.classList.remove('translate-y-20', 'opacity-0');
+			luviaBackToTop.classList.add('translate-y-0', 'opacity-100');
+		} else {
+			luviaBackToTop.classList.add('translate-y-20', 'opacity-0');
+			luviaBackToTop.classList.remove('translate-y-0', 'opacity-100');
+		}
 	});
-});
+
+	luviaBackToTop.addEventListener('click', () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	});
+}
 
 /* filter settings */
 // assets/collection-filters.js (veya main-collection.liquid içine <script> olarak)

@@ -25,7 +25,6 @@
 
     const updateUI = () => {
       const ids = window.LuviaWishlist.get();
-
       if (!ids || ids.length === 0) {
         container?.classList.add('hidden');
         emptyMessage?.classList.remove('hidden');
@@ -35,7 +34,7 @@
       }
     };
 
-    // Silme işlemini anlık yap
+    // Toggle fonksiyonu
     const originalToggle = window.LuviaWishlist.toggle;
     window.LuviaWishlist.toggle = function (id) {
       originalToggle.call(this, id);
@@ -45,111 +44,55 @@
 
     updateUI();
     const wishlistIds = window.LuviaWishlist.get();
-    if (wishlistIds.length === 0) return;
+    if (!wishlistIds || wishlistIds.length === 0) return;
 
-    // 🛡️ EN SAĞLAM YÖNTEM: Predictive Search (Garantili JSON döner)
-    if (wishlistIds.length === 0) return;
+    // 🛡️ STRATEJİ: ID'leri 'OR' ile birleştirip gerçek Search API'sine soruyoruz
+    // Örnek sorgu: q=id:123 OR id:456
+    const searchQuery = wishlistIds.map((id) => `id:${id}`).join(' OR ');
+    const apiUrl = `${window.Shopify.routes.root}search?q=${encodeURIComponent(
+      searchQuery
+    )}&type=product&view=wishlist-json`;
 
-    // Performance: AbortController ile timeout ve cancel desteği
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 saniye timeout
-
-    fetch(
-      `${window.Shopify.routes.root}search/suggest.json?q=${wishlistIds.join(
-        ','
-      )}&resources[type]=product&resources[limit]=10`,
-      {
-        signal: controller.signal,
-        headers: { Accept: 'application/json' },
-      }
-    )
-      .then((res) => {
-        clearTimeout(timeoutId);
-        console.log('📡 API Response status:', res.status);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        console.log('📦 API Response data:', data);
-        const products = data.resources.results.products;
-        console.log('📦 Products found:', products?.length || 0);
-
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((products) => {
         if (!products || products.length === 0) {
-          console.warn('No products found for wishlist items:', wishlistIds);
           updateUI();
           return;
         }
 
-        console.log('🎨 Rendering products to container...');
         container.innerHTML = products
           .map((product) => {
-            // Fiyatı formatla - Shopify.formatMoney kullan
+            // Para birimi formatı
             const price = Shopify.formatMoney
-              ? Shopify.formatMoney(product.price * 100, '{{ shop.money_format }}')
-              : product.price + ' {{ cart.currency.symbol }}';
+              ? Shopify.formatMoney(product.price, '{{ shop.money_format }}')
+              : product.price;
 
             return `
-          <div class="group flex flex-col h-full bg-white border border-line/20 relative" id="wish-item-${product.id}">
-            <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
-              <button type="button" onclick="LuviaWishlist.toggle('${product.id}')" class="absolute top-2 right-2 z-30 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-red-500 hover:text-white transition-all cursor-pointer border-none">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg>
-              </button>
-              <a href="${product.url}" class="block h-full w-full">
-                <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-              </a>
-              <button onclick="handleWishlistAddToCart(event, '${product.variants[0].id}')" class="absolute inset-x-0 bottom-0 bg-primary text-white py-3 text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all cursor-pointer border-none">
-                {{ 'products.product.add_to_cart' | t }}
-              </button>
+            <div class="group flex flex-col h-full bg-white border border-line/20 relative" id="wish-item-${product.id}">
+              <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
+                <button type="button" onclick="LuviaWishlist.toggle('${product.id}')" class="absolute top-2 right-2 z-30 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-red-500 hover:text-white transition-all cursor-pointer border-none">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <a href="${product.url}" class="block h-full w-full">
+                  <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </a>
+                <button onclick="handleWishlistAddToCart(event, '${product.variant_id}')" class="absolute inset-x-0 bottom-0 bg-primary text-white py-3 text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all cursor-pointer border-none">
+                  {{ 'products.product.add_to_cart' | t }}
+                </button>
+              </div>
+              <div class="p-4 text-center">
+                <h3 class="text-[12px] uppercase tracking-wider text-primary line-clamp-1">${product.title}</h3>
+                <p class="mt-1 text-secondary font-medium text-[13px]">${price}</p>
+              </div>
             </div>
-            <div class="p-4 text-center">
-              <h3 class="text-[12px] uppercase tracking-wider text-primary line-clamp-1">${product.title}</h3>
-              <p class="mt-1 text-secondary font-medium text-[13px]">${price}</p>
-            </div>
-          </div>
-        `;
+          `;
           })
           .join('');
       })
       .catch((err) => {
-        clearTimeout(timeoutId);
-        console.error('🚨 Wishlist Loading Error:', err);
-        console.error('🚨 Error details:', {
-          message: err.message,
-          stack: err.stack,
-          wishlistIds: wishlistIds,
-          timestamp: new Date().toISOString(),
-        });
-
-        // Hata durumunda kullanıcıya bilgi ver
-        container.innerHTML = `
-          <div class="text-center py-20">
-            <p class="text-primary text-lg mb-4">{{ 'general.no_products_found' | t | default: 'No products found' }}</p>
-            <button onclick="location.reload()" class="px-6 py-3 bg-primary text-white text-sm uppercase tracking-[0.2em] hover:bg-secondary transition-colors">
-              Retry
-            </button>
-          </div>
-        `;
-        emptyMessage?.classList.add('hidden');
+        console.error('Wishlist error:', err);
+        updateUI();
       });
   });
-
-  // Sepete Ekleme Fonksiyonu
-  window.handleWishlistAddToCart = function (e, variantId) {
-    const btn = e.currentTarget;
-    btn.innerText = '...';
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: variantId, quantity: 1 }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        btn.innerText = 'ADDED';
-        if (window.showToast) window.showToast("{{ 'products.product.add_to_cart' | t }}", 'success');
-        if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
-        setTimeout(() => {
-          btn.innerText = "{{ 'products.product.add_to_cart' | t }}";
-        }, 2000);
-      });
-  };
 </script>

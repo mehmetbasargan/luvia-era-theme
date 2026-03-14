@@ -854,11 +854,6 @@ blockquote{
   right: 0px;
 }
 
-.inset-x-3{
-  left: 0.75rem;
-  right: 0.75rem;
-}
-
 .\!left-\[30px\]{
   left: 30px !important;
 }
@@ -923,6 +918,10 @@ blockquote{
   right: 0px;
 }
 
+.right-2{
+  right: 0.5rem;
+}
+
 .right-3{
   right: 0.75rem;
 }
@@ -951,6 +950,10 @@ blockquote{
   top: 2.5rem;
 }
 
+.top-2{
+  top: 0.5rem;
+}
+
 .top-24{
   top: 6rem;
 }
@@ -967,6 +970,10 @@ blockquote{
   top: 1rem;
 }
 
+.top-40{
+  top: 10rem;
+}
+
 .top-8{
   top: 2rem;
 }
@@ -981,22 +988,6 @@ blockquote{
 
 .top-full{
   top: 100%;
-}
-
-.top-48{
-  top: 12rem;
-}
-
-.top-40{
-  top: 10rem;
-}
-
-.right-2{
-  right: 0.5rem;
-}
-
-.top-2{
-  top: 0.5rem;
 }
 
 .z-0{
@@ -1212,8 +1203,11 @@ blockquote{
   margin-top: auto;
 }
 
-.ml-3{
-  margin-left: 0.75rem;
+.line-clamp-1{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .line-clamp-2{
@@ -1228,13 +1222,6 @@ blockquote{
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-}
-
-.line-clamp-1{
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
 }
 
 .block{
@@ -1390,6 +1377,10 @@ blockquote{
   height: 25px;
 }
 
+.h-\[2px\]{
+  height: 2px;
+}
+
 .h-\[300px\]{
   height: 300px;
 }
@@ -1446,14 +1437,6 @@ blockquote{
   height: 100%;
 }
 
-.h-\[21px\]{
-  height: 21px;
-}
-
-.h-\[2px\]{
-  height: 2px;
-}
-
 .max-h-\[80vh\]{
   max-height: 80vh;
 }
@@ -1464,10 +1447,6 @@ blockquote{
 
 .min-h-\[200px\]{
   min-height: 200px;
-}
-
-.min-h-\[36px\]{
-  min-height: 36px;
 }
 
 .min-h-\[400px\]{
@@ -1587,30 +1566,6 @@ blockquote{
   width: max-content;
 }
 
-.w-\[40px\]{
-  width: 40px;
-}
-
-.w-\[200px\]{
-  width: 200px;
-}
-
-.w-\[100px\]{
-  width: 100px;
-}
-
-.w-\[120px\]{
-  width: 120px;
-}
-
-.w-\[500px\]{
-  width: 500px;
-}
-
-.w-\[300px\]{
-  width: 300px;
-}
-
 .min-w-\[200px\]{
   min-width: 200px;
 }
@@ -1621,18 +1576,6 @@ blockquote{
 
 .min-w-\[45px\]{
   min-width: 45px;
-}
-
-.min-w-5{
-  min-width: 1.25rem;
-}
-
-.min-w-\[100px\]{
-  min-width: 100px;
-}
-
-.min-w-\[300px\]{
-  min-width: 300px;
 }
 
 .max-w-2xl{
@@ -1651,8 +1594,8 @@ blockquote{
   max-width: 80rem;
 }
 
-.max-w-\[1440px\]{
-  max-width: 1440px;
+.max-w-\[300px\]{
+  max-width: 300px;
 }
 
 .max-w-\[400px\]{
@@ -1677,10 +1620,6 @@ blockquote{
 
 .max-w-xl{
   max-width: 36rem;
-}
-
-.max-w-\[300px\]{
-  max-width: 300px;
 }
 
 .flex-1{
@@ -2051,10 +1990,6 @@ blockquote{
   white-space: nowrap;
 }
 
-.text-wrap{
-  text-wrap: wrap;
-}
-
 .\!rounded-full{
   border-radius: 9999px !important;
 }
@@ -2238,11 +2173,6 @@ blockquote{
   background-color: var(--color-white);
 }
 
-.bg-red-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
-}
-
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -2416,16 +2346,6 @@ blockquote{
   padding-bottom: 80px;
 }
 
-.py-0{
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.px-0{
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
 .pb-1{
   padding-bottom: 0.25rem;
 }
@@ -2452,6 +2372,10 @@ blockquote{
 
 .pb-8{
   padding-bottom: 2rem;
+}
+
+.pl-3{
+  padding-left: 0.75rem;
 }
 
 .pl-4{
@@ -2502,14 +2426,6 @@ blockquote{
   padding-top: 2.25rem;
 }
 
-.pl-10{
-  padding-left: 2.5rem;
-}
-
-.pl-3{
-  padding-left: 0.75rem;
-}
-
 .text-left{
   text-align: left;
 }
@@ -2528,10 +2444,6 @@ blockquote{
 
 .font-josefin{
   font-family: var(--font-heading);
-}
-
-.font-sans{
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .text-2xl{
@@ -2609,18 +2521,6 @@ blockquote{
   line-height: 1rem;
 }
 
-.text-\[113px\]{
-  font-size: 113px;
-}
-
-.text-\[114px\]{
-  font-size: 114px;
-}
-
-.text-\[45px\]{
-  font-size: 45px;
-}
-
 .font-bold{
   font-weight: 700;
 }
@@ -2661,6 +2561,14 @@ blockquote{
   line-height: 1.5rem;
 }
 
+.leading-\[20px\]{
+  line-height: 20px;
+}
+
+.leading-\[24px\]{
+  line-height: 24px;
+}
+
 .leading-loose{
   line-height: 2;
 }
@@ -2677,38 +2585,6 @@ blockquote{
   line-height: 1.25;
 }
 
-.leading-\[20px\]{
-  line-height: 20px;
-}
-
-.leading-\[10px\]{
-  line-height: 10px;
-}
-
-.leading-\[60px\]{
-  line-height: 60px;
-}
-
-.leading-\[30px\]{
-  line-height: 30px;
-}
-
-.leading-\[7px\]{
-  line-height: 7px;
-}
-
-.leading-\[9px\]{
-  line-height: 9px;
-}
-
-.leading-\[15px\]{
-  line-height: 15px;
-}
-
-.leading-\[24px\]{
-  line-height: 24px;
-}
-
 .tracking-\[0\.1em\]{
   letter-spacing: 0.1em;
 }
@@ -2723,10 +2599,6 @@ blockquote{
 
 .tracking-\[0\.3px\]{
   letter-spacing: 0.3px;
-}
-
-.tracking-\[0\.4em\]{
-  letter-spacing: 0.4em;
 }
 
 .tracking-tight{
@@ -2856,10 +2728,6 @@ blockquote{
   opacity: 0.75;
 }
 
-.opacity-80{
-  opacity: 0.8;
-}
-
 .shadow-2xl{
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
@@ -2924,11 +2792,6 @@ blockquote{
 
 .filter{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.backdrop-blur-sm{
-  --tw-backdrop-blur: blur(4px);
-  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
 .backdrop-filter{
@@ -3085,6 +2948,11 @@ blockquote{
   background-color: var(--color-primary);
 }
 
+.hover\:bg-red-200:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:bg-red-50:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
@@ -3101,11 +2969,6 @@ blockquote{
 
 .hover\:bg-white:hover{
   background-color: var(--color-white);
-}
-
-.hover\:bg-red-200:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 202 202 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:\!text-secondary:hover{
@@ -3284,10 +3147,6 @@ blockquote{
 
 .group:hover .group-hover\:bg-opacity-60{
   --tw-bg-opacity: 0.6;
-}
-
-.group:hover .group-hover\:text-primary{
-  color: var(--color-primary);
 }
 
 .group:hover .group-hover\:text-secondary{
