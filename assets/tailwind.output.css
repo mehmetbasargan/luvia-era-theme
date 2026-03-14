@@ -991,6 +991,14 @@ blockquote{
   top: 10rem;
 }
 
+.right-2{
+  right: 0.5rem;
+}
+
+.top-2{
+  top: 0.5rem;
+}
+
 .z-0{
   z-index: 0;
 }
