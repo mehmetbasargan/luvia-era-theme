@@ -1419,6 +1419,14 @@ blockquote{
   height: 100%;
 }
 
+.h-\[21px\]{
+  height: 21px;
+}
+
+.h-\[2px\]{
+  height: 2px;
+}
+
 .max-h-\[80vh\]{
   max-height: 80vh;
 }
@@ -2179,10 +2187,6 @@ blockquote{
      object-position: top;
 }
 
-.p-0{
-  padding: 0px;
-}
-
 .p-1{
   padding: 0.25rem;
 }
@@ -2430,6 +2434,10 @@ blockquote{
 
 .font-josefin{
   font-family: var(--font-heading);
+}
+
+.font-sans{
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .text-2xl{
@@ -2704,10 +2712,6 @@ blockquote{
 
 .opacity-50{
   opacity: 0.5;
-}
-
-.opacity-70{
-  opacity: 0.7;
 }
 
 .opacity-75{
@@ -3378,10 +3382,6 @@ blockquote{
 
   .md\:text-\[11px\]{
     font-size: 11px;
-  }
-
-  .md\:text-\[13px\]{
-    font-size: 13px;
   }
 }
 
