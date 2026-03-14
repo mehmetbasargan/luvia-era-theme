@@ -60,7 +60,7 @@
                       name="updates[]"
                       value="{{ item.quantity }}"
                       readOnly
-                      class="w-8 h-8 py-3 text-center text-[15px] text-primary border-none focus:ring-0 cursor-default flex items-center justify-center pl-3"
+                      class="w-8 h-8 py-3 text-center text-[15px] text-primary border-none focus:ring-0 cursor-default flex items-center justify-center "
                       aria-label="Quantity"
                     >
 
@@ -146,38 +146,37 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const urlParams = new URLSearchParams(window.location.search);
+    // Tüm sepet butonlarını yakala (+, -, Kaldır)
+    const cartButtons = document.querySelectorAll('a[href*="/cart/change"], a[href*="/cart/add"]');
 
-    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD) {
-    }
+    cartButtons.forEach((link) => {
+      link.addEventListener('click', function (e) {
+        const url = new URL(this.href);
+        const params = new URLSearchParams(url.search);
+        const quantity = parseInt(params.get('quantity'));
 
-    const removeLinks = document.querySelectorAll('a[href*="/cart/change"]');
-    removeLinks.forEach((link) => {
-      link.addEventListener('click', function () {
-        localStorage.setItem('showRemoveToast', 'true');
+        // Eğer linkte quantity parametresi varsa ve 0 ise SİLİNDİ mesajı kur
+        if (params.has('quantity') && quantity === 0) {
+          localStorage.setItem('cart_toast_msg', 'Product removed from cart!');
+          localStorage.setItem('cart_toast_type', 'error');
+        }
+        // Eğer miktar artıyor veya sadece değişiyorsa GÜNCELLENDİ mesajı kur
+        else {
+          localStorage.setItem('cart_toast_msg', 'Cart updated successfully!');
+          localStorage.setItem('cart_toast_type', 'success');
+        }
       });
     });
 
-    if (localStorage.getItem('showRemoveToast') === 'true') {
-      showToast('Product removed from cart!', 'error');
-      localStorage.removeItem('showRemoveToast');
-    }
-  });
+    // Sayfa yüklendiğinde mesaj var mı kontrol et
+    const pendingMsg = localStorage.getItem('cart_toast_msg');
+    const pendingType = localStorage.getItem('cart_toast_type');
 
-  document.addEventListener('click', function (e) {
-    if (e.target.closest('a[href*="/cart/change"]')) {
-      localStorage.setItem('cart_item_removed', 'true');
-    }
-  });
-
-  window.addEventListener('load', function () {
-    if (localStorage.getItem('cart_item_removed') === 'true') {
-      if (typeof showToast === 'function') {
-        showToast('Product removed from cart!', 'error');
-      } else {
-        showToast('Product removed from cart!', 'error');
-      }
-      localStorage.removeItem('cart_item_removed');
+    if (pendingMsg && typeof showToast === 'function') {
+      showToast(pendingMsg, pendingType);
+      // Mesajı bir kez gösterdikten sonra temizle
+      localStorage.removeItem('cart_toast_msg');
+      localStorage.removeItem('cart_toast_type');
     }
   });
 </script>
