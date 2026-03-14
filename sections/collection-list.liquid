@@ -16,19 +16,15 @@
   }
 {%- endstyle -%}
 
-{%- capture bg_class -%}
-  {% if section.settings.use_transparent_bg %}
-    bg-transparent
-  {% else %}
-    bg-custombg
-  {% endif %}
-{%- endcapture -%}
-
 <section
   id="shopify-section-{{ section.id }}"
   class="
     transition-colors duration-300 section-{{ section.id }}-padding
-    {{ bg_class }} color-{{ section.settings.color_scheme }} gradient
+    {% if section.settings.use_transparent_bg %}
+      bg-transparent
+    {% else %}
+      bg-custombg color-{{ section.settings.color_scheme }} gradient
+    {% endif %}
   "
   {% if section.settings.use_transparent_bg %}
     style="background: transparent !important;"
@@ -147,12 +143,6 @@
       "unit": "px",
       "label": "Bottom Margin",
       "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "use_transparent_bg",
-      "label": "Transparan Arka Plan Kullan",
-      "default": false
     }
   ],
   "blocks": [
