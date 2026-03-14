@@ -417,7 +417,12 @@
       "settings": {
         "slides_per_view": 3,
         "testimonial_title": "Testimonials",
-        "background_color": "#ffffff"
+        "background_color": "#ffffff",
+        "header_opacity": 100,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "image_with_text_multi_ExeLfW": {
@@ -557,7 +562,12 @@
       ],
       "name": "Luvia Full Gallery",
       "settings": {
-        "title": "Follow Era"
+        "title": "Follow Era",
+        "header_opacity": 100,
+        "padding_top": 68,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "featured_blog_carousel_qhr9Th": {
@@ -652,7 +662,12 @@
       "settings": {
         "slides_per_view": 3,
         "testimonial_title": "Testimonials",
-        "background_color": "#ffffff"
+        "background_color": "#ffffff",
+        "header_opacity": 100,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "newsletter_banner_fKkMaW": {
@@ -701,7 +716,12 @@
       ],
       "name": "Luvia Full Gallery",
       "settings": {
-        "title": "Follow Era"
+        "title": "Follow Era",
+        "header_opacity": 100,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "featured_products_slider_7JHjiQ": {
