@@ -158,28 +158,12 @@
       };
     </script>
 
-    <!-- Reduce TBT - Aggressive Lazy Loading -->
-    <script>
-      // Load non-critical scripts after page is fully interactive
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(function() {
-          const luviaScript = document.createElement('script');
-          luviaScript.src = '{{ 'luvia-global.js' | asset_url }}';
-          luviaScript.defer = true;
-          document.body.appendChild(luviaScript);
-        });
-      } else {
-        // Fallback for older browsers
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            const luviaScript = document.createElement('script');
-            luviaScript.src = '{{ 'luvia-global.js' | asset_url }}';
-            luviaScript.defer = true;
-            document.body.appendChild(luviaScript);
-          }, 200);
-        });
-      }
-    </script>
+    <!-- Critical: Load luvia-global.js IMMEDIATELY -->
+    <script src="{{ 'luvia-global.js' | asset_url }}" defer></script>
+
+    <!-- Other scripts -->
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
 
     {% render 'luvia-lightbox' %}
   </body>
