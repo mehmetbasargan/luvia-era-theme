@@ -202,7 +202,11 @@
         "section_title": "Editor's Picks",
         "section_subtitle": "Luvia Era Capsule Collection",
         "button_text": "All Products",
-        "button_url": "shopify://collections/all"
+        "button_url": "shopify://collections/all",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "image_with_text_multi_KVYKE3": {
@@ -238,7 +242,12 @@
         "image_block_HaCNaT"
       ],
       "name": "Image with Text Multi",
-      "settings": {}
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "rich_text_banner_yW67kH": {
       "type": "rich-text-banner",
@@ -293,7 +302,11 @@
       "settings": {
         "image": "shopify://shop_images/shoppable-image3.jpg",
         "title": "Curated Collections",
-        "subtitle": "Touch the details and discover the artistry behind every piece."
+        "subtitle": "Touch the details and discover the artistry behind every piece.",
+        "padding_top": 56,
+        "padding_bottom": 52,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "featured_blog_carousel_rfnxdi": {
@@ -327,7 +340,12 @@
         "image_block_AjiDDT"
       ],
       "name": "Image with Text Multi",
-      "settings": {}
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "rich_text_banner_b3LtW4": {
       "type": "rich-text-banner",
@@ -418,7 +436,12 @@
         "image_block_AMpELL"
       ],
       "name": "Image with Text Multi",
-      "settings": {}
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "featured_products_cdqPtt": {
       "type": "featured-products",
@@ -459,7 +482,11 @@
         "section_title": "New Arrivals",
         "section_subtitle": "Handpicked for you",
         "button_text": "View All",
-        "button_url": ""
+        "button_url": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "full_width_gallery_fnrnK7": {
@@ -568,7 +595,11 @@
       "settings": {
         "image": "shopify://shop_images/5-2.jpg",
         "title": "Curated Collections",
-        "subtitle": "Touch the details and discover the artistry behind every piece."
+        "subtitle": "Touch the details and discover the artistry behind every piece.",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "testimonial_MnhfEw": {
