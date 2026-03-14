@@ -144,7 +144,8 @@
         "padding_top": 88,
         "padding_bottom": 88,
         "margin_top": 0,
-        "margin_bottom": 0
+        "margin_bottom": 0,
+        "use_transparent_bg": true
       }
     },
     "rich_text_banner_m8j33U": {
