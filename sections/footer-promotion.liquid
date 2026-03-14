@@ -14,7 +14,7 @@
       {% for block in section.blocks %}
         <a
           href="{{ block.settings.link }}"
-          class="group relative block overflow-hidden aspect-square border border-line  "
+          class="group relative block overflow-hidden aspect-square border border-line"
           {{ block.shopify_attributes }}
         >
           {% comment %} Görsel {% endcomment %}
@@ -42,11 +42,11 @@
           >
             {% comment %} Metin Alanı {% endcomment %}
             <div class="text-center px-4 relative z-20">
-              <h3 class="text-secondary text-[13px] uppercase tracking-[0.3em] font-light leading-snug">
+              <h3 class="text-white text-[13px] uppercase tracking-[0.3em] font-light leading-snug">
                 {{ block.settings.title }}
               </h3>
               <div
-                class="h-[1px] w-0 group-hover:w-full bg-secondary mx-auto mt-2 transition-all duration-500 ease-in-out"
+                class="h-[1px] w-0 group-hover:w-full bg-white mx-auto mt-2 transition-all duration-500 ease-in-out"
               ></div>
             </div>
           </div>

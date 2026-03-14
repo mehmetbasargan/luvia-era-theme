@@ -983,6 +983,14 @@ blockquote{
   top: 100%;
 }
 
+.top-48{
+  top: 12rem;
+}
+
+.top-40{
+  top: 10rem;
+}
+
 .z-0{
   z-index: 0;
 }
@@ -1194,6 +1202,10 @@ blockquote{
 
 .mt-auto{
   margin-top: auto;
+}
+
+.ml-3{
+  margin-left: 0.75rem;
 }
 
 .line-clamp-2{
@@ -1560,6 +1572,30 @@ blockquote{
   width: max-content;
 }
 
+.w-\[40px\]{
+  width: 40px;
+}
+
+.w-\[200px\]{
+  width: 200px;
+}
+
+.w-\[100px\]{
+  width: 100px;
+}
+
+.w-\[120px\]{
+  width: 120px;
+}
+
+.w-\[500px\]{
+  width: 500px;
+}
+
+.w-\[300px\]{
+  width: 300px;
+}
+
 .min-w-\[200px\]{
   min-width: 200px;
 }
@@ -1570,6 +1606,18 @@ blockquote{
 
 .min-w-\[45px\]{
   min-width: 45px;
+}
+
+.min-w-5{
+  min-width: 1.25rem;
+}
+
+.min-w-\[100px\]{
+  min-width: 100px;
+}
+
+.min-w-\[300px\]{
+  min-width: 300px;
 }
 
 .max-w-2xl{
@@ -1614,6 +1662,10 @@ blockquote{
 
 .max-w-xl{
   max-width: 36rem;
+}
+
+.max-w-\[300px\]{
+  max-width: 300px;
 }
 
 .flex-1{
@@ -1984,6 +2036,10 @@ blockquote{
   white-space: nowrap;
 }
 
+.text-wrap{
+  text-wrap: wrap;
+}
+
 .\!rounded-full{
   border-radius: 9999px !important;
 }
@@ -2167,6 +2223,11 @@ blockquote{
   background-color: var(--color-white);
 }
 
+.bg-red-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+}
+
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -2340,6 +2401,16 @@ blockquote{
   padding-bottom: 80px;
 }
 
+.py-0{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.px-0{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .pb-1{
   padding-bottom: 0.25rem;
 }
@@ -2414,6 +2485,14 @@ blockquote{
 
 .pt-9{
   padding-top: 2.25rem;
+}
+
+.pl-10{
+  padding-left: 2.5rem;
+}
+
+.pl-3{
+  padding-left: 0.75rem;
 }
 
 .text-left{
@@ -2515,6 +2594,18 @@ blockquote{
   line-height: 1rem;
 }
 
+.text-\[113px\]{
+  font-size: 113px;
+}
+
+.text-\[114px\]{
+  font-size: 114px;
+}
+
+.text-\[45px\]{
+  font-size: 45px;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -2569,6 +2660,38 @@ blockquote{
 
 .leading-tight{
   line-height: 1.25;
+}
+
+.leading-\[20px\]{
+  line-height: 20px;
+}
+
+.leading-\[10px\]{
+  line-height: 10px;
+}
+
+.leading-\[60px\]{
+  line-height: 60px;
+}
+
+.leading-\[30px\]{
+  line-height: 30px;
+}
+
+.leading-\[7px\]{
+  line-height: 7px;
+}
+
+.leading-\[9px\]{
+  line-height: 9px;
+}
+
+.leading-\[15px\]{
+  line-height: 15px;
+}
+
+.leading-\[24px\]{
+  line-height: 24px;
 }
 
 .tracking-\[0\.1em\]{
@@ -2963,6 +3086,11 @@ blockquote{
 
 .hover\:bg-white:hover{
   background-color: var(--color-white);
+}
+
+.hover\:bg-red-200:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:\!text-secondary:hover{

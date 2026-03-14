@@ -1,7 +1,7 @@
 {% paginate blog.articles by 10 %}
   <div class="main-blog-section py-12 px-4 container">
     <header class="text-center mb-16">
-      <h4 class="font-light uppercase tracking-widest ">
+      <h4 class="font-light uppercase tracking-widest">
         {{ section.settings.blog_title | default: blog.title }}
       </h4>
       <p class="text-primary mt-2">
@@ -47,15 +47,18 @@
               <span class="text-sm font-bold text-primary tracking-wider">
                 {{- article.published_at | date: '%B %d, %Y' -}}
               </span>
-              <h5 class="font-light uppercase leading-tight group-hover:text-primary transition-colors">
+              <h6 class="font-medium uppercase hover:text-primary transition-colors max-w-[300px] min-h-[1rem] leading-[24px]">
                 <a href="{{ article.url }}">{{ article.title }}</a>
-              </h5>
+              </h6>
               <p class="text-primary line-clamp-3">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
               <a
                 href="{{ article.url }}"
                 class="inline-block pt-2 font-medium text-sm hover:underline text-primary transition-all uppercase"
               >
-                {{ 'blog.read_more' | t }}
+                <div class="flex items-center gap-3">
+                  {{ 'blog.read_more' | t }}
+                  {% render 'icon-arrow-right' %}
+                </div>
               </a>
             </div>
           </article>

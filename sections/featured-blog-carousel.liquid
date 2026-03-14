@@ -19,7 +19,7 @@
       {% assign blog = blogs[section.settings.blog] %}
       {% for article in blog.articles limit: section.settings.post_limit %}
         <div class="swiper-slide">
-          <div class="group cursor-pointer">
+          <div class="cursor-pointer">
             {% if article.image %}
               <div class="overflow-hidden aspect-[16/9] mb-6 rounded-sm">
                 <a href="{{ article.url }}">
@@ -40,13 +40,13 @@
                 {{- article.published_at | date: '%b %d, %Y' -}}
               </span>
 
-              <h6 class="font-light uppercase group-hover:text-primary transition-colors min-h-[1rem]">
+              <h6 class="font-medium uppercase hover:text-primary transition-colors max-w-[300px] min-h-[1rem] leading-[24px]">
                 {{ article.title }}
               </h6>
 
               <a
                 href="{{ article.url }}"
-                class="text-[11px] uppercase font-semibold tracking-widest hover:text-secondary transition-all flex items-center gap-1"
+                class="text-[12px] uppercase font-semibold tracking-widest hover:text-secondary transition-all flex items-center gap-1"
               >
                 {{ 'blog.read_article' | t }}
                 {% render 'icon-arrow-right' %}

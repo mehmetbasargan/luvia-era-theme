@@ -23,102 +23,123 @@
     const container = document.getElementById('wishlist-container');
     const emptyMessage = document.getElementById('wishlist-empty');
 
-    // 1. Boş Kontrolü (Global Obje Üzerinden)
-    window.LuviaWishlist.checkEmpty = function () {
-      const wishlistIds = this.get();
+    // 1. Sayfa Güncelleme Fonksiyonu
+    const updateWishlistUI = () => {
+      const wishlistIds = window.LuviaWishlist.get();
       if (wishlistIds.length === 0) {
         if (container) container.classList.add('hidden');
         if (emptyMessage) emptyMessage.classList.remove('hidden');
       } else {
         if (container) container.classList.remove('hidden');
-        if (emptyMessage) emptyMessage.add ? emptyMessage.classList.add('hidden') : null;
-        // fallback for classList
-        emptyMessage.classList.add('hidden');
+        if (emptyMessage) emptyMessage.classList.add('hidden');
       }
     };
 
-    // İlk kontrolü yap
-    window.LuviaWishlist.checkEmpty();
+    // 2. Toggle Fonksiyonunu Genişletme (Silince Sayfadan Uçurma)
+    const originalToggle = window.LuviaWishlist.toggle;
+    window.LuviaWishlist.toggle = function (id) {
+      // Orijinal toggle işlemini yap (Localstorage ve ikon güncelleme)
+      originalToggle.call(this, id);
+
+      // Eğer wishlist sayfasındaysak, kartı anında DOM'dan kaldır
+      const itemElement = document.getElementById(`wish-item-${id}`);
+      if (itemElement) {
+        itemElement.style.opacity = '0';
+        itemElement.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          itemElement.remove();
+          updateWishlistUI(); // Boş kaldıysa mesajı göster
+        }, 300);
+      }
+    };
+
+    // İlk kontrol
+    updateWishlistUI();
 
     const initialIds = window.LuviaWishlist.get();
     if (initialIds.length === 0) return;
 
     const formatPrice = (cents) => {
-      return (cents / 100).toLocaleString('{{ shop.locale }}', {
+      // Shopify formatına uygun para birimi gösterimi
+      return new Intl.NumberFormat('{{ shop.locale }}', {
         style: 'currency',
         currency: '{{ cart.currency.iso_code }}',
-      });
+      }).format(cents / 100);
     };
 
-    // 2. Shopify Search API ile ürünleri çek
-    const searchQuery = initialIds.map((id) => `id:${id}`).join(' OR ');
+    // 3. Ürünleri Çekme ve Ekrana Basma
+    // Not: Search API bazen gecikebilir, her ürün için tekil fetch daha sağlamdır
+    const fetchPromises = initialIds.map((id) =>
+      fetch(`/products/${id}.js`)
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null)
+    );
 
-    fetch(`/search/suggest.json?q=${encodeURIComponent(searchQuery)}&resources[type]=product&resources[limit]=20`)
-      .then((res) => res.json())
-      .then(async (data) => {
-        const initialProducts = data.resources.results.products;
-        if (!initialProducts || initialProducts.length === 0) {
-          window.LuviaWishlist.checkEmpty();
-          return;
-        }
+    Promise.all(fetchPromises).then((products) => {
+      const validProducts = products.filter((p) => p !== null);
 
-        const fullProductPromises = initialProducts.map((p) => fetch(`/products/${p.handle}.js`).then((r) => r.json()));
-        const products = await Promise.all(fullProductPromises);
+      if (validProducts.length === 0) {
+        updateWishlistUI();
+        return;
+      }
 
-        container.innerHTML = products
-          .map((product) => {
-            const isOnSale = product.compare_at_price > product.price;
-            const firstVariantId = product.variants[0].id;
+      container.innerHTML = validProducts
+        .map((product) => {
+          const isOnSale = product.compare_at_price > product.price;
+          const firstVariantId = product.variants[0].id;
 
-            return `
-            <div class="group flex flex-col h-full bg-white overflow-hidden relative transition-all duration-500" id="wish-item-${
-              product.id
-            }">
-              <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
-                <div class="absolute top-3 inset-x-3 z-10 flex justify-end items-start">
-                  <button type="button" 
-                          onclick="LuviaWishlist.toggle('${product.id}')"
-                          class="flex items-center justify-center w-8 h-8 bg-white backdrop-blur-sm rounded-full shadow-sm hover:bg-red-500 hover:text-white transition-all duration-300 pointer-events-auto border-none cursor-pointer">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                  </button>
-                </div>
-                <a href="${product.url}" class="block h-full w-full">
-                  <img src="${product.featured_image}" alt="${
-              product.title
-            }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-                </a>
-                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
-                  <button type="button" onclick="handleWishlistAddToCart(event, '${firstVariantId}')" class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer border-none">
-                    {{ 'products.product.add_to_cart' | t }}
-                  </button>
-                </div>
+          return `
+          <div class="group flex flex-col h-full bg-white overflow-hidden relative transition-all duration-500" id="wish-item-${
+            product.id
+          }">
+            <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
+              <div class="absolute top-3 inset-x-3 z-10 flex justify-end items-start">
+                <button type="button" 
+                        onclick="LuviaWishlist.toggle('${product.id}')"
+                        class="flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-red-500 hover:text-white transition-all duration-300 cursor-pointer border-none">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                </button>
               </div>
-              <div class="pt-4 pb-2 flex flex-col items-center px-3">
-                <a href="${
-                  product.url
-                }" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px]">${
-              product.title
-            }</a>
-                <div class="mt-2 flex items-center gap-2">
-                  ${
-                    isOnSale
-                      ? `<span class="text-gray-400 line-through text-[13px]">${formatPrice(
-                          product.compare_at_price
-                        )}</span>`
-                      : ''
-                  }
-                  <span class="text-primary text-[14px] font-medium">${formatPrice(product.price)}</span>
-                </div>
+              <a href="${product.url}" class="block h-full w-full">
+                <img src="${product.featured_image}" alt="${
+            product.title
+          }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+              </a>
+              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
+                <button type="button" onclick="handleWishlistAddToCart(event, '${firstVariantId}')" class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer border-none">
+                  {{ 'products.product.add_to_cart' | t }}
+                </button>
               </div>
-            </div>`;
-          })
-          .join('');
-      });
+            </div>
+            <div class="pt-4 pb-2 flex flex-col items-center px-3">
+              <a href="${
+                product.url
+              }" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px]">
+                ${product.title}
+              </a>
+              <div class="mt-2 flex items-center gap-2">
+                ${
+                  isOnSale
+                    ? `<span class="text-gray-400 line-through text-[13px]">${formatPrice(
+                        product.compare_at_price
+                      )}</span>`
+                    : ''
+                }
+                <span class="text-primary text-[14px] font-medium">${formatPrice(product.price)}</span>
+              </div>
+            </div>
+          </div>`;
+        })
+        .join('');
+    });
 
-    // 3. Global Toast Destekli Sepete Ekleme
+    // 4. Sepete Ekleme Fonksiyonu
     window.handleWishlistAddToCart = function (e, variantId) {
       const btn = e.currentTarget;
       const originalText = btn.innerText;
+      btn.disabled = true;
       btn.innerText = '...';
 
       fetch('/cart/add.js', {
@@ -129,21 +150,21 @@
         .then((res) => res.json())
         .then((cartData) => {
           btn.innerText = 'ADDED';
-          // Global Toast Kullanımı
           if (window.showToast) window.showToast(window.LuviaStrings.cartAdded, 'success');
           if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
 
-          // Cart Drawer'ı tetikle
           document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: cartData }, bubbles: true }));
 
           setTimeout(() => {
             btn.innerText = originalText;
+            btn.disabled = false;
           }, 2000);
         })
         .catch(() => {
           btn.innerText = 'ERROR';
           setTimeout(() => {
             btn.innerText = originalText;
+            btn.disabled = false;
           }, 2000);
         });
     };

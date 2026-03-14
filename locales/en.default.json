@@ -66,7 +66,8 @@
 		"discover_our_collection": "Discover Our Collection",
 		"shipping_taxes_discounts": "Shipping, taxes, and discounts will be calculated at checkout.",
 		"secure_payment_guaranteed": "Secure Payment Guaranteed",
-		"empty": "Your cart is empty"
+		"empty": "Your cart is empty",
+		"order_title": "Order Summary"
 	},
 	"collections": {
 		"title": "Collections",
