@@ -140,7 +140,11 @@
       ],
       "name": "Collection List",
       "settings": {
-        "collection_list_title": "Our Collections"
+        "collection_list_title": "Our Collections",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     },
     "rich_text_banner_m8j33U": {
