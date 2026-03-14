@@ -23,10 +23,9 @@
     const container = document.getElementById('wishlist-container');
     const emptyMessage = document.getElementById('wishlist-empty');
 
-    // 1. Sayfa Güncelleme Fonksiyonu
     const updateWishlistUI = () => {
       const wishlistIds = window.LuviaWishlist.get();
-      if (wishlistIds.length === 0) {
+      if (!wishlistIds || wishlistIds.length === 0) {
         if (container) container.classList.add('hidden');
         if (emptyMessage) emptyMessage.classList.remove('hidden');
       } else {
@@ -35,136 +34,96 @@
       }
     };
 
-    // 2. Toggle Fonksiyonunu Genişletme (Silince Sayfadan Uçurma)
+    // Toggle fonksiyonunu sayfa için özelleştir
     const originalToggle = window.LuviaWishlist.toggle;
     window.LuviaWishlist.toggle = function (id) {
-      // Orijinal toggle işlemini yap (Localstorage ve ikon güncelleme)
       originalToggle.call(this, id);
-
-      // Eğer wishlist sayfasındaysak, kartı anında DOM'dan kaldır
       const itemElement = document.getElementById(`wish-item-${id}`);
       if (itemElement) {
-        itemElement.style.opacity = '0';
-        itemElement.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-          itemElement.remove();
-          updateWishlistUI(); // Boş kaldıysa mesajı göster
-        }, 300);
+        itemElement.remove();
+        updateWishlistUI();
       }
     };
 
-    // İlk kontrol
     updateWishlistUI();
 
-    const initialIds = window.LuviaWishlist.get();
-    if (initialIds.length === 0) return;
+    const wishlistIds = window.LuviaWishlist.get();
+    if (wishlistIds.length === 0) return;
 
-    const formatPrice = (cents) => {
-      // Shopify formatına uygun para birimi gösterimi
-      return new Intl.NumberFormat('{{ shop.locale }}', {
-        style: 'currency',
-        currency: '{{ cart.currency.iso_code }}',
-      }).format(cents / 100);
-    };
+    // 1. Arama sorgusu oluştur (id:123 OR id:456 ...)
+    const searchQuery = wishlistIds.map((id) => `id:${id}`).join(' OR ');
 
-    // 3. Ürünleri Çekme ve Ekrana Basma
-    // Not: Search API bazen gecikebilir, her ürün için tekil fetch daha sağlamdır
-    const fetchPromises = initialIds.map((id) =>
-      fetch(`/products/${id}.js`)
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null)
-    );
+    // 2. Search API ile ürünleri getir
+    fetch(`${window.Shopify.routes.root}search?q=${encodeURIComponent(searchQuery)}&view=json&type=product`)
+      .then((res) => res.json())
+      .then((products) => {
+        if (!products || products.length === 0) {
+          updateWishlistUI();
+          return;
+        }
 
-    Promise.all(fetchPromises).then((products) => {
-      const validProducts = products.filter((p) => p !== null);
+        container.innerHTML = products
+          .map((product) => {
+            const isOnSale = product.compare_at_price > product.price;
+            // Fiyat formatlama (Basit ama etkili)
+            const price = Shopify.formatMoney(product.price, '{{ shop.money_format }}');
+            const comparePrice = product.compare_at_price
+              ? Shopify.formatMoney(product.compare_at_price, '{{ shop.money_format }}')
+              : '';
 
-      if (validProducts.length === 0) {
-        updateWishlistUI();
-        return;
-      }
-
-      container.innerHTML = validProducts
-        .map((product) => {
-          const isOnSale = product.compare_at_price > product.price;
-          const firstVariantId = product.variants[0].id;
-
-          return `
-          <div class="group flex flex-col h-full bg-white overflow-hidden relative transition-all duration-500" id="wish-item-${
-            product.id
-          }">
-            <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
-              <div class="absolute top-3 inset-x-3 z-10 flex justify-end items-start">
+            return `
+            <div class="group flex flex-col h-full bg-white relative" id="wish-item-${product.id}">
+              <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
                 <button type="button" 
                         onclick="LuviaWishlist.toggle('${product.id}')"
-                        class="flex items-center justify-center w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-red-500 hover:text-white transition-all duration-300 cursor-pointer border-none">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                  </svg>
+                        class="absolute top-3 right-3 z-20 flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-sm hover:bg-red-500 hover:text-white transition-all cursor-pointer border-none">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
-              </div>
-              <a href="${product.url}" class="block h-full w-full">
-                <img src="${product.featured_image}" alt="${
-            product.title
-          }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-              </a>
-              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
-                <button type="button" onclick="handleWishlistAddToCart(event, '${firstVariantId}')" class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer border-none">
+                <a href="${product.url}" class="block h-full w-full">
+                  <img src="${
+                    product.featured_image
+                  }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </a>
+                <button type="button" onclick="handleWishlistAddToCart(event, '${
+                  product.variants[0].id
+                }')" class="absolute inset-x-0 bottom-0 bg-primary text-white py-4 text-[11px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all cursor-pointer border-none">
                   {{ 'products.product.add_to_cart' | t }}
                 </button>
               </div>
-            </div>
-            <div class="pt-4 pb-2 flex flex-col items-center px-3">
-              <a href="${
-                product.url
-              }" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase text-center line-clamp-2 min-h-[40px]">
-                ${product.title}
-              </a>
-              <div class="mt-2 flex items-center gap-2">
-                ${
-                  isOnSale
-                    ? `<span class="text-gray-400 line-through text-[13px]">${formatPrice(
-                        product.compare_at_price
-                      )}</span>`
-                    : ''
-                }
-                <span class="text-primary text-[14px] font-medium">${formatPrice(product.price)}</span>
+              <div class="pt-4 text-center">
+                <a href="${product.url}" class="text-primary text-[13px] uppercase tracking-wider line-clamp-1 px-2">${
+              product.title
+            }</a>
+                <div class="mt-1 flex justify-center gap-2 text-[13px]">
+                  ${isOnSale ? `<span class="text-gray-400 line-through">${comparePrice}</span>` : ''}
+                  <span class="text-primary font-medium">${price}</span>
+                </div>
               </div>
-            </div>
-          </div>`;
-        })
-        .join('');
-    });
+            </div>`;
+          })
+          .join('');
+      })
+      .catch((err) => {
+        console.error('Wishlist Error:', err);
+        updateWishlistUI();
+      });
 
-    // 4. Sepete Ekleme Fonksiyonu
+    // Sepete Ekleme
     window.handleWishlistAddToCart = function (e, variantId) {
       const btn = e.currentTarget;
-      const originalText = btn.innerText;
-      btn.disabled = true;
       btn.innerText = '...';
-
       fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: variantId, quantity: 1 }),
       })
         .then((res) => res.json())
-        .then((cartData) => {
+        .then((data) => {
           btn.innerText = 'ADDED';
-          if (window.showToast) window.showToast(window.LuviaStrings.cartAdded, 'success');
+          if (window.showToast) window.showToast('Added to cart', 'success');
           if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
-
-          document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: cartData }, bubbles: true }));
-
           setTimeout(() => {
-            btn.innerText = originalText;
-            btn.disabled = false;
-          }, 2000);
-        })
-        .catch(() => {
-          btn.innerText = 'ERROR';
-          setTimeout(() => {
-            btn.innerText = originalText;
-            btn.disabled = false;
+            btn.innerText = 'ADD TO CART';
           }, 2000);
         });
     };
