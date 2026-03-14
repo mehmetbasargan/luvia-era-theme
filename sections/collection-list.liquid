@@ -18,17 +18,7 @@
 
 <section
   id="shopify-section-{{ section.id }}"
-  class="
-    transition-colors duration-300 section-{{ section.id }}-padding
-    {% if section.settings.use_transparent_bg %}
-      bg-transparent
-    {% else %}
-      bg-custombg color-{{ section.settings.color_scheme }} gradient
-    {% endif %}
-  "
-  {% if section.settings.use_transparent_bg %}
-    style="background: transparent !important;"
-  {% endif %}
+  class=" transition-colors duration-300 section-{{ section.id }}-padding"
 >
   <div class="container">
     {% if section.settings.collection_list_title != blank %}
