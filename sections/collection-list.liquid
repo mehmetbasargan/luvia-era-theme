@@ -16,17 +16,17 @@
   }
 {%- endstyle -%}
 
-{%- capture bg_class -%}
+{%- capture bg_style -%}
   {% if section.settings.use_transparent_bg %}
-    bg-transparent
-  {% else %}
-    bg-custombg
+    background-color: transparent !important;
+    background-image: none !important;
   {% endif %}
 {%- endcapture -%}
 
 <section
   id="shopify-section-{{ section.id }}"
-  class="section-{{ section.id }}-padding {{ bg_class }} transition-colors duration-300 section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
+  class="section-{{ section.id }}-padding transition-colors duration-300 color-{{ section.settings.color_scheme }} {% unless section.settings.use_transparent_bg %}bg-custombg gradient{% endunless %}"
+  style="{{ bg_style }}"
 >
   <div class="container">
     {% if section.settings.collection_list_title != blank %}
