@@ -34,7 +34,6 @@
       }
     };
 
-    // Toggle fonksiyonu
     const originalToggle = window.LuviaWishlist.toggle;
     window.LuviaWishlist.toggle = function (id) {
       originalToggle.call(this, id);
@@ -46,8 +45,6 @@
     const wishlistIds = window.LuviaWishlist.get();
     if (!wishlistIds || wishlistIds.length === 0) return;
 
-    // 🛡️ STRATEJİ: ID'leri 'OR' ile birleştirip gerçek Search API'sine soruyoruz
-    // Örnek sorgu: q=id:123 OR id:456
     const searchQuery = wishlistIds.map((id) => `id:${id}`).join(' OR ');
     const apiUrl = `${window.Shopify.routes.root}search?q=${encodeURIComponent(
       searchQuery
@@ -63,7 +60,6 @@
 
         container.innerHTML = products
           .map((product) => {
-            // Para birimi formatı
             const price = Shopify.formatMoney
               ? Shopify.formatMoney(product.price, '{{ shop.money_format }}')
               : product.price;
@@ -75,9 +71,9 @@
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg>
                 </button>
                 <a href="${product.url}" class="block h-full w-full">
-                  <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                  <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                 </a>
-                <button onclick="handleWishlistAddToCart(event, '${product.variant_id}')" class="absolute inset-x-0 bottom-0 bg-primary text-white py-3 text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all cursor-pointer border-none">
+                <button type="button" onclick="handleWishlistAddToCart(event, '${product.variant_id}')" class="absolute inset-x-0 bottom-0 bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all cursor-pointer border-none z-40">
                   {{ 'products.product.add_to_cart' | t }}
                 </button>
               </div>
@@ -95,4 +91,69 @@
         updateUI();
       });
   });
+
+  // 🛒 SEPETE EKLEME FONKSİYONU
+  window.handleWishlistAddToCart = function (event, variantId) {
+    event.preventDefault();
+    const btn = event.currentTarget;
+    const originalText = btn.innerText;
+
+    btn.disabled = true;
+    btn.innerText = '...';
+
+    const formData = {
+      items: [
+        {
+          id: variantId,
+          quantity: 1,
+        },
+      ],
+    };
+
+    fetch(window.Shopify.routes.root + 'cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
+      .then((data) => {
+        btn.innerText = 'ADDED';
+
+        // 1. Toast bildirimi göster
+        if (window.showToast) {
+          window.showToast("{{ 'products.product.add_to_cart' | t }}", 'success');
+        }
+
+        // 2. Cart Drawer'ı yenile ve aç
+        // Temanın Drawer'ı açma fonksiyonu genellikle bunlardan biridir:
+        if (typeof openAndRefreshCart === 'function') {
+          openAndRefreshCart();
+        } else if (typeof refreshCartDrawer === 'function') {
+          refreshCartDrawer();
+        }
+
+        // Shopify'ın standart event'ini tetikle (bazı uygulamalar/temalar için)
+        document.dispatchEvent(
+          new CustomEvent('cart:updated', {
+            detail: { cart: data },
+          })
+        );
+
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.disabled = false;
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        btn.innerText = 'ERROR';
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.disabled = false;
+        }, 2000);
+      });
+  };
 </script>
