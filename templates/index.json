@@ -261,7 +261,7 @@
         "margin_top": 0,
         "margin_bottom": 0,
         "use_custom_bg": true,
-        "section_bg_color": "#d11b1b",
+        "section_bg_color": "#f9f9f9",
         "remove_bg": false
       }
     },
