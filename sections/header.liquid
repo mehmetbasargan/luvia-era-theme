@@ -252,12 +252,12 @@
 
           {% comment %} account {% endcomment %}
           <div class="flex items-center gap-0">
-            <div class="bg-black/10 p-2 rounded-full bg-custombg hover:bg-secondary hover:!text-white">
+            <div class="bg-black/10 p-2 rounded-full bg-custombg ">
               <a href="{{ routes.search_url }}" class="lg:w-[12px] w-[12px] shrink-0">
                 {% render 'icon-search' %}
               </a>
             </div>
-            <div class="bg-black/10 p-2 rounded-full hover:bg-secondary hover:!text-white">
+            <div class="bg-black/10 p-2 rounded-full">
               <a href="/pages/wishlist" class="lg:w-[12px] w-[12px] shrink-0">
                 {% if shop.customer_accounts_enabled %}
                   {% render 'icon-wishlist' %}
@@ -265,7 +265,7 @@
               </a>
             </div>
 
-            <div class="bg-black/10 p-2 rounded-full hover:bg-secondary hover:!text-white relative">
+            <div class="bg-black/10 p-2 rounded-full relative">
               <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0">
                 <div class="absolute top-[0px] right-0">
                   <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
