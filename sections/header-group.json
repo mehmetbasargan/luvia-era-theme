@@ -24,6 +24,7 @@
       "block_order": [
         "text_block_HeqF77"
       ],
+      "disabled": true,
       "name": "Marquee Text",
       "settings": {
         "bg_color": "#000000",
@@ -71,7 +72,6 @@
         "social_icon_pgVcp7",
         "social_icon_pYUtiM"
       ],
-      "disabled": true,
       "settings": {
         "menu": "main-menu",
         "logo": "shopify://shop_images/logo2.svg",
@@ -120,6 +120,7 @@
         "social_icon_rRjGRG",
         "social_icon_WkhFWn"
       ],
+      "disabled": true,
       "name": "Header - Centered",
       "settings": {
         "menu": "main-menu",
