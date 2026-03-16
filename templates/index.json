@@ -260,8 +260,8 @@
         "padding_bottom": 36,
         "margin_top": 0,
         "margin_bottom": 0,
-        "use_custom_bg": false,
-        "section_bg_color": "#ffffff",
+        "use_custom_bg": true,
+        "section_bg_color": "#d11b1b",
         "remove_bg": true
       }
     },
