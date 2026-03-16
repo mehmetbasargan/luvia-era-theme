@@ -26,14 +26,19 @@
           class="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
         >
       {% else %}
-        <div class="w-full h-[600px] bg-custombg flex items-center justify-center italic text-primary tracking-widest uppercase">
-          <img
-            src="{{ 'collection-1' | placeholder_svg_tag: 'w-full h-full bg-[#E5E5E5]' }}"
+        <div class="w-full h-[600px] bg-[#E5E5E5] flex items-center justify-center">
+          <svg
             height="600"
             width="1200"
-            alt="{{ section.settings.heading }}"
-            loading="eager"
+            viewBox="0 0 1200 600"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            preserveAspectRatio="xMidYMid slice"
           >
+            <rect width="1200" height="600" fill="#E5E5E5"/>
+            <text x="600" y="300" text-anchor="middle" fill="#currentColor" font-size="24" font-family="sans-serif">{{ section.settings.heading }}</text>
+          </svg>
         </div>
       {% endif %}
     </div>
