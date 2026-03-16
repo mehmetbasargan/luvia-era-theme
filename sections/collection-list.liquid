@@ -55,6 +55,7 @@
           <a
             href="{{ collection.url | default: '#' }}"
             class="w-full aspect-[4/5] overflow-hidden bg-white relative block shadow-sm transition-all duration-500 border border-transparent group-hover:border-line"
+            aria-label="{{ collection.title | default: 'Collection' | escape }}"
           >
             {% if collection.featured_image != blank %}
               <img
@@ -81,6 +82,7 @@
             <a
               href="{{ collection.url | default: '#' }}"
               class="text-primary text-[11px] uppercase tracking-[0.2em] hover:text-secondary transition-all flex items-center justify-center gap-2"
+              aria-label="Explore {{ collection.title | default: 'Collection' | escape }}"
             >
               {{ 'collections.review' | t | default: 'Explore' }}
               <span class="transition-transform group-hover:translate-x-1">

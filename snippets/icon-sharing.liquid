@@ -4,6 +4,7 @@
   <a
     href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}"
     target="_blank"
+    rel="noopener"
     class="hover:text-blue-600 transition"
   >
     <svg
@@ -26,6 +27,7 @@
   <a
     href="//twitter.com/share?text={{ share_title | url_param_escape }}&url={{ shop.url | append: share_permalink }}"
     target="_blank"
+    rel="noopener"
     class="hover:text-blue-400 transition"
   >
     <svg
@@ -50,6 +52,7 @@
   <a
     href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&media={{ share_image | image_url: width: 1024 }}&description={{ share_title | url_param_escape }}"
     target="_blank"
+    rel="noopener"
     class="hover:text-red-600 transition"
   >
     <svg
@@ -75,6 +78,7 @@
   <a
     href="https://api.whatsapp.com/send?text={{ share_title | url_param_escape }}%20{{ shop.url | append: share_permalink }}"
     target="_blank"
+    rel="noopener"
     class="hover:text-green-500 transition"
   >
     <svg
@@ -99,6 +103,7 @@
   <a
     href="//www.linkedin.com/shareArticle?mini=true&url={{ shop.url | append: share_permalink }}"
     target="_blank"
+    rel="noopener"
     class="hover:text-blue-700 transition"
   >
     <svg

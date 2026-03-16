@@ -49,10 +49,16 @@
       <div class="flex items-center gap-6 mt-6 md:mt-0">
         {% comment %} Slider Navigasyon Butonları {% endcomment %}
         <div class="flex gap-4">
-          <button class="swiper-prev-{{ section.id }} swiper-button-prev-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition">
+          <button
+            class="swiper-prev-{{ section.id }} swiper-button-prev-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition"
+            aria-label="Previous slide"
+          >
             {% render 'icon-chevron-left' %}
           </button>
-          <button class="swiper-next-{{ section.id }} swiper-button-next-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition">
+          <button
+            class="swiper-next-{{ section.id }} swiper-button-next-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition"
+            aria-label="Next slide"
+          >
             {% render 'icon-chevron-right' %}
           </button>
         </div>
