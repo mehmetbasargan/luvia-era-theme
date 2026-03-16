@@ -447,8 +447,8 @@
         "padding_bottom": 36,
         "margin_top": 0,
         "margin_bottom": 0,
-        "use_custom_bg": true,
-        "section_bg_color": "#dc2222",
+        "use_custom_bg": false,
+        "section_bg_color": "#f9f9f9",
         "remove_bg": false
       }
     },
