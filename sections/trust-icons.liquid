@@ -14,10 +14,27 @@
       margin-bottom: {{ section.settings.margin_bottom }}px;
     }
   }
+
+  /* color and background settings */
+  #LuviaSection-{{ section.id }} {
+    {% if section.settings.remove_bg %}
+      background-color: transparent !important;
+      background-image: none !important;
+    {% elsif section.settings.use_custom_bg %}
+      background-color: {{ section.settings.section_bg_color }} !important;
+      background-image: none !important;
+    {% endif %}
+  }
 {%- endstyle -%}
 
-<section class="bg-custombg border-t border-line section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
-  <div class="container mx-auto px-4">
+<section
+  id="LuviaSection-{{ section.id }}"
+  class="
+    transition-colors duration-300 section-{{ section.id }}-padding
+    {% unless section.settings.remove_bg or section.settings.use_custom_bg %}bg-white color-{{ section.settings.color_scheme }} gradient{% endunless %}
+  "
+>
+  <div class="container mx-auto">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
       {% for block in section.blocks %}
         <div class="flex flex-col items-center text-center space-y-3 group" {{ block.shopify_attributes }}>
@@ -119,6 +136,28 @@
       "unit": "px",
       "label": "Alt Dış Boşluk (Margin)",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Arka Plan Tasarımı"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_custom_bg",
+      "label": "Özel Arka Plan Rengi Kullan",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Arka Plan Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_bg",
+      "label": "Arka Planı Tamamen Kaldır (Transparent)",
+      "default": false
     }
   ],
   "blocks": [
