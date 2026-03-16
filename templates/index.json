@@ -145,9 +145,9 @@
         "padding_bottom": 88,
         "margin_top": 0,
         "margin_bottom": 0,
-        "use_custom_bg": true,
+        "use_custom_bg": false,
         "section_bg_color": "#667c67",
-        "remove_bg": true
+        "remove_bg": false
       }
     },
     "rich_text_banner_m8j33U": {
