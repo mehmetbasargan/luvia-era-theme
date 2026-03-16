@@ -27,7 +27,13 @@
 
   <div class="relative z-10 text-center px-4 max-w-4xl">
     <nav class="mb-4 text-[13px] uppercase tracking-[0.3em] text-custombg">
-      <a href="{{ routes.root_url }}" class="hover:text-secondary transition-colors">{{ 'general.home' | t }}</a>
+      <a
+        href="{{ routes.root_url }}"
+        class="hover:text-secondary transition-colors"
+        aria-label="{{ 'general.home' | t }}"
+      >
+        {{- 'general.home' | t -}}
+      </a>
       <span class="mx-2">/</span>
       <span class="">{{ collection.title }}</span>
     </nav>

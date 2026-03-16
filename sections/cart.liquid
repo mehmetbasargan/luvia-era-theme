@@ -20,7 +20,7 @@
           {% for item in cart.items %}
             <div class="flex flex-col md:flex-row gap-6 py-8 border-b border-line items-start md:items-center animate-fadeIn">
               <div class="w-28 h-36 shrink-0 bg-custombg overflow-hidden">
-                <a href="{{ item.url }}">
+                <a href="{{ item.url }}" aria-label="View {{ item.product.title | escape }} product details">
                   <img
                     src="{{ item.image | image_url: width: 400 }}"
                     alt="{{ item.title | escape }}"
@@ -118,6 +118,7 @@
               type="submit"
               name="checkout"
               class="w-full cursor-pointer bg-primary text-white py-5 text-[13px] uppercase tracking-[0.2em] hover:bg-secondary transition-all duration-500 shadow-sm"
+              aria-label="{{ 'cart.proceed_to_checkout' | t | default: 'Proceed to checkout' }}"
             >
               {{ 'cart.proceed_to_checkout' | t }}
             </button>

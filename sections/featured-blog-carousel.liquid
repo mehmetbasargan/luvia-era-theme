@@ -57,7 +57,7 @@
           <div class="cursor-pointer">
             {% if article.image %}
               <div class="overflow-hidden aspect-[16/9] mb-6 rounded-sm">
-                <a href="{{ article.url }}">
+                <a href="{{ article.url }}" aria-label="Read article: {{ article.title | escape }}">
                   <img
                     src="{{ article.image | image_url: width: 600 }}"
                     height="400"

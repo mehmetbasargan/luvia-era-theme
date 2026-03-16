@@ -60,7 +60,10 @@
             style="top: {{ block.settings.top_position }}%; left: {{ block.settings.left_position }}%; transform: translate(-50%, -50%);"
             {{ block.shopify_attributes }}
           >
-            <button class="relative flex items-center justify-center w-6 h-6 md:w-8 md:h-8 focus:outline-none">
+            <button
+              class="relative flex items-center justify-center w-6 h-6 md:w-8 md:h-8 focus:outline-none"
+              aria-label="Product hotspot - {{ block.settings.product.title | default: 'View product' }}"
+            >
               <span class="absolute inline-flex h-full w-full rounded-full bg-white opacity-75 animate-ping"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-white shadow-lg border border-line"></span>
             </button>

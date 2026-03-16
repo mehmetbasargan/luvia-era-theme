@@ -27,7 +27,11 @@
   </div>
 
   <div class="mt-16 pt-8 border-t border-line flex flex-col md:flex-row md:justify-between justify-center items-center">
-    <a href="{{ blog.url }}" class="text-sm font-medium hover:text-secondary mb-8 md:mb-0"
+    <a
+      href="{{ blog.url }}"
+      class="text-sm font-medium hover:text-secondary mb-8 md:mb-0"
+      aria-label="Back to {{ blog.title }}"
+    >
       >← {{ 'blog.back_to_blog' | t -}}
     </a>
     {%- render 'icon-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image -%}
