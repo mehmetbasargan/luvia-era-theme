@@ -40,6 +40,7 @@
                     <a
                       href="{{ block.settings.link | default: '#' }}"
                       target="_blank"
+                      rel="noopener"
                       class="w-[25px] h-[25px] flex items-center justify-center"
                     >
                       {%- case block.settings.icon_choice -%}
@@ -299,6 +300,7 @@
                               <a
                                 href="{{ block.settings.link | default: '#' }}"
                                 target="_blank"
+                                rel="noopener"
                                 class="w-[25px] h-[25px] flex items-center justify-center"
                               >
                                 {%- case block.settings.icon_choice -%}

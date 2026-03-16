@@ -71,6 +71,7 @@
               type="button"
               class="wishlist-heart absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-all duration-300 text-red-500"
               onclick="event.stopPropagation(); toggleWishlist('${product.handle}', this)"
+              aria-label="Remove {{ product.title }} from wishlist"
               data-product-handle="${product.handle}"
             >
               <svg

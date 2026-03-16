@@ -66,7 +66,10 @@
         !right-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
       "
     >
-      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover-bg-primary text-white hover-text-white transition-colors">
+      <button
+        class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover-bg-primary text-white hover-text-white transition-colors"
+        aria-label="Next slide"
+      >
         {% render 'icon-arrow-bar-right', class: 'w-5 h-5' %}
       </button>
     </div>
@@ -76,7 +79,10 @@
         !left-[30px] !w-[50px] !h-[50px] inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] ease-out
       "
     >
-      <button class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover-bg-primary text-white hover-text-white transition-colors">
+      <button
+        class="js-prev-btn pointer-events-auto bg-secondary border border-line p-2 rounded-full hover-bg-primary text-white hover-text-white transition-colors"
+        aria-label="Previous slide"
+      >
         {% render 'icon-arrow-bar-left', class: 'w-5 h-5' %}
       </button>
     </div>
