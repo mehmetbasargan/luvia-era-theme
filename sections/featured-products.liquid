@@ -14,121 +14,135 @@
       margin-bottom: {{ section.settings.margin_bottom }}px;
     }
   }
+
+  /* color and background settings */
+  #LuviaSection-{{ section.id }} {
+    {% if section.settings.remove_bg %}
+      background-color: transparent !important;
+      background-image: none !important;
+    {% elsif section.settings.use_custom_bg %}
+      background-color: {{ section.settings.section_bg_color }} !important;
+      background-image: none !important;
+    {% endif %}
+  }
 {%- endstyle -%}
 
-<div class="featured-products-wrapper">
-  <section class="bg-custombg section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
-    {% comment %} bg-white yerine global bg kullandık {% endcomment %}
-    <div class="container py-12 mx-auto px-4">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
-        <div>
-          <h2 class="text-secondary font-light tracking-widest uppercase">
-            {{ section.settings.section_title }}
-          </h2>
-          <p class="text-primary mt-2 font-light tracking-widest">
-            {{ section.settings.section_subtitle }}
-          </p>
-        </div>
-        {% if section.settings.button_url %}
-          <a
-            href="{{ section.settings.button_url }}"
-            class="text-primary text-sm hover:!text-secondary transition-all duration-150 uppercase tracking-widest mt-4 md:mt-0 flex items-center gap-2"
-          >
-            {{ section.settings.button_text }}
-            {% render 'icon-arrow-right' %}
-          </a>
-        {% endif %}
+<section
+  id="LuviaSection-{{ section.id }}"
+  class="
+    transition-colors duration-300 section-{{ section.id }}-padding
+    {% unless section.settings.remove_bg or section.settings.use_custom_bg %}bg-white color-{{ section.settings.color_scheme }} gradient{% endunless %}
+  "
+>
+  {% comment %} bg-white yerine global bg kullandık {% endcomment %}
+  <div class="container py-12 mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+      <div>
+        <h2 class="text-secondary font-light tracking-widest uppercase">
+          {{ section.settings.section_title }}
+        </h2>
+        <p class="text-primary mt-2 font-light tracking-widest">
+          {{ section.settings.section_subtitle }}
+        </p>
       </div>
+      {% if section.settings.button_url %}
+        <a
+          href="{{ section.settings.button_url }}"
+          class="text-primary text-sm hover:!text-secondary transition-all duration-150 uppercase tracking-widest mt-4 md:mt-0 flex items-center gap-2"
+        >
+          {{ section.settings.button_text }}
+          {% render 'icon-arrow-right' %}
+        </a>
+      {% endif %}
+    </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
-        {% comment %} Koleksiyon yerine BLOKLARI dönüyoruz {% endcomment %}
-        {% for block in section.blocks %}
-          {%- assign product = all_products[block.settings.product] -%}
-          {% if product != blank %}
-            <div
-              class="group relative flex flex-col h-full"
-              id="prod-{{ product.id }}-{{ forloop.index }}"
-              {{ block.shopify_attributes }}
-            >
-              <div class="relative aspect-[3/4] overflow-hidden bg-white shadow-sm">
-                {% if product.compare_at_price > product.price %}
-                  <span class="absolute top-4 left-4 z-20 bg-primary rounded-sm text-white font-medium text-[11px] px-2 py-1 tracking-widest uppercase">
-                    {{ 'products.product.on_sale' | t }}
-                  </span>
-                {% endif %}
-
-                {% comment %} Wishlist Butonu {% endcomment %}
-                <div class="absolute top-4 right-4 z-40">
-                  <button
-                    type="button"
-                    class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none bg-white"
-                    data-product-id="{{ product.id }}"
-                    onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') } else { console.error('Wishlist script not loaded') }"
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
+      {% comment %} Koleksiyon yerine BLOKLARI dönüyoruz {% endcomment %}
+      {% for block in section.blocks %}
+        {%- assign product = all_products[block.settings.product] -%}
+        {% if product != blank %}
+          <div
+            class="group relative flex flex-col h-full"
+            id="prod-{{ product.id }}-{{ forloop.index }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="relative aspect-[3/4] overflow-hidden bg-white shadow-sm">
+              {% if product.compare_at_price > product.price %}
+                <span class="absolute top-4 left-4 z-20 bg-primary rounded-sm text-white font-medium text-[11px] px-2 py-1 tracking-widest uppercase">
+                  {{ 'products.product.on_sale' | t }}
+                </span>
+              {% endif %}
+              {% comment %} Wishlist Butonu {% endcomment %}
+              <div class="absolute top-4 right-4 z-40">
+                <button
+                  type="button"
+                  class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none bg-white"
+                  data-product-id="{{ product.id }}"
+                  onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') } else { console.error('Wishlist script not loaded') }"
+                >
+                  <svg
+                    class="w-6 h-6 text-primary transition-all duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    <svg
-                      class="w-6 h-6 text-primary transition-all duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                  </button>
-                </div>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                  </svg>
+                </button>
+              </div>
 
-                <a href="{{ product.url }}" class="block w-full h-full relative z-10">
+              <a href="{{ product.url }}" class="block w-full h-full relative z-10">
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+                  height="500"
+                  width="500"
+                  alt="{{ product.title }}"
+                  loading="lazy"
+                >
+                {% if product.images[1] %}
                   <img
-                    src="{{ product.featured_image | image_url: width: 600 }}"
-                    class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+                    src="{{ product.images[1] | image_url: width: 600 }}"
+                    class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                     height="500"
                     width="500"
                     alt="{{ product.title }}"
                     loading="lazy"
                   >
-                  {% if product.images[1] %}
-                    <img
-                      src="{{ product.images[1] | image_url: width: 600 }}"
-                      class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                      height="500"
-                      width="500"
-                      alt="{{ product.title }}"
-                      loading="lazy"
-                    >
-                  {% endif %}
-                </a>
+                {% endif %}
+              </a>
 
-                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
-                  <button
-                    type="button"
-                    onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-                    class="w-full bg-primary text-white py-4 text-[14px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none font-medium"
-                  >
-                    {{ 'products.product.add_to_cart' | t }}
-                  </button>
-                </div>
-              </div>
-
-              <div class="mt-4 text-center">
-                <a
-                  href="{{ product.url }}"
-                  class="text-primary text-[14px] font-light uppercase tracking-wider block mb-1"
+              <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
+                <button
+                  type="button"
+                  onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
+                  class="w-full bg-primary text-white py-4 text-[14px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none font-medium"
                 >
-                  <h6>{{- product.title -}}</h6>
-                </a>
-                <div class="flex justify-center items-center gap-2">
-                  {% if product.compare_at_price > product.price %}
-                    <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
-                  {% endif %}
-                  <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
-                </div>
+                  {{ 'products.product.add_to_cart' | t }}
+                </button>
               </div>
             </div>
-          {% endif %}
-        {% endfor %}
-      </div>
+
+            <div class="mt-4 text-center">
+              <a
+                href="{{ product.url }}"
+                class="text-primary text-[14px] font-light uppercase tracking-wider block mb-1"
+              >
+                <h6>{{- product.title -}}</h6>
+              </a>
+              <div class="flex justify-center items-center gap-2">
+                {% if product.compare_at_price > product.price %}
+                  <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+                <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <script>
   function handleFeaturedAddToCart(e, variantId) {
