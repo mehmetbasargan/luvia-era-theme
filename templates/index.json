@@ -106,8 +106,8 @@
         "padding_bottom": 48,
         "margin_top": 0,
         "margin_bottom": 0,
-        "use_custom_bg": false,
-        "section_bg_color": "#09b6fd",
+        "use_custom_bg": true,
+        "section_bg_color": "#f9f9f9",
         "remove_bg": false
       }
     },
@@ -153,7 +153,7 @@
         "margin_top": 0,
         "margin_bottom": 0,
         "use_custom_bg": false,
-        "section_bg_color": "#667c67",
+        "section_bg_color": "#e5e7eb",
         "remove_bg": false
       }
     },
