@@ -114,6 +114,7 @@
             type="submit"
             name="add"
             class="add-to-cart-btn w-full bg-primary text-white py-5 text-[13px] font-medium uppercase tracking-[0.3em] hover:bg-secondary transition-all {% unless product.available %}opacity-50 cursor-not-allowed{% endunless %}"
+            aria-label="{% if product.available %}{{ 'products.product.add_to_cart' | t }} for {{ product.title }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}"
             {% unless product.available %}
               disabled
             {% endunless %}
