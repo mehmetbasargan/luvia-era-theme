@@ -67,6 +67,7 @@
         --color-secondary: {{ settings.secondary_color | default: '#b2ac88' }};
         --color-custombg: {{ settings.custom_bg_color | default: '#f9f9f9' }};
         --color-line: {{ settings.line_color | default: '#e5e7eb' }};
+        --color-main-bg: {{ settings.background_color | default: '#ffffff' }};
       }
 
       /* 1. TAILWIND İLE ÇAKIŞMAYAN ÖZEL SINIFLAR */
@@ -79,7 +80,7 @@
 
       /* 2. GENEL ELEMENTLER */
       body {
-        background-color: var(--color-custombg);
+        background-color: var(--color-main-bg);
         color: var(--color-primary);
         font-family: var(--font-body);
         margin: 0;
