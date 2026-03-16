@@ -13,13 +13,11 @@
     {% for collection in collections %}
       <a class="collection-card bg-custombg border-line" href="{{ collection.url }}">
         {% if collection.featured_image %}
-          {% render 'image',
-            class: 'collection-card__image',
-            image: collection.featured_image,
-            width: 600,
-            height: 600,
-            crop: 'center'
-          %}
+          {{
+            collection.featured_image
+            | image_url: width: 600, height: 600, crop: 'center'
+            | image_tag: class: 'collection-card__image', alt: collection.title
+          }}
         {% endif %}
         <div class="collection-card__content">
           <p class="text-primary">{{ collection.title }}</p>
