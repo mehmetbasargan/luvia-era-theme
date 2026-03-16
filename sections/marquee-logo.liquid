@@ -1,4 +1,39 @@
-<section class="py-16 bg-white overflow-hidden border-y border-line">
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+
+  /* color and background settings */
+  #LuviaSection-{{ section.id }} {
+    {% if section.settings.remove_bg %}
+      background-color: transparent !important;
+      background-image: none !important;
+    {% elsif section.settings.use_custom_bg %}
+      background-color: {{ section.settings.section_bg_color }} !important;
+      background-image: none !important;
+    {% endif %}
+  }
+{%- endstyle -%}
+
+<section
+  id="LuviaSection-{{ section.id }}"
+  class="
+    transition-colors duration-300 section-{{ section.id }}-padding
+    {% unless section.settings.remove_bg or section.settings.use_custom_bg %}bg-white color-{{ section.settings.color_scheme }} gradient{% endunless %}
+  "
+>
   {% if section.settings.title != blank %}
     <div class="text-center mb-10">
       <h4 class="font-light uppercase tracking-[0.2em] text-secondary">
@@ -43,6 +78,72 @@
       "id": "title",
       "label": "Heading",
       "default": "AS FEATURED IN"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Margin",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Margin",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Arka Plan Tasarımı"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_custom_bg",
+      "label": "Özel Arka Plan Rengi Kullan",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Arka Plan Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_bg",
+      "label": "Arka Planı Tamamen Kaldır (Transparent)",
+      "default": false
     }
   ],
   "blocks": [
