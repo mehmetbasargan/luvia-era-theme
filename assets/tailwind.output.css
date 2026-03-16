@@ -3459,6 +3459,10 @@ blockquote{
     height: 169px;
   }
 
+  .lg\:h-\[161px\]{
+    height: 161px;
+  }
+
   .lg\:w-1\/3{
     width: 33.333333%;
   }
