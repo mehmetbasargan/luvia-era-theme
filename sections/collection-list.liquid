@@ -14,11 +14,25 @@
       margin-bottom: {{ section.settings.margin_bottom }}px;
     }
   }
+
+  /* color and background settings */
+  #LuviaSection-{{ section.id }} {
+    {% if section.settings.remove_bg %}
+      background-color: transparent !important;
+      background-image: none !important;
+    {% elsif section.settings.use_custom_bg %}
+      background-color: {{ section.settings.section_bg_color }} !important;
+      background-image: none !important;
+    {% endif %}
+  }
 {%- endstyle -%}
 
 <section
-  id="shopify-section-{{ section.id }}"
-  class=" transition-colors duration-300 section-{{ section.id }}-padding"
+  id="LuviaSection-{{ section.id }}"
+  class="
+    transition-colors duration-300 section-{{ section.id }}-padding
+    {% unless section.settings.remove_bg or section.settings.use_custom_bg %}bg-custombg color-{{ section.settings.color_scheme }} gradient{% endunless %}
+  "
 >
   <div class="container">
     {% if section.settings.collection_list_title != blank %}
@@ -133,6 +147,28 @@
       "unit": "px",
       "label": "Bottom Margin",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Arka Plan Tasarımı"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_custom_bg",
+      "label": "Özel Arka Plan Rengi Kullan",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Arka Plan Rengi",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_bg",
+      "label": "Arka Planı Tamamen Kaldır (Transparent)",
+      "default": false
     }
   ],
   "blocks": [
