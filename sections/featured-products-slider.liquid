@@ -129,7 +129,7 @@
                   {% endif %}
                 </a>
 
-                {% comment %} Add to Cart Butonu (Alttan Kayarak Çıkan) {% endcomment %}
+                {% comment %} Add to Cart Button {% endcomment %}
                 <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
                   <button
                     type="button"
@@ -141,7 +141,7 @@
                 </div>
               </div>
 
-              {% comment %} Ürün Bilgileri {% endcomment %}
+              {% comment %} Product Information {% endcomment %}
               <div class="mt-4 text-center">
                 <a
                   href="{{ product.url }}"
@@ -181,7 +181,7 @@
     });
   });
 
-  // Paylaştığın Sepete Ekleme Fonksiyonu (Eğer globalde yoksa çalışması için)
+  // Add to Cart Function (if not available globally)
   if (typeof handleFeaturedAddToCart !== 'function') {
     window.handleFeaturedAddToCart = function (e, variantId) {
       const btn = e.currentTarget;
@@ -236,16 +236,6 @@
     },
     {
       "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Top Padding",
-      "default": 36
-    },
-    {
-      "type": "range",
       "id": "padding_bottom",
       "min": 0,
       "max": 100,
@@ -253,16 +243,6 @@
       "unit": "px",
       "label": "Bottom Padding",
       "default": 36
-    },
-    {
-      "type": "range",
-      "id": "margin_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Top Margin",
-      "default": 0
     },
     {
       "type": "range",
@@ -276,24 +256,24 @@
     },
     {
       "type": "header",
-      "content": "Arka Plan Tasarımı"
+      "content": "Background Design"
     },
     {
       "type": "checkbox",
       "id": "use_custom_bg",
-      "label": "Özel Arka Plan Rengi Kullan",
+      "label": "Use Custom Background Color",
       "default": false
     },
     {
       "type": "color",
       "id": "section_bg_color",
-      "label": "Arka Plan Rengi",
+      "label": "Background Color",
       "default": "#ffffff"
     },
     {
       "type": "checkbox",
       "id": "remove_bg",
-      "label": "Arka Planı Tamamen Kaldır (Transparent)",
+      "label": "Remove Background (Transparent)",
       "default": false
     }
   ],
