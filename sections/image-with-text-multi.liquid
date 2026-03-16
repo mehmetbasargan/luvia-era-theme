@@ -40,7 +40,7 @@
         class="flex flex-col {% if block.settings.image_placement == 'right' %}md:flex-row-reverse{% else %}md:flex-row{% endif %} items-center gap-12 md:gap-24 py-16 md:py-24"
         {{ block.shopify_attributes }}
       >
-        {% comment %} Görsel Alanı {% endcomment %}
+        {% comment %} Visual Area {% endcomment %}
         <div class="w-full md:w-1/2">
           <div class="relative aspect-[4/5] overflow-hidden bg-white shadow-sm border border-line">
             {% if block.settings.image != blank %}
@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        {% comment %} Metin Alanı {% endcomment %}
+        {% comment %} Text Area {% endcomment %}
         <div class="w-full md:w-1/2 text-left space-y-6 px-4 md:px-0">
           {% if block.settings.subheading != blank %}
             <span class="text-secondary uppercase tracking-[0.3em] text-[13px] font-medium block">
@@ -99,7 +99,7 @@
   "settings": [
     {
       "type": "header",
-      "content": "Section Boşluk Ayarları"
+      "content": "Section Spacing Settings"
     },
     {
       "type": "range",
@@ -108,7 +108,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Üst İç Boşluk (Padding)",
+      "label": "Top Padding",
       "default": 36
     },
     {
@@ -118,7 +118,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Alt İç Boşluk (Padding)",
+      "label": "Bottom Padding",
       "default": 36
     },
     {
@@ -128,7 +128,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Üst Dış Boşluk (Margin)",
+      "label": "Top Margin",
       "default": 0
     },
     {
@@ -138,29 +138,29 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Alt Dış Boşluk (Margin)",
+      "label": "Bottom Margin",
       "default": 0
     },
     {
       "type": "header",
-      "content": "Arka Plan Tasarımı"
+      "content": "Background Design"
     },
     {
       "type": "checkbox",
       "id": "use_custom_bg",
-      "label": "Özel Arka Plan Rengi Kullan",
+      "label": "Use Custom Background Color",
       "default": false
     },
     {
       "type": "color",
       "id": "section_bg_color",
-      "label": "Arka Plan Rengi",
+      "label": "Background Color",
       "default": "#ffffff"
     },
     {
       "type": "checkbox",
       "id": "remove_bg",
-      "label": "Arka Planı Tamamen Kaldır (Transparent)",
+      "label": "Remove Background (Transparent)",
       "default": false
     }
   ],

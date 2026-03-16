@@ -21,7 +21,7 @@
   class="statement-banner-wrapper section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
 >
   <section class="relative w-full min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-center">
-    {% comment %} Arka Plan Görseli {% endcomment %}
+    {% comment %} Background Image {% endcomment %}
     <div class="absolute inset-0 z-0">
       {% if section.settings.bg_image != blank %}
         <img
@@ -38,14 +38,14 @@
         </div>
       {% endif %}
 
-      {% comment %} Dinamik Overlay (Karartma) Katmanı {% endcomment %}
+      {% comment %} Dynamic Overlay Layer {% endcomment %}
       <div
         class="absolute inset-0 z-[1]"
         style="background-color: rgba(0,0,0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"
       ></div>
     </div>
 
-    {% comment %} İçerik Alanı {% endcomment %}
+    {% comment %} Content Area {% endcomment %}
     <div class="relative z-10 container mx-auto px-6 text-center text-white">
       <div class="max-w-3xl mx-auto space-y-6">
         {% if section.settings.title != blank %}
@@ -117,7 +117,7 @@
     },
     {
       "type": "header",
-      "content": "Section Boşluk Ayarları"
+      "content": "Section Spacing Settings"
     },
     {
       "type": "range",
@@ -126,7 +126,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Üst İç Boşluk (Padding)",
+      "label": "Top Padding",
       "default": 36
     },
     {
@@ -136,7 +136,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Alt İç Boşluk (Padding)",
+      "label": "Bottom Padding",
       "default": 36
     },
     {
@@ -146,7 +146,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Üst Dış Boşluk (Margin)",
+      "label": "Top Margin",
       "default": 0
     },
     {
@@ -156,7 +156,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Alt Dış Boşluk (Margin)",
+      "label": "Bottom Margin",
       "default": 0
     }
   ],

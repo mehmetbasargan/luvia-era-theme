@@ -1,15 +1,3 @@
-{%- liquid
-  # Slider yüksekliği ayarı
-  assign slider_height = section.settings.slider_height
-
-  # Eğer "full" ise header yüksekliğini düşerek hesapla, değilse kullanıcının değerini bas
-  if slider_height == 'full'
-    assign height_style = 'height: calc(100dvh - var(--header-height, 0px));'
-  else
-    assign height_style = 'height: ' | append: slider_height | append: ';'
-  endif
--%}
-
 <div
   class="
     swiper group myHeroSwiper w-full {% if section.settings.slider_height == 'full' %}

@@ -148,7 +148,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Tüm sepet butonlarını yakala (+, -, Kaldır)
+    // Capture all cart buttons (+, -, Remove)
     const cartButtons = document.querySelectorAll('a[href*="/cart/change"], a[href*="/cart/add"]');
 
     cartButtons.forEach((link) => {
@@ -157,12 +157,12 @@
         const params = new URLSearchParams(url.search);
         const quantity = parseInt(params.get('quantity'));
 
-        // Eğer linkte quantity parametresi varsa ve 0 ise SİLİNDİ mesajı kur
+        // If link has quantity parameter and it's 0, set DELETED message
         if (params.has('quantity') && quantity === 0) {
           localStorage.setItem('cart_toast_msg', 'Product removed from cart!');
           localStorage.setItem('cart_toast_type', 'error');
         }
-        // Eğer miktar artıyor veya sadece değişiyorsa GÜNCELLENDİ mesajı kur
+        // If quantity is increasing or just changing, set UPDATED message
         else {
           localStorage.setItem('cart_toast_msg', 'Cart updated successfully!');
           localStorage.setItem('cart_toast_type', 'success');
@@ -170,13 +170,13 @@
       });
     });
 
-    // Sayfa yüklendiğinde mesaj var mı kontrol et
+    // Check if there's a message when page loads
     const pendingMsg = localStorage.getItem('cart_toast_msg');
     const pendingType = localStorage.getItem('cart_toast_type');
 
     if (pendingMsg && typeof showToast === 'function') {
       showToast(pendingMsg, pendingType);
-      // Mesajı bir kez gösterdikten sonra temizle
+      // Clear message after showing once
       localStorage.removeItem('cart_toast_msg');
       localStorage.removeItem('cart_toast_type');
     }
