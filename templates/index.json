@@ -216,7 +216,10 @@
         "padding_top": 36,
         "padding_bottom": 36,
         "margin_top": 0,
-        "margin_bottom": 0
+        "margin_bottom": 0,
+        "use_custom_bg": true,
+        "section_bg_color": "#dc1212",
+        "remove_bg": false
       }
     },
     "image_with_text_multi_KVYKE3": {
@@ -505,7 +508,10 @@
         "padding_top": 36,
         "padding_bottom": 36,
         "margin_top": 0,
-        "margin_bottom": 0
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
       }
     },
     "full_width_gallery_fnrnK7": {
