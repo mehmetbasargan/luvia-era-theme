@@ -347,7 +347,7 @@
               </div>
               {% render 'icon-cart' %}
             </a>
-            <div>
+            <div class="pl-8">
               <shopify-account menu="customer-account-main-menu">
                 <div slot="signed-out-avatar" class="deneme">
                   {% render 'icon-account' %}
@@ -375,13 +375,13 @@
 
   // Customer session debug removed for production
 
-  // Account link'ini düzelt
+  // Fix account link
   document.addEventListener('DOMContentLoaded', function () {
     const accountLinks = document.querySelectorAll('a[href*="account"]');
     accountLinks.forEach(function (link) {
       if (link.href.includes('/account')) {
         link.addEventListener('click', function (e) {
-          // Customer durumunu kontrol et
+          // Check customer status
           fetch('/cart.js', {
             method: 'POST',
             headers: {

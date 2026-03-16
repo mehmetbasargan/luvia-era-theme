@@ -66,14 +66,14 @@
     function updateMarqueeHeight() {
       const marquee = document.getElementById('Marquee-{{ section.id }}');
       if (marquee) {
-        // Bölümün yüksekliğini ölçüp CSS değişkenine gönderiyoruz
+        // Measure section height and send to CSS variable
         document.documentElement.style.setProperty('--marquee-height', marquee.offsetHeight + 'px');
       }
     }
-    // Sayfa yüklendiğinde ve boyut değiştiğinde tetikle
+    // Trigger when page loads and when size changes
     window.addEventListener('resize', updateMarqueeHeight);
     window.addEventListener('load', updateMarqueeHeight);
-    // Shopify editor etkileşimi için
+    // For Shopify editor interaction
     document.addEventListener('shopify:section:load', updateMarqueeHeight);
     document.addEventListener('shopify:section:unload', () => {
       document.documentElement.style.setProperty('--marquee-height', '0px');
@@ -81,7 +81,7 @@
 
     /* **** */
     (function () {
-      // Header'ı bulmak için yardımcı fonksiyon
+      // Helper function to find header
       function getHeader() {
         return document.getElementById('main-header') || document.querySelector('.site-header');
       }
@@ -90,10 +90,10 @@
         const header = getHeader();
         if (!header) return;
 
-        // 1. Marquee class'ını ekle
+        // 1. Add marquee class
         header.classList.add('marquee-text-active');
 
-        // 2. Scroll kontrolü
+        // 2. Scroll control
         const updateHeaderPosition = () => {
           const isScrolled = window.scrollY > 20;
           if (isScrolled) {
@@ -105,11 +105,11 @@
           }
         };
 
-        // Event'leri bağla
+        // Bind events
         window.addEventListener('scroll', updateHeaderPosition, { passive: true });
-        updateHeaderPosition(); // İlk açılışta çalıştır
+        updateHeaderPosition(); // Run on first load
 
-        // Bekçi: Başka bir JS class'ı silerse geri ekle
+        // Watchdog: Add back if another JS deletes the class
         const observer = new MutationObserver(() => {
           if (!header.classList.contains('marquee-text-active')) {
             header.classList.add('marquee-text-active');
@@ -119,7 +119,7 @@
         observer.observe(header, { attributes: true, attributeFilter: ['class'] });
       }
 
-      // DOM'un yüklenmesini beklemeden hemen denemeye başla (Interval yöntemi)
+      // Start trying immediately without waiting for DOM (Interval method)
       let retryCount = 0;
       const checkHeader = setInterval(() => {
         const header = getHeader();
@@ -127,7 +127,7 @@
           initMarqueeHeader();
           clearInterval(checkHeader);
         }
-        if (retryCount > 100) clearInterval(checkHeader); // 10 saniye sonra aramayı bırak
+        if (retryCount > 100) clearInterval(checkHeader); // Stop searching after 10 seconds
         retryCount++;
       }, 100);
     })();

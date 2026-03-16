@@ -44,10 +44,6 @@
       </div>
     {% endif %}
 
-    {% comment %}
-      Blok sayısına göre grid yapısını dinamik yapıyoruz:
-      1 blok varsa tam genişlik, 2 varsa yarı yarıya, 3 veya daha fazla varsa uygun grid.
-    {% endcomment %}
     <div class="grid grid-cols-1 sm:grid-cols-2 {% if section.blocks.size == 3 %}md:grid-cols-3{% else %}md:grid-cols-4{% endif %} gap-8">
       {% for block in section.blocks %}
         {%- assign collection = collections[block.settings.collection] -%}

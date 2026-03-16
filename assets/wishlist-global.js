@@ -8,7 +8,7 @@ window.showToast = function (message, type = 'info') {
 	if (oldToast) oldToast.remove();
 
 	const toast = document.createElement('div');
-	// Tasarımına göre renkleri ayarlayabilirsin
+	// You can adjust colors according to your design
 	const bgColor = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : 'bg-primary';
 
 	toast.className = `luvia-toast fixed bottom-8 left-1/2 -translate-x-1/2 ${bgColor} text-white px-8 py-3 rounded-full shadow-2xl z-[9999] text-[12px] uppercase tracking-[0.2em] transition-all duration-500 opacity-0 translate-y-4`;

@@ -7,16 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	if (menuToggle && mainMenu) {
 		menuToggle.addEventListener('click', () => {
-			// Menü listesini aç/kapat
+			// Open/close menu list
 			mainMenu.classList.toggle('hidden');
 
-			// İkonları değiştir
+			// Change icons
 			if (mainMenu.classList.contains('hidden')) {
-				// Menü kapalıysa
+				// If menu is closed
 				iconOpen.classList.replace('hidden', 'block');
 				iconClose.classList.replace('block', 'hidden');
 			} else {
-				// Menü açıksa
+				// If menu is open
 				iconOpen.classList.replace('block', 'hidden');
 				iconClose.classList.replace('hidden', 'block');
 			}
@@ -47,7 +47,7 @@ if (luviaBackToTop) {
 }
 
 /* filter settings */
-// assets/collection-filters.js (veya main-collection.liquid içine <script> olarak)
+// assets/collection-filters.js (or as <script> in main-collection.liquid)
 
 document.addEventListener('DOMContentLoaded', function () {
 	const filterForm = document.querySelector('#CollectionFiltersForm');
@@ -58,12 +58,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			const searchParams = new URLSearchParams(formData).toString();
 			const fetchUrl = `${window.location.pathname}?${searchParams}`;
 
-			// Sayfa yenilenmeden URL'i güncelle
+			// Update URL without page reload
 			history.pushState({ path: fetchUrl }, '', fetchUrl);
 
-			// Ürün grid'ini güncelle (Loading efekti ekleyebiliriz)
+			// Update product grid (Can add loading effect)
 			const productGrid = document.querySelector('#ProductGridContainer');
-			productGrid.style.opacity = '0.5'; // Hafif karartma (Loading hissi)
+			productGrid.style.opacity = '0.5'; // Light dimming (Loading feel)
 
 			fetch(fetchUrl)
 				.then((response) => response.text())
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					const newProducts = html.querySelector('#ProductGridContainer').innerHTML;
 
 					document.querySelector('#ProductGridContainer').innerHTML = newProducts;
-					productGrid.style.opacity = '1'; // Geri getir
+					productGrid.style.opacity = '1'; // Restore
 				})
 				.catch((e) => console.error('Filter Error:', e));
 		});
@@ -86,14 +86,14 @@ const overlay = document.getElementById('mobile-menu-overlay');
 const drawer = document.getElementById('mobile-menu-drawer');
 const dropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
 
-// Menüyü Aç
+// Open Menu
 openBtn.addEventListener('click', () => {
 	drawer.classList.remove('translate-x-full');
 	overlay.classList.remove('hidden');
-	document.body.classList.add('overflow-hidden'); // Sayfa kaymasını engeller
+	document.body.classList.add('overflow-hidden'); // Prevent page scrolling
 });
 
-// Menüyü Kapat
+// Close Menu
 const closeMenu = () => {
 	drawer.classList.add('translate-x-full');
 	overlay.classList.add('hidden');
@@ -103,7 +103,7 @@ const closeMenu = () => {
 closeBtn.addEventListener('click', closeMenu);
 overlay.addEventListener('click', closeMenu);
 
-// Mobil Dropdownları Aç/Kapat
+// Open/Close Mobile Dropdowns
 dropdownBtns.forEach((btn) => {
 	btn.addEventListener('click', () => {
 		const subMenu = btn.nextElementSibling;

@@ -62,13 +62,13 @@
 </section>
 
 <script>
-  // Fonksiyonları global kapsamda tanımlıyoruz (Eğer yoksa)
+  // Define functions in global scope (if not exists)
   if (typeof openLuviaGallery !== 'function') {
     var currentImgIndex = 0;
     var galleryImages = [];
 
     window.openLuviaGallery = function (element, index) {
-      // Sadece tıklanan galeri grubundaki görselleri topla
+      // Collect images only from the clicked gallery group
       galleryImages = [];
       const parentSection = element.closest('section');
       const items = parentSection.querySelectorAll('.luvia-gallery-item');

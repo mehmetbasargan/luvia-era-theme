@@ -1199,6 +1199,10 @@ blockquote{
   margin-top: auto;
 }
 
+.ml-6{
+  margin-left: 1.5rem;
+}
+
 .line-clamp-1{
   overflow: hidden;
   display: -webkit-box;
@@ -2169,6 +2173,21 @@ blockquote{
   background-color: var(--color-white);
 }
 
+.bg-red-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+}
+
+.bg-slate-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity, 1));
+}
+
+.bg-red-700{
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
+}
+
 .object-contain{
   -o-object-fit: contain;
      object-fit: contain;
@@ -2412,6 +2431,30 @@ blockquote{
 
 .pt-8{
   padding-top: 2rem;
+}
+
+.pl-6{
+  padding-left: 1.5rem;
+}
+
+.pl-\[200px\]{
+  padding-left: 200px;
+}
+
+.pr-5{
+  padding-right: 1.25rem;
+}
+
+.pr-2{
+  padding-right: 0.5rem;
+}
+
+.pl-12{
+  padding-left: 3rem;
+}
+
+.pl-8{
+  padding-left: 2rem;
 }
 
 .text-left{

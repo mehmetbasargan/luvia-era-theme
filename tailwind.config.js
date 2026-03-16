@@ -19,8 +19,8 @@ module.exports = {
 				black: 'var(--color-black)',
 				bgtransparent: 'var(--color-bgtransparent)',
 
-				// --- Dinamik Şema Renkleri (Color Schemes) ---
-				// Bu renkler seçilen şemaya göre section bazlı değişir
+				// --- Dynamic Color Scheme Colors ---
+				// These colors change section-based according to selected scheme
 				'scheme-bg': 'var(--color-background)',
 				'scheme-text': 'var(--color-text)',
 				'scheme-heading': 'var(--color-heading)',

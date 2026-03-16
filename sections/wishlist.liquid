@@ -4,7 +4,7 @@
   </h4>
 
   <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[200px] transition-all duration-500">
-    {% comment %} Ürünler JS ile buraya gelecek {% endcomment %}
+    {% comment %} Products will be added here via JS {% endcomment %}
   </div>
 
   <div id="wishlist-empty" class="hidden text-center py-20">
@@ -92,7 +92,7 @@
       });
   });
 
-  // 🛒 SEPETE EKLEME FONKSİYONU
+  // 🛒 ADD TO CART FUNCTION
   window.handleWishlistAddToCart = function (event, variantId) {
     event.preventDefault();
     const btn = event.currentTarget;
@@ -122,20 +122,20 @@
       .then((data) => {
         btn.innerText = 'ADDED';
 
-        // 1. Toast bildirimi göster
+        // 1. Show toast notification
         if (window.showToast) {
           window.showToast("{{ 'products.product.add_to_cart' | t }}", 'success');
         }
 
-        // 2. Cart Drawer'ı yenile ve aç
-        // Temanın Drawer'ı açma fonksiyonu genellikle bunlardan biridir:
+        // 2. Update and open Cart Drawer
+        // Theme's drawer opening function is usually one of these:
         if (typeof openAndRefreshCart === 'function') {
           openAndRefreshCart();
         } else if (typeof refreshCartDrawer === 'function') {
           refreshCartDrawer();
         }
 
-        // Shopify'ın standart event'ini tetikle (bazı uygulamalar/temalar için)
+        // Trigger Shopify's standard event (for some apps/themes)
         document.dispatchEvent(
           new CustomEvent('cart:updated', {
             detail: { cart: data },

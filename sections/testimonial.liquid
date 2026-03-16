@@ -104,7 +104,7 @@
 
 <script>
   const initTestimonialSwiper = () => {
-    // Mevcut bir swiper örneği varsa önce onu yok et (Shopify Editör çakışmalarını önler)
+    // Destroy existing swiper instance if exists (prevents Shopify Editor conflicts)
     const existingSwiper = document.querySelector('.myTestimonialSwiper')?.swiper;
     if (existingSwiper) existingSwiper.destroy(true, true);
 
@@ -134,7 +134,7 @@
     });
   };
 
-  // Sayfa yüklenince ve Shopify Editör her güncellendiğinde çalıştır
+  // Run when page loads and when Shopify Editor updates
   document.addEventListener('DOMContentLoaded', initTestimonialSwiper);
   document.addEventListener('shopify:section:load', initTestimonialSwiper);
 </script>

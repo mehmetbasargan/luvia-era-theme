@@ -38,7 +38,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
       {% for block in section.blocks %}
         <div class="flex flex-col items-center text-center space-y-3 group" {{ block.shopify_attributes }}>
-          {% comment %} İkon Alanı {% endcomment %}
+          {% comment %} Icon Area {% endcomment %}
           <div class="text-primary group-hover:text-secondary transition-colors duration-500">
             {% if block.settings.custom_svg != blank %}
               {{ block.settings.custom_svg }}

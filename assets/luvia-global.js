@@ -10,15 +10,15 @@ window.showToast = function (message, type = 'info') {
 
 	const toast = document.createElement('div');
 
-	// Renkleri doğrudan JS içinden atayalım (Tailwind çakışmasını önler)
-	let bgColor = 'var(--color-primary, #000)'; // Varsayılan: Temanızdaki primary renk
+	// Assign colors directly from JS (prevents Tailwind conflicts)
+	let bgColor = 'var(--color-primary, #000)'; // Default: Your theme's primary color
 	if (type === 'success') bgColor = '#16a34a'; // bg-green-600
 	if (type === 'error') bgColor = '#dc2626'; // bg-red-600
-	if (type === 'info') bgColor = '#2563eb'; // bg-blue-600 (İsteğe bağlı)
+	if (type === 'info') bgColor = '#2563eb'; // bg-blue-600 (Optional)
 
 	toast.className = `luvia-toast fixed bottom-8 left-1/2 -translate-x-1/2 text-white px-8 py-3 rounded-full shadow-2xl z-[9999] text-[12px] uppercase tracking-[0.2em] transition-all duration-500 opacity-0 translate-y-4`;
 
-	// Arka plan rengini inline style olarak ekliyoruz
+	// Add background color as inline style
 	toast.style.backgroundColor = bgColor;
 	toast.innerText = message;
 
@@ -82,7 +82,7 @@ window.LuviaWishlist = {
 		localStorage.setItem('luvia-wishlist', JSON.stringify(wishlist));
 		this.updateUI(productId, isAdding);
 
-		// Wishlist sayfasındaysak satırı kaldır
+		// Remove row if on wishlist page
 		const wishItem = document.getElementById(`wish-item-${productId}`);
 		if (!isAdding && wishItem) {
 			wishItem.style.opacity = '0';
@@ -128,11 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('wishlist:updated', function (e) {
-	// Diğer sayfa öğelerini güncellemek gerekirse burası kullanılabilir
+	// Can be used to update other page elements
 	console.log('Wishlist Sync:', e.detail.wishlist);
 });
 
-// Global Add to Cart Function (Tüm kartlar için ortak)
+// Global Add to Cart Function (Common for all cards)
 window.handleGlobalAddToCart = function (e, variantId) {
 	const btn = e.currentTarget;
 	const originalText = btn.innerText;
@@ -154,18 +154,18 @@ window.handleGlobalAddToCart = function (e, variantId) {
 		.then((data) => {
 			btn.innerText = 'ADDED';
 
-			// Toast göster
+			// Show toast
 			if (window.showToast) window.showToast(window.LuviaStrings.cartAdded || 'Product added to cart', 'success');
 
-			// Drawer'ı aç
+			// Open drawer
 			if (window.openCartDrawer) window.openCartDrawer();
 
-			// Sepeti yenile (Temanızdaki fonksiyon ismiyle eşleşmeli)
+			// Update cart (should match your theme's function name)
 			if (typeof openAndRefreshCart === 'function') {
 				openAndRefreshCart();
 			}
 
-			// Event fırlat
+			// Fire event
 			document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: data }, bubbles: true }));
 
 			setTimeout(() => {
@@ -206,22 +206,22 @@ window.handleGlobalAddToCart = function (e, variantId) {
 		.then((data) => {
 			btn.innerText = 'ADDED';
 
-			// 1. Bildirim (Toast) Göster
+			// 1. Show notification (Toast)
 			if (window.showToast) {
 				window.showToast(window.LuviaStrings?.cartAdded || 'Product added to cart', 'success');
 			}
 
-			// 2. Sepet Çekmecesini Aç
+			// 2. Open Cart Drawer
 			if (window.openCartDrawer) {
 				window.openCartDrawer();
 			}
 
-			// 3. Sepet İçeriğini Yenile (Eğer temanızda bu isimde bir fonksiyon varsa)
+			// 3. Update Cart Content (If your theme has a function with this name)
 			if (typeof openAndRefreshCart === 'function') {
 				openAndRefreshCart();
 			}
 
-			// Genel sepet güncelleme olayını tetikle
+			// Trigger general cart update event
 			document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: data }, bubbles: true }));
 
 			setTimeout(() => {
@@ -230,7 +230,7 @@ window.handleGlobalAddToCart = function (e, variantId) {
 			}, 2000);
 		})
 		.catch((err) => {
-			console.error('Sepet Hatası:', err);
+			console.error('Cart Error:', err);
 			btn.innerText = 'ERROR';
 			if (window.showToast) window.showToast('Error adding to cart', 'error');
 			setTimeout(() => {
