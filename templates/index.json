@@ -262,7 +262,7 @@
         "margin_bottom": 0,
         "use_custom_bg": true,
         "section_bg_color": "#d11b1b",
-        "remove_bg": true
+        "remove_bg": false
       }
     },
     "rich_text_banner_yW67kH": {
