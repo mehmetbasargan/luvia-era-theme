@@ -33,21 +33,21 @@
 
     <a href="{{ product.url }}" class="block h-full w-full z-10">
       <img
-        src="{{ product.featured_image | image_url: width: 600 }}"
+        src="{{ product.featured_image | image_url: width: 400 }}"
         alt="{{ product.title | escape }}"
         loading="lazy"
-        width="600"
-        height="800"
+        width="400"
+        height="533"
         class="w-full h-full object-cover transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
       >
 
       {% if product.images[1] %}
         <img
-          src="{{ product.images[1] | image_url: width: 600 }}"
+          src="{{ product.images[1] | image_url: width: 400 }}"
           alt="{{ product.title | escape }}"
           loading="lazy"
-          width="600"
-          height="800"
+          width="400"
+          height="533"
           class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
         >
       {% endif %}

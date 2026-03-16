@@ -36,7 +36,9 @@
                 <div class="flex justify-between items-start">
                   <div>
                     <h6 class="uppercase tracking-[0.2em] font-medium leading-[20px]">
-                      <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      <a href="{{ item.url }}" aria-label="View {{ item.product.title | escape }} product details">
+                        {{- item.product.title -}}
+                      </a>
                     </h6>
                     {% unless item.product.has_only_default_variant %}
                       <p class="text-[14px] uppercase tracking-widest mt-1">
