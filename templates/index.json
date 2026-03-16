@@ -811,7 +811,14 @@
         "section_title": "Featured Selection",
         "section_subtitle": "Handpicked for you",
         "button_text": "View All",
-        "button_url": ""
+        "button_url": "",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
       }
     },
     "footer_promotion_HXyaeK": {
