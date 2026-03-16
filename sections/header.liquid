@@ -63,7 +63,7 @@
     </div>
     <div class="container mx-auto flex md:flex-row flex-col items-center justify-between h-[100px]">
       {% comment %} logo {% endcomment %}
-      <a href="{{ routes.root_url }}" class=" w-[170px] lg:w-[180px] shrink-0">
+      <a href="{{ routes.root_url }}" class=" w-[170px] lg:w-[180px] shrink-0" aria-label="{{ shop.name }} homepage">
         {% if section.settings.logo %}
           {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
         {% else %}
@@ -253,12 +253,12 @@
           {% comment %} account {% endcomment %}
           <div class="flex items-center gap-0">
             <div class="bg-black/10 p-2 rounded-full bg-custombg ">
-              <a href="{{ routes.search_url }}" class="lg:w-[12px] w-[12px] shrink-0">
+              <a href="{{ routes.search_url }}" class="lg:w-[12px] w-[12px] shrink-0" aria-label="Search products">
                 {% render 'icon-search' %}
               </a>
             </div>
             <div class="bg-black/10 p-2 rounded-full">
-              <a href="/pages/wishlist" class="lg:w-[12px] w-[12px] shrink-0">
+              <a href="/pages/wishlist" class="lg:w-[12px] w-[12px] shrink-0" aria-label="View wishlist">
                 {% if shop.customer_accounts_enabled %}
                   {% render 'icon-wishlist' %}
                 {% endif %}
@@ -266,7 +266,7 @@
             </div>
 
             <div class="bg-black/10 p-2 rounded-full relative">
-              <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0">
+              <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0" aria-label="View shopping cart">
                 <div class="absolute top-[0px] right-0">
                   <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
                     {{- cart.item_count -}}

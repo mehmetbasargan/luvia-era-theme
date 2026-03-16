@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
     <div class="flex flex-col space-y-6">
       <div>
-        <a href="{{ routes.root_url }}" class="block mb-8">
+        <a href="{{ routes.root_url }}" class="block mb-8" aria-label="{{ shop.name }} homepage">
           {% if section.settings.footer_logo != blank %}
             {%- assign logo_alt = section.settings.footer_logo.alt | default: shop.name -%}
             {{
@@ -33,7 +33,11 @@
           <span class="text-primary">
             {% render 'icon-envelop' %}
           </span>
-          <a href="mailto:{{ section.settings.footer_email }}" class="hover:text-secondary transition-all duration-200">
+          <a
+            href="mailto:{{ section.settings.footer_email }}"
+            class="hover:text-secondary transition-all duration-200"
+            aria-label="Send email to {{ section.settings.footer_email }}"
+          >
             {{- section.settings.footer_email -}}
           </a>
         </p>
@@ -47,7 +51,11 @@
       <ul class="space-y-4 text-md font-light text-primary">
         {% for link in linklists[section.settings.footer_menu_1].links %}
           <li>
-            <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+            <a
+              href="{{ link.url }}"
+              class="hover:text-secondary transition-colors duration-300"
+              aria-label="{{ link.title | escape }}"
+            >
               {{ link.title }}
             </a>
           </li>
@@ -62,7 +70,11 @@
       <ul class="space-y-4 text-md font-light text-primary">
         {% for link in linklists[section.settings.footer_menu_2].links %}
           <li>
-            <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+            <a
+              href="{{ link.url }}"
+              class="hover:text-secondary transition-colors duration-300"
+              aria-label="{{ link.title | escape }}"
+            >
               {{ link.title }}
             </a>
           </li>

@@ -20,7 +20,11 @@
             {% endif %}
           </div>
           <div class="">
-            <a href="{{ routes.root_url }}" class=" w-[140px] lg:w-[180px] shrink-0">
+            <a
+              href="{{ routes.root_url }}"
+              class=" w-[140px] lg:w-[180px] shrink-0"
+              aria-label="{{ shop.name }} homepage"
+            >
               {% if section.settings.logo %}
                 {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
               {% else %}
@@ -42,6 +46,7 @@
                       target="_blank"
                       rel="noopener"
                       class="w-[25px] h-[25px] flex items-center justify-center"
+                      aria-label="{{ block.settings.icon_choice | replace: 'icon-', '' | capitalize }} on social media"
                     >
                       {%- case block.settings.icon_choice -%}
                         {%- when 'icon-facebook' -%}
@@ -302,6 +307,7 @@
                                 target="_blank"
                                 rel="noopener"
                                 class="w-[25px] h-[25px] flex items-center justify-center"
+                                aria-label="{{ block.settings.icon_choice | replace: 'icon-', '' | capitalize }} on social media"
                               >
                                 {%- case block.settings.icon_choice -%}
                                   {%- when 'icon-facebook' -%}

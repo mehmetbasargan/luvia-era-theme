@@ -31,7 +31,11 @@
         {% for article in blog.articles %}
           <article class="blog-post-card group">
             {% if article.image %}
-              <a href="{{ article.url }}" class="block overflow-hidden mb-4 aspect-[16/10]">
+              <a
+                href="{{ article.url }}"
+                class="block overflow-hidden mb-4 aspect-[16/10]"
+                aria-label="Read {{ article.title | escape }}"
+              >
                 <img
                   src="{{ article.image | image_url: width: 800 }}"
                   alt="{{ article.title }}"
@@ -117,9 +121,13 @@
     {% else %}
       <div class="text-center py-20 bg-gray-50 rounded-lg">
         <p class="text-xl text-primary italic">No posts found in "{{ blog.title }}"</p>
-        <a href="/admin/articles/new" class="mt-4 inline-block bg-primary text-white px-6 py-2 rounded"
-          >Create a Post</a
+        <a
+          href="/admin/articles/new"
+          class="mt-4 inline-block bg-primary text-white px-6 py-2 rounded"
+          aria-label="Create new blog post"
         >
+          Create a Post
+        </a>
       </div>
     {% endif %}
   </div>

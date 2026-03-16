@@ -148,7 +148,7 @@
         // DETAIL BUTTON FOR ALL PRODUCTS
         actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
-            <a href="${item.url}" class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading no-underline">
+            <a href="${item.url}" class="w-full bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading no-underline" aria-label="View ${translations.viewProduct} details">
               ${translations.viewProduct}
             </a>
           </div>`;
@@ -156,7 +156,7 @@
         badgeHtml = `<span class="absolute top-3 left-3 z-30 bg-black text-white text-[10px] px-2 py-1 tracking-widest uppercase italic shadow-sm">${translations.journal}</span>`;
         actionButton = `
           <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-20">
-            <a href="${item.url}" class="w-full bg-black text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading no-underline">
+            <a href="${item.url}" class="w-full bg-black text-white py-4 text-[11px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors font-heading no-underline" aria-label="Read ${translations.readMore}">
               ${translations.readMore}
             </a>
           </div>`;
@@ -167,13 +167,13 @@
           <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
             ${badgeHtml}
             ${wishlistBtn}
-            <a href="${item.url}" class="block h-full w-full">
+            <a href="${item.url}" class="block h-full w-full" aria-label="View ${item.title} details">
               <img src="${mainImage}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
             </a>
             ${actionButton}
           </div>
           <div class="pt-4 pb-2 flex flex-col items-center px-3 text-center">
-            <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase line-clamp-2 min-h-[40px] tracking-wider font-body no-underline">
+            <a href="${item.url}" class="text-primary font-light text-[14px] hover:text-secondary transition-colors uppercase line-clamp-2 min-h-[40px] tracking-wider font-body no-underline" aria-label="View ${item.title} details">
               ${item.title}
             </a>
             ${priceHtml}

@@ -31,7 +31,7 @@
       </button>
     </div>
 
-    <a href="{{ product.url }}" class="block h-full w-full z-10">
+    <a href="{{ product.url }}" class="block h-full w-full z-10" aria-label="View {{ product.title | escape }} details">
       <img
         src="{{ product.featured_image | image_url: width: 400 }}"
         alt="{{ product.title | escape }}"

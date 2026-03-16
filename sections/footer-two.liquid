@@ -1,7 +1,7 @@
 <footer class="bg-custombg text-primary pt-14">
   <div class="">
     <div class="w-full flex items-center justify-center border-b border-line pb-10">
-      <a href="{{ routes.root_url }}" class="block">
+      <a href="{{ routes.root_url }}" class="block" aria-label="{{ shop.name }} homepage">
         {% if section.settings.footer_logo != blank %}
           {%- assign logo_alt = section.settings.footer_logo.alt | default: shop.name -%}
           {{
