@@ -35,7 +35,7 @@
   "
 >
   <div class="container mx-auto">
-    {% comment %} Başlık {% endcomment %}
+    {% comment %} Heading {% endcomment %}
     {% if section.settings.heading != blank %}
       <div class="text-center mb-12">
         <h2 class="text-secondary font-light uppercase tracking-[0.2em]">
@@ -52,7 +52,7 @@
           class="group relative block overflow-hidden aspect-square border border-line"
           {{ block.shopify_attributes }}
         >
-          {% comment %} Görsel {% endcomment %}
+          {% comment %} Image {% endcomment %}
           {% if block.settings.image != blank %}
             <img
               src="{{ block.settings.image | image_url: width: 800 }}"
@@ -67,15 +67,15 @@
           {% endif %}
 
           {% comment %}
-            🛠️ Dinamik Overlay Layer
-            Opacity değerini doğrudan block ayarlarından alıyoruz.
+            Dynamic Overlay Layer
+            Opacity value directly from block settings.
           {% endcomment %}
           {%- assign overlay_opacity = block.settings.overlay_opacity | divided_by: 100.0 -%}
           <div
             class="absolute inset-0 bg-black transition-all duration-500 z-10 flex items-center justify-center group-hover:bg-opacity-60"
             style="background-color: rgba(0,0,0, {{ overlay_opacity }});"
           >
-            {% comment %} Metin Alanı {% endcomment %}
+            {% comment %} Text Area {% endcomment %}
             <div class="text-center px-4 relative z-20">
               <h3 class="text-white text-[13px] uppercase tracking-[0.3em] font-light leading-snug">
                 {{ block.settings.title }}
@@ -104,7 +104,7 @@
     },
     {
       "type": "header",
-      "content": "Section Boşluk Ayarları"
+      "content": "Section Spacing Settings"
     },
     {
       "type": "range",
@@ -113,7 +113,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Üst İç Boşluk (Padding)",
+      "label": "Top Padding",
       "default": 36
     },
     {
@@ -123,7 +123,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Alt İç Boşluk (Padding)",
+      "label": "Bottom Padding",
       "default": 36
     },
     {
@@ -133,7 +133,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Üst Dış Boşluk (Margin)",
+      "label": "Top Margin",
       "default": 0
     },
     {
@@ -143,29 +143,29 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Alt Dış Boşluk (Margin)",
+      "label": "Bottom Margin",
       "default": 0
     },
     {
       "type": "header",
-      "content": "Arka Plan Tasarımı"
+      "content": "Background Design"
     },
     {
       "type": "checkbox",
       "id": "use_custom_bg",
-      "label": "Özel Arka Plan Rengi Kullan",
+      "label": "Use Custom Background Color",
       "default": false
     },
     {
       "type": "color",
       "id": "section_bg_color",
-      "label": "Arka Plan Rengi",
+      "label": "Background Color",
       "default": "#ffffff"
     },
     {
       "type": "checkbox",
       "id": "remove_bg",
-      "label": "Arka Planı Tamamen Kaldır (Transparent)",
+      "label": "Remove Background (Transparent)",
       "default": false
     }
   ],

@@ -108,7 +108,7 @@
       {%- endunless -%}
 
       <div class="product-form-container mt-8">
-        <form action="/cart/add" method="post" id="product-form-{{ section.id }}">
+        <form action="{{ routes.cart_add_url }}" method="post" id="product-form-{{ section.id }}">
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
           <button
             type="submit"
@@ -236,41 +236,41 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 2. Varyant Değişimi
+  // 2. Variant Change
   const variantData = {{ product.variants | json }};
   const variantRadios = document.querySelectorAll('.variant-wrapper input[type="radio"]');
   
   variantRadios.forEach(radio => {
     radio.addEventListener('change', function() {
-      // Label Güncelle
+      // Label Update
       const optionIndex = this.closest('.variant-wrapper').dataset.optionIndex;
       document.getElementById(`option-value-${optionIndex}`).textContent = this.value;
 
-      // Seçili varyantı bul
+      // Find selected variant
       const selectedOptions = Array.from(document.querySelectorAll('.variant-wrapper input:checked')).map(input => input.value);
       const matchedVariant = variantData.find(v => JSON.stringify(v.options) === JSON.stringify(selectedOptions));
 
       if (matchedVariant) {
-        // ID Güncelle
+        // ID Update
         document.querySelector('input[name="id"]').value = matchedVariant.id;
-        // Fiyat Güncelle
+        // Price Update
         document.querySelector('.product-price-display').innerText = (matchedVariant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        // Buton Güncelle
+        // Button Update
         const btn = document.querySelector('.add-to-cart-btn');
         if (matchedVariant.available) {
           btn.disabled = false; btn.classList.remove('opacity-50'); btn.innerText = "{{ 'products.product.add_to_cart' | t }}";
         } else {
           btn.disabled = true; btn.classList.add('opacity-50'); btn.innerText = "{{ 'products.product.sold_out' | t }}";
         }
-        // URL Güncelle
+        // URL Update
         window.history.replaceState({}, '', `?variant=${matchedVariant.id}`);
-        // Wishlist uygulamalarını uyar
+        // Update wishlist applications
         document.querySelector('input[name="id"]').dispatchEvent(new Event('change', { bubbles: true }));
       }
     });
   });
 
-  // 3. AJAX Sepete Ekleme
+  // 3. AJAX Add to Cart
   const productForm = document.getElementById('product-form-{{ section.id }}');
   if (productForm) {
     productForm.addEventListener('submit', function (e) {
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
       submitBtn.disabled = true;
       submitBtn.innerText = 'Adding...';
 
-      fetch('/cart/add.js', {
+      fetch('{{ routes.cart_add_url }}', {
         method: 'POST',
         body: new FormData(this)
       })
