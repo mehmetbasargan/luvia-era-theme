@@ -12,8 +12,10 @@
     <div class="flex justify-between items-center pb-6 border-b border-line">
       <h3 class="text-[12px] uppercase tracking-[0.3em] font-light text-primary">{{ 'cart.my_cart' | t }}</h3>
       <button
+        type="button"
         onclick="closeCartDrawer()"
         class="text-[13px] uppercase tracking-widest hover:opacity-50 transition-opacity"
+        aria-label="Close cart"
       >
         {{ 'general.close' | t }}
       </button>

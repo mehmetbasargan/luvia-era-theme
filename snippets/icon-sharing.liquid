@@ -128,8 +128,10 @@
   </a>
 
   <button
+    type="button"
     onclick="navigator.clipboard.writeText(window.location.href).then(() => { showToast('Link copied!'); }).catch(err => console.error('Copy error:', err))"
     class="hover:text-primary transition"
+    aria-label="Copy link to clipboard"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

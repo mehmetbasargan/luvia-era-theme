@@ -10,7 +10,10 @@
               <ul class="flex items-center gap-2">
                 <li>{% render 'icon-phone' %}</li>
                 <li class="font-medium">
-                  <a href="{{ section.settings.header_phone | replace: ' ', '' }}">
+                  <a
+                    href="{{ section.settings.header_phone | replace: ' ', '' }}"
+                    aria-label="Call {{ section.settings.header_phone | replace: ' ', '' }}"
+                  >
                     {{ section.settings.header_phone -}}
                   </a>
                 </li>
@@ -186,7 +189,10 @@
                           <ul class="flex items-center gap-2">
                             <li>{% render 'icon-phone' %}</li>
                             <li class="font-medium">
-                              <a href="{{ section.settings.header_phone | replace: ' ', '' }}">
+                              <a
+                                href="{{ section.settings.header_phone | replace: ' ', '' }}"
+                                aria-label="Call {{ section.settings.header_phone | replace: ' ', '' }}"
+                              >
                                 {{ section.settings.header_phone -}}
                               </a>
                             </li>
@@ -276,7 +282,7 @@
               </a>
             </div>
             <div class="p-2">
-              <shopify-account menu="customer-account-main-menu">
+              <shopify-account menu="customer-account-main-menu" aria-label="Account">
                 <div slot="signed-out-avatar" class="deneme">
                   {% render 'icon-account' %}
                 </div>
