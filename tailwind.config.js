@@ -17,7 +17,6 @@ module.exports = {
 				line: 'var(--color-line)',
 				white: 'var(--color-white)',
 				black: 'var(--color-black)',
-				bgtransparent: 'var(--color-bgtransparent)',
 
 				// --- Dynamic Color Scheme Colors ---
 				// These colors change section-based according to selected scheme
