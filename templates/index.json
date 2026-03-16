@@ -147,7 +147,7 @@
         "margin_bottom": 0,
         "use_custom_bg": true,
         "section_bg_color": "#667c67",
-        "remove_bg": false
+        "remove_bg": true
       }
     },
     "rich_text_banner_m8j33U": {
