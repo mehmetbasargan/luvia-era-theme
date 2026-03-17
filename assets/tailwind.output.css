@@ -936,10 +936,6 @@ blockquote {
   top: 6rem;
 }
 
-.top-28 {
-  top: 7rem;
-}
-
 .top-3 {
   top: 0.75rem;
 }
@@ -2483,18 +2479,6 @@ blockquote {
   line-height: 1rem;
 }
 
-.text-\[4px\] {
-  font-size: 4px;
-}
-
-.text-\[0px\] {
-  font-size: 0px;
-}
-
-.text-\[3px\] {
-  font-size: 3px;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -2927,11 +2911,6 @@ blockquote {
   background-color: rgb(254 202 202 / var(--tw-bg-opacity, 1));
 }
 
-.hover\:bg-red-50:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
-}
-
 .hover\:bg-red-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
@@ -3350,14 +3329,6 @@ blockquote {
   .md\:text-5xl {
     font-size: 3rem;
     line-height: 1;
-  }
-
-  .md\:text-\[11px\] {
-    font-size: 11px;
-  }
-
-  .md\:text-\[13px\] {
-    font-size: 13px;
   }
 }
 

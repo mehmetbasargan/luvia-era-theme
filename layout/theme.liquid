@@ -4,13 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
-      rel="stylesheet"
-    >
-
     <title>{{ page_title | default: shop.name | escape }}</title>
     <meta name="description" content="{{ page_description | default: shop.description | truncate: 160 | escape }}">
 
@@ -34,11 +27,16 @@
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
     <style>
-      /* Performance: Font yüklenirken metnin görünmemesini engeller */
+      /* 1. Dinamik Font Yükleme (RemoteAsset Hatasını Giderir) */
       {{ settings.heading_font | font_face: font_display: 'swap' }}
       {{ settings.body_font | font_face: font_display: 'swap' }}
 
+      /* Kalın versiyonlar için opsiyonel yükleme */
+      {{ settings.heading_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+      {{ settings.body_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+
       :root {
+        /* Shopify CDN üzerinden gelen font aileleri */
         --font-heading: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
         --font-body: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
 
@@ -47,6 +45,9 @@
         --color-custombg: {{ settings.custom_bg_color | default: '#f9f9f9' }};
         --color-line: {{ settings.line_color | default: '#e5e7eb' }};
         --color-main-bg: {{ settings.background_color | default: '#ffffff' }};
+
+        /* Header Opacity Değişkeni (Gelecek ayar için hazır) */
+        --header-opacity: {{ settings.header_opacity | default: 100 | divided_by: 100.0 }};
       }
 
       body {
@@ -57,25 +58,24 @@
         -webkit-font-smoothing: antialiased;
       }
 
-      /* BAŞLIKLAR: Josefin Sans için Optimize Edilmiş Yeni Boyutlar ve Stil */
+      /* BAŞLIKLAR: Panelden Seçilen Fontu Kullanır */
       h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         font-family: var(--font-heading) !important;
         color: var(--color-secondary) !important;
         text-transform: uppercase !important;
-        letter-spacing: 1px !important; /* Bir tık daralttım, 4px Josefin'de çok yayılabilir */
-        font-weight: 400 !important;
+        letter-spacing: 1px !important;
+        font-weight: {{ settings.heading_font.weight | default: 400 }} !important;
         line-height: 1.2;
       }
 
-      /* Rafine Font Boyutları (Clamp) */
-      h1, .h1 { font-size: clamp(1.75rem, 4vw, 2.5rem) !important; }   /* Eskisi: 3rem'di, küçültüldü */
-      h2, .h2 { font-size: clamp(1.5rem, 3.5vw, 2rem) !important; }   /* Eskisi: 2.25rem'di */
-      h3, .h3 { font-size: clamp(1.25rem, 3vw, 1.625rem) !important; } /* Eskisi: 1.875rem'di */
+      /* Rafine Font Boyutları */
+      h1, .h1 { font-size: clamp(1.75rem, 4vw, 2.5rem) !important; }
+      h2, .h2 { font-size: clamp(1.5rem, 3.5vw, 2rem) !important; }
+      h3, .h3 { font-size: clamp(1.25rem, 3vw, 1.625rem) !important; }
       h4, .h4 { font-size: clamp(1.1rem, 2.5vw, 1.375rem) !important; }
       h5, .h5 { font-size: clamp(1rem, 2vw, 1.125rem) !important; }
       h6, .h6 { font-size: clamp(0.85rem, 1.5vw, 0.95rem) !important; }
 
-      /* Diğer Yardımcı Sınıflar */
       .bg-custombg { background-color: var(--color-custombg) !important; }
       .text-primary { color: var(--color-primary) !important; }
       .text-secondary { color: var(--color-secondary) !important; }
@@ -85,6 +85,11 @@
 
       #main-header .active-link, #main-header a:hover {
         color: var(--color-secondary) !important;
+      }
+
+      /* Header Şeffaflık Uygulaması */
+      #main-header {
+        background-color: rgba(255, 255, 255, var(--header-opacity)) !important;
       }
 
       .custom-wishlist-btn.active svg, .custom-wishlist-btn.wishlist-active svg {
