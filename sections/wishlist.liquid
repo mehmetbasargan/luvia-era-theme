@@ -81,7 +81,7 @@
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg>
                 </button>
                 <a href="${product.url}" class="block h-full w-full" aria-label="View ${product.title} details">
-                  <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                  <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width="400" height="400">
                 </a>
                 <button type="button" onclick="handleWishlistAddToCart(event, '${product.variant_id}')" class="absolute inset-x-0 bottom-0 bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all cursor-pointer border-none z-40" aria-label="Add ${product.title} to cart">
                   {{ 'products.product.add_to_cart' | t }}
