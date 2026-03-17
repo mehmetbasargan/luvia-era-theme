@@ -24,7 +24,7 @@
 				"type": "color",
 				"id": "secondary_color",
 				"label": "Secondary Color",
-				"default": "#b2ac88"
+				"default": "#736d4b"
 			},
 			{
 				"type": "color",

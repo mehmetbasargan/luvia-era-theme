@@ -37,7 +37,7 @@
   <div class="container">
     {% if section.settings.collection_list_title != blank %}
       <div class="text-center mb-16">
-        <h3 class="">
+        <h3>
           {{ section.settings.collection_list_title }}
         </h3>
         <div class="h-[1px] w-20 mx-auto mt-4 border-b border-secondary"></div>
@@ -72,12 +72,12 @@
           </a>
 
           <div class="mt-6 text-center">
-            <h5 class="tracking-widest uppercase mb-2">
+            <h5 class="mb-2">
               {{ collection.title | default: 'Collection Title' }}
             </h5>
             <a
               href="{{ collection.url | default: '#' }}"
-              class="text-primary text-[11px] uppercase tracking-[0.2em] hover:text-secondary transition-all flex items-center justify-center gap-2"
+              class="text-primary text-[14px] uppercase tracking-[0.1em] hover:text-secondary transition-all flex items-center justify-center gap-2"
               aria-label="Explore {{ collection.title | default: 'Collection' | escape }}"
             >
               {{ 'collections.review' | t | default: 'Explore' }}
