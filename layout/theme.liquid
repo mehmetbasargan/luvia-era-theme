@@ -36,9 +36,9 @@
       {{ settings.body_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
 
       :root {
-        /* Shopify CDN üzerinden gelen font aileleri */
-        --font-heading: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
-        --font-body: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+        /* Font ailelerini tam isimleriyle ve fallback (yedek) fontlarıyla tanımlıyoruz */
+        --font-heading: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families | default: 'sans-serif' }};
+        --font-body: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families | default: 'sans-serif' }};
 
         --color-primary: {{ settings.primary_color | default: '#3b443c' }};
         --color-secondary: {{ settings.secondary_color | default: '#867f57' }};
@@ -46,14 +46,15 @@
         --color-line: {{ settings.line_color | default: '#e5e7eb' }};
         --color-main-bg: {{ settings.background_color | default: '#ffffff' }};
 
-        /* Header Opacity Değişkeni (Gelecek ayar için hazır) */
+        /* Header Opacity Değişkeni */
         --header-opacity: {{ settings.header_opacity | default: 100 | divided_by: 100.0 }};
       }
 
-      body {
+      /* 2. Global Font Uygulaması: Tarayıcıyı zorlamak için html ve body'e ekliyoruz */
+      html, body {
+        font-family: var(--font-body) !important;
         background-color: var(--color-main-bg);
         color: var(--color-primary);
-        font-family: var(--font-body);
         margin: 0;
         -webkit-font-smoothing: antialiased;
       }
@@ -76,6 +77,7 @@
       h5, .h5 { font-size: clamp(1rem, 2vw, 1.125rem) !important; }
       h6, .h6 { font-size: clamp(0.85rem, 1.5vw, 0.95rem) !important; }
 
+      /* Diğer Yardımcı Sınıflar */
       .bg-custombg { background-color: var(--color-custombg) !important; }
       .text-primary { color: var(--color-primary) !important; }
       .text-secondary { color: var(--color-secondary) !important; }
@@ -87,9 +89,10 @@
         color: var(--color-secondary) !important;
       }
 
-      /* Header Şeffaflık Uygulaması */
+      /* Header Şeffaflık Uygulaması: Arka plan rengini CSS değişkeninden çeker */
       #main-header {
         background-color: rgba(255, 255, 255, var(--header-opacity)) !important;
+        transition: background-color 0.3s ease;
       }
 
       .custom-wishlist-btn.active svg, .custom-wishlist-btn.wishlist-active svg {
