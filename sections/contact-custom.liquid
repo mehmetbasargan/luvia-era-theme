@@ -2,19 +2,19 @@
 <section class="container py-24 md:py-32">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
     <div class="flex flex-col space-y-12 animate-fade-in">
-      <h4 class="uppercase tracking-[0.3em] text-secondary">
+      <h4 class="text-secondary">
         {{ section.settings.heading }}
       </h4>
-      <div class="space-y-10 font-light tracking-[0.1em] text-primary">
+      <div class="space-y-10 tracking-[0.1em] text-primary">
         <p class="leading-loose md:max-w-md">{{ section.settings.subtext }}</p>
 
         <div class="space-y-8 pt-4">
           <div class="group">
-            <p class="mb-2 text-[13px]">{{ section.settings.address_title }}</p>
+            <p class="mb-2 text-[14px]">{{ section.settings.address_title }}</p>
             <p class="tracking-[0.1em]">{{ section.settings.address_text }}</p>
           </div>
           <div class="group">
-            <p class="mb-2 text-[13px]">{{ section.settings.email_title }}</p>
+            <p class="mb-2 text-[14px]">{{ section.settings.email_title }}</p>
             <p class="tracking-[0.1em]">
               <a
                 href="mailto:{{ section.settings.email_text }}"
@@ -31,7 +31,7 @@
     <div class="animate-fade-in-delayed">
       {% form 'contact' %}
         {% if form.posted_successfully? %}
-          <p class="text-[16px] mb-10 text-primary italic font-light tracking-widest">
+          <p class="text-[16px] mb-10 text-primary italic tracking-widest">
             {%- if section.settings.success_message != blank -%}
               {{ section.settings.success_message }}
             {%- else -%}

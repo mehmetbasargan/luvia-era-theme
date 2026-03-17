@@ -71,24 +71,40 @@
 		text-transform: uppercase !important;
 		color: var(--color-secondary) !important;
 	}
-	h1 {
-		font-size: clamp(2rem, 5vw, 3rem);
+	/* H1: Max 48px -> 40px çekildi. Daha dengeli. */
+	h1,
+	.h1 {
+		font-size: clamp(1.75rem, 4vw, 2.5rem) !important;
 	}
-	h2 {
-		font-size: clamp(1.75rem, 4vw, 2.25rem);
+
+	/* H2: Max 36px -> 32px çekildi. */
+	h2,
+	.h2 {
+		font-size: clamp(1.5rem, 3.5vw, 2rem) !important;
 	}
-	h3 {
-		font-size: clamp(1.5rem, 3vw, 1.875rem);
-		text-transform: uppercase !important;
+
+	/* H3: Max 30px -> 26px çekildi. */
+	h3,
+	.h3 {
+		font-size: clamp(1.25rem, 3vw, 1.625rem) !important;
 	}
-	h4 {
-		font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+
+	/* H4: Alt başlık kıvamına getirildi. */
+	h4,
+	.h4 {
+		font-size: clamp(1.1rem, 2.5vw, 1.375rem) !important;
 	}
-	h5 {
-		font-size: clamp(1.1rem, 2vw, 1.25rem);
+
+	/* H5: Vurgulu metin boyutu. */
+	h5,
+	.h5 {
+		font-size: clamp(1rem, 2vw, 1.125rem) !important;
 	}
-	h6 {
-		font-size: clamp(0.875rem, 1.5vw, 1rem);
+
+	/* H6: En küçük başlık, ama geniş spacing ile çok şık durur. */
+	h6,
+	.h6 {
+		font-size: clamp(0.85rem, 1.5vw, 0.95rem) !important;
 	}
 
 	p {

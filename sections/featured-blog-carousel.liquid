@@ -37,7 +37,7 @@
   <div class="container">
     <div class="mb-10 flex flex-col md:flex-row justify-between items-start">
       <div>
-        <h3 class="uppercase tracking-widest">{{ section.settings.title }}</h3>
+        <h2>{{ section.settings.title }}</h2>
         <p class="text-primary mt-2">{{ section.settings.subtitle }}</p>
       </div>
       <div class="flex space-x-4 mt-5 md:mt-0">
@@ -76,13 +76,13 @@
                   {{- article.published_at | date: '%b %d, %Y' -}}
                 </span>
 
-                <h5 class="uppercase hover:text-primary transition-colors max-w-[300px] min-h-[1rem] leading-[20px] text-lg">
+                <h6 class="hover:text-primary transition-colors max-w-[300px] min-h-[1rem] leading-[20px]">
                   {{ article.title }}
-                </h5>
+                </h6>
 
                 <a
                   href="{{ article.url }}"
-                  class="text-[12px] uppercase font-semibold tracking-widest hover:text-secondary transition-all flex items-center gap-1"
+                  class="text-[12px] uppercase font-semibold -tracking-tight hover:text-secondary transition-all flex items-center gap-1"
                 >
                   {{ 'blog.read_article' | t }}
                   {% render 'icon-arrow-right' %}

@@ -1,13 +1,13 @@
 <div class="container px-4 md:px-20 py-20 lg:py-32">
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
     <div class="space-y-8 animate-fadeIn">
-      <h2 class="text-[15px] uppercase tracking-[0.3em] text-primary italic">
+      <p class="text-primary text-lg">
         {{ section.settings.since }}
-      </h2>
-      <h3 class="text-secondary uppercase">
+      </p>
+      <h3 class="text-secondary">
         {{ section.settings.heading | default: 'Crafting Timeless Elegance' }}
       </h3>
-      <div class="text-primary !leading-relaxed font-light max-w-lg flex flex-col gap-4 ">
+      <div class="text-primary !leading-relaxed flex flex-col gap-4">
         {{
           section.settings.text
           | default: 'Luvia Era was born from a desire to blend modern minimalism with artisan craftsmanship.'
