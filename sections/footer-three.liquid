@@ -5,7 +5,7 @@
         <h5 class="font-bold mb-3 text-secondary">
           {{ section.settings.menu_2_title }}
         </h5>
-        <ul class="space-y-4 text-sm text-primary flex flex-col">
+        <ul class="space-y-4 text-primary flex flex-col">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li>
               <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
@@ -20,7 +20,7 @@
         <h5 class="font-bold mb-3 text-secondary">
           {{ section.settings.menu_1_title }}
         </h5>
-        <ul class="text-sm text-primary flex flex-col gap-3">
+        <ul class="text-primary flex flex-col gap-3">
           {% for link in linklists[section.settings.footer_menu_1].links %}
             <li>
               <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">

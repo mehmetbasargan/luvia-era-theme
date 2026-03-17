@@ -18,10 +18,10 @@
     </div>
     <div class="container w-full xl:h-[200px] flex flex-wrap items-center xl:items-start gap-8 justify-between py-14">
       <div class="md:w-[400px] w-full">
-        <h6 class="mb-3 text-primary">
+        <h5 class="mb-3 text-primary">
           {{ section.settings.menu_1_title }}
-        </h6>
-        <ul class="text-sm font-light text-primary flex flex-row flex-wrap gap-3">
+        </h5>
+        <ul class="text-primary flex flex-row flex-wrap gap-3">
           {% for link in linklists[section.settings.footer_menu_1].links %}
             <li class="pt-0">
               <a
@@ -36,10 +36,10 @@
       </div>
 
       <div class="md:w-[400px] w-full">
-        <h6 class=" uppercase tracking-widest mb-3 text-primary">
+        <h5 class="mb-3 text-primary">
           {{ section.settings.menu_2_title }}
-        </h6>
-        <ul class="text-sm font-light text-primary flex flex-row flex-wrap gap-3">
+        </h5>
+        <ul class="font-light text-primary flex flex-row flex-wrap gap-3">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li class="pt-0">
               <a
@@ -54,9 +54,9 @@
       </div>
 
       <div class="w-full lg:w-[300px] ">
-        <h6 class=" uppercase tracking-widest mb-3 text-primary">Newsletter</h6>
-        <p class="text-xs text-primary mb-4 font-medium ">
-          Be the first to know about new collections and exclusive events.
+        <h5 class="mb-3 text-primary">Newsletter</h5>
+        <p class="text-sm text-primary mb-4 font-medium" style="margin-bottom: 30px;">
+          {{ 'footer.be_first_to_know' | t }}
         </p>
 
         {% form 'customer', class: 'flex border-b border-gray-400 pb-2' %}
@@ -80,15 +80,19 @@
             class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2"
             aria-label="Subscribe to newsletter"
           >
-            Subscribe
+            {{ 'footer.join' | t }}
           </button>
 
           {%- if form.posted_successfully? -%}
-            <p class="text-[14px] text-green-600 absolute mt-8 italic">Thanks for subscribing!</p>
+            <p class="text-[14px] text-green-600 absolute mt-8 italic">
+              {{ 'newsletter.success' | t | default: 'Success! You are on the list.' }}
+            </p>
           {%- endif -%}
 
           {%- if form.errors -%}
-            <p class="text-[14px] text-red-600 absolute mt-8 italic">Please try again.</p>
+            <p class="text-[14px] text-red-600 absolute mt-8 italic">
+              {{ form.errors.messages.email }}
+            </p>
           {%- endif -%}
         {% endform %}
       </div>
