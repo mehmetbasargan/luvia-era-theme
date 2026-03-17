@@ -24,6 +24,7 @@
       "block_order": [
         "text_block_HeqF77"
       ],
+      "disabled": true,
       "name": "Marquee Text",
       "settings": {
         "bg_color": "#000000",
