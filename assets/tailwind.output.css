@@ -964,18 +964,6 @@ blockquote {
   top: 100%;
 }
 
-.-right-4 {
-  right: -1rem;
-}
-
-.-top-2 {
-  top: -0.5rem;
-}
-
-.-right-2 {
-  right: -0.5rem;
-}
-
 .z-0 {
   z-index: 0;
 }
@@ -1046,10 +1034,6 @@ blockquote {
 
 .z-\[999\] {
   z-index: 999;
-}
-
-.z-\[2\] {
-  z-index: 2;
 }
 
 .order-first {
@@ -1423,10 +1407,6 @@ blockquote {
   height: 100%;
 }
 
-.h-7 {
-  height: 1.75rem;
-}
-
 .max-h-\[80vh\] {
   max-height: 80vh;
 }
@@ -1554,14 +1534,6 @@ blockquote {
 .w-max {
   width: -moz-max-content;
   width: max-content;
-}
-
-.w-1 {
-  width: 0.25rem;
-}
-
-.w-7 {
-  width: 1.75rem;
 }
 
 .min-w-\[200px\] {
@@ -2406,10 +2378,6 @@ blockquote {
 
 .pt-8 {
   padding-top: 2rem;
-}
-
-.pl-2 {
-  padding-left: 0.5rem;
 }
 
 .text-left {
@@ -3365,10 +3333,6 @@ blockquote {
 }
 
 @media (min-width: 1024px) {
-  .lg\:block {
-    display: block;
-  }
-
   .lg\:flex {
     display: flex;
   }
@@ -3425,14 +3389,6 @@ blockquote {
     width: auto;
   }
 
-  .lg\:w-\[24px\] {
-    width: 24px;
-  }
-
-  .lg\:w-\[25px\] {
-    width: 25px;
-  }
-
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3459,14 +3415,6 @@ blockquote {
 
   .lg\:gap-2 {
     gap: 0.5rem;
-  }
-
-  .lg\:gap-6 {
-    gap: 1.5rem;
-  }
-
-  .lg\:gap-4 {
-    gap: 1rem;
   }
 
   .lg\:py-24 {
