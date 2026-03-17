@@ -105,7 +105,6 @@
 	h6 {
 		/* H6'yı biraz daha 'editorial' yapalım: Küçük ama geniş aralıklı */
 		font-size: clamp(0.875rem, 1.5vw, 1rem);
-		@apply uppercase font-light;
 	}
 
 	p {
