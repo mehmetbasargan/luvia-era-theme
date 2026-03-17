@@ -255,6 +255,7 @@
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
+                            aria-hidden="true"
                           >
                             <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
@@ -376,36 +377,33 @@
 </div>
 
 <script>
-  function updateHeaderHeight() {
+  function adjustHeaderPosition() {
     const header = document.querySelector('#main-header');
+    // Duyuru çubuğunu bul (Shopify'ın standart class'ı veya senin barın ID'si)
+    const announcementBar =
+      document.querySelector('.announcement-bar') || document.querySelector('#shopify-section-announcement-bar');
+
     if (header) {
+      // Sayfa en tepedeyse ve duyuru çubuğu varsa yüksekliği kadar boşluk bırak
+      if (window.scrollY === 0 && announcementBar && announcementBar.offsetHeight > 0) {
+        header.style.top = announcementBar.offsetHeight + 'px';
+      } else {
+        // Sayfa kaydırılınca veya bar yoksa sıfıra yapıştır
+        header.style.top = '0px';
+      }
+
+      // Header yüksekliğini CSS değişkeni olarak kaydet (diğer yerlerde lazım olabilir)
       document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
     }
   }
 
-  window.addEventListener('resize', updateHeaderHeight);
-  window.addEventListener('load', updateHeaderHeight);
-  window.addEventListener('scroll', updateHeaderHeight);
+  // Sayfa yüklendiğinde, kaydırıldığında ve pencere boyutu değiştiğinde çalıştır
+  window.addEventListener('scroll', adjustHeaderPosition);
+  window.addEventListener('resize', adjustHeaderPosition);
+  window.addEventListener('load', adjustHeaderPosition);
 
-  // Customer session debug removed for production
-
-  // Fix account link
-  document.addEventListener('DOMContentLoaded', function () {
-    const accountLinks = document.querySelectorAll('a[href*="account"]');
-    accountLinks.forEach(function (link) {
-      if (link.href.includes('/account')) {
-        link.addEventListener('click', function (e) {
-          // Check customer status
-          fetch('/cart.js', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }).then((response) => response.json());
-        });
-      }
-    });
-  });
+  // İlk açılışta tetikle
+  document.addEventListener('DOMContentLoaded', adjustHeaderPosition);
 </script>
 
 <style>

@@ -78,7 +78,8 @@
             <div class="group flex flex-col h-full bg-white border border-line/20 relative" id="wish-item-${product.id}">
               <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
                 <button type="button" onclick="LuviaWishlist.toggle('${product.id}')" class="absolute top-2 right-2 z-30 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-red-500 hover:text-white transition-all cursor-pointer border-none" aria-label="Remove ${product.title} from wishlist">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg>
                 </button>
                 <a href="${product.url}" class="block h-full w-full" aria-label="View ${product.title} details">
                   <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width="400" height="400">
