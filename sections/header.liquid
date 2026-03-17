@@ -1,5 +1,9 @@
 <div class="relative w-full h-[141px] md:h-[101px] lg:h-[161px]">
-  <header id="main-header" class="site-header bg-custombg w-full py-5 md:py-0 fixed z-50 border-b border-line">
+  <header
+    id="main-header"
+    class="site-header bg-custombg w-full py-5 md:py-0 fixed z-50 border-b border-line"
+    role="banner"
+  >
     {% comment %} topbar {% endcomment %}
     <div class="hidden lg:flex bg-custombg border-b border-line py-2 ">
       <div class="container">
@@ -137,7 +141,7 @@
                   class="fixed top-0 right-0 h-full w-[80%] max-w-[400px] bg-white z-[70] translate-x-full transition-transform duration-300 ease-in-out shadow-2xl p-6 overflow-scroll"
                 >
                   <div class="flex justify-end mb-8">
-                    <button id="mobile-menu-close" class="p-2 text-primary">
+                    <button id="mobile-menu-close" type="button" class="p-2 text-primary">
                       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                       </svg>
@@ -148,7 +152,10 @@
                     {% for link in linklists['main-menu'].links %}
                       <div class="mobile-nav-item">
                         {% if link.links != blank %}
-                          <button class="flex justify-between items-center w-full tracking-widest font-josefin text-primary py-2 border-b border-line mobile-dropdown-btn">
+                          <button
+                            type="button"
+                            class="flex justify-between items-center w-full tracking-widest font-josefin text-primary py-2 border-b border-line mobile-dropdown-btn"
+                          >
                             {{ link.title }}
                             <svg
                               class="w-4 h-4 transition-transform duration-300"
@@ -246,7 +253,7 @@
         </div>
         <div class="flex flex-row items-center justify-between md:justify-end w-full gap-2">
           <div class="flex lg:hidden items-start justify-start">
-            <button id="mobile-menu-open" class="">
+            <button id="mobile-menu-open" type="button" class="group relative order-last">
               <div id="icon-open" class="block">
                 {% render 'icon-menu' %}
               </div>
