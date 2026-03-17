@@ -92,9 +92,10 @@
                 <div class="absolute top-4 right-4 z-40">
                   <button
                     type="button"
-                    class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-110 transition-transform cursor-pointer border-none bg-white"
+                    class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-sm hover:scale-110 transition-transform duration-300"
                     data-product-id="{{ product.id }}"
                     onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') }"
+                    aria-label="Add {{ product.title }} to wishlist"
                   >
                     <svg
                       aria-hidden="true"
@@ -136,6 +137,7 @@
                     type="button"
                     onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
                     class="w-full bg-primary text-white py-4 text-[13px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none font-medium"
+                    aria-label="Add {{ product.title }} to cart"
                   >
                     {{ 'products.product.add_to_cart' | t }}
                   </button>
@@ -152,7 +154,7 @@
                 </a>
                 <div class="flex justify-center items-center gap-2">
                   {% if product.compare_at_price > product.price %}
-                    <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
+                    <span class="text-gray-600 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
                   {% endif %}
                   <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
                 </div>

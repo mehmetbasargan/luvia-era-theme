@@ -4,7 +4,7 @@
     class="site-header overflow-visible bg-custombg fixed top-0 z-50 w-full border-b border-line"
     role="banner"
   >
-    {% comment %} logo llll {% endcomment %}
+    {% comment %} logo {% endcomment %}
     <div class="border-line border-b">
       <div class="container">
         <div class="w-full h-[80px] py-5 items-center justify-center lg:justify-between flex">
@@ -32,7 +32,7 @@
               {% if section.settings.logo %}
                 {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
               {% else %}
-                <span class="h2">{{ shop.name }}</span>
+                <span class="h1 text-2xl">{{ shop.name }}</span>
               {% endif %}
             </a>
           </div>

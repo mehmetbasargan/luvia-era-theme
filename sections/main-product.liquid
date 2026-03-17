@@ -57,7 +57,9 @@
             {{- product.selected_or_first_available_variant.price | money -}}
           </span>
           {% if product.compare_at_price > product.price %}
-            <span class="product-compare-price text-gray-400 line-through">{{ product.compare_at_price | money }}</span>
+            <span class="product-compare-price text-gray-600 line-through text-[13px]">
+              {{- product.compare_at_price | money -}}
+            </span>
           {% endif %}
         </div>
       </div>

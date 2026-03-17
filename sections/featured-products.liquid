@@ -134,7 +134,7 @@
               </a>
               <div class="flex justify-center items-center gap-2">
                 {% if product.compare_at_price > product.price %}
-                  <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
+                  <span class="text-gray-600 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
                 {% endif %}
                 <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
               </div>
