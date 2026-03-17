@@ -16,8 +16,8 @@
   </div>
 
   <div class="relative z-10 text-center px-4">
-    <nav class="mb-4 text-[14px] uppercase tracking-[0.2em] text-white">
-      <a href="{{ routes.root_url }}" class="hover:text-secondary">{{ 'general.home' | t }}</a>
+    <nav class="mb-4 text-[13px] uppercase tracking-[0.2em] text-white">
+      <a href="{{ routes.root_url }}" class="hover:text-primary">{{ 'general.home' | t }}</a>
       <span class="mx-2">/</span>
       <span class="text-white">
         {%- if section.settings.custom_title != blank -%}
@@ -28,13 +28,13 @@
       </span>
     </nav>
 
-    <h3 class="text-white font-light tracking-widest leading-10 uppercase max-w-2xl">
+    <h2 class="text-white leading-10 max-w-2xl">
       {% if section.settings.custom_title != blank %}
         {{ section.settings.custom_title }}
       {% else %}
         {{ page.title }}
       {% endif %}
-    </h3>
+    </h2>
   </div>
 </section>
 

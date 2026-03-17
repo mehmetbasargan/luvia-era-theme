@@ -1,5 +1,5 @@
 <div class="container mx-auto px-4 py-12">
-  <h4 class="text-primary uppercase mb-8 text-center tracking-widest border-b border-line pb-2">
+  <h4 class="text-primary uppercase mb-8 text-center tracking-widest border-b border-line pb-4">
     {{ 'wishlist.title' | t }}
   </h4>
 
@@ -60,9 +60,19 @@
 
         container.innerHTML = products
           .map((product) => {
-            const price = Shopify.formatMoney
-              ? Shopify.formatMoney(product.price, '{{ shop.money_format }}')
-              : product.price;
+            // --- DİNAMİK FİYAT FORMATLAMA ---
+            // Liquid çıktısını tırnak içine alarak JS hatasını engelledik
+            const moneyFormat = '{{ shop.money_format }}';
+
+            // Script içindeki ilgili kısmı bununla değiştir:
+            let formattedPrice;
+            if (window.Shopify && Shopify.formatMoney) {
+              // Paneli dinler:
+              formattedPrice = Shopify.formatMoney(product.price, '{{ shop.money_format }}');
+            } else {
+              // Manuel Fallback: Simgeyi elle başa koyuyoruz
+              formattedPrice = '{{ cart.currency.symbol }}' + (product.price / 100).toFixed(2);
+            }
 
             return `
             <div class="group flex flex-col h-full bg-white border border-line/20 relative" id="wish-item-${product.id}">
@@ -78,8 +88,8 @@
                 </button>
               </div>
               <div class="p-4 text-center">
-                <h3 class="text-[12px] uppercase tracking-wider text-primary line-clamp-1">${product.title}</h3>
-                <p class="mt-1 text-secondary font-medium text-[13px]">${price}</p>
+                <h6 class="text-[12px] uppercase tracking-wider text-primary line-clamp-1">${product.title}</h6>
+                <p class="mt-1 text-secondary font-medium text-[13px]">${formattedPrice}</p>
               </div>
             </div>
           `;
@@ -102,12 +112,7 @@
     btn.innerText = '...';
 
     const formData = {
-      items: [
-        {
-          id: variantId,
-          quantity: 1,
-        },
-      ],
+      items: [{ id: variantId, quantity: 1 }],
     };
 
     fetch(window.Shopify.routes.root + 'cart/add.js', {
@@ -121,27 +126,15 @@
       })
       .then((data) => {
         btn.innerText = 'ADDED';
-
-        // 1. Show toast notification
         if (window.showToast) {
           window.showToast("{{ 'products.product.add_to_cart' | t }}", 'success');
         }
-
-        // 2. Update and open Cart Drawer
-        // Theme's drawer opening function is usually one of these:
         if (typeof openAndRefreshCart === 'function') {
           openAndRefreshCart();
         } else if (typeof refreshCartDrawer === 'function') {
           refreshCartDrawer();
         }
-
-        // Trigger Shopify's standard event (for some apps/themes)
-        document.dispatchEvent(
-          new CustomEvent('cart:updated', {
-            detail: { cart: data },
-          })
-        );
-
+        document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: data } }));
         setTimeout(() => {
           btn.innerText = originalText;
           btn.disabled = false;

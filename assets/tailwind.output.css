@@ -1177,22 +1177,6 @@ blockquote {
   margin-top: auto;
 }
 
-.mb-14 {
-  margin-bottom: 3.5rem;
-}
-
-.\!mb-4 {
-  margin-bottom: 1rem !important;
-}
-
-.mb-\[20px\] {
-  margin-bottom: 20px;
-}
-
-.mb-\[\!20px\] {
-  margin-bottom: !20px;
-}
-
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;
@@ -1578,10 +1562,6 @@ blockquote {
 
 .max-w-4xl {
   max-width: 56rem;
-}
-
-.max-w-7xl {
-  max-width: 80rem;
 }
 
 .max-w-\[300px\] {
@@ -2503,6 +2483,18 @@ blockquote {
   line-height: 1rem;
 }
 
+.text-\[4px\] {
+  font-size: 4px;
+}
+
+.text-\[0px\] {
+  font-size: 0px;
+}
+
+.text-\[3px\] {
+  font-size: 3px;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -3362,6 +3354,10 @@ blockquote {
 
   .md\:text-\[11px\] {
     font-size: 11px;
+  }
+
+  .md\:text-\[13px\] {
+    font-size: 13px;
   }
 }
 

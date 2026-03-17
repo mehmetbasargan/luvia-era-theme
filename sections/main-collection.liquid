@@ -3,11 +3,11 @@
     {% comment %} filters {% endcomment %}
     <aside class="w-full md:w-64 shrink-0">
       <div class="filter-wrapper sticky top-24">
-        <h2 class="text-[15px] uppercase tracking-[0.3em] font-medium mb-8">{{ 'collections.filters' | t }}</h2>
+        <h4 class="mb-8">{{ 'collections.filters' | t }}</h4>
         <form id="CollectionFiltersForm" class="space-y-8">
           {%- for filter in collection.filters -%}
             <div class="filter-group border-b border-line pb-6">
-              <h3 class="text-[14px] uppercase tracking-widest text-primary mb-4">{{ filter.label }}</h3>
+              <h5 class="text-primary mb-4">{{ filter.label }}</h5>
               <div class="filter-options {% if filter.label == 'Renk' or filter.label == 'Color' %}grid grid-cols-4 gap-3 w-max{% else %}space-y-2{% endif %}">
                 {%- case filter.type -%}
                   {%- when 'list', 'boolean' -%}
@@ -45,9 +45,9 @@
                             {% endif %}
                             class="w-3 h-3 border-line focus:ring-0 checked:bg-black"
                           >
-                          <span class="text-[14px] uppercase tracking-tighter hover:text-secondary font-medium {% if value.count == 0 %}text-gray-300{% endif %}">
+                          <span class="text-[13px] uppercase tracking-tighter hover:text-secondary font-medium {% if value.count == 0 %}text-gray-300{% endif %}">
                             {{ value.label }}
-                            <span class="text-[14px] text-primary">({{ value.count }})</span>
+                            <span class="text-[13px] text-primary">({{ value.count }})</span>
                           </span>
                         </label>
                       {%- endif -%}
