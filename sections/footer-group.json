@@ -59,6 +59,7 @@
         "payment_icons_mbBwxX",
         "payment_icons_JUKEeF"
       ],
+      "disabled": true,
       "settings": {
         "footer_logo": "shopify://shop_images/logo2.svg",
         "footer_description": "Defining your essence through timeless designs.",
@@ -146,7 +147,6 @@
         "gallery_image_zA7xgB",
         "gallery_image_z3YhPw"
       ],
-      "disabled": true,
       "settings": {
         "menu_1_title": "Collections",
         "footer_menu_1": "footer",
