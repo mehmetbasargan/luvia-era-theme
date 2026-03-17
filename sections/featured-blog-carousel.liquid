@@ -30,66 +30,68 @@
 <section
   id="LuviaSection-{{ section.id }}"
   class="
-    transition-colors duration-300 section-{{ section.id }}-padding
+     transition-colors duration-300 section-{{ section.id }}-padding
     {% unless section.settings.remove_bg or section.settings.use_custom_bg %}bg-white color-{{ section.settings.color_scheme }} gradient{% endunless %}
   "
 >
-  <div class="container mb-10 flex flex-col md:flex-row justify-between items-start">
-    <div>
-      <h2 class="font-light uppercase tracking-widest">{{ section.settings.title }}</h2>
-      <p class="text-primary mt-2">{{ section.settings.subtitle }}</p>
-    </div>
-    <div class="flex space-x-4 mt-5 md:mt-0">
-      <div class="swiper-button-prev-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition">
-        {% render 'icon-chevron-left' %}
+  <div class="container">
+    <div class="mb-10 flex flex-col md:flex-row justify-between items-start">
+      <div>
+        <h3 class="uppercase tracking-widest">{{ section.settings.title }}</h3>
+        <p class="text-primary mt-2">{{ section.settings.subtitle }}</p>
       </div>
-      <div class="swiper-button-next-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition">
-        {% render 'icon-chevron-right' %}
+      <div class="flex space-x-4 mt-5 md:mt-0">
+        <div class="swiper-button-prev-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition">
+          {% render 'icon-chevron-left' %}
+        </div>
+        <div class="swiper-button-next-custom cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition">
+          {% render 'icon-chevron-right' %}
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="container swiper featuredSwiper px-4">
-    <div class="swiper-wrapper">
-      {% assign blog = blogs[section.settings.blog] %}
-      {% for article in blog.articles limit: section.settings.post_limit %}
-        <div class="swiper-slide">
-          <div class="cursor-pointer">
-            {% if article.image %}
-              <div class="overflow-hidden aspect-[16/9] mb-6 rounded-sm">
-                <a href="{{ article.url }}" aria-label="Read article: {{ article.title | escape }}">
-                  <img
-                    src="{{ article.image | image_url: width: 600 }}"
-                    height="400"
-                    width="600"
-                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                    alt="{{ article.title | escape }}"
-                    loading="eager"
-                  >
+    <div class="swiper featuredSwiper px-4">
+      <div class="swiper-wrapper">
+        {% assign blog = blogs[section.settings.blog] %}
+        {% for article in blog.articles limit: section.settings.post_limit %}
+          <div class="swiper-slide">
+            <div class="cursor-pointer">
+              {% if article.image %}
+                <div class="overflow-hidden aspect-[16/9] mb-6 rounded-sm">
+                  <a href="{{ article.url }}" aria-label="Read article: {{ article.title | escape }}">
+                    <img
+                      src="{{ article.image | image_url: width: 600 }}"
+                      height="400"
+                      width="600"
+                      class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                      alt="{{ article.title | escape }}"
+                      loading="eager"
+                    >
+                  </a>
+                </div>
+              {% endif %}
+
+              <div class="space-y-2">
+                <span class="text-[13px] font-medium text-primary uppercase">
+                  {{- article.published_at | date: '%b %d, %Y' -}}
+                </span>
+
+                <h5 class="uppercase hover:text-primary transition-colors max-w-[300px] min-h-[1rem] leading-[20px] text-lg">
+                  {{ article.title }}
+                </h5>
+
+                <a
+                  href="{{ article.url }}"
+                  class="text-[12px] uppercase font-semibold tracking-widest hover:text-secondary transition-all flex items-center gap-1"
+                >
+                  {{ 'blog.read_article' | t }}
+                  {% render 'icon-arrow-right' %}
                 </a>
               </div>
-            {% endif %}
-
-            <div class="space-y-2">
-              <span class="text-[13px] font-medium text-primary uppercase">
-                {{- article.published_at | date: '%b %d, %Y' -}}
-              </span>
-
-              <h6 class="font-medium uppercase hover:text-primary transition-colors max-w-[300px] min-h-[1rem] leading-[24px]">
-                {{ article.title }}
-              </h6>
-
-              <a
-                href="{{ article.url }}"
-                class="text-[12px] uppercase font-semibold tracking-widest hover:text-secondary transition-all flex items-center gap-1"
-              >
-                {{ 'blog.read_article' | t }}
-                {% render 'icon-arrow-right' %}
-              </a>
             </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>

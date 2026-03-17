@@ -37,9 +37,9 @@
   <div class="container">
     {% if section.settings.collection_list_title != blank %}
       <div class="text-center mb-16">
-        <h4 class="uppercase font-light tracking-[0.2em]">
+        <h3 class="">
           {{ section.settings.collection_list_title }}
-        </h4>
+        </h3>
         <div class="h-[1px] w-20 mx-auto mt-4 border-b border-secondary"></div>
       </div>
     {% endif %}
@@ -72,9 +72,9 @@
           </a>
 
           <div class="mt-6 text-center">
-            <h6 class="tracking-widest uppercase mb-2 font-light">
+            <h5 class="tracking-widest uppercase mb-2">
               {{ collection.title | default: 'Collection Title' }}
-            </h6>
+            </h5>
             <a
               href="{{ collection.url | default: '#' }}"
               class="text-primary text-[11px] uppercase tracking-[0.2em] hover:text-secondary transition-all flex items-center justify-center gap-2"

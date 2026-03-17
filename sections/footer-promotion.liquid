@@ -38,9 +38,9 @@
     {% comment %} Heading {% endcomment %}
     {% if section.settings.heading != blank %}
       <div class="text-center mb-12">
-        <h2 class="text-secondary font-light uppercase tracking-[0.2em]">
+        <h3 class="text-secondary uppercase tracking-[0.1em]">
           {{ section.settings.heading }}
-        </h2>
+        </h3>
         <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
       </div>
     {% endif %}
@@ -77,7 +77,7 @@
           >
             {% comment %} Text Area {% endcomment %}
             <div class="text-center px-4 relative z-20">
-              <h3 class="text-white text-[13px] uppercase tracking-[0.3em] font-light leading-snug">
+              <h3 class="text-white text-[13px] uppercase tracking-[0.3em] leading-snug">
                 {{ block.settings.title }}
               </h3>
               <div

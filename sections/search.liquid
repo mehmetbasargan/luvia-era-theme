@@ -31,7 +31,7 @@
     id="search-header-wrapper"
     class="mb-8 border-b border-line pb-4 {% unless search.performed %}hidden{% endunless %}"
   >
-    <h5 id="dynamic-search-title" class="font-light text-primary uppercase tracking-widest leading-relaxed text-center">
+    <h5 id="dynamic-search-title" class="text-primary uppercase tracking-widest leading-relaxed text-center">
       {% if search.performed %}
         {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
       {% endif %}

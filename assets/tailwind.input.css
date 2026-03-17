@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-	/* Theme Renk Değişkenleri - Settings'ten */
 	:root {
 		--color-primary: #3b443c;
-		--color-secondary: #736d4b;
+		--color-secondary: #b2ac88;
 		--color-custombg: #f9f9f9;
 		--color-line: #e5e7eb;
 		--color-white: #ffffff;
@@ -15,31 +14,19 @@
 
 	/* account */
 	shopify-account {
-		/* Arka plan rengini buradan değiştir */
 		--shopify-account-color-accent: var(--color-secondary) !important;
-
-		/* İkon veya metin rengini buradan değiştir */
 		--shopify-account-color-accent-text: var(--color-white) !important;
-
-		/* Eğer giriş yapılmışsa özel renkler */
 		--shopify-account-signed-in-avatar-color-background: var(--color-secondary) !important;
 		--shopify-account-signed-in-avatar-color-text: var(--color-white) !important;
 	}
 
-	/* İkonun boyutunu ve kutusunu zorlamak için */
 	shopify-account {
-		/* Boyut için gerçek değişken bu */
 		--shopify-account-signed-in-avatar-size: 50px !important;
-
-		/* Renkler için bunlar */
 		--shopify-account-signed-in-avatar-color-background: var(--color-primary) !important; /* İstediğin renk */
 		--shopify-account-signed-in-avatar-color-text: var(--color-white) !important;
-
-		/* Genel tema uyumu için (Signed out durumu için de geçerli olabilir) */
 		--shopify-account-color-accent: var(--color-secondary) !important;
 	}
 
-	/* İkonun bu yeni boyuta tam ortalanması için */
 	shopify-account [slot='signed-out-avatar'],
 	shopify-account [slot='signed-in-avatar'] {
 		width: 50px !important;
@@ -50,18 +37,12 @@
 	}
 
 	shopify-account {
-		/* 1. O çarpanlı hesaplamayı devre dışı bırakmak için bu değişkeni 0 yapıyoruz */
-		--shopify-account-avatar-size: 40px !important; /* Kendi istediğin net boyutu yaz */
-
-		/* 2. O inatçı 1.57 çarpanını etkisiz hale getirmek için zorlama */
+		--shopify-account-avatar-size: 40px !important;
 		--clamped-avatar-size: 40px !important;
-
-		/* 3. Slot (ikon) alanının taşmasını engelle */
 		min-width: 0 !important;
 		min-height: 0 !important;
 	}
 
-	/* Kapsayıcı butonun kendisine müdahale */
 	shopify-account::part(button) {
 		min-width: 40px !important;
 		padding: 0 !important;
@@ -71,30 +52,29 @@
 		@apply font-inter text-primary antialiased m-0;
 	}
 
-	.bg-transparent {
-		background-color: transparent !important;
-	}
-
 	h1,
 	h2,
 	h3,
 	h4,
 	h5,
 	h6 {
-		/* Bold yerine Normal veya Light'a geçiyoruz */
-		@apply font-josefin leading-[1.1] font-normal tracking-tight;
+		font-family: 'Josefin Sans', sans-serif;
+		line-height: 1.1;
+		font-weight: 400 !important;
+		letter-spacing: 3px;
+		text-transform: uppercase !important;
+		color: var(--color-secondary) !important;
 	}
 
 	h1 {
-		/* Max: 64px (4rem) yerine artık Max: 48px (3rem) */
 		font-size: clamp(2rem, 5vw, 3rem);
 	}
 	h2 {
-		/* Max: 48px (3rem) yerine artık Max: 36px (2.25rem) */
 		font-size: clamp(1.75rem, 4vw, 2.25rem);
 	}
 	h3 {
 		font-size: clamp(1.5rem, 3vw, 1.875rem);
+		text-transform: uppercase !important;
 	}
 	h4 {
 		font-size: clamp(1.25rem, 2.5vw, 1.5rem);
@@ -103,7 +83,6 @@
 		font-size: clamp(1.1rem, 2vw, 1.25rem);
 	}
 	h6 {
-		/* H6'yı biraz daha 'editorial' yapalım: Küçük ama geniş aralıklı */
 		font-size: clamp(0.875rem, 1.5vw, 1rem);
 	}
 
@@ -125,7 +104,6 @@
 		animation: marquee 15s linear infinite;
 	}
 
-	/* Hero Slider için Important Class'ler */
 	.hover-text-white:hover {
 		@apply !text-white;
 	}
@@ -142,7 +120,6 @@
 		@apply !bg-secondary;
 	}
 
-	/* Hero Button Specific */
 	.hero-button-link {
 		transition: all 150ms ease;
 	}
@@ -155,7 +132,6 @@
 		color: var(--color-white) !important;
 	}
 
-	/* Featured Products Button Specific */
 	.featured-add-to-cart {
 		transition: all 300ms ease;
 	}
@@ -168,7 +144,6 @@
 		color: var(--color-white) !important;
 	}
 
-	/* Full Width Gallery Button Specific */
 	.luvia-gallery-item span {
 		color: var(--color-primary) !important;
 	}
@@ -181,7 +156,6 @@
 		color: var(--color-white) !important;
 	}
 
-	/* Product Card Button Specific */
 	.product-card button {
 		color: var(--color-white) !important;
 		background-color: var(--color-primary) !important;

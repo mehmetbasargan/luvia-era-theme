@@ -1,7 +1,7 @@
 <article class="max-w-[900px] mx-auto px-4 py-16">
   <header class="text-center mb-12">
     <span class="text-md uppercase tracking-widest text-primary">{{ blog.title }}</span>
-    <h4 class="font-light uppercase mt-4 mb-6 leading-tight">{{ article.title }}</h4>
+    <h4 class="uppercase mt-4 mb-6 leading-tight">{{ article.title }}</h4>
     <div class="flex justify-center items-center space-x-4 text-primary text-md">
       <span>{{ article.author }}</span>
       <span class="text-primary">•</span>
@@ -32,7 +32,7 @@
       class="text-sm font-medium hover:text-secondary mb-8 md:mb-0"
       aria-label="Back to {{ blog.title }}"
     >
-      >← {{ 'blog.back_to_blog' | t -}}
+      ← {{ 'blog.back_to_blog' | t }}
     </a>
     {%- render 'icon-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image -%}
   </div>
