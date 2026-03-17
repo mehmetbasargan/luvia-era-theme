@@ -2,25 +2,10 @@
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border-b border-line pt-10 pb-10">
       <div class="w-1/2">
-        <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
-          {{ section.settings.menu_1_title }}
-        </h4>
-        <ul class="text-sm font-light text-primary flex flex-col gap-3">
-          {% for link in linklists[section.settings.footer_menu_1].links %}
-            <li>
-              <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
-                {{ link.title }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div class="w-1/2">
-        <h4 class="text-sm font-bold uppercase tracking-widest mb-3 text-secondary">
+        <h5 class="font-bold mb-3 text-secondary">
           {{ section.settings.menu_2_title }}
-        </h4>
-        <ul class="space-y-4 text-sm font-light text-primary flex flex-col">
+        </h5>
+        <ul class="space-y-4 text-sm text-primary flex flex-col">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li>
               <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
@@ -31,10 +16,25 @@
         </ul>
       </div>
 
+      <div class="w-1/2">
+        <h5 class="font-bold mb-3 text-secondary">
+          {{ section.settings.menu_1_title }}
+        </h5>
+        <ul class="text-sm text-primary flex flex-col gap-3">
+          {% for link in linklists[section.settings.footer_menu_1].links %}
+            <li>
+              <a href="{{ link.url }}" class="hover:text-secondary transition-colors duration-300">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
       <div class="w-full lg:w-100%">
-        <h4 class="text-sm font-semibold uppercase tracking-widest mb-6 text-secondary">
+        <h5 class="font-bold mb-6 text-secondary">
           {{ section.settings.gallery_title }}
-        </h4>
+        </h5>
         <div class="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-2">
           {% for block in section.blocks %}
             {% if block.type == 'gallery_image' %}
@@ -57,10 +57,10 @@
     </div>
 
     <div class="md:w-[60%] mx-auto text-center py-9">
-      <h4 class="text-sm font-bold uppercase tracking-widest mb-1 text-secondary">
+      <h5 class="font-bold mb-1 text-secondary">
         {{ 'footer.newsletter' | t }}
-      </h4>
-      <p class="text-xs text-primary mb-4 font-medium ">
+      </h5>
+      <p class="text-sm text-primary mb-4 font-medium ">
         {{ 'footer.be_first_to_know' | t }}
       </p>
 
@@ -81,13 +81,13 @@
           required
         >
 
-        <button type="submit" class="text-secondary uppercase text-xs tracking-widest font-semibold ml-2">
+        <button type="submit" class="text-secondary uppercase text-sm tracking-widest font-bold ml-2">
           {{ 'footer.join' | t }}
         </button>
 
         {%- if form.posted_successfully? -%}
           <div class="absolute mt-10 w-full text-center">
-            <p class="text-[10px] text-green-600 font-bold italic">
+            <p class="text-[13px] text-green-600 font-bold italic">
               {{ 'newsletter.success' | t | default: 'Success! You are on the list.' }}
             </p>
           </div>
@@ -95,7 +95,7 @@
 
         {%- if form.errors -%}
           <div class="absolute mt-10 w-full text-center">
-            <p class="text-[10px] text-red-600 font-bold italic">
+            <p class="text-[13px] text-red-600 font-bold italic">
               {{ form.errors.messages.email }}
             </p>
           </div>
