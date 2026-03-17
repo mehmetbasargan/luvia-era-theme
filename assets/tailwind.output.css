@@ -1177,10 +1177,6 @@ blockquote {
   margin-top: auto;
 }
 
-.mb-7 {
-  margin-bottom: 1.75rem;
-}
-
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;
@@ -1544,30 +1540,6 @@ blockquote {
   width: max-content;
 }
 
-.w-\[60\%\] {
-  width: 60%;
-}
-
-.w-\[610\%\] {
-  width: 610%;
-}
-
-.w-\[10\%\] {
-  width: 10%;
-}
-
-.\!w-\[10\%\] {
-  width: 10% !important;
-}
-
-.w-\[40\%\] {
-  width: 40%;
-}
-
-.w-\[\!40\%\] {
-  width: !40%;
-}
-
 .min-w-\[200px\] {
   min-width: 200px;
 }
@@ -1578,14 +1550,6 @@ blockquote {
 
 .min-w-\[45px\] {
   min-width: 45px;
-}
-
-.min-w-6 {
-  min-width: 1.5rem;
-}
-
-.min-w-\[60\%\] {
-  min-width: 60%;
 }
 
 .max-w-2xl {
@@ -1618,10 +1582,6 @@ blockquote {
 
 .max-w-\[900px\] {
   max-width: 900px;
-}
-
-.max-w-lg {
-  max-width: 32rem;
 }
 
 .max-w-none {
@@ -2491,6 +2451,10 @@ blockquote {
   font-size: 16px;
 }
 
+.text-\[18px\] {
+  font-size: 18px;
+}
+
 .text-\[20px\] {
   font-size: 20px;
 }
@@ -2521,14 +2485,6 @@ blockquote {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-\[18px\] {
-  font-size: 18px;
-}
-
-.text-\[4px\] {
-  font-size: 4px;
 }
 
 .font-bold {
@@ -2587,16 +2543,12 @@ blockquote {
   line-height: 1.625;
 }
 
-.leading-snug {
-  line-height: 1.375;
-}
-
 .leading-tight {
   line-height: 1.25;
 }
 
-.tracking-\[0\.05em\] {
-  letter-spacing: 0.05em;
+.-tracking-tight {
+  letter-spacing: 0.025em;
 }
 
 .tracking-\[0\.1em\] {
@@ -2633,10 +2585,6 @@ blockquote {
 
 .tracking-widest {
   letter-spacing: 0.1em;
-}
-
-.-tracking-tight {
-  letter-spacing: 0.025em;
 }
 
 .\!text-primary {
