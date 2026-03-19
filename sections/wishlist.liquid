@@ -61,39 +61,63 @@
         container.innerHTML = products
           .map((product) => {
             // --- DİNAMİK FİYAT FORMATLAMA ---
-            // Liquid çıktısını tırnak içine alarak JS hatasını engelledik
-            const moneyFormat = '{{ shop.money_format }}';
-
-            // Script içindeki ilgili kısmı bununla değiştir:
+            // Shopify'ın global formatlama aracını kullanıyoruz
             let formattedPrice;
-            if (window.Shopify && Shopify.formatMoney) {
-              // Paneli dinler:
-              formattedPrice = Shopify.formatMoney(product.price, '{{ shop.money_format }}');
-            } else {
-              // Manuel Fallback: Simgeyi elle başa koyuyoruz
-              formattedPrice = '{{ cart.currency.symbol }}' + (product.price / 100).toFixed(2);
+            try {
+              if (window.Shopify && window.Shopify.formatMoney) {
+                formattedPrice = Shopify.formatMoney(product.price, '{{ shop.money_format }}');
+              } else {
+                // Manuel Fallback: Para birimi simgesi shop.money_format'tan gelebilir
+                const symbol = '{{ cart.currency.symbol }}';
+                formattedPrice = symbol + (product.price / 100).toFixed(2);
+              }
+            } catch (e) {
+              formattedPrice = (product.price / 100).toFixed(2);
             }
 
+            // --- HTML ÇIKTISI (Geliştirilmiş) ---
             return `
-            <div class="group flex flex-col h-full bg-white border border-line/20 relative" id="wish-item-${product.id}">
+            <div class="group flex flex-col h-full bg-white border border-line/20 relative" id="wish-item-${
+              product.id
+            }">
               <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
-                <button type="button" onclick="LuviaWishlist.toggle('${product.id}')" class="absolute top-2 right-2 z-30 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-red-500 hover:text-white transition-all cursor-pointer border-none" aria-label="Remove ${product.title} from wishlist">
-                  <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg>
+                <button type="button" 
+                  onclick="LuviaWishlist.toggle('${product.id}')" 
+                  class="absolute top-2 right-2 z-30 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-red-500 hover:text-white transition-all cursor-pointer border-none" 
+                  aria-label="Remove ${product.title.replace(/"/g, '&quot;')} from wishlist">
+                  <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" focusable="false">
+                    <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
                 </button>
-                <a href="${product.url}" class="block h-full w-full" aria-label="View ${product.title} details">
-                  <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width="400" height="400">
+
+                <a href="${product.url}" class="block h-full w-full" aria-label="View ${product.title.replace(
+              /"/g,
+              '&quot;'
+            )} details">
+                  <img src="${product.image}" 
+                      alt="${product.title.replace(/"/g, '&quot;')}" 
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                      loading="lazy" 
+                      width="400" 
+                      height="533">
                 </a>
-                <button type="button" onclick="handleWishlistAddToCart(event, '${product.variant_id}')" class="absolute inset-x-0 bottom-0 bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all cursor-pointer border-none z-40" aria-label="Add ${product.title} to cart">
+
+                <button type="button" 
+                  onclick="handleWishlistAddToCart(event, '${product.variant_id}')" 
+                  class="absolute inset-x-0 bottom-0 bg-primary text-white py-4 text-[11px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all cursor-pointer border-none z-40" 
+                  aria-label="Add ${product.title.replace(/"/g, '&quot;')} to cart">
                   {{ 'products.product.add_to_cart' | t }}
                 </button>
               </div>
+
               <div class="p-4 text-center">
-                <span class="text-[12px] uppercase tracking-wider text-primary line-clamp-1">${product.title}</span>
+                <h3 class="text-[12px] uppercase tracking-wider text-primary line-clamp-1 font-normal">${
+                  product.title
+                }</h3>
                 <p class="mt-1 text-secondary font-medium text-[13px]">${formattedPrice}</p>
               </div>
             </div>
-          `;
+            `;
           })
           .join('');
       })
