@@ -15,128 +15,106 @@
     }
   }
 
-  /* color and background settings */
   #LuviaSection-{{ section.id }} {
     {% if section.settings.remove_bg %}
       background-color: transparent !important;
-      background-image: none !important;
     {% elsif section.settings.use_custom_bg %}
       background-color: {{ section.settings.section_bg_color }} !important;
-      background-image: none !important;
     {% endif %}
+  }
+
+  /* Slider Görünürlük Ayarları */
+  .swiper-{{ section.id }} {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .swiper-{{ section.id }} .swiper-pagination {
+    position: relative;
+    margin-top: 20px;
+    text-align: center;
   }
 {%- endstyle -%}
 
-<section
-  id="LuviaSection-{{ section.id }}"
-  class="
-    transition-colors duration-300 section-{{ section.id }}-padding
-    {% unless section.settings.remove_bg or section.settings.use_custom_bg %}bg-custombg color-{{ section.settings.color_scheme }} gradient{% endunless %}
-  "
->
-  <div class="container py-[100px] ">
+<section id="LuviaSection-{{ section.id }}" class="section-{{ section.id }}-padding transition-colors duration-300">
+  <div class="container py-[100px]">
     {% if section.settings.testimonial_title %}
-      <div class="container mb-10 flex justify-center items-end w-full">
-        <div>
+      <div class="mb-10 flex justify-center items-end w-full">
+        <div class="text-center">
           <h2>{{ section.settings.testimonial_title }}</h2>
           <div class="h-[1px] w-20 bg-secondary mx-auto mt-4"></div>
         </div>
       </div>
     {% endif %}
 
-    <!-- Swiper -->
-    <div class="swiper myTestimonialSwiper">
+    <div class="swiper swiper-{{ section.id }}">
       <div class="swiper-wrapper">
         {% for item in section.blocks %}
           <div
-            class="swiper-slide flex flex-col items-center justify-center text-center w-full bg-custombg p-4 rounded-lg "
+            class="swiper-slide flex flex-col items-center justify-center text-center bg-custombg p-6 rounded-lg"
             itemscope
             itemtype="https://schema.org/Review"
           >
-            <div class="w-full h-[70px] flex items-center justify-center ny-7">
-              <span class="mb-5 text-secondary">{% render 'icon-quote' %}</span>
+            <div class="w-full h-[70px] flex items-center justify-center mb-4">
+              <span class="text-secondary" aria-hidden="true">{% render 'icon-quote' %}</span>
             </div>
-            <div class="h-[90px] text-[14px]" itemprop="reviewBody">
-              {{ item.settings.testimonial | strip_html | truncate: 150, '...' }}
+            <div class="min-h-[90px] text-[14px]" itemprop="reviewBody">
+              {{ item.settings.testimonial | strip_html | truncate: 150 }}
             </div>
             <span class="mt-8 italic text-[13px]" itemprop="author">- {{ item.settings.name }}</span>
             <meta itemprop="datePublished" content="{{ 'now' | date: '%Y-%m-%d' }}">
           </div>
         {% endfor %}
       </div>
-      <div class="swiper-pagination" role="tablist" aria-label="Testimonial slide navigation"></div>
+      <div
+        class="swiper-pagination pagination-{{ section.id }}"
+        role="tablist"
+        aria-label="Testimonial navigation"
+      ></div>
     </div>
   </div>
 </section>
 
-<!-- JSON-LD Structured Data for SEO -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "AggregateRating",
-    "itemReviewed": {
-      "@type": "Thing",
-      "name": "{{ section.settings.testimonial_title | default: 'Testimonials' }}"
-    },
-    "reviewCount": {{ section.blocks.size }},
-    "ratingValue": "5.0",
-    "bestRating": "5.0",
-    "worstRating": "1.0"
-  }
-</script>
-
-<style>
-  .myTestimonialSwiper .swiper-pagination {
-    position: initial;
-    text-align: center;
-    transform: translateZ(0);
-    transition: opacity 0.3s;
-    z-index: 10;
-  }
-
-  .myTestimonialSwiper .swiper-horizontal > .swiper-pagination-bullets,
-  .myTestimonialSwiper .swiper-pagination-bullets.swiper-pagination-horizontal,
-  .myTestimonialSwiper .swiper-pagination-custom,
-  .myTestimonialSwiper .swiper-pagination-fraction {
-    margin-top: 20px;
-  }
-</style>
-
 <script>
-  const initTestimonialSwiper = () => {
-    // Destroy existing swiper instance if exists (prevents Shopify Editor conflicts)
-    const existingSwiper = document.querySelector('.myTestimonialSwiper')?.swiper;
-    if (existingSwiper) existingSwiper.destroy(true, true);
+  // IIFE (Sarmalayıcı) kullanarak global değişken çakışmalarını %100 engelliyoruz
+  (function() {
+    function initSlider() {
+      const container = document.querySelector('.swiper-{{ section.id }}');
+      if (!container) return;
 
-    new Swiper('.myTestimonialSwiper', {
-      spaceBetween: 30,
-      freeMode: true,
-      loop:true,
-     /*  autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-      }, */
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-       breakpoints: {
-        640: {
-          slidesPerView: 2,
+      // Eğer zaten başlatılmışsa yok et (Shopify Editor için)
+      if (container.swiper) container.swiper.destroy(true, true);
+
+      const blockCount = {{ section.blocks.size }};
+      const desktopView = {{ section.settings.slides_per_view | default: 3 }};
+
+      new Swiper('.swiper-{{ section.id }}', {
+        spaceBetween: 30,
+        grabCursor: true,
+        // Lighthouse Hatası Fix: Sadece yeterli slide varsa loop aç
+        loop: blockCount > desktopView,
+        pagination: {
+          el: '.pagination-{{ section.id }}',
+          clickable: true,
         },
-        768: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: {{ section.settings.slides_per_view }},
-        },
-      },
+        breakpoints: {
+          320: { slidesPerView: 1, loop: blockCount > 1 },
+          640: { slidesPerView: 2, loop: blockCount > 2 },
+          1024: { slidesPerView: desktopView, loop: blockCount > desktopView }
+        }
+      });
+    }
+
+    // İlk yükleme
+    document.addEventListener('DOMContentLoaded', initSlider);
+    // Shopify Tema Editörü etkileşimi
+    document.addEventListener('shopify:section:load', initSlider);
+    // Mobil/Resize kontrolü için yedek
+    window.addEventListener('resize', function() {
+        if(!document.querySelector('.swiper-{{ section.id }}')?.swiper) initSlider();
     });
-  };
-
-  // Run when page loads and when Shopify Editor updates
-  document.addEventListener('DOMContentLoaded', initTestimonialSwiper);
-  document.addEventListener('shopify:section:load', initTestimonialSwiper);
+  })();
 </script>
 
 {% schema %}
@@ -156,29 +134,8 @@
       "default": "Testimonials"
     },
     {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
-    {
       "type": "header",
       "content": "Style Settings"
-    },
-    {
-      "type": "range",
-      "id": "header_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 10,
-      "unit": "%",
-      "label": "Header Opacity Rate",
-      "default": 100,
-      "info": "Adjust the transparency level of the header section if applicable."
-    },
-    {
-      "type": "header",
-      "content": "Section Spacing Settings"
     },
     {
       "type": "range",
@@ -221,10 +178,6 @@
       "default": 0
     },
     {
-      "type": "header",
-      "content": "Background Design"
-    },
-    {
       "type": "checkbox",
       "id": "use_custom_bg",
       "label": "Use Custom Background Color",
@@ -252,8 +205,7 @@
           "type": "textarea",
           "id": "testimonial",
           "label": "Testimonial",
-          "info": "Recommended: Max 150 characters for the best layout.",
-          "default": "This is a great product! I highly recommend it to everyone looking for quality."
+          "default": "This is a great product!"
         },
         {
           "type": "text",

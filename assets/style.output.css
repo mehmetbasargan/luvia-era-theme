@@ -779,6 +779,10 @@ blockquote {
   position: static;
 }
 
+.\!static {
+  position: static !important;
+}
+
 .fixed {
   position: fixed;
 }
@@ -1381,6 +1385,10 @@ blockquote {
 
 .min-h-\[40px\] {
   min-height: 40px;
+}
+
+.min-h-\[90px\] {
+  min-height: 90px;
 }
 
 .\!w-\[50px\] {
