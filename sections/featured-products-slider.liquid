@@ -119,13 +119,17 @@
                 </div>
 
                 {% comment %} Ürün Görselleri {% endcomment %}
-                <a href="{{ product.url }}" class="block w-full h-full relative z-10">
+                <a
+                  href="{{ product.url }}"
+                  class="block w-full h-full relative z-10"
+                  aria-label="{{ product.title | escape }}"
+                >
                   <img
                     src="{{ product.featured_image | image_url: width: 600 }}"
                     class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
                     height="800"
                     width="600"
-                    alt="{{ product.title | escape }}"
+                    alt="Ürün görseli: {{ product.title | escape }}"
                     loading="lazy"
                   >
                   {% if product.images[1] %}
@@ -134,7 +138,7 @@
                       class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                       height="800"
                       width="600"
-                      alt="{{ product.title | escape }}"
+                      alt="Ürün görseli: {{ product.title | escape }}"
                       loading="lazy"
                     >
                   {% endif %}

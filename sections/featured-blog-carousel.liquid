@@ -75,13 +75,17 @@
             <div class="group h-full flex flex-col">
               {% if article.image %}
                 <div class="overflow-hidden aspect-[16/9] mb-6 rounded-sm bg-gray-100">
-                  <a href="{{ article.url }}" class="block w-full h-full">
+                  <a
+                    href="{{ article.url }}"
+                    class="block w-full h-full"
+                    aria-label="{{ article.title | escape }} - Makaleyi oku"
+                  >
                     <img
                       src="{{ article.image | image_url: width: 800 }}"
                       height="450"
                       width="800"
                       class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                      alt="{{ article.title | escape }}"
+                      alt="Makale görseli"
                       loading="lazy"
                     >
                   </a>
@@ -100,6 +104,7 @@
                 <a
                   href="{{ article.url }}"
                   class="text-[12px] uppercase font-bold tracking-tighter hover:text-secondary transition-all flex items-center gap-2 mt-auto pt-4"
+                  aria-label="{{ article.title | escape }} - Makaleyi oku"
                 >
                   {{ 'blog.read_article' | t }}
                   <span class="w-4">{% render 'icon-arrow-right' %}</span>
