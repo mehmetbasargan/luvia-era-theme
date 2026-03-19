@@ -78,6 +78,7 @@
             <a
               href="{{ block.settings.button_link | default: '#' }}"
               class="inline-block mt-4 px-10 py-4 bg-primary text-white text-[15px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors duration-300"
+              aria-label="{{ block.settings.button_label | default: 'Discover More' | escape }} - {{ block.settings.title | escape }}"
             >
               {{ block.settings.button_label }}
             </a>

@@ -78,7 +78,7 @@
                   <a
                     href="{{ article.url }}"
                     class="block w-full h-full"
-                    aria-label="{{ article.title | escape }} - Makaleyi oku"
+                    aria-label="{{ 'blog.read_article' | t | escape }} - {{ article.title | escape }}"
                   >
                     <img
                       src="{{ article.image | image_url: width: 800 }}"
@@ -104,7 +104,7 @@
                 <a
                   href="{{ article.url }}"
                   class="text-[12px] uppercase font-bold tracking-tighter hover:text-secondary transition-all flex items-center gap-2 mt-auto pt-4"
-                  aria-label="{{ article.title | escape }} - Makaleyi oku"
+                  aria-label="{{ 'blog.read_article' | t | escape }} - {{ article.title | escape }}"
                 >
                   {{ 'blog.read_article' | t }}
                   <span class="w-4">{% render 'icon-arrow-right' %}</span>
