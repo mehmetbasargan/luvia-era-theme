@@ -44,20 +44,21 @@
 
     <div class="product-info-column w-full lg:w-2/5 space-y-8 sticky top-40">
       <div>
-        <h1
+        <span
           style="color: {{ settings.product_primary_color }}; font-family: {{ settings.product_heading_font.family }}, {{ settings.product_heading_font.fallback_families }};"
+          class="text-xl md:text-3xl uppercase"
         >
           {{ product.title }}
-        </h1>
+        </span>
         <div class="mt-4 flex items-center gap-4">
           <span
-            class="product-price-display text-[20px] font-medium"
+            class="product-price-display text-2xl font-bold"
             style="color: {{ settings.product_primary_color }};"
           >
             {{- product.selected_or_first_available_variant.price | money -}}
           </span>
           {% if product.compare_at_price > product.price %}
-            <span class="product-compare-price text-gray-600 line-through text-[13px]">
+            <span class="product-compare-price text-gray-600 line-through text-xl">
               {{- product.compare_at_price | money -}}
             </span>
           {% endif %}
@@ -72,7 +73,7 @@
         <div class="product-variants space-y-6 py-8 border-y border-line my-8">
           {%- for option in product.options_with_values -%}
             <div class="variant-wrapper" data-option-index="{{ forloop.index }}">
-              <label class="text-[13px] uppercase tracking-[0.2em] text-primary mb-4 block">
+              <label class="text-sm uppercase tracking-[0.2em] text-primary mb-4 block">
                 {{ option.name }}:
                 <span id="option-value-{{ forloop.index }}" class="text-black font-medium">
                   {{- option.selected_value -}}

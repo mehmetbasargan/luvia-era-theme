@@ -18,9 +18,9 @@
     </div>
     <div class="container w-full xl:h-[200px] flex flex-wrap items-center xl:items-start gap-8 justify-between py-14">
       <div class="md:w-[400px] w-full">
-        <h5 class="mb-3 text-primary">
+        <span class="font-bold mb-6 block text-secondary uppercase text-sm tracking-widest">
           {{ section.settings.menu_1_title }}
-        </h5>
+        </span>
         <ul class="text-primary flex flex-row flex-wrap gap-3">
           {% for link in linklists[section.settings.footer_menu_1].links %}
             <li class="pt-0">
@@ -36,9 +36,9 @@
       </div>
 
       <div class="md:w-[400px] w-full">
-        <h5 class="mb-3 text-primary">
+        <span class="font-bold mb-6 block text-secondary uppercase text-sm tracking-widest">
           {{ section.settings.menu_2_title }}
-        </h5>
+        </span>
         <ul class="font-light text-primary flex flex-row flex-wrap gap-3">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li class="pt-0">
@@ -54,7 +54,9 @@
       </div>
 
       <div class="w-full lg:w-[300px] ">
-        <h5 class="mb-3 text-primary">{{ 'footer.newsletter' | t }}</h5>
+        <span class="font-bold mb-6 block text-secondary uppercase text-sm tracking-widest">
+          {{- 'footer.newsletter' | t -}}
+        </span>
         <p class="text-sm text-primary mb-4 font-medium" style="margin-bottom: 30px;">
           {{ 'footer.be_first_to_know' | t }}
         </p>

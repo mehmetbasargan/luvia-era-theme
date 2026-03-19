@@ -3,103 +3,56 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-
     <title>{{ page_title | default: shop.name | escape }}</title>
-    <meta name="description" content="{{ page_description | default: shop.description | truncate: 160 | escape }}">
-
     {% render 'meta-tags' %}
     <link rel="canonical" href="{{ canonical_url }}">
 
-    <meta property="og:title" content="{{ page_title | default: shop.name | escape }}">
-    <meta
-      property="og:description"
-      content="{{ page_description | default: shop.description | truncate: 160 | escape }}"
-    >
-    <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:type" content="website">
-
-    {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
-    {%- endif -%}
-
-    {{ 'style.output.css' | asset_url | stylesheet_tag }}
     {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
     <style>
-      /* 1. Dinamik Font Yükleme (RemoteAsset Hatasını Giderir) */
       {{ settings.heading_font | font_face: font_display: 'swap' }}
       {{ settings.body_font | font_face: font_display: 'swap' }}
 
-      /* Kalın versiyonlar için opsiyonel yükleme */
-      {{ settings.heading_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-      {{ settings.body_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-
       :root {
-        /* Font ailelerini tam isimleriyle ve fallback (yedek) fontlarıyla tanımlıyoruz */
         --font-heading: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families | default: 'sans-serif' }};
         --font-body: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families | default: 'sans-serif' }};
-
         --color-primary: {{ settings.primary_color | default: '#3b443c' }};
         --color-secondary: {{ settings.secondary_color | default: '#5a5432' }};
-        --color-custombg: {{ settings.custom_bg_color | default: '#f9f9f9' }};
-        --color-line: {{ settings.line_color | default: '#e5e7eb' }};
-        --color-main-bg: {{ settings.background_color | default: '#ffffff' }};
-
-        /* Header Opacity Değişkeni */
         --header-opacity: {{ settings.header_opacity | default: 100 | divided_by: 100.0 }};
       }
 
-      /* 2. Global Font Uygulaması: Tarayıcıyı zorlamak için html ve body'e ekliyoruz */
+      /* !IMPORTANT'LARI TEMİZLEDİK: Tailwind artık bunları ezebilir */
       html, body {
-        font-family: var(--font-body) !important;
-        background-color: var(--color-main-bg);
+        font-family: var(--font-body);
+        background-color: {{ settings.background_color | default: '#ffffff' }};
         color: var(--color-primary);
         margin: 0;
-        -webkit-font-smoothing: antialiased;
       }
 
-      /* BAŞLIKLAR: Panelden Seçilen Fontu Kullanır */
       h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-        font-family: var(--font-heading) !important;
-        color: var(--color-secondary) !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        font-weight: {{ settings.heading_font.weight | default: 400 }} !important;
-        line-height: 1.2;
+        font-family: var(--font-heading) !important; /* Font ailesi sabit kalsın */
+        color: var(--color-secondary);
+        text-transform: uppercase;
+        font-weight: {{ settings.heading_font.weight | default: 400 }};
       }
 
-      /* Rafine Font Boyutları */
-      h1, .h1 { font-size: clamp(1.75rem, 4vw, 2.5rem) !important; }
-      h2, .h2 { font-size: clamp(1.5rem, 3.5vw, 2rem) !important; }
-      h3, .h3 { font-size: clamp(1.25rem, 3vw, 1.625rem) !important; }
-      h4, .h4 { font-size: clamp(1.1rem, 2.5vw, 1.375rem) !important; }
-      h5, .h5 { font-size: clamp(1rem, 2vw, 1.125rem) !important; }
-      h6, .h6 { font-size: clamp(0.85rem, 1.5vw, 0.95rem) !important; }
+      /* Varsayılan boyutlar (Clamp kalsın ama !important sildik) */
+      h1, .h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+      h2, .h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+      h3, .h3 { font-size: clamp(1.25rem, 3vw, 1.625rem); }
+      h4, .h4 { font-size: clamp(1.1rem, 2.5vw, 1.375rem); }
+      h5, .h5 { font-size: clamp(1rem, 2vw, 1.125rem); }
+      h6, .h6 { font-size: clamp(0.85rem, 1.5vw, 0.95rem); }
 
-      /* Diğer Yardımcı Sınıflar */
-      .bg-custombg { background-color: var(--color-custombg) !important; }
-      .text-primary { color: var(--color-primary) !important; }
-      .text-secondary { color: var(--color-secondary) !important; }
-      .text-white { color: #ffffff !important; }
-
+      /* Diğer dekoratifler */
       svg { stroke: currentColor; fill: none; transition: all 0.3s ease; }
-
-      #main-header .active-link, #main-header a:hover {
-        color: var(--color-secondary) !important;
-      }
-
-      /* Header Şeffaflık Uygulaması: Arka plan rengini CSS değişkeninden çeker */
       #main-header {
-        background-color: rgba(255, 255, 255, var(--header-opacity)) !important;
+        background-color: rgba(255, 255, 255, var(--header-opacity));
         transition: background-color 0.3s ease;
       }
-
-      .custom-wishlist-btn.active svg, .custom-wishlist-btn.wishlist-active svg {
-        fill: var(--color-primary) !important;
-        stroke: var(--color-primary) !important;
-      }
     </style>
+
+    {{ 'style.output.css' | asset_url | stylesheet_tag }}
 
     {{ content_for_header }}
   </head>

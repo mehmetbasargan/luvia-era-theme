@@ -71,14 +71,14 @@
                 </div>
               {% endif %}
 
-              <div class="space-y-2">
+              <div class="space-y-2 flex flex-col">
                 <span class="text-[13px] font-medium text-primary uppercase">
                   {{- article.published_at | date: '%b %d, %Y' -}}
                 </span>
 
-                <h6 class="hover:text-primary transition-colors max-w-[300px] min-h-[1rem] leading-[20px]">
+                <span class="hover:text-primary transition-colors max-w-[300px] min-h-[1rem] leading-[20px] uppercase">
                   {{ article.title }}
-                </h6>
+                </span>
 
                 <a
                   href="{{ article.url }}"

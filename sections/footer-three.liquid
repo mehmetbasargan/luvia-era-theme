@@ -2,9 +2,9 @@
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border-b border-line pt-10 pb-10">
       <div class="w-1/2">
-        <h5 class="font-bold mb-3 text-secondary">
+        <span class="font-bold mb-6 block text-secondary uppercase text-sm tracking-widest">
           {{ section.settings.menu_2_title }}
-        </h5>
+        </span>
         <ul class="space-y-4 text-primary flex flex-col">
           {% for link in linklists[section.settings.footer_menu_2].links %}
             <li>
@@ -17,9 +17,9 @@
       </div>
 
       <div class="w-1/2">
-        <h5 class="font-bold mb-3 text-secondary">
+        <span class="font-bold mb-6 block text-secondary uppercase text-sm tracking-widest">
           {{ section.settings.menu_1_title }}
-        </h5>
+        </span>
         <ul class="text-primary flex flex-col gap-3">
           {% for link in linklists[section.settings.footer_menu_1].links %}
             <li>
@@ -32,9 +32,9 @@
       </div>
 
       <div class="w-full lg:w-100%">
-        <h5 class="font-bold mb-6 text-secondary">
+        <span class="font-bold mb-6 block text-secondary uppercase text-sm tracking-widest">
           {{ section.settings.gallery_title }}
-        </h5>
+        </span>
         <div class="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-2">
           {% for block in section.blocks %}
             {% if block.type == 'gallery_image' %}
@@ -57,9 +57,9 @@
     </div>
 
     <div class="md:w-[60%] mx-auto text-center py-9">
-      <h5 class="font-bold mb-1 text-secondary">
+      <span class="font-bold mb-6 block text-secondary uppercase text-sm tracking-widest">
         {{ 'footer.newsletter' | t }}
-      </h5>
+      </span>
       <p class="text-sm text-primary mb-4 font-medium ">
         {{ 'footer.be_first_to_know' | t }}
       </p>

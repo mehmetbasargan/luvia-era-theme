@@ -32,7 +32,7 @@
               {% if section.settings.logo %}
                 {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
               {% else %}
-                <span class="h1 text-2xl">{{ shop.name }}</span>
+                <p class="uppercase text-xl md:text-2xl">{{ shop.name }}</p>
               {% endif %}
             </a>
           </div>
@@ -143,9 +143,9 @@
                             height="300"
                           >
                           <div class="absolute inset-0 bg-black/20 flex flex-col justify-end p-6 text-left">
-                            <h5 class="text-white font-josefin mb-2">
+                            <span class="text-white font-josefin mb-2">
                               {{ mega_block.settings.promo_heading }}
-                            </h5>
+                            </span>
                             <a
                               href="{{ mega_block.settings.promo_link }}"
                               class="text-white text-xs font-medium tracking-widest uppercase hover:underline"
@@ -290,8 +290,10 @@
                   {% endfor %}
                 </nav>
 
-                <div class="container py-5 mt-10">
-                  <h5 class="text-center mb-5 border-b border-line pb-3">{{ 'general.social_media' | t }}</h5>
+                <div class="container py-5 mt-10 flex flex-col">
+                  <span class="text-center mb-5 font-bold border-b border-line pb-3 text-lg tracking-wider">
+                    {{- 'general.social_media' | t -}}
+                  </span>
                   <div class="flex flex-col lg:flex-row items-center justify-between md:justify-around gap-2">
                     <div class="">
                       {% if section.settings.show_phone and section.settings.header_phone != blank %}

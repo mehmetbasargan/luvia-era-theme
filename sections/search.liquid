@@ -31,11 +31,14 @@
     id="search-header-wrapper"
     class="mb-8 border-b border-line pb-4 {% unless search.performed %}hidden{% endunless %}"
   >
-    <h5 id="dynamic-search-title" class="text-primary leading-relaxed text-center">
+    <span
+      id="dynamic-search-title"
+      class="text-primary leading-relaxed text-center text-lg flex items-start justify-center"
+    >
       {% if search.performed %}
         {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
       {% endif %}
-    </h5>
+    </span>
   </div>
 
   <div id="search-results-container">

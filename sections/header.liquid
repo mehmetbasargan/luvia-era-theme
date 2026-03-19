@@ -74,7 +74,7 @@
         {% if section.settings.logo %}
           {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
         {% else %}
-          <span class="h2">{{ shop.name }}</span>
+          <span class="uppercase text-xl md:text-2xl">{{ shop.name }}</span>
         {% endif %}
       </a>
       <div class="flex justify-between w-full lg:w-auto md:gap-6">
@@ -190,7 +190,7 @@
                   </nav>
 
                   <div class="container py-5 mt-10">
-                    <h5 class="text-center mb-5 border-b border-line pb-3">{{ 'general.social_media' | t }}</h5>
+                    <span class="text-center mb-5 border-b border-line pb-3">{{ 'general.social_media' | t }}</span>
                     <div class="flex flex-col lg:flex-row items-center justify-between md:justify-around gap-2">
                       <div class="">
                         {% if section.settings.show_phone and section.settings.header_phone != blank %}

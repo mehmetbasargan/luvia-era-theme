@@ -1,7 +1,7 @@
 <div class="container mx-auto px-4 py-12">
-  <h4 class="text-primary uppercase mb-8 text-center tracking-widest border-b border-line pb-4">
+  <h2 class="text-primary uppercase mb-8 text-center tracking-widest border-b border-line pb-4 text-xl md:text-3xl">
     {{ 'wishlist.title' | t }}
-  </h4>
+  </h2>
 
   <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[200px] transition-all duration-500">
     {% comment %} Products will be added here via JS {% endcomment %}
@@ -89,7 +89,7 @@
                 </button>
               </div>
               <div class="p-4 text-center">
-                <h6 class="text-[12px] uppercase tracking-wider text-primary line-clamp-1">${product.title}</h6>
+                <span class="text-[12px] uppercase tracking-wider text-primary line-clamp-1">${product.title}</span>
                 <p class="mt-1 text-secondary font-medium text-[13px]">${formattedPrice}</p>
               </div>
             </div>

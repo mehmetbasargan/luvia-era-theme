@@ -3,11 +3,11 @@
     {% comment %} filters {% endcomment %}
     <aside class="w-full md:w-64 shrink-0">
       <div class="filter-wrapper sticky top-24">
-        <h4 class="mb-8">{{ 'collections.filters' | t }}</h4>
+        <span class="mb-8 uppercase block ">{{ 'collections.filters' | t }}</span>
         <form id="CollectionFiltersForm" class="space-y-8">
           {%- for filter in collection.filters -%}
             <div class="filter-group border-b border-line pb-6">
-              <h5 class="text-primary mb-4">{{ filter.label }}</h5>
+              <span class="text-primary mb-4 uppercase block text-sm">{{ filter.label }}</span>
               <div class="filter-options {% if filter.label == 'Renk' or filter.label == 'Color' %}grid grid-cols-4 gap-3 w-max{% else %}space-y-2{% endif %}">
                 {%- case filter.type -%}
                   {%- when 'list', 'boolean' -%}
