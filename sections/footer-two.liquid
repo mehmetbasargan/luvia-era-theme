@@ -64,9 +64,11 @@
         {% form 'customer', class: 'flex border-b border-gray-400 pb-2' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
 
+          <label class="sr-only" for="FooterTwoNewsletterEmail--{{ section.id }}">E-posta</label>
           <input
             type="email"
             name="contact[email]"
+            id="FooterTwoNewsletterEmail--{{ section.id }}"
             value="{{ form.email }}"
             placeholder="Your email address"
             class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"

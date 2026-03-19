@@ -60,6 +60,7 @@
                           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[14px] text-primary">
                             {{- cart.currency.symbol -}}
                           </span>
+                          <label class="sr-only" for="Filter-{{ filter.label | handle }}-Min">Minimum {{ filter.label }}</label>
                           <input
                             name="{{ filter.min_value.param_name }}"
                             id="Filter-{{ filter.label | handle }}-Min"
@@ -80,6 +81,7 @@
                           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[14px] text-primary">
                             {{- cart.currency.symbol -}}
                           </span>
+                          <label class="sr-only" for="Filter-{{ filter.label | handle }}-Max">Maksimum {{ filter.label }}</label>
                           <input
                             name="{{ filter.max_value.param_name }}"
                             id="Filter-{{ filter.label | handle }}-Max"

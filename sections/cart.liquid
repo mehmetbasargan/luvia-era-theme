@@ -57,11 +57,13 @@
                       >-</a
                     >
 
+                    <label class="sr-only" for="CartQuantity-{{ forloop.index }}">Adet</label>
                     <input
                       type="number"
                       name="updates[]"
                       value="{{ item.quantity }}"
                       readOnly
+                      id="CartQuantity-{{ forloop.index }}"
                       class="w-8 h-8 py-3 text-center text-[15px] text-primary border-none focus:ring-0 cursor-default flex items-center justify-center "
                       aria-label="Quantity"
                     >

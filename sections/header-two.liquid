@@ -221,7 +221,12 @@
         <div class="flex items-center lg:gap-2 gap-8 justify-start w-full lg:w-auto">
           <div class="flex lg:hidden">
             <div class="flex lg:hidden">
-              <button id="mobile-menu-open" type="button" class="group relative order-last">
+              <button
+                id="mobile-menu-open"
+                type="button"
+                class="group relative order-last"
+                aria-label="Menüyü aç"
+              >
                 <div id="icon-open" class="block">
                   {% render 'icon-menu' %}
                 </div>
@@ -241,7 +246,12 @@
                 class="fixed top-0 right-0 h-full w-[80%] max-w-[400px] bg-white z-[70] translate-x-full transition-transform duration-300 ease-in-out shadow-2xl p-6"
               >
                 <div class="flex justify-end mb-8">
-                  <button id="mobile-menu-close" type="button" class="p-2 text-primary">
+                  <button
+                    id="mobile-menu-close"
+                    type="button"
+                    class="p-2 text-primary"
+                    aria-label="Menüyü kapat"
+                  >
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
@@ -302,7 +312,6 @@
                           <li class="font-medium">
                             <a
                               href="{{ section.settings.header_phone | replace: ' ', '' }}"
-                              aria-label="Call {{ section.settings.header_phone | replace: ' ', '' }}"
                             >
                               {{ section.settings.header_phone -}}
                             </a>
@@ -357,19 +366,34 @@
 
           {% comment %} account {% endcomment %}
           <div class="order-first flex flex-row justify-start items-center gap-3 w-full lg:w-auto relative">
-            <a href="{{ routes.search_url }}" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
+            <a
+              href="{{ routes.search_url }}"
+              class="lg:w-[30px] w-[20px] text-primary hover:text-secondary"
+              aria-label="Ürün ara"
+            >
               {% render 'icon-search' %}
+              <span class="sr-only">Ürün ara</span>
             </a>
-            <a href="/pages/wishlist" class="lg:w-[30px] w-[20px] text-primary hover:text-secondary">
+            <a
+              href="/pages/wishlist"
+              class="lg:w-[30px] w-[20px] text-primary hover:text-secondary"
+              aria-label="İstek listesi"
+            >
               {% render 'icon-wishlist' %}
+              <span class="sr-only">İstek listesi</span>
             </a>
-            <a href="{{ routes.cart_url }}" class="lg:w-[12px] w-[12px] shrink-0 relative">
+            <a
+              href="{{ routes.cart_url }}"
+              class="lg:w-[12px] w-[12px] shrink-0 relative"
+              aria-label="Alışveriş sepeti"
+            >
               <div class="absolute top-[-10px] right-[-23px]">
                 <span class="cart-count-bubble bg-secondary w-[20px] h-[20px] flex items-center justify-center text-white text-xs rounded-full">
                   {{- cart.item_count -}}
                 </span>
               </div>
               {% render 'icon-cart' %}
+              <span class="sr-only">Alışveriş sepeti</span>
             </a>
             <div class="pl-4">
               <shopify-account menu="customer-account-main-menu">

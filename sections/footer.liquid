@@ -93,9 +93,11 @@
       {% form 'customer', class: 'flex border-b border-gray-400 pb-2' %}
         <input type="hidden" name="contact[tags]" value="newsletter">
 
+        <label class="sr-only" for="FooterNewsletterEmail--{{ section.id }}">E-posta</label>
         <input
           type="email"
           name="contact[email]"
+          id="FooterNewsletterEmail--{{ section.id }}"
           value="{{ form.email }}"
           placeholder="{{ 'footer.email_address' | t }}"
           class="bg-transparent border-none text-sm w-full focus:outline-none placeholder:text-primary text-primary"

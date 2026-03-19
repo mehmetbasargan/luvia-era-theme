@@ -37,7 +37,9 @@
       {% form 'customer', class: 'mt-10' %}
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="flex flex-col md:flex-row items-center gap-4 max-w-xl mx-auto">
+          <label class="sr-only" for="NewsletterEmail--{{ section.id }}">E-posta</label>
           <input
+            id="NewsletterEmail--{{ section.id }}"
             type="email"
             name="contact[email]"
             class="w-full bg-transparent border-b border-white text-white placeholder:text-white py-3 px-2 focus:outline-none focus:border-white transition-colors font-light"

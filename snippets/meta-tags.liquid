@@ -114,9 +114,12 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
+{%- liquid
+  assign meta_description = page_description | default: shop.description | default: page_title
+-%}
+{%- if meta_description != blank -%}
   <meta
     name="description"
-    content="{{ page_description | escape }}"
+    content="{{ meta_description | escape }}"
   >
-{% endif %}
+{%- endif -%}

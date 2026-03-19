@@ -34,9 +34,9 @@
 
         <div class="absolute inset-0 flex items-center justify-center text-center px-4 z-[999]">
           <div class="max-w-2xl">
-            <h1 class="text-white mb-4">
+            <h2 class="text-white mb-4">
               {{ block.settings.title }}
-            </h1>
+            </h2>
 
             <p class="text-white mb-8">
               {{ block.settings.sub_title }}
@@ -98,17 +98,32 @@
 
 <style>
   .swiper-pagination-bullet {
-    background: var(--color-secondary);
-    height: 12px !important;
-    width: 12px !important;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-  }
-  .swiper-pagination-bullet-active {
-    background: var(--color-secondary);
+    background: transparent !important;
+    height: 24px !important;
+    width: 24px !important;
     opacity: 1;
-    width: 30px !important;
-    border-radius: 6px;
+    position: relative;
+    transition: opacity 0.3s ease;
+  }
+
+  .swiper-pagination-bullet::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background: var(--color-secondary);
+    opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .swiper-pagination-bullet-active::after {
+    width: 16px;
+    height: 16px;
+    opacity: 1;
   }
 
   .hero-title,

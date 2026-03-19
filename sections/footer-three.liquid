@@ -67,6 +67,7 @@
       {% form 'customer', class: 'flex border-b border-secondary pb-2' %}
         <input type="hidden" name="contact[tags]" value="newsletter">
 
+        <label class="sr-only" for="NewsletterForm--{{ section.id }}">E-posta</label>
         <input
           type="email"
           name="contact[email]"

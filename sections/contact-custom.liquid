@@ -39,17 +39,21 @@
         {% endif %}
 
         <div class="space-y-12">
+          <label class="sr-only" for="ContactName--{{ section.id }}">Ad Soyad</label>
           <input
             type="text"
             name="contact[name]"
+            id="ContactName--{{ section.id }}"
             placeholder="{{ 'contact.form.name' | t | default: 'FULL NAME' }}"
             required
             class="w-full bg-transparent border-b border-line py-4 text-[15px] tracking-[0.1em] focus:outline-none focus:border-black transition-colors duration-[1500ms] placeholder:text-gray-400"
           >
 
+          <label class="sr-only" for="ContactEmail--{{ section.id }}">E-posta</label>
           <input
             type="email"
             name="contact[email]"
+            id="ContactEmail--{{ section.id }}"
             placeholder="{{ 'contact.form.email' | t | default: 'EMAIL ADDRESS' }}"
             required
             class="w-full bg-transparent border-b border-line py-4 tracking-[0.1em] text-[15px] focus:outline-none focus:border-black transition-colors duration-[1500ms] placeholder:text-gray-400"
@@ -57,9 +61,11 @@
 
           {% if section.settings.show_subject %}
             <div class="relative border-b border-line">
+              <label class="sr-only" for="ContactSubject--{{ section.id }}">Konu</label>
               <select
                 name="contact[note][Subject]"
                 required
+                id="ContactSubject--{{ section.id }}"
                 onchange="this.style.color='black'"
                 style="color: #9ca3af;"
                 class="w-full bg-transparent border-b border-line py-4 text-[15px] tracking-[0.1em] focus:outline-none appearance-none cursor-pointer"
@@ -75,8 +81,10 @@
             </div>
           {% endif %}
 
+          <label class="sr-only" for="ContactMessage--{{ section.id }}">Mesaj</label>
           <textarea
             name="contact[body]"
+            id="ContactMessage--{{ section.id }}"
             rows="4"
             placeholder="{{ 'contact.form.message' | t | default: 'YOUR MESSAGE' }}"
             required
