@@ -1359,6 +1359,10 @@ blockquote {
   height: 100%;
 }
 
+.h-\[40px\] {
+  height: 40px;
+}
+
 .max-h-\[80vh\] {
   max-height: 80vh;
 }
@@ -1381,6 +1385,10 @@ blockquote {
 
 .min-h-\[90px\] {
   min-height: 90px;
+}
+
+.min-h-\[100px\] {
+  min-height: 100px;
 }
 
 .\!w-\[50px\] {
@@ -1611,6 +1619,12 @@ blockquote {
 }
 
 .scale-\[1\.5\] {
+  --tw-scale-x: 1.5;
+  --tw-scale-y: 1.5;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-150 {
   --tw-scale-x: 1.5;
   --tw-scale-y: 1.5;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -2134,6 +2148,10 @@ blockquote {
 
 .p-8 {
   padding: 2rem;
+}
+
+.p-12 {
+  padding: 3rem;
 }
 
 .px-10 {
@@ -3262,6 +3280,10 @@ blockquote {
 
   .md\:gap-8 {
     gap: 2rem;
+  }
+
+  .md\:p-12 {
+    padding: 3rem;
   }
 
   .md\:px-0 {
