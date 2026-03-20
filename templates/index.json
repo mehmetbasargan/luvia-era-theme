@@ -23,6 +23,42 @@
         "overlay_opacity": 70
       }
     },
+    "hero_slider_9WN3Qw": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide_a83amF": {
+          "type": "slide",
+          "settings": {
+            "title": "New Season Collection",
+            "sub_title": "Explore our limited edition pieces designed for the modern lifestyle.",
+            "button_label": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide_qzRr3Y": {
+          "type": "slide",
+          "settings": {
+            "title": "Luxury Essentials",
+            "sub_title": "Curated selection of premium quality essentials for your daily wardrobe.",
+            "button_label": "View All",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_a83amF",
+        "slide_qzRr3Y"
+      ],
+      "name": "Hero Slider",
+      "settings": {
+        "slider_effect": "fade",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "slider_height": "full",
+        "show_arrows": true,
+        "show_pagination": true
+      }
+    },
     "marquee_logo_Aana7d": {
       "type": "marquee-logo",
       "blocks": {
@@ -68,7 +104,7 @@
         "collection_caXUVb": {
           "type": "collection",
           "settings": {
-            "collection": "the-minimalist-era"
+            "collection": ""
           }
         },
         "collection_EbQTGh": {
@@ -879,42 +915,6 @@
         "use_custom_bg": true,
         "section_bg_color": "#ffffff",
         "remove_bg": false
-      }
-    },
-    "hero_slider_9WN3Qw": {
-      "type": "hero-slider",
-      "blocks": {
-        "slide_a83amF": {
-          "type": "slide",
-          "settings": {
-            "title": "New Season Collection",
-            "sub_title": "Explore our limited edition pieces designed for the modern lifestyle.",
-            "button_label": "Shop Now",
-            "button_link": ""
-          }
-        },
-        "slide_qzRr3Y": {
-          "type": "slide",
-          "settings": {
-            "title": "Luxury Essentials",
-            "sub_title": "Curated selection of premium quality essentials for your daily wardrobe.",
-            "button_label": "View All",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_a83amF",
-        "slide_qzRr3Y"
-      ],
-      "name": "Hero Slider",
-      "settings": {
-        "slider_effect": "fade",
-        "overlay_color": "#000000",
-        "overlay_opacity": 30,
-        "slider_height": "full",
-        "show_arrows": true,
-        "show_pagination": true
       }
     }
   },
