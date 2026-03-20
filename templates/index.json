@@ -59,6 +59,20 @@
         "show_pagination": true
       }
     },
+    "marquee_logo_axkgXd": {
+      "type": "marquee-logo",
+      "name": "Dynamic Marquee Logos",
+      "settings": {
+        "title": "AS FEATURED IN",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
+    },
     "collection_list_zHTtyQ": {
       "type": "collection-list",
       "blocks": {
@@ -280,7 +294,6 @@
         "image_block_AMpELL": {
           "type": "image_block",
           "settings": {
-            "image": "shopify://shop_images/blg1-2.jpg",
             "image_placement": "left",
             "subheading": "Luvia Story",
             "title": "Crafted with passion",
@@ -295,55 +308,6 @@
       ],
       "name": "Image with Text Multi",
       "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "use_custom_bg": false,
-        "section_bg_color": "#ffffff",
-        "remove_bg": false
-      }
-    },
-    "featured_products_cdqPtt": {
-      "type": "featured-products",
-      "blocks": {
-        "product_n3AKbz": {
-          "type": "product",
-          "settings": {
-            "product": "aura-silk-maxi-dress"
-          }
-        },
-        "product_JiTTKw": {
-          "type": "product",
-          "settings": {
-            "product": "luna-satin-slip-dress"
-          }
-        },
-        "product_tbz7ha": {
-          "type": "product",
-          "settings": {
-            "product": "solstice-linen-blouse"
-          }
-        },
-        "product_4Kk44e": {
-          "type": "product",
-          "settings": {
-            "product": "luna-high-waist-trousers"
-          }
-        }
-      },
-      "block_order": [
-        "product_n3AKbz",
-        "product_JiTTKw",
-        "product_tbz7ha",
-        "product_4Kk44e"
-      ],
-      "name": "Featured Products (Selectable)",
-      "settings": {
-        "section_title": "New Arrivals",
-        "section_subtitle": "Handpicked for you",
-        "button_text": "View All",
-        "button_url": "",
         "padding_top": 36,
         "padding_bottom": 36,
         "margin_top": 0,
@@ -797,20 +761,6 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
-    },
-    "marquee_logo_axkgXd": {
-      "type": "marquee-logo",
-      "name": "Dynamic Marquee Logos",
-      "settings": {
-        "title": "AS FEATURED IN",
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "use_custom_bg": false,
-        "section_bg_color": "#ffffff",
-        "remove_bg": false
-      }
     }
   },
   "order": [
@@ -826,7 +776,6 @@
     "image_with_text_multi_LgxGEe",
     "rich_text_banner_b3LtW4",
     "image_with_text_multi_ExeLfW",
-    "featured_products_cdqPtt",
     "full_width_gallery_fnrnK7",
     "featured_blog_carousel_qhr9Th",
     "shoppable_image_PQrjBw",
