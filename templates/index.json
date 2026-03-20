@@ -276,58 +276,12 @@
     },
     "testimonial_CxWzTk": {
       "type": "testimonial",
-      "blocks": {
-        "testimonial_P4nawc": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "This is a great product! I highly recommend it to everyone looking for quality.",
-            "name": "John Doe"
-          }
-        },
-        "testimonial_mgkKpV": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "Ut eget neque ultricies neque semper porta iaculis tincidunt ante. Sed lorem dolor, dictum blandit metus quis, mollis interdum enim. Praesent venenatis",
-            "name": "Deneme Başlık"
-          }
-        },
-        "testimonial_kk6pic": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
-            "name": "Mehmet Başargan"
-          }
-        },
-        "testimonial_BBAPTn": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean",
-            "name": "Mehmet Başargan"
-          }
-        },
-        "testimonial_9GUqLM": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur eros sapien, efficitur semper lectus aliquam et. Donec convallis nisl in lacus luctus pretium.",
-            "name": "Mehmet Başargan"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_P4nawc",
-        "testimonial_mgkKpV",
-        "testimonial_kk6pic",
-        "testimonial_BBAPTn",
-        "testimonial_9GUqLM"
-      ],
       "name": "Testimonial",
       "settings": {
         "slides_per_view": 3,
         "testimonial_title": "Testimonials",
         "padding_top": 36,
         "padding_bottom": 36,
-        "margin_top": 0,
-        "margin_bottom": 0,
         "use_custom_bg": false,
         "section_bg_color": "#f9f9f9",
         "remove_bg": false
@@ -583,8 +537,6 @@
         "testimonial_title": "Testimonials",
         "padding_top": 36,
         "padding_bottom": 36,
-        "margin_top": 0,
-        "margin_bottom": 0,
         "use_custom_bg": false,
         "section_bg_color": "#ffffff",
         "remove_bg": false
