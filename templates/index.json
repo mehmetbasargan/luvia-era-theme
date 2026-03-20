@@ -58,10 +58,25 @@
         "show_arrows": true,
         "show_pagination": true
       }
+    },
+    "marquee_logo_rbndHM": {
+      "type": "marquee-logo",
+      "name": "Dynamic Marquee Logos",
+      "settings": {
+        "title": "AS FEATURED IN",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
-    "hero_slider_9WN3Qw"
+    "hero_slider_9WN3Qw",
+    "marquee_logo_rbndHM"
   ]
 }
