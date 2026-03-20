@@ -194,20 +194,11 @@
             "top_position": 63,
             "left_position": 48
           }
-        },
-        "product_point_gXCrUc": {
-          "type": "product_point",
-          "settings": {
-            "product": "",
-            "top_position": 50,
-            "left_position": 50
-          }
         }
       },
       "block_order": [
         "product_point_peFUVH",
-        "product_point_cRcG8a",
-        "product_point_gXCrUc"
+        "product_point_cRcG8a"
       ],
       "name": "Shoppable Image",
       "settings": {
