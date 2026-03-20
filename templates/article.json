@@ -8,24 +8,21 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main_page_header_LAHALC": {
-      "type": "main-page-header",
-      "name": "Page Header",
-      "settings": {
-        "image": "shopify://shop_images/page-header.jpg",
-        "custom_title": "{{ article.title }}",
-        "hero_height": 40,
-        "overlay_opacity": 60
-      }
-    },
-    "main": {
-      "type": "main-article",
-      "settings": {}
-    }
-  },
-  "order": [
-    "main_page_header_LAHALC",
-    "main"
-  ]
+	"sections": {
+		"main_page_header_LAHALC": {
+			"type": "page-header",
+			"name": "Page Header",
+			"settings": {
+				"image": "shopify://shop_images/page-header.jpg",
+				"custom_title": "{{ article.title }}",
+				"hero_height": 40,
+				"overlay_opacity": 60
+			}
+		},
+		"main": {
+			"type": "main-article",
+			"settings": {}
+		}
+	},
+	"order": ["main_page_header_LAHALC", "main"]
 }

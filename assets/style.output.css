@@ -1219,16 +1219,16 @@ blockquote {
   height: 2rem;
 }
 
+.\!h-\[400px\] {
+  height: 400px !important;
+}
+
 .\!h-\[50px\] {
   height: 50px !important;
 }
 
 .h-0 {
   height: 0px;
-}
-
-.h-1\/2 {
-  height: 50%;
 }
 
 .h-12 {

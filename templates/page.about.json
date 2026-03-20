@@ -8,77 +8,67 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main_page_header_GR6D7d": {
-      "type": "main-page-header",
-      "name": "Page Header",
-      "settings": {
-        "image": "shopify://shop_images/pageheader3.jpg",
-        "custom_title": "",
-        "hero_height": 40,
-        "overlay_opacity": 50
-      }
-    },
-    "main": {
-      "type": "page",
-      "disabled": true,
-      "settings": {
-        "show_title": false
-      }
-    },
-    "story": {
-      "type": "about-brand-story",
-      "settings": {
-        "heading": "The Art of Timeless Living",
-        "text": "<p><strong>At Luvia, we believe</strong> that true aesthetics are hidden within the details, not just the surface. In the fast-paced rhythm of modern life, we strive to create a timeless balance by prioritizing simplicity and uncompromising quality in every piece. </p><p>Our design journey began with the desire to infuse soul into living spaces, merging the elegance of the past with a visionary approach to the future. To us, every detail is more than just an object; it is a silent reflection of your lifestyle and a cherished chapter of your story.</p>",
-        "since": "2026",
-        "image": "shopify://shop_images/1.jpg"
-      }
-    },
-    "full_width_gallery_ARiJNg": {
-      "type": "full-width-gallery",
-      "blocks": {
-        "image_CzXNtY": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p4-1.jpg"
-          }
-        },
-        "image_fzxwMm": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p2-3.jpg"
-          }
-        },
-        "image_DWGLrc": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p2-2.jpg"
-          }
-        },
-        "image_Aw9E6P": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p5-3.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "image_CzXNtY",
-        "image_fzxwMm",
-        "image_DWGLrc",
-        "image_Aw9E6P"
-      ],
-      "name": "Luvia Full Gallery",
-      "settings": {
-        "title": "Follow Era"
-      }
-    }
-  },
-  "order": [
-    "main_page_header_GR6D7d",
-    "main",
-    "story",
-    "full_width_gallery_ARiJNg"
-  ]
+	"sections": {
+		"main_page_header_GR6D7d": {
+			"type": "page-header",
+			"name": "Page Header",
+			"settings": {
+				"image": "shopify://shop_images/pageheader3.jpg",
+				"custom_title": "",
+				"hero_height": 40,
+				"overlay_opacity": 50
+			}
+		},
+		"main": {
+			"type": "page",
+			"disabled": true,
+			"settings": {
+				"show_title": false
+			}
+		},
+		"story": {
+			"type": "about-brand-story",
+			"settings": {
+				"heading": "The Art of Timeless Living",
+				"text": "<p><strong>At Luvia, we believe</strong> that true aesthetics are hidden within the details, not just the surface. In the fast-paced rhythm of modern life, we strive to create a timeless balance by prioritizing simplicity and uncompromising quality in every piece. </p><p>Our design journey began with the desire to infuse soul into living spaces, merging the elegance of the past with a visionary approach to the future. To us, every detail is more than just an object; it is a silent reflection of your lifestyle and a cherished chapter of your story.</p>",
+				"since": "2026",
+				"image": "shopify://shop_images/1.jpg"
+			}
+		},
+		"full_width_gallery_ARiJNg": {
+			"type": "full-width-gallery",
+			"blocks": {
+				"image_CzXNtY": {
+					"type": "image",
+					"settings": {
+						"image": "shopify://shop_images/p4-1.jpg"
+					}
+				},
+				"image_fzxwMm": {
+					"type": "image",
+					"settings": {
+						"image": "shopify://shop_images/p2-3.jpg"
+					}
+				},
+				"image_DWGLrc": {
+					"type": "image",
+					"settings": {
+						"image": "shopify://shop_images/p2-2.jpg"
+					}
+				},
+				"image_Aw9E6P": {
+					"type": "image",
+					"settings": {
+						"image": "shopify://shop_images/p5-3.jpg"
+					}
+				}
+			},
+			"block_order": ["image_CzXNtY", "image_fzxwMm", "image_DWGLrc", "image_Aw9E6P"],
+			"name": "Luvia Full Gallery",
+			"settings": {
+				"title": "Follow Era"
+			}
+		}
+	},
+	"order": ["main_page_header_GR6D7d", "main", "story", "full_width_gallery_ARiJNg"]
 }

@@ -8,24 +8,21 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main_page_header_YcecpA": {
-      "type": "main-page-header",
-      "name": "Page Header",
-      "settings": {
-        "image": "shopify://shop_images/page-header.jpg",
-        "custom_title": "Search",
-        "hero_height": 40,
-        "overlay_opacity": 30
-      }
-    },
-    "main": {
-      "type": "search",
-      "settings": {}
-    }
-  },
-  "order": [
-    "main_page_header_YcecpA",
-    "main"
-  ]
+	"sections": {
+		"main_page_header_YcecpA": {
+			"type": "page-header",
+			"name": "Page Header",
+			"settings": {
+				"image": "shopify://shop_images/page-header.jpg",
+				"custom_title": "Search",
+				"hero_height": 40,
+				"overlay_opacity": 30
+			}
+		},
+		"main": {
+			"type": "search",
+			"settings": {}
+		}
+	},
+	"order": ["main_page_header_YcecpA", "main"]
 }
