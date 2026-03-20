@@ -870,10 +870,10 @@
     "featured_products_HDyQTt": {
       "type": "featured-products",
       "blocks": {
-        "product_nQrLFb": {
+        "product_67rr9y": {
           "type": "product",
           "settings": {
-            "product": "aura-oversized-cashmere-coat"
+            "product": "velvet-night-blazer"
           }
         },
         "product_wkGAmE": {
@@ -896,7 +896,7 @@
         }
       },
       "block_order": [
-        "product_nQrLFb",
+        "product_67rr9y",
         "product_wkGAmE",
         "product_4qkX4E",
         "product_DPKdY3"
