@@ -59,45 +59,6 @@
         "show_pagination": true
       }
     },
-    "marquee_logo_Aana7d": {
-      "type": "marquee-logo",
-      "blocks": {
-        "logo_image_imLUGg": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        },
-        "logo_image_NR9zGi": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/favicon.png"
-          }
-        },
-        "logo_image_MKCMGt": {
-          "type": "logo_image",
-          "settings": {
-            "image": "shopify://shop_images/logo2.svg"
-          }
-        }
-      },
-      "block_order": [
-        "logo_image_imLUGg",
-        "logo_image_NR9zGi",
-        "logo_image_MKCMGt"
-      ],
-      "name": "Dinamik Marquee Logos",
-      "settings": {
-        "title": "AS FEATURED IN",
-        "padding_top": 56,
-        "padding_bottom": 48,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "use_custom_bg": true,
-        "section_bg_color": "#f9f9f9",
-        "remove_bg": false
-      }
-    },
     "collection_list_zHTtyQ": {
       "type": "collection-list",
       "blocks": {
@@ -916,20 +877,43 @@
         "remove_bg": false
       }
     },
-    "collection_banner_DHU6PQ": {
-      "type": "collection-banner",
-      "name": "Collection Banner",
+    "marquee_logo_epc3YD": {
+      "type": "marquee-logo",
+      "blocks": {
+        "logo_image_VwCn3C": {
+          "type": "logo_image",
+          "settings": {}
+        },
+        "logo_image_MzcXrY": {
+          "type": "logo_image",
+          "settings": {}
+        },
+        "logo_image_KTtdXw": {
+          "type": "logo_image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "logo_image_VwCn3C",
+        "logo_image_MzcXrY",
+        "logo_image_KTtdXw"
+      ],
+      "name": "Dinamik Marquee Logos",
       "settings": {
-        "show_description": true,
-        "hero_height": 50,
-        "overlay_opacity": 30
+        "title": "AS FEATURED IN",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
       }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_9WN3Qw",
-    "marquee_logo_Aana7d",
     "collection_list_zHTtyQ",
     "rich_text_banner_m8j33U",
     "image_with_text_multi_KVYKE3",
@@ -940,7 +924,6 @@
     "rich_text_banner_b3LtW4",
     "testimonial_CxWzTk",
     "image_with_text_multi_ExeLfW",
-    "collection_banner_DHU6PQ",
     "featured_products_cdqPtt",
     "full_width_gallery_fnrnK7",
     "featured_blog_carousel_qhr9Th",
@@ -951,6 +934,7 @@
     "featured_products_slider_7JHjiQ",
     "footer_promotion_HXyaeK",
     "trust_icons_xjLKyX",
-    "featured_products_HDyQTt"
+    "featured_products_HDyQTt",
+    "marquee_logo_epc3YD"
   ]
 }
