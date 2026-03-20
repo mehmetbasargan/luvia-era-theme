@@ -47,25 +47,27 @@
     <div class="grid grid-cols-2 {% if section.blocks.size == 3 %}md:grid-cols-3{% else %}md:grid-cols-4{% endif %} gap-4 md:gap-8">
       {% for block in section.blocks %}
         {%- assign collection = collections[block.settings.collection] -%}
+
         <div class="group relative flex flex-col items-center" {{ block.shopify_attributes }}>
           <a
             href="{{ collection.url | default: '#' }}"
             class="w-full !h-[400px] overflow-hidden bg-white relative block shadow-sm transition-all duration-500 border border-transparent group-hover:border-line"
-            aria-label="{{ collection.title | default: 'Collection' | escape }}"
           >
-            {% if collection.featured_image != blank %}
+            {% comment %} Eğer koleksiyon seçiliyse ve görseli varsa göster {% endcomment %}
+            {% if collection != blank and collection.featured_image != blank %}
               <img
                 src="{{ collection.featured_image | image_url: width: 800 }}"
                 alt="{{ collection.title | escape }}"
                 width="800"
                 height="1000"
                 loading="lazy"
-                class="w-full aspect-[3/2] object-cover transition-transform duration-1000 group-hover:scale-105"
+                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               >
             {% else %}
-              <div class="w-full aspect-[3/2] bg-gray-100 flex items-center justify-center">
+              {% comment %} Koleksiyon yoksa veya görseli yoksa Placeholder (Yer Tutucu) göster {% endcomment %}
+              <div class="w-full h-full bg-gray-100 flex items-center justify-center border border-line">
                 {%- capture current -%}{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
-                {{ 'collection-' | append: current | placeholder_svg_tag: 'w-full h-full object-cover opacity-50' }}
+                {{ 'collection-' | append: current | placeholder_svg_tag: 'w-full h-full object-cover opacity-20' }}
               </div>
             {% endif %}
 
@@ -74,18 +76,14 @@
 
           <div class="mt-6 text-center">
             <span class="mb-2 uppercase text-sm md:text-lg">
-              {{ collection.title | default: 'Collection Title' }}
+              {{ collection.title | default: 'Example Collection' }}
             </span>
-            <a
-              href="{{ collection.url | default: '#' }}"
-              class="text-primary text-[14px] uppercase tracking-[0.1em] hover:text-secondary transition-all flex items-center justify-center gap-2"
-              aria-label="{{ 'collections.review' | t | default: 'Explore' | escape }} - {{ collection.title | default: 'Collection' | escape }}"
-            >
-              {{ 'collections.review' | t | default: 'Explore' }}
+            <div class="text-primary text-[14px] uppercase tracking-[0.1em] flex items-center justify-center gap-2">
+              Explore
               <span class="transition-transform group-hover:translate-x-1">
                 {% render 'icon-arrow-right' %}
               </span>
-            </a>
+            </div>
           </div>
         </div>
       {% endfor %}
