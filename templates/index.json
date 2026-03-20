@@ -915,6 +915,15 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "collection_banner_DHU6PQ": {
+      "type": "collection-banner",
+      "name": "Collection Banner",
+      "settings": {
+        "show_description": true,
+        "hero_height": 50,
+        "overlay_opacity": 30
+      }
     }
   },
   "order": [
@@ -931,6 +940,7 @@
     "rich_text_banner_b3LtW4",
     "testimonial_CxWzTk",
     "image_with_text_multi_ExeLfW",
+    "collection_banner_DHU6PQ",
     "featured_products_cdqPtt",
     "full_width_gallery_fnrnK7",
     "featured_blog_carousel_qhr9Th",
