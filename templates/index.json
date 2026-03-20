@@ -137,7 +137,6 @@
         "image_block_HaCNaT": {
           "type": "image_block",
           "settings": {
-            "image": "shopify://shop_images/p5-2.jpg",
             "image_placement": "right",
             "subheading": "Luvia Story",
             "title": "Crafted with passion",
