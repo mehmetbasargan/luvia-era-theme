@@ -127,11 +127,11 @@
             <div class="swiper-slide h-full">
               <div class="group h-full flex flex-col opacity-60">
                 <div class="aspect-[16/9] bg-gray-200 mb-6 rounded-sm">
-                  {{
-                    'lifestyle-'
-                    | append: i
-                    | placeholder_svg_tag: 'w-full h-full object-cover grayscale opacity-30'
-                  }}
+                  {% comment %} Hata veren lifestyle-3 yerine güvenli olanları döngüye sokuyoruz {% endcomment %}
+                  {%- capture placeholder_name -%}
+          {%- cycle 'lifestyle-1', 'lifestyle-2', 'collection-1' -%}
+        {%- endcapture -%}
+                  {{ placeholder_name | placeholder_svg_tag: 'w-full h-full object-cover grayscale opacity-30' }}
                 </div>
                 <div class="space-y-4">
                   <div class="h-3 w-24 bg-gray-200"></div>
