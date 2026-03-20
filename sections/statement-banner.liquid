@@ -24,17 +24,18 @@
     {% comment %} Background Image {% endcomment %}
     <div class="absolute inset-0 z-0">
       {% if section.settings.bg_image != blank %}
-        <img
-          src="{{ section.settings.bg_image | image_url: width: 1200 }}"
-          alt="{{ section.settings.title | escape }}"
-          class="w-full h-full object-cover block"
-          width="1200"
-          height="500"
-          loading="eager"
-        >
+        {{
+          section.settings.bg_image
+          | image_url: width: 1920
+          | image_tag:
+            class: 'w-full h-full object-cover block',
+            loading: 'eager',
+            widths: '375, 550, 750, 1100, 1500, 1780, 2000',
+            alt: section.settings.title
+        }}
       {% else %}
-        <div class="w-full h-full bg-primary flex items-center justify-center">
-          <span class="text-white opacity-20 italic font-light uppercase tracking-widest">Luvia Banner Area</span>
+        <div class="w-full h-full bg-gray-200">
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover opacity-30 grayscale' }}
         </div>
       {% endif %}
 

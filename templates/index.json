@@ -45,10 +45,7 @@
           }
         }
       },
-      "block_order": [
-        "slide_a83amF",
-        "slide_qzRr3Y"
-      ],
+      "block_order": ["slide_a83amF", "slide_qzRr3Y"],
       "name": "Hero Slider",
       "settings": {
         "slider_effect": "fade",
@@ -81,11 +78,7 @@
           }
         }
       },
-      "block_order": [
-        "logo_image_imLUGg",
-        "logo_image_NR9zGi",
-        "logo_image_MKCMGt"
-      ],
+      "block_order": ["logo_image_imLUGg", "logo_image_NR9zGi", "logo_image_MKCMGt"],
       "name": "Dinamik Marquee Logos",
       "settings": {
         "title": "AS FEATURED IN",
@@ -126,12 +119,7 @@
           }
         }
       },
-      "block_order": [
-        "collection_caXUVb",
-        "collection_EbQTGh",
-        "collection_YatzNq",
-        "collection_YV6ztR"
-      ],
+      "block_order": ["collection_caXUVb", "collection_EbQTGh", "collection_YatzNq", "collection_YV6ztR"],
       "name": "Collection List",
       "settings": {
         "collection_list_title": "Our Collections",
@@ -145,7 +133,7 @@
       }
     },
     "rich_text_banner_m8j33U": {
-      "type": "rich-text-banner",
+      "type": "statement-banner",
       "name": "Statement Banner",
       "settings": {
         "overlay_opacity": 40,
@@ -187,12 +175,7 @@
           }
         }
       },
-      "block_order": [
-        "product_mGNYed",
-        "product_dwqjCE",
-        "product_xXQfAy",
-        "product_P7bMT3"
-      ],
+      "block_order": ["product_mGNYed", "product_dwqjCE", "product_xXQfAy", "product_P7bMT3"],
       "name": "Luvia Featured Collection",
       "settings": {
         "section_title": "Editor's Picks",
@@ -236,10 +219,7 @@
           }
         }
       },
-      "block_order": [
-        "image_block_B9EMda",
-        "image_block_HaCNaT"
-      ],
+      "block_order": ["image_block_B9EMda", "image_block_HaCNaT"],
       "name": "Image with Text Multi",
       "settings": {
         "padding_top": 0,
@@ -252,7 +232,7 @@
       }
     },
     "rich_text_banner_yW67kH": {
-      "type": "rich-text-banner",
+      "type": "statement-banner",
       "name": "Statement Banner",
       "settings": {
         "bg_image": "shopify://shop_images/1.jpg",
@@ -295,11 +275,7 @@
           }
         }
       },
-      "block_order": [
-        "product_point_peFUVH",
-        "product_point_cRcG8a",
-        "product_point_gXCrUc"
-      ],
+      "block_order": ["product_point_peFUVH", "product_point_cRcG8a", "product_point_gXCrUc"],
       "name": "Shoppable Image",
       "settings": {
         "image": "shopify://shop_images/shoppable-image3.jpg",
@@ -347,9 +323,7 @@
           }
         }
       },
-      "block_order": [
-        "image_block_AjiDDT"
-      ],
+      "block_order": ["image_block_AjiDDT"],
       "name": "Image with Text Multi",
       "settings": {
         "padding_top": 36,
@@ -362,7 +336,7 @@
       }
     },
     "rich_text_banner_b3LtW4": {
-      "type": "rich-text-banner",
+      "type": "statement-banner",
       "name": "Statement Banner",
       "settings": {
         "bg_image": "shopify://shop_images/4-2.jpg",
@@ -416,13 +390,7 @@
           }
         }
       },
-      "block_order": [
-        "testimonial_P4nawc",
-        "testimonial_mgkKpV",
-        "testimonial_kk6pic",
-        "testimonial_BBAPTn",
-        "testimonial_9GUqLM"
-      ],
+      "block_order": ["testimonial_P4nawc", "testimonial_mgkKpV", "testimonial_kk6pic", "testimonial_BBAPTn", "testimonial_9GUqLM"],
       "name": "Testimonial",
       "settings": {
         "slides_per_view": 3,
@@ -452,9 +420,7 @@
           }
         }
       },
-      "block_order": [
-        "image_block_AMpELL"
-      ],
+      "block_order": ["image_block_AMpELL"],
       "name": "Image with Text Multi",
       "settings": {
         "padding_top": 36,
@@ -494,12 +460,7 @@
           }
         }
       },
-      "block_order": [
-        "product_n3AKbz",
-        "product_JiTTKw",
-        "product_tbz7ha",
-        "product_4Kk44e"
-      ],
+      "block_order": ["product_n3AKbz", "product_JiTTKw", "product_tbz7ha", "product_4Kk44e"],
       "name": "Featured Products (Selectable)",
       "settings": {
         "section_title": "New Arrivals",
@@ -624,10 +585,7 @@
           }
         }
       },
-      "block_order": [
-        "product_point_HAJWFA",
-        "product_point_PRXXM9"
-      ],
+      "block_order": ["product_point_HAJWFA", "product_point_PRXXM9"],
       "name": "Shoppable Image",
       "settings": {
         "image": "shopify://shop_images/5-2.jpg",
@@ -674,12 +632,7 @@
           }
         }
       },
-      "block_order": [
-        "testimonial_9cKMAY",
-        "testimonial_YTDEqd",
-        "testimonial_4tbCCF",
-        "testimonial_3YRVpa"
-      ],
+      "block_order": ["testimonial_9cKMAY", "testimonial_YTDEqd", "testimonial_4tbCCF", "testimonial_3YRVpa"],
       "name": "Testimonial",
       "settings": {
         "slides_per_view": 3,
@@ -731,12 +684,7 @@
           }
         }
       },
-      "block_order": [
-        "image_dayYKD",
-        "image_43jFER",
-        "image_Gk8CkM",
-        "image_zTWijT"
-      ],
+      "block_order": ["image_dayYKD", "image_43jFER", "image_Gk8CkM", "image_zTWijT"],
       "name": "Luvia Full Gallery",
       "settings": {
         "title": "Follow Era",
@@ -781,13 +729,7 @@
           }
         }
       },
-      "block_order": [
-        "product_YChzNk",
-        "product_mkxBay",
-        "product_xGqpgA",
-        "product_FzJptP",
-        "product_J8rWxm"
-      ],
+      "block_order": ["product_YChzNk", "product_mkxBay", "product_xGqpgA", "product_FzJptP", "product_J8rWxm"],
       "name": "Featured Products Slider",
       "settings": {
         "section_title": "Featured Selection",
@@ -844,12 +786,7 @@
           }
         }
       },
-      "block_order": [
-        "promotion_VheHWf",
-        "promotion_kiMWjD",
-        "promotion_Dtm6NA",
-        "promotion_jgFDYf"
-      ],
+      "block_order": ["promotion_VheHWf", "promotion_kiMWjD", "promotion_Dtm6NA", "promotion_jgFDYf"],
       "name": "Footer Promotion",
       "settings": {
         "heading": "Curated Collections",
@@ -898,12 +835,7 @@
           }
         }
       },
-      "block_order": [
-        "icon_block_BNNLP9",
-        "icon_block_q7r6G7",
-        "icon_block_GpTKnM",
-        "icon_block_PfDGYQ"
-      ],
+      "block_order": ["icon_block_BNNLP9", "icon_block_q7r6G7", "icon_block_GpTKnM", "icon_block_PfDGYQ"],
       "name": "Trust Icons",
       "settings": {
         "header_opacity": 100,
