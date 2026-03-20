@@ -126,11 +126,11 @@
           {%- for i in (1..3) -%}
             <div class="swiper-slide h-full">
               <div class="group h-full flex flex-col opacity-60">
-                <div class="aspect-[16/9] bg-gray-200 mb-6 rounded-sm">
-                  {% comment %} Hata veren lifestyle-3 yerine güvenli olanları döngüye sokuyoruz {% endcomment %}
+                {% comment %} aspect-[16/9] içine object-cover ekleyerek görseli zorluyoruz {% endcomment %}
+                <div class="aspect-[16/9] bg-gray-200 mb-6 rounded-sm overflow-hidden flex items-center justify-center">
                   {%- capture placeholder_name -%}
-          {%- cycle 'lifestyle-1', 'lifestyle-2', 'collection-1' -%}
-        {%- endcapture -%}
+                  {%- cycle 'lifestyle-1', 'lifestyle-2', 'image' -%}
+                {%- endcapture -%}
                   {{ placeholder_name | placeholder_svg_tag: 'w-full h-full object-cover grayscale opacity-30' }}
                 </div>
                 <div class="space-y-4">
