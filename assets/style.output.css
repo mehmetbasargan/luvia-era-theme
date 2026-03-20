@@ -1496,6 +1496,10 @@ blockquote {
   width: max-content;
 }
 
+.w-2\/3 {
+  width: 66.666667%;
+}
+
 .min-w-\[200px\] {
   min-width: 200px;
 }
@@ -2634,6 +2638,10 @@ blockquote {
 
 .opacity-90 {
   opacity: 0.9;
+}
+
+.opacity-60 {
+  opacity: 0.6;
 }
 
 .shadow-2xl {
