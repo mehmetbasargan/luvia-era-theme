@@ -480,19 +480,6 @@
         "remove_bg": false
       }
     },
-    "testimonial_MnhfEw": {
-      "type": "testimonial",
-      "name": "Testimonial",
-      "settings": {
-        "slides_per_view": 3,
-        "testimonial_title": "Testimonials",
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "use_custom_bg": false,
-        "section_bg_color": "#ffffff",
-        "remove_bg": false
-      }
-    },
     "newsletter_banner_fKkMaW": {
       "type": "newsletter-banner",
       "name": "Newsletter Banner",
@@ -862,6 +849,71 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "testimonial_fe8h6c": {
+      "type": "testimonial",
+      "blocks": {
+        "testimonial_wJpzV3": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_6pAJH9": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_qPiftM": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_Kjnjqw": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_n3F8RV": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
+            "name": "John Doe"
+          }
+        },
+        "testimonial_mnhRRL": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
+            "name": "John Doe"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_wJpzV3",
+        "testimonial_6pAJH9",
+        "testimonial_qPiftM",
+        "testimonial_Kjnjqw",
+        "testimonial_n3F8RV",
+        "testimonial_mnhRRL"
+      ],
+      "name": "Testimonial",
+      "settings": {
+        "slides_per_view": 3,
+        "testimonial_title": "Client Experiences",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
@@ -880,7 +932,6 @@
     "full_width_gallery_fnrnK7",
     "featured_blog_carousel_qhr9Th",
     "shoppable_image_PQrjBw",
-    "testimonial_MnhfEw",
     "newsletter_banner_fKkMaW",
     "full_width_gallery_JLkbMT",
     "featured_products_slider_7JHjiQ",
@@ -888,6 +939,7 @@
     "trust_icons_xjLKyX",
     "featured_products_HDyQTt",
     "marquee_logo_epc3YD",
-    "testimonial_wBxFrQ"
+    "testimonial_wBxFrQ",
+    "testimonial_fe8h6c"
   ]
 }
