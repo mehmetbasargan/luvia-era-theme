@@ -56,15 +56,16 @@
             {% if collection.featured_image != blank %}
               <img
                 src="{{ collection.featured_image | image_url: width: 800 }}"
-                alt="Koleksiyon görseli"
+                alt="{{ collection.title | escape }}"
                 width="800"
                 height="1000"
                 loading="lazy"
                 class="w-full aspect-[3/2] object-cover transition-transform duration-1000 group-hover:scale-105"
               >
             {% else %}
-              <div class="w-full h-full bg-custombg flex items-center justify-center border border-line">
-                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'w-1/2 h-1/2 opacity-10' }}
+              <div class="w-full aspect-[3/2] bg-gray-100 flex items-center justify-center">
+                {%- capture current -%}{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
+                {{ 'collection-' | append: current | placeholder_svg_tag: 'w-full h-full object-cover opacity-50' }}
               </div>
             {% endif %}
 
