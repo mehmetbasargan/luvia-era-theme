@@ -797,11 +797,26 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "marquee_logo_axkgXd": {
+      "type": "marquee-logo",
+      "name": "Dynamic Marquee Logos",
+      "settings": {
+        "title": "AS FEATURED IN",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_9WN3Qw",
+    "marquee_logo_axkgXd",
     "collection_list_zHTtyQ",
     "rich_text_banner_m8j33U",
     "image_with_text_multi_KVYKE3",
