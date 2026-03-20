@@ -148,7 +148,6 @@
       "type": "rich-text-banner",
       "name": "Statement Banner",
       "settings": {
-        "bg_image": "shopify://shop_images/5-2.jpg",
         "overlay_opacity": 40,
         "title": "Sustainable Luxury",
         "text": "<p>Discover our curated collection of timeless pieces.</p>",
