@@ -23,54 +23,6 @@
         "overlay_opacity": 70
       }
     },
-    "hero_slider_yFYYic": {
-      "type": "hero-slider",
-      "blocks": {
-        "slide_UMRT6D": {
-          "type": "slide",
-          "settings": {
-            "title": "Elevate Your Lifestyle",
-            "sub_title": "Discover our curated collection of premium essentials designed for modern living. Quality meets elegance in every detail.",
-            "button_label": "Shop Collection",
-            "button_link": "shopify://collections/golden-hour-muse"
-          }
-        },
-        "slide_QGpjDa": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/1.jpg",
-            "title": "The Art of Minimalism",
-            "sub_title": "Experience the perfect balance of form and function. Timeless designs crafted with sustainable materials for a better future.",
-            "button_label": "Explore Now",
-            "button_link": "shopify://collections/all"
-          }
-        },
-        "slide_n3HckD": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/2.jpg",
-            "title": "New Season Arrivals",
-            "sub_title": "Be the first to own our latest drops. Limited edition pieces that define the trends of tomorrow. Available now online.",
-            "button_label": "Shop the Drop",
-            "button_link": "shopify://products/luna-satin-slip-dress"
-          }
-        }
-      },
-      "block_order": [
-        "slide_UMRT6D",
-        "slide_QGpjDa",
-        "slide_n3HckD"
-      ],
-      "name": "Hero Slider",
-      "settings": {
-        "slider_effect": "fade",
-        "overlay_color": "#000000",
-        "overlay_opacity": 45,
-        "slider_height": "full",
-        "show_arrows": true,
-        "show_pagination": true
-      }
-    },
     "marquee_logo_Aana7d": {
       "type": "marquee-logo",
       "blocks": {
@@ -928,11 +880,47 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "hero_slider_9WN3Qw": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide_a83amF": {
+          "type": "slide",
+          "settings": {
+            "title": "New Season Collection",
+            "sub_title": "Explore our limited edition pieces designed for the modern lifestyle.",
+            "button_label": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide_qzRr3Y": {
+          "type": "slide",
+          "settings": {
+            "title": "Luxury Essentials",
+            "sub_title": "Curated selection of premium quality essentials for your daily wardrobe.",
+            "button_label": "View All",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_a83amF",
+        "slide_qzRr3Y"
+      ],
+      "name": "Hero Slider",
+      "settings": {
+        "slider_effect": "fade",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "slider_height": "full",
+        "show_arrows": true,
+        "show_pagination": true
+      }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
-    "hero_slider_yFYYic",
+    "hero_slider_9WN3Qw",
     "marquee_logo_Aana7d",
     "collection_list_zHTtyQ",
     "rich_text_banner_m8j33U",
