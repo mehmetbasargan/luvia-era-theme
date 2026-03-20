@@ -4,9 +4,16 @@
 >
   <div class="absolute inset-0 z-0">
     {% if section.settings.image != blank %}
-      {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover object-top' }}
+      {{
+        section.settings.image
+        | image_url: width: 2000
+        | image_tag: class: 'w-full h-full object-cover object-top', loading: 'eager', fetchpriority: 'high'
+      }}
     {% else %}
-      <div class="w-full h-full bg-primary"></div>
+      {% comment %} Tasarımı bozmayan Placeholder buraya eklendi {% endcomment %}
+      <div class="w-full h-full bg-gray-200">
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover opacity-30 grayscale' }}
+      </div>
     {% endif %}
 
     <div
@@ -17,20 +24,24 @@
 
   <div class="relative z-10 text-center px-4">
     <nav class="mb-4 text-[13px] uppercase tracking-[0.2em] text-white">
-      <a href="{{ routes.root_url }}" class="hover:text-primary">{{ 'general.home' | t }}</a>
+      <a href="{{ routes.root_url }}" class="hover:text-primary">{{ 'general.home' | t | default: 'Home' }}</a>
       <span class="mx-2">/</span>
       <span class="text-white">
         {%- if section.settings.custom_title != blank -%}
           {{- section.settings.custom_title -}}
+        {%- elsif collection.title != blank -%}
+          {{- collection.title -}}
         {%- else -%}
           {{- page.title -}}
         {%- endif -%}
       </span>
     </nav>
 
-    <h1 class="text-white max-w-2xl text-xl md:text-3xl">
+    <h1 class="text-white max-w-2xl text-xl md:text-3xl uppercase tracking-widest font-light">
       {% if section.settings.custom_title != blank %}
         {{ section.settings.custom_title }}
+      {% elsif collection.title != blank %}
+        {{ collection.title }}
       {% else %}
         {{ page.title }}
       {% endif %}
@@ -50,7 +61,7 @@
     {
       "type": "text",
       "id": "custom_title",
-      "label": "Custom Title (if blank, page title will be used)",
+      "label": "Custom Title (if blank, page/collection title will be used)",
       "placeholder": "Example: Our Story"
     },
     {
