@@ -787,58 +787,6 @@
     },
     "testimonial_NGDxbT": {
       "type": "testimonial",
-      "blocks": {
-        "testimonial_MgceBX": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
-            "name": "John Doe"
-          }
-        },
-        "testimonial_he8DHF": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
-            "name": "John Doe"
-          }
-        },
-        "testimonial_4bjbb9": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
-            "name": "John Doe"
-          }
-        },
-        "testimonial_QJz7Nx": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
-            "name": "John Doe"
-          }
-        },
-        "testimonial_MBFHkD": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
-            "name": "John Doe"
-          }
-        },
-        "testimonial_WtaWBm": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.",
-            "name": "John Doe"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_MgceBX",
-        "testimonial_he8DHF",
-        "testimonial_4bjbb9",
-        "testimonial_QJz7Nx",
-        "testimonial_MBFHkD",
-        "testimonial_WtaWBm"
-      ],
       "name": "Testimonial",
       "settings": {
         "slides_per_view": 3,
