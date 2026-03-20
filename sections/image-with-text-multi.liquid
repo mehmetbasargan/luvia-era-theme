@@ -69,26 +69,27 @@
 
         {% comment %} Text Area {% endcomment %}
         <div class="w-full md:w-1/2 text-left space-y-6 px-4 md:px-0">
-          {% if block.settings.subheading != blank %}
-            <span class="text-secondary uppercase tracking-[0.1em] text-[14px] block">
-              {{ block.settings.subheading }}
-            </span>
-          {% endif %}
+          {% comment %} Alt Başlık: Boş bırakılırsa 'Luvia Story' yazar {% endcomment %}
+          <span class="text-secondary uppercase tracking-[0.1em] text-[14px] block">
+            {{ block.settings.subheading | default: 'Luvia Story' }}
+          </span>
 
+          {% comment %} Ana Başlık: Boş bırakılırsa 'Crafted with passion' yazar {% endcomment %}
           <h2 class="text-secondary">
-            {{ block.settings.title }}
+            {{ block.settings.title | default: 'Crafted with passion' }}
           </h2>
 
+          {% comment %} Açıklama: Boş bırakılırsa varsayılan paragrafı basar {% endcomment %}
           <div class="text-primary leading-relaxed">
-            {{ block.settings.text }}
+            {{
+              block.settings.text
+              | default: '<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>'
+            }}
           </div>
 
+          {% comment %} Buton Etiketi: Boşsa buton hiç görünmez (Bu doğru bir mantık) {% endcomment %}
           {% if block.settings.button_label != blank %}
-            <a
-              href="{{ block.settings.button_link | default: '#' }}"
-              class="inline-block mt-4 px-10 py-4 bg-primary text-white text-[15px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors duration-300"
-              aria-label="{{ block.settings.button_label | default: 'Discover More' | escape }} - {{ block.settings.title | escape }}"
-            >
+            <a href="{{ block.settings.button_link | default: '#' }}" class="...">
               {{ block.settings.button_label }}
             </a>
           {% endif %}
