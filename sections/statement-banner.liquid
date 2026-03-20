@@ -49,18 +49,17 @@
     {% comment %} Content Area {% endcomment %}
     <div class="relative z-10 container mx-auto px-6 text-center text-white">
       <div class="max-w-3xl mx-auto space-y-6">
-        {% if section.settings.title != blank %}
-          <h2 class="text-white">
-            {{ section.settings.title }}
-          </h2>
-        {% endif %}
+        {% comment %} Title: Silinse bile yedek başlık gelir {% endcomment %}
+        <h2 class="text-white">
+          {{ section.settings.title | default: 'THE ART OF ELEGANCE' }}
+        </h2>
 
-        {% if section.settings.text != blank %}
-          <div class="text-white tracking-wide">
-            {{ section.settings.text }}
-          </div>
-        {% endif %}
+        {% comment %} Text: Silinse bile yedek paragraf gelir {% endcomment %}
+        <div class="text-white tracking-wide">
+          {{ section.settings.text | default: '<p>Discover our curated collection of timeless pieces.</p>' }}
+        </div>
 
+        {% comment %} Button: Sadece etiket tamamen silinirse kaybolur, bu normaldir {% endcomment %}
         {% if section.settings.button_label != blank %}
           <a
             href="{{ section.settings.button_link | default: '#' }}"
