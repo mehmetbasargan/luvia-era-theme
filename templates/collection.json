@@ -8,64 +8,80 @@
  * ------------------------------------------------------------
  */
 {
-	"sections": {
-		"main_collection_banner_LMYeKg": {
-			"type": "collection-banner",
-			"name": "Collection Banner",
-			"settings": {
-				"fallback_image": "shopify://shop_images/pageheader3.jpg",
-				"hero_height": 40,
-				"overlay_opacity": 60
-			}
-		},
-		"main": {
-			"type": "collection",
-			"settings": {
-				"products_per_page": 12
-			}
-		},
-		"product_recommendations_jKgtbU": {
-			"type": "product-recommendations",
-			"name": "Product Recommendations",
-			"settings": {
-				"heading": "You May Also Like",
-				"products_to_show": 4
-			}
-		},
-		"full_width_gallery_7dxMQK": {
-			"type": "full-width-gallery",
-			"blocks": {
-				"image_h4tRdW": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p7-2.jpg"
-					}
-				},
-				"image_fRcTBf": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p5-2.jpg"
-					}
-				},
-				"image_BxJUwe": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p6-1.jpg"
-					}
-				},
-				"image_qR8XRW": {
-					"type": "image",
-					"settings": {
-						"image": "shopify://shop_images/p3.jpg"
-					}
-				}
-			},
-			"block_order": ["image_h4tRdW", "image_fRcTBf", "image_BxJUwe", "image_qR8XRW"],
-			"name": "Luvia Full Gallery",
-			"settings": {
-				"title": "Follow the Era"
-			}
-		}
-	},
-	"order": ["main_collection_banner_LMYeKg", "main", "product_recommendations_jKgtbU", "full_width_gallery_7dxMQK"]
+  "sections": {
+    "page_header_HPXXKQ": {
+      "type": "page-header",
+      "name": "Page Header",
+      "settings": {
+        "image": "shopify://shop_images/shoppable-image3.jpg",
+        "custom_title": "{{ collection.title }}",
+        "hero_height": 40,
+        "overlay_opacity": 30
+      }
+    },
+    "main": {
+      "type": "collection",
+      "settings": {
+        "products_per_page": 12
+      }
+    },
+    "product_recommendations_jKgtbU": {
+      "type": "product-recommendations",
+      "name": "Product Recommendations",
+      "settings": {
+        "heading": "You May Also Like",
+        "products_to_show": 4
+      }
+    },
+    "full_width_gallery_7dxMQK": {
+      "type": "full-width-gallery",
+      "blocks": {
+        "image_h4tRdW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p7-2.jpg"
+          }
+        },
+        "image_fRcTBf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p5-2.jpg"
+          }
+        },
+        "image_BxJUwe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p6-1.jpg"
+          }
+        },
+        "image_qR8XRW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_h4tRdW",
+        "image_fRcTBf",
+        "image_BxJUwe",
+        "image_qR8XRW"
+      ],
+      "name": "Luvia Full Gallery",
+      "settings": {
+        "title": "Follow the Era",
+        "header_opacity": 100,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "page_header_HPXXKQ",
+    "main",
+    "product_recommendations_jKgtbU",
+    "full_width_gallery_7dxMQK"
+  ]
 }
