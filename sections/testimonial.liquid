@@ -10,8 +10,6 @@
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
-      margin-top: {{ section.settings.margin_top }}px;
-      margin-bottom: {{ section.settings.margin_bottom }}px;
     }
   }
 
@@ -27,6 +25,7 @@
     width: 100%;
     overflow: hidden;
     padding-bottom: 60px !important;
+    cursor: grab;
   }
 
   .swiper-slide {
@@ -36,53 +35,56 @@
 
   .pagination-{{ section.id }} .swiper-pagination-bullet-active {
     background: #000 !important;
-    width: 15px;
-    border-radius: 5px;
+    width: 25px;
+    border-radius: 4px;
   }
 {%- endstyle -%}
 
 <section id="LuviaSection-{{ section.id }}" class="section-{{ section.id }}-padding transition-colors duration-300">
   <div class="container mx-auto px-4">
-    <div class="mb-16 flex justify-center items-end w-full">
-      <div class="text-center">
-        <h2 class="text-2xl md:text-3xl font-light uppercase tracking-widest">
-          {{ section.settings.testimonial_title | default: 'Client Experiences' }}
-        </h2>
-        <div class="h-[1px] w-20 bg-secondary mx-auto mt-6"></div>
-      </div>
+    <div class="mb-16 text-center">
+      <h2 class="text-2xl md:text-3xl font-light uppercase tracking-widest">
+        {{ section.settings.testimonial_title | default: 'Client Experiences' }}
+      </h2>
+      <div class="h-[1px] w-20 bg-secondary mx-auto mt-6"></div>
     </div>
 
     <div class="swiper swiper-{{ section.id }}">
       <div class="swiper-wrapper">
         {%- if section.blocks.size > 0 -%}
-          {% comment %} Kullanıcı blok eklediyse bunları göster {% endcomment %}
-          {% for item in section.blocks %}
-            <div class="swiper-slide" {{ item.shopify_attributes }}>
-              <div class="flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-gray-100 w-full">
-                <div class="w-full h-[40px] flex items-center justify-center mb-6">
-                  <span class="text-secondary opacity-40 scale-150" aria-hidden="true">{% render 'icon-quote' %}</span>
+          {% comment %}
+            KRİTİK HİLE: Eğer blok sayısı 3 veya daha azsa,
+            Slider'ın masaüstünde de kayması için blokları 2 kez döndürüyoruz.
+          {% endcomment %}
+          {%- assign loop_count = 1 -%}
+          {%- if section.blocks.size <= 3 -%}{%- assign loop_count = 2 -%}{%- endif -%}
+
+          {%- for i in (1..loop_count) -%}
+            {%- for item in section.blocks -%}
+              <div class="swiper-slide" {{ item.shopify_attributes }}>
+                <div class="flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-gray-100 w-full">
+                  <div class="w-full h-[40px] flex items-center justify-center mb-6">
+                    <span class="text-secondary opacity-40 scale-150">{% render 'icon-quote' %}</span>
+                  </div>
+                  <div class="min-h-[100px] text-[15px] italic text-primary">
+                    "{{ item.settings.testimonial | default: 'Excellent service and quality.' }}"
+                  </div>
+                  <span class="mt-8 font-medium uppercase tracking-widest text-[12px]">
+                    — {{ item.settings.name | default: 'Customer' }}
+                  </span>
                 </div>
-                <div class="min-h-[100px] text-[15px] leading-relaxed italic text-primary">
-                  "{{ item.settings.testimonial | default: 'The quality and design exceeded my expectations.' }}"
-                </div>
-                <span class="mt-8 font-medium uppercase tracking-widest text-[12px]">
-                  — {{ item.settings.name | default: 'Valued Customer' }}
-                </span>
               </div>
-            </div>
-          {% endfor %}
+            {%- endfor -%}
+          {%- endfor -%}
+
         {%- else -%}
-          {% comment %} EĞER HER ŞEY SİLİNDİYSE: 3 tane Yer Tutucu (Placeholder) göster {% endcomment %}
-          {%- for i in (1..3) -%}
+          {% comment %} HİÇ BLOK YOKSA: 6 Tane Yer Tutucu (Garantili Kayma) {% endcomment %}
+          {%- for i in (1..6) -%}
             <div class="swiper-slide">
-              <div class="flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-dashed border-gray-300 w-full opacity-60">
-                <div class="w-full h-[40px] flex items-center justify-center mb-6">
-                  <span class="text-gray-400" aria-hidden="true">{% render 'icon-quote' %}</span>
-                </div>
-                <div class="min-h-[100px] text-[15px] italic text-gray-400">
-                  "Buraya müşteri yorumu gelecek. Henüz bir yorum eklemediniz."
-                </div>
-                <span class="mt-8 font-medium uppercase text-[12px] text-gray-400"> — Müşteri İsmi </span>
+              <div class="flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-dashed border-gray-300 w-full opacity-40">
+                <div class="h-10 mb-4 opacity-20">{% render 'icon-quote' %}</div>
+                <div class="min-h-[80px]">Henüz bir yorum eklenmedi. Örnek yer tutucu.</div>
+                <span class="mt-4">— Müşteri Adı</span>
               </div>
             </div>
           {%- endfor -%}
@@ -94,33 +96,34 @@
 </section>
 
 <script>
-  (function () {
+  (function() {
     const initSlider = () => {
       const selector = '.swiper-{{ section.id }}';
-      const container = document.querySelector(selector);
-      if (!container) return;
+      if (!document.querySelector(selector)) return;
 
-      if (container.swiper) container.swiper.destroy(true, true);
-
-      const totalSlides = container.querySelectorAll('.swiper-slide').length;
-      const desktopLimit = parseInt('{{ section.settings.slides_per_view | default: 3 }}');
+      if (document.querySelector(selector).swiper) {
+        document.querySelector(selector).swiper.destroy(true, true);
+      }
 
       new Swiper(selector, {
         slidesPerView: 1.2,
         spaceBetween: 20,
         grabCursor: true,
-        centeredSlides: totalSlides < 2,
-        loop: totalSlides > desktopLimit,
+        loop: true, // Artık içerik kopyalandığı için her zaman true olabilir
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
         pagination: {
           el: '.pagination-{{ section.id }}',
           clickable: true,
         },
         breakpoints: {
           640: { slidesPerView: 2, spaceBetween: 30 },
-          1024: { slidesPerView: desktopLimit, spaceBetween: 40 },
-        },
+          1024: { slidesPerView: {{ section.settings.slides_per_view | default: 3 }}, spaceBetween: 40 }
+        }
       });
-    };
+    }
 
     document.addEventListener('DOMContentLoaded', initSlider);
     document.addEventListener('shopify:section:load', initSlider);
@@ -140,12 +143,7 @@
       "label": "Slides per view (Desktop)",
       "default": 3
     },
-    {
-      "type": "text",
-      "id": "testimonial_title",
-      "label": "Testimonial Title",
-      "default": "Client Experiences"
-    },
+    { "type": "text", "id": "testimonial_title", "label": "Testimonial Title", "default": "Client Experiences" },
     { "type": "header", "content": "Style Settings" },
     {
       "type": "range",
@@ -180,14 +178,9 @@
           "type": "textarea",
           "id": "testimonial",
           "label": "Testimonial",
-          "default": "The quality and design exceeded my expectations."
+          "default": "Excellent service and high quality products!"
         },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name",
-          "default": "John Doe"
-        }
+        { "type": "text", "id": "name", "label": "Name", "default": "John Doe" }
       ]
     }
   ],
