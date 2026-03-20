@@ -165,7 +165,6 @@
       "type": "statement-banner",
       "name": "Statement Banner",
       "settings": {
-        "bg_image": "shopify://shop_images/1.jpg",
         "overlay_opacity": 50,
         "title": "THE ART OF ELEGANCE",
         "text": "<p>Discover our curated collection of timeless pieces, designed for those who appreciate the finer things in life.</p>",
@@ -212,7 +211,6 @@
       ],
       "name": "Shoppable Image",
       "settings": {
-        "image": "shopify://shop_images/shoppable-image3.jpg",
         "title": "Curated Collections",
         "subtitle": "Touch the details and discover the artistry behind every piece.",
         "padding_top": 100,
