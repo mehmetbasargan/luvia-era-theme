@@ -2346,6 +2346,10 @@ blockquote {
   padding-top: 2rem;
 }
 
+.\!pb-12 {
+  padding-bottom: 3rem !important;
+}
+
 .text-left {
   text-align: left;
 }
