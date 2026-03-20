@@ -1,45 +1,84 @@
+{%- comment -%}
+  File: collection-banner.liquid
+  Description: Dynamic banner for collection pages with SEO optimization and placeholders.
+{%- endcomment -%}
+
+{%- liquid
+  assign header_tag = 'h2'
+  if template contains 'collection'
+    assign header_tag = 'h1'
+  endif
+
+  assign collection_title = collection.title | default: 'Collection'
+  if collection.handle == 'all'
+    assign collection_title = 'collections.title' | t | default: 'All Products'
+  endif
+-%}
+
 <section
   class="relative w-full overflow-hidden flex items-center justify-center"
   style="height: {{ section.settings.hero_height }}vh; min-height: 350px;"
 >
+  {% comment %} --- BACKGROUND LAYER --- {% endcomment %}
   <div class="absolute inset-0 z-0">
-    {% if collection.image %}
+    {%- if collection.image -%}
       {{
         collection.image
         | image_url: width: 2000
-        | image_tag: class: 'w-full h-full object-cover object-center object-top', loading: 'eager'
+        | image_tag:
+          class: 'w-full h-full object-cover object-center',
+          loading: 'eager',
+          fetchpriority: 'high',
+          preload: true,
+          widths: '375, 550, 750, 1100, 1500, 1780, 2000',
+          alt: collection_title
       }}
-    {% elsif section.settings.fallback_image != blank %}
+    {%- elsif section.settings.fallback_image != blank -%}
       {{
         section.settings.fallback_image
         | image_url: width: 2000
-        | image_tag: class: 'w-full h-full object-cover object-center object-top', loading: 'eager'
+        | image_tag:
+          class: 'w-full h-full object-cover object-center',
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '375, 550, 750, 1100, 1500, 1780, 2000',
+          alt: collection_title
       }}
-    {% else %}
-      <div class="w-full h-full bg-primary"></div>
-    {% endif %}
+    {%- else -%}
+      <div class="w-full h-full bg-gray-200">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-40 grayscale' }}
+      </div>
+    {%- endif -%}
 
+    {% comment %} Overlay Layer {% endcomment %}
     <div
-      class="absolute inset-0"
+      class="absolute inset-0 z-[1]"
       style="background-color: rgba(0,0,0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"
     ></div>
   </div>
 
+  {% comment %} --- CONTENT LAYER --- {% endcomment %}
   <div class="relative z-10 text-center px-4 max-w-4xl">
-    <nav class="mb-4 text-[13px] uppercase tracking-[0.3em] text-custombg">
-      <a
-        href="{{ routes.root_url }}"
-        class="hover:text-secondary transition-colors"
-        aria-label="{{ 'general.home' | t }}"
-      >
-        {{- 'general.home' | t -}}
+    {% comment %} Breadcrumb {% endcomment %}
+    <nav class="mb-4 text-[13px] uppercase tracking-[0.3em] text-white">
+      <a href="{{ routes.root_url }}" class="hover:text-secondary transition-colors">
+        {{- 'general.home' | t | default: 'Home' -}}
       </a>
       <span class="mx-2">/</span>
-      <span class="">{{ collection.title }}</span>
+      <span>{{ collection_title }}</span>
     </nav>
-    <h2 class="text-custombg font-light tracking-[0.1em] uppercase drop-shadow-sm">
-      {{ collection.title }}
-    </h2>
+
+    {% comment %} Title {% endcomment %}
+    <{{ header_tag }} class="text-white font-light tracking-[0.2em] uppercase drop-shadow-md text-4xl md:text-6xl">
+      {{ collection_title }}
+    </{{ header_tag }}>
+
+    {% comment %} Description {% endcomment %}
+    {% if section.settings.show_description and collection.description != blank %}
+      <div class="mt-6 text-white opacity-90 max-w-xl mx-auto text-sm md:text-base tracking-wide leading-relaxed">
+        {{ collection.description }}
+      </div>
+    {% endif %}
   </div>
 </section>
 
@@ -48,10 +87,16 @@
   "name": "Collection Banner",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show Collection Description",
+      "default": true
+    },
+    {
       "type": "image_picker",
       "id": "fallback_image",
       "label": "Fallback Image",
-      "info": "If there is no collection-specific image (for example, the All Products page), this image will be displayed."
+      "info": "Used for 'All Products' or collections without an image."
     },
     {
       "type": "range",
