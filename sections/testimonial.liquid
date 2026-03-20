@@ -27,17 +27,20 @@
     width: 100%;
     height: auto;
     overflow: hidden;
-    padding-bottom: 50px !important; /* Pagination için alan */
+    padding-bottom: 60px !important;
   }
 
   .pagination-{{ section.id }} .swiper-pagination-bullet-active {
-    background: var(--color-secondary, #000) !important;
+    background: #000 !important; /* Tailwind değişkenin yoksa şimdilik siyah */
+    width: 20px;
+    border-radius: 4px;
+    transition: all 0.3s;
   }
 {%- endstyle -%}
 
 <section id="LuviaSection-{{ section.id }}" class="section-{{ section.id }}-padding transition-colors duration-300">
   <div class="container mx-auto px-4">
-    {% comment %} Başlık: Silinse bile varsayılan başlık gelir {% endcomment %}
+    {% comment %} Başlık Kontrolü {% endcomment %}
     <div class="mb-16 flex justify-center items-end w-full">
       <div class="text-center">
         <h2 class="text-2xl md:text-3xl font-light uppercase tracking-widest">
@@ -49,10 +52,13 @@
 
     <div class="swiper swiper-{{ section.id }}">
       <div class="swiper-wrapper">
-        {%- if section.blocks.size > 0 -%}
-          {% for item in section.blocks %}
+        {%- assign valid_blocks_count = 0 -%}
+
+        {%- for item in section.blocks -%}
+          {%- if item.settings.testimonial != blank or item.settings.name != blank -%}
+            {%- assign valid_blocks_count = valid_blocks_count | plus: 1 -%}
             <div
-              class="swiper-slide flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-gray-100"
+              class="swiper-slide flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-gray-100 h-auto"
               {{ item.shopify_attributes }}
               itemscope
               itemtype="https://schema.org/Review"
@@ -60,32 +66,34 @@
               <div class="w-full h-[40px] flex items-center justify-center mb-6">
                 <span class="text-secondary opacity-40 scale-150" aria-hidden="true">{% render 'icon-quote' %}</span>
               </div>
+
               <div class="min-h-[100px] text-[15px] leading-relaxed italic text-primary" itemprop="reviewBody">
                 "
                 {{-
                   item.settings.testimonial
-                  | default: 'The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever.'
+                  | default: 'The quality and design exceeded my expectations. A truly timeless piece.'
                 -}}
                 "
               </div>
+
               <span class="mt-8 font-medium uppercase tracking-widest text-[12px]" itemprop="author">
                 — {{ item.settings.name | default: 'Valued Customer' }}
               </span>
               <meta itemprop="datePublished" content="{{ 'now' | date: '%Y-%m-%d' }}">
             </div>
-          {% endfor %}
-        {%- else -%}
-          {% comment %} Hiç blok yoksa editörde boş görünmemesi için 3 tane dummy kart {% endcomment %}
-          {% for i in (1..3) %}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if valid_blocks_count == 0 -%}
+          {%- for i in (1..3) -%}
             <div class="swiper-slide bg-gray-50 p-12 text-center opacity-50">
-              <div class="min-h-[100px] italic">Add a testimonial to share customer experiences...</div>
-              <span class="mt-8 block">— Customer Name</span>
+              <div class="min-h-[100px] italic">No testimonials yet. Add one in the theme editor!</div>
+              <span class="mt-8 block">— Example Name</span>
             </div>
-          {% endfor %}
+          {%- endfor -%}
         {%- endif -%}
       </div>
 
-      {% comment %} Sayfalama (Noktalar) {% endcomment %}
       <div class="swiper-pagination pagination-{{ section.id }}"></div>
     </div>
   </div>
@@ -93,22 +101,22 @@
 
 <script>
   (function() {
-    function initSlider() {
-      const selector = '.swiper-{{ section.id }}';
-      const container = document.querySelector(selector);
+    const initSlider = () => {
+      const container = document.querySelector('.swiper-{{ section.id }}');
       if (!container) return;
 
       if (container.swiper) container.swiper.destroy(true, true);
 
-      const blockCount = {{ section.blocks.size | default: 3 }};
+      // Gerçekten dolu olan slide sayısını bul
+      const realSlidesCount = container.querySelectorAll('.swiper-slide').length;
       const desktopView = {{ section.settings.slides_per_view | default: 3 }};
 
-      new Swiper(selector, {
+      new Swiper('.swiper-{{ section.id }}', {
         slidesPerView: 1.2,
         spaceBetween: 20,
         grabCursor: true,
-        centeredSlides: blockCount < 3,
-        loop: blockCount > desktopView,
+        centeredSlides: realSlidesCount < 2,
+        loop: realSlidesCount > desktopView,
         pagination: {
           el: '.pagination-{{ section.id }}',
           clickable: true,
