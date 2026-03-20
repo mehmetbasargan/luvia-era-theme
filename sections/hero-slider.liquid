@@ -220,6 +220,7 @@
   document.addEventListener('shopify:section:load', initSwiper);
 </script>
 
+
 {% schema %}
 {
   "name": "Hero Slider",
@@ -293,20 +294,19 @@
           "type": "text",
           "id": "title",
           "label": "Heading",
-          "default": "New Season"
+          "default": "New Season Collection"
         },
         {
           "type": "text",
           "id": "sub_title",
           "label": "Subheading",
-          "default": "Discover the latest collection now."
+          "default": "Explore our limited edition pieces designed for the modern lifestyle."
         },
         {
           "type": "text",
           "id": "button_label",
           "label": "Button Label",
-          "default": "Shop Now",
-          "info": "Leave blank to hide the button."
+          "default": "Shop Now"
         },
         {
           "type": "url",
@@ -318,7 +318,25 @@
   ],
   "presets": [
     {
-      "name": "Hero Slider"
+      "name": "Hero Slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "title": "New Season Collection",
+            "sub_title": "Explore our limited edition pieces designed for the modern lifestyle.",
+            "button_label": "Shop Now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Luxury Essentials",
+            "sub_title": "Curated selection of premium quality essentials for your daily wardrobe.",
+            "button_label": "View All"
+          }
+        }
+      ]
     }
   ]
 }
