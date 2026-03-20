@@ -32,13 +32,6 @@
     height: auto !important;
     display: flex !important;
   }
-
-  .pagination-{{ section.id }} .swiper-pagination-bullet-active {
-    background: #000 !important;
-    width: 25px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-  }
 {%- endstyle -%}
 
 <section id="LuviaSection-{{ section.id }}" class="section-{{ section.id }}-padding transition-colors duration-300">
@@ -62,7 +55,7 @@
           {%- for i in (1..loop_count) -%}
             {%- for item in section.blocks -%}
               <div class="swiper-slide" {{ item.shopify_attributes }}>
-                <div class="flex flex-col items-center justify-center text-center bg-gray-200 p-8 md:p-12 rounded-sm border border-gray-100 w-full">
+                <div class="flex flex-col items-center justify-center text-center bg-custombg p-8 md:p-12 rounded-sm border border-gray-100 w-full">
                   <div class="w-full h-[40px] flex items-center justify-center mb-6">
                     <span class="text-secondary opacity-40 scale-150">{% render 'icon-quote' %}</span>
                   </div>
@@ -86,7 +79,7 @@
           {% comment %} EMPTY STATE: 6 English Placeholders to ensure sliding works {% endcomment %}
           {%- for i in (1..6) -%}
             <div class="swiper-slide">
-              <div class="flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-dashed border-gray-300 w-full opacity-40">
+              <div class="flex flex-col items-center justify-center text-center bg-custombg p-8 md:p-12 rounded-sm border border-dashed border-gray-300 w-full opacity-40">
                 <div class="h-10 mb-4 opacity-20">{% render 'icon-quote' %}</div>
                 <div class="min-h-[80px]">
                   "Add a testimonial to share your customers' experiences and build trust with your audience."
@@ -102,6 +95,28 @@
   </div>
 </section>
 
+<style>
+  .swiper-pagination-bullet {
+    background: var(--color-secondary);
+    height: 10px !important;
+    width: 13px !important;
+    opacity: 0.5 !important;
+    transition: all 0.3s ease !important;
+  }
+  .swiper-pagination-bullet-active {
+    background: var(--color-secondary);
+    opacity: 1 !important;
+    width: 20px !important;
+    border-radius: 6px;
+  }
+
+  .swiper-pagination-bullet-active::after {
+    width: 20px !important;
+    height: inherit !important;
+    opacity: 1 !important;
+  }
+</style>
+
 <script>
   (function() {
     const initSlider = () => {
@@ -116,11 +131,11 @@
         spaceBetween: 20,
         grabCursor: true,
         loop: true,
-        autoplay: {
+       /*  autoplay: {
           delay: 5000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true
-        },
+        }, */
         pagination: {
           el: '.pagination-{{ section.id }}',
           clickable: true,
