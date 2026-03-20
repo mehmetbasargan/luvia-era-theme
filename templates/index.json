@@ -906,7 +906,7 @@
         "section_title": "Featured Selection",
         "section_subtitle": "Handpicked for you",
         "button_text": "View All",
-        "button_url": "",
+        "button_url": "shopify://pages/collections",
         "padding_top": 36,
         "padding_bottom": 36,
         "margin_top": 0,
