@@ -122,15 +122,14 @@
             </div>
           {%- endfor -%}
         {%- else -%}
-          {% comment %} Placeholder Content when no blog is selected {% endcomment %}
-          {%- for i in (1..3) -%}
+          {% comment %} Yer tutucu sayısını 6'ya çıkardık ki slide olduğu anlaşılsın {% endcomment %}
+          {%- for i in (1..6) -%}
             <div class="swiper-slide h-full">
               <div class="group h-full flex flex-col opacity-60">
-                {% comment %} aspect-[16/9] içine object-cover ekleyerek görseli zorluyoruz {% endcomment %}
                 <div class="aspect-[16/9] bg-gray-200 mb-6 rounded-sm overflow-hidden flex items-center justify-center">
                   {%- capture placeholder_name -%}
-                  {%- cycle 'lifestyle-1', 'lifestyle-2', 'image' -%}
-                {%- endcapture -%}
+                    {%- cycle 'lifestyle-1', 'lifestyle-2', 'image', 'lifestyle-1', 'lifestyle-2', 'image' -%}
+                  {%- endcapture -%}
                   {{ placeholder_name | placeholder_svg_tag: 'w-full h-full object-cover grayscale opacity-30' }}
                 </div>
                 <div class="space-y-4">
@@ -179,9 +178,9 @@
             loop: articleCount > 2,
           },
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 30,
-            loop: articleCount > 4,
+            loop: articleCount > 3,
           },
         },
       });
