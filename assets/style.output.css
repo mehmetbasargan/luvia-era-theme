@@ -767,6 +767,10 @@ blockquote {
   pointer-events: auto;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .invisible {
   visibility: hidden;
 }
@@ -2348,6 +2352,10 @@ blockquote {
 
 .\!pb-12 {
   padding-bottom: 3rem !important;
+}
+
+.\!pb-16 {
+  padding-bottom: 4rem !important;
 }
 
 .text-left {

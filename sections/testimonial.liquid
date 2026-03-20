@@ -23,24 +23,34 @@
     {% endif %}
   }
 
+  /* Swiper Stabilite Ayarları */
   .swiper-{{ section.id }} {
     width: 100%;
-    height: auto;
-    overflow: hidden;
-    padding-bottom: 60px !important;
+    overflow: visible !important; /* Kartların gölgeleri kesilmesin */
+    clip-path: inset(-100px 0 -100px 0); /* Sadece alt ve üstten taşmaya izin ver */
+  }
+
+  .swiper-slide {
+    height: auto !important;
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .pagination-{{ section.id }} {
+    bottom: 0 !important;
   }
 
   .pagination-{{ section.id }} .swiper-pagination-bullet-active {
-    background: #000 !important; /* Tailwind değişkenin yoksa şimdilik siyah */
-    width: 20px;
-    border-radius: 4px;
-    transition: all 0.3s;
+    background: #000 !important;
+    width: 15px;
+    border-radius: 5px;
   }
 {%- endstyle -%}
 
 <section id="LuviaSection-{{ section.id }}" class="section-{{ section.id }}-padding transition-colors duration-300">
   <div class="container mx-auto px-4">
-    {% comment %} Başlık Kontrolü {% endcomment %}
+    {% comment %} Header {% endcomment %}
     <div class="mb-16 flex justify-center items-end w-full">
       <div class="text-center">
         <h2 class="text-2xl md:text-3xl font-light uppercase tracking-widest">
@@ -50,60 +60,52 @@
       </div>
     </div>
 
-    <div class="swiper swiper-{{ section.id }} !pb-12">
+    <div class="swiper swiper-{{ section.id }} !pb-16">
       <div class="swiper-wrapper">
         {%- if section.blocks.size > 0 -%}
           {% for item in section.blocks %}
-            {%- if item.settings.testimonial != blank or item.settings.name != blank -%}
-              <div class="swiper-slide h-auto flex" {{ item.shopify_attributes }}>
-                <div class="flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-gray-100 w-full">
-                  <div class="w-full h-[40px] flex items-center justify-center mb-6">
-                    <span class="text-secondary opacity-40 scale-150" aria-hidden="true">
-                      {%- render 'icon-quote' -%}
-                    </span>
-                  </div>
-                  <div class="min-h-[100px] text-[15px] leading-relaxed italic text-primary">
-                    "{{ item.settings.testimonial | default: 'The quality and design exceeded my expectations.' }}"
-                  </div>
-                  <span class="mt-8 font-medium uppercase tracking-widest text-[12px]">
-                    — {{ item.settings.name | default: 'Valued Customer' }}
-                  </span>
+            {%- assign t_text = item.settings.testimonial
+              | default: 'The quality and design exceeded my expectations.'
+            -%}
+            {%- assign t_name = item.settings.name | default: 'Valued Customer' -%}
+
+            <div class="swiper-slide" {{ item.shopify_attributes }}>
+              <div class="flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-gray-100 w-full shadow-sm">
+                <div class="w-full h-[40px] flex items-center justify-center mb-6">
+                  <span class="text-secondary opacity-40 scale-150" aria-hidden="true">{% render 'icon-quote' %}</span>
                 </div>
+                <div class="min-h-[100px] text-[15px] leading-relaxed italic text-primary">"{{ t_text }}"</div>
+                <span class="mt-8 font-medium uppercase tracking-widest text-[12px]"> — {{ t_name }} </span>
               </div>
-            {%- endif -%}
+            </div>
           {% endfor %}
         {%- endif -%}
       </div>
+
+      {% comment %} Pagination Dots {% endcomment %}
       <div class="swiper-pagination pagination-{{ section.id }}"></div>
     </div>
   </div>
 </section>
 
 <script>
-  (function() {
+  (function () {
     const initSlider = () => {
-      const selector = '.swiper-{{ section.id }}';
-      const container = document.querySelector(selector);
+      const container = document.querySelector('.swiper-{{ section.id }}');
       if (!container) return;
 
       if (container.swiper) container.swiper.destroy(true, true);
 
-      // Slayt sayısını dinamik alalım
       const totalSlides = container.querySelectorAll('.swiper-slide').length;
-      const desktopLimit = {{ section.settings.slides_per_view | default: 3 }};
+      const desktopView = parseInt('{{ section.settings.slides_per_view | default: 3 }}');
 
-      new Swiper(selector, {
+      new Swiper('.swiper-{{ section.id }}', {
         slidesPerView: 1.2,
         spaceBetween: 20,
         grabCursor: true,
-        // KRİTİK AYAR: İçerik azsa bile ortalar, çoksa kaydırır
         centeredSlides: totalSlides < 2,
-        initialSlide: 0,
-        watchOverflow: true, // Slayt yetersizse slider özelliklerini kapatır (Hata önleyici)
-
-        // Sadece ekranda görünenden fazla slayt varsa sonsuz döngüyü aç
-        loop: totalSlides > desktopLimit,
-
+        // Sadece ekranda görünenden fazla slayt varsa sonsuz döngüyü aç, yoksa slider kilitlenir
+        loop: totalSlides > desktopView,
         pagination: {
           el: '.pagination-{{ section.id }}',
           clickable: true,
@@ -112,19 +114,21 @@
           640: {
             slidesPerView: 2,
             spaceBetween: 30,
-            centeredSlides: false
           },
           1024: {
-            slidesPerView: desktopLimit,
+            slidesPerView: desktopView,
             spaceBetween: 40,
-            centeredSlides: false
-          }
-        }
+          },
+        },
       });
-    }
+    };
 
     document.addEventListener('DOMContentLoaded', initSlider);
     document.addEventListener('shopify:section:load', initSlider);
+    // Editor'de değişiklik yapıldığında tetiklenmesi için:
+    if (window.Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:select', initSlider);
+    }
   })();
 </script>
 
