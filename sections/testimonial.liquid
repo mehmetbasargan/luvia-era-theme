@@ -37,6 +37,7 @@
     background: #000 !important;
     width: 25px;
     border-radius: 4px;
+    transition: all 0.3s ease;
   }
 {%- endstyle -%}
 
@@ -53,8 +54,7 @@
       <div class="swiper-wrapper">
         {%- if section.blocks.size > 0 -%}
           {% comment %}
-            KRİTİK HİLE: Eğer blok sayısı 3 veya daha azsa,
-            Slider'ın masaüstünde de kayması için blokları 2 kez döndürüyoruz.
+            Force slider to move even with 3 blocks by duplicating them in Liquid
           {% endcomment %}
           {%- assign loop_count = 1 -%}
           {%- if section.blocks.size <= 3 -%}{%- assign loop_count = 2 -%}{%- endif -%}
@@ -66,11 +66,16 @@
                   <div class="w-full h-[40px] flex items-center justify-center mb-6">
                     <span class="text-secondary opacity-40 scale-150">{% render 'icon-quote' %}</span>
                   </div>
-                  <div class="min-h-[100px] text-[15px] italic text-primary">
-                    "{{ item.settings.testimonial | default: 'Excellent service and quality.' }}"
+                  <div class="min-h-[100px] text-[15px] italic text-primary leading-relaxed">
+                    "
+                    {{-
+                      item.settings.testimonial
+                      | default: 'The craftsmanship and attention to detail are truly exceptional. A perfect addition to my collection.'
+                    -}}
+                    "
                   </div>
                   <span class="mt-8 font-medium uppercase tracking-widest text-[12px]">
-                    — {{ item.settings.name | default: 'Customer' }}
+                    — {{ item.settings.name | default: 'Valued Client' }}
                   </span>
                 </div>
               </div>
@@ -78,13 +83,15 @@
           {%- endfor -%}
 
         {%- else -%}
-          {% comment %} HİÇ BLOK YOKSA: 6 Tane Yer Tutucu (Garantili Kayma) {% endcomment %}
+          {% comment %} EMPTY STATE: 6 English Placeholders to ensure sliding works {% endcomment %}
           {%- for i in (1..6) -%}
             <div class="swiper-slide">
               <div class="flex flex-col items-center justify-center text-center bg-gray-50 p-8 md:p-12 rounded-sm border border-dashed border-gray-300 w-full opacity-40">
                 <div class="h-10 mb-4 opacity-20">{% render 'icon-quote' %}</div>
-                <div class="min-h-[80px]">Henüz bir yorum eklenmedi. Örnek yer tutucu.</div>
-                <span class="mt-4">— Müşteri Adı</span>
+                <div class="min-h-[80px]">
+                  "Add a testimonial to share your customers' experiences and build trust with your audience."
+                </div>
+                <span class="mt-4">— Customer Name</span>
               </div>
             </div>
           {%- endfor -%}
@@ -99,20 +106,20 @@
   (function() {
     const initSlider = () => {
       const selector = '.swiper-{{ section.id }}';
-      if (!document.querySelector(selector)) return;
+      const el = document.querySelector(selector);
+      if (!el) return;
 
-      if (document.querySelector(selector).swiper) {
-        document.querySelector(selector).swiper.destroy(true, true);
-      }
+      if (el.swiper) el.swiper.destroy(true, true);
 
       new Swiper(selector, {
         slidesPerView: 1.2,
         spaceBetween: 20,
         grabCursor: true,
-        loop: true, // Artık içerik kopyalandığı için her zaman true olabilir
+        loop: true,
         autoplay: {
-          delay: 4000,
+          delay: 5000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true
         },
         pagination: {
           el: '.pagination-{{ section.id }}',
@@ -178,7 +185,7 @@
           "type": "textarea",
           "id": "testimonial",
           "label": "Testimonial",
-          "default": "Excellent service and high quality products!"
+          "default": "The quality and design exceeded my expectations. A truly timeless piece that I will cherish forever."
         },
         { "type": "text", "id": "name", "label": "Name", "default": "John Doe" }
       ]
