@@ -88,90 +88,13 @@
       <div class="swiper-wrapper">
         {% for block in section.blocks %}
           {%- assign product = all_products[block.settings.product] -%}
-          {% if product != blank %}
-            <div class="swiper-slide group relative flex flex-col h-full" {{ block.shopify_attributes }}>
-              <div class="relative aspect-[3/4] overflow-hidden bg-white shadow-sm rounded-sm">
-                {% if product.compare_at_price > product.price %}
-                  <span class="absolute top-4 left-4 z-20 bg-primary rounded-sm text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase">
-                    {{ 'products.product.on_sale' | t }}
-                  </span>
-                {% endif %}
-
-                {% comment %} Wishlist Butonu {% endcomment %}
-                <div class="absolute top-4 right-4 z-40">
-                  <button
-                    type="button"
-                    class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-sm hover:scale-110 transition-transform duration-300 bg-white"
-                    data-product-id="{{ product.id }}"
-                    onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') }"
-                    aria-label="Add to wishlist"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      class="w-5 h-5 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                  </button>
-                </div>
-
-                {% comment %} Ürün Görselleri {% endcomment %}
-                <a
-                  href="{{ product.url }}"
-                  class="block w-full h-full relative z-10"
-                  aria-label="{{ product.title | escape }}"
-                >
-                  <img
-                    src="{{ product.featured_image | image_url: width: 600 }}"
-                    class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
-                    height="800"
-                    width="600"
-                    alt="Ürün görseli: {{ product.title | escape }}"
-                    loading="lazy"
-                  >
-                  {% if product.images[1] %}
-                    <img
-                      src="{{ product.images[1] | image_url: width: 600 }}"
-                      class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                      height="800"
-                      width="600"
-                      alt="Ürün görseli: {{ product.title | escape }}"
-                      loading="lazy"
-                    >
-                  {% endif %}
-                </a>
-
-                {% comment %} Sepete Ekle {% endcomment %}
-                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
-                  <button
-                    type="button"
-                    onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-                    class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none font-medium"
-                  >
-                    {{ 'products.product.add_to_cart' | t }}
-                  </button>
-                </div>
-              </div>
-
-              <div class="mt-4 text-center px-2">
-                <a
-                  href="{{ product.url }}"
-                  class="text-primary uppercase tracking-wider block mb-1 hover:text-secondary transition-all text-sm"
-                >
-                  <span>{{ product.title }}</span>
-                </a>
-                <div class="flex justify-center items-center gap-2">
-                  {% if product.compare_at_price > product.price %}
-                    <span class="text-gray-500 line-through text-[12px]">{{ product.compare_at_price | money }}</span>
-                  {% endif %}
-                  <span class="text-primary text-[14px] font-bold">{{ product.price | money }}</span>
-                </div>
-              </div>
-            </div>
-          {% endif %}
+          <div class="swiper-slide h-auto" {{ block.shopify_attributes }}>
+            {% comment %}
+              TASARIM DEĞİŞİKLİĞİ YAPILMADI:
+              Sadece mevcut HTML bloğu yerine merkezi product-card snippet'ı eklendi.
+            {% endcomment %}
+            {% render 'product-card', product: product %}
+          </div>
         {% endfor %}
       </div>
     </div>
@@ -179,10 +102,6 @@
 </section>
 
 <script>
-  /**
-   * Luvia Era - Product Slider Logic
-   * Konsol hatalarını ve kaybolma sorunlarını gideren kapsüllenmiş yapı.
-   */
   (function () {
     const initSlider = () => {
       const swiperSelector = '.featured-swiper-{{ section.id }}';
@@ -190,12 +109,10 @@
 
       if (!container) return;
 
-      // Önceki Swiper örneği varsa temizle (Shopify Editor çakışmasını önler)
       if (container.swiper) {
         container.swiper.destroy(true, true);
       }
 
-      // Dinamik slide ve görünüm kontrolü
       const totalSlides = container.querySelectorAll('.swiper-slide').length;
       const desktopView = parseInt('{{ section.settings.slides_per_view | default: 4 }}');
 
@@ -204,7 +121,6 @@
         spaceBetween: 15,
         grabCursor: true,
         watchOverflow: true,
-        // KRİTİK: Konsol hatasını önlemek için loop kontrolü
         loop: totalSlides > 2,
         navigation: {
           nextEl: '.swiper-next-{{ section.id }}',
@@ -230,7 +146,6 @@
       });
     };
 
-    // Sayfa yüklendiğinde ve Shopify Editor'de değişiklik yapıldığında çalıştır
     if (document.readyState === 'complete') {
       initSlider();
     } else {
@@ -239,7 +154,6 @@
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  // Global Sepete Ekleme Fonksiyonu (Eğer tema dosyasında yoksa)
   if (typeof handleFeaturedAddToCart !== 'function') {
     window.handleFeaturedAddToCart = function (e, variantId) {
       const btn = e.currentTarget;
