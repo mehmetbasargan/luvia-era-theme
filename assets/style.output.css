@@ -2870,6 +2870,10 @@ blockquote {
   border-color: var(--color-primary);
 }
 
+.hover\:border-secondary:hover {
+  border-color: var(--color-secondary);
+}
+
 .hover\:bg-black:hover {
   background-color: var(--color-black);
 }
