@@ -1016,6 +1016,11 @@ blockquote {
   grid-column: span 8 / span 8;
 }
 
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -1026,11 +1031,6 @@ blockquote {
   margin-right: 1.5rem;
 }
 
-.mx-8 {
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1039,11 +1039,6 @@ blockquote {
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
-
-.mx-10 {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
 }
 
 .mb-1 {
@@ -1892,10 +1887,6 @@ blockquote {
 
 .overflow-y-auto {
   overflow-y: auto;
-}
-
-.overflow-x-hidden {
-  overflow-x: hidden;
 }
 
 .truncate {
@@ -3089,11 +3080,6 @@ blockquote {
 }
 
 @media (min-width: 768px) {
-  .md\:mx-16 {
-    margin-left: 4rem;
-    margin-right: 4rem;
-  }
-
   .md\:mx-20 {
     margin-left: 5rem;
     margin-right: 5rem;
@@ -3159,8 +3145,8 @@ blockquote {
     width: 4rem;
   }
 
-  .md\:w-36 {
-    width: 9rem;
+  .md\:w-40 {
+    width: 10rem;
   }
 
   .md\:w-48 {
@@ -3189,10 +3175,6 @@ blockquote {
 
   .md\:w-full {
     width: 100%;
-  }
-
-  .md\:w-40 {
-    width: 10rem;
   }
 
   .md\:max-w-lg {
