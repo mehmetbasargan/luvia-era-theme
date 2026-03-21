@@ -30,28 +30,38 @@
 
   <div class="flex flex-wrap gallery-wrapper">
     {% for block in section.blocks %}
+      {%- liquid
+        if block.settings.image != blank
+          assign thumb_url = block.settings.image | image_url: width: 800
+          assign full_url = block.settings.image | image_url: width: 2000
+        else
+          # Yer tutucu modunda hem küçük hem büyük resim AYNI olsun
+          assign thumb_url = 'https://cdn.shopify.com/s/images/themes/product-1.png'
+          assign full_url = 'https://cdn.shopify.com/s/images/themes/product-1.png'
+        endif
+      -%}
+
       <div
-        class="w-1/2 md:w-1/4 aspect-[3/2] relative group overflow-hidden cursor-pointer luvia-gallery-item"
+        class="w-1/2 md:w-1/4 aspect-[3/2] relative group overflow-hidden cursor-pointer luvia-gallery-item flex items-center justify-center bg-[#f3f3f3]"
         {{ block.shopify_attributes }}
         onclick="openLuviaGallery(this, {{ forloop.index0 }})"
-        data-full-src="{{ block.settings.image | image_url: width: 2000 }}"
+        data-full-src="{{ full_url }}"
       >
-        {% if block.settings.image != blank %}
-          <img
-            src="{{ block.settings.image | image_url: width: 800 }}"
-            alt="{{ block.settings.image.alt | default: 'Gallery Image' }}"
-            height="600"
-            width="800"
-            class="w-full h-full object-cover object-top transition-transform duration-[1500ms] ease-out group-hover:scale-110"
-            loading="lazy"
-          >
-        {% else %}
-          <div class="w-full h-full bg-custombg flex items-center justify-center">
-            {{ 'image' | placeholder_svg_tag: 'w-20 h-20 opacity-20' }}
-          </div>
-        {% endif %}
+        {% comment %}
+          Görsel: 'object-cover' kutuyu doldurur, 'object-center' ise tam ortalar.
+          'absolute inset-0' görselin kutunun her köşesine yapışmasını sağlar.
+        {% endcomment %}
+        <img
+          src="{{ thumb_url }}"
+          alt="Gallery Image"
+          class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[1500ms] ease-out group-hover:scale-110 {% if block.settings.image == blank %}opacity-30{% endif %}"
+          loading="lazy"
+          width="800"
+          height="600"
+        >
 
-        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1500ms] ease-out flex items-center justify-center z-20 bg-black/50">
+        {% comment %} Hover Efekti ve İkon (Her zaman tam merkezde) {% endcomment %}
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1500ms] ease-out flex items-center justify-center z-20 bg-black/40">
           <span class="flex text-primary bg-white md:h-16 md:w-16 h-12 w-12 rounded-full items-center justify-center transition-all duration-[1500ms] transform scale-50 group-hover:scale-100">
             {% render 'icon-zoom-pan' %}
           </span>

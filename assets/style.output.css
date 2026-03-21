@@ -2182,6 +2182,11 @@ blockquote {
      object-position: top;
 }
 
+.object-center {
+  -o-object-position: center;
+     object-position: center;
+}
+
 .p-0 {
   padding: 0px;
 }
