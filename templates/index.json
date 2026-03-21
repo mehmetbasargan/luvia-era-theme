@@ -285,6 +285,35 @@
         "section_bg_color": "#f9f9f9",
         "remove_bg": false
       }
+    },
+    "image_with_text_multi_Kt36ED": {
+      "type": "image-with-text-multi",
+      "blocks": {
+        "image_block_8PKWBA": {
+          "type": "image_block",
+          "settings": {
+            "image_placement": "left",
+            "subheading": "The Vision",
+            "title": "Timeless Design Philosophy",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_block_8PKWBA"
+      ],
+      "name": "Image with Text Multi",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
@@ -296,6 +325,7 @@
     "collection_list_3fMXPn",
     "newsletter_banner_rQGEgG",
     "featured_blog_carousel_mxUCVn",
-    "featured_products_qN9dm6"
+    "featured_products_qN9dm6",
+    "image_with_text_multi_Kt36ED"
   ]
 }
