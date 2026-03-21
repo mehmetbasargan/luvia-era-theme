@@ -121,12 +121,28 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "statement_banner_kBTgkP": {
+      "type": "statement-banner",
+      "name": "Statement Banner",
+      "settings": {
+        "overlay_opacity": 40,
+        "title": "THE ART OF ELEGANCE",
+        "text": "<p>Discover our curated collection of timeless pieces.</p>",
+        "button_label": "Shop The Collection",
+        "button_link": "",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_9WN3Qw",
     "marquee_logo_rbndHM",
-    "featured_products_TUxrEx"
+    "featured_products_TUxrEx",
+    "statement_banner_kBTgkP"
   ]
 }
