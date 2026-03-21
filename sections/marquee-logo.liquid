@@ -67,10 +67,10 @@
            ELEGANT PLACEHOLDER MODE: 
            Shows 6 stylish dummy logos if no blocks are added.
         {% endcomment %}
-        {%- assign dummy_logos = "VOGUE, BAZAAR, ELLE, FORBES, GQ, NY TIMES" | split: ", " -%}
+        {%- assign dummy_logos = "Logo, Logo, Logo, Logo, Logo, Logo" | split: ", " -%}
         {% for logo_name in dummy_logos %}
           <div class="mx-10 md:mx-20 w-24 md:w-40 flex-shrink-0 opacity-20 grayscale flex items-center justify-center">
-            <span class="text-lg md:text-2xl font-serif italic tracking-tighter">{{ logo_name }}</span>
+            <span class="text-lg md:text-2xl font-black font-josefin italic uppercase tracking-tighter">{{ logo_name }}</span>
           </div>
         {% endfor %}
       {% endif %}
