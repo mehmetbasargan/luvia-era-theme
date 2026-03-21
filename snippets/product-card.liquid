@@ -1,74 +1,66 @@
 {% comment %}
-  Luvia Era Product Card Snippet
-  Updated: Fixed empty image placeholder & English defaults
+  Luvia Era Product Card - Fixed Hover & Placeholder
 {% endcomment %}
 
 <div class="group flex flex-col h-full bg-white overflow-hidden relative">
   <div class="relative aspect-[3/4] overflow-hidden bg-gray-50">
     {% comment %} Sale Badge {% endcomment %}
     {% if product.compare_at_price > product.price %}
-      <span class="absolute top-3 left-3 z-10 bg-primary text-white font-light text-[10px] md:text-[12px] px-2 py-1 tracking-widest uppercase">
+      <span class="absolute top-3 left-3 z-20 bg-primary text-white font-light text-[10px] md:text-[12px] px-2 py-1 tracking-widest uppercase">
         {{ 'products.product.on_sale' | t | default: 'Sale' }}
       </span>
     {% endif %}
 
-    {% comment %} Wishlist Button {% endcomment %}
-    <div class="absolute top-3 right-3 z-20">
+    {% comment %} Wishlist {% endcomment %}
+    <div class="absolute top-3 right-3 z-30">
       <button
         type="button"
-        class="custom-wishlist-btn flex items-center justify-center w-8 h-8 md:w-9 md:h-9 bg-white rounded-full shadow-sm hover:scale-110 transition-all duration-300 cursor-pointer p-1"
-        data-product-id="{{ product.id }}"
-        aria-label="Add to wishlist"
+        class="flex items-center justify-center w-9 h-9 bg-white rounded-full shadow-sm hover:scale-110 transition-all duration-300 cursor-pointer p-1"
         onclick="LuviaWishlist.toggle('{{ product.id }}')"
       >
-        <svg
-          class="text-primary w-4 h-4 md:w-5 md:h-5 transition-all duration-300 pointer-events-none"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg class="text-primary w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
         </svg>
       </button>
     </div>
 
-    {% comment %} Product Image / Placeholder Logic {% endcomment %}
-    <a href="{{ product.url | default: '#' }}" class="block h-full w-full z-10" aria-label="View product details">
+    <a href="{{ product.url | default: '#' }}" class="block h-full w-full relative z-10">
       {% if product.featured_image != blank %}
+        {% comment %} BİRİNCİ GÖRSEL {% endcomment %}
         <img
           src="{{ product.featured_image | image_url: width: 600 }}"
           alt="{{ product.title | escape }}"
           loading="lazy"
-          width="400"
-          height="533"
-          class="w-full h-full object-cover transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+          height="600"
+          width="600"
+          class="w-full h-full object-cover transition-opacity duration-700 ease-in-out {% if product.images[1] %}group-hover:opacity-0{% endif %}"
         >
+
+        {% comment %} İKİNCİ GÖRSEL (HOVERDA GELEN) {% endcomment %}
         {% if product.images[1] %}
           <img
             src="{{ product.images[1] | image_url: width: 600 }}"
             alt="{{ product.title | escape }}"
             loading="lazy"
-            width="400"
-            height="533"
-            class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+            height="600"
+            width="600"
+            class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out"
           >
         {% endif %}
+
       {% else %}
-        {% comment %} SHOW THIS IF NO IMAGE EXISTS {% endcomment %}
-        <div class="w-full h-full bg-gray-100 flex items-center justify-center opacity-40 group-hover:scale-105 transition-transform duration-700">
+        {% comment %} GÖRSEL HİÇ YOKSA (PLACEHOLDER) {% endcomment %}
+        <div class="w-full h-full bg-gray-100 flex items-center justify-center opacity-40">
           {{ 'product-1' | placeholder_svg_tag: 'w-full h-full' }}
         </div>
       {% endif %}
     </a>
 
-    {% comment %} Add to Cart Button (Desktop Hover) {% endcomment %}
-    <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
+    {% comment %} Sepete Ekle Butonu {% endcomment %}
+    <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 hidden md:block z-40">
       <button
         type="button"
-        {% if product.available %}
-          onclick="handleAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-        {% endif %}
-        class="w-full bg-primary text-white py-3 text-[12px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer"
+        class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer"
         {% unless product.available %}
           disabled
         {% endunless %}
@@ -82,24 +74,19 @@
     </div>
   </div>
 
-  {% comment %} Info Section {% endcomment %}
-  <div class="pt-4 pb-2 flex flex-col items-center px-3">
+  {% comment %} Alt Bilgi {% endcomment %}
+  <div class="pt-5 pb-3 flex flex-col items-center px-3">
     <a
       href="{{ product.url | default: '#' }}"
-      class="text-primary text-[13px] md:text-[14px] hover:text-secondary transition-colors uppercase text-center tracking-wider line-clamp-1"
+      class="text-primary text-[14px] hover:text-secondary transition-colors uppercase tracking-widest text-center"
     >
-      {{ product.title | default: 'Sample Premium Product' }}
+      {{ product.title | default: 'Premium Product Item' }}
     </a>
-
     <div class="mt-2 flex items-center gap-2">
       {% if product.compare_at_price > product.price %}
         <span class="text-gray-400 line-through text-[12px]">{{ product.compare_at_price | money }}</span>
-        <span class="text-primary text-[13px] md:text-[14px] font-medium">{{ product.price | money }}</span>
-      {% elsif product.price %}
-        <span class="text-primary text-[13px] md:text-[14px] font-medium">{{ product.price | money }}</span>
-      {% else %}
-        <span class="text-primary text-[13px] md:text-[14px] font-medium">$99.00</span>
       {% endif %}
+      <span class="text-primary text-[14px] font-medium">{{ product.price | money | default: '$0.00' }}</span>
     </div>
   </div>
 </div>
