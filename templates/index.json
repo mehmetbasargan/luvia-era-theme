@@ -381,66 +381,6 @@
     },
     "full_width_gallery_JxjmU9": {
       "type": "full-width-gallery",
-      "blocks": {
-        "image_iCE6RL": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p6-1.jpg"
-          }
-        },
-        "image_mtYpLC": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p4.jpg"
-          }
-        },
-        "image_UWqxhf": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p3.jpg"
-          }
-        },
-        "image_VR8X6K": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p1.jpg"
-          }
-        },
-        "image_9Pyqew": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p7-4.jpg"
-          }
-        },
-        "image_mtVniL": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p5-2.jpg"
-          }
-        },
-        "image_4bfMDX": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p3-1.jpg"
-          }
-        },
-        "image_GHKXUz": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p4-1.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "image_iCE6RL",
-        "image_mtYpLC",
-        "image_UWqxhf",
-        "image_VR8X6K",
-        "image_9Pyqew",
-        "image_mtVniL",
-        "image_4bfMDX",
-        "image_GHKXUz"
-      ],
       "name": "Luvia Full Gallery",
       "settings": {
         "title": "Follow Era",
