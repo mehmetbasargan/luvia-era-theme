@@ -1727,6 +1727,10 @@ blockquote {
   align-items: center;
 }
 
+.items-stretch {
+  align-items: stretch;
+}
+
 .justify-start {
   justify-content: flex-start;
 }

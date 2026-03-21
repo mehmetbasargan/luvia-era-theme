@@ -26,7 +26,7 @@
   .featured-swiper-{{ section.id }} {
     width: 100%;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
   }
 
   .featured-swiper-{{ section.id }}.swiper-initialized {
@@ -40,27 +40,23 @@
 >
   {% comment %} SENİN ORİJİNAL CONTAINER YAPIN {% endcomment %}
   <div class="container mx-auto overflow-hidden">
-    {% comment %} Header and Navigation Area {% endcomment %}
+    {% comment %} Header and Navigation {% endcomment %}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 px-4 md:px-0">
       <div>
-        <h2 class="text-secondary text-2xl md:text-3xl font-bold">{{ section.settings.section_title }}</h2>
-        <p class="text-primary mt-2 -tracking-tight opacity-80">
+        <h2 class="text-secondary text-2xl md:text-3xl font-bold uppercase tracking-tight">
+          {{ section.settings.section_title }}
+        </h2>
+        <p class="text-primary mt-2 opacity-80 italic">
           {{ section.settings.section_subtitle }}
         </p>
       </div>
 
       <div class="flex items-center gap-6 mt-6 md:mt-0">
         <div class="flex gap-4">
-          <button
-            class="swiper-prev-{{ section.id }} cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition-all duration-300"
-            aria-label="Previous slide"
-          >
+          <button class="swiper-prev-{{ section.id }} border border-primary p-2 hover:bg-primary hover:text-white transition-all cursor-pointer">
             {% render 'icon-chevron-left' %}
           </button>
-          <button
-            class="swiper-next-{{ section.id }} cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition-all duration-300"
-            aria-label="Next slide"
-          >
+          <button class="swiper-next-{{ section.id }} border border-primary p-2 hover:bg-primary hover:text-white transition-all cursor-pointer">
             {% render 'icon-chevron-right' %}
           </button>
         </div>
@@ -68,7 +64,7 @@
         {% if section.settings.button_url %}
           <a
             href="{{ section.settings.button_url }}"
-            class="text-primary text-sm hover:text-secondary transition-all uppercase tracking-widest border-b border-line pb-1"
+            class="text-primary text-sm uppercase tracking-widest border-b border-gray-200 pb-1 hover:border-primary transition-all"
           >
             {{ section.settings.button_text }}
           </a>
@@ -76,19 +72,30 @@
       </div>
     </div>
 
-    {% comment %} Swiper Container - !overflow-visible özelliğini ve senin paddinglerini korudum {% endcomment %}
+    {% comment %} Swiper Container {% endcomment %}
     <div class="swiper featured-swiper-{{ section.id }} !overflow-visible px-4 md:px-0">
-      <div class="swiper-wrapper">
-        {% for block in section.blocks %}
-          {%- assign product = all_products[block.settings.product] -%}
-          <div class="swiper-slide group relative flex flex-col h-full" {{ block.shopify_attributes }}>
-            {% comment %}
-              Senin tasarımın olan product-card.liquid dosyasını render ediyoruz.
-              Tasarımın bozulmaması için tüm sınıfları oradan çekiyor.
-            {% endcomment %}
-            {% render 'product-card', product: product %}
-          </div>
-        {% endfor %}
+      <div class="swiper-wrapper flex items-stretch">
+        {%- if section.blocks.size > 0 -%}
+          {% for block in section.blocks %}
+            {%- assign product_handle = block.settings.product -%}
+            {%- assign product = all_products[product_handle] -%}
+
+            <div class="swiper-slide h-auto" {{ block.shopify_attributes }}>
+              {% comment %}
+                Product değişkeni boş olsa bile product-card.liquid
+                dosyan içindeki 'else' (yer tutucu) kısmını tetikler.
+              {% endcomment %}
+              {% render 'product-card', product: product %}
+            </div>
+          {% endfor %}
+        {%- else -%}
+          {% comment %} Hiç blok yoksa test için 4 adet şık yer tutucu basar {% endcomment %}
+          {%- for i in (1..4) -%}
+            <div class="swiper-slide h-auto">
+              {% render 'product-card', product: null %}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -99,21 +106,18 @@
     const initSlider = () => {
       const swiperSelector = '.featured-swiper-{{ section.id }}';
       const container = document.querySelector(swiperSelector);
-      if (!container) return;
+      if (!container || typeof Swiper === 'undefined') return;
 
-      if (container.swiper) {
-        container.swiper.destroy(true, true);
-      }
+      if (container.swiper) container.swiper.destroy(true, true);
 
       const totalSlides = container.querySelectorAll('.swiper-slide').length;
       const desktopView = parseInt('{{ section.settings.slides_per_view | default: 4 }}');
 
       new Swiper(swiperSelector, {
-        slidesPerView: 2,
+        slidesPerView: 1.2,
         spaceBetween: 15,
         grabCursor: true,
         watchOverflow: true,
-        loop: totalSlides > 2,
         navigation: {
           nextEl: '.swiper-next-{{ section.id }}',
           prevEl: '.swiper-prev-{{ section.id }}',
@@ -122,12 +126,10 @@
           768: {
             slidesPerView: 3,
             spaceBetween: 20,
-            loop: totalSlides > 3,
           },
           1024: {
             slidesPerView: desktopView,
             spaceBetween: 30,
-            loop: totalSlides > desktopView,
           },
         },
         on: {
@@ -138,11 +140,9 @@
       });
     };
 
-    if (document.readyState === 'complete') {
-      initSlider();
-    } else {
-      window.addEventListener('load', initSlider);
-    }
+    document.addEventListener('DOMContentLoaded', initSlider);
     document.addEventListener('shopify:section:load', initSlider);
+    // Editor için garantiye alalım
+    window.addEventListener('load', initSlider);
   })();
 </script>
