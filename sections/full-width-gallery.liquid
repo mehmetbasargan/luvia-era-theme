@@ -30,27 +30,15 @@
 
   <div class="flex flex-wrap gallery-wrapper">
     {% for block in section.blocks %}
-      {%- liquid
-        assign has_image = false
-        if block.settings.image != blank
-          assign has_image = true
-          assign img_url = block.settings.image | image_url: width: 800
-          assign full_img_url = block.settings.image | image_url: width: 2000
-        else
-          # Görsel yoksa Shopify yer tutucu URL'sini oluşturuyoruz
-          assign full_img_url = 'image' | placeholder_svg_tag | escape
-        endif
-      -%}
-
       <div
         class="w-1/2 md:w-1/4 aspect-[3/2] relative group overflow-hidden cursor-pointer luvia-gallery-item"
         {{ block.shopify_attributes }}
         onclick="openLuviaGallery(this, {{ forloop.index0 }})"
-        data-full-src="{% if has_image %}{{ full_img_url }}{% else %}https://via.placeholder.com/2000x1333/f3f3f3/cccccc?text=Gallery+Image{% endif %}"
+        data-full-src="{{ block.settings.image | image_url: width: 2000 }}"
       >
-        {% if has_image %}
+        {% if block.settings.image != blank %}
           <img
-            src="{{ img_url }}"
+            src="{{ block.settings.image | image_url: width: 800 }}"
             alt="{{ block.settings.image.alt | default: 'Gallery Image' }}"
             height="600"
             width="800"
@@ -58,13 +46,11 @@
             loading="lazy"
           >
         {% else %}
-          {% comment %} BURASI YER TUTUCU ALANI - TASARIMI BOZMAZ {% endcomment %}
-          <div class="w-full h-full bg-[#f3f3f3] flex items-center justify-center transition-transform duration-[1500ms] ease-out group-hover:scale-110">
+          <div class="w-full h-full bg-custombg flex items-center justify-center">
             {{ 'image' | placeholder_svg_tag: 'w-20 h-20 opacity-20' }}
           </div>
         {% endif %}
 
-        {% comment %} Hover Efekti (Yer tutucu olsa da çalışır) {% endcomment %}
         <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1500ms] ease-out flex items-center justify-center z-20 bg-black/50">
           <span class="flex text-primary bg-white md:h-16 md:w-16 h-12 w-12 rounded-full items-center justify-center transition-all duration-[1500ms] transform scale-50 group-hover:scale-100">
             {% render 'icon-zoom-pan' %}

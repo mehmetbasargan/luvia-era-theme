@@ -2136,6 +2136,11 @@ blockquote {
   background-color: rgb(243 243 243 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\#eeeeee\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 238 238 / var(--tw-bg-opacity, 1));
+}
+
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -2156,6 +2161,10 @@ blockquote {
 
 .fill-gray-300 {
   fill: #d1d5db;
+}
+
+.fill-gray-400 {
+  fill: #9ca3af;
 }
 
 .object-contain {
