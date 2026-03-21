@@ -487,6 +487,60 @@
         "section_bg_color": "#ffffff",
         "remove_bg": true
       }
+    },
+    "trust_icons_AQpXj8": {
+      "type": "trust-icons",
+      "blocks": {
+        "icon_block_aB36M4": {
+          "type": "icon_block",
+          "settings": {
+            "custom_svg": "",
+            "title": "World Wide Shipping",
+            "subtitle": "Premium delivery"
+          }
+        },
+        "icon_block_FEB8GB": {
+          "type": "icon_block",
+          "settings": {
+            "custom_svg": "",
+            "title": "Secure Payment",
+            "subtitle": "100% Protected"
+          }
+        },
+        "icon_block_aAeNxq": {
+          "type": "icon_block",
+          "settings": {
+            "custom_svg": "",
+            "title": "Eco Friendly",
+            "subtitle": "Sustainable Fashion"
+          }
+        },
+        "icon_block_NfwFPY": {
+          "type": "icon_block",
+          "settings": {
+            "custom_svg": "",
+            "title": "Customer Care",
+            "subtitle": "24/7 Support"
+          }
+        }
+      },
+      "block_order": [
+        "icon_block_aB36M4",
+        "icon_block_FEB8GB",
+        "icon_block_aAeNxq",
+        "icon_block_NfwFPY"
+      ],
+      "name": "Trust Icons",
+      "settings": {
+        "header_opacity": 100,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": true
+      }
     }
   },
   "order": [
@@ -502,6 +556,7 @@
     "image_with_text_multi_Kt36ED",
     "featured_products_slider_4zxdmN",
     "full_width_gallery_JxjmU9",
-    "shoppable_image_UT6HE7"
+    "shoppable_image_UT6HE7",
+    "trust_icons_AQpXj8"
   ]
 }
