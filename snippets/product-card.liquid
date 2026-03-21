@@ -79,6 +79,7 @@
         {% for block in section.blocks %}
           {%- assign product = all_products[block.settings.product] -%}
           <div class="swiper-slide h-auto" {{ block.shopify_attributes }}>
+            {% comment %} SENİN HAZIR KART TASARIMIN {% endcomment %}
             {% render 'product-card', product: product %}
           </div>
         {% endfor %}
@@ -129,7 +130,7 @@
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  // SEPETE EKLEME, DRAWER VE HEADER GÜNCELLEME
+  // KRİTİK DÜZELTME: Fonksiyon ismini product-card içindeki onclick="handleAddToCart" ile eşitledik.
   if (typeof handleAddToCart !== 'function') {
     window.handleAddToCart = function (e, variantId) {
       e.preventDefault();
@@ -141,38 +142,19 @@
       btn.innerText = '...';
       btn.disabled = true;
 
-      let formData = {
-        items: [{ id: variantId, quantity: 1 }],
-        sections: 'cart-drawer,cart-icon-bubble,header',
-        sections_url: window.location.pathname,
-      };
-
       fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ id: variantId, quantity: 1 }),
       })
         .then((res) => res.json())
-        .then((response) => {
-          if (response.status == 422) {
+        .then((data) => {
+          if (data.status == 422) {
             btn.innerText = 'LIMIT REACHED';
           } else {
             btn.innerText = 'ADDED';
-
-            // 1. Header sepet sayısını güncelle
-            if (response.sections && response.sections['cart-icon-bubble']) {
-              const bubbles = document.querySelectorAll('#cart-icon-bubble');
-              bubbles.forEach((b) => (b.innerHTML = response.sections['cart-icon-bubble']));
-            }
-
-            // 2. Çekmeceyi (Drawer) güncelle ve aç
-            const cartDrawer = document.querySelector('cart-drawer');
-            if (cartDrawer) {
-              if (response.sections['cart-drawer']) cartDrawer.renderContents(response);
-              if (typeof cartDrawer.open === 'function') cartDrawer.open();
-            } else if (typeof openAndRefreshCart === 'function') {
-              openAndRefreshCart();
-            }
+            // Eğer sepet çekmecesi fonksiyonun varsa burada tetikle:
+            if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
           }
           setTimeout(() => {
             btn.innerHTML = originalText;
@@ -180,8 +162,7 @@
             btn.classList.remove('loading');
           }, 2000);
         })
-        .catch((err) => {
-          console.error('Cart Error:', err);
+        .catch(() => {
           btn.innerText = 'ERROR';
           setTimeout(() => {
             btn.innerHTML = originalText;
@@ -191,18 +172,6 @@
         });
     };
   }
-
-  // WISHLIST DÜZELTMESİ: Global bir dinleyici ile handle'ı yakalayalım
-  document.addEventListener('click', function (e) {
-    const wishlistBtn = e.target.closest('.custom-wishlist-btn');
-    if (!wishlistBtn) return;
-
-    const handle = wishlistBtn.getAttribute('data-product-handle');
-    if (handle && window.LuviaWishlist) {
-      // Wishlist sayfasına gitmesi için handle üzerinden toggle yapıyoruz
-      window.LuviaWishlist.toggle(e, handle);
-    }
-  });
 </script>
 
 {% schema %}
