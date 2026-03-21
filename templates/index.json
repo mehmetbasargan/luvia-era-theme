@@ -140,6 +140,18 @@
     "collection_list_3fMXPn": {
       "type": "collection-list",
       "blocks": {
+        "collection_Hicqnr": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_XMxyid": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
         "collection_QynLkG": {
           "type": "collection",
           "settings": {
@@ -160,6 +172,8 @@
         }
       },
       "block_order": [
+        "collection_Hicqnr",
+        "collection_XMxyid",
         "collection_QynLkG",
         "collection_mA6cWi",
         "collection_rQV7dd"
