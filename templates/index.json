@@ -210,6 +210,15 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "newsletter_banner_rQGEgG": {
+      "type": "newsletter-banner",
+      "name": "Newsletter Banner",
+      "settings": {
+        "overlay_opacity": 40,
+        "title": "Luvia Privileges",
+        "subtext": "Be the first to know about new collections and exclusive events."
+      }
     }
   },
   "order": [
@@ -218,6 +227,7 @@
     "marquee_logo_rbndHM",
     "featured_products_TUxrEx",
     "statement_banner_kBTgkP",
-    "collection_list_3fMXPn"
+    "collection_list_3fMXPn",
+    "newsletter_banner_rQGEgG"
   ]
 }
