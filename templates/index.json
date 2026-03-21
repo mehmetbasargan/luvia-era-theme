@@ -541,6 +541,47 @@
         "section_bg_color": "#ffffff",
         "remove_bg": true
       }
+    },
+    "image_with_text_multi_9AHKEL": {
+      "type": "image-with-text-multi",
+      "blocks": {
+        "image_block_fxybLV": {
+          "type": "image_block",
+          "settings": {
+            "image_placement": "right",
+            "subheading": "The Process",
+            "title": "Ethical Craftsmanship",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": ""
+          }
+        },
+        "image_block_XDFec7": {
+          "type": "image_block",
+          "settings": {
+            "image_placement": "left",
+            "subheading": "The Vision",
+            "title": "Timeless Design Philosophy",
+            "text": "<p>Our jewelry is more than just an accessory. It is a reflection of your unique journey and timeless elegance.</p>",
+            "button_label": "Discover More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_block_fxybLV",
+        "image_block_XDFec7"
+      ],
+      "name": "Image with Text Multi",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
@@ -557,6 +598,7 @@
     "featured_products_slider_4zxdmN",
     "full_width_gallery_JxjmU9",
     "shoppable_image_UT6HE7",
-    "trust_icons_AQpXj8"
+    "trust_icons_AQpXj8",
+    "image_with_text_multi_9AHKEL"
   ]
 }
