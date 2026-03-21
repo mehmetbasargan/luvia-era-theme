@@ -19,18 +19,31 @@
         <div class="border-t border-line">
           {% for item in cart.items %}
             <div class="flex flex-col md:flex-row gap-6 py-8 border-b border-line items-start md:items-center animate-fadeIn">
-              <div class="w-28 h-36 shrink-0 bg-custombg overflow-hidden">
-                <a href="{{ item.url }}" aria-label="View {{ item.product.title | escape }} product details">
-                  <img
-                    src="{{ item.image | image_url: width: 400 }}"
-                    alt="{{ item.title | escape }}"
-                    width="400"
-                    height="400"
-                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                    loading="eager"
-                  >
+              {% comment %} Görsel Alanı Başlangıcı {% endcomment %}
+              <div class="w-28 h-36 shrink-0 bg-custombg overflow-hidden flex items-center justify-center border border-line/10">
+                <a
+                  href="{{ item.url }}"
+                  aria-label="View {{ item.product.title | escape }} product details"
+                  class="w-full h-full block"
+                >
+                  {% if item.image != blank %}
+                    <img
+                      src="{{ item.image | image_url: width: 400 }}"
+                      alt="{{ item.title | escape }}"
+                      width="400"
+                      height="400"
+                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                      loading="eager"
+                    >
+                  {% else %}
+                    {% comment %} Görsel yoksa burası çalışır {% endcomment %}
+                    <div class="w-full h-full bg-gray-100 flex items-center justify-center opacity-60">
+                      {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+                    </div>
+                  {% endif %}
                 </a>
               </div>
+              {% comment %} Görsel Alanı Bitiş {% endcomment %}
 
               <div class="grow space-y-2 w-full md:w-auto">
                 <div class="flex justify-between items-start">
