@@ -140,6 +140,24 @@
     "collection_list_3fMXPn": {
       "type": "collection-list",
       "blocks": {
+        "collection_BK84hj": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_4mPLGq": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_UBcQT3": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
         "collection_Hicqnr": {
           "type": "collection",
           "settings": {
@@ -172,6 +190,9 @@
         }
       },
       "block_order": [
+        "collection_BK84hj",
+        "collection_4mPLGq",
+        "collection_UBcQT3",
         "collection_Hicqnr",
         "collection_XMxyid",
         "collection_QynLkG",
