@@ -381,6 +381,17 @@
     },
     "full_width_gallery_JxjmU9": {
       "type": "full-width-gallery",
+      "blocks": {
+        "image_fp37Tw": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p7-3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_fp37Tw"
+      ],
       "name": "Luvia Full Gallery",
       "settings": {
         "title": "Follow Era",
