@@ -310,7 +310,7 @@
         "padding_bottom": 36,
         "margin_top": 0,
         "margin_bottom": 0,
-        "use_custom_bg": false,
+        "use_custom_bg": true,
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
