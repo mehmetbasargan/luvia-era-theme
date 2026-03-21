@@ -382,10 +382,6 @@
     "full_width_gallery_JxjmU9": {
       "type": "full-width-gallery",
       "blocks": {
-        "image_afP9Yt": {
-          "type": "image",
-          "settings": {}
-        },
         "image_btnhNw": {
           "type": "image",
           "settings": {}
@@ -422,7 +418,6 @@
         }
       },
       "block_order": [
-        "image_afP9Yt",
         "image_btnhNw",
         "image_A4tFBg",
         "image_cP9hUr",
