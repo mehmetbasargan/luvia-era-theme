@@ -582,6 +582,52 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "shoppable_image_V6G9yN": {
+      "type": "shoppable-image",
+      "blocks": {
+        "product_point_6NGdiV": {
+          "type": "product_point",
+          "settings": {
+            "product": "",
+            "top_position": 71,
+            "left_position": 24
+          }
+        },
+        "product_point_ckweWT": {
+          "type": "product_point",
+          "settings": {
+            "product": "",
+            "top_position": 27,
+            "left_position": 68
+          }
+        },
+        "product_point_NETdmn": {
+          "type": "product_point",
+          "settings": {
+            "product": "",
+            "top_position": 50,
+            "left_position": 50
+          }
+        }
+      },
+      "block_order": [
+        "product_point_6NGdiV",
+        "product_point_ckweWT",
+        "product_point_NETdmn"
+      ],
+      "name": "Shoppable Image",
+      "settings": {
+        "title": "Curated Collections",
+        "subtitle": "Touch the details and discover the artistry behind every piece.",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
@@ -599,6 +645,7 @@
     "full_width_gallery_JxjmU9",
     "shoppable_image_UT6HE7",
     "trust_icons_AQpXj8",
-    "image_with_text_multi_9AHKEL"
+    "image_with_text_multi_9AHKEL",
+    "shoppable_image_V6G9yN"
   ]
 }
