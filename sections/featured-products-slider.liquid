@@ -102,12 +102,8 @@
     const initSlider = () => {
       const swiperSelector = '.featured-swiper-{{ section.id }}';
       const container = document.querySelector(swiperSelector);
-
       if (!container) return;
-
-      if (container.swiper) {
-        container.swiper.destroy(true, true);
-      }
+      if (container.swiper) container.swiper.destroy(true, true);
 
       const totalSlides = container.querySelectorAll('.swiper-slide').length;
       const desktopView = parseInt('{{ section.settings.slides_per_view | default: 4 }}');
@@ -123,16 +119,8 @@
           prevEl: '.swiper-prev-{{ section.id }}',
         },
         breakpoints: {
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-            loop: totalSlides > 3,
-          },
-          1024: {
-            slidesPerView: desktopView,
-            spaceBetween: 30,
-            loop: totalSlides > desktopView,
-          },
+          768: { slidesPerView: 3, spaceBetween: 20, loop: totalSlides > 3 },
+          1024: { slidesPerView: desktopView, spaceBetween: 30, loop: totalSlides > desktopView },
         },
         on: {
           init: function () {
@@ -142,15 +130,12 @@
       });
     };
 
-    if (document.readyState === 'complete') {
-      initSlider();
-    } else {
-      window.addEventListener('load', initSlider);
-    }
+    if (document.readyState === 'complete') initSlider();
+    else window.addEventListener('load', initSlider);
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  // SEPETE EKLEME VE ÇEKMECEYİ TETİKLEME MANTIĞI
+  // SEPET VE HEADER GÜNCELLEME MANTIĞI
   if (typeof handleAddToCart !== 'function') {
     window.handleAddToCart = function (e, variantId) {
       const btn = e.currentTarget;
@@ -161,16 +146,10 @@
       btn.innerText = '...';
       btn.disabled = true;
 
-      // Sepete ekleme verisi
+      // Header ve Drawer'ı güncellemek için gerekli bölümleri istiyoruz
       let formData = {
-        items: [
-          {
-            id: variantId,
-            quantity: 1,
-          },
-        ],
-        // Dawn/Modern temalar için sepet çekmecesini güncelleyen bölümleri çekmesini sağlar
-        sections: 'cart-drawer,cart-icon-bubble,cart-live-region-text',
+        items: [{ id: variantId, quantity: 1 }],
+        sections: 'cart-drawer,cart-icon-bubble,header',
         sections_url: window.location.pathname,
       };
 
@@ -181,41 +160,34 @@
       })
         .then((response) => response.json())
         .then((response) => {
-          // 1. Temanın sepet çekmecesini (cart-drawer) bul
-          const cartDrawer = document.querySelector('cart-drawer');
-          const cartIcon = document.querySelector('#cart-icon-bubble');
-
-          // 2. Çekmece içeriğini yeni gelen verilerle güncelle (Dawn/Modern yapı)
-          if (cartDrawer && response.sections) {
-            cartDrawer.renderContents(response);
+          // 1. Header'daki sepet sayısını (bubble) güncelle
+          if (response.sections && response.sections['cart-icon-bubble']) {
+            const cartIcons = document.querySelectorAll('#cart-icon-bubble');
+            cartIcons.forEach((icon) => {
+              icon.innerHTML = response.sections['cart-icon-bubble'];
+            });
           }
 
-          // 3. Çekmeceyi aç
+          // 2. Çekmeceyi bul, içeriği bas ve aç
+          const cartDrawer = document.querySelector('cart-drawer');
           if (cartDrawer) {
-            cartDrawer.classList.add('active'); // Bazı temalar için
-            if (typeof cartDrawer.open === 'function') {
-              cartDrawer.open(); // Dawn için standart
+            if (response.sections['cart-drawer']) {
+              cartDrawer.renderContents(response);
             }
-          } else if (window.openAndRefreshCart) {
-            window.openAndRefreshCart(); // Custom temalar için
+            if (typeof cartDrawer.open === 'function') cartDrawer.open();
           }
 
           btn.innerText = 'ADDED';
-
           setTimeout(() => {
             btn.innerHTML = originalText;
             btn.disabled = false;
             btn.classList.remove('loading');
           }, 2000);
         })
-        .catch((error) => {
-          console.error('Error:', error);
+        .catch((err) => {
+          console.error(err);
           btn.innerText = 'ERROR';
-          setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            btn.classList.remove('loading');
-          }, 2000);
+          btn.disabled = false;
         });
     };
   }
