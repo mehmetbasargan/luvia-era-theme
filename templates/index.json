@@ -126,11 +126,11 @@
       "type": "statement-banner",
       "name": "Statement Banner",
       "settings": {
-        "overlay_opacity": 40,
+        "overlay_opacity": 50,
         "title": "THE ART OF ELEGANCE",
         "text": "<p>Discover our curated collection of timeless pieces.</p>",
         "button_label": "Shop The Collection",
-        "button_link": "",
+        "button_link": "shopify://collections/golden-hour-muse",
         "padding_top": 0,
         "padding_bottom": 100,
         "margin_top": 0,
