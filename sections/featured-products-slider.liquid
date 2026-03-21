@@ -103,8 +103,7 @@
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  // --- GLOBAL SEPETE EKLEME FONKSİYONU ---
-  // window. diyerek tüm sayfalarda (slider dahil) çalışmasını garanti ediyoruz.
+  // 🛒 GLOBAL SEPETE EKLEME VE ANLIK GÜNCELLEME
   window.handleAddToCart = function (e, variantId) {
     if (e) e.preventDefault();
     const btn = e.currentTarget || e.target;
@@ -115,8 +114,8 @@
     btn.innerText = '...';
     btn.disabled = true;
 
-    // Header ve Drawer bölümlerini Shopify'dan istiyoruz
-    const sections = 'cart-drawer,cart-icon-bubble,header';
+    // Shopify'dan güncel sepet baloncuğunu ve çekmecesini istiyoruz
+    const sectionsToUpdate = ['cart-drawer', 'cart-icon-bubble'];
 
     fetch('/cart/add.js', {
       method: 'POST',
@@ -124,33 +123,36 @@
       body: JSON.stringify({
         id: variantId,
         quantity: 1,
-        sections: sections,
+        sections: sectionsToUpdate.join(','),
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.status == 422) {
-          btn.innerText = 'LIMIT REACHED';
-        } else {
-          btn.innerText = 'ADDED';
+        // 1. Temanın "PubSub" (Yayınla-Abone Ol) sistemini tetikle (Dawn için kritik)
+        if (window.publish && window.PUB_SUB_EVENTS) {
+          publish(PUB_SUB_EVENTS.cartUpdate, { source: 'featured-slider', cart: data });
+        }
 
-          // 1. Header Sepet Sayısını Güncelle (Zorunlu)
-          if (data.sections && data.sections['cart-icon-bubble']) {
-            const cartIcon = document.querySelector('#cart-icon-bubble');
-            if (cartIcon) cartIcon.innerHTML = data.sections['cart-icon-bubble'];
-          }
-
-          // 2. Sepet Çekmecesini (Drawer) Güncelle ve Aç
-          const cartDrawer = document.querySelector('cart-drawer');
-          if (cartDrawer) {
-            if (data.sections['cart-drawer']) cartDrawer.renderContents(data);
-            if (typeof cartDrawer.open === 'function') cartDrawer.open();
-          } else if (typeof openAndRefreshCart === 'function') {
-            openAndRefreshCart();
+        // 2. Header'daki sepet baloncuğunu (bubble) anında güncelle
+        if (data.sections && data.sections['cart-icon-bubble']) {
+          const bubbleContainer = document.querySelector('#cart-icon-bubble');
+          if (bubbleContainer) {
+            // Yeni HTML'i yerleştiriyoruz
+            bubbleContainer.innerHTML = data.sections['cart-icon-bubble'];
           }
         }
+
+        // 3. Çekmeceyi (Drawer) güncelle ve otomatik aç
+        const cartDrawer = document.querySelector('cart-drawer');
+        if (cartDrawer) {
+          if (data.sections['cart-drawer']) cartDrawer.renderContents(data);
+          if (typeof cartDrawer.open === 'function') cartDrawer.open();
+        }
+
+        btn.innerText = 'ADDED';
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('Cart Error:', err);
         btn.innerText = 'ERROR';
       })
       .finally(() => {
@@ -162,8 +164,7 @@
       });
   };
 
-  // --- GLOBAL WISHLIST DINLEYICI ---
-  // Slider içindeki kartlara sonradan eklenen wishlist butonlarını yakalar
+  // ❤️ GLOBAL WISHLIST (SAYFA YENİLENMEDEN EKLEME)
   document.addEventListener('click', function (e) {
     const wishlistBtn = e.target.closest('.custom-wishlist-btn');
     if (!wishlistBtn) return;
@@ -172,7 +173,18 @@
     const handle = wishlistBtn.getAttribute('data-product-handle');
 
     if (window.LuviaWishlist && handle) {
+      // 1. Uygulamayı tetikle
       window.LuviaWishlist.toggle(e, handle);
+
+      // 2. Sayfa yenilenmeden verinin Wishlist sayfasına düşmesi için localStorage'ı zorla güncelle
+      let wishlistData = JSON.parse(localStorage.getItem('luvia-wishlist') || '[]');
+      if (!wishlistData.includes(handle)) {
+        wishlistData.push(handle);
+        localStorage.setItem('luvia-wishlist', JSON.stringify(wishlistData));
+      }
+
+      // Butonun rengini anlık değiştir (aktiflik hissi için)
+      wishlistBtn.querySelector('svg').style.fill = 'currentColor';
     }
   });
 </script>
