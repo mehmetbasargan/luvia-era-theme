@@ -27,7 +27,7 @@
   /* Slider Görünürlük ve Stabilite Fixleri */
   .featured-swiper-{{ section.id }} {
     width: 100%;
-    opacity: 0; /* JS yüklenene kadar sıçramayı önler */
+    opacity: 0;
     transition: opacity 0.3s ease;
   }
 
@@ -89,10 +89,6 @@
         {% for block in section.blocks %}
           {%- assign product = all_products[block.settings.product] -%}
           <div class="swiper-slide h-auto" {{ block.shopify_attributes }}>
-            {% comment %}
-              TASARIM DEĞİŞİKLİĞİ YAPILMADI:
-              Sadece mevcut HTML bloğu yerine merkezi product-card snippet'ı eklendi.
-            {% endcomment %}
             {% render 'product-card', product: product %}
           </div>
         {% endfor %}
@@ -154,8 +150,9 @@
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  if (typeof handleFeaturedAddToCart !== 'function') {
-    window.handleFeaturedAddToCart = function (e, variantId) {
+  // DÜZELTİLEN KISIM: handleAddToCart olarak değiştirildi
+  if (typeof handleAddToCart !== 'function') {
+    window.handleAddToCart = function (e, variantId) {
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
       if (btn.classList.contains('loading')) return;
