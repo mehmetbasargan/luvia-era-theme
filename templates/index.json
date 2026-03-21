@@ -314,6 +314,70 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "featured_products_slider_4zxdmN": {
+      "type": "featured-products-slider",
+      "blocks": {
+        "product_MxqNXN": {
+          "type": "product",
+          "settings": {
+            "product": "solstice-linen-blouse"
+          }
+        },
+        "product_NygUtU": {
+          "type": "product",
+          "settings": {
+            "product": "luna-satin-slip-dress"
+          }
+        },
+        "product_aWWUNz": {
+          "type": "product",
+          "settings": {
+            "product": "aura-silk-maxi-dress"
+          }
+        },
+        "product_kgeD4F": {
+          "type": "product",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat"
+          }
+        },
+        "product_adkNAM": {
+          "type": "product",
+          "settings": {
+            "product": "luna-high-waist-trousers"
+          }
+        },
+        "product_Kj8y4V": {
+          "type": "product",
+          "settings": {
+            "product": "velvet-night-blazer"
+          }
+        }
+      },
+      "block_order": [
+        "product_MxqNXN",
+        "product_NygUtU",
+        "product_aWWUNz",
+        "product_kgeD4F",
+        "product_adkNAM",
+        "product_Kj8y4V"
+      ],
+      "name": "Featured Products Slider",
+      "settings": {
+        "section_title": "Featured Selection",
+        "section_subtitle": "Handpicked for you",
+        "button_text": "View All",
+        "button_url": "",
+        "slides_per_view": 4,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
@@ -326,6 +390,7 @@
     "newsletter_banner_rQGEgG",
     "featured_blog_carousel_mxUCVn",
     "featured_products_qN9dm6",
-    "image_with_text_multi_Kt36ED"
+    "image_with_text_multi_Kt36ED",
+    "featured_products_slider_4zxdmN"
   ]
 }
