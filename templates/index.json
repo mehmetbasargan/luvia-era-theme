@@ -73,67 +73,39 @@
         "remove_bg": false
       }
     },
-    "featured_products_TUxrEx": {
+    "featured_products_UFpYJB": {
       "type": "featured-products",
       "blocks": {
-        "product_7cNPyB": {
+        "product_gig4qn": {
           "type": "product",
           "settings": {
             "product": "aura-oversized-cashmere-coat"
           }
         },
-        "product_HP776a": {
-          "type": "product",
-          "settings": {
-            "product": "velvet-night-blazer"
-          }
-        },
-        "product_zUjcTk": {
+        "product_UzVynU": {
           "type": "product",
           "settings": {
             "product": "aura-silk-maxi-dress"
           }
         },
-        "product_Uw9Uxc": {
-          "type": "product",
-          "settings": {
-            "product": "luna-high-waist-trousers"
-          }
-        },
-        "product_JpAz8e": {
-          "type": "product",
-          "settings": {
-            "product": "aura-oversized-cashmere-coat"
-          }
-        },
-        "product_PkH9CN": {
-          "type": "product",
-          "settings": {
-            "product": "ethereal-knit-cardigan"
-          }
-        },
-        "product_jbr3pm": {
+        "product_3xj6Cj": {
           "type": "product",
           "settings": {
             "product": "luna-satin-slip-dress"
           }
         },
-        "product_xCEaeb": {
+        "product_ywtwhP": {
           "type": "product",
           "settings": {
-            "product": "solstice-linen-blouse"
+            "product": "velvet-night-blazer"
           }
         }
       },
       "block_order": [
-        "product_7cNPyB",
-        "product_HP776a",
-        "product_zUjcTk",
-        "product_Uw9Uxc",
-        "product_JpAz8e",
-        "product_PkH9CN",
-        "product_jbr3pm",
-        "product_xCEaeb"
+        "product_gig4qn",
+        "product_UzVynU",
+        "product_3xj6Cj",
+        "product_ywtwhP"
       ],
       "name": "Featured Products (Selectable)",
       "settings": {
@@ -141,8 +113,8 @@
         "section_subtitle": "Handpicked for you",
         "button_text": "View All",
         "button_url": "",
-        "padding_top": 100,
-        "padding_bottom": 100,
+        "padding_top": 36,
+        "padding_bottom": 36,
         "margin_top": 0,
         "margin_bottom": 0,
         "use_custom_bg": false,
@@ -757,7 +729,7 @@
     "promo_video_banner_yyDpHy",
     "hero_slider_9WN3Qw",
     "marquee_logo_rbndHM",
-    "featured_products_TUxrEx",
+    "featured_products_UFpYJB",
     "statement_banner_kBTgkP",
     "collection_list_3fMXPn",
     "newsletter_banner_rQGEgG",
