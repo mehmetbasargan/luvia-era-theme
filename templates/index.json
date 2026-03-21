@@ -717,8 +717,8 @@
         "collection_list_title": "Our Collections",
         "padding_top": 0,
         "padding_bottom": 0,
-        "margin_top": 0,
-        "margin_bottom": 0,
+        "margin_top": 100,
+        "margin_bottom": 100,
         "use_custom_bg": false,
         "section_bg_color": "#ffffff",
         "remove_bg": false
