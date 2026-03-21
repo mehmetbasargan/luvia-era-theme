@@ -89,98 +89,8 @@
         {% for block in section.blocks %}
           {%- assign product = all_products[block.settings.product] -%}
           {% if product != blank %}
-            <div class="swiper-slide group relative flex flex-col h-full" {{ block.shopify_attributes }}>
-              <div class="relative aspect-[3/4] overflow-hidden bg-white shadow-sm rounded-sm">
-                {% if product.compare_at_price > product.price %}
-                  <span class="absolute top-4 left-4 z-20 bg-primary rounded-sm text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase">
-                    {{ 'products.product.on_sale' | t }}
-                  </span>
-                {% endif %}
-
-                {% comment %} Wishlist Butonu {% endcomment %}
-                <div class="absolute top-4 right-4 z-40">
-                  <button
-                    type="button"
-                    class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-white rounded-full shadow-sm hover:scale-110 transition-all duration-300 cursor-pointer p-1"
-                    data-product-id="{{ product.id }}"
-                    onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') }"
-                    aria-label="Add to wishlist"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      class="w-5 h-5 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                  </button>
-                </div>
-
-                {% comment %} Ürün Görselleri {% endcomment %}
-                <a
-                  href="{{ product.url }}"
-                  class="block h-full w-full z-10"
-                  aria-label="View {{ product.title | escape }} details"
-                >
-                  {% if product.featured_image != blank %}
-                    <img
-                      src="{{ product.featured_image | image_url: width: 400 }}"
-                      alt="{{ product.title | escape }}"
-                      loading="lazy"
-                      width="400"
-                      height="533"
-                      class="w-full h-full object-cover transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
-                    >
-
-                    {% if product.images[1] %}
-                      <img
-                        src="{{ product.images[1] | image_url: width: 400 }}"
-                        alt="{{ product.title | escape }}"
-                        loading="lazy"
-                        width="400"
-                        height="533"
-                        class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                      >
-                    {% endif %}
-                  {% else %}
-                    {% comment %} GÖRSEL YOKSA YERTUTUCULAR (Placeholder) {% endcomment %}
-                    <div class="w-full h-full bg-gray-100 transition-opacity duration-700 group-hover:opacity-0">
-                      {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-20' }}
-                    </div>
-                    <div class="w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gray-200">
-                      {{ 'product-2' | placeholder_svg_tag: 'w-full h-full object-cover opacity-20' }}
-                    </div>
-                  {% endif %}
-                </a>
-
-                {% comment %} Sepete Ekle {% endcomment %}
-                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
-                  <button
-                    type="button"
-                    onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
-                    class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none font-medium"
-                  >
-                    {{ 'products.product.add_to_cart' | t }}
-                  </button>
-                </div>
-              </div>
-
-              <div class="mt-4 text-center px-2">
-                <a
-                  href="{{ product.url }}"
-                  class="text-primary uppercase tracking-wider block mb-1 hover:text-secondary transition-all text-sm"
-                >
-                  <span>{{ product.title }}</span>
-                </a>
-                <div class="flex justify-center items-center gap-2">
-                  {% if product.compare_at_price > product.price %}
-                    <span class="text-gray-500 line-through text-[12px]">{{ product.compare_at_price | money }}</span>
-                  {% endif %}
-                  <span class="text-primary text-[14px] font-bold">{{ product.price | money }}</span>
-                </div>
-              </div>
+            <div class="swiper-slide" {{ block.shopify_attributes }}>
+              {% render 'product-card', product: product, show_sale_badge: true %}
             </div>
           {% endif %}
         {% endfor %}
@@ -249,43 +159,6 @@
     }
     document.addEventListener('shopify:section:load', initSlider);
   })();
-
-  // Global Sepete Ekleme Fonksiyonu (Eğer tema dosyasında yoksa)
-  if (typeof handleFeaturedAddToCart !== 'function') {
-    window.handleFeaturedAddToCart = function (e, variantId) {
-      const btn = e.currentTarget;
-      const originalText = btn.innerHTML;
-      if (btn.classList.contains('loading')) return;
-
-      btn.classList.add('loading');
-      btn.innerText = '...';
-      btn.disabled = true;
-
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: 1 }),
-      })
-        .then((res) => res.json())
-        .then(() => {
-          btn.innerText = 'ADDED';
-          if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
-          setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            btn.classList.remove('loading');
-          }, 2000);
-        })
-        .catch(() => {
-          btn.innerText = 'ERROR';
-          setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            btn.classList.remove('loading');
-          }, 2000);
-        });
-    };
-  }
 </script>
 
 {% schema %}
