@@ -454,6 +454,14 @@
     "shoppable_image_UT6HE7": {
       "type": "shoppable-image",
       "blocks": {
+        "product_point_3wD6FP": {
+          "type": "product_point",
+          "settings": {
+            "product": "",
+            "top_position": 67,
+            "left_position": 29
+          }
+        },
         "product_point_HDh98B": {
           "type": "product_point",
           "settings": {
@@ -464,6 +472,7 @@
         }
       },
       "block_order": [
+        "product_point_3wD6FP",
         "product_point_HDh98B"
       ],
       "name": "Shoppable Image",
