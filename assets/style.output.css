@@ -3133,6 +3133,14 @@ blockquote {
     height: 100%;
   }
 
+  .md\:h-5 {
+    height: 1.25rem;
+  }
+
+  .md\:h-9 {
+    height: 2.25rem;
+  }
+
   .md\:min-h-\[500px\] {
     min-height: 500px;
   }
@@ -3179,6 +3187,14 @@ blockquote {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  .md\:w-5 {
+    width: 1.25rem;
+  }
+
+  .md\:w-9 {
+    width: 2.25rem;
   }
 
   .md\:max-w-lg {
@@ -3306,6 +3322,10 @@ blockquote {
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-\[12px\] {
+    font-size: 12px;
   }
 }
 
