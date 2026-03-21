@@ -215,7 +215,7 @@
       "type": "newsletter-banner",
       "name": "Newsletter Banner",
       "settings": {
-        "overlay_opacity": 40,
+        "overlay_opacity": 50,
         "title": "Luvia Privileges",
         "subtext": "Be the first to know about new collections and exclusive events."
       }
