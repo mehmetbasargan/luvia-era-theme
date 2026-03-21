@@ -155,7 +155,8 @@
 		"continue_shopping": "Continue Shopping",
 		"added": "Added to wishlist",
 		"removed": "Removed from wishlist",
-		"login_required": "Please login to add items to your wishlist."
+		"login_required": "Please login to add items to your wishlist.",
+		"loading": "Loading..."
 	},
 	"contact": {
 		"success_message": "MESSAGE SENT SUCCESSFULLY. WE WILL CONTACT YOU SHORTLY.",
