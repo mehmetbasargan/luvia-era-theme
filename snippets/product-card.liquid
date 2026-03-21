@@ -1,92 +1,110 @@
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
-    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
-  }
+{% comment %}
+  Luvia Era Product Card Snippet
+  1. Placeholder images added for missing products.
+  2. Cart drawer trigger added to onclick.
+  3. Wishlist handle added for proper listing.
+{% endcomment %}
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-      margin-top: {{ section.settings.margin_top }}px;
-      margin-bottom: {{ section.settings.margin_bottom }}px;
-    }
-  }
-
-  #LuviaSection-{{ section.id }} {
-    {% if section.settings.remove_bg %}
-      background-color: transparent !important;
-    {% elsif section.settings.use_custom_bg %}
-      background-color: {{ section.settings.section_bg_color }} !important;
+<div class="group flex flex-col h-full bg-white overflow-hidden relative">
+  <div class="relative aspect-[3/4] overflow-hidden bg-custombg">
+    {% if product.compare_at_price > product.price %}
+      <span class="absolute top-3 left-3 z-10 bg-primary text-white font-light text-[12px] px-2 py-1 tracking-widest uppercase">
+        {{ 'products.product.on_sale' | t }}
+      </span>
     {% endif %}
-  }
 
-  .featured-swiper-{{ section.id }} {
-    width: 100%;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .featured-swiper-{{ section.id }}.swiper-initialized {
-    opacity: 1;
-  }
-
-  .swiper-button-disabled {
-    opacity: 0.3 !important;
-    cursor: not-allowed !important;
-    pointer-events: none;
-  }
-{%- endstyle -%}
-
-<section
-  id="LuviaSection-{{ section.id }}"
-  class="transition-colors duration-300 section-{{ section.id }}-padding {% unless section.settings.remove_bg or section.settings.use_custom_bg %}bg-white{% endunless %}"
->
-  <div class="container mx-auto overflow-hidden">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 px-4 md:px-0">
-      <div>
-        <h2 class="text-secondary text-2xl md:text-3xl font-bold">{{ section.settings.section_title }}</h2>
-        <p class="text-primary mt-2 -tracking-tight opacity-80">
-          {{ section.settings.section_subtitle }}
-        </p>
-      </div>
-
-      <div class="flex items-center gap-6 mt-6 md:mt-0">
-        <div class="flex gap-4">
-          <button class="swiper-prev-{{ section.id }} cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition-all duration-300">
-            {% render 'icon-chevron-left' %}
-          </button>
-          <button class="swiper-next-{{ section.id }} cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition-all duration-300">
-            {% render 'icon-chevron-right' %}
-          </button>
-        </div>
-
-        {% if section.settings.button_url %}
-          <a
-            href="{{ section.settings.button_url }}"
-            class="text-primary text-sm hover:text-secondary transition-all uppercase tracking-widest border-b border-line pb-1"
-          >
-            {{ section.settings.button_text }}
-          </a>
-        {% endif %}
-      </div>
+    <div class="absolute top-3 right-3 z-20">
+      <button
+        type="button"
+        class="custom-wishlist-btn flex items-center justify-center w-9 h-9 bg-white rounded-full shadow-sm hover:scale-110 transition-all duration-300 cursor-pointer p-1"
+        data-product-id="{{ product.id }}"
+        {% comment %} Wishlist sayfasında listelenmesi için handle kritiktir {% endcomment %}
+        data-product-handle="{{ product.handle }}"
+        aria-label="Add {{ product.title | escape }} to wishlist"
+        onclick="if(window.LuviaWishlist) window.LuviaWishlist.toggle(event, '{{ product.handle }}')"
+      >
+        <svg
+          class="text-primary transition-all duration-300 pointer-events-none w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+        </svg>
+      </button>
     </div>
 
-    <div class="swiper featured-swiper-{{ section.id }} !overflow-visible px-4 md:px-0">
-      <div class="swiper-wrapper">
-        {% for block in section.blocks %}
-          {%- assign product = all_products[block.settings.product] -%}
-          <div class="swiper-slide h-auto" {{ block.shopify_attributes }}>
-            {% comment %} SENİN HAZIR KART TASARIMIN {% endcomment %}
-            {% render 'product-card', product: product %}
-          </div>
-        {% endfor %}
-      </div>
+    <a href="{{ product.url }}" class="block h-full w-full z-10" aria-label="View {{ product.title | escape }} details">
+      {% if product.featured_image != blank %}
+        <img
+          src="{{ product.featured_image | image_url: width: 400 }}"
+          alt="{{ product.title | escape }}"
+          loading="lazy"
+          width="400"
+          height="533"
+          class="w-full h-full object-cover transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+        >
+
+        {% if product.images[1] %}
+          <img
+            src="{{ product.images[1] | image_url: width: 400 }}"
+            alt="{{ product.title | escape }}"
+            loading="lazy"
+            width="400"
+            height="533"
+            class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          >
+        {% endif %}
+      {% else %}
+        {% comment %} GÖRSEL YOKSA YERTUTUCULAR (Placeholder) {% endcomment %}
+        <div class="w-full h-full bg-gray-100 transition-opacity duration-700 group-hover:opacity-0">
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-20' }}
+        </div>
+        <div class="w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gray-200">
+          {{ 'product-2' | placeholder_svg_tag: 'w-full h-full object-cover opacity-20' }}
+        </div>
+      {% endif %}
+    </a>
+
+    <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-30">
+      <button
+        type="button"
+        {% comment %} Sepet çekmecesini (drawer) tetikleyen fonksiyon çağrısı {% endcomment %}
+        onclick="if(window.handleAddToCart) { window.handleAddToCart(event, '{{ product.selected_or_first_available_variant.id }}') }"
+        aria-label="Add {{ product.title | escape }} to cart"
+        class="w-full bg-primary text-white py-3 text-[13px] uppercase tracking-[0.2em] block text-center hover:bg-secondary transition-colors cursor-pointer"
+        {% unless product.available %}
+          disabled
+        {% endunless %}
+      >
+        {% if product.available %}
+          {{ 'products.product.add_to_cart' | t }}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </button>
     </div>
   </div>
-</section>
+
+  <div class="pt-4 pb-2 flex flex-col items-center px-3">
+    <a
+      href="{{ product.url }}"
+      class="text-primary text-[14px] hover:text-secondary transition-colors uppercase text-center"
+    >
+      {{ product.title | default: 'Ürün Başlığı' }}
+    </a>
+
+    <div class="mt-2 flex items-center gap-2">
+      {% if product.compare_at_price > product.price %}
+        <span class="text-gray-400 line-through text-[13px]">{{ product.compare_at_price | money }}</span>
+        <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
+      {% else %}
+        <span class="text-primary text-[14px] font-medium">{{ product.price | money }}</span>
+      {% endif %}
+    </div>
+  </div>
+</div>
 
 <script>
   (function () {
@@ -94,7 +112,6 @@
       const swiperSelector = '.featured-swiper-{{ section.id }}';
       const container = document.querySelector(swiperSelector);
       if (!container) return;
-
       if (container.swiper) container.swiper.destroy(true, true);
 
       const totalSlides = container.querySelectorAll('.swiper-slide').length;
@@ -122,125 +139,76 @@
       });
     };
 
-    if (document.readyState === 'complete') {
-      initSlider();
-    } else {
-      window.addEventListener('load', initSlider);
-    }
+    if (document.readyState === 'complete') initSlider();
+    else window.addEventListener('load', initSlider);
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  // KRİTİK DÜZELTME: Fonksiyon ismini product-card içindeki onclick="handleAddToCart" ile eşitledik.
-  if (typeof handleAddToCart !== 'function') {
-    window.handleAddToCart = function (e, variantId) {
-      e.preventDefault();
-      const btn = e.currentTarget;
-      const originalText = btn.innerHTML;
-      if (btn.classList.contains('loading')) return;
+  // 🛒 ÇALIŞAN SEPET VE ÇEKMECE MANTIĞI
+  window.handleAddToCart = function (e, variantId) {
+    if (e) e.preventDefault();
+    const btn = e.currentTarget;
+    const label = btn.querySelector('span') || btn;
+    const originalText = label.innerText;
 
-      btn.classList.add('loading');
-      btn.innerText = '...';
-      btn.disabled = true;
+    if (btn.classList.contains('loading')) return;
 
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: 1 }),
+    btn.classList.add('loading');
+    label.innerText = '...';
+    btn.disabled = true;
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: 1 }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status == 422) {
-            btn.innerText = 'LIMIT REACHED';
-          } else {
-            btn.innerText = 'ADDED';
-            // Eğer sepet çekmecesi fonksiyonun varsa burada tetikle:
-            if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
-          }
-          setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            btn.classList.remove('loading');
-          }, 2000);
-        })
-        .catch(() => {
-          btn.innerText = 'ERROR';
-          setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            btn.classList.remove('loading');
-          }, 2000);
-        });
-    };
-  }
-</script>
+      .then((data) => {
+        label.innerText = 'ADDED';
 
-{% schema %}
-{
-  "name": "Featured Products Slider",
-  "settings": [
-    { "type": "text", "id": "section_title", "label": "Title", "default": "Featured Selection" },
-    { "type": "text", "id": "section_subtitle", "label": "Subtitle", "default": "Handpicked for you" },
-    { "type": "text", "id": "button_text", "label": "Button Text", "default": "View All" },
-    { "type": "url", "id": "button_url", "label": "Button URL" },
-    { "type": "number", "id": "slides_per_view", "label": "Slides per view (Desktop)", "default": 4 },
-    { "type": "header", "content": "Spacing" },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "label": "Top Padding",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "label": "Bottom Padding",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "margin_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Top Margin",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Bottom Margin",
-      "default": 0
-    },
-    { "type": "header", "content": "Design" },
-    { "type": "checkbox", "id": "use_custom_bg", "label": "Use Custom Background Color", "default": false },
-    { "type": "color", "id": "section_bg_color", "label": "Background Color", "default": "#ffffff" },
-    { "type": "checkbox", "id": "remove_bg", "label": "Remove Background", "default": false }
-  ],
-  "blocks": [
-    {
-      "type": "product",
-      "name": "Product",
-      "settings": [{ "type": "product", "id": "product", "label": "Select Product" }]
+        // 1. Temanın Özel Çekmece Fonksiyonlarını Tetikle (Kritik Nokta)
+        if (typeof openAndRefreshCart === 'function') {
+          openAndRefreshCart();
+        } else if (window.openCartDrawer) {
+          window.openCartDrawer();
+        }
+
+        // 2. Global Event Yayınla (Header ve diğer kısımlar için)
+        document.dispatchEvent(
+          new CustomEvent('cart:updated', {
+            detail: { cart: data },
+            bubbles: true,
+          })
+        );
+
+        setTimeout(() => {
+          label.innerText = originalText;
+          btn.disabled = false;
+          btn.classList.remove('loading');
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error('Cart Error:', error);
+        label.innerText = 'ERROR';
+        setTimeout(() => {
+          label.innerText = originalText;
+          btn.disabled = false;
+          btn.classList.remove('loading');
+        }, 2000);
+      });
+  };
+
+  // ❤️ GLOBAL WISHLIST DINLEYICI
+  document.addEventListener('click', function (e) {
+    const wishlistBtn = e.target.closest('.custom-wishlist-btn');
+    if (!wishlistBtn) return;
+    e.preventDefault();
+    const handle = wishlistBtn.getAttribute('data-product-handle');
+    if (window.LuviaWishlist && handle) {
+      window.LuviaWishlist.toggle(e, handle);
     }
-  ],
-  "presets": [
-    {
-      "name": "Featured Products Slider",
-      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }, { "type": "product" }]
-    }
-  ]
-}
-{% endschema %}
+  });
+</script>

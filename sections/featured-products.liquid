@@ -92,26 +92,37 @@
 
               <a
                 href="{{ product.url }}"
-                class="block w-full h-full relative z-10"
-                aria-label="{{ product.title | escape }}"
+                class="block h-full w-full z-10"
+                aria-label="View {{ product.title | escape }} details"
               >
-                <img
-                  src="{{ product.featured_image | image_url: width: 600 }}"
-                  class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
-                  height="500"
-                  width="500"
-                  alt="Ürün görseli: {{ product.title | escape }}"
-                  loading="lazy"
-                >
-                {% if product.images[1] %}
+                {% if product.featured_image != blank %}
                   <img
-                    src="{{ product.images[1] | image_url: width: 600 }}"
-                    class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                    height="500"
-                    width="500"
-                    alt="Ürün görseli: {{ product.title | escape }}"
+                    src="{{ product.featured_image | image_url: width: 400 }}"
+                    alt="{{ product.title | escape }}"
                     loading="lazy"
+                    width="400"
+                    height="533"
+                    class="w-full h-full object-cover transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
                   >
+
+                  {% if product.images[1] %}
+                    <img
+                      src="{{ product.images[1] | image_url: width: 400 }}"
+                      alt="{{ product.title | escape }}"
+                      loading="lazy"
+                      width="400"
+                      height="533"
+                      class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                    >
+                  {% endif %}
+                {% else %}
+                  {% comment %} GÖRSEL YOKSA YERTUTUCULAR (Placeholder) {% endcomment %}
+                  <div class="w-full h-full bg-gray-100 transition-opacity duration-700 group-hover:opacity-0">
+                    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-20' }}
+                  </div>
+                  <div class="w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gray-200">
+                    {{ 'product-2' | placeholder_svg_tag: 'w-full h-full object-cover opacity-20' }}
+                  </div>
                 {% endif %}
               </a>
 
@@ -299,7 +310,7 @@
   ],
   "presets": [
     {
-      "name": "Featured Products (Selectable)",
+      "name": "Featured Products",
       "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }, { "type": "product" }]
     }
   ]

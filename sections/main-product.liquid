@@ -2,9 +2,9 @@
   <div class="flex flex-col lg:flex-row gap-16 items-start">
     <div class="w-full md:w-full lg:w-2/3 flex flex-row gap-6">
       {% comment %} thumbnails {% endcomment %}
-      <div class="hidden md:block w-20 shrink-0">
-        <div class="swiper product-thumbs h-full">
-          <div class="swiper-wrapper ">
+      <div class="swiper product-thumbs h-full">
+        <div class="swiper-wrapper">
+          {% if product.media.size > 0 %}
             {% for media in product.media %}
               <div class="swiper-slide cursor-pointer opacity-50 transition-opacity duration-300 [&.swiper-slide-thumb-active]:opacity-100">
                 {{
@@ -14,26 +14,34 @@
                 }}
               </div>
             {% endfor %}
-          </div>
+          {% else %}
+            <div class="swiper-slide cursor-pointer opacity-50 transition-opacity duration-300">
+              {{ 'product-1' | placeholder_svg_tag: 'object-cover w-full h-full bg-gray-100' }}
+            </div>
+          {% endif %}
         </div>
       </div>
 
       {% comment %} main images {% endcomment %}
-      <div class="grow h-full overflow-hidden bg-white relative">
-        <div class="swiper product-main h-full">
-          <div class="swiper-wrapper h-full">
-            {% for media in product.media %}
-              <div class="swiper-slide h-full">
-                {{
-                  media
-                  | image_url: width: 1000, format: 'webp'
-                  | image_tag:
-                    class: 'w-full h-[700px] md:h-full object-cover object-top',
-                    loading: 'eager',
-                    alt: product.title
-                }}
+      {% comment %} main images - FULL WIDTH {% endcomment %}
+      <div class="grow h-full overflow-hidden bg-white relative w-full">
+        <div class="swiper product-main h-full w-full">
+          <div class="swiper-wrapper h-full w-full">
+            {% if product.media.size > 0 %}
+              {% for media in product.media %}
+                <div class="swiper-slide h-full w-full">
+                  {{
+                    media
+                    | image_url: width: 1920, format: 'webp'
+                    | image_tag: class: 'w-full h-auto object-cover', loading: 'eager', alt: product.title
+                  }}
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="swiper-slide h-full w-full">
+                {{ 'product-1' | placeholder_svg_tag: 'w-full h-auto bg-gray-100' }}
               </div>
-            {% endfor %}
+            {% endif %}
           </div>
           <button
             type="button"

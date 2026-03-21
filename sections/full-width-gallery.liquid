@@ -46,8 +46,12 @@
             loading="lazy"
           >
         {% else %}
-          <div class="w-full h-full bg-custombg flex items-center justify-center">
-            {{ 'image' | placeholder_svg_tag: 'w-20 h-20 opacity-20' }}
+          {% comment %} Daha gösterişli placeholder {% endcomment %}
+          <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+            <div class="text-center">
+              {{ 'image' | placeholder_svg_tag: 'w-16 h-16 md:w-20 md:h-20 opacity-40 mx-auto' }}
+              <p class="text-xs text-gray-400 mt-2">No Image</p>
+            </div>
           </div>
         {% endif %}
 
