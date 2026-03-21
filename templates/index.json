@@ -277,12 +277,12 @@
         "section_subtitle": "Handpicked for you",
         "button_text": "View All",
         "button_url": "",
-        "padding_top": 0,
+        "padding_top": 100,
         "padding_bottom": 100,
         "margin_top": 0,
         "margin_bottom": 0,
-        "use_custom_bg": false,
-        "section_bg_color": "#ffffff",
+        "use_custom_bg": true,
+        "section_bg_color": "#f9f9f9",
         "remove_bg": false
       }
     }
