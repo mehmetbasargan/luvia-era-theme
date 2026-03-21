@@ -72,11 +72,61 @@
         "section_bg_color": "#f9f9f9",
         "remove_bg": false
       }
+    },
+    "featured_products_TUxrEx": {
+      "type": "featured-products",
+      "blocks": {
+        "product_JpAz8e": {
+          "type": "product",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat"
+          }
+        },
+        "product_PkH9CN": {
+          "type": "product",
+          "settings": {
+            "product": "ethereal-knit-cardigan"
+          }
+        },
+        "product_jbr3pm": {
+          "type": "product",
+          "settings": {
+            "product": "luna-satin-slip-dress"
+          }
+        },
+        "product_xCEaeb": {
+          "type": "product",
+          "settings": {
+            "product": "solstice-linen-blouse"
+          }
+        }
+      },
+      "block_order": [
+        "product_JpAz8e",
+        "product_PkH9CN",
+        "product_jbr3pm",
+        "product_xCEaeb"
+      ],
+      "name": "Featured Products (Selectable)",
+      "settings": {
+        "section_title": "Featured Selection",
+        "section_subtitle": "Handpicked for you",
+        "button_text": "View All",
+        "button_url": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
     "promo_video_banner_yyDpHy",
     "hero_slider_9WN3Qw",
-    "marquee_logo_rbndHM"
+    "marquee_logo_rbndHM",
+    "featured_products_TUxrEx"
   ]
 }
