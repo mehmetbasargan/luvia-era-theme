@@ -11,7 +11,10 @@
         height="600"
       >
     {% else %}
-      <div class="w-full h-full bg-primary/20"></div>
+      {% comment %} GÖRSEL SİLİNDİĞİNDE BURASI ÇALIŞIR {% endcomment %}
+      <div class="w-full h-full bg-gray-200">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-30 fill-gray-400' }}
+      </div>
     {% endif %}
 
     {% comment %} Dynamic Overlay {% endcomment %}
