@@ -76,6 +76,30 @@
     "featured_products_TUxrEx": {
       "type": "featured-products",
       "blocks": {
+        "product_7cNPyB": {
+          "type": "product",
+          "settings": {
+            "product": "aura-oversized-cashmere-coat"
+          }
+        },
+        "product_HP776a": {
+          "type": "product",
+          "settings": {
+            "product": "velvet-night-blazer"
+          }
+        },
+        "product_zUjcTk": {
+          "type": "product",
+          "settings": {
+            "product": "aura-silk-maxi-dress"
+          }
+        },
+        "product_Uw9Uxc": {
+          "type": "product",
+          "settings": {
+            "product": "luna-high-waist-trousers"
+          }
+        },
         "product_JpAz8e": {
           "type": "product",
           "settings": {
@@ -102,6 +126,10 @@
         }
       },
       "block_order": [
+        "product_7cNPyB",
+        "product_HP776a",
+        "product_zUjcTk",
+        "product_Uw9Uxc",
         "product_JpAz8e",
         "product_PkH9CN",
         "product_jbr3pm",
