@@ -36,8 +36,8 @@
           assign full_url = block.settings.image | image_url: width: 2000
         else
           # Yer tutucu modunda hem küçük hem büyük resim AYNI olsun
-          assign thumb_url = 'https://cdn.shopify.com/s/images/themes/product-1.png'
-          assign full_url = 'https://cdn.shopify.com/s/images/themes/product-1.png'
+          assign thumb_url = 'https://cdn.shopify.com/s/images/themes/product-2.png'
+          assign full_url = 'https://cdn.shopify.com/s/images/themes/product-2.png'
         endif
       -%}
 
@@ -54,7 +54,7 @@
         <img
           src="{{ thumb_url }}"
           alt="Gallery Image"
-          class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[1500ms] ease-out group-hover:scale-110 {% if block.settings.image == blank %}opacity-30{% endif %}"
+          class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-[1500ms] ease-out group-hover:scale-110 {% if block.settings.image == blank %}opacity-30{% endif %}"
           loading="lazy"
           width="800"
           height="600"
