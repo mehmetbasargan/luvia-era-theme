@@ -130,7 +130,7 @@
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  // KRİTİK DÜZELTME: Fonksiyon ismini product-card içindeki handleAddToCart fonksiyonuna onclick="handleAddToCart" ile eşitledik.
+  // KRİTİK DÜZELTME: Fonksiyon ismini product-card içindeki onclick="handleAddToCart" ile eşitledik.
   if (typeof handleAddToCart !== 'function') {
     window.handleAddToCart = function (e, variantId) {
       e.preventDefault();
