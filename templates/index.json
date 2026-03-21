@@ -219,6 +219,23 @@
         "title": "Luvia Privileges",
         "subtext": "Be the first to know about new collections and exclusive events."
       }
+    },
+    "featured_blog_carousel_mxUCVn": {
+      "type": "featured-blog-carousel",
+      "name": "Featured Blog Carousel",
+      "settings": {
+        "title": "The Journal",
+        "subtitle": "Discover the world of Luvia Era",
+        "blog": "news",
+        "post_limit": 6,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
@@ -228,6 +245,7 @@
     "featured_products_TUxrEx",
     "statement_banner_kBTgkP",
     "collection_list_3fMXPn",
-    "newsletter_banner_rQGEgG"
+    "newsletter_banner_rQGEgG",
+    "featured_blog_carousel_mxUCVn"
   ]
 }
