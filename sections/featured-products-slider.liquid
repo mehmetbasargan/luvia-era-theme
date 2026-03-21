@@ -167,16 +167,40 @@
         body: JSON.stringify({ id: variantId, quantity: 1 }),
       })
         .then((res) => res.json())
-        .then(() => {
+        .then((cart) => {
           btn.innerText = 'ADDED';
-          if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
+
+          // 1. Standart Shopify "Cart Update" olayını yayınla (Dawn ve modern temalar için)
+          document.dispatchEvent(
+            new CustomEvent('cart:updated', {
+              detail: { cart: cart },
+            })
+          );
+
+          // 2. Popüler Drawer tetikleyicilerini dene
+          if (window.openAndRefreshCart) {
+            window.openAndRefreshCart();
+          } else if (document.querySelector('cart-drawer')) {
+            // Dawn tabanlı temalarda çekmeceyi açar
+            const cartDrawer = document.querySelector('cart-drawer');
+            if (cartDrawer.open) cartDrawer.open();
+          } else if (typeof window.refreshCartDrawer === 'function') {
+            window.refreshCartDrawer();
+          }
+
+          // 3. Eğer hiçbiri yoksa en azından sayfayı yenilemeden sepet sayısını güncellemeye çalışır
+          if (document.querySelector('.cart-count-bubble')) {
+            // Opsiyonel: Buraya basit bir fetch ile sayı güncelleme eklenebilir
+          }
+
           setTimeout(() => {
             btn.innerHTML = originalText;
             btn.disabled = false;
             btn.classList.remove('loading');
           }, 2000);
         })
-        .catch(() => {
+        .catch((error) => {
+          console.error('Cart Error:', error);
           btn.innerText = 'ERROR';
           setTimeout(() => {
             btn.innerHTML = originalText;
