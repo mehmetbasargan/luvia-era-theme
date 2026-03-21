@@ -669,6 +669,21 @@
         "section_bg_color": "#ffffff",
         "remove_bg": true
       }
+    },
+    "statement_banner_z4dWJV": {
+      "type": "statement-banner",
+      "name": "Statement Banner",
+      "settings": {
+        "overlay_opacity": 60,
+        "title": "THE ART OF ELEGANCE",
+        "text": "<p>Discover our curated collection of timeless pieces.</p>",
+        "button_label": "Shop The Collection",
+        "button_link": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -688,6 +703,7 @@
     "trust_icons_AQpXj8",
     "image_with_text_multi_9AHKEL",
     "shoppable_image_V6G9yN",
-    "testimonial_effdMB"
+    "testimonial_effdMB",
+    "statement_banner_z4dWJV"
   ]
 }
