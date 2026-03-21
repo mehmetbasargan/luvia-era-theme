@@ -15,6 +15,7 @@
     }
   }
 
+  /* Arka plan ve Renk Ayarları */
   #LuviaSection-{{ section.id }} {
     {% if section.settings.remove_bg %}
       background-color: transparent !important;
@@ -23,14 +24,21 @@
     {% endif %}
   }
 
+  /* Slider Görünürlük ve Stabilite Fixleri */
   .featured-swiper-{{ section.id }} {
     width: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    opacity: 0; /* JS yüklenene kadar sıçramayı önler */
+    transition: opacity 0.3s ease;
   }
 
   .featured-swiper-{{ section.id }}.swiper-initialized {
     opacity: 1;
+  }
+
+  .swiper-button-disabled {
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
   }
 {%- endstyle -%}
 
@@ -38,25 +46,28 @@
   id="LuviaSection-{{ section.id }}"
   class="transition-colors duration-300 section-{{ section.id }}-padding {% unless section.settings.remove_bg or section.settings.use_custom_bg %}bg-white{% endunless %}"
 >
-  {% comment %} SENİN ORİJİNAL CONTAINER YAPIN {% endcomment %}
   <div class="container mx-auto overflow-hidden">
-    {% comment %} Header and Navigation {% endcomment %}
+    {% comment %} Header and Navigation Area {% endcomment %}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 px-4 md:px-0">
       <div>
-        <h2 class="text-secondary text-2xl md:text-3xl font-bold uppercase tracking-tight">
-          {{ section.settings.section_title }}
-        </h2>
-        <p class="text-primary mt-2 opacity-80 italic">
+        <h2 class="text-secondary text-2xl md:text-3xl font-bold">{{ section.settings.section_title }}</h2>
+        <p class="text-primary mt-2 -tracking-tight opacity-80">
           {{ section.settings.section_subtitle }}
         </p>
       </div>
 
       <div class="flex items-center gap-6 mt-6 md:mt-0">
         <div class="flex gap-4">
-          <button class="swiper-prev-{{ section.id }} border border-primary p-2 hover:bg-primary hover:text-white transition-all cursor-pointer">
+          <button
+            class="swiper-prev-{{ section.id }} cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition-all duration-300"
+            aria-label="Previous slide"
+          >
             {% render 'icon-chevron-left' %}
           </button>
-          <button class="swiper-next-{{ section.id }} border border-primary p-2 hover:bg-primary hover:text-white transition-all cursor-pointer">
+          <button
+            class="swiper-next-{{ section.id }} cursor-pointer border border-primary p-2 hover:bg-primary hover:text-white transition-all duration-300"
+            aria-label="Next slide"
+          >
             {% render 'icon-chevron-right' %}
           </button>
         </div>
@@ -64,7 +75,7 @@
         {% if section.settings.button_url %}
           <a
             href="{{ section.settings.button_url }}"
-            class="text-primary text-sm uppercase tracking-widest border-b border-gray-200 pb-1 hover:border-primary transition-all"
+            class="text-primary text-sm hover:text-secondary transition-all uppercase tracking-widest border-b border-line pb-1"
           >
             {{ section.settings.button_text }}
           </a>
@@ -74,50 +85,127 @@
 
     {% comment %} Swiper Container {% endcomment %}
     <div class="swiper featured-swiper-{{ section.id }} !overflow-visible px-4 md:px-0">
-      <div class="swiper-wrapper flex items-stretch">
-        {%- if section.blocks.size > 0 -%}
-          {% for block in section.blocks %}
-            {%- assign product_handle = block.settings.product -%}
-            {%- assign product = all_products[product_handle] -%}
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          {%- assign product = all_products[block.settings.product] -%}
+          {% if product != blank %}
+            <div class="swiper-slide group relative flex flex-col h-full" {{ block.shopify_attributes }}>
+              <div class="relative aspect-[3/4] overflow-hidden bg-white shadow-sm rounded-sm">
+                {% if product.compare_at_price > product.price %}
+                  <span class="absolute top-4 left-4 z-20 bg-primary rounded-sm text-white font-medium text-[10px] px-2 py-1 tracking-widest uppercase">
+                    {{ 'products.product.on_sale' | t }}
+                  </span>
+                {% endif %}
 
-            <div class="swiper-slide h-auto" {{ block.shopify_attributes }}>
-              {% comment %}
-                Product değişkeni boş olsa bile product-card.liquid
-                dosyan içindeki 'else' (yer tutucu) kısmını tetikler.
-              {% endcomment %}
-              {% render 'product-card', product: product %}
+                {% comment %} Wishlist Butonu {% endcomment %}
+                <div class="absolute top-4 right-4 z-40">
+                  <button
+                    type="button"
+                    class="custom-wishlist-btn w-9 h-9 flex items-center justify-center rounded-full shadow-sm hover:scale-110 transition-transform duration-300 bg-white"
+                    data-product-id="{{ product.id }}"
+                    onclick="if(window.LuviaWishlist) { LuviaWishlist.toggle('{{ product.id }}') }"
+                    aria-label="Add to wishlist"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="w-5 h-5 text-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+
+                {% comment %} Ürün Görselleri {% endcomment %}
+                <a
+                  href="{{ product.url }}"
+                  class="block w-full h-full relative z-10"
+                  aria-label="{{ product.title | escape }}"
+                >
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 {% if product.images[1] %}group-hover:opacity-0{% endif %}"
+                    height="800"
+                    width="600"
+                    alt="Ürün görseli: {{ product.title | escape }}"
+                    loading="lazy"
+                  >
+                  {% if product.images[1] %}
+                    <img
+                      src="{{ product.images[1] | image_url: width: 600 }}"
+                      class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                      height="800"
+                      width="600"
+                      alt="Ürün görseli: {{ product.title | escape }}"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </a>
+
+                {% comment %} Sepete Ekle {% endcomment %}
+                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
+                  <button
+                    type="button"
+                    onclick="handleFeaturedAddToCart(event, '{{ product.selected_or_first_available_variant.id }}')"
+                    class="w-full bg-primary text-white py-4 text-[12px] uppercase tracking-[0.2em] hover:bg-secondary transition-colors cursor-pointer border-none font-medium"
+                  >
+                    {{ 'products.product.add_to_cart' | t }}
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-4 text-center px-2">
+                <a
+                  href="{{ product.url }}"
+                  class="text-primary uppercase tracking-wider block mb-1 hover:text-secondary transition-all text-sm"
+                >
+                  <span>{{ product.title }}</span>
+                </a>
+                <div class="flex justify-center items-center gap-2">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="text-gray-500 line-through text-[12px]">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="text-primary text-[14px] font-bold">{{ product.price | money }}</span>
+                </div>
+              </div>
             </div>
-          {% endfor %}
-        {%- else -%}
-          {% comment %} Hiç blok yoksa test için 4 adet şık yer tutucu basar {% endcomment %}
-          {%- for i in (1..4) -%}
-            <div class="swiper-slide h-auto">
-              {% render 'product-card', product: null %}
-            </div>
-          {%- endfor -%}
-        {%- endif -%}
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>
 </section>
 
 <script>
+  /**
+   * Luvia Era - Product Slider Logic
+   * Konsol hatalarını ve kaybolma sorunlarını gideren kapsüllenmiş yapı.
+   */
   (function () {
     const initSlider = () => {
       const swiperSelector = '.featured-swiper-{{ section.id }}';
       const container = document.querySelector(swiperSelector);
-      if (!container || typeof Swiper === 'undefined') return;
 
-      if (container.swiper) container.swiper.destroy(true, true);
+      if (!container) return;
 
+      // Önceki Swiper örneği varsa temizle (Shopify Editor çakışmasını önler)
+      if (container.swiper) {
+        container.swiper.destroy(true, true);
+      }
+
+      // Dinamik slide ve görünüm kontrolü
       const totalSlides = container.querySelectorAll('.swiper-slide').length;
       const desktopView = parseInt('{{ section.settings.slides_per_view | default: 4 }}');
 
       new Swiper(swiperSelector, {
-        slidesPerView: 1.2,
+        slidesPerView: 2,
         spaceBetween: 15,
         grabCursor: true,
         watchOverflow: true,
+        // KRİTİK: Konsol hatasını önlemek için loop kontrolü
+        loop: totalSlides > 2,
         navigation: {
           nextEl: '.swiper-next-{{ section.id }}',
           prevEl: '.swiper-prev-{{ section.id }}',
@@ -126,10 +214,12 @@
           768: {
             slidesPerView: 3,
             spaceBetween: 20,
+            loop: totalSlides > 3,
           },
           1024: {
             slidesPerView: desktopView,
             spaceBetween: 30,
+            loop: totalSlides > desktopView,
           },
         },
         on: {
@@ -140,9 +230,120 @@
       });
     };
 
-    document.addEventListener('DOMContentLoaded', initSlider);
+    // Sayfa yüklendiğinde ve Shopify Editor'de değişiklik yapıldığında çalıştır
+    if (document.readyState === 'complete') {
+      initSlider();
+    } else {
+      window.addEventListener('load', initSlider);
+    }
     document.addEventListener('shopify:section:load', initSlider);
-    // Editor için garantiye alalım
-    window.addEventListener('load', initSlider);
   })();
+
+  // Global Sepete Ekleme Fonksiyonu (Eğer tema dosyasında yoksa)
+  if (typeof handleFeaturedAddToCart !== 'function') {
+    window.handleFeaturedAddToCart = function (e, variantId) {
+      const btn = e.currentTarget;
+      const originalText = btn.innerHTML;
+      if (btn.classList.contains('loading')) return;
+
+      btn.classList.add('loading');
+      btn.innerText = '...';
+      btn.disabled = true;
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 }),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          btn.innerText = 'ADDED';
+          if (typeof openAndRefreshCart === 'function') openAndRefreshCart();
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.classList.remove('loading');
+          }, 2000);
+        })
+        .catch(() => {
+          btn.innerText = 'ERROR';
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.classList.remove('loading');
+          }, 2000);
+        });
+    };
+  }
 </script>
+
+{% schema %}
+{
+  "name": "Featured Products Slider",
+  "settings": [
+    { "type": "text", "id": "section_title", "label": "Title", "default": "Featured Selection" },
+    { "type": "text", "id": "section_subtitle", "label": "Subtitle", "default": "Handpicked for you" },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "View All" },
+    { "type": "url", "id": "button_url", "label": "Button URL" },
+    { "type": "number", "id": "slides_per_view", "label": "Slides per view (Desktop)", "default": 4 },
+    { "type": "header", "content": "Section Spacing Settings" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Margin",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Margin",
+      "default": 0
+    },
+    { "type": "header", "content": "Background Design" },
+    { "type": "checkbox", "id": "use_custom_bg", "label": "Use Custom Background Color", "default": false },
+    { "type": "color", "id": "section_bg_color", "label": "Background Color", "default": "#ffffff" },
+    { "type": "checkbox", "id": "remove_bg", "label": "Remove Background", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [{ "type": "product", "id": "product", "label": "Select Product" }]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products Slider",
+      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }, { "type": "product" }]
+    }
+  ]
+}
+{% endschema %}
