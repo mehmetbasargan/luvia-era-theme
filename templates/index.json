@@ -382,6 +382,18 @@
     "full_width_gallery_JxjmU9": {
       "type": "full-width-gallery",
       "blocks": {
+        "image_ExnJPe": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_zej7UP": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_GAmzXj": {
+          "type": "image",
+          "settings": {}
+        },
         "image_fp37Tw": {
           "type": "image",
           "settings": {
@@ -390,6 +402,9 @@
         }
       },
       "block_order": [
+        "image_ExnJPe",
+        "image_zej7UP",
+        "image_GAmzXj",
         "image_fp37Tw"
       ],
       "name": "Luvia Full Gallery",
