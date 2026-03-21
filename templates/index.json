@@ -485,7 +485,7 @@
         "margin_bottom": 0,
         "use_custom_bg": false,
         "section_bg_color": "#ffffff",
-        "remove_bg": false
+        "remove_bg": true
       }
     }
   },
