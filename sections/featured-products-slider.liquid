@@ -72,15 +72,20 @@
       const container = document.querySelector(swiperSelector);
       if (!container) return;
       if (container.swiper) container.swiper.destroy(true, true);
+
       const totalSlides = container.querySelectorAll('.swiper-slide').length;
       const desktopView = parseInt('{{ section.settings.slides_per_view | default: 4 }}');
+
       new Swiper(swiperSelector, {
         slidesPerView: 2,
         spaceBetween: 15,
         grabCursor: true,
         watchOverflow: true,
         loop: totalSlides > 2,
-        navigation: { nextEl: '.swiper-next-{{ section.id }}', prevEl: '.swiper-prev-{{ section.id }}' },
+        navigation: {
+          nextEl: '.swiper-next-{{ section.id }}',
+          prevEl: '.swiper-prev-{{ section.id }}',
+        },
         breakpoints: {
           768: { slidesPerView: 3, spaceBetween: 20, loop: totalSlides > 3 },
           1024: { slidesPerView: desktopView, spaceBetween: 30, loop: totalSlides > desktopView },
@@ -92,23 +97,26 @@
         },
       });
     };
+
     if (document.readyState === 'complete') initSlider();
     else window.addEventListener('load', initSlider);
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  // 🛒 SEPETE EKLEME VE HEADER/DRAWER TETİKLEME
+  // --- GLOBAL SEPETE EKLEME FONKSİYONU ---
+  // window. diyerek tüm sayfalarda (slider dahil) çalışmasını garanti ediyoruz.
   window.handleAddToCart = function (e, variantId) {
-    e.preventDefault();
-    const btn = e.currentTarget;
+    if (e) e.preventDefault();
+    const btn = e.currentTarget || e.target;
     const originalText = btn.innerHTML;
     if (btn.classList.contains('loading')) return;
 
     btn.classList.add('loading');
     btn.innerText = '...';
+    btn.disabled = true;
 
-    // Sepet çekmecesini ve ikonunu güncellemek için gerekli "sections" isteği
-    const sections = ['cart-drawer', 'cart-icon-bubble', 'header'];
+    // Header ve Drawer bölümlerini Shopify'dan istiyoruz
+    const sections = 'cart-drawer,cart-icon-bubble,header';
 
     fetch('/cart/add.js', {
       method: 'POST',
@@ -116,58 +124,53 @@
       body: JSON.stringify({
         id: variantId,
         quantity: 1,
-        sections: sections.join(','),
+        sections: sections,
       }),
     })
-      .then((response) => response.json())
-      .then((response) => {
-        // 1. HEADER GÜNCELLEME (Dawn ve Modern Temalar İçin)
-        // Temanın kendi 'publish' mekanizmasını tetikliyoruz
-        if (window.publish && window.PUB_SUB_EVENTS) {
-          publish(PUB_SUB_EVENTS.cartUpdate, {
-            source: 'featured-slider',
-            product_variant_id: variantId,
-            cart: response,
-          });
-        }
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status == 422) {
+          btn.innerText = 'LIMIT REACHED';
+        } else {
+          btn.innerText = 'ADDED';
 
-        // 2. MANUEL HEADER GÜNCELLEME (Eğer publish çalışmazsa)
-        if (response.sections && response.sections['cart-icon-bubble']) {
-          const cartBubbleContainer = document.querySelector('#cart-icon-bubble');
-          if (cartBubbleContainer) {
-            cartBubbleContainer.innerHTML = response.sections['cart-icon-bubble'];
+          // 1. Header Sepet Sayısını Güncelle (Zorunlu)
+          if (data.sections && data.sections['cart-icon-bubble']) {
+            const cartIcon = document.querySelector('#cart-icon-bubble');
+            if (cartIcon) cartIcon.innerHTML = data.sections['cart-icon-bubble'];
+          }
+
+          // 2. Sepet Çekmecesini (Drawer) Güncelle ve Aç
+          const cartDrawer = document.querySelector('cart-drawer');
+          if (cartDrawer) {
+            if (data.sections['cart-drawer']) cartDrawer.renderContents(data);
+            if (typeof cartDrawer.open === 'function') cartDrawer.open();
+          } else if (typeof openAndRefreshCart === 'function') {
+            openAndRefreshCart();
           }
         }
-
-        // 3. DRAWER (ÇEKMECE) AÇMA VE GÜNCELLEME
-        const cartDrawer = document.querySelector('cart-drawer');
-        if (cartDrawer) {
-          if (response.sections['cart-drawer']) {
-            cartDrawer.renderContents(response);
-          }
-          if (typeof cartDrawer.open === 'function') cartDrawer.open();
-        }
-
-        btn.innerText = 'ADDED';
       })
-      .catch((err) => {
-        console.error('Cart Error:', err);
+      .catch(() => {
         btn.innerText = 'ERROR';
       })
       .finally(() => {
         setTimeout(() => {
           btn.innerHTML = originalText;
+          btn.disabled = false;
           btn.classList.remove('loading');
         }, 2000);
       });
   };
 
-  // ❤️ WISHLIST DINLEYICI
+  // --- GLOBAL WISHLIST DINLEYICI ---
+  // Slider içindeki kartlara sonradan eklenen wishlist butonlarını yakalar
   document.addEventListener('click', function (e) {
     const wishlistBtn = e.target.closest('.custom-wishlist-btn');
     if (!wishlistBtn) return;
+
     e.preventDefault();
     const handle = wishlistBtn.getAttribute('data-product-handle');
+
     if (window.LuviaWishlist && handle) {
       window.LuviaWishlist.toggle(e, handle);
     }
