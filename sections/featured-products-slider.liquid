@@ -150,7 +150,7 @@
     document.addEventListener('shopify:section:load', initSlider);
   })();
 
-  // DÜZELTİLEN KISIM: handleAddToCart olarak değiştirildi
+  // SEPETE EKLEME VE ÇEKMECEYİ TETİKLEME MANTIĞI
   if (typeof handleAddToCart !== 'function') {
     window.handleAddToCart = function (e, variantId) {
       const btn = e.currentTarget;
@@ -161,37 +161,46 @@
       btn.innerText = '...';
       btn.disabled = true;
 
+      // Sepete ekleme verisi
+      let formData = {
+        items: [
+          {
+            id: variantId,
+            quantity: 1,
+          },
+        ],
+        // Dawn/Modern temalar için sepet çekmecesini güncelleyen bölümleri çekmesini sağlar
+        sections: 'cart-drawer,cart-icon-bubble,cart-live-region-text',
+        sections_url: window.location.pathname,
+      };
+
       fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: 1 }),
+        body: JSON.stringify(formData),
       })
-        .then((res) => res.json())
-        .then((cart) => {
+        .then((response) => response.json())
+        .then((response) => {
+          // 1. Temanın sepet çekmecesini (cart-drawer) bul
+          const cartDrawer = document.querySelector('cart-drawer');
+          const cartIcon = document.querySelector('#cart-icon-bubble');
+
+          // 2. Çekmece içeriğini yeni gelen verilerle güncelle (Dawn/Modern yapı)
+          if (cartDrawer && response.sections) {
+            cartDrawer.renderContents(response);
+          }
+
+          // 3. Çekmeceyi aç
+          if (cartDrawer) {
+            cartDrawer.classList.add('active'); // Bazı temalar için
+            if (typeof cartDrawer.open === 'function') {
+              cartDrawer.open(); // Dawn için standart
+            }
+          } else if (window.openAndRefreshCart) {
+            window.openAndRefreshCart(); // Custom temalar için
+          }
+
           btn.innerText = 'ADDED';
-
-          // 1. Standart Shopify "Cart Update" olayını yayınla (Dawn ve modern temalar için)
-          document.dispatchEvent(
-            new CustomEvent('cart:updated', {
-              detail: { cart: cart },
-            })
-          );
-
-          // 2. Popüler Drawer tetikleyicilerini dene
-          if (window.openAndRefreshCart) {
-            window.openAndRefreshCart();
-          } else if (document.querySelector('cart-drawer')) {
-            // Dawn tabanlı temalarda çekmeceyi açar
-            const cartDrawer = document.querySelector('cart-drawer');
-            if (cartDrawer.open) cartDrawer.open();
-          } else if (typeof window.refreshCartDrawer === 'function') {
-            window.refreshCartDrawer();
-          }
-
-          // 3. Eğer hiçbiri yoksa en azından sayfayı yenilemeden sepet sayısını güncellemeye çalışır
-          if (document.querySelector('.cart-count-bubble')) {
-            // Opsiyonel: Buraya basit bir fetch ile sayı güncelleme eklenebilir
-          }
 
           setTimeout(() => {
             btn.innerHTML = originalText;
@@ -200,7 +209,7 @@
           }, 2000);
         })
         .catch((error) => {
-          console.error('Cart Error:', error);
+          console.error('Error:', error);
           btn.innerText = 'ERROR';
           setTimeout(() => {
             btn.innerHTML = originalText;
