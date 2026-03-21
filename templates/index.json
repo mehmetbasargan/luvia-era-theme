@@ -382,6 +382,18 @@
     "full_width_gallery_JxjmU9": {
       "type": "full-width-gallery",
       "blocks": {
+        "image_iCE6RL": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p6-1.jpg"
+          }
+        },
+        "image_mtYpLC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/p4.jpg"
+          }
+        },
         "image_UWqxhf": {
           "type": "image",
           "settings": {
@@ -420,6 +432,8 @@
         }
       },
       "block_order": [
+        "image_iCE6RL",
+        "image_mtYpLC",
         "image_UWqxhf",
         "image_VR8X6K",
         "image_9Pyqew",
