@@ -1572,6 +1572,10 @@ blockquote {
   width: 4rem;
 }
 
+.w-10 {
+  width: 2.5rem;
+}
+
 .min-w-\[200px\] {
   min-width: 200px;
 }
@@ -2193,6 +2197,11 @@ blockquote {
   background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\#f8f8f8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 248 248 / var(--tw-bg-opacity, 1));
+}
+
 .fill-gray-400 {
   fill: #9ca3af;
 }
@@ -2255,6 +2264,14 @@ blockquote {
 
 .p-20 {
   padding: 5rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
+}
+
+.p-12 {
+  padding: 3rem;
 }
 
 .px-10 {
@@ -2535,6 +2552,10 @@ blockquote {
   line-height: 1rem;
 }
 
+.text-\[9px\] {
+  font-size: 9px;
+}
+
 .font-black {
   font-weight: 900;
 }
@@ -2637,6 +2658,10 @@ blockquote {
 
 .tracking-\[0\.5em\] {
   letter-spacing: 0.5em;
+}
+
+.tracking-\[0\.4em\] {
+  letter-spacing: 0.4em;
 }
 
 .\!text-primary {
@@ -3238,6 +3263,10 @@ blockquote {
     height: 600px;
   }
 
+  .md\:h-14 {
+    height: 3.5rem;
+  }
+
   .md\:min-h-\[500px\] {
     min-height: 500px;
   }
@@ -3284,6 +3313,10 @@ blockquote {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  .md\:w-14 {
+    width: 3.5rem;
   }
 
   .md\:max-w-lg {
