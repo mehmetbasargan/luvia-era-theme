@@ -709,6 +709,60 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "footer_promotion_VnzCaT": {
+      "type": "footer-promotion",
+      "blocks": {
+        "promotion_hMr6dW": {
+          "type": "promotion",
+          "settings": {
+            "title": "Dresses",
+            "link": "",
+            "overlay_opacity": 30
+          }
+        },
+        "promotion_KFJqw3": {
+          "type": "promotion",
+          "settings": {
+            "title": "Accessories",
+            "link": "",
+            "overlay_opacity": 30
+          }
+        },
+        "promotion_Xdp6b7": {
+          "type": "promotion",
+          "settings": {
+            "title": "Best Sellers",
+            "link": "",
+            "overlay_opacity": 30
+          }
+        },
+        "promotion_yCHEj4": {
+          "type": "promotion",
+          "settings": {
+            "title": "Final Sale",
+            "link": "",
+            "overlay_opacity": 30
+          }
+        }
+      },
+      "block_order": [
+        "promotion_hMr6dW",
+        "promotion_KFJqw3",
+        "promotion_Xdp6b7",
+        "promotion_yCHEj4"
+      ],
+      "name": "Footer Promotion",
+      "settings": {
+        "heading": "Curated Collections",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "use_custom_bg": false,
+        "section_bg_color": "#ffffff",
+        "remove_bg": false
+      }
     }
   },
   "order": [
@@ -730,6 +784,7 @@
     "shoppable_image_V6G9yN",
     "testimonial_effdMB",
     "statement_banner_z4dWJV",
-    "collection_list_mTmkEB"
+    "collection_list_mTmkEB",
+    "footer_promotion_VnzCaT"
   ]
 }
