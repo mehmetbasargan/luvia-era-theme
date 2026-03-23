@@ -619,6 +619,7 @@
       "name": "FAQ Accordion",
       "settings": {
         "title": "Frequently Asked Questions",
+        "image": "shopify://shop_images/p3-1.jpg",
         "header_opacity": 100,
         "padding_top": 80,
         "padding_bottom": 80
