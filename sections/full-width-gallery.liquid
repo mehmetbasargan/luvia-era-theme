@@ -31,41 +31,58 @@
   <div class="flex flex-wrap gallery-wrapper">
     {% for block in section.blocks %}
       {%- liquid
+        # Her döngüde farklı bir placeholder (1-6 arası) seçer
+        assign placeholder_index = forloop.index | modulo: 6 | plus: 1
+        assign placeholder_name = 'lifestyle-' | append: placeholder_index
+
         if block.settings.image != blank
           assign thumb_url = block.settings.image | image_url: width: 800
           assign full_url = block.settings.image | image_url: width: 2000
+          assign is_placeholder = false
         else
-          # Yer tutucu modunda hem küçük hem büyük resim AYNI olsun
-          assign thumb_url = 'https://cdn.shopify.com/s/images/themes/product-2.png'
-          assign full_url = 'https://cdn.shopify.com/s/images/themes/product-2.png'
+          # Görsel yoksa Shopify'ın SVG placeholder sistemini kullanacağız
+          assign is_placeholder = true
         endif
       -%}
 
       <div
         class="w-1/2 md:w-1/4 aspect-[3/2] relative group overflow-hidden cursor-pointer luvia-gallery-item flex items-center justify-center bg-[#f3f3f3]"
         {{ block.shopify_attributes }}
-        onclick="openLuviaGallery(this, {{ forloop.index0 }})"
-        data-full-src="{{ full_url }}"
+        {% unless is_placeholder %}
+          onclick="openLuviaGallery(this, {{ forloop.index0 }})"
+          data-full-src="{{ full_url }}"
+        {% endunless %}
       >
-        {% comment %}
-          Görsel: 'object-cover' kutuyu doldurur, 'object-center' ise tam ortalar.
-          'absolute inset-0' görselin kutunun her köşesine yapışmasını sağlar.
-        {% endcomment %}
-        <img
-          src="{{ thumb_url }}"
-          alt="Gallery Image"
-          class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-[1500ms] ease-out group-hover:scale-110 {% if block.settings.image == blank %}opacity-30{% endif %}"
-          loading="lazy"
-          width="800"
-          height="600"
-        >
+        {% if is_placeholder %}
+          {% comment %} Yer tutucu modu: Farklı lifestyle SVG'leri basar {% endcomment %}
+          <div class="absolute inset-0 w-full h-full p-8 opacity-20 transition-transform duration-[1500ms] group-hover:scale-110">
+            {{ placeholder_name | placeholder_svg_tag: 'w-full h-full object-cover' }}
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center bg-black/5">
+            <span class="text-[10px] tracking-[0.3em] uppercase text-primary/40 font-light"
+              >Gallery {{ forloop.index -}}
+            </span>
+          </div>
+        {% else %}
+          {% comment %} Normal Görsel Modu {% endcomment %}
+          <img
+            src="{{ thumb_url }}"
+            alt="Gallery Image"
+            class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-[1500ms] ease-out group-hover:scale-110"
+            loading="lazy"
+            width="800"
+            height="600"
+          >
+        {% endif %}
 
-        {% comment %} Hover Efekti ve İkon (Her zaman tam merkezde) {% endcomment %}
-        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1500ms] ease-out flex items-center justify-center z-20 bg-black/40">
-          <span class="flex text-primary bg-white md:h-16 md:w-16 h-12 w-12 rounded-full items-center justify-center transition-all duration-[1500ms] transform scale-50 group-hover:scale-100">
-            {% render 'icon-zoom-pan' %}
-          </span>
-        </div>
+        {% comment %} Zoom İkonu (Sadece gerçek görsel varken veya istersen her zaman) {% endcomment %}
+        {% unless is_placeholder %}
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[1500ms] ease-out flex items-center justify-center z-20 bg-black/40">
+            <span class="flex text-primary bg-white md:h-16 md:w-16 h-12 w-12 rounded-full items-center justify-center transition-all duration-[1500ms] transform scale-50 group-hover:scale-100">
+              {% render 'icon-zoom-pan' %}
+            </span>
+          </div>
+        {% endunless %}
       </div>
     {% endfor %}
   </div>
