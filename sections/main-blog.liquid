@@ -30,25 +30,25 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {% for article in blog.articles %}
           <article class="blog-post-card group">
-            {% comment %} GÖRSEL ALANI: Görsel varsa onu, yoksa yer tutucuyu basar {% endcomment %}
             <a
               href="{{ article.url }}"
-              class="block overflow-hidden mb-4 aspect-[16/10] bg-custombg border border-line/10"
+              class="block overflow-hidden mb-4 aspect-[16/10] bg-custombg border border-line/10 relative"
               aria-label="Read {{ article.title | escape }}"
             >
               {% if article.image %}
                 <img
-                  src="{{ article.image | image_url: width: 800 }}"
+                  src="{{ article.image | image_url: width: 1200, crop: 'center' }}"
                   alt="{{ article.title | escape }}"
-                  height="450"
-                  width="800"
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  height="750"
+                  width="1200"
+                  class="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105 shadow-inner"
                   loading="lazy"
+                  decoding="async"
+                  {% comment %} Tarayıcının görseli daha hızlı işlemesine yardımcı olur {% endcomment %}
                 >
               {% else %}
-                {% comment %} Görsel eklenmediğinde görünecek yer tutucu {% endcomment %}
-                <div class="w-full h-full bg-gray-100 flex items-center justify-center opacity-40 group-hover:scale-105 transition-transform duration-700">
-                  {{ 'lifestyle-1' | placeholder_svg_tag: 'w-20 h-20' }}
+                <div class="w-full h-full bg-gray-50 flex items-center justify-center opacity-30 group-hover:scale-105 transition-transform duration-700">
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'w-[100%] h-[100%]' }}
                 </div>
               {% endif %}
             </a>
@@ -74,6 +74,8 @@
                 </div>
               </a>
             </div>
+
+            {% comment %} Geri kalan içerik kısmı (Title, Date vb.) aynı kalıyor {% endcomment %}
           </article>
         {% endfor %}
       </div>
