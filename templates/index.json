@@ -237,55 +237,6 @@
         "remove_bg": false
       }
     },
-    "featured_products_qN9dm6": {
-      "type": "featured-products",
-      "blocks": {
-        "product_cq8fqq": {
-          "type": "product",
-          "settings": {
-            "product": "luna-satin-slip-dress"
-          }
-        },
-        "product_z4HqGc": {
-          "type": "product",
-          "settings": {
-            "product": "ethereal-knit-cardigan"
-          }
-        },
-        "product_kmKNNa": {
-          "type": "product",
-          "settings": {
-            "product": "luna-high-waist-trousers"
-          }
-        },
-        "product_TN8gGE": {
-          "type": "product",
-          "settings": {
-            "product": "velvet-night-blazer"
-          }
-        }
-      },
-      "block_order": [
-        "product_cq8fqq",
-        "product_z4HqGc",
-        "product_kmKNNa",
-        "product_TN8gGE"
-      ],
-      "name": "Featured Products (Selectable)",
-      "settings": {
-        "section_title": "Featured Selection",
-        "section_subtitle": "Handpicked for you",
-        "button_text": "View All",
-        "button_url": "",
-        "padding_top": 100,
-        "padding_bottom": 100,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "use_custom_bg": true,
-        "section_bg_color": "#f9f9f9",
-        "remove_bg": false
-      }
-    },
     "image_with_text_multi_Kt36ED": {
       "type": "image-with-text-multi",
       "blocks": {
@@ -674,7 +625,6 @@
     "collection_list_3fMXPn",
     "newsletter_banner_rQGEgG",
     "featured_blog_carousel_mxUCVn",
-    "featured_products_qN9dm6",
     "image_with_text_multi_Kt36ED",
     "featured_products_slider_4zxdmN",
     "full_width_gallery_JxjmU9",
