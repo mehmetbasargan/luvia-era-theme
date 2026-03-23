@@ -1,10 +1,10 @@
 <div
   id="LuviaLightbox"
-  class="fixed inset-0 z-[10000] bg-primary flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300"
+  class="fixed inset-0 z-[10000] bg-black flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300"
 >
   <button
     type="button"
-    class="absolute top-8 right-8 text-white hover:bg-secondary bg-secondary text-5xl z-[9999] h-[60px] w-[60px] cursor-pointer rounded-full flex items-center justify-center"
+    class="absolute top-8 right-8 text-white hover:bg-secondary bg-primary text-5xl z-[9999] h-[60px] w-[60px] cursor-pointer rounded-full flex items-center justify-center transition duration-200"
     onclick="closeLuviaGallery()"
     aria-label="Close gallery"
   >
@@ -12,7 +12,7 @@
   </button>
   <button
     type="button"
-    class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-secondary bg-secondary z-[10001] p-4 cursor-pointer rounded-full flex items-center justify-center"
+    class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-secondary bg-primary z-[10001] p-4 cursor-pointer rounded-full flex items-center justify-center transition duration-200"
     onclick="changeImage(-1)"
     aria-label="Previous image"
   >
@@ -27,7 +27,7 @@
   >
   <button
     type="button"
-    class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-secondary bg-secondary z-[10001] p-4 cursor-pointer rounded-full flex items-center justify-center"
+    class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-secondary bg-primary z-[10001] p-4 cursor-pointer rounded-full flex items-center justify-center transition duration-200"
     onclick="changeImage(1)"
     aria-label="Next image"
   >

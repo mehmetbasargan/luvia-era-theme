@@ -3059,6 +3059,10 @@ blockquote {
   color: var(--color-white);
 }
 
+.hover\:\!text-black:hover {
+  color: var(--color-black) !important;
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
