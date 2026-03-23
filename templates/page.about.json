@@ -38,27 +38,19 @@
       "blocks": {
         "image_CzXNtY": {
           "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p4-1.jpg"
-          }
+          "settings": {}
         },
         "image_fzxwMm": {
           "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p2-3.jpg"
-          }
+          "settings": {}
         },
         "image_DWGLrc": {
           "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p2-2.jpg"
-          }
+          "settings": {}
         },
         "image_Aw9E6P": {
           "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/p5-3.jpg"
-          }
+          "settings": {}
         }
       },
       "block_order": [
