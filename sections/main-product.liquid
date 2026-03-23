@@ -289,32 +289,38 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 3. AJAX Add to Cart
+ // 3. AJAX Add to Cart (GÜNCELLENDİ)
   const productForm = document.getElementById('product-form-{{ section.id }}');
   if (productForm) {
     productForm.addEventListener('submit', function (e) {
       e.preventDefault();
       const submitBtn = this.querySelector('.add-to-cart-btn');
       submitBtn.disabled = true;
+      const originalText = submitBtn.innerText;
       submitBtn.innerText = 'Adding...';
 
-      fetch('{{ routes.cart_add_url }}', {
+      fetch('{{ routes.cart_add_url }}.js', { // .js eklendi daha sağlıklı döner
         method: 'POST',
         body: new FormData(this)
       })
       .then(res => res.json())
       .then(data => {
-        if (typeof openAndRefreshCart === 'function') {
-          openAndRefreshCart();
-        } else {
-          window.location.href = '/cart';
+        // 1. Sepet verilerini ve Header sayısını güncelle
+        if (typeof updateCartDrawer === 'function') {
+          updateCartDrawer();
         }
+
+        // 2. Sepet Çekmecesini (Drawer) Aç
+        openCartDrawer(); 
+
+        // 3. Butonu eski haline getir
         submitBtn.disabled = false;
-        submitBtn.innerText = "{{ 'products.product.add_to_cart' | t }}";
+        submitBtn.innerText = originalText;
       })
       .catch(err => {
         console.error('Cart Error:', err);
         submitBtn.disabled = false;
+        submitBtn.innerText = originalText;
       });
     });
   }
