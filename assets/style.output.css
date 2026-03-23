@@ -1129,6 +1129,10 @@ blockquote {
   margin-top: auto;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;
@@ -1939,6 +1943,16 @@ blockquote {
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+
+.divide-line > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--color-line);
 }
 
 .overflow-hidden {
@@ -3417,6 +3431,10 @@ blockquote {
     padding-bottom: 8rem;
   }
 
+  .md\:pr-10 {
+    padding-right: 2.5rem;
+  }
+
   .md\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -3448,6 +3466,10 @@ blockquote {
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-\[15px\] {
+    font-size: 15px;
   }
 }
 
@@ -3524,6 +3546,10 @@ blockquote {
     gap: 0.5rem;
   }
 
+  .lg\:gap-24 {
+    gap: 6rem;
+  }
+
   .lg\:py-24 {
     padding-top: 6rem;
     padding-bottom: 6rem;
@@ -3532,6 +3558,11 @@ blockquote {
   .lg\:py-32 {
     padding-top: 8rem;
     padding-bottom: 8rem;
+  }
+
+  .lg\:px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 }
 

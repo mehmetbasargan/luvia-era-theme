@@ -1,0 +1,186 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+  }
+  .accordion-item.active .accordion-content {
+    max-height: 500px; /* İçeriğe göre ayarlanır */
+    padding-bottom: 1.5rem;
+  }
+  .accordion-item.active .icon-plus { display: none; }
+  .accordion-item.active .icon-minus { display: block; }
+  .icon-minus { display: none; }
+{%- endstyle -%}
+
+<section class="section-{{ section.id }}-padding bg-white overflow-hidden">
+  <div class="container mx-auto px-4 md:px-10 lg:px-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+      <div class="relative aspect-[4/5] overflow-hidden bg-custombg group animate-fadeIn">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url: width: 1000 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            height="100%"
+            width="100%"
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
+          >
+        {% else %}
+          <div class="w-full h-full opacity-30 p-20">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="text-primary/40 uppercase tracking-[0.5em] text-xs font-light">FAQ Image</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="flex flex-col space-y-8 animate-fadeIn" style="animation-delay: 0.2s;">
+        <div class="space-y-4">
+          {% if section.settings.title != blank %}
+            <h2 class="text-secondary text-2xl md:text-3xl font-light uppercase tracking-widest">
+              {{ section.settings.title }}
+            </h2>
+          {% endif %}
+          <div class="h-[1px] w-20 bg-secondary"></div>
+        </div>
+
+        <div class="accordion-wrapper divide-y divide-line">
+          {% for block in section.blocks %}
+            <div class="accordion-item group py-2" {{ block.shopify_attributes }}>
+              <button
+                type="button"
+                class="w-full flex items-center justify-between py-4 text-left focus:outline-none"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="text-primary text-[14px] md:text-[15px] uppercase tracking-wider font-medium group-hover:text-secondary transition-colors">
+                  {{ block.settings.question }}
+                </span>
+                <span class="ml-4 flex-shrink-0 text-secondary">
+                  <svg class="icon-plus w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"></path>
+                  </svg>
+                  <svg class="icon-minus w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 12H6"></path>
+                  </svg>
+                </span>
+              </button>
+              <div class="accordion-content">
+                <div class="text-primary/70 leading-relaxed text-[14px] font-light md:pr-10">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleAccordion(button) {
+    const currentItem = button.parentElement;
+    const isActive = currentItem.classList.contains('active');
+
+    // Diğerlerini kapat (Opsiyonel: Sadece biri açık kalsın istiyorsan)
+    document.querySelectorAll('.accordion-item').forEach((item) => {
+      item.classList.remove('active');
+    });
+
+    if (!isActive) {
+      currentItem.classList.add('active');
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "FAQ Image"
+    },
+    {
+      "type": "range",
+      "id": "header_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Header Opacity Rate",
+      "default": 100,
+      "info": "Adjust the transparency level of the header section if applicable."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is your shipping policy?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>We offer free express shipping on all orders over $150.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [{ "type": "question" }, { "type": "question" }, { "type": "question" }]
+    }
+  ]
+}
+{% endschema %}
