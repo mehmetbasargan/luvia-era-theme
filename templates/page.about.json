@@ -42,7 +42,9 @@
         },
         "image_fzxwMm": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/p4-3.jpg"
+          }
         },
         "image_DWGLrc": {
           "type": "image",
