@@ -1564,6 +1564,10 @@ blockquote {
   width: 40%;
 }
 
+.w-16 {
+  width: 4rem;
+}
+
 .min-w-\[200px\] {
   min-width: 200px;
 }
