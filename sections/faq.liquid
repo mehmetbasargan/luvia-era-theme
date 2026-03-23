@@ -10,92 +10,73 @@
     }
   }
 
-  /* Akordeon İçerik Alanı */
+  /* Akordeon Ana Kapsayıcı */
   .accordion-content {
     max-height: 0;
     overflow: hidden;
-    /* transition: süresini buradan ayarlayabilirsin, 0.5s idealdir */
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    /* Pürüzsüzlük anahtarı: Süre ve Bezier eğrisi */
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
     opacity: 0;
   }
 
+  /* Aktif olduğunda yazı yavaşça belirsin */
   .accordion-item.active .accordion-content {
     opacity: 1;
-    /* padding-bottom ekleyerek metnin en altta sıkışmasını engelliyoruz */
+  }
+
+  /* İçerik Yazısı: Padding'i buraya veriyoruz ki yükseklik hesaplanırken takılmasın */
+  .accordion-inner {
+    padding-top: 0.5rem;
     padding-bottom: 2rem;
   }
 
-  /* İkon Animasyonları */
-  .icon-plus, .icon-minus {
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .accordion-item.active .icon-plus {
-    transform: rotate(90deg);
-    display: none;
-  }
-  .accordion-item.active .icon-minus {
-    display: block;
-    transform: rotate(180deg);
-  }
-  .icon-minus { display: none; }
+  /* İkon Animasyonu */
+  .icon-plus { transition: transform 0.5s ease; }
+  .accordion-item.active .icon-plus { transform: rotate(45deg); color: #000; } /* Artı işaretini çarpıya çevirir */
 {%- endstyle -%}
 
-<section class="section-{{ section.id }}-padding bg-white overflow-hidden">
+<section class="section-{{ section.id }}-padding bg-white">
   <div class="container mx-auto px-4 md:px-10 lg:px-20">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-      <div class="relative aspect-[4/5] overflow-hidden bg-custombg group animate-fadeIn">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+      <div class="relative aspect-[4/5] overflow-hidden bg-custombg animate-fadeIn sticky top-32">
         {% if section.settings.image != blank %}
           <img
             src="{{ section.settings.image | image_url: width: 1000 }}"
-            alt="{{ section.settings.image.alt | escape }}"
             loading="lazy"
-            height="100%"
-            width="100%"
-            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
           >
         {% else %}
           <div class="w-full h-full opacity-30 p-20">
             {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
           </div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <span class="text-primary/40 uppercase tracking-[0.5em] text-xs font-light">FAQ Image</span>
-          </div>
         {% endif %}
       </div>
 
-      <div class="flex flex-col space-y-8 animate-fadeIn" style="animation-delay: 0.2s;">
-        <div class="space-y-4">
-          {% if section.settings.title != blank %}
-            <h2 class="text-secondary text-2xl md:text-3xl font-light uppercase tracking-widest">
-              {{ section.settings.title }}
-            </h2>
-          {% endif %}
-          <div class="h-[1px] w-20 bg-secondary"></div>
-        </div>
+      <div class="flex flex-col space-y-8 animate-fadeIn">
+        <h2 class="text-secondary text-2xl md:text-3xl font-light uppercase tracking-[0.2em]">
+          {{ section.settings.title }}
+        </h2>
 
-        <div class="accordion-wrapper divide-y divide-line">
+        <div class="accordion-wrapper border-t border-line">
           {% for block in section.blocks %}
-            <div class="accordion-item group py-2" {{ block.shopify_attributes }}>
+            <div class="accordion-item border-b border-line" {{ block.shopify_attributes }}>
               <button
                 type="button"
-                class="w-full flex items-center justify-between py-4 text-left focus:outline-none"
+                class="w-full flex items-center justify-between py-6 text-left group"
                 onclick="toggleAccordion(this)"
               >
-                <span class="text-primary text-[14px] md:text-[15px] uppercase tracking-wider font-medium group-hover:text-secondary transition-colors">
+                <span class="text-primary text-[13px] md:text-[14px] uppercase tracking-[0.15em] font-medium transition-colors group-hover:text-secondary">
                   {{ block.settings.question }}
                 </span>
-                <span class="ml-4 flex-shrink-0 text-secondary">
-                  <svg class="icon-plus w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"></path>
-                  </svg>
-                  <svg class="icon-minus w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 12H6"></path>
+                <span class="icon-plus text-secondary">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 6v12m6-6H6"></path>
                   </svg>
                 </span>
               </button>
+
               <div class="accordion-content">
-                <div class="text-primary/70 leading-relaxed text-[14px] font-light md:pr-10">
+                <div class="accordion-inner text-primary/70 leading-relaxed text-[14px] font-light md:pr-10 italic">
                   {{ block.settings.answer }}
                 </div>
               </div>
@@ -113,102 +94,22 @@
     const content = currentItem.querySelector('.accordion-content');
     const allItems = document.querySelectorAll('.accordion-item');
 
-    // 1. Diğer açık olanları kapat (Sadece biri açık kalsın istiyorsan)
+    // 1. Diğerlerini kapat (Daha profesyonel bir akış için)
     allItems.forEach((item) => {
       if (item !== currentItem && item.classList.contains('active')) {
         item.classList.remove('active');
-        item.querySelector('.accordion-content').style.maxHeight = null;
+        item.querySelector('.accordion-content').style.maxHeight = '0px';
       }
     });
 
-    // 2. Mevcut öğeyi aç veya kapat
+    // 2. Mevcut olanı aç/kapat
     const isActive = currentItem.classList.toggle('active');
 
     if (isActive) {
-      // scrollHeight içeriğin gerçek piksel yüksekliğini verir
+      // scrollHeight ile gerçek yüksekliği tam hesaplayıp veriyoruz
       content.style.maxHeight = content.scrollHeight + 'px';
     } else {
-      content.style.maxHeight = null;
+      content.style.maxHeight = '0px';
     }
   }
 </script>
-
-{% schema %}
-{
-  "name": "FAQ Accordion",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Frequently Asked Questions"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "FAQ Image"
-    },
-    {
-      "type": "range",
-      "id": "header_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 10,
-      "unit": "%",
-      "label": "Header Opacity Rate",
-      "default": 100,
-      "info": "Adjust the transparency level of the header section if applicable."
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Top Padding",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Bottom Padding",
-      "default": 80
-    }
-  ],
-  "blocks": [
-    {
-      "type": "question",
-      "name": "Question",
-      "settings": [
-        {
-          "type": "text",
-          "id": "question",
-          "label": "Question",
-          "default": "What is your shipping policy?"
-        },
-        {
-          "type": "richtext",
-          "id": "answer",
-          "label": "Answer",
-          "default": "<p>We offer free express shipping on all orders over $150.</p>"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "FAQ Accordion",
-      "blocks": [{ "type": "question" }, { "type": "question" }, { "type": "question" }]
-    }
-  ]
-}
-{% endschema %}
