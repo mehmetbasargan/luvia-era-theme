@@ -10,15 +10,26 @@
   </header>
 
   {% if article.image %}
-    <div class="aspect-video overflow-hidden mb-12">
+    {% comment %}
+      Detay sayfasında görselin kesilmemesi için 'object-contain' ve soft bir arka plan ekledik.
+      Böylece görsel içindeki tüm detaylar (yazılar, küçük objeler) tam boy görünür.
+    {% endcomment %}
+    <div class="aspect-video overflow-hidden mb-12 bg-[#fbfbfb] border border-line/5 flex items-center justify-center">
       <img
-        src="{{ article.image | image_url: width: 800 }}"
-        height="400"
-        width="800"
+        src="{{ article.image | image_url: width: 1200 }}"
+        {% comment %} Netlik için genişliği artırdık {% endcomment %}
         alt="{{ article.title | escape }}"
         loading="eager"
-        class="w-full h-full object-cover"
+        width="100%"
+        height="auto"
+        class="w-full h-full object-contain"
+        {% comment %} Kesilmeyi engelleyen asıl komut {% endcomment %}
       >
+    </div>
+  {% else %}
+    {% comment %} Eğer detay sayfasında da görsel yoksa boş kalmasın diye yer tutucu (isteğe bağlı) {% endcomment %}
+    <div class="aspect-video overflow-hidden mb-12 bg-gray-50 flex items-center justify-center opacity-20 border border-gray-500">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-[70%] h-[70%]' }}
     </div>
   {% endif %}
 
