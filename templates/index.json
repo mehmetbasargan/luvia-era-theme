@@ -585,6 +585,44 @@
         "section_bg_color": "#ffffff",
         "remove_bg": false
       }
+    },
+    "faq_pzDR8K": {
+      "type": "faq",
+      "blocks": {
+        "question_cYVNYF": {
+          "type": "question",
+          "settings": {
+            "question": "What is your shipping policy?",
+            "answer": "<p>We offer free express shipping on all orders over $150.</p>"
+          }
+        },
+        "question_Rfb7hH": {
+          "type": "question",
+          "settings": {
+            "question": "What is your shipping policy?",
+            "answer": "<p>We offer free express shipping on all orders over $150.</p>"
+          }
+        },
+        "question_9fVXhz": {
+          "type": "question",
+          "settings": {
+            "question": "What is your shipping policy?",
+            "answer": "<p>We offer free express shipping on all orders over $150.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_cYVNYF",
+        "question_Rfb7hH",
+        "question_9fVXhz"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "title": "Frequently Asked Questions",
+        "header_opacity": 100,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -602,6 +640,7 @@
     "trust_icons_AQpXj8",
     "image_with_text_multi_9AHKEL",
     "testimonial_effdMB",
-    "footer_promotion_VnzCaT"
+    "footer_promotion_VnzCaT",
+    "faq_pzDR8K"
   ]
 }
