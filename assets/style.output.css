@@ -1351,6 +1351,10 @@ blockquote {
   height: 100%;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .max-h-\[80vh\] {
   max-height: 80vh;
 }
