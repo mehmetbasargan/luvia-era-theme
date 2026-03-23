@@ -569,52 +569,6 @@
         "remove_bg": false
       }
     },
-    "shoppable_image_V6G9yN": {
-      "type": "shoppable-image",
-      "blocks": {
-        "product_point_6NGdiV": {
-          "type": "product_point",
-          "settings": {
-            "product": "",
-            "top_position": 71,
-            "left_position": 24
-          }
-        },
-        "product_point_ckweWT": {
-          "type": "product_point",
-          "settings": {
-            "product": "",
-            "top_position": 27,
-            "left_position": 68
-          }
-        },
-        "product_point_NETdmn": {
-          "type": "product_point",
-          "settings": {
-            "product": "",
-            "top_position": 50,
-            "left_position": 50
-          }
-        }
-      },
-      "block_order": [
-        "product_point_6NGdiV",
-        "product_point_ckweWT",
-        "product_point_NETdmn"
-      ],
-      "name": "Shoppable Image",
-      "settings": {
-        "title": "Curated Collections",
-        "subtitle": "Touch the details and discover the artistry behind every piece.",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "margin_top": 100,
-        "margin_bottom": 100,
-        "use_custom_bg": false,
-        "section_bg_color": "#ffffff",
-        "remove_bg": false
-      }
-    },
     "testimonial_effdMB": {
       "type": "testimonial",
       "blocks": {
@@ -654,60 +608,6 @@
         "use_custom_bg": false,
         "section_bg_color": "#ffffff",
         "remove_bg": true
-      }
-    },
-    "statement_banner_z4dWJV": {
-      "type": "statement-banner",
-      "name": "Statement Banner",
-      "settings": {
-        "overlay_opacity": 60,
-        "title": "THE ART OF ELEGANCE",
-        "text": "<p>Discover our curated collection of timeless pieces.</p>",
-        "button_label": "Shop The Collection",
-        "button_link": "",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "margin_top": 0,
-        "margin_bottom": 0
-      }
-    },
-    "collection_list_mTmkEB": {
-      "type": "collection-list",
-      "blocks": {
-        "collection_4D3Uk3": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection_PidDj4": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection_bDn94q": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection_4D3Uk3",
-        "collection_PidDj4",
-        "collection_bDn94q"
-      ],
-      "name": "Collection List",
-      "settings": {
-        "collection_list_title": "Our Collections",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "margin_top": 100,
-        "margin_bottom": 100,
-        "use_custom_bg": false,
-        "section_bg_color": "#ffffff",
-        "remove_bg": false
       }
     },
     "footer_promotion_VnzCaT": {
@@ -781,10 +681,7 @@
     "shoppable_image_UT6HE7",
     "trust_icons_AQpXj8",
     "image_with_text_multi_9AHKEL",
-    "shoppable_image_V6G9yN",
     "testimonial_effdMB",
-    "statement_banner_z4dWJV",
-    "collection_list_mTmkEB",
     "footer_promotion_VnzCaT"
   ]
 }
