@@ -10,44 +10,47 @@
     }
   }
 
-  /* Akordeon Ana Kapsayıcı */
+  /* Akordeon Mantığı */
   .accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    /* Pürüzsüzlük anahtarı: Süre ve Bezier eğrisi */
-    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+    display: grid;
+    grid-template-rows: 0fr; /* Kapalıyken 0 satır yüksekliği */
+    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
   }
 
-  /* Aktif olduğunda yazı yavaşça belirsin */
   .accordion-item.active .accordion-content {
+    grid-template-rows: 1fr; /* Açıldığında içeriğin kendi yüksekliği kadar */
     opacity: 1;
   }
 
-  /* İçerik Yazısı: Padding'i buraya veriyoruz ki yükseklik hesaplanırken takılmasın */
   .accordion-inner {
-    padding-top: 0.5rem;
-    padding-bottom: 2rem;
+    overflow: hidden; /* Taşmayı önler */
   }
 
   /* İkon Animasyonu */
-  .icon-plus { transition: transform 0.5s ease; }
-  .accordion-item.active .icon-plus { transform: rotate(45deg); color: #000; } /* Artı işaretini çarpıya çevirir */
+  .icon-plus {
+    transition: transform 0.4s ease;
+  }
+  .accordion-item.active .icon-plus {
+    transform: rotate(45deg);
+  }
 {%- endstyle -%}
 
 <section class="section-{{ section.id }}-padding bg-white">
   <div class="container mx-auto px-4 md:px-10 lg:px-20">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-      <div class="relative aspect-[4/5] overflow-hidden bg-custombg animate-fadeIn sticky top-32">
+      <div class="relative aspect-[4/5] overflow-hidden bg-custombg animate-fadeIn">
         {% if section.settings.image != blank %}
           <img
             src="{{ section.settings.image | image_url: width: 1000 }}"
             loading="lazy"
+            height="100%"
+            width="100%"
             class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
           >
         {% else %}
           <div class="w-full h-full opacity-30 p-20">
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover' }}
           </div>
         {% endif %}
       </div>
@@ -63,7 +66,7 @@
               <button
                 type="button"
                 class="w-full flex items-center justify-between py-6 text-left group"
-                onclick="toggleAccordion(this)"
+                onclick="toggleFAQ(this)"
               >
                 <span class="text-primary text-[13px] md:text-[14px] uppercase tracking-[0.15em] font-medium transition-colors group-hover:text-secondary">
                   {{ block.settings.question }}
@@ -76,8 +79,10 @@
               </button>
 
               <div class="accordion-content">
-                <div class="accordion-inner text-primary/70 leading-relaxed text-[14px] font-light md:pr-10 italic">
-                  {{ block.settings.answer }}
+                <div class="accordion-inner">
+                  <div class="pb-6 text-primary/70 leading-relaxed text-[14px] font-light md:pr-10 italic">
+                    {{ block.settings.answer }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -89,27 +94,88 @@
 </section>
 
 <script>
-  function toggleAccordion(button) {
+  function toggleFAQ(button) {
     const currentItem = button.parentElement;
-    const content = currentItem.querySelector('.accordion-content');
-    const allItems = document.querySelectorAll('.accordion-item');
+    const allItems = currentItem.closest('.accordion-wrapper').querySelectorAll('.accordion-item');
+    const isActive = currentItem.classList.contains('active');
 
-    // 1. Diğerlerini kapat (Daha profesyonel bir akış için)
+    // 1. Tüm açık olanları kapat (Süzülerek kapanırlar)
     allItems.forEach((item) => {
-      if (item !== currentItem && item.classList.contains('active')) {
-        item.classList.remove('active');
-        item.querySelector('.accordion-content').style.maxHeight = '0px';
-      }
+      item.classList.remove('active');
     });
 
-    // 2. Mevcut olanı aç/kapat
-    const isActive = currentItem.classList.toggle('active');
-
-    if (isActive) {
-      // scrollHeight ile gerçek yüksekliği tam hesaplayıp veriyoruz
-      content.style.maxHeight = content.scrollHeight + 'px';
-    } else {
-      content.style.maxHeight = '0px';
+    // 2. Eğer tıklandığında zaten aktif değilse aç (Süzülerek açılır)
+    if (!isActive) {
+      currentItem.classList.add('active');
     }
   }
 </script>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "FAQ Image"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is your shipping policy?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>We offer free express shipping on all orders over $150.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [{ "type": "question" }, { "type": "question" }]
+    }
+  ]
+}
+{% endschema %}
