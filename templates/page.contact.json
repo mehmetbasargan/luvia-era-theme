@@ -8,27 +8,31 @@
  * ------------------------------------------------------------
  */
 {
-	"sections": {
-		"main_page_header": {
-			"type": "page-header",
-			"settings": {
-				"image": "shopify://shop_images/pageheader3.jpg",
-				"custom_title": "CONTACT THE ERA",
-				"hero_height": 40,
-				"overlay_opacity": 60
-			}
-		},
-		"main": {
-			"type": "contact-custom",
-			"settings": {
-				"heading": "CONTACT THE ERA",
-				"address_title": "Paris Studio",
-				"address_text": "22 Rue de Rivoli, 75004 Paris, France",
-				"email_title": "Inquiries",
-				"email_text": "studio@luvialera.com",
-				"subtext": "FOR INQUIRIES REGARDING OUR COLLECTIONS, PRIVATE APPOINTMENTS OR PARTNERSHIPS."
-			}
-		}
-	},
-	"order": ["main_page_header", "main"]
+  "sections": {
+    "main_page_header": {
+      "type": "page-header",
+      "settings": {
+        "custom_title": "CONTACT THE ERA",
+        "hero_height": 40,
+        "overlay_opacity": 60
+      }
+    },
+    "main": {
+      "type": "contact-custom",
+      "settings": {
+        "heading": "CONTACT THE ERA",
+        "subtext": "FOR INQUIRIES REGARDING OUR COLLECTIONS, PRIVATE APPOINTMENTS OR PARTNERSHIPS.",
+        "address_title": "Paris Studio",
+        "address_text": "22 Rue de Rivoli, 75004 Paris, France",
+        "email_title": "Inquiries",
+        "email_text": "studio@luvialera.com",
+        "success_message": "THANK YOU. YOUR MESSAGE HAS BEEN RECEIVED.",
+        "show_subject": true
+      }
+    }
+  },
+  "order": [
+    "main_page_header",
+    "main"
+  ]
 }
